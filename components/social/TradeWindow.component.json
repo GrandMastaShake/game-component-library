@@ -1,0 +1,22 @@
+{
+  "id": "social.trade_window",
+  "name": "Trade Window",
+  "category": "social",
+  "description": "Two-player item and currency trade UI with confirm/cancel and scam-prevention lock step.",
+  "version": "0.1.0",
+  "platform": ["roblox", "web", "agnostic"],
+  "inputs": [
+    {"name": "maxItemsPerSide", "type": "number", "required": false, "default": 8}
+  ],
+  "outputs": [
+    {"name": "isOpen", "type": "boolean"},
+    {"name": "offerA", "type": "object"},
+    {"name": "offerB", "type": "object"}
+  ],
+  "events": {
+    "emits": ["social.tradeOpened", "social.tradeCompleted", "social.tradeCancelled"],
+    "listensTo": ["inventory.itemAdded"]
+  },
+  "dependencies": ["inventory.slotted_bag", "economy.currency"],
+  "tags": ["multiplayer", "trading"]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "economy.currency",
+  "name": "Currency",
+  "category": "economy",
+  "description": "A single spendable currency balance with earn/spend transactions and persistence hooks.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "currencyName", "type": "string", "required": false, "default": "Coins"},
+    {"name": "startingBalance", "type": "number", "required": false, "default": 0}
+  ],
+  "outputs": [
+    {"name": "balance", "type": "number"}
+  ],
+  "events": {
+    "emits": ["economy.earned", "economy.spent", "economy.insufficientFunds"],
+    "listensTo": ["social.tradeCompleted"]
+  },
+  "dependencies": [],
+  "tags": ["currency", "progression"]
+}

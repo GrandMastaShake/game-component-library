@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameComponent",
+  "description": "The Lego connector contract. Every game component brick in this library must validate against this schema so that human or AI builders can discover, understand, and safely wire components together.",
+  "type": "object",
+  "required": ["id", "name", "category", "version", "platform", "inputs", "outputs", "events", "dependencies"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique, stable identifier for this component, e.g. 'movement.basic_walk'"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of this component definition"
+    },
+    "platform": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["roblox", "godot", "unity", "web", "agnostic"]
+      },
+      "description": "Which runtimes this component supports or targets"
+    },
+    "inputs": {
+      "type": "array",
+      "description": "Parameters this component accepts at construction or runtime",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "required": {"type": "boolean"},
+          "default": {},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "Values or state this component exposes for other components to read",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "events": {
+      "type": "object",
+      "description": "Signals this component emits and/or listens for",
+      "properties": {
+        "emits": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "listensTo": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other component ids required for this component to function",
+      "items": {"type": "string"}
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

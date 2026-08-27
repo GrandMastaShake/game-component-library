@@ -1,0 +1,22 @@
+{
+  "id": "movement.basic_walk",
+  "name": "Basic Walk",
+  "category": "movement",
+  "description": "Ground-based locomotion with configurable speed and acceleration.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "agnostic"],
+  "inputs": [
+    {"name": "walkSpeed", "type": "number", "required": false, "default": 16, "description": "Studs or units per second"},
+    {"name": "acceleration", "type": "number", "required": false, "default": 8}
+  ],
+  "outputs": [
+    {"name": "isMoving", "type": "boolean", "description": "Whether the character is currently moving"},
+    {"name": "velocity", "type": "vector3"}
+  ],
+  "events": {
+    "emits": ["movement.started", "movement.stopped"],
+    "listensTo": ["input.moveDirection"]
+  },
+  "dependencies": [],
+  "tags": ["locomotion", "core"]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "combat.melee_basic",
+  "name": "Basic Melee Attack",
+  "category": "combat",
+  "description": "Single-target close-range attack with cooldown and damage falloff by range.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "agnostic"],
+  "inputs": [
+    {"name": "damage", "type": "number", "required": true},
+    {"name": "range", "type": "number", "required": false, "default": 4},
+    {"name": "cooldown", "type": "number", "required": false, "default": 0.8}
+  ],
+  "outputs": [
+    {"name": "isOnCooldown", "type": "boolean"},
+    {"name": "lastTarget", "type": "string"}
+  ],
+  "events": {
+    "emits": ["combat.hit", "combat.miss", "combat.onCooldown"],
+    "listensTo": ["input.attack"]
+  },
+  "dependencies": ["movement.basic_walk"],
+  "tags": ["melee", "pvp", "pve"]
+}

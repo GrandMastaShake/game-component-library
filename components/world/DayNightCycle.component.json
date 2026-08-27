@@ -1,0 +1,22 @@
+{
+  "id": "world.day_night_cycle",
+  "name": "Day/Night Cycle",
+  "category": "world",
+  "description": "Time-of-day simulation driving lighting, spawn tables, and ambient events.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "dayLengthMinutes", "type": "number", "required": false, "default": 20},
+    {"name": "startTime", "type": "number", "required": false, "default": 6}
+  ],
+  "outputs": [
+    {"name": "currentTime", "type": "number"},
+    {"name": "isNight", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["world.dawnStarted", "world.duskStarted"],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": ["ambient", "environment"]
+}

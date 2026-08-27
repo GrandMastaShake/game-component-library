@@ -1,0 +1,21 @@
+{
+  "id": "ui.hud",
+  "name": "HUD",
+  "category": "ui",
+  "description": "Configurable heads-up display panel that renders health, currency, and notification widgets.",
+  "version": "0.1.0",
+  "platform": ["roblox", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "showHealth", "type": "boolean", "required": false, "default": true},
+    {"name": "showCurrency", "type": "boolean", "required": false, "default": true}
+  ],
+  "outputs": [
+    {"name": "isVisible", "type": "boolean"}
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": ["economy.earned", "economy.spent", "combat.hit"]
+  },
+  "dependencies": ["economy.currency"],
+  "tags": ["interface", "presentation"]
+}
