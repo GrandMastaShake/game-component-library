@@ -7,7 +7,7 @@
   "properties": {
     "id": {"type": "string", "description": "Unique, stable identifier for this component, e.g. 'movement.basic_walk'"},
     "name": {"type": "string", "description": "Human-readable name"},
-    "category": {"type": "string", "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui", "pets", "progression", "persistence"]},
+    "category": {"type": "string", "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui", "pets", "progression", "persistence", "presentation"]},
     "description": {"type": "string"},
     "version": {"type": "string", "description": "Semantic version of this component definition"},
     "platform": {

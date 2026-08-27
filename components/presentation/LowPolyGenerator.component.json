@@ -1,0 +1,19 @@
+{
+  "id": "presentation.low_poly_generator",
+  "name": "Low-Poly Generator",
+  "category": "presentation",
+  "description": "Procedurally generates simplified low-polygon meshes for props, rocks, trees, and terrain features to keep part counts and rendering cost low.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "targetFaceCount", "type": "number", "required": false, "default": 200},
+    {"name": "shapeType", "type": "string", "required": false, "default": "rock"}
+  ],
+  "outputs": [
+    {"name": "meshData", "type": "object"}
+  ],
+  "events": {"emits": ["presentation.meshGenerated"], "listensTo": []},
+  "dependencies": [],
+  "tags": ["mesh", "procedural", "performance"],
+  "sourceModule": "roblox-modular-lib/src/LowPolyGenerator.lua"
+}

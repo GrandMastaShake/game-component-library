@@ -1,0 +1,18 @@
+{
+  "id": "presentation.lod_system",
+  "name": "LOD System",
+  "category": "presentation",
+  "description": "Swaps mesh detail level based on camera distance to reduce rendering cost for distant objects.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "lodThresholds", "type": "array", "required": false, "default": [50, 150, 400]}
+  ],
+  "outputs": [
+    {"name": "currentLOD", "type": "number"}
+  ],
+  "events": {"emits": ["presentation.lodChanged"], "listensTo": ["presentation.meshGenerated"]},
+  "dependencies": ["presentation.low_poly_generator"],
+  "tags": ["performance", "rendering"],
+  "sourceModule": "roblox-modular-lib/src/LODSystem.lua"
+}

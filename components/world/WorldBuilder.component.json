@@ -1,0 +1,19 @@
+{
+  "id": "world.world_builder",
+  "name": "World Builder",
+  "category": "world",
+  "description": "Top-level orchestrator that runs the full world-generation pipeline in order: terrain, biomes, caves, erosion, water, chunk registration, and object placement.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "worldSeed", "type": "number", "required": false, "default": 0}
+  ],
+  "outputs": [
+    {"name": "buildProgress", "type": "number"},
+    {"name": "isComplete", "type": "boolean"}
+  ],
+  "events": {"emits": ["world.buildStarted", "world.buildComplete"], "listensTo": ["world.erosionComplete", "world.waterPlaced", "presentation.objectsPlaced"]},
+  "dependencies": ["world.terrain_generator", "world.biome_system", "world.cave_system", "world.erosion_simulator", "world.water_system", "presentation.object_placer"],
+  "tags": ["orchestrator", "pipeline"],
+  "sourceModule": "roblox-modular-lib/src/WorldBuilder.lua"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "presentation.color_palette",
+  "name": "Color Palette",
+  "category": "presentation",
+  "description": "Generates and enforces a consistent, harmonious color palette across procedurally generated assets and UI elements.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "baseHue", "type": "number", "required": false, "default": 0},
+    {"name": "paletteSize", "type": "number", "required": false, "default": 6}
+  ],
+  "outputs": [
+    {"name": "colors", "type": "array"}
+  ],
+  "events": {"emits": ["presentation.paletteChanged"], "listensTo": []},
+  "dependencies": [],
+  "tags": ["color", "art-direction"],
+  "sourceModule": "roblox-modular-lib/src/ColorPaletteSystem.lua"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "world.environment_builder",
+  "name": "Environment Builder",
+  "category": "world",
+  "description": "Configures ambient lighting, fog, skybox, and atmosphere settings to match the current biome and weather state.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "fogEnabled", "type": "boolean", "required": false, "default": true}
+  ],
+  "outputs": [
+    {"name": "currentAtmosphere", "type": "object"}
+  ],
+  "events": {"emits": ["world.atmosphereChanged"], "listensTo": ["world.biomeAssigned", "world.weatherChanged"]},
+  "dependencies": ["world.biome_system", "world.weather_system", "presentation.style_presets"],
+  "tags": ["atmosphere", "lighting"],
+  "sourceModule": "roblox-modular-lib/src/EnvironmentBuilder.lua"
+}

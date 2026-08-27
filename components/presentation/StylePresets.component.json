@@ -1,0 +1,18 @@
+{
+  "id": "presentation.style_presets",
+  "name": "Style Presets",
+  "category": "presentation",
+  "description": "Named bundles (e.g. 'cartoon', 'realistic', 'retro') that combine a color palette, mesh style, and material settings into one switchable visual theme.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "presetName", "type": "string", "required": false, "default": "cartoon"}
+  ],
+  "outputs": [
+    {"name": "activePreset", "type": "object"}
+  ],
+  "events": {"emits": ["presentation.styleApplied"], "listensTo": ["presentation.paletteChanged", "presentation.meshGenerated"]},
+  "dependencies": ["presentation.color_palette", "presentation.low_poly_generator"],
+  "tags": ["theme", "art-direction"],
+  "sourceModule": "roblox-modular-lib/src/StylePresets.lua"
+}

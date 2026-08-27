@@ -1,0 +1,19 @@
+{
+  "id": "presentation.object_placer",
+  "name": "Object Placer",
+  "category": "presentation",
+  "description": "Procedurally scatters props (trees, rocks, ruins) across generated terrain according to biome-appropriate density rules.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "density", "type": "number", "required": false, "default": 0.2},
+    {"name": "propTypes", "type": "array", "required": false, "default": ["tree", "rock", "bush"]}
+  ],
+  "outputs": [
+    {"name": "placedObjects", "type": "array"}
+  ],
+  "events": {"emits": ["presentation.objectsPlaced"], "listensTo": ["world.biomeAssigned"]},
+  "dependencies": ["world.biome_system", "world.terrain_generator", "presentation.low_poly_generator"],
+  "tags": ["procedural", "props", "decoration"],
+  "sourceModule": "roblox-modular-lib/src/ObjectPlacer.lua"
+}
