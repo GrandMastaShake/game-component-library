@@ -1,0 +1,19 @@
+{
+  "id": "movement.physics_core",
+  "name": "Physics Core",
+  "category": "movement",
+  "description": "Low-level physics utility for projectile arcs, knockback impulses, and gravity-affected motion used by combat and movement bricks.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "gravity", "type": "number", "required": false, "default": 9.8}
+  ],
+  "outputs": [
+    {"name": "computeTrajectory", "type": "function"},
+    {"name": "computeKnockback", "type": "function"}
+  ],
+  "events": {"emits": [], "listensTo": []},
+  "dependencies": [],
+  "tags": ["utility", "physics", "math"],
+  "sourceModule": "roblox-modular-lib/src/Physics.lua"
+}

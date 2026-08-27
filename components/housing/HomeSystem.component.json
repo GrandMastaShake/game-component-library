@@ -1,0 +1,20 @@
+{
+  "id": "housing.home_system",
+  "name": "Home System",
+  "category": "housing",
+  "description": "Player-owned housing/base plot with placeable furniture, saved layouts, and visit permissions for other players.",
+  "version": "0.1.0",
+  "platform": ["roblox", "agnostic"],
+  "inputs": [
+    {"name": "plotSize", "type": "object", "required": false, "default": {"x": 50, "z": 50}},
+    {"name": "maxFurnitureItems", "type": "number", "required": false, "default": 100}
+  ],
+  "outputs": [
+    {"name": "placedFurniture", "type": "array"},
+    {"name": "ownerId", "type": "string"}
+  ],
+  "events": {"emits": ["housing.furniturePlaced", "housing.plotSaved", "housing.visitorEntered"], "listensTo": ["inventory.itemAdded"]},
+  "dependencies": ["inventory.core_inventory", "persistence.save_system"],
+  "tags": ["base-building", "player-housing"],
+  "sourceModule": "roblox-modular-lib/src/HomeSystem.lua"
+}

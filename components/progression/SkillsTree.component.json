@@ -1,0 +1,19 @@
+{
+  "id": "progression.skills_tree",
+  "name": "Skills Tree",
+  "category": "progression",
+  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "treeDefinition", "type": "object", "required": true}
+  ],
+  "outputs": [
+    {"name": "unlockedNodes", "type": "array"},
+    {"name": "availablePoints", "type": "number"}
+  ],
+  "events": {"emits": ["progression.skillUnlocked"], "listensTo": ["progression.leveledUp"]},
+  "dependencies": ["progression.xp_leveling"],
+  "tags": ["skills", "unlocks"],
+  "sourceModule": "roblox-modular-lib/src/Skills.lua"
+}

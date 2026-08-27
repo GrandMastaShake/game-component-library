@@ -1,0 +1,20 @@
+{
+  "id": "utility.timer_system",
+  "name": "Timer System",
+  "category": "utility",
+  "description": "Generic countdown/interval timer utility used across cooldowns, autosave ticks, weather transitions, and quest timers.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "durationSeconds", "type": "number", "required": true},
+    {"name": "repeats", "type": "boolean", "required": false, "default": false}
+  ],
+  "outputs": [
+    {"name": "remainingSeconds", "type": "number"},
+    {"name": "isRunning", "type": "boolean"}
+  ],
+  "events": {"emits": ["utility.timerCompleted", "utility.timerTicked"], "listensTo": []},
+  "dependencies": [],
+  "tags": ["utility", "scheduling"],
+  "sourceModule": "roblox-modular-lib/src/TimerSystem.lua"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "presentation.audio_system",
+  "name": "Audio System",
+  "category": "presentation",
+  "description": "Centralized sound effect and music playback manager with volume buckets, 3D spatial sound, and crossfade between tracks.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "masterVolume", "type": "number", "required": false, "default": 1.0}
+  ],
+  "outputs": [
+    {"name": "nowPlaying", "type": "string"}
+  ],
+  "events": {"emits": ["presentation.soundPlayed", "presentation.musicChanged"], "listensTo": ["combat.hit", "world.weatherChanged"]},
+  "dependencies": [],
+  "tags": ["audio", "sfx", "music"],
+  "sourceModule": "roblox-modular-lib/src/AudioSystem.lua"
+}

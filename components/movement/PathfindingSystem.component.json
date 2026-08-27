@@ -1,0 +1,19 @@
+{
+  "id": "movement.pathfinding_system",
+  "name": "Pathfinding System",
+  "category": "movement",
+  "description": "Computes walkable paths across generated terrain for NPCs, pets, or vehicles, avoiding obstacles and cave/water hazards.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "maxPathLength", "type": "number", "required": false, "default": 200}
+  ],
+  "outputs": [
+    {"name": "currentPath", "type": "array"},
+    {"name": "isPathfinding", "type": "boolean"}
+  ],
+  "events": {"emits": ["movement.pathFound", "movement.pathFailed"], "listensTo": ["world.terrainGenerated"]},
+  "dependencies": ["world.terrain_generator"],
+  "tags": ["navigation", "npc", "ai"],
+  "sourceModule": "roblox-modular-lib/src/PathfindingSystem.lua"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "presentation.atmosphere_system",
+  "name": "Atmosphere System",
+  "category": "presentation",
+  "description": "Low-level fog density, skybox, and ambient lighting renderer that Environment Builder drives based on biome and weather state.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "transitionSeconds", "type": "number", "required": false, "default": 5}
+  ],
+  "outputs": [
+    {"name": "fogDensity", "type": "number"},
+    {"name": "ambientColor", "type": "string"}
+  ],
+  "events": {"emits": ["presentation.atmosphereRendered"], "listensTo": ["world.weatherChanged", "world.dawnStarted", "world.duskStarted"]},
+  "dependencies": ["world.weather_system", "world.day_night_cycle"],
+  "tags": ["fog", "lighting", "low-level"],
+  "sourceModule": "roblox-modular-lib/src/AtmosphereSystem.lua"
+}
