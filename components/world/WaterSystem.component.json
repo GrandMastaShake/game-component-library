@@ -1,0 +1,18 @@
+{
+  "id": "world.water_system",
+  "name": "Water System",
+  "category": "world",
+  "description": "Places rivers, lakes, and ocean bodies onto terrain based on heightmap sea-level thresholds, with basic flow simulation.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "seaLevel", "type": "number", "required": false, "default": 20}
+  ],
+  "outputs": [
+    {"name": "waterMap", "type": "array"}
+  ],
+  "events": {"emits": ["world.waterPlaced"], "listensTo": ["world.terrainGenerated"]},
+  "dependencies": ["world.terrain_generator"],
+  "tags": ["procedural", "water"],
+  "sourceModule": "roblox-modular-lib/src/WaterSystem.lua"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "persistence.save_system",
+  "name": "Save System",
+  "category": "persistence",
+  "description": "Serializes a player's game state (inventory, currency, progression) into a saveable snapshot on an interval or trigger.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "autosaveIntervalSeconds", "type": "number", "required": false, "default": 120}
+  ],
+  "outputs": [
+    {"name": "lastSaveTimestamp", "type": "number"},
+    {"name": "isDirty", "type": "boolean"}
+  ],
+  "events": {"emits": ["persistence.saved", "persistence.saveFailed"], "listensTo": ["inventory.itemAdded", "economy.earned", "progression.leveledUp"]},
+  "dependencies": [],
+  "tags": ["save", "state"],
+  "sourceModule": "roblox-modular-lib/src/SaveSystem.lua"
+}

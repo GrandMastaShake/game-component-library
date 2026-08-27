@@ -1,0 +1,19 @@
+{
+  "id": "world.cave_system",
+  "name": "Cave System",
+  "category": "world",
+  "description": "Carves underground cave networks and tunnels beneath generated terrain using 3D noise thresholds.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "density", "type": "number", "required": false, "default": 0.45},
+    {"name": "minDepth", "type": "number", "required": false, "default": 10}
+  ],
+  "outputs": [
+    {"name": "caveVoxels", "type": "array"}
+  ],
+  "events": {"emits": ["world.cavesGenerated"], "listensTo": ["world.terrainGenerated"]},
+  "dependencies": ["world.terrain_generator", "world.noise_lib"],
+  "tags": ["procedural", "underground"],
+  "sourceModule": "roblox-modular-lib/src/CaveSystem.lua"
+}

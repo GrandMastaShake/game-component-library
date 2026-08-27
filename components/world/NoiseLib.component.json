@@ -1,0 +1,20 @@
+{
+  "id": "world.noise_lib",
+  "name": "Noise Library",
+  "category": "world",
+  "description": "Perlin/Simplex noise generator utility used as the mathematical foundation for terrain, biome, and cave generation.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "seed", "type": "number", "required": false, "default": 0},
+    {"name": "octaves", "type": "number", "required": false, "default": 4}
+  ],
+  "outputs": [
+    {"name": "sample2D", "type": "function", "description": "(x, y) -> noise value in [-1, 1]"},
+    {"name": "sample3D", "type": "function"}
+  ],
+  "events": {"emits": [], "listensTo": []},
+  "dependencies": [],
+  "tags": ["utility", "procedural", "math"],
+  "sourceModule": "roblox-modular-lib/src/NoiseLib.lua"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "world.biome_system",
+  "name": "Biome System",
+  "category": "world",
+  "description": "Assigns biome types (forest, desert, tundra, etc.) across generated terrain based on noise-driven temperature/moisture maps.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "biomeTypes", "type": "array", "required": false, "default": ["forest", "desert", "tundra", "plains"]}
+  ],
+  "outputs": [
+    {"name": "biomeMap", "type": "array"}
+  ],
+  "events": {"emits": ["world.biomeAssigned"], "listensTo": ["world.terrainGenerated"]},
+  "dependencies": ["world.terrain_generator", "world.noise_lib"],
+  "tags": ["procedural", "biomes"],
+  "sourceModule": "roblox-modular-lib/src/BiomeSystem.lua"
+}

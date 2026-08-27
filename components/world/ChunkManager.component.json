@@ -1,0 +1,19 @@
+{
+  "id": "world.chunk_manager",
+  "name": "Chunk Manager",
+  "category": "world",
+  "description": "Streams terrain chunks in/out around the player based on render distance, calling the terrain generator per-chunk on demand.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "chunkSize", "type": "number", "required": false, "default": 64},
+    {"name": "renderDistance", "type": "number", "required": false, "default": 4}
+  ],
+  "outputs": [
+    {"name": "loadedChunks", "type": "array"}
+  ],
+  "events": {"emits": ["world.chunkLoaded", "world.chunkUnloaded"], "listensTo": ["movement.started"]},
+  "dependencies": ["world.terrain_generator", "movement.basic_walk"],
+  "tags": ["streaming", "performance"],
+  "sourceModule": "roblox-modular-lib/src/ChunkManager.lua"
+}

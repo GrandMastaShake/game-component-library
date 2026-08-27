@@ -1,0 +1,20 @@
+{
+  "id": "world.terrain_generator",
+  "name": "Terrain Generator",
+  "category": "world",
+  "description": "Procedurally generates ground heightmaps from noise, producing voxel/terrain data for a region.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "regionSize", "type": "number", "required": false, "default": 512},
+    {"name": "maxHeight", "type": "number", "required": false, "default": 100}
+  ],
+  "outputs": [
+    {"name": "heightmap", "type": "array"},
+    {"name": "isGenerated", "type": "boolean"}
+  ],
+  "events": {"emits": ["world.terrainGenerated"], "listensTo": []},
+  "dependencies": ["world.noise_lib"],
+  "tags": ["procedural", "terrain"],
+  "sourceModule": "roblox-modular-lib/src/TerrainGenerator.lua"
+}

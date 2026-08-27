@@ -1,0 +1,19 @@
+{
+  "id": "world.erosion_simulator",
+  "name": "Erosion Simulator",
+  "category": "world",
+  "description": "Post-processes a heightmap with simulated water/wind erosion to produce more natural-looking terrain.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "iterations", "type": "number", "required": false, "default": 50000},
+    {"name": "erosionRate", "type": "number", "required": false, "default": 0.3}
+  ],
+  "outputs": [
+    {"name": "erodedHeightmap", "type": "array"}
+  ],
+  "events": {"emits": ["world.erosionComplete"], "listensTo": ["world.terrainGenerated"]},
+  "dependencies": ["world.terrain_generator"],
+  "tags": ["procedural", "post-processing"],
+  "sourceModule": "roblox-modular-lib/src/ErosionSimulator.lua"
+}

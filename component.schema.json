@@ -5,31 +5,14 @@
   "type": "object",
   "required": ["id", "name", "category", "version", "platform", "inputs", "outputs", "events", "dependencies"],
   "properties": {
-    "id": {
-      "type": "string",
-      "description": "Unique, stable identifier for this component, e.g. 'movement.basic_walk'"
-    },
-    "name": {
-      "type": "string",
-      "description": "Human-readable name"
-    },
-    "category": {
-      "type": "string",
-      "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui", "pets", "progression"]
-    },
-    "description": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string",
-      "description": "Semantic version of this component definition"
-    },
+    "id": {"type": "string", "description": "Unique, stable identifier for this component, e.g. 'movement.basic_walk'"},
+    "name": {"type": "string", "description": "Human-readable name"},
+    "category": {"type": "string", "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui", "pets", "progression", "persistence"]},
+    "description": {"type": "string"},
+    "version": {"type": "string", "description": "Semantic version of this component definition"},
     "platform": {
       "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["roblox", "godot", "unity", "web", "agnostic"]
-      },
+      "items": {"type": "string", "enum": ["roblox", "godot", "unity", "web", "agnostic"]},
       "description": "Which runtimes this component supports or targets"
     },
     "inputs": {
@@ -39,11 +22,7 @@
         "type": "object",
         "required": ["name", "type"],
         "properties": {
-          "name": {"type": "string"},
-          "type": {"type": "string"},
-          "required": {"type": "boolean"},
-          "default": {},
-          "description": {"type": "string"}
+          "name": {"type": "string"}, "type": {"type": "string"}, "required": {"type": "boolean"}, "default": {}, "description": {"type": "string"}
         }
       }
     },
@@ -53,39 +32,19 @@
       "items": {
         "type": "object",
         "required": ["name", "type"],
-        "properties": {
-          "name": {"type": "string"},
-          "type": {"type": "string"},
-          "description": {"type": "string"}
-        }
+        "properties": {"name": {"type": "string"}, "type": {"type": "string"}, "description": {"type": "string"}}
       }
     },
     "events": {
       "type": "object",
       "description": "Signals this component emits and/or listens for",
       "properties": {
-        "emits": {
-          "type": "array",
-          "items": {"type": "string"}
-        },
-        "listensTo": {
-          "type": "array",
-          "items": {"type": "string"}
-        }
+        "emits": {"type": "array", "items": {"type": "string"}},
+        "listensTo": {"type": "array", "items": {"type": "string"}}
       }
     },
-    "dependencies": {
-      "type": "array",
-      "description": "Other component ids required for this component to function",
-      "items": {"type": "string"}
-    },
-    "tags": {
-      "type": "array",
-      "items": {"type": "string"}
-    },
-    "sourceModule": {
-      "type": "string",
-      "description": "Optional pointer to the real implementation this brick was extracted from, e.g. 'roblox-modular-lib/src/PetSystem.lua'"
-    }
+    "dependencies": {"type": "array", "description": "Other component ids required for this component to function", "items": {"type": "string"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "sourceModule": {"type": "string", "description": "Optional pointer to the real implementation this brick was extracted from, e.g. 'roblox-modular-lib/src/PetSystem.lua'"}
   }
 }
