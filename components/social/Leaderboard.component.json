@@ -1,0 +1,22 @@
+{
+  "id": "social.leaderboard",
+  "name": "Leaderboard",
+  "category": "social",
+  "description": "Ranked leaderboard backed by a numeric stat (XP, wins, currency) with top-N query support.",
+  "version": "0.1.0",
+  "platform": ["roblox", "web", "agnostic"],
+  "inputs": [
+    {"name": "statKey", "type": "string", "required": true},
+    {"name": "topN", "type": "number", "required": false, "default": 100}
+  ],
+  "outputs": [
+    {"name": "rankings", "type": "array"}
+  ],
+  "events": {
+    "emits": ["social.rankChanged"],
+    "listensTo": ["progression.xpGained", "economy.earned"]
+  },
+  "dependencies": [],
+  "tags": ["ranking", "competition"],
+  "sourceModule": "roblox-modular-lib/src/LeaderboardSystem.lua"
+}

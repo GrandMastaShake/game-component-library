@@ -1,0 +1,23 @@
+{
+  "id": "ui.dialogue_box",
+  "name": "Dialogue Box",
+  "category": "ui",
+  "description": "Branching NPC dialogue renderer with typed-text effect and choice buttons.",
+  "version": "0.1.0",
+  "platform": ["roblox", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "tree", "type": "object", "required": true, "description": "Dialogue tree with nodes and choices"},
+    {"name": "typeSpeed", "type": "number", "required": false, "default": 0.03}
+  ],
+  "outputs": [
+    {"name": "isOpen", "type": "boolean"},
+    {"name": "currentNodeId", "type": "string"}
+  ],
+  "events": {
+    "emits": ["ui.dialogueStarted", "ui.dialogueChoiceMade", "ui.dialogueEnded"],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": ["npc", "narrative"],
+  "sourceModule": "roblox-modular-lib/src/DialogueSystem.lua"
+}

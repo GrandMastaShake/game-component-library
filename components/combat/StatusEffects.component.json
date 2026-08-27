@@ -1,0 +1,21 @@
+{
+  "id": "combat.status_effects",
+  "name": "Status Effects",
+  "category": "combat",
+  "description": "Buff/debuff manager: applies timed stat modifiers (poison, haste, stun, shield) to an entity.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "agnostic"],
+  "inputs": [
+    {"name": "maxActiveEffects", "type": "number", "required": false, "default": 6}
+  ],
+  "outputs": [
+    {"name": "activeEffects", "type": "array"}
+  ],
+  "events": {
+    "emits": ["combat.effectApplied", "combat.effectExpired"],
+    "listensTo": ["combat.hit"]
+  },
+  "dependencies": ["combat.melee_basic"],
+  "tags": ["buffs", "debuffs"],
+  "sourceModule": "roblox-modular-lib/src/StatusEffectSystem.lua"
+}

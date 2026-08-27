@@ -1,0 +1,23 @@
+{
+  "id": "movement.vehicle_basic",
+  "name": "Basic Vehicle",
+  "category": "movement",
+  "description": "Drivable vehicle with throttle/steer input, top speed, and seat-based entry/exit.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity"],
+  "inputs": [
+    {"name": "topSpeed", "type": "number", "required": false, "default": 60},
+    {"name": "seatCount", "type": "number", "required": false, "default": 1}
+  ],
+  "outputs": [
+    {"name": "currentSpeed", "type": "number"},
+    {"name": "driver", "type": "string"}
+  ],
+  "events": {
+    "emits": ["movement.vehicleEntered", "movement.vehicleExited"],
+    "listensTo": ["input.moveDirection"]
+  },
+  "dependencies": [],
+  "tags": ["vehicle", "locomotion"],
+  "sourceModule": "roblox-modular-lib/src/VehicleSystem.lua"
+}

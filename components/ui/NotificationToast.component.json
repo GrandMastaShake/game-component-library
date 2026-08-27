@@ -1,0 +1,22 @@
+{
+  "id": "ui.notification_toast",
+  "name": "Notification Toast",
+  "category": "ui",
+  "description": "Queued, auto-dismissing toast notifications for achievements, loot, and system messages.",
+  "version": "0.1.0",
+  "platform": ["roblox", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "maxVisible", "type": "number", "required": false, "default": 3},
+    {"name": "displaySeconds", "type": "number", "required": false, "default": 4}
+  ],
+  "outputs": [
+    {"name": "queueLength", "type": "number"}
+  ],
+  "events": {
+    "emits": ["ui.notificationShown", "ui.notificationDismissed"],
+    "listensTo": ["inventory.itemGranted", "progression.leveledUp", "economy.earned"]
+  },
+  "dependencies": [],
+  "tags": ["feedback", "presentation"],
+  "sourceModule": "roblox-modular-lib/src/NotificationSystem.lua"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "inventory.loot_table",
+  "name": "Loot Table",
+  "category": "inventory",
+  "description": "Weighted random drop table that grants items into a target inventory on trigger.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "agnostic"],
+  "inputs": [
+    {"name": "entries", "type": "array", "required": true, "description": "List of {itemId, weight, minQty, maxQty}"}
+  ],
+  "outputs": [
+    {"name": "lastDrop", "type": "object"}
+  ],
+  "events": {
+    "emits": ["inventory.itemGranted"],
+    "listensTo": ["combat.hit"]
+  },
+  "dependencies": ["inventory.slotted_bag"],
+  "tags": ["loot", "drops", "rng"],
+  "sourceModule": "roblox-modular-lib/src/LootSystem.lua"
+}

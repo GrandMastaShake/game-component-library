@@ -1,0 +1,22 @@
+{
+  "id": "world.weather_system",
+  "name": "Weather System",
+  "category": "world",
+  "description": "Cycles between weather states (clear, rain, storm, snow) with transition blending.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "possibleStates", "type": "array", "required": false, "default": ["clear", "rain", "storm"]},
+    {"name": "avgStateDurationMinutes", "type": "number", "required": false, "default": 10}
+  ],
+  "outputs": [
+    {"name": "currentState", "type": "string"}
+  ],
+  "events": {
+    "emits": ["world.weatherChanged"],
+    "listensTo": ["world.dawnStarted", "world.duskStarted"]
+  },
+  "dependencies": ["world.day_night_cycle"],
+  "tags": ["ambient", "environment"],
+  "sourceModule": "roblox-modular-lib/src/WeatherSystem.lua"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "pets.pet_companion",
+  "name": "Pet Companion",
+  "category": "pets",
+  "description": "Ownable, followable companion pet with hunger/happiness stats and equip slot.",
+  "version": "0.1.0",
+  "platform": ["roblox", "agnostic"],
+  "inputs": [
+    {"name": "petId", "type": "string", "required": true},
+    {"name": "followDistance", "type": "number", "required": false, "default": 6}
+  ],
+  "outputs": [
+    {"name": "happiness", "type": "number"},
+    {"name": "isEquipped", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["pets.equipped", "pets.unequipped", "pets.hungry"],
+    "listensTo": ["movement.started"]
+  },
+  "dependencies": ["movement.basic_walk"],
+  "tags": ["companion", "collectible"],
+  "sourceModule": "roblox-modular-lib/src/PetSystem.lua"
+}

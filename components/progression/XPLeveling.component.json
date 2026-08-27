@@ -1,0 +1,24 @@
+{
+  "id": "progression.xp_leveling",
+  "name": "XP Leveling",
+  "category": "progression",
+  "description": "Tracks experience points and level, computing level-up thresholds from a curve.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "inputs": [
+    {"name": "curve", "type": "string", "required": false, "default": "linear"},
+    {"name": "startingLevel", "type": "number", "required": false, "default": 1}
+  ],
+  "outputs": [
+    {"name": "level", "type": "number"},
+    {"name": "currentXP", "type": "number"},
+    {"name": "xpToNextLevel", "type": "number"}
+  ],
+  "events": {
+    "emits": ["progression.leveledUp", "progression.xpGained"],
+    "listensTo": ["combat.hit", "progression.questCompleted"]
+  },
+  "dependencies": [],
+  "tags": ["xp", "leveling"],
+  "sourceModule": "roblox-modular-lib/src/XPSystem.lua"
+}

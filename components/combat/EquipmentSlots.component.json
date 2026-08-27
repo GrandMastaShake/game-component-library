@@ -1,0 +1,22 @@
+{
+  "id": "combat.equipment_slots",
+  "name": "Equipment Slots",
+  "category": "combat",
+  "description": "Weapon/armor equip slots that modify combat stats when items are equipped.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "agnostic"],
+  "inputs": [
+    {"name": "slotTypes", "type": "array", "required": false, "default": ["weapon", "armor", "accessory"]}
+  ],
+  "outputs": [
+    {"name": "equipped", "type": "object"},
+    {"name": "totalStatBonus", "type": "object"}
+  ],
+  "events": {
+    "emits": ["combat.itemEquipped", "combat.itemUnequipped"],
+    "listensTo": ["inventory.itemAdded"]
+  },
+  "dependencies": ["combat.melee_basic", "inventory.slotted_bag"],
+  "tags": ["equipment", "stats"],
+  "sourceModule": "roblox-modular-lib/src/EquipmentSystem.lua"
+}

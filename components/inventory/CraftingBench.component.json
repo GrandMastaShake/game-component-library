@@ -1,0 +1,21 @@
+{
+  "id": "inventory.crafting_bench",
+  "name": "Crafting Bench",
+  "category": "inventory",
+  "description": "Recipe-based crafting: consumes input items from a bag, produces an output item.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "agnostic"],
+  "inputs": [
+    {"name": "recipes", "type": "array", "required": true}
+  ],
+  "outputs": [
+    {"name": "availableRecipes", "type": "array"}
+  ],
+  "events": {
+    "emits": ["inventory.itemCrafted", "inventory.craftFailed"],
+    "listensTo": ["inventory.itemAdded", "inventory.itemRemoved"]
+  },
+  "dependencies": ["inventory.slotted_bag"],
+  "tags": ["crafting", "recipes"],
+  "sourceModule": "roblox-modular-lib/src/CraftingSystem.lua"
+}

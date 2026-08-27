@@ -15,7 +15,7 @@
     },
     "category": {
       "type": "string",
-      "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui"]
+      "enum": ["movement", "combat", "inventory", "economy", "social", "world", "ui", "pets", "progression"]
     },
     "description": {
       "type": "string"
@@ -82,6 +82,10 @@
     "tags": {
       "type": "array",
       "items": {"type": "string"}
+    },
+    "sourceModule": {
+      "type": "string",
+      "description": "Optional pointer to the real implementation this brick was extracted from, e.g. 'roblox-modular-lib/src/PetSystem.lua'"
     }
   }
 }
