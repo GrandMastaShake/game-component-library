@@ -1,0 +1,21 @@
+{
+  "id": "social.trade_remote_handler",
+  "name": "Trade Remote Handler",
+  "category": "social",
+  "description": "Client-server RemoteEvent/RemoteFunction plumbing that relays trade UI actions (offer, accept, cancel) to the Trade Coordinator and streams state updates back to both clients.",
+  "version": "0.1.0",
+  "platform": ["roblox"],
+  "inputs": [
+    {"name": "rateLimitPerSecond", "type": "number", "required": false, "default": 5}
+  ],
+  "outputs": [
+    {"name": "pendingRequests", "type": "number"}
+  ],
+  "events": {
+    "emits": ["social.tradeOpened"],
+    "listensTo": ["social.tradeValidated", "social.tradeCommitted", "social.tradeRejected"]
+  },
+  "dependencies": ["social.trade_coordinator"],
+  "tags": ["networking", "remotes"],
+  "sourceModule": "roblox-modular-lib/src/TradeRemoteHandler.lua"
+}

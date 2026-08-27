@@ -1,0 +1,21 @@
+{
+  "id": "social.trade_coordinator",
+  "name": "Trade Coordinator",
+  "category": "social",
+  "description": "Server-side authority for two-player trades: validates offers against live inventory/currency state, locks items during negotiation, and commits the swap atomically on mutual confirm.",
+  "version": "0.1.0",
+  "platform": ["roblox", "agnostic"],
+  "inputs": [
+    {"name": "confirmTimeoutSeconds", "type": "number", "required": false, "default": 30}
+  ],
+  "outputs": [
+    {"name": "activeTrades", "type": "array"}
+  ],
+  "events": {
+    "emits": ["social.tradeValidated", "social.tradeCommitted", "social.tradeRejected"],
+    "listensTo": ["social.tradeOpened"]
+  },
+  "dependencies": ["inventory.core_inventory", "economy.currency"],
+  "tags": ["trading", "server-authority", "anti-scam"],
+  "sourceModule": "roblox-modular-lib/src/TradeCoordinator.lua"
+}

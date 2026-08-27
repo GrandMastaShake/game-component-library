@@ -2,8 +2,8 @@
   "id": "inventory.slotted_bag",
   "name": "Slotted Bag",
   "category": "inventory",
-  "description": "Fixed-slot inventory with stacking and rarity metadata.",
-  "version": "0.1.0",
+  "description": "Fixed-slot inventory with stacking and rarity metadata, built on the Core Inventory primitive.",
+  "version": "0.1.1",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
   "inputs": [
     {"name": "slotCount", "type": "number", "required": false, "default": 20},
@@ -17,6 +17,7 @@
     "emits": ["inventory.itemAdded", "inventory.itemRemoved", "inventory.full"],
     "listensTo": ["economy.itemGranted"]
   },
-  "dependencies": [],
-  "tags": ["items", "storage"]
+  "dependencies": ["inventory.core_inventory"],
+  "tags": ["items", "storage"],
+  "sourceModule": "roblox-modular-lib/src/Inventory.lua"
 }

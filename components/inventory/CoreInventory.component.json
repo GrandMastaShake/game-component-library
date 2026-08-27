@@ -1,0 +1,18 @@
+{
+  "id": "inventory.core_inventory",
+  "name": "Core Inventory",
+  "category": "inventory",
+  "description": "Low-level key-value item storage primitive (add/remove/query) that higher-level inventory bricks like Slotted Bag are built on top of.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "initialItems", "type": "array", "required": false, "default": []}
+  ],
+  "outputs": [
+    {"name": "itemCount", "type": "number"}
+  ],
+  "events": {"emits": ["inventory.itemAdded", "inventory.itemRemoved"], "listensTo": []},
+  "dependencies": [],
+  "tags": ["primitive", "storage"],
+  "sourceModule": "roblox-modular-lib/src/Inventory.lua"
+}
