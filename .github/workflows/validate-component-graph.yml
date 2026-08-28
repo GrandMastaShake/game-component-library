@@ -5,13 +5,17 @@ on:
     paths:
       - "components/**/*.component.json"
       - "component.schema.json"
+      - "examples/**/*.request.json"
       - "tools/validate_component_graph.py"
+      - "tools/compile_build_manifest.py"
       - ".github/workflows/validate-component-graph.yml"
   pull_request:
     paths:
       - "components/**/*.component.json"
       - "component.schema.json"
+      - "examples/**/*.request.json"
       - "tools/validate_component_graph.py"
+      - "tools/compile_build_manifest.py"
       - ".github/workflows/validate-component-graph.yml"
 
 permissions:
@@ -29,10 +33,12 @@ jobs:
           python-version: "3.11"
       - name: Validate descriptors and dependency graph
         run: python3 tools/validate_component_graph.py --report reports/component-graph.json
-      - name: Upload graph report
+      - name: Compile Pet Survival Game example
+        run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
+      - name: Upload validation artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: component-graph-report
-          path: reports/component-graph.json
+          name: component-library-reports
+          path: reports/
           if-no-files-found: error
