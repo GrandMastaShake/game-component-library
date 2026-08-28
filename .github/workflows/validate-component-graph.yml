@@ -1,52 +1,22 @@
-name: Validate Component Graph
-
+name: Validate Component Library
 on:
   push:
-    paths:
-      - "components/**/*.component.json"
-      - "component.schema.json"
-      - "examples/**/*.request.json"
-      - "tools/validate_component_graph.py"
-      - "tools/compile_build_manifest.py"
-      - "tools/evaluate_manifest_readiness.py"
-      - "tools/generate_coverage_roadmap.py"
-      - ".github/workflows/validate-component-graph.yml"
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
   pull_request:
-    paths:
-      - "components/**/*.component.json"
-      - "component.schema.json"
-      - "examples/**/*.request.json"
-      - "tools/validate_component_graph.py"
-      - "tools/compile_build_manifest.py"
-      - "tools/evaluate_manifest_readiness.py"
-      - "tools/generate_coverage_roadmap.py"
-      - ".github/workflows/validate-component-graph.yml"
-
-permissions:
-  contents: read
-
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+permissions: {contents: read}
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Validate descriptors and dependency graph
-        run: python3 tools/validate_component_graph.py --report reports/component-graph.json
-      - name: Compile Pet Survival Game example
-        run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
-      - name: Evaluate Pet Survival Game prototype readiness
-        run: python3 tools/evaluate_manifest_readiness.py reports/pet-survival-game.manifest.json --mode prototype --report reports/pet-survival-game.prototype-readiness.json
-      - name: Generate adapter coverage roadmap
-        run: python3 tools/generate_coverage_roadmap.py reports/pet-survival-game.manifest.json --output reports/pet-survival-game.coverage-roadmap.json
-      - name: Upload validation artifacts
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: python3 tools/validate_component_graph.py --report reports/component-graph.json
+      - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
+      - run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
+      - run: python3 tools/evaluate_manifest_readiness.py reports/pet-survival-game.manifest.json --mode prototype --report reports/pet-survival-game.prototype-readiness.json
+      - run: python3 tools/generate_coverage_roadmap.py reports/pet-survival-game.manifest.json --output reports/pet-survival-game.coverage-roadmap.json
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: component-library-reports
-          path: reports/
-          if-no-files-found: error
+        with: {name: component-library-reports, path: reports/, if-no-files-found: error}

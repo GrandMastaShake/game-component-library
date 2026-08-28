@@ -1,0 +1,37 @@
+{
+  "id": "compound.procedural_world_bootstrap",
+  "name": "Procedural World Bootstrap",
+  "version": "0.1.0",
+  "description": "A complete world startup recipe: generate terrain from noise, assign biomes, carve caves, apply erosion, place water and props, then apply environment styling and atmosphere.",
+  "targetPlatform": "roblox",
+  "components": [
+    {"id": "world.noise_lib", "role": "seeded procedural signal source", "config": {"seed": 42, "octaves": 4}},
+    {"id": "world.terrain_generator", "role": "heightmap and terrain generator", "config": {"regionSize": 512}},
+    {"id": "world.biome_system", "role": "biome assignment", "config": {}},
+    {"id": "world.cave_system", "role": "subterranean carving", "config": {}},
+    {"id": "world.erosion_simulator", "role": "terrain erosion post-process", "config": {"iterations": 50000}},
+    {"id": "world.water_system", "role": "water placement", "config": {"seaLevel": 20}},
+    {"id": "presentation.low_poly_generator", "role": "procedural prop mesh source", "config": {"targetFaceCount": 200}},
+    {"id": "presentation.object_placer", "role": "biome-aware prop placement", "config": {"density": 0.2}},
+    {"id": "presentation.color_palette", "role": "world art-direction palette", "config": {"paletteSize": 6}},
+    {"id": "presentation.style_presets", "role": "visual theme selector", "config": {"presetName": "cartoon"}},
+    {"id": "world.day_night_cycle", "role": "time-of-day source", "config": {"dayLengthMinutes": 20}},
+    {"id": "world.weather_system", "role": "weather state source", "config": {}},
+    {"id": "world.environment_builder", "role": "lighting/fog/sky environment coordinator", "config": {}},
+    {"id": "world.world_builder", "role": "top-level world generation orchestrator", "config": {"worldSeed": 42}}
+  ],
+  "connections": [
+    {"from": "world.terrain_generator", "event": "world.terrainGenerated", "to": "world.biome_system", "note": "Terrain topology enables biome assignment."},
+    {"from": "world.terrain_generator", "event": "world.terrainGenerated", "to": "world.cave_system", "note": "Terrain topology enables cave carving."},
+    {"from": "world.terrain_generator", "event": "world.terrainGenerated", "to": "world.erosion_simulator", "note": "Terrain topology enables erosion."},
+    {"from": "world.terrain_generator", "event": "world.terrainGenerated", "to": "world.water_system", "note": "Terrain topology enables water placement."},
+    {"from": "world.biome_system", "event": "world.biomeAssigned", "to": "presentation.object_placer", "note": "Biome data controls prop distribution."},
+    {"from": "world.biome_system", "event": "world.biomeAssigned", "to": "world.environment_builder", "note": "Biome state informs lighting and atmosphere."},
+    {"from": "world.weather_system", "event": "world.weatherChanged", "to": "world.environment_builder", "note": "Weather state updates the environment."},
+    {"from": "world.erosion_simulator", "event": "world.erosionComplete", "to": "world.world_builder", "note": "World builder tracks erosion completion."},
+    {"from": "world.water_system", "event": "world.waterPlaced", "to": "world.world_builder", "note": "World builder tracks water placement completion."},
+    {"from": "presentation.object_placer", "event": "presentation.objectsPlaced", "to": "world.world_builder", "note": "World builder tracks prop placement completion."}
+  ],
+  "criticalComponents": ["world.noise_lib", "world.terrain_generator", "world.biome_system", "world.erosion_simulator", "world.world_builder", "world.environment_builder"],
+  "acceptanceCriteria": ["A fixed world seed produces a terrain build pipeline with deterministic inputs.", "Terrain generation enables biome, cave, erosion, and water stages.", "Biome assignment drives both prop placement and environmental styling.", "World Builder reports completion only after its tracked world stages complete."]
+}
