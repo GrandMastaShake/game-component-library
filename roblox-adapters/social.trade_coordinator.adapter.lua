@@ -1,37 +1,39 @@
 --!strict
--- Adapter for component.schema.json id: social.trade_coordinator
--- Thin translation layer over roblox-modular-lib/src/TradeCoordinator.lua
--- No gameplay logic lives here — this only maps schema inputs/outputs/events
--- onto the real module's function names once it is vendored into this repo.
+-- Schema adapter: social.trade_coordinator
+-- Verified source constructor: TradeCoordinator.new(eventBus, deps, config)
+-- Source: roblox-modular-lib/src/TradeCoordinator.lua
 
 local Adapter = {}
 Adapter.componentId = "social.trade_coordinator"
 
-export type TradeCoordinatorConfig = {
+export type Config = {
 	confirmTimeoutSeconds: number?,
 }
 
--- Inputs (per schema): confirmTimeoutSeconds (default 30)
--- Outputs (per schema): activeTrades (array)
--- Emits: social.tradeValidated, social.tradeCommitted, social.tradeRejected
--- ListensTo: social.tradeOpened
--- Dependencies (per schema): inventory.core_inventory, economy.currency
-function Adapter.new(config: TradeCoordinatorConfig?)
+export type Runtime = {
+	eventBus: { Emit: (self: any, eventName: string, payload: any) -> () },
+	RequireSource: (self: any, sourceName: string) -> any,
+	Emit: (self: any, eventName: string, payload: any) -> (),
+}
+
+-- `deps` is intentionally supplied by the host game. TradeCoordinator's real
+-- dependency shape is defined by roblox-modular-lib and should remain the
+-- source of truth rather than being duplicated or guessed in this repo.
+-- inputs: confirmTimeoutSeconds (translated into host config by the caller)
+-- outputs: activeTrades (source-owned)
+-- emits/listensTo: mapped after the host EventBus event names are extracted.
+function Adapter.new(runtime: Runtime, deps: any, config: Config?)
+	local TradeCoordinator = runtime:RequireSource("TradeCoordinator")
 	local cfg = config or {}
-	local confirmTimeoutSeconds = cfg.confirmTimeoutSeconds or 30
 
-	local self = {
-		_confirmTimeoutSeconds = confirmTimeoutSeconds,
-		activeTrades = {},
+	-- This is a verified call against the live source signature.
+	local backing = TradeCoordinator.new(runtime.eventBus, deps, cfg)
+
+	return {
+		componentId = Adapter.componentId,
+		backing = backing,
+		config = cfg,
 	}
-
-	-- Real wiring: require the actual TradeCoordinator module, forward its
-	-- native events (whatever they're internally named) onto the schema's
-	-- social.tradeValidated / social.tradeCommitted / social.tradeRejected
-	-- event names, and subscribe to social.tradeOpened from the
-	-- trade_remote_handler adapter to kick off validation.
-
-	return self
 end
 
 return Adapter

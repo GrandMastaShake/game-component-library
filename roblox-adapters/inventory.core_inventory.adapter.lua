@@ -1,41 +1,37 @@
 --!strict
--- Adapter for component.schema.json id: inventory.core_inventory
--- Wraps roblox-modular-lib/src/Inventory.lua
--- NOTE: exact method names below are placeholders. This repo has not yet
--- vendored roblox-modular-lib as a dependency, so the real Inventory.lua
--- API surface has not been verified. Replace TODO-marked lines once it is.
+-- Schema adapter: inventory.core_inventory
+-- Verified source constructor: Inventory.new(eventBus, maxSlots)
+-- Source: roblox-modular-lib/src/Inventory.lua
 
 local Adapter = {}
 Adapter.componentId = "inventory.core_inventory"
 
--- Inputs (per schema): initialItems (array, default {})
--- Outputs (per schema): itemCount (number)
--- Emits: inventory.itemAdded, inventory.itemRemoved
-function Adapter.new(initialItems: {any}?)
-	local self = {
-		_items = initialItems or {},
-		itemCount = 0,
+export type Config = {
+	maxSlots: number?,
+}
+
+export type Runtime = {
+	eventBus: { Emit: (self: any, eventName: string, payload: any) -> () },
+	RequireSource: (self: any, sourceName: string) -> any,
+	Emit: (self: any, eventName: string, payload: any) -> (),
+}
+
+-- inputs: initialItems (currently not part of the confirmed source constructor)
+-- outputs: itemCount (delegated to the source instance where available)
+-- emits: inventory.itemAdded, inventory.itemRemoved (source-event mapping pending)
+function Adapter.new(runtime: Runtime, config: Config?)
+	local cfg = config or {}
+	local Inventory = runtime:RequireSource("Inventory")
+	local maxSlots = cfg.maxSlots or 20
+
+	-- This is a verified call against the live source signature.
+	local backing = Inventory.new(runtime.eventBus, maxSlots)
+
+	return {
+		componentId = Adapter.componentId,
+		backing = backing,
+		maxSlots = maxSlots,
 	}
-	self.itemCount = #self._items
-
-	-- TODO: require the real Inventory module here, e.g.:
-	-- local Inventory = require(RobloxModularLib.Inventory)
-	-- self._backing = Inventory.new(initialItems)
-
-	return self
-end
-
--- TODO: verify against real API. Should call the backing module's add function
--- and re-emit inventory.itemAdded through the shared EventBus.
-function Adapter:AddItem(item: any)
-	table.insert(self._items, item)
-	self.itemCount += 1
-	-- emit inventory.itemAdded
-end
-
--- TODO: verify against real API.
-function Adapter:RemoveItem(item: any)
-	-- emit inventory.itemRemoved
 end
 
 return Adapter
