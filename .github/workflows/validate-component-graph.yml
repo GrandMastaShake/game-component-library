@@ -8,6 +8,7 @@ on:
       - "examples/**/*.request.json"
       - "tools/validate_component_graph.py"
       - "tools/compile_build_manifest.py"
+      - "tools/evaluate_manifest_readiness.py"
       - ".github/workflows/validate-component-graph.yml"
   pull_request:
     paths:
@@ -16,6 +17,7 @@ on:
       - "examples/**/*.request.json"
       - "tools/validate_component_graph.py"
       - "tools/compile_build_manifest.py"
+      - "tools/evaluate_manifest_readiness.py"
       - ".github/workflows/validate-component-graph.yml"
 
 permissions:
@@ -35,6 +37,8 @@ jobs:
         run: python3 tools/validate_component_graph.py --report reports/component-graph.json
       - name: Compile Pet Survival Game example
         run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
+      - name: Evaluate Pet Survival Game prototype readiness
+        run: python3 tools/evaluate_manifest_readiness.py reports/pet-survival-game.manifest.json --mode prototype --report reports/pet-survival-game.prototype-readiness.json
       - name: Upload validation artifacts
         if: always()
         uses: actions/upload-artifact@v4

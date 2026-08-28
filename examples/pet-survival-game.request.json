@@ -20,5 +20,14 @@
     "presentation.audio_system",
     "utility.timer_system",
     "movement.pathfinding_system"
+  ],
+  "criticalComponents": [
+    "pets.pet_companion",
+    "world.world_builder",
+    "inventory.crafting_bench",
+    "combat.status_effects",
+    "social.trade_window",
+    "ui.hud",
+    "persistence.profile_adapter"
   ]
 }

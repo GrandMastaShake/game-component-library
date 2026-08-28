@@ -72,13 +72,21 @@ def main() -> int:
     request = json.loads(args.request.read_text(encoding="utf-8"))
     platform = request.get("targetPlatform")
     requested = request.get("requestedComponents")
+    critical = request.get("criticalComponents", requested)
     if not isinstance(platform, str):
         raise ValueError("Request requires string field 'targetPlatform'")
     if not isinstance(requested, list) or not all(isinstance(item, str) for item in requested):
         raise ValueError("Request requires string-array field 'requestedComponents'")
+    if not isinstance(critical, list) or not all(isinstance(item, str) for item in critical):
+        raise ValueError("'criticalComponents' must be a string array when provided")
 
     registry = load_registry(root)
     build_order = resolve(requested, registry, platform)
+    resolved_ids = set(build_order)
+    for component_id in critical:
+        if component_id not in resolved_ids:
+            raise ValueError(f"Critical component '{component_id}' is not part of the resolved build")
+
     components = []
     for index, component_id in enumerate(build_order, start=1):
         component = registry[component_id]
@@ -89,19 +97,22 @@ def main() -> int:
             "category": component["category"],
             "descriptor": component["_descriptorPath"],
             "dependencies": component["dependencies"],
+            "critical": component_id in critical,
             "adapterStatus": adapter_status(root, component_id) if platform == "roblox" else "not-applicable",
         })
 
     manifest = {
-        "manifestVersion": "1.0.0",
+        "manifestVersion": "1.1.0",
         "gameName": request.get("gameName", "Untitled Game"),
         "targetPlatform": platform,
         "requestedComponents": requested,
+        "criticalComponents": critical,
         "resolvedComponentCount": len(components),
         "buildOrder": components,
         "notes": [
             "Order is dependency-safe: every dependency precedes its dependent component.",
             "adapterStatus is an implementation signal, not a runtime test result.",
+            "critical components define the minimum runtime path for demo readiness.",
         ],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
