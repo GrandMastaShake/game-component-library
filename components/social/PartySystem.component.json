@@ -1,0 +1,5 @@
+{
+  "id":"social.party_system","name":"Party System","category":"social","description":"Creates a small player party, tracks members, and emits shared-credit events that eligible quest/progression systems can consume.","version":"0.1.0","platform":["roblox","godot","unity","web","agnostic"],
+  "inputs":[{"name":"maxMembers","type":"number","required":false,"default":4}],"outputs":[{"name":"members","type":"array"},{"name":"isLeader","type":"boolean"}],
+  "events":{"emits":["social.partyCreated","social.partyMemberJoined","social.sharedQuestCredit"],"listensTo":["progression.questCompleted"]},"dependencies":[],"tags":["multiplayer","cooperative","social"],"provenance":"library-native"
+}
