@@ -1,0 +1,65 @@
+{
+  "id": "compound.server_authoritative_trade_flow",
+  "name": "Server-Authoritative Trade Flow",
+  "version": "0.1.0",
+  "description": "A reusable multiplayer trade composition: client transport opens a trade, the coordinator validates and commits it server-side, then the transport and UI receive authoritative result events.",
+  "targetPlatform": "roblox",
+  "components": [
+    {"id": "inventory.core_inventory", "role": "authoritative item ownership store", "config": {"maxSlots": 50}},
+    {"id": "economy.currency", "role": "authoritative currency balance", "config": {"currencyName": "Coins"}},
+    {"id": "social.trade_coordinator", "role": "server authority and transaction coordinator", "config": {"confirmTimeoutSeconds": 30}},
+    {"id": "social.trade_remote_handler", "role": "rate-limited client/server transport", "config": {"rateLimitPerSecond": 5}},
+    {"id": "social.trade_window", "role": "player trade interface", "config": {"maxItemsPerSide": 8}}
+  ],
+  "connections": [
+    {
+      "from": "social.trade_remote_handler",
+      "event": "social.tradeOpened",
+      "to": "social.trade_coordinator",
+      "note": "Remote transport requests a server-authoritative trade session."
+    },
+    {
+      "from": "social.trade_coordinator",
+      "event": "social.tradeValidated",
+      "to": "social.trade_remote_handler",
+      "note": "Coordinator returns validated state to both clients."
+    },
+    {
+      "from": "social.trade_coordinator",
+      "event": "social.tradeCommitted",
+      "to": "social.trade_remote_handler",
+      "note": "Coordinator returns the final committed transaction result."
+    },
+    {
+      "from": "social.trade_coordinator",
+      "event": "social.tradeCommitted",
+      "to": "social.trade_window",
+      "note": "UI updates only after the server confirms the swap."
+    },
+    {
+      "from": "social.trade_coordinator",
+      "event": "social.tradeRejected",
+      "to": "social.trade_remote_handler",
+      "note": "Coordinator returns authoritative rejection state."
+    },
+    {
+      "from": "social.trade_coordinator",
+      "event": "social.tradeRejected",
+      "to": "social.trade_window",
+      "note": "UI displays the server-authoritative failure state."
+    }
+  ],
+  "criticalComponents": [
+    "inventory.core_inventory",
+    "economy.currency",
+    "social.trade_coordinator",
+    "social.trade_remote_handler",
+    "social.trade_window"
+  ],
+  "acceptanceCriteria": [
+    "A client request cannot commit a trade without coordinator validation.",
+    "The trade window reacts to committed or rejected results from the coordinator, not to client assumptions.",
+    "Item and currency ownership are checked by the server authority before commit.",
+    "Transport is rate-limited and does not become the source of truth."
+  ]
+}

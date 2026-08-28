@@ -1,0 +1,41 @@
+{
+  "id": "compound.pet_persistence_loop",
+  "name": "Pet Persistence Loop",
+  "version": "0.1.0",
+  "description": "A durable companion loop: a player gains pet inventory state, the state marks the save system dirty, persistence writes safely, and a profile session owns the loaded state.",
+  "targetPlatform": "roblox",
+  "components": [
+    {"id": "inventory.core_inventory", "role": "authoritative owned-pet inventory", "config": {"maxSlots": 50}},
+    {"id": "pets.pet_companion", "role": "equipped in-world companion", "config": {"followDistance": 6}},
+    {"id": "persistence.save_system", "role": "state snapshot and autosave coordinator", "config": {"autosaveIntervalSeconds": 120}},
+    {"id": "persistence.datastore_safe", "role": "retry/backoff persistence writer", "config": {"maxRetries": 3}},
+    {"id": "persistence.profile_adapter", "role": "session-locked profile owner", "config": {}},
+    {"id": "utility.timer_system", "role": "general timing primitive", "config": {"durationSeconds": 120, "repeats": true}}
+  ],
+  "connections": [
+    {
+      "from": "inventory.core_inventory",
+      "event": "inventory.itemAdded",
+      "to": "persistence.save_system",
+      "note": "Acquiring a pet marks player state dirty for saving."
+    },
+    {
+      "from": "persistence.save_system",
+      "event": "persistence.saved",
+      "to": "persistence.datastore_safe",
+      "note": "Save completion enters the safe write/retry layer."
+    }
+  ],
+  "criticalComponents": [
+    "inventory.core_inventory",
+    "pets.pet_companion",
+    "persistence.save_system",
+    "persistence.profile_adapter"
+  ],
+  "acceptanceCriteria": [
+    "A pet acquired into inventory marks the player save state dirty.",
+    "A profile session is loaded before pet state is used.",
+    "A save event enters the safe datastore write path.",
+    "A player can leave and return with the pet ownership state restored."
+  ]
+}
