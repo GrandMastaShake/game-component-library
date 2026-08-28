@@ -7,7 +7,7 @@
   "platform": ["roblox", "unity", "web", "agnostic"],
   "inputs": [{"name": "maxVisible", "type": "number", "required": false, "default": 3}, {"name": "displaySeconds", "type": "number", "required": false, "default": 4}],
   "outputs": [{"name": "queueLength", "type": "number"}],
-  "events": {"emits": ["ui.notificationShown", "ui.notificationDismissed"], "listensTo": ["inventory.itemGranted", "progression.leveledUp", "economy.earned", "ui.notificationRequested", "inventory.itemCrafted", "progression.questCompleted", "pets.hatched", "housing.furniturePlaced"]},
+  "events": {"emits": ["ui.notificationShown", "ui.notificationDismissed"], "listensTo": ["inventory.itemGranted", "progression.leveledUp", "economy.earned", "ui.notificationRequested"]},
   "sinkFor": ["notify"],
   "dependencies": [],
   "tags": ["feedback", "presentation"],
