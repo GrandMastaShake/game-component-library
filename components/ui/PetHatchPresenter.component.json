@@ -1,5 +1,15 @@
 {
-  "id":"ui.pet_hatch_presenter","name":"Pet Hatch Presenter","category":"ui","description":"Library-native bridge that converts a pet hatch result into a normalized player-notification request with pet, rarity, and reveal payload data.","version":"0.1.0","platform":["roblox","godot","unity","web","agnostic"],
-  "inputs":[{"name":"revealSeconds","type":"number","required":false,"default":3}],"outputs":[{"name":"lastPresentation","type":"object"}],
-  "events":{"emits":["ui.notificationRequested"],"listensTo":["pets.hatched"]},"dependencies":["pets.egg_hatchery"],"tags":["pets","presentation","feedback"],"provenance":"library-native"
+  "id": "ui.pet_hatch_presenter",
+  "name": "Pet Hatch Presenter",
+  "category": "ui",
+  "description": "Library-native bridge that converts a trusted pet hatch result into a normalized player-notification request containing pet, rarity, and reveal data.",
+  "version": "0.2.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [{"name": "revealSeconds", "type": "number", "required": false, "default": 3}],
+  "outputs": [{"name": "lastPresentation", "type": "object"}],
+  "events": {"emits": ["ui.notificationRequested"], "listensTo": ["pets.hatched"]},
+  "dependencies": ["pets.egg_hatchery"],
+  "tags": ["pets", "presentation", "feedback"],
+  "provenance": "library-native",
+  "implementationPath": "roblox-adapters/native/PetHatchPresenter.lua"
 }

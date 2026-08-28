@@ -2,13 +2,14 @@
   "id": "pets.egg_hatchery",
   "name": "Egg Hatchery",
   "category": "pets",
-  "description": "Consumes a configured egg/item, selects a pet outcome from a weighted hatch table, grants the result into authoritative inventory, and emits a hatching result.",
-  "version": "0.1.0",
+  "description": "Consumes a configured egg, resolves a server-authoritative weighted pet outcome, grants it into authoritative inventory, and emits success or failure events.",
+  "version": "0.2.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
-  "inputs": [{"name":"hatchTable","type":"array","required":true},{"name":"hatchCost","type":"number","required":false,"default":0}],
-  "outputs": [{"name":"lastHatchedPet","type":"object"},{"name":"isHatching","type":"boolean"}],
-  "events": {"emits":["pets.hatched","pets.hatchFailed"],"listensTo":["inventory.itemAdded","economy.earned"]},
-  "dependencies": ["inventory.core_inventory","economy.currency"],
-  "tags": ["pets","eggs","rarity","collection"],
-  "provenance": "library-native"
+  "inputs": [{"name": "eggItemId", "type": "string", "required": true}, {"name": "hatchTable", "type": "array", "required": true}, {"name": "hatchCost", "type": "number", "required": false, "default": 0}],
+  "outputs": [{"name": "lastHatchedPet", "type": "object"}, {"name": "isHatching", "type": "boolean"}],
+  "events": {"emits": ["pets.hatched", "pets.hatchFailed"], "listensTo": ["inventory.itemAdded", "economy.earned"]},
+  "dependencies": ["inventory.core_inventory", "economy.currency"],
+  "tags": ["pets", "eggs", "rarity", "collection", "server-authority"],
+  "provenance": "library-native",
+  "implementationPath": "roblox-adapters/native/EggHatchery.lua"
 }
