@@ -1,0 +1,38 @@
+name: Validate Component Graph
+
+on:
+  push:
+    paths:
+      - "components/**/*.component.json"
+      - "component.schema.json"
+      - "tools/validate_component_graph.py"
+      - ".github/workflows/validate-component-graph.yml"
+  pull_request:
+    paths:
+      - "components/**/*.component.json"
+      - "component.schema.json"
+      - "tools/validate_component_graph.py"
+      - ".github/workflows/validate-component-graph.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate descriptors and dependency graph
+        run: python3 tools/validate_component_graph.py --report reports/component-graph.json
+      - name: Upload graph report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: component-graph-report
+          path: reports/component-graph.json
+          if-no-files-found: error
