@@ -1,22 +1,5 @@
 {
-  "id": "progression.quest_log",
-  "name": "Quest Log",
-  "category": "progression",
-  "description": "Tracks active/completed quests with objective progress and reward payout on completion.",
-  "version": "0.1.0",
-  "platform": ["roblox", "godot", "agnostic"],
-  "inputs": [
-    {"name": "maxActiveQuests", "type": "number", "required": false, "default": 5}
-  ],
-  "outputs": [
-    {"name": "activeQuests", "type": "array"},
-    {"name": "completedCount", "type": "number"}
-  ],
-  "events": {
-    "emits": ["progression.questStarted", "progression.questCompleted", "progression.objectiveUpdated"],
-    "listensTo": ["combat.hit", "inventory.itemAdded"]
-  },
-  "dependencies": ["economy.currency"],
-  "tags": ["quests", "objectives"],
-  "sourceModule": "roblox-modular-lib/src/QuestSystem.lua"
+  "id":"progression.quest_log","name":"Quest Log","category":"progression","description":"Tracks active/completed quests with objective progress, reward payout, and guarded shared party credit.","version":"0.3.0","platform":["roblox","godot","agnostic"],
+  "inputs":[{"name":"maxActiveQuests","type":"number","required":false,"default":5}],"outputs":[{"name":"activeQuests","type":"array"},{"name":"completedCount","type":"number"}],
+  "events":{"emits":["progression.questStarted","progression.questCompleted","progression.objectiveUpdated"],"listensTo":["combat.hit","inventory.itemAdded","progression.sharedQuestCreditSafe"]},"dependencies":["economy.currency"],"tags":["quests","objectives","cooperative"],"sourceModule":"roblox-modular-lib/src/QuestSystem.lua","provenance":"hybrid"
 }
