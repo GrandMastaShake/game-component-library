@@ -1,0 +1,17 @@
+{
+  "id": "presentation.particle_system",
+  "name": "Particle System",
+  "category": "presentation",
+  "description": "Pooled, delta-timed particle emitter for damage numbers, impacts, and status flashes. Uses a fixed pool with explicit exhaustion signalling rather than unbounded allocation, and advances physics by frame delta rather than a fixed step.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "poolSize", "type": "number", "required": false, "default": 1000},
+    {"name": "defaultLifetimeSeconds", "type": "number", "required": false, "default": 1.5}
+  ],
+  "outputs": [{"name": "activeCount", "type": "number"}],
+  "events": {"emits": ["presentation.effectSpawned", "presentation.effectPoolExhausted"], "listensTo": ["combat.damageResolved", "combat.entityDefeated", "presentation.styleApplied"]},
+  "dependencies": [],
+  "tags": ["vfx", "particles", "presentation", "performance"],
+  "provenance": "library-native"
+}

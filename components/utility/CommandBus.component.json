@@ -1,0 +1,17 @@
+{
+  "id": "utility.command_bus",
+  "name": "Command Bus",
+  "category": "utility",
+  "description": "Single ordered channel for entity commands. Priority-sorted, depth-capped, and dispatch-acknowledged so that producers and consumers never hold private command paths.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "maxQueueDepth", "type": "number", "required": false, "default": 256},
+    {"name": "dispatchesPerTick", "type": "number", "required": false, "default": 32}
+  ],
+  "outputs": [{"name": "pending", "type": "array"}],
+  "events": {"emits": ["utility.commandQueued", "utility.commandDispatched", "utility.commandRejected"], "listensTo": ["utility.commandRequested"]},
+  "dependencies": [],
+  "tags": ["command", "rts", "dispatch", "primitive"],
+  "provenance": "library-native"
+}

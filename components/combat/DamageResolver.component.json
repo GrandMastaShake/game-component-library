@@ -1,0 +1,18 @@
+{
+  "id": "combat.damage_resolver",
+  "name": "Damage Resolver",
+  "category": "combat",
+  "description": "Resolves a landed attack into final damage: armor mitigation, armor penetration, critical multiplier, and bounded variance. Armor penetration reduces the effective armor of the defender before mitigation is applied and never adds damage, and mitigation is clamped so a fully armored target still takes minDamageFraction of base damage.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "armorCoefficient", "type": "number", "required": false, "default": 0.05},
+    {"name": "minDamageFraction", "type": "number", "required": false, "default": 0.2},
+    {"name": "varianceFraction", "type": "number", "required": false, "default": 0.1}
+  ],
+  "outputs": [{"name": "lastResolution", "type": "object"}],
+  "events": {"emits": ["combat.damageResolved", "combat.entityDefeated"], "listensTo": ["combat.hit"]},
+  "dependencies": [],
+  "tags": ["combat", "damage", "armor", "rts"],
+  "provenance": "library-native"
+}

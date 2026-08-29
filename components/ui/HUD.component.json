@@ -2,20 +2,17 @@
   "id": "ui.hud",
   "name": "HUD",
   "category": "ui",
-  "description": "Configurable heads-up display panel that renders health, currency, and notification widgets.",
-  "version": "0.1.0",
+  "description": "Configurable heads-up display panel that renders health, currency, and notification widgets, plus per-entity world-space overlays (nameplates, health bars, and behavior status icons).",
+  "version": "0.2.0",
   "platform": ["roblox", "unity", "web", "agnostic"],
   "inputs": [
     {"name": "showHealth", "type": "boolean", "required": false, "default": true},
-    {"name": "showCurrency", "type": "boolean", "required": false, "default": true}
+    {"name": "showCurrency", "type": "boolean", "required": false, "default": true},
+    {"name": "showNameplates", "type": "boolean", "required": false, "default": false},
+    {"name": "showStatusIcons", "type": "boolean", "required": false, "default": false}
   ],
-  "outputs": [
-    {"name": "isVisible", "type": "boolean"}
-  ],
-  "events": {
-    "emits": [],
-    "listensTo": ["economy.earned", "economy.spent", "combat.hit"]
-  },
+  "outputs": [{"name": "isVisible", "type": "boolean"}],
+  "events": {"emits": [], "listensTo": ["economy.earned", "economy.spent", "combat.hit", "combat.damageResolved", "utility.behaviorChanged"]},
   "dependencies": ["economy.currency"],
   "tags": ["interface", "presentation"]
 }

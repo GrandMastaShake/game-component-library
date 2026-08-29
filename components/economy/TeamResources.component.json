@@ -1,0 +1,20 @@
+{
+  "id": "economy.team_resources",
+  "name": "Team Resources",
+  "category": "economy",
+  "description": "Per-team RTS resource ledger. Separates consumable stock, which is spent and gone, from concurrent capacity, which is occupied while a unit lives and released on death; affordability requires stock >= cost AND supply.used + cost <= supply.cap. Distinct from economy.currency, which is per-player and has no capacity axis.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "startingStock", "type": "object", "required": false, "default": {"mineral": 500, "gas": 200}},
+    {"name": "startingSupplyCap", "type": "number", "required": false, "default": 15}
+  ],
+  "outputs": [
+    {"name": "stock", "type": "object"},
+    {"name": "supply", "type": "object"}
+  ],
+  "events": {"emits": ["economy.teamStockChanged", "economy.supplyChanged", "economy.spendRejected"], "listensTo": ["economy.earned"]},
+  "dependencies": [],
+  "tags": ["economy", "rts", "team", "supply"],
+  "provenance": "library-native"
+}

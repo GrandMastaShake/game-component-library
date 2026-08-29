@@ -1,0 +1,20 @@
+{
+  "id": "world.vision_system",
+  "name": "Vision System",
+  "category": "world",
+  "description": "Per-team fog of war. Tracks the three-state tile lattice of unexplored, explored, and visible, recomputing visible tiles only for entities that moved and retaining explored tiles permanently.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "revealRadius", "type": "number", "required": false, "default": 10},
+    {"name": "persistExplored", "type": "boolean", "required": false, "default": true}
+  ],
+  "outputs": [
+    {"name": "visibleTiles", "type": "array"},
+    {"name": "exploredTiles", "type": "array"}
+  ],
+  "events": {"emits": ["world.visionUpdated", "world.tileExplored"], "listensTo": ["world.chunkLoaded", "movement.started", "movement.stopped"]},
+  "dependencies": [],
+  "tags": ["fog-of-war", "vision", "rts", "world"],
+  "provenance": "library-native"
+}

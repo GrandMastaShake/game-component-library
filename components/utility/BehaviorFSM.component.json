@@ -1,0 +1,18 @@
+{
+  "id": "utility.behavior_fsm",
+  "name": "Behavior FSM",
+  "category": "utility",
+  "description": "Finite state machine for autonomous entity behavior across idle, moving, attacking, fleeing, gathering, and patrolling. Its only output channel is a command request on the command bus, so it never mutates entities directly. Categorised as utility rather than movement because it governs engagement and gathering, not locomotion alone.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "detectionRange", "type": "number", "required": false, "default": 15},
+    {"name": "actionCooldownSeconds", "type": "number", "required": false, "default": 1.0},
+    {"name": "initialBehavior", "type": "string", "required": false, "default": "idle"}
+  ],
+  "outputs": [{"name": "states", "type": "object"}],
+  "events": {"emits": ["utility.commandRequested", "utility.behaviorChanged"], "listensTo": ["combat.damageResolved", "combat.entityDefeated", "movement.pathFailed", "utility.commandDispatched"]},
+  "dependencies": ["utility.command_bus", "movement.pathfinding_system"],
+  "tags": ["ai", "fsm", "rts", "behavior"],
+  "provenance": "library-native"
+}

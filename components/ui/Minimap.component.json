@@ -1,0 +1,18 @@
+{
+  "id": "ui.minimap",
+  "name": "Minimap",
+  "category": "ui",
+  "description": "Scaled overview of terrain, entities, and camera frustum in grid space, with click-to-pan. Scale is derived from map extent in tiles rather than pixels, so the projection stays unit-consistent at any map size.",
+  "version": "0.1.0",
+  "platform": ["roblox", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "widthPx", "type": "number", "required": false, "default": 200},
+    {"name": "heightPx", "type": "number", "required": false, "default": 200},
+    {"name": "respectFogOfWar", "type": "boolean", "required": false, "default": true}
+  ],
+  "outputs": [{"name": "viewport", "type": "object"}],
+  "events": {"emits": ["ui.minimapClicked"], "listensTo": ["world.visionUpdated", "world.chunkLoaded", "world.terrainGenerated"]},
+  "dependencies": ["world.vision_system"],
+  "tags": ["interface", "minimap", "rts"],
+  "provenance": "library-native"
+}

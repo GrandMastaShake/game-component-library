@@ -7,7 +7,7 @@
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
   "inputs": [{"name": "autosaveIntervalSeconds", "type": "number", "required": false, "default": 120}],
   "outputs": [{"name": "lastSavedAt", "type": "number"}],
-  "events": {"emits": ["persistence.saved", "persistence.saveFailed"], "listensTo": ["inventory.itemAdded", "economy.earned", "progression.leveledUp", "inventory.itemCrafted", "progression.questCompleted", "pets.hatched", "housing.furniturePlaced"]},
+  "events": {"emits": ["persistence.saved", "persistence.saveFailed"], "listensTo": ["inventory.itemAdded", "economy.earned", "progression.leveledUp"]},
   "sinkFor": ["persist"],
   "dependencies": [],
   "tags": ["save", "persistence", "state"],
