@@ -12,7 +12,7 @@
     {"name": "wallKickVelocity", "type": "number", "required": false, "default": 12, "description": "Horizontal speed away from the wall."},
     {"name": "inputLockSeconds", "type": "number", "required": false, "default": 0.12, "description": "How long horizontal input is ignored after a wall jump. Zero means holding toward the wall cancels the kick and the character never leaves."},
     {"name": "resetsAirJumps", "type": "boolean", "required": false, "default": true, "description": "Whether touching a wall refills jump_core's jump counter."},
-    {"name": "resetsAirDashes", "type": "boolean", "required": false, "default": true, "description": "Whether touching a wall refills movement.dash_ability's air dash budget. Not a dependency: a build may have walls and no dash, so an implementation reads the dash outputs optionally and does nothing when it is absent."}
+    {"name": "resetsAirDashes", "type": "boolean", "required": false, "default": true, "description": "Whether touching a wall refills movement.dash_ability's air dash budget. Not a dependency: a build may have walls and no dash, so this is a refill request that goes unclaimed when the dash is absent, rather than a call into it."}
   ],
   "outputs": [
     {"name": "isTouchingWall", "type": "boolean"},
