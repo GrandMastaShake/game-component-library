@@ -1,0 +1,50 @@
+{
+  "id": "art.limb_paw",
+  "name": "Limb Paw",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No sharp poles",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 40,
+      "vertices": 24
+    },
+    {
+      "level": 1,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 40 to 24 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 14,
+      "vertices": 9,
+      "reductionRule": "Reduce detail from 24 to 14 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce to minimal proxy (6 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Toe count vs performance tradeoff — merge toes at LOD1+",
+    "construction": "Oblate ellipsoid, flattened on contact side"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

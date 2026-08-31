@@ -1,0 +1,50 @@
+{
+  "id": "art.snout",
+  "name": "Snout",
+  "category": "organic_head",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "icosphere",
+    "hasPoles": false,
+    "poleNote": "No sharp poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 48,
+      "vertices": 28
+    },
+    {
+      "level": 1,
+      "triangles": 28,
+      "vertices": 17,
+      "reductionRule": "Reduce detail from 48 to 28 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce detail from 28 to 16 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce to minimal proxy (6 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Seam blending with head requires matching vertex density",
+    "construction": "Elongated ellipsoid merged with head socket"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

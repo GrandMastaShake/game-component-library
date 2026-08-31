@@ -1,0 +1,93 @@
+{
+  "note": "Findings accepted at the time topology validation was introduced. Each entry is a shape whose descriptor contradicts itself and has not been resolved yet. Removing an entry is the fix landing; adding one should be a deliberate, reviewed decision.",
+  "accepted": [
+    {
+      "code": "TOPO001",
+      "shape": "art.beak"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.ear_floppy"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.fin_pectoral"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.limb_arm"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.limb_paw"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.sphere"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.tail_bushy"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.tail_curved"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.tail_fish"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.tail_straight"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.tentacle"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.wing_bat"
+    },
+    {
+      "code": "TOPO001",
+      "shape": "art.wing_feathered"
+    },
+    {
+      "code": "TOPO002",
+      "shape": "art.beak"
+    },
+    {
+      "code": "TOPO002",
+      "shape": "art.limb_arm"
+    },
+    {
+      "code": "TOPO002",
+      "shape": "art.tail_curved"
+    },
+    {
+      "code": "TOPO002",
+      "shape": "art.tail_fish"
+    },
+    {
+      "code": "TOPO002",
+      "shape": "art.tail_straight"
+    },
+    {
+      "code": "TOPO002",
+      "shape": "art.tentacle"
+    },
+    {
+      "code": "TOPO003",
+      "shape": "art.tail_curved"
+    },
+    {
+      "code": "TOPO003",
+      "shape": "art.tail_straight"
+    },
+    {
+      "code": "TOPO003",
+      "shape": "art.tentacle"
+    }
+  ]
+}

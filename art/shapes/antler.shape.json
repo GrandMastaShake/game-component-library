@@ -1,0 +1,50 @@
+{
+  "id": "art.antler",
+  "name": "Antler",
+  "category": "organic_head",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Multiple N-poles at branch tips",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 140,
+      "vertices": 80
+    },
+    {
+      "level": 1,
+      "triangles": 80,
+      "vertices": 46,
+      "reductionRule": "Reduce detail from 140 to 80 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 40,
+      "vertices": 24,
+      "reductionRule": "Reduce detail from 80 to 40 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce to minimal proxy (8 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "High tri count — always needs aggressive LOD reduction",
+    "construction": "Main beam + N radiating tapered branch cylinders merged"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

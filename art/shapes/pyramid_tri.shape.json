@@ -1,0 +1,50 @@
+{
+  "id": "art.pyramid_tri",
+  "name": "Pyramid Tri",
+  "category": "extruded_poly",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "triangle",
+    "constructionMethod": "taper_extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Apex is N-pole valence=3",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 4,
+      "vertices": 4
+    },
+    {
+      "level": 1,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce detail from 4 to 4 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce detail from 4 to 4 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Minimum possible tri-count solid — cannot be reduced further",
+    "construction": "Triangle base tapered to single apex (tetrahedron)"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

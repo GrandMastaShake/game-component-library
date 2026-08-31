@@ -1,0 +1,50 @@
+{
+  "id": "art.coin",
+  "name": "Coin",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 100,
+    "capStyle": "quad",
+    "hasPoles": true,
+    "poleNote": "Both flat face centers are E-poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 40,
+      "vertices": 24
+    },
+    {
+      "level": 1,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 40 to 24 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 24 to 12 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Rim bevel loop doubles edge count — skip at LOD2+",
+    "construction": "Flat cylinder with beveled rim edge"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

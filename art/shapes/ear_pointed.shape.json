@@ -1,0 +1,50 @@
+{
+  "id": "art.ear_pointed",
+  "name": "Ear Pointed",
+  "category": "organic_head",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "triangle",
+    "constructionMethod": "taper_extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Tip is N-pole",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 24,
+      "vertices": 15
+    },
+    {
+      "level": 1,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce detail from 24 to 16 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 10,
+      "vertices": 7,
+      "reductionRule": "Reduce detail from 16 to 10 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Base ring needs enough segments to blend smoothly into head surface",
+    "construction": "Tapered cone-like loft from base ring to point"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

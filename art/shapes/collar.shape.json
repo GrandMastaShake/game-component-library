@@ -1,0 +1,50 @@
+{
+  "id": "art.collar",
+  "name": "Collar",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 1,
+    "eulerCharacteristic": 0,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No poles — genus-1",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 56,
+      "vertices": 33
+    },
+    {
+      "level": 1,
+      "triangles": 30,
+      "vertices": 18,
+      "reductionRule": "Reduce detail from 56 to 30 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce detail from 30 to 16 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce to minimal proxy (6 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Must be sized slightly larger than neck to avoid clipping",
+    "construction": "Thin torus ring sized to neck socket"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

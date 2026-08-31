@@ -1,0 +1,50 @@
+{
+  "id": "art.fin_dorsal",
+  "name": "Fin Dorsal",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 20,
+      "vertices": 13
+    },
+    {
+      "level": 1,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 20 to 12 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce detail from 12 to 6 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 2,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (2 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Thin geometry needs double-sided shading",
+    "construction": "Upright lofted sheet, tapered profile"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

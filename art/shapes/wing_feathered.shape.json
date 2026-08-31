@@ -1,0 +1,50 @@
+{
+  "id": "art.wing_feathered",
+  "name": "Wing Feathered",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No sharp poles",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 180,
+      "vertices": 102
+    },
+    {
+      "level": 1,
+      "triangles": 90,
+      "vertices": 52,
+      "reductionRule": "Reduce detail from 180 to 90 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 40,
+      "vertices": 24,
+      "reductionRule": "Reduce detail from 90 to 40 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce to minimal proxy (8 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Feather card count directly drives triangle budget — cap at LOD0 only",
+    "construction": "Base membrane + layered feather card sheets"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

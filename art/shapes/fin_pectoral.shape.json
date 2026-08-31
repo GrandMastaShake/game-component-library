@@ -1,0 +1,50 @@
+{
+  "id": "art.fin_pectoral",
+  "name": "Fin Pectoral",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No poles",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 22,
+      "vertices": 14
+    },
+    {
+      "level": 1,
+      "triangles": 14,
+      "vertices": 9,
+      "reductionRule": "Reduce detail from 22 to 14 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 7,
+      "vertices": 5,
+      "reductionRule": "Reduce detail from 14 to 7 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 2,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (2 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Thin geometry needs double-sided shading",
+    "construction": "Side-mounted lofted sheet, curved profile"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

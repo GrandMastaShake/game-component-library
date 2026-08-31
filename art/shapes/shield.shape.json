@@ -1,0 +1,50 @@
+{
+  "id": "art.shield",
+  "name": "Shield",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "rounded_rect",
+    "constructionMethod": "bevel_extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 100,
+    "capStyle": "quad",
+    "hasPoles": true,
+    "poleNote": "Boss center is E-pole",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 80,
+      "vertices": 46
+    },
+    {
+      "level": 1,
+      "triangles": 40,
+      "vertices": 24,
+      "reductionRule": "Reduce detail from 80 to 40 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 20,
+      "vertices": 13,
+      "reductionRule": "Reduce detail from 40 to 20 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Central boss adds pole — keep separate from flat rim geometry",
+    "construction": "Beveled flat profile extrude with central boss"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

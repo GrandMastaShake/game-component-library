@@ -1,0 +1,50 @@
+{
+  "id": "art.star_extrude",
+  "name": "Star Extrude",
+  "category": "extruded_poly",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "star",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": false,
+    "poleNote": "No poles but concave verts need careful normal calc",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 60,
+      "vertices": 35
+    },
+    {
+      "level": 1,
+      "triangles": 40,
+      "vertices": 24,
+      "reductionRule": "Reduce detail from 60 to 40 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 40 to 24 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce to minimal proxy (12 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Concave profile can self-intersect if bevel depth too large",
+    "construction": "5-point star profile extruded with bevel"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "art.ear_rounded",
+  "name": "Ear Rounded",
+  "category": "organic_head",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No sharp poles — smooth dome",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 28,
+      "vertices": 17
+    },
+    {
+      "level": 1,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 28 to 18 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 18 to 12 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Flat base can create visible seam against curved head",
+    "construction": "Half-ellipsoid loft, flat base"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

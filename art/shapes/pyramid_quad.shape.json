@@ -1,0 +1,50 @@
+{
+  "id": "art.pyramid_quad",
+  "name": "Pyramid Quad",
+  "category": "extruded_poly",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "rectangle",
+    "constructionMethod": "taper_extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Apex is N-pole valence=4",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 6,
+      "vertices": 5
+    },
+    {
+      "level": 1,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce detail from 6 to 6 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce detail from 6 to 6 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce to minimal proxy (6 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Classic pyramid — apex valence=4 N-pole",
+    "construction": "Square base tapered to single apex"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

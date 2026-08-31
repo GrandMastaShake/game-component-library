@@ -1,0 +1,50 @@
+{
+  "id": "art.horn_curved",
+  "name": "Horn Curved",
+  "category": "organic_head",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Tip is N-pole",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 36,
+      "vertices": 22
+    },
+    {
+      "level": 1,
+      "triangles": 22,
+      "vertices": 14,
+      "reductionRule": "Reduce detail from 36 to 22 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 22 to 12 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "High curve angle can cause tip self-intersection if not enough rings",
+    "construction": "Tapered cylinder with curved spline axis"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

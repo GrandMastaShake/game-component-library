@@ -1,0 +1,50 @@
+{
+  "id": "art.cube",
+  "name": "Cube",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "rectangle",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 100,
+    "capStyle": "quad",
+    "hasPoles": false,
+    "poleNote": "No poles — all valence-3 corners (expected for box)",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "level": 1,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 12 to 12 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 12 to 12 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce to minimal proxy (12 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "None — cleanest possible topology",
+    "construction": "6 quad faces, 8 verts, box"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

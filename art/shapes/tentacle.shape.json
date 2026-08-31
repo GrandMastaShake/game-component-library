@@ -1,0 +1,50 @@
+{
+  "id": "art.tentacle",
+  "name": "Tentacle",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Tip is N-pole",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 64,
+      "vertices": 37
+    },
+    {
+      "level": 1,
+      "triangles": 36,
+      "vertices": 22,
+      "reductionRule": "Reduce detail from 64 to 36 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 20,
+      "vertices": 13,
+      "reductionRule": "Reduce detail from 36 to 20 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce to minimal proxy (6 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Needs dense bone chain — most animation-expensive part type",
+    "construction": "Long tapered tube, multiple curve control points"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

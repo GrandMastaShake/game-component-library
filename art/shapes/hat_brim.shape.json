@@ -1,0 +1,50 @@
+{
+  "id": "art.hat_brim",
+  "name": "Hat Brim",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 1,
+    "eulerCharacteristic": 0,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No poles — genus-1 ring topology",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 60,
+      "vertices": 35
+    },
+    {
+      "level": 1,
+      "triangles": 32,
+      "vertices": 19,
+      "reductionRule": "Reduce detail from 60 to 32 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 32 to 18 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce to minimal proxy (6 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Inner/outer radius ratio must stay >0.4 to avoid pinching",
+    "construction": "Annular ring extrusion (torus section)"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

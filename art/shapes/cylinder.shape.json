@@ -1,0 +1,50 @@
+{
+  "id": "art.cylinder",
+  "name": "Cylinder",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Both cap centers are N-poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 64,
+      "vertices": 37
+    },
+    {
+      "level": 1,
+      "triangles": 32,
+      "vertices": 19,
+      "reductionRule": "Reduce detail from 64 to 32 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 32 to 18 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce to minimal proxy (16 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Fan caps create N-pole at each center; use ngon cap instead for clean quads",
+    "construction": "N-sided ring extrude + 2 fan-tri caps"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

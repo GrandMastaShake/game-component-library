@@ -1,0 +1,50 @@
+{
+  "id": "art.tail_curved",
+  "name": "Tail Curved",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Tip is N-pole",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 42,
+      "vertices": 25
+    },
+    {
+      "level": 1,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 42 to 24 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 14,
+      "vertices": 9,
+      "reductionRule": "Reduce detail from 24 to 14 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Curve radius too tight causes pinching at inner edge",
+    "construction": "Tapered tube with curved spline"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

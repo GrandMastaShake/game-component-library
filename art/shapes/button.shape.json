@@ -1,0 +1,50 @@
+{
+  "id": "art.button",
+  "name": "Button",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 100,
+    "capStyle": "quad",
+    "hasPoles": true,
+    "poleNote": "Face center is E-pole",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 24,
+      "vertices": 15
+    },
+    {
+      "level": 1,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 24 to 12 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 6,
+      "vertices": 5,
+      "reductionRule": "Reduce detail from 12 to 6 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 2,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (2 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Indent detail invisible past LOD1 — remove early",
+    "construction": "Small flat disc with indent detail"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "art.hemisphere",
+  "name": "Hemisphere",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "icosphere",
+    "hasPoles": true,
+    "poleNote": "Cap center is E-pole (valence=N)",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 640,
+      "vertices": 360
+    },
+    {
+      "level": 1,
+      "triangles": 160,
+      "vertices": 91,
+      "reductionRule": "Reduce detail from 640 to 160 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 88,
+      "vertices": 51,
+      "reductionRule": "Reduce detail from 160 to 88 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 40,
+      "vertices": 24,
+      "reductionRule": "Reduce to minimal proxy (40 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Seam at equator needs matching vertex welds",
+    "construction": "Half icosphere + flat disc cap"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

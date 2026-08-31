@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArtShape",
+  "description": "A geometry contract for an art asset: how it is constructed, what its topology is, and what it costs at each LOD tier. Declaring a shape is not a claim that the mesh exists or has been authored — it is a claim about what the mesh must satisfy if it does.",
+  "type": "object",
+  "required": ["id", "name", "category", "version", "topology", "lod"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^art\\.[a-z0-9_]+$"},
+    "name": {"type": "string"},
+    "category": {"type": "string", "enum": ["primitive", "extruded_poly", "organic_head", "organic_body", "item"]},
+    "version": {"type": "string"},
+    "origin2d": {
+      "type": "object",
+      "description": "The 2D construction this 3D shape derives from. Recording it makes the build reproducible by hand.",
+      "properties": {
+        "baseShape": {"type": "string"},
+        "constructionMethod": {"type": "string"}
+      }
+    },
+    "topology": {
+      "type": "object",
+      "description": "The checkable properties. Everything a validator is allowed to reason about lives here as a value, never as prose.",
+      "required": ["genus", "quadPct", "capStyle", "hasPoles", "deformsWithRig"],
+      "properties": {
+        "genus": {"type": "integer", "minimum": 0},
+        "eulerCharacteristic": {"type": "integer"},
+        "quadPct": {"type": "number", "minimum": 0, "maximum": 100, "description": "Percentage of faces that are quads. Deforming meshes need quad loops; triangles pinch."},
+        "capStyle": {"type": "string", "enum": ["quad", "ngon", "fan_tri", "icosphere", "none"], "description": "How the ends are closed. fan_tri concentrates a pole at the cap centre."},
+        "hasPoles": {"type": "boolean", "description": "Derived from poleNote at authoring time so rules never parse prose."},
+        "poleNote": {"type": "string", "description": "Human-readable detail. No rule may depend on this string."},
+        "deformsWithRig": {"type": "boolean", "description": "Whether this shape is skinned and deformed. Flips several rules from advisory to blocking."}
+      }
+    },
+    "lod": {
+      "type": "array",
+      "description": "Ordered LOD tiers, coarsest last. Triangle counts must be non-increasing.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["level", "triangles", "vertices"],
+        "properties": {
+          "level": {"type": "integer", "minimum": 0},
+          "triangles": {"type": "integer", "minimum": 1},
+          "vertices": {"type": "integer", "minimum": 3},
+          "reductionRule": {"type": "string"}
+        }
+      }
+    },
+    "annotations": {
+      "type": "object",
+      "description": "Authored craft knowledge. `pitfall` is the scarce artifact — the tacit rule someone had to know. A hazardous shape is required to carry one.",
+      "properties": {
+        "pitfall": {"type": "string"},
+        "construction": {"type": "string"}
+      }
+    },
+    "provenance": {"type": "string", "enum": ["upstream-mapped", "library-native", "hybrid"]},
+    "source": {"type": "string"}
+  }
+}
