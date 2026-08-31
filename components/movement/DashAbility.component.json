@@ -1,0 +1,28 @@
+{
+  "id": "movement.dash_ability",
+  "name": "Dash Ability",
+  "category": "movement",
+  "description": "A short burst of speed in the input direction, on a cooldown, usable on the ground or in the air. Independent of jumping on purpose: plenty of games have one without the other, and binding them would force a jump into every build that wants a dash. Air dashes are a separate budget from the cooldown, refilled by touching ground, so a player cannot chain them to cross an arbitrary gap.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "dashSpeed", "type": "number", "required": false, "default": 48, "description": "Speed during the dash. Three times movement.basic_walk's default walkSpeed, which is the point where a dash reads as a distinct action rather than a sprint."},
+    {"name": "dashDurationSeconds", "type": "number", "required": false, "default": 0.15},
+    {"name": "cooldownSeconds", "type": "number", "required": false, "default": 0.6, "description": "Measured from the end of the dash, not its start, so shortening the duration does not silently raise the dash rate."},
+    {"name": "airDashCount", "type": "number", "required": false, "default": 1, "description": "Dashes allowed between touching ground. 0 makes it a ground-only ability."},
+    {"name": "cancelsVerticalVelocity", "type": "boolean", "required": false, "default": true, "description": "Whether an air dash zeroes vertical speed for its duration. True gives the flat, readable dash; false lets a falling dash keep dropping, which is harder to aim."},
+    {"name": "invulnerableDuringDash", "type": "boolean", "required": false, "default": false, "description": "Deliberately off by default. Invulnerability frames turn a movement ability into a defensive one and change every combat encounter, so that has to be asked for."}
+  ],
+  "outputs": [
+    {"name": "isDashing", "type": "boolean"},
+    {"name": "cooldownRemaining", "type": "number"},
+    {"name": "airDashesRemaining", "type": "number"}
+  ],
+  "events": {
+    "emits": ["movement.dashStarted", "movement.dashEnded", "movement.dashRejected"],
+    "listensTo": ["input.dash", "input.moveDirection", "movement.grounded"]
+  },
+  "dependencies": ["movement.physics_core", "movement.ground_sensor"],
+  "tags": ["locomotion", "platformer", "ability", "dash"],
+  "provenance": "library-native"
+}

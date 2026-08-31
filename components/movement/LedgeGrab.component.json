@@ -1,0 +1,28 @@
+{
+  "id": "movement.ledge_grab",
+  "name": "Ledge Grab",
+  "category": "movement",
+  "description": "Catches an edge the character is falling past and hangs there until the player climbs or drops. Detection is the two-probe test: something at hand height is solid and nothing at head height is, which is what distinguishes a ledge from a wall. regrabCooldownSeconds exists because without it, dropping from a ledge re-satisfies the grab test on the very next frame and the character is stuck to it forever.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "grabReach", "type": "number", "required": false, "default": 0.6, "description": "Forward reach of the hand and head probes."},
+    {"name": "hangHeightOffset", "type": "number", "required": false, "default": -0.9, "description": "Where the character settles relative to the ledge lip. Negative hangs below it."},
+    {"name": "climbDurationSeconds", "type": "number", "required": false, "default": 0.35, "description": "How long the climb takes. The character is not simulated during it, so a long value is a long window of no control."},
+    {"name": "regrabCooldownSeconds", "type": "number", "required": false, "default": 0.25, "description": "How long after releasing a ledge before any ledge can be grabbed again."},
+    {"name": "requiresAirborne", "type": "boolean", "required": false, "default": true, "description": "Whether the character must be off the ground to grab. False lets a character standing beside a waist-high edge snap onto it, which is rarely wanted."},
+    {"name": "autoClimb", "type": "boolean", "required": false, "default": false, "description": "False hangs and waits for input. True climbs on contact, which removes the hang entirely — the two are different mechanics wearing one name, so this is the switch between them."}
+  ],
+  "outputs": [
+    {"name": "isHanging", "type": "boolean"},
+    {"name": "isClimbing", "type": "boolean"},
+    {"name": "ledgeNormal", "type": "vector3"}
+  ],
+  "events": {
+    "emits": ["movement.ledgeGrabbed", "movement.ledgeClimbed", "movement.ledgeReleased"],
+    "listensTo": ["input.jump", "input.moveDirection", "movement.leftGround"]
+  },
+  "dependencies": ["movement.physics_core", "movement.ground_sensor", "movement.jump_core"],
+  "tags": ["locomotion", "platformer", "climbing"],
+  "provenance": "library-native"
+}

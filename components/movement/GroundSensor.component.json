@@ -1,0 +1,26 @@
+{
+  "id": "movement.ground_sensor",
+  "name": "Ground Sensor",
+  "category": "movement",
+  "description": "The single source of ground contact: whether the character is standing on walkable ground, how long since it last was, and the normal of the surface under it. Every air-mobility component reads this rather than probing independently, because coyote time is defined as time-since-grounded and three separate probes would disagree about when that clock started. Ground steeper than maxWalkableAngle reports as airborne with isOnSteepSlope set, so a character slides off a cliff face instead of standing on it.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "probeDistance", "type": "number", "required": false, "default": 0.15, "description": "How far below the feet to sample, in the same units as movement.basic_walk walkSpeed. Too small and the sensor flickers on stairs; too large and the character appears grounded while falling."},
+    {"name": "maxWalkableAngle", "type": "number", "required": false, "default": 50, "description": "Degrees from vertical. A surface steeper than this is not ground: isGrounded stays false and isOnSteepSlope goes true."},
+    {"name": "landingSpeedThreshold", "type": "number", "required": false, "default": 12, "description": "Downward speed at or above which a landing counts as heavy. Carried on movement.grounded so landing effects can distinguish a step down from a fall."}
+  ],
+  "outputs": [
+    {"name": "isGrounded", "type": "boolean"},
+    {"name": "timeSinceGrounded", "type": "number", "description": "Seconds since isGrounded was last true. Zero while grounded. This is the value coyote time is measured against."},
+    {"name": "groundNormal", "type": "vector3"},
+    {"name": "isOnSteepSlope", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["movement.grounded", "movement.leftGround"],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": ["locomotion", "platformer", "sensor", "core"],
+  "provenance": "library-native"
+}
