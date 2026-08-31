@@ -15,7 +15,7 @@
   ],
   "events": {
     "emits": ["inventory.itemAdded", "inventory.itemRemoved", "inventory.full"],
-    "listensTo": ["economy.itemGranted"]
+    "listensTo": ["inventory.itemGranted"]
   },
   "dependencies": ["inventory.core_inventory"],
   "tags": ["items", "storage"],

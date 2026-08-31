@@ -17,7 +17,9 @@ def load_registry(root: Path) -> dict[str, dict[str, Any]]:
         component_id = component["id"]
         if component_id in registry:
             raise ValueError(f"Duplicate component id: {component_id}")
-        component["_descriptorPath"] = str(path.relative_to(root))
+        # POSIX separators regardless of host OS: this string is committed to
+        # fixtures and compared in CI, so a Windows run must match a Linux one.
+        component["_descriptorPath"] = path.relative_to(root).as_posix()
         registry[component_id] = component
     return registry
 
