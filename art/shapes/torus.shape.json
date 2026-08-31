@@ -1,0 +1,50 @@
+{
+  "id": "art.torus",
+  "name": "Torus",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 1,
+    "eulerCharacteristic": 0,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "Genus-1 — no poles, all quads, fully regular valence-4",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 256,
+      "vertices": 145
+    },
+    {
+      "level": 1,
+      "triangles": 96,
+      "vertices": 55,
+      "reductionRule": "Reduce detail from 256 to 96 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 48,
+      "vertices": 28,
+      "reductionRule": "Reduce detail from 96 to 48 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 32,
+      "vertices": 19,
+      "reductionRule": "Reduce to minimal proxy (32 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Low minor-segment count (<6) makes torus look faceted/hexagonal in cross-section",
+    "construction": "Major ring × minor ring quad grid, fully closed"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

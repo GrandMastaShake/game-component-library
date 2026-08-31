@@ -1,0 +1,50 @@
+{
+  "id": "art.gem",
+  "name": "Gem",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "polygon",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Both apexes are N-poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 48,
+      "vertices": 28
+    },
+    {
+      "level": 1,
+      "triangles": 28,
+      "vertices": 17,
+      "reductionRule": "Reduce detail from 48 to 28 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce detail from 28 to 16 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce to minimal proxy (8 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Facet count vs sparkle — too few facets looks low-poly, too many wastes budget",
+    "construction": "Dual-apex faceted solid: polygon equator + top/bottom apex"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

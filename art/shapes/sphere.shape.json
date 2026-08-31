@@ -1,0 +1,50 @@
+{
+  "id": "art.sphere",
+  "name": "Sphere",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "icosphere",
+    "hasPoles": false,
+    "poleNote": "Icosphere: no poles — all equilateral tris (valence varies 5/6)",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 1280,
+      "vertices": 718
+    },
+    {
+      "level": 1,
+      "triangles": 320,
+      "vertices": 181,
+      "reductionRule": "Reduce detail from 1280 to 320 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 176,
+      "vertices": 100,
+      "reductionRule": "Reduce detail from 320 to 176 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 80,
+      "vertices": 46,
+      "reductionRule": "Reduce to minimal proxy (80 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "UV sphere creates 32-pole at top/bottom — never use for game assets",
+    "construction": "Icosahedron (20 tris) → 1 subdiv=80 → 2=320 → 3=1280"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

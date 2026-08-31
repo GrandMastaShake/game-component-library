@@ -1,0 +1,50 @@
+{
+  "id": "art.truncated_cone",
+  "name": "Truncated Cone",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Both cap centers are E-poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 72,
+      "vertices": 42
+    },
+    {
+      "level": 1,
+      "triangles": 36,
+      "vertices": 22,
+      "reductionRule": "Reduce detail from 72 to 36 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 20,
+      "vertices": 13,
+      "reductionRule": "Reduce detail from 36 to 20 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce to minimal proxy (16 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Mid-taper ring must match segment count top/bottom or twisting occurs",
+    "construction": "Frustum: two rings + fan-tri caps top/bottom"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

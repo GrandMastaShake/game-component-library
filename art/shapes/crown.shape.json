@@ -1,0 +1,50 @@
+{
+  "id": "art.crown",
+  "name": "Crown",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 100,
+    "capStyle": "quad",
+    "hasPoles": false,
+    "poleNote": "No poles on band; spike tips are N-poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 96,
+      "vertices": 55
+    },
+    {
+      "level": 1,
+      "triangles": 54,
+      "vertices": 32,
+      "reductionRule": "Reduce detail from 96 to 54 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 28,
+      "vertices": 17,
+      "reductionRule": "Reduce detail from 54 to 28 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce to minimal proxy (8 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Spike count drives tri budget — replace with normal map at distance",
+    "construction": "Cylinder band + N triangular spike sheets at angular offsets"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

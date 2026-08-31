@@ -1,0 +1,50 @@
+{
+  "id": "art.prism_pent",
+  "name": "Prism Pent",
+  "category": "extruded_poly",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "pentagon",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": false,
+    "poleNote": "No poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 18,
+      "vertices": 12
+    },
+    {
+      "level": 1,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 18 to 18 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 18 to 18 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce to minimal proxy (18 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Odd-sided prisms have no mirror symmetry plane through vertices",
+    "construction": "Pentagon profile extruded"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

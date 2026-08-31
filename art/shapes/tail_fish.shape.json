@@ -1,0 +1,50 @@
+{
+  "id": "art.tail_fish",
+  "name": "Tail Fish",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": false,
+    "poleNote": "No poles — flat fan shape",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 28,
+      "vertices": 17
+    },
+    {
+      "level": 1,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce detail from 28 to 16 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 10,
+      "vertices": 7,
+      "reductionRule": "Reduce detail from 16 to 10 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Thin trailing edge needs careful UV seam placement",
+    "construction": "Two mirrored flat lobes forming forked fluke"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

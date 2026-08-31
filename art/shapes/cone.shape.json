@@ -1,0 +1,50 @@
+{
+  "id": "art.cone",
+  "name": "Cone",
+  "category": "primitive",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Single apex vertex = N-pole (valence=N_sides); base: E-pole at center",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 64,
+      "vertices": 37
+    },
+    {
+      "level": 1,
+      "triangles": 32,
+      "vertices": 19,
+      "reductionRule": "Reduce detail from 64 to 32 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 32 to 18 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 16,
+      "vertices": 10,
+      "reductionRule": "Reduce to minimal proxy (16 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Apex shading: set apex vertex normal to (0,1,0) explicitly or shading spikes",
+    "construction": "N lateral tris from apex + N fan-tri base cap"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "art.limb_arm",
+  "name": "Limb Arm",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "taper_extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": false,
+    "poleNote": "No poles — capped cylinder ends",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 56,
+      "vertices": 33
+    },
+    {
+      "level": 1,
+      "triangles": 32,
+      "vertices": 19,
+      "reductionRule": "Reduce detail from 56 to 32 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 18,
+      "vertices": 12,
+      "reductionRule": "Reduce detail from 32 to 18 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce to minimal proxy (8 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Needs 2+ edge loops per joint for clean skin-weight deformation",
+    "construction": "Tapered cylinder segment with joint ring loops"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

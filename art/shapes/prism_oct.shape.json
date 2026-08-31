@@ -1,0 +1,50 @@
+{
+  "id": "art.prism_oct",
+  "name": "Prism Oct",
+  "category": "extruded_poly",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "octagon",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": false,
+    "poleNote": "No poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 24,
+      "vertices": 15
+    },
+    {
+      "level": 1,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 24 to 24 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 24 to 24 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce to minimal proxy (24 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "None",
+    "construction": "Octagon profile extruded"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

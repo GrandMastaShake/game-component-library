@@ -1,0 +1,50 @@
+{
+  "id": "art.prism_hex",
+  "name": "Prism Hex",
+  "category": "extruded_poly",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "hexagon",
+    "constructionMethod": "extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": false,
+    "poleNote": "No poles",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 20,
+      "vertices": 13
+    },
+    {
+      "level": 1,
+      "triangles": 20,
+      "vertices": 13,
+      "reductionRule": "Reduce detail from 20 to 20 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 20,
+      "vertices": 13,
+      "reductionRule": "Reduce detail from 20 to 20 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 20,
+      "vertices": 13,
+      "reductionRule": "Reduce to minimal proxy (20 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "None — clean, common for bolts/pillars",
+    "construction": "Hexagon profile extruded"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

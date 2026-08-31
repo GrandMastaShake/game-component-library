@@ -1,0 +1,50 @@
+{
+  "id": "art.ring",
+  "name": "Ring",
+  "category": "item",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "revolve"
+  },
+  "topology": {
+    "genus": 1,
+    "eulerCharacteristic": 0,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No poles — genus-1",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 48,
+      "vertices": 28
+    },
+    {
+      "level": 1,
+      "triangles": 24,
+      "vertices": 15,
+      "reductionRule": "Reduce detail from 48 to 24 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "reductionRule": "Reduce detail from 24 to 12 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (4 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Very thin cross-section — watch for z-fighting at distance",
+    "construction": "Thin torus, small minor radius"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "art.wing_bat",
+  "name": "Wing Bat",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "spline",
+    "constructionMethod": "loft"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 20,
+    "capStyle": "none",
+    "hasPoles": false,
+    "poleNote": "No sharp poles — smooth membrane surface",
+    "deformsWithRig": true
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 120,
+      "vertices": 69
+    },
+    {
+      "level": 1,
+      "triangles": 64,
+      "vertices": 37,
+      "reductionRule": "Reduce detail from 120 to 64 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 32,
+      "vertices": 19,
+      "reductionRule": "Reduce detail from 64 to 32 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce to minimal proxy (8 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Membrane pinches at wingtip if struts converge too sharply",
+    "construction": "Lofted membrane between finger-like spline struts"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}

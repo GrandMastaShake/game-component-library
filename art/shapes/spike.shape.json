@@ -1,0 +1,50 @@
+{
+  "id": "art.spike",
+  "name": "Spike",
+  "category": "organic_body",
+  "version": "0.1.0",
+  "origin2d": {
+    "baseShape": "circle",
+    "constructionMethod": "taper_extrude"
+  },
+  "topology": {
+    "genus": 0,
+    "eulerCharacteristic": 2,
+    "quadPct": 0,
+    "capStyle": "fan_tri",
+    "hasPoles": true,
+    "poleNote": "Tip is N-pole",
+    "deformsWithRig": false
+  },
+  "lod": [
+    {
+      "level": 0,
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "level": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "reductionRule": "Reduce detail from 12 to 8 tris"
+    },
+    {
+      "level": 2,
+      "triangles": 4,
+      "vertices": 4,
+      "reductionRule": "Reduce detail from 8 to 4 tris"
+    },
+    {
+      "level": 3,
+      "triangles": 2,
+      "vertices": 4,
+      "reductionRule": "Reduce to minimal proxy (2 tris)"
+    }
+  ],
+  "annotations": {
+    "pitfall": "Overuse creates huge tri overhead — normal-map alternative recommended",
+    "construction": "Simple tapered cone, low segment count"
+  },
+  "provenance": "library-native",
+  "source": "3d_shapes_full_package_v7/shape_catalogue.json"
+}
