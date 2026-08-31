@@ -1,0 +1,28 @@
+{
+  "id": "presentation.screen_shake",
+  "name": "Screen Shake",
+  "category": "presentation",
+  "description": "Camera kick driven by a decaying trauma value rather than by scripted shakes. Anything tagged with the `impact` intent adds trauma; trauma falls off on its own, and the offset is trauma raised to traumaExponent — so overlapping hits accumulate into one continuous shake instead of restarting a canned animation and fighting each other. It names no events at all: it is a pure intent sink, so a new emitter that tags itself `impact` shakes the camera without this descriptor changing. It emits nothing either, deliberately — a shakeStarted event would be one more thing in the catalogue that nobody listens to.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "traumaPerImpact", "type": "number", "required": false, "default": 0.35, "description": "Trauma added by one impact, on a 0..1 scale. Three hits in quick succession reach full shake; one does not."},
+    {"name": "traumaDecayPerSecond", "type": "number", "required": false, "default": 1.4, "description": "How fast trauma bleeds off. At the default a single impact is spent in about a quarter of a second."},
+    {"name": "traumaExponent", "type": "number", "required": false, "default": 2, "description": "Offset is trauma raised to this power. Above 1 it keeps small impacts subtle while leaving headroom for big ones; at 1 every tap shakes the whole screen, which is the usual reason shake gets turned off in options menus."},
+    {"name": "maxOffset", "type": "number", "required": false, "default": 0.35, "description": "Peak positional kick at full trauma, in world units."},
+    {"name": "maxRoll", "type": "number", "required": false, "default": 0.04, "description": "Peak rotation at full trauma, in radians. Small values read as weight; large ones read as a bug."}
+  ],
+  "outputs": [
+    {"name": "trauma", "type": "number", "description": "Current 0..1 trauma, before the exponent is applied."},
+    {"name": "offset", "type": "vector3"},
+    {"name": "roll", "type": "number"}
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": []
+  },
+  "sinkFor": ["impact"],
+  "dependencies": [],
+  "tags": ["presentation", "feedback", "camera", "game-feel"],
+  "provenance": "library-native"
+}
