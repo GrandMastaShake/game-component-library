@@ -11,7 +11,8 @@
   "outputs": [
     {"name": "nowPlaying", "type": "string"}
   ],
-  "events": {"emits": ["presentation.soundPlayed", "presentation.musicChanged"], "listensTo": ["combat.hit", "world.weatherChanged"]},
+  "events": {"emits": ["presentation.soundPlayed", "presentation.musicChanged"], "listensTo": ["world.weatherChanged"]},
+  "sinkFor": ["impact"],
   "dependencies": [],
   "tags": ["audio", "sfx", "music"],
   "sourceModule": "roblox-modular-lib/src/AudioSystem.lua"

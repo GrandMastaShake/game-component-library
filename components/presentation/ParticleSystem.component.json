@@ -10,7 +10,8 @@
     {"name": "defaultLifetimeSeconds", "type": "number", "required": false, "default": 1.5}
   ],
   "outputs": [{"name": "activeCount", "type": "number"}],
-  "events": {"emits": ["presentation.effectSpawned", "presentation.effectPoolExhausted"], "listensTo": ["combat.damageResolved", "combat.entityDefeated", "presentation.styleApplied"]},
+  "events": {"emits": ["presentation.effectSpawned", "presentation.effectPoolExhausted"], "listensTo": ["presentation.styleApplied"]},
+  "sinkFor": ["impact"],
   "dependencies": [],
   "tags": ["vfx", "particles", "presentation", "performance"],
   "provenance": "library-native"
