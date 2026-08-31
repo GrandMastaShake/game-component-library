@@ -1,0 +1,29 @@
+{
+  "id": "movement.wall_interaction",
+  "name": "Wall Interaction",
+  "category": "movement",
+  "description": "Wall sliding and wall jumping, together, because neither is useful alone: a slide with no jump is a decoration, and a jump with no slide gives the player no time to aim it. It depends on movement.jump_core rather than duplicating it, since both answer input.jump and only one of them may fire — construction order is what lets this suppress the ground jump while the character is on a wall. After a wall jump, horizontal input is ignored for inputLockSeconds, or holding toward the wall re-sticks the character to it immediately and the jump goes nowhere.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "wallProbeDistance", "type": "number", "required": false, "default": 0.35, "description": "Sideways reach used to detect a wall. Separate from ground_sensor's downward probe: a different surface asked a different question."},
+    {"name": "slideSpeed", "type": "number", "required": false, "default": 4, "description": "Terminal downward speed while sliding, replacing gravity's acceleration rather than adding to it."},
+    {"name": "wallJumpVelocity", "type": "number", "required": false, "default": 9, "description": "Upward speed of a wall jump. Matches movement.jump_core's jumpVelocity default so the two read as the same height."},
+    {"name": "wallKickVelocity", "type": "number", "required": false, "default": 12, "description": "Horizontal speed away from the wall."},
+    {"name": "inputLockSeconds", "type": "number", "required": false, "default": 0.12, "description": "How long horizontal input is ignored after a wall jump. Zero means holding toward the wall cancels the kick and the character never leaves."},
+    {"name": "resetsAirJumps", "type": "boolean", "required": false, "default": true, "description": "Whether touching a wall refills jump_core's jump counter."},
+    {"name": "resetsAirDashes", "type": "boolean", "required": false, "default": true, "description": "Whether touching a wall refills movement.dash_ability's air dash budget. Not a dependency: a build may have walls and no dash, so an implementation reads the dash outputs optionally and does nothing when it is absent."}
+  ],
+  "outputs": [
+    {"name": "isTouchingWall", "type": "boolean"},
+    {"name": "isWallSliding", "type": "boolean", "description": "Touching a wall is not sliding: sliding also requires being airborne and moving downward."},
+    {"name": "wallNormal", "type": "vector3"}
+  ],
+  "events": {
+    "emits": ["movement.wallSlideStarted", "movement.wallSlideEnded", "movement.wallJumped"],
+    "listensTo": ["input.jump", "input.moveDirection", "movement.grounded"]
+  },
+  "dependencies": ["movement.physics_core", "movement.ground_sensor", "movement.jump_core"],
+  "tags": ["locomotion", "platformer", "wall-jump"],
+  "provenance": "library-native"
+}
