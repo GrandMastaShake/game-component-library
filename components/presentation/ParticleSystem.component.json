@@ -5,6 +5,12 @@
   "description": "Pooled, delta-timed particle emitter for damage numbers, impacts, and status flashes. Uses a fixed pool with explicit exhaustion signalling rather than unbounded allocation, and advances physics by frame delta rather than a fixed step.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "poolSize", "type": "number", "required": false, "default": 1000},
     {"name": "defaultLifetimeSeconds", "type": "number", "required": false, "default": 1.5}

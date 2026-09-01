@@ -5,6 +5,12 @@
   "description": "Owns the view: where the world is drawn from, and the only transform applied to it. It follows a target within a deadzone rather than centring on it exactly, because a camera pinned to a walking character makes the whole world jitter under every step, and smooths what is left so a jump does not snap the view. It also composes screen shake into the same matrix, since a shake is a camera effect and two components cannot each own the transform — presentation.screen_shake publishes an offset and a roll, and yields the view when a camera is present. The target is read optionally rather than declared as a dependency, so the same camera follows a side-view body or a top-down walker without either being required.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "deadzoneWidth", "type": "number", "required": false, "default": 4, "description": "How far the target may move horizontally before the camera starts following, in world units. Zero pins the camera to the target and makes every footstep move the world."},
     {"name": "deadzoneHeight", "type": "number", "required": false, "default": 3, "description": "The vertical equivalent. Usually larger than it looks it should be: a jump is a big vertical excursion that the player does not want the camera to chase."},

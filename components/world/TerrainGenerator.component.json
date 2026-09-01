@@ -5,6 +5,11 @@
   "description": "Procedurally generates ground heightmaps from noise, producing voxel/terrain data for a region.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/world.terrain_generator.adapter.lua"},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "regionSize", "type": "number", "required": false, "default": 512},
     {"name": "maxHeight", "type": "number", "required": false, "default": 100}

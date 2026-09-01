@@ -5,6 +5,11 @@
   "description": "Low-level physics utility for projectile arcs, knockback impulses, and gravity-affected motion used by combat and movement bricks.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/Physics.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "gravity", "type": "number", "required": false, "default": 9.8}
   ],

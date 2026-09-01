@@ -5,6 +5,10 @@
   "description": "Ground-based locomotion with configurable speed and acceleration.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/movement.basic_walk.adapter.lua"}
+  ],
   "inputs": [
     {"name": "walkSpeed", "type": "number", "required": false, "default": 16, "description": "Studs or units per second"},
     {"name": "acceleration", "type": "number", "required": false, "default": 8}

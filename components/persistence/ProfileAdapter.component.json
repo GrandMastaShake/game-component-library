@@ -5,6 +5,9 @@
   "description": "Session-locked player profile loader/unloader that prevents duplicate-session data corruption across servers.",
   "version": "0.1.0",
   "platform": ["roblox", "agnostic"],
+  "implementations": [
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/ProfileStoreAdapter.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "profileTemplate", "type": "object", "required": true}
   ],

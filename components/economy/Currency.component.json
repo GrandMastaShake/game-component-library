@@ -5,6 +5,12 @@
   "description": "A single spendable currency balance with earn/spend transactions and persistence hooks.",
   "version": "0.1.1",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/economy.currency.adapter.lua"},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "currencyName", "type": "string", "required": false, "default": "Coins"},
     {"name": "startingBalance", "type": "number", "required": false, "default": 0}

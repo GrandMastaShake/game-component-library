@@ -5,6 +5,9 @@
   "description": "Server-side authority for two-player trades: validates offers against live inventory/currency state, locks items during negotiation, and commits the swap atomically on mutual confirm.",
   "version": "0.1.0",
   "platform": ["roblox", "agnostic"],
+  "implementations": [
+    {"target": "roblox", "status": "constructor-verified", "module": "roblox-adapters/social.trade_coordinator.adapter.lua"}
+  ],
   "inputs": [
     {"name": "confirmTimeoutSeconds", "type": "number", "required": false, "default": 30}
   ],

@@ -5,6 +5,12 @@
   "description": "A short burst of speed in the input direction, on a cooldown, usable on the ground or in the air. Independent of jumping on purpose: plenty of games have one without the other, and binding them would force a jump into every build that wants a dash. Air dashes are a separate budget from the cooldown, refilled by touching ground, so a player cannot chain them to cross an arbitrary gap.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "dashSpeed", "type": "number", "required": false, "default": 48, "description": "Speed during the dash. Three times movement.basic_walk's default walkSpeed, which is the point where a dash reads as a distinct action rather than a sprint."},
     {"name": "dashDurationSeconds", "type": "number", "required": false, "default": 0.15},

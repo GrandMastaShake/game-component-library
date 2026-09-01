@@ -5,6 +5,11 @@
   "description": "Places rivers, lakes, and ocean bodies onto terrain based on heightmap sea-level thresholds, with basic flow simulation.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/WaterSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "seaLevel", "type": "number", "required": false, "default": 20}
   ],

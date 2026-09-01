@@ -5,6 +5,12 @@
   "description": "Walking enemies that pace a surface, turn at walls and at the edge of what they are standing on, and resolve contact with the player by where it happened: from above is a stomp, from anywhere else is a hit. It emits world.hazardEntered for the hit rather than an event of its own, which is the whole point — a mob touching you IS a hazard being entered, and reusing the event means every listener that already handles spikes handles mobs too, with nothing rewired. A catalogue that invents an event per source ends up with events nobody listens to; this one has too many of those already.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "spawns", "type": "array", "required": true, "description": "Where the mobs start, each {x, y, facing}. Required with no default: mobs nobody placed are not a sensible empty level, they are an unconfigured one. `facing` is -1 or 1 and defaults to 1."},
     {"name": "speed", "type": "number", "required": false, "default": 2.2, "description": "Patrol speed in world units per second. Well under a player's run speed on purpose — a mob you cannot outrun is a wall, not an enemy."},

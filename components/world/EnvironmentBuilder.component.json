@@ -5,6 +5,11 @@
   "description": "Configures ambient lighting, fog, skybox, and atmosphere settings to match the current biome and weather state.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/EnvironmentBuilder.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "fogEnabled", "type": "boolean", "required": false, "default": true}
   ],

@@ -5,6 +5,11 @@
   "description": "Computes walkable paths across generated terrain for NPCs, pets, or vehicles, avoiding obstacles and cave/water hazards.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/PathfindingSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "maxPathLength", "type": "number", "required": false, "default": 200}
   ],

@@ -5,6 +5,11 @@
   "description": "Queued, auto-dismissing toast notification contract for achievements, loot, hatch results, and system messages. The Roblox adapter subscribes to normalized requests and delegates rendering to a game-owned UI renderer.",
   "version": "0.3.1",
   "platform": ["roblox", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/ui.notification_toast.adapter.lua"},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [{"name": "maxVisible", "type": "number", "required": false, "default": 3}, {"name": "displaySeconds", "type": "number", "required": false, "default": 4}],
   "outputs": [{"name": "queueLength", "type": "number"}],
   "events": {"emits": ["ui.notificationShown", "ui.notificationDismissed"], "listensTo": ["inventory.itemGranted", "progression.leveledUp", "economy.earned", "ui.notificationRequested"]},
