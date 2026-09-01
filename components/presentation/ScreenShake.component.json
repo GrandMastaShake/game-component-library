@@ -2,7 +2,7 @@
   "id": "presentation.screen_shake",
   "name": "Screen Shake",
   "category": "presentation",
-  "description": "Camera kick driven by a decaying trauma value rather than by scripted shakes. Anything tagged with the `impact` intent adds trauma; trauma falls off on its own, and the offset is trauma raised to traumaExponent — so overlapping hits accumulate into one continuous shake instead of restarting a canned animation and fighting each other. It names no events at all: it is a pure intent sink, so a new emitter that tags itself `impact` shakes the camera without this descriptor changing. It emits nothing either, deliberately — a shakeStarted event would be one more thing in the catalogue that nobody listens to.",
+  "description": "Camera kick driven by a decaying trauma value rather than by scripted shakes. Anything tagged with the `impact` intent adds trauma; trauma falls off on its own, and the offset is trauma raised to traumaExponent — so overlapping hits accumulate into one continuous shake instead of restarting a canned animation and fighting each other. It names no events at all: it is a pure intent sink, so a new emitter that tags itself `impact` shakes the camera without this descriptor changing. It publishes its offset and roll rather than insisting on applying them: where presentation.camera_follow is in the build, the camera composes them into the one view matrix, and this yields. It emits nothing either, deliberately — a shakeStarted event would be one more thing in the catalogue that nobody listens to.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
   "inputs": [
