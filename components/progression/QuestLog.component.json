@@ -1,2 +1,77 @@
 {
-  "id":"progression.quest_log","name":"Quest Log","category":"progression","description":"Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit.","version":"0.3.1","platform":["roblox","godot","agnostic"],"implementations":[{"target":"godot","status":"unmapped","module":null},{"target":"roblox","status":"not-implemented","module":"roblox-modular-lib/src/QuestSystem.lua","note":"Upstream module named; no adapter written."}],"inputs":[{"name":"maxActiveQuests","type":"number","required":false,"default":5}],"outputs":[{"name":"activeQuests","type":"array"},{"name":"completedCount","type":"number"}],"events":{"emits":["progression.questStarted","progression.questCompleted","progression.objectiveUpdated"],"listensTo":["combat.hit","inventory.itemAdded","progression.sharedQuestCreditSafe"]},"eventIntents":{"progression.questCompleted":["persist","notify"]},"dependencies":["economy.currency"],"tags":["quests","objectives","cooperative"],"sourceModule":"roblox-modular-lib/src/QuestSystem.lua","provenance":"hybrid"}
+  "id": "progression.quest_log",
+  "name": "Quest Log",
+  "category": "progression",
+  "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit.",
+  "version": "0.3.1",
+  "platform": [
+    "roblox",
+    "godot",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/QuestSystem.lua",
+      "note": "Upstream module named; no adapter written."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxActiveQuests",
+      "type": "number",
+      "required": false,
+      "default": 5
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeQuests",
+      "type": "array"
+    },
+    {
+      "name": "completedCount",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.questStarted",
+      "progression.questCompleted",
+      "progression.objectiveUpdated"
+    ],
+    "listensTo": [
+      "combat.hit",
+      "inventory.itemAdded",
+      "progression.sharedQuestCreditSafe"
+    ]
+  },
+  "eventIntents": {
+    "progression.questCompleted": [
+      "persist",
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "economy.currency"
+  ],
+  "tags": [
+    "quests",
+    "objectives",
+    "cooperative"
+  ],
+  "sourceModule": "roblox-modular-lib/src/QuestSystem.lua",
+  "provenance": "hybrid"
+}

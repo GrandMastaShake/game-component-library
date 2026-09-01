@@ -4,20 +4,67 @@
   "category": "world",
   "description": "Configures ambient lighting, fog, skybox, and atmosphere settings to match the current biome and weather state.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/EnvironmentBuilder.lua", "note": "Upstream module named; no adapter written."},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/EnvironmentBuilder.lua",
+      "note": "Upstream module named; no adapter written."
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "fogEnabled", "type": "boolean", "required": false, "default": true}
+    {
+      "name": "fogEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": true
+    }
   ],
   "outputs": [
-    {"name": "currentAtmosphere", "type": "object"}
+    {
+      "name": "currentAtmosphere",
+      "type": "object"
+    }
   ],
-  "events": {"emits": ["world.atmosphereChanged"], "listensTo": ["world.biomeAssigned", "world.weatherChanged"]},
-  "dependencies": ["world.biome_system", "world.weather_system", "presentation.style_presets"],
-  "tags": ["atmosphere", "lighting"],
+  "events": {
+    "emits": [
+      "world.atmosphereChanged"
+    ],
+    "listensTo": [
+      "world.biomeAssigned",
+      "world.weatherChanged"
+    ]
+  },
+  "dependencies": [
+    "world.biome_system",
+    "world.weather_system",
+    "presentation.style_presets"
+  ],
+  "tags": [
+    "atmosphere",
+    "lighting"
+  ],
   "sourceModule": "roblox-modular-lib/src/EnvironmentBuilder.lua"
 }

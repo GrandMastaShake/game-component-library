@@ -1,0 +1,201 @@
+{
+  "id": "compound.first_person_voxel_world",
+  "name": "First Person Voxel World",
+  "version": "0.1.0",
+  "description": "A walkable block world seen from inside it: noise shapes terrain, caves and a sea are cut into it, chunks stream around the player, the volume is meshed into geometry, and the movement contracts drive a body through it at eye level. The movement half is the same set of descriptors the 2D platformer uses \u2014 this compound exists partly to show that jumpVelocity and coyote time never cared how many axes there were.",
+  "targetPlatform": "web",
+  "components": [
+    {
+      "id": "world.noise_lib",
+      "role": "shared value-noise source",
+      "config": {
+        "seed": 7,
+        "octaves": 4
+      }
+    },
+    {
+      "id": "world.terrain_generator",
+      "role": "surface height per column",
+      "config": {
+        "maxHeight": 38
+      }
+    },
+    {
+      "id": "world.cave_system",
+      "role": "carves the interior",
+      "config": {
+        "minDepth": 4
+      }
+    },
+    {
+      "id": "world.water_system",
+      "role": "fills below sea level",
+      "config": {
+        "seaLevel": 22
+      }
+    },
+    {
+      "id": "world.chunk_manager",
+      "role": "streams chunks around the player",
+      "config": {
+        "chunkSize": 16,
+        "renderDistance": 3
+      }
+    },
+    {
+      "id": "world.voxel_volume",
+      "role": "authoritative block store",
+      "config": {
+        "chunkSizeX": 16,
+        "chunkSizeZ": 16,
+        "worldHeight": 64
+      }
+    },
+    {
+      "id": "presentation.voxel_mesher",
+      "role": "blocks to drawable geometry",
+      "config": {
+        "mergeCoplanarFaces": true,
+        "meshBudgetMs": 6
+      }
+    },
+    {
+      "id": "movement.physics_core",
+      "role": "gravity and integration",
+      "config": {}
+    },
+    {
+      "id": "movement.character_body",
+      "role": "owns position and collision",
+      "config": {
+        "width": 0.6,
+        "height": 1.8
+      }
+    },
+    {
+      "id": "movement.ground_sensor",
+      "role": "grounded state",
+      "config": {
+        "probeDistance": 0.08
+      }
+    },
+    {
+      "id": "movement.run_control",
+      "role": "horizontal acceleration",
+      "config": {
+        "maxRunSpeed": 5.2,
+        "airControlFraction": 0.55
+      }
+    },
+    {
+      "id": "movement.jump_core",
+      "role": "jump, coyote time and buffering",
+      "config": {
+        "jumpVelocity": 8,
+        "coyoteTimeSeconds": 0.1,
+        "jumpBufferSeconds": 0.1
+      }
+    },
+    {
+      "id": "presentation.first_person_camera",
+      "role": "eye-level view of the body",
+      "config": {
+        "eyeHeight": 1.62,
+        "fieldOfView": 70
+      }
+    },
+    {
+      "id": "presentation.atmosphere_system",
+      "role": "above-water fog and light",
+      "config": {}
+    },
+    {
+      "id": "presentation.submersion_view",
+      "role": "underwater fog and light",
+      "config": {
+        "fogDensity": 0.075
+      }
+    },
+    {
+      "id": "presentation.audio_system",
+      "role": "impact sink",
+      "config": {}
+    },
+    {
+      "id": "presentation.particle_system",
+      "role": "impact sink",
+      "config": {}
+    }
+  ],
+  "connections": [
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "world.cave_system"
+    },
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "world.water_system"
+    },
+    {
+      "from": "world.chunk_manager",
+      "event": "world.chunkLoaded",
+      "to": "world.voxel_volume"
+    },
+    {
+      "from": "world.chunk_manager",
+      "event": "world.chunkLoaded",
+      "to": "presentation.voxel_mesher"
+    },
+    {
+      "from": "world.voxel_volume",
+      "event": "world.blockChanged",
+      "to": "presentation.voxel_mesher"
+    },
+    {
+      "from": "world.voxel_volume",
+      "event": "world.blockChanged",
+      "to": "presentation.audio_system"
+    },
+    {
+      "from": "world.voxel_volume",
+      "event": "world.blockChanged",
+      "to": "presentation.particle_system"
+    },
+    {
+      "from": "presentation.submersion_view",
+      "event": "presentation.submersionChanged",
+      "to": "presentation.audio_system"
+    },
+    {
+      "from": "presentation.submersion_view",
+      "event": "presentation.submersionChanged",
+      "to": "presentation.particle_system"
+    },
+    {
+      "from": "movement.ground_sensor",
+      "event": "movement.grounded",
+      "to": "movement.jump_core"
+    },
+    {
+      "from": "movement.ground_sensor",
+      "event": "movement.leftGround",
+      "to": "movement.jump_core"
+    }
+  ],
+  "criticalComponents": [
+    "world.voxel_volume",
+    "presentation.voxel_mesher",
+    "movement.character_body",
+    "presentation.first_person_camera"
+  ],
+  "acceptanceCriteria": [
+    "A player spawns standing on generated terrain, not inside it or above it.",
+    "Walking far enough in any direction streams new chunks in without the player falling through ground that has not been drawn yet.",
+    "Merged chunk geometry covers exactly the same surface as unmerged face culling \u2014 no holes, no seam drawn twice.",
+    "A jump clears the height jumpVelocity and gravity predict, using the same contract values as the 2D runtime.",
+    "Entering water changes the view in the near field, not only at the horizon.",
+    "Changing a block re-meshes only the chunk that contains it."
+  ]
+}

@@ -4,19 +4,54 @@
   "category": "persistence",
   "description": "Session-locked player profile loader/unloader that prevents duplicate-session data corruption across servers.",
   "version": "0.1.0",
-  "platform": ["roblox", "agnostic"],
+  "platform": [
+    "roblox",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/ProfileStoreAdapter.lua", "note": "Upstream module named; no adapter written."}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/ProfileStoreAdapter.lua",
+      "note": "Upstream module named; no adapter written."
+    }
   ],
   "inputs": [
-    {"name": "profileTemplate", "type": "object", "required": true}
+    {
+      "name": "profileTemplate",
+      "type": "object",
+      "required": true
+    }
   ],
   "outputs": [
-    {"name": "activeProfile", "type": "object"},
-    {"name": "isSessionLocked", "type": "boolean"}
+    {
+      "name": "activeProfile",
+      "type": "object"
+    },
+    {
+      "name": "isSessionLocked",
+      "type": "boolean"
+    }
   ],
-  "events": {"emits": ["persistence.profileLoaded", "persistence.profileReleased"], "listensTo": []},
-  "dependencies": ["persistence.datastore_safe"],
-  "tags": ["session", "profile"],
+  "events": {
+    "emits": [
+      "persistence.profileLoaded",
+      "persistence.profileReleased"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [
+    "persistence.datastore_safe"
+  ],
+  "tags": [
+    "session",
+    "profile"
+  ],
   "sourceModule": "roblox-modular-lib/src/ProfileStoreAdapter.lua"
 }

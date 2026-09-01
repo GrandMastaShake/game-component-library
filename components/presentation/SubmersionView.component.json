@@ -1,0 +1,84 @@
+{
+  "id": "presentation.submersion_view",
+  "name": "Submersion View",
+  "category": "presentation",
+  "description": "Changes how the world is lit and fogged while the camera is inside a fluid. Uses exponential fog rather than a linear fog pulled tighter: linear fog leaves everything nearer than its start distance completely untinted, so the horizon goes blue while the ground underfoot stays lit like a dry afternoon. Being submerged is a near-field effect.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null,
+      "note": "No depth to fog against."
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (components/manifest/VoxelLab.tsx); not verifiable from this repository."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "fogColor",
+      "type": "string",
+      "required": false,
+      "default": "#11405f"
+    },
+    {
+      "name": "fogDensity",
+      "type": "number",
+      "required": false,
+      "default": 0.075
+    },
+    {
+      "name": "lightIntensityScale",
+      "type": "number",
+      "required": false,
+      "default": 0.3
+    },
+    {
+      "name": "lightTint",
+      "type": "string",
+      "required": false,
+      "default": "#9fd4ff"
+    },
+    {
+      "name": "fluidBlock",
+      "type": "string",
+      "required": false,
+      "default": "water"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "submerged",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.submersionChanged"
+    ],
+    "listensTo": []
+  },
+  "eventIntents": {
+    "presentation.submersionChanged": [
+      "impact"
+    ]
+  },
+  "dependencies": [
+    "world.voxel_volume",
+    "presentation.first_person_camera",
+    "presentation.atmosphere_system"
+  ],
+  "tags": [
+    "3d",
+    "atmosphere",
+    "water",
+    "rendering"
+  ]
+}

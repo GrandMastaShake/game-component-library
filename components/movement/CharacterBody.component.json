@@ -2,34 +2,120 @@
   "id": "movement.character_body",
   "name": "Character Body",
   "category": "movement",
-  "description": "The moving body itself: position, velocity, size, gravity, and the collision resolution that turns one into the other. Everything else in the side-view movement set sets a velocity and lets this integrate it. Resolution is axis-separated — horizontal first, then vertical — so a body sliding along a wall keeps its other axis instead of sticking, and a blocked axis zeroes only that component of velocity. Gravity lives here rather than on the jump, so a build with locomotion and no jump still falls; before this existed, gravity arrived with whichever component happened to declare movement.physics_core, which made falling depend on being able to jump. It emits nothing: movement.ground_sensor already announces landing and takeoff, and a body that reported the same contact again would be one fact with two sources. It listens for world.hazardEntered and puts itself back at the spawn, because only the component that owns position may reset position — a hazard reaching in to move the body would be one component writing another's state, which is the defect this ownership rule exists to prevent. Whether it does so is respawnOnHazard's business, so the hazard reports a fact and the body keeps the policy.",
+  "description": "The moving body itself: position, velocity, size, gravity, and the collision resolution that turns one into the other. Everything else in the side-view movement set sets a velocity and lets this integrate it. Resolution is axis-separated \u2014 horizontal first, then vertical \u2014 so a body sliding along a wall keeps its other axis instead of sticking, and a blocked axis zeroes only that component of velocity. Gravity lives here rather than on the jump, so a build with locomotion and no jump still falls; before this existed, gravity arrived with whichever component happened to declare movement.physics_core, which made falling depend on being able to jump. It emits nothing: movement.ground_sensor already announces landing and takeoff, and a body that reported the same contact again would be one fact with two sources. It listens for world.hazardEntered and puts itself back at the spawn, because only the component that owns position may reset position \u2014 a hazard reaching in to move the body would be one component writing another's state, which is the defect this ownership rule exists to prevent. Whether it does so is respawnOnHazard's business, so the hazard reports a fact and the body keeps the policy.",
   "version": "0.2.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    }
   ],
   "inputs": [
-    {"name": "width", "type": "number", "required": false, "default": 0.7, "description": "Body width in world units. Narrower than a tile on a tile-based stage, so a one-tile gap is passable."},
-    {"name": "height", "type": "number", "required": false, "default": 1.4},
-    {"name": "gravityScale", "type": "number", "required": false, "default": 1, "description": "Multiplier on movement.physics_core's gravity, so one body can be floatier than another without changing the world constant every other component reads."},
-    {"name": "terminalFallSpeed", "type": "number", "required": false, "default": 26, "description": "Downward speed cap. Without one, a long fall accumulates enough speed to tunnel through a thin floor between two frames."},
-    {"name": "maxRiseSpeed", "type": "number", "required": false, "default": 40, "description": "Upward speed cap, so a stacked jump and knockback impulse cannot launch the body out of the world."},
-    {"name": "respawnOnHazard", "type": "boolean", "required": false, "default": true, "description": "Whether world.hazardEntered sends the body back to its spawn. False suits a build where something else — a health system, a knockback — owns the response and a hazard should not also teleport you."}
+    {
+      "name": "width",
+      "type": "number",
+      "required": false,
+      "default": 0.7,
+      "description": "Body width in world units. Narrower than a tile on a tile-based stage, so a one-tile gap is passable."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "required": false,
+      "default": 1.4
+    },
+    {
+      "name": "gravityScale",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Multiplier on movement.physics_core's gravity, so one body can be floatier than another without changing the world constant every other component reads."
+    },
+    {
+      "name": "terminalFallSpeed",
+      "type": "number",
+      "required": false,
+      "default": 26,
+      "description": "Downward speed cap. Without one, a long fall accumulates enough speed to tunnel through a thin floor between two frames."
+    },
+    {
+      "name": "maxRiseSpeed",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Upward speed cap, so a stacked jump and knockback impulse cannot launch the body out of the world."
+    },
+    {
+      "name": "respawnOnHazard",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether world.hazardEntered sends the body back to its spawn. False suits a build where something else \u2014 a health system, a knockback \u2014 owns the response and a hazard should not also teleport you."
+    }
   ],
   "outputs": [
-    {"name": "position", "type": "vector3"},
-    {"name": "velocity", "type": "vector3"},
-    {"name": "isBlockedHorizontally", "type": "boolean", "description": "The last horizontal move was stopped by a solid. Read it before blaming input handling for a character that will not move."},
-    {"name": "isBlockedVertically", "type": "boolean"}
+    {
+      "name": "position",
+      "type": "vector3"
+    },
+    {
+      "name": "velocity",
+      "type": "vector3"
+    },
+    {
+      "name": "isBlockedHorizontally",
+      "type": "boolean",
+      "description": "The last horizontal move was stopped by a solid. Read it before blaming input handling for a character that will not move."
+    },
+    {
+      "name": "isBlockedVertically",
+      "type": "boolean"
+    }
   ],
   "events": {
     "emits": [],
-    "listensTo": ["world.hazardEntered"]
+    "listensTo": [
+      "world.hazardEntered"
+    ]
   },
-  "dependencies": ["movement.physics_core"],
-  "tags": ["locomotion", "platformer", "physics", "core"],
+  "dependencies": [
+    "movement.physics_core"
+  ],
+  "tags": [
+    "locomotion",
+    "platformer",
+    "physics",
+    "core"
+  ],
   "provenance": "library-native"
 }

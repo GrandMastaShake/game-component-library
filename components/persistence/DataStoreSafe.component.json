@@ -4,19 +4,59 @@
   "category": "persistence",
   "description": "Wraps raw platform datastore calls with retry/backoff, request budgeting, and corruption checks so save data never gets silently dropped.",
   "version": "0.1.0",
-  "platform": ["roblox", "agnostic"],
+  "platform": [
+    "roblox",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/DataStoreSafe.lua", "note": "Upstream module named; no adapter written."}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/DataStoreSafe.lua",
+      "note": "Upstream module named; no adapter written."
+    }
   ],
   "inputs": [
-    {"name": "maxRetries", "type": "number", "required": false, "default": 3},
-    {"name": "backoffSeconds", "type": "number", "required": false, "default": 2}
+    {
+      "name": "maxRetries",
+      "type": "number",
+      "required": false,
+      "default": 3
+    },
+    {
+      "name": "backoffSeconds",
+      "type": "number",
+      "required": false,
+      "default": 2
+    }
   ],
   "outputs": [
-    {"name": "pendingWrites", "type": "number"}
+    {
+      "name": "pendingWrites",
+      "type": "number"
+    }
   ],
-  "events": {"emits": ["persistence.writeSucceeded", "persistence.writeExhausted"], "listensTo": ["persistence.saved"]},
-  "dependencies": ["persistence.save_system"],
-  "tags": ["reliability", "datastore"],
+  "events": {
+    "emits": [
+      "persistence.writeSucceeded",
+      "persistence.writeExhausted"
+    ],
+    "listensTo": [
+      "persistence.saved"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "reliability",
+    "datastore"
+  ],
   "sourceModule": "roblox-modular-lib/src/DataStoreSafe.lua"
 }

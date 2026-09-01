@@ -1,0 +1,87 @@
+{
+  "id": "world.voxel_volume",
+  "name": "Voxel Volume",
+  "category": "world",
+  "description": "Dense block storage for a chunked world: a palette of block types with per-type solidity, addressed by world coordinate. The storage contract the chunk manager streams and the mesher draws \u2014 declared separately because streaming, generating and drawing are three different jobs against one array.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null,
+      "note": "A dense 3D block array has no Canvas 2D meaning; the 2D bricks model terrain as a heightfield."
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/voxel/VoxelWorld.ts); not verifiable from this repository."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "chunkSizeX",
+      "type": "number",
+      "required": false,
+      "default": 16
+    },
+    {
+      "name": "chunkSizeZ",
+      "type": "number",
+      "required": false,
+      "default": 16
+    },
+    {
+      "name": "worldHeight",
+      "type": "number",
+      "required": false,
+      "default": 64
+    },
+    {
+      "name": "blockPalette",
+      "type": "array",
+      "required": false,
+      "default": [
+        "air",
+        "stone",
+        "dirt",
+        "grass",
+        "sand",
+        "water"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "loadedChunkCount",
+      "type": "number"
+    },
+    {
+      "name": "blocksPerChunk",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.blockChanged"
+    ],
+    "listensTo": [
+      "world.chunkLoaded"
+    ]
+  },
+  "eventIntents": {
+    "world.blockChanged": [
+      "impact"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "voxel",
+    "3d",
+    "storage",
+    "terrain"
+  ]
+}

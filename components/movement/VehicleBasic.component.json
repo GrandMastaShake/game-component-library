@@ -4,25 +4,72 @@
   "category": "movement",
   "description": "Drivable vehicle with throttle/steer input, top speed, and seat-based entry/exit.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/VehicleSystem.lua", "note": "Upstream module named; no adapter written."},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/VehicleSystem.lua",
+      "note": "Upstream module named; no adapter written."
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "topSpeed", "type": "number", "required": false, "default": 60},
-    {"name": "seatCount", "type": "number", "required": false, "default": 1}
+    {
+      "name": "topSpeed",
+      "type": "number",
+      "required": false,
+      "default": 60
+    },
+    {
+      "name": "seatCount",
+      "type": "number",
+      "required": false,
+      "default": 1
+    }
   ],
   "outputs": [
-    {"name": "currentSpeed", "type": "number"},
-    {"name": "driver", "type": "string"}
+    {
+      "name": "currentSpeed",
+      "type": "number"
+    },
+    {
+      "name": "driver",
+      "type": "string"
+    }
   ],
   "events": {
-    "emits": ["movement.vehicleEntered", "movement.vehicleExited"],
-    "listensTo": ["input.moveDirection"]
+    "emits": [
+      "movement.vehicleEntered",
+      "movement.vehicleExited"
+    ],
+    "listensTo": [
+      "input.moveDirection"
+    ]
   },
   "dependencies": [],
-  "tags": ["vehicle", "locomotion"],
+  "tags": [
+    "vehicle",
+    "locomotion"
+  ],
   "sourceModule": "roblox-modular-lib/src/VehicleSystem.lua"
 }
