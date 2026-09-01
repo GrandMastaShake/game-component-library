@@ -2,32 +2,119 @@
   "id": "movement.jump_core",
   "name": "Jump Core",
   "category": "movement",
-  "description": "The jump verb, with the two forgiveness windows that make it feel fair. Coyote time accepts a press shortly after walking off an edge; the jump buffer accepts a press shortly before landing and fires it on touchdown. Both exist because a jump that only answers a frame-perfect press reads as broken input rather than as difficulty. maxJumps covers double and triple jumps on one counter, reset by movement.grounded. It governs vertical motion only. Steering while airborne is movement.run_control's airControlFraction: air control is horizontal, and the component that owns horizontal velocity is the one that has to apply the multiplier. This component emits no landing event — movement.ground_sensor already does, and a second source for one fact doubles every count downstream.",
+  "description": "The jump verb, with the two forgiveness windows that make it feel fair. Coyote time accepts a press shortly after walking off an edge; the jump buffer accepts a press shortly before landing and fires it on touchdown. Both exist because a jump that only answers a frame-perfect press reads as broken input rather than as difficulty. maxJumps covers double and triple jumps on one counter, reset by movement.grounded. It governs vertical motion only. Steering while airborne is movement.run_control's airControlFraction: air control is horizontal, and the component that owns horizontal velocity is the one that has to apply the multiplier. This component emits no landing event \u2014 movement.ground_sensor already does, and a second source for one fact doubles every count downstream.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    }
   ],
   "inputs": [
-    {"name": "jumpVelocity", "type": "number", "required": false, "default": 9, "description": "Upward speed applied at takeoff. Against the default effective gravity of 9.8 — movement.physics_core's value scaled by movement.character_body's gravityScale — this apexes at roughly 4 units. The two must be tuned together, since raising gravity alone shortens the jump."},
-    {"name": "maxJumps", "type": "number", "required": false, "default": 1, "description": "Total jumps before touching ground. 1 is a ground jump only; 2 is a double jump."},
-    {"name": "coyoteTimeSeconds", "type": "number", "required": false, "default": 0.1, "description": "How long after leaving walkable ground a first jump is still accepted. Measured against ground_sensor's timeSinceGrounded. Consumes a jump, so it cannot be stacked with an air jump for extra height."},
-    {"name": "jumpBufferSeconds", "type": "number", "required": false, "default": 0.1, "description": "How long a press is remembered while airborne, fired on the next landing. The buffer is cleared when consumed so one press can never produce two jumps."},
-    {"name": "variableHeight", "type": "boolean", "required": false, "default": true, "description": "Whether releasing the jump input mid-rise cuts the jump short."},
-    {"name": "releaseVelocityMultiplier", "type": "number", "required": false, "default": 0.45, "description": "What rising velocity is scaled to on early release. Only read when variableHeight is true. 0 stops the rise dead, which reads as a hitch."}
+    {
+      "name": "jumpVelocity",
+      "type": "number",
+      "required": false,
+      "default": 9,
+      "description": "Upward speed applied at takeoff. Against the default effective gravity of 9.8 \u2014 movement.physics_core's value scaled by movement.character_body's gravityScale \u2014 this apexes at roughly 4 units. The two must be tuned together, since raising gravity alone shortens the jump."
+    },
+    {
+      "name": "maxJumps",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Total jumps before touching ground. 1 is a ground jump only; 2 is a double jump."
+    },
+    {
+      "name": "coyoteTimeSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.1,
+      "description": "How long after leaving walkable ground a first jump is still accepted. Measured against ground_sensor's timeSinceGrounded. Consumes a jump, so it cannot be stacked with an air jump for extra height."
+    },
+    {
+      "name": "jumpBufferSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.1,
+      "description": "How long a press is remembered while airborne, fired on the next landing. The buffer is cleared when consumed so one press can never produce two jumps."
+    },
+    {
+      "name": "variableHeight",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether releasing the jump input mid-rise cuts the jump short."
+    },
+    {
+      "name": "releaseVelocityMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 0.45,
+      "description": "What rising velocity is scaled to on early release. Only read when variableHeight is true. 0 stops the rise dead, which reads as a hitch."
+    }
   ],
   "outputs": [
-    {"name": "jumpsRemaining", "type": "number"},
-    {"name": "isJumping", "type": "boolean", "description": "True from takeoff until the rise ends, not for the whole airborne period."}
+    {
+      "name": "jumpsRemaining",
+      "type": "number"
+    },
+    {
+      "name": "isJumping",
+      "type": "boolean",
+      "description": "True from takeoff until the rise ends, not for the whole airborne period."
+    }
   ],
   "events": {
-    "emits": ["movement.jumped", "movement.jumpRejected"],
-    "listensTo": ["input.jump", "movement.grounded", "movement.leftGround"]
+    "emits": [
+      "movement.jumped",
+      "movement.jumpRejected"
+    ],
+    "listensTo": [
+      "input.jump",
+      "movement.grounded",
+      "movement.leftGround"
+    ]
   },
-  "dependencies": ["movement.character_body", "movement.ground_sensor"],
-  "tags": ["locomotion", "platformer", "jump", "core"],
+  "dependencies": [
+    "movement.character_body",
+    "movement.ground_sensor"
+  ],
+  "tags": [
+    "locomotion",
+    "platformer",
+    "jump",
+    "core"
+  ],
   "provenance": "library-native"
 }

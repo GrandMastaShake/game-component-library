@@ -4,22 +4,59 @@
   "category": "combat",
   "description": "Buff/debuff manager: applies timed stat modifiers (poison, haste, stun, shield) to an entity.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/StatusEffectSystem.lua", "note": "Upstream module named; no adapter written."}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/StatusEffectSystem.lua",
+      "note": "Upstream module named; no adapter written."
+    }
   ],
   "inputs": [
-    {"name": "maxActiveEffects", "type": "number", "required": false, "default": 6}
+    {
+      "name": "maxActiveEffects",
+      "type": "number",
+      "required": false,
+      "default": 6
+    }
   ],
   "outputs": [
-    {"name": "activeEffects", "type": "array"}
+    {
+      "name": "activeEffects",
+      "type": "array"
+    }
   ],
   "events": {
-    "emits": ["combat.effectApplied", "combat.effectExpired"],
-    "listensTo": ["combat.hit"]
+    "emits": [
+      "combat.effectApplied",
+      "combat.effectExpired"
+    ],
+    "listensTo": [
+      "combat.hit"
+    ]
   },
-  "dependencies": ["combat.melee_basic"],
-  "tags": ["buffs", "debuffs"],
+  "dependencies": [
+    "combat.melee_basic"
+  ],
+  "tags": [
+    "buffs",
+    "debuffs"
+  ],
   "sourceModule": "roblox-modular-lib/src/StatusEffectSystem.lua"
 }

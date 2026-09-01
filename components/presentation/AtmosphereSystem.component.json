@@ -4,21 +4,78 @@
   "category": "presentation",
   "description": "Low-level fog density, skybox, and ambient lighting renderer that Environment Builder drives based on biome and weather state.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/AtmosphereSystem.lua", "note": "Upstream module named; no adapter written."},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/AtmosphereSystem.lua",
+      "note": "Upstream module named; no adapter written."
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    }
   ],
   "inputs": [
-    {"name": "transitionSeconds", "type": "number", "required": false, "default": 5}
+    {
+      "name": "transitionSeconds",
+      "type": "number",
+      "required": false,
+      "default": 5
+    }
   ],
   "outputs": [
-    {"name": "fogDensity", "type": "number"},
-    {"name": "ambientColor", "type": "string"}
+    {
+      "name": "fogDensity",
+      "type": "number"
+    },
+    {
+      "name": "ambientColor",
+      "type": "string"
+    }
   ],
-  "events": {"emits": ["presentation.atmosphereRendered"], "listensTo": ["world.weatherChanged", "world.dawnStarted", "world.duskStarted"]},
-  "dependencies": ["world.weather_system", "world.day_night_cycle"],
-  "tags": ["fog", "lighting", "low-level"],
+  "events": {
+    "emits": [
+      "presentation.atmosphereRendered"
+    ],
+    "listensTo": [
+      "world.weatherChanged",
+      "world.dawnStarted",
+      "world.duskStarted"
+    ]
+  },
+  "dependencies": [
+    "world.weather_system",
+    "world.day_night_cycle"
+  ],
+  "tags": [
+    "fog",
+    "lighting",
+    "low-level"
+  ],
   "sourceModule": "roblox-modular-lib/src/AtmosphereSystem.lua"
 }

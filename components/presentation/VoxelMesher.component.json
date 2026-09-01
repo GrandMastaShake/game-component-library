@@ -1,0 +1,88 @@
+{
+  "id": "presentation.voxel_mesher",
+  "name": "Voxel Mesher",
+  "category": "presentation",
+  "description": "Turns a voxel volume into drawable geometry. Emits a face only where a block meets something that does not hide it, then merges coplanar faces of the same block into the largest rectangles that fit. Merging is what keeps finer subdivision affordable: without it a flat surface costs one quad per block face however flat it is.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null,
+      "note": "Nothing to mesh: the Canvas 2D bricks draw tiles directly."
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/voxel/VoxelWorld.ts buildChunkGeometry); not verifiable from this repository."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "mergeCoplanarFaces",
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "meshBudgetMs",
+      "type": "number",
+      "required": false,
+      "default": 6
+    },
+    {
+      "name": "faceShadeTop",
+      "type": "number",
+      "required": false,
+      "default": 1.0
+    },
+    {
+      "name": "faceShadeSide",
+      "type": "number",
+      "required": false,
+      "default": 0.78
+    },
+    {
+      "name": "faceShadeBottom",
+      "type": "number",
+      "required": false,
+      "default": 0.55
+    }
+  ],
+  "outputs": [
+    {
+      "name": "triangleCount",
+      "type": "number"
+    },
+    {
+      "name": "meshedChunkCount",
+      "type": "number"
+    },
+    {
+      "name": "lastMeshMs",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.chunkMeshed"
+    ],
+    "listensTo": [
+      "world.chunkLoaded",
+      "world.blockChanged"
+    ]
+  },
+  "dependencies": [
+    "world.voxel_volume"
+  ],
+  "tags": [
+    "voxel",
+    "3d",
+    "rendering",
+    "performance"
+  ]
+}

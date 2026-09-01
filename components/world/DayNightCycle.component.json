@@ -4,24 +4,69 @@
   "category": "world",
   "description": "Time-of-day simulation driving lighting, spawn tables, and ambient events.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "dayLengthMinutes", "type": "number", "required": false, "default": 20},
-    {"name": "startTime", "type": "number", "required": false, "default": 6}
+    {
+      "name": "dayLengthMinutes",
+      "type": "number",
+      "required": false,
+      "default": 20
+    },
+    {
+      "name": "startTime",
+      "type": "number",
+      "required": false,
+      "default": 6
+    }
   ],
   "outputs": [
-    {"name": "currentTime", "type": "number"},
-    {"name": "isNight", "type": "boolean"}
+    {
+      "name": "currentTime",
+      "type": "number"
+    },
+    {
+      "name": "isNight",
+      "type": "boolean"
+    }
   ],
   "events": {
-    "emits": ["world.dawnStarted", "world.duskStarted"],
+    "emits": [
+      "world.dawnStarted",
+      "world.duskStarted"
+    ],
     "listensTo": []
   },
   "dependencies": [],
-  "tags": ["ambient", "environment"]
+  "tags": [
+    "ambient",
+    "environment"
+  ]
 }

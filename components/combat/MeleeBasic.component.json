@@ -4,25 +4,79 @@
   "category": "combat",
   "description": "Single-target close-range attack with cooldown and damage falloff by range.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "damage", "type": "number", "required": true},
-    {"name": "range", "type": "number", "required": false, "default": 4},
-    {"name": "cooldown", "type": "number", "required": false, "default": 0.8}
+    {
+      "name": "damage",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "range",
+      "type": "number",
+      "required": false,
+      "default": 4
+    },
+    {
+      "name": "cooldown",
+      "type": "number",
+      "required": false,
+      "default": 0.8
+    }
   ],
   "outputs": [
-    {"name": "isOnCooldown", "type": "boolean"},
-    {"name": "lastTarget", "type": "string"}
+    {
+      "name": "isOnCooldown",
+      "type": "boolean"
+    },
+    {
+      "name": "lastTarget",
+      "type": "string"
+    }
   ],
   "events": {
-    "emits": ["combat.hit", "combat.miss", "combat.onCooldown"],
-    "listensTo": ["input.attack"]
+    "emits": [
+      "combat.hit",
+      "combat.miss",
+      "combat.onCooldown"
+    ],
+    "listensTo": [
+      "input.attack"
+    ]
   },
-  "eventIntents": {"combat.hit": ["impact"]},
-  "dependencies": ["movement.basic_walk"],
-  "tags": ["melee", "pvp", "pve"]
+  "eventIntents": {
+    "combat.hit": [
+      "impact"
+    ]
+  },
+  "dependencies": [
+    "movement.basic_walk"
+  ],
+  "tags": [
+    "melee",
+    "pvp",
+    "pve"
+  ]
 }

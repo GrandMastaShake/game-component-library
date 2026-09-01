@@ -4,23 +4,67 @@
   "category": "movement",
   "description": "Ground-based locomotion with configurable speed and acceleration.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/movement.basic_walk.adapter.lua"}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "scaffold",
+      "module": "roblox-adapters/movement.basic_walk.adapter.lua"
+    }
   ],
   "inputs": [
-    {"name": "walkSpeed", "type": "number", "required": false, "default": 16, "description": "Studs or units per second"},
-    {"name": "acceleration", "type": "number", "required": false, "default": 8}
+    {
+      "name": "walkSpeed",
+      "type": "number",
+      "required": false,
+      "default": 16,
+      "description": "Studs or units per second"
+    },
+    {
+      "name": "acceleration",
+      "type": "number",
+      "required": false,
+      "default": 8
+    }
   ],
   "outputs": [
-    {"name": "isMoving", "type": "boolean", "description": "Whether the character is currently moving"},
-    {"name": "velocity", "type": "vector3"}
+    {
+      "name": "isMoving",
+      "type": "boolean",
+      "description": "Whether the character is currently moving"
+    },
+    {
+      "name": "velocity",
+      "type": "vector3"
+    }
   ],
   "events": {
-    "emits": ["movement.started", "movement.stopped"],
-    "listensTo": ["input.moveDirection"]
+    "emits": [
+      "movement.started",
+      "movement.stopped"
+    ],
+    "listensTo": [
+      "input.moveDirection"
+    ]
   },
   "dependencies": [],
-  "tags": ["locomotion", "core"]
+  "tags": [
+    "locomotion",
+    "core"
+  ]
 }

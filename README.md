@@ -6,7 +6,7 @@ A schema-driven, AI-assemblable library of modular game systems—**elements** a
 
 ## What exists
 
-- **51 component descriptors** spanning movement, combat, inventory, economy, social, world, UI, pets, progression, persistence, presentation, housing, and utility.
+- **75 component descriptors** spanning movement, combat, inventory, economy, social, world, UI, pets, progression, persistence, presentation, housing, and utility.
 - **10 validated compounds** for reusable multi-system gameplay loops.
 - Component-graph and compound validators for malformed descriptors, missing members/dependencies, bad event wires, duplicates, and cycles.
 - A platform-aware build-manifest compiler, readiness evaluator, and coverage-roadmap generator.

@@ -122,6 +122,32 @@ def main() -> int:
     for cycle in cycles:
         errors.append(f"Circular dependency: {cycle}")
 
+    # A descriptor that listens for an event nobody emits is wiring that will
+    # never fire, and it reads as connected in every diagram and every review.
+    # This was found by hand when presentation.first_person_camera was written
+    # against "movement.moved", which no component has ever emitted.
+    #
+    # The `input.` prefix is the deliberate exception: those events come from
+    # the player, not from another component, so having no emitter is correct.
+    emitters: dict[str, list[str]] = {}
+    listeners: dict[str, list[str]] = {}
+    for _, component in components:
+        events = component.get("events") or {}
+        for event in events.get("emits") or []:
+            emitters.setdefault(event, []).append(component["id"])
+        for event in events.get("listensTo") or []:
+            listeners.setdefault(event, []).append(component["id"])
+
+    orphan_events = {
+        event: sorted(who)
+        for event, who in sorted(listeners.items())
+        if event not in emitters and not event.startswith("input.")
+    }
+    for event, who in orphan_events.items():
+        errors.append(
+            f"Event '{event}' is listened for by {', '.join(who)} but emitted by nothing"
+        )
+
     categories = Counter(
         component["category"] for _, component in components if isinstance(component.get("category"), str)
     )
@@ -131,6 +157,8 @@ def main() -> int:
         "categoryCounts": dict(sorted(categories.items())),
         "missingDependencies": missing_dependencies,
         "cycles": cycles,
+        "orphanEvents": orphan_events,
+        "externalEvents": sorted(e for e in listeners if e.startswith("input.")),
         "buildOrder": order,
         "errors": errors,
     }

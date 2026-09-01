@@ -1,0 +1,82 @@
+{
+  "id": "presentation.first_person_camera",
+  "name": "First Person Camera",
+  "category": "presentation",
+  "description": "An eye-level camera driven by yaw and pitch, offset from the body's feet rather than its centre. Pitch stops just short of the poles: reaching either exactly makes the forward vector degenerate and rolls the view for a frame. Distinct from camera_follow, which frames a body from outside it.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null,
+      "note": "There is no eye position in a 2D side view; camera_follow is the 2D contract."
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/voxel/FirstPersonController.ts); not verifiable from this repository."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "eyeHeight",
+      "type": "number",
+      "required": false,
+      "default": 1.62
+    },
+    {
+      "name": "lookSensitivity",
+      "type": "number",
+      "required": false,
+      "default": 0.0022
+    },
+    {
+      "name": "fieldOfView",
+      "type": "number",
+      "required": false,
+      "default": 70
+    },
+    {
+      "name": "pitchLimitRadians",
+      "type": "number",
+      "required": false,
+      "default": 1.5698
+    },
+    {
+      "name": "invertY",
+      "type": "boolean",
+      "required": false,
+      "default": false
+    }
+  ],
+  "outputs": [
+    {
+      "name": "yaw",
+      "type": "number"
+    },
+    {
+      "name": "pitch",
+      "type": "number"
+    },
+    {
+      "name": "eyePosition",
+      "type": "object"
+    }
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": []
+  },
+  "dependencies": [
+    "movement.character_body"
+  ],
+  "tags": [
+    "camera",
+    "3d",
+    "first-person"
+  ]
+}
