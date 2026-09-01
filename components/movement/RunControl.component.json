@@ -21,7 +21,7 @@
     "emits": [],
     "listensTo": ["input.moveDirection"]
   },
-  "dependencies": ["movement.ground_sensor"],
+  "dependencies": ["movement.character_body", "movement.ground_sensor"],
   "tags": ["locomotion", "platformer", "side-scroller", "core"],
   "provenance": "library-native"
 }

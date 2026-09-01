@@ -6,7 +6,7 @@
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
   "inputs": [
-    {"name": "jumpVelocity", "type": "number", "required": false, "default": 9, "description": "Upward speed applied at takeoff. Against movement.physics_core's default gravity of 9.8 this apexes at roughly 4 units; the pair must be tuned together, since raising gravity alone shortens the jump."},
+    {"name": "jumpVelocity", "type": "number", "required": false, "default": 9, "description": "Upward speed applied at takeoff. Against the default effective gravity of 9.8 — movement.physics_core's value scaled by movement.character_body's gravityScale — this apexes at roughly 4 units. The two must be tuned together, since raising gravity alone shortens the jump."},
     {"name": "maxJumps", "type": "number", "required": false, "default": 1, "description": "Total jumps before touching ground. 1 is a ground jump only; 2 is a double jump."},
     {"name": "coyoteTimeSeconds", "type": "number", "required": false, "default": 0.1, "description": "How long after leaving walkable ground a first jump is still accepted. Measured against ground_sensor's timeSinceGrounded. Consumes a jump, so it cannot be stacked with an air jump for extra height."},
     {"name": "jumpBufferSeconds", "type": "number", "required": false, "default": 0.1, "description": "How long a press is remembered while airborne, fired on the next landing. The buffer is cleared when consumed so one press can never produce two jumps."},
@@ -21,7 +21,7 @@
     "emits": ["movement.jumped", "movement.jumpRejected"],
     "listensTo": ["input.jump", "movement.grounded", "movement.leftGround"]
   },
-  "dependencies": ["movement.physics_core", "movement.ground_sensor"],
+  "dependencies": ["movement.character_body", "movement.ground_sensor"],
   "tags": ["locomotion", "platformer", "jump", "core"],
   "provenance": "library-native"
 }

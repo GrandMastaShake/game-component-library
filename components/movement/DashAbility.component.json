@@ -23,7 +23,7 @@
     "listensTo": ["input.dash", "input.moveDirection", "movement.grounded"]
   },
   "eventIntents": {"movement.dashStarted": ["impact"]},
-  "dependencies": ["movement.physics_core", "movement.ground_sensor"],
+  "dependencies": ["movement.character_body", "movement.ground_sensor"],
   "tags": ["locomotion", "platformer", "ability", "dash"],
   "provenance": "library-native"
 }
