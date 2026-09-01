@@ -1,0 +1,315 @@
+{
+  "note": "Descriptors claiming a target this repository can check, where the implementation is absent. Accepted at the time platform validation was introduced. Removing an entry is either the implementation landing or the claim being corrected; adding one should be a deliberate, reviewed decision. See fixtures 10 and 11 in the consuming app: the durable fix is a per-target implementation list, because status belongs to a brick-target pair rather than to a brick.",
+  "accepted": [
+    {
+      "code": "PLAT001",
+      "component": "combat.damage_resolver",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "combat.equipment_slots",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "combat.melee_basic",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "combat.status_effects",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "economy.team_resources",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "housing.home_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "inventory.crafting_bench",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "inventory.loot_table",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "inventory.slotted_bag",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.character_body",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.dash_ability",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.ground_sensor",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.jump_core",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.ledge_grab",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.pathfinding_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.physics_core",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.run_control",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.vehicle_basic",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "movement.wall_interaction",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "persistence.datastore_safe",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "persistence.profile_adapter",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "pets.egg_hatchery",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "pets.pet_companion",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.atmosphere_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.audio_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.camera_follow",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.color_palette",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.lod_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.low_poly_generator",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.object_placer",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.particle_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.screen_shake",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "presentation.style_presets",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "progression.level_goal",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "progression.production_queue",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "progression.quest_log",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "progression.skills_tree",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "progression.xp_leveling",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "social.home_trade_stand",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "social.leaderboard",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "social.party_credit_guard",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "social.party_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "social.trade_remote_handler",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "social.trade_window",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "ui.dialogue_box",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "ui.minimap",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "ui.pet_hatch_presenter",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "utility.behavior_fsm",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "utility.command_bus",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "utility.timer_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.biome_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.cave_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.chunk_manager",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.day_night_cycle",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.environment_builder",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.erosion_simulator",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.hazard_volume",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.noise_lib",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.vision_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.water_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.weather_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
+      "component": "world.world_builder",
+      "target": "roblox"
+    }
+  ]
+}

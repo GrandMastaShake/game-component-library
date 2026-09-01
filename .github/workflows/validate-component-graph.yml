@@ -1,9 +1,9 @@
 name: Validate Component Library
 on:
   push:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
   pull_request:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
 permissions: {contents: read}
 jobs:
   validate:
@@ -16,6 +16,8 @@ jobs:
       - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
       - name: Validate art topology (fails on findings not in the baseline)
         run: python3 tools/validate_topology.py --baseline art/topology-baseline.json --report reports/topology.json
+      - name: Validate platform claims (fails on findings not in the baseline)
+        run: python3 tools/validate_platforms.py --baseline platform-baseline.json --report reports/platforms.json
       - run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
       - run: python3 tools/evaluate_manifest_readiness.py reports/pet-survival-game.manifest.json --mode prototype --report reports/pet-survival-game.prototype-readiness.json
       - run: python3 tools/generate_coverage_roadmap.py reports/pet-survival-game.manifest.json --output reports/pet-survival-game.coverage-roadmap.json
