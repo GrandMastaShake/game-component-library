@@ -22,7 +22,7 @@
     "emits": ["movement.ledgeGrabbed", "movement.ledgeClimbed", "movement.ledgeReleased"],
     "listensTo": ["input.jump", "input.moveDirection", "movement.leftGround"]
   },
-  "dependencies": ["movement.physics_core", "movement.ground_sensor", "movement.jump_core"],
+  "dependencies": ["movement.character_body", "movement.ground_sensor", "movement.jump_core"],
   "tags": ["locomotion", "platformer", "climbing"],
   "provenance": "library-native"
 }

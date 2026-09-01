@@ -20,7 +20,7 @@
     "emits": ["movement.grounded", "movement.leftGround"],
     "listensTo": []
   },
-  "dependencies": [],
+  "dependencies": ["movement.character_body"],
   "tags": ["locomotion", "platformer", "sensor", "core"],
   "provenance": "library-native"
 }
