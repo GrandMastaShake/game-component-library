@@ -23,6 +23,7 @@
     "emits": ["movement.wallSlideStarted", "movement.wallSlideEnded", "movement.wallJumped"],
     "listensTo": ["input.jump", "input.moveDirection", "movement.grounded"]
   },
+  "eventIntents": {"movement.wallJumped": ["impact"]},
   "dependencies": ["movement.physics_core", "movement.ground_sensor", "movement.jump_core"],
   "tags": ["locomotion", "platformer", "wall-jump"],
   "provenance": "library-native"
