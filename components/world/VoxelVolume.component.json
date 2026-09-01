@@ -82,6 +82,11 @@
     "voxel",
     "3d",
     "storage",
-    "terrain"
+    "terrain",
+    "blocks",
+    "cubes",
+    "blocky",
+    "sandbox",
+    "mining"
   ]
 }

@@ -83,6 +83,10 @@
     "voxel",
     "3d",
     "rendering",
-    "performance"
+    "performance",
+    "blocks",
+    "chunks",
+    "geometry",
+    "mesh"
   ]
 }

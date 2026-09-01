@@ -79,6 +79,11 @@
     "3d",
     "atmosphere",
     "water",
-    "rendering"
+    "rendering",
+    "underwater",
+    "submerged",
+    "diving",
+    "swimming",
+    "depth"
   ]
 }
