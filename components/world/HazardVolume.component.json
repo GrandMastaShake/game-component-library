@@ -1,0 +1,27 @@
+{
+  "id": "world.hazard_volume",
+  "name": "Hazard Volume",
+  "category": "world",
+  "description": "Regions of the world that hurt on contact — spikes, lava, a bottomless pit's kill plane. It reports the contact and nothing else: it does not damage anyone, move anyone, or end anything. What happens next is the business of whatever listens, which is why the same spike can kill in one build and cost a heart in another without this component changing. retriggerSeconds exists because a volume tested every frame fires sixty times a second otherwise, and a hazard that hits sixty times is not a hazard, it is a crash. world.hazardEntered carries the `impact` intent, so a build with particles, audio or a screen shake gets all three reacting to it without wiring any of them.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "regions", "type": "array", "required": true, "description": "Rectangles in world units, each {x, y, width, height}. Required with no default: a hazard with no regions is an unconfigured build, not a sensible empty one."},
+    {"name": "damage", "type": "number", "required": false, "default": 1, "description": "Carried on the event for a listener that wants it. This component does not apply it — it has no opinion about health."},
+    {"name": "retriggerSeconds", "type": "number", "required": false, "default": 0.75, "description": "How long after a contact before the same body can trigger again. Doubles as the invulnerability window a player expects after being hit."},
+    {"name": "instantlyLethal", "type": "boolean", "required": false, "default": true, "description": "Carried on the event. True is a pit or spikes; false is a hazard that chips away at health and needs something tracking it."}
+  ],
+  "outputs": [
+    {"name": "isInHazard", "type": "boolean"},
+    {"name": "contactCount", "type": "number"},
+    {"name": "cooldownRemaining", "type": "number"}
+  ],
+  "events": {
+    "emits": ["world.hazardEntered"],
+    "listensTo": []
+  },
+  "eventIntents": {"world.hazardEntered": ["impact"]},
+  "dependencies": ["movement.character_body"],
+  "tags": ["world", "hazard", "platformer"],
+  "provenance": "library-native"
+}
