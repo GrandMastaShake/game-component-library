@@ -1,0 +1,33 @@
+{
+  "id": "world.mob_patrol",
+  "name": "Patrolling Mobs",
+  "category": "world",
+  "description": "Walking enemies that pace a surface, turn at walls and at the edge of what they are standing on, and resolve contact with the player by where it happened: from above is a stomp, from anywhere else is a hit. It emits world.hazardEntered for the hit rather than an event of its own, which is the whole point — a mob touching you IS a hazard being entered, and reusing the event means every listener that already handles spikes handles mobs too, with nothing rewired. A catalogue that invents an event per source ends up with events nobody listens to; this one has too many of those already.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "spawns", "type": "array", "required": true, "description": "Where the mobs start, each {x, y, facing}. Required with no default: mobs nobody placed are not a sensible empty level, they are an unconfigured one. `facing` is -1 or 1 and defaults to 1."},
+    {"name": "speed", "type": "number", "required": false, "default": 2.2, "description": "Patrol speed in world units per second. Well under a player's run speed on purpose — a mob you cannot outrun is a wall, not an enemy."},
+    {"name": "turnsAtLedges", "type": "boolean", "required": false, "default": true, "description": "Whether a mob turns around at the edge of its surface. False lets them walk off, which is a different enemy: one that falls into the pit you were saving for yourself."},
+    {"name": "mobSize", "type": "number", "required": false, "default": 0.8, "description": "Square footprint in world units. Smaller than the player, so the size difference reads as 'this is the thing I jump on'."},
+    {"name": "stompable", "type": "boolean", "required": false, "default": true, "description": "Whether landing on a mob from above defeats it. False makes every contact a hit, which turns the mob from an obstacle into a hazard that walks."},
+    {"name": "stompBounceVelocity", "type": "number", "required": false, "default": 7, "description": "Upward speed given to whoever stomps a mob. A little under a normal jump, so a stomp reads as a bounce rather than as a free extra jump."},
+    {"name": "hitCooldownSeconds", "type": "number", "required": false, "default": 0.9, "description": "How long before the same mob can hit again. Same reason as a hazard volume's: contact is tested every frame, so without it one touch is sixty hits."}
+  ],
+  "outputs": [
+    {"name": "mobs", "type": "array", "description": "Live state per mob — position, facing, and whether it is still alive."},
+    {"name": "aliveCount", "type": "number"},
+    {"name": "defeatedCount", "type": "number"}
+  ],
+  "events": {
+    "emits": ["world.hazardEntered", "world.mobDefeated"],
+    "listensTo": []
+  },
+  "eventIntents": {
+    "world.hazardEntered": ["impact"],
+    "world.mobDefeated": ["impact", "notify"]
+  },
+  "dependencies": ["movement.character_body"],
+  "tags": ["world", "enemy", "platformer", "patrol"],
+  "provenance": "library-native"
+}
