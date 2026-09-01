@@ -5,6 +5,11 @@
   "description": "Cycles between weather states (clear, rain, storm, snow) with transition blending.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/WeatherSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "possibleStates", "type": "array", "required": false, "default": ["clear", "rain", "storm"]},
     {"name": "avgStateDurationMinutes", "type": "number", "required": false, "default": 10}

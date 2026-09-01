@@ -5,6 +5,11 @@
   "description": "Named bundles (e.g. 'cartoon', 'realistic', 'retro') that combine a color palette, mesh style, and material settings into one switchable visual theme.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/StylePresets.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "presetName", "type": "string", "required": false, "default": "cartoon"}
   ],

@@ -5,6 +5,9 @@
   "description": "Ownable, followable companion pet with hunger/happiness stats and equip slot.",
   "version": "0.1.0",
   "platform": ["roblox", "agnostic"],
+  "implementations": [
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/PetSystem.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "petId", "type": "string", "required": true},
     {"name": "followDistance", "type": "number", "required": false, "default": 6}

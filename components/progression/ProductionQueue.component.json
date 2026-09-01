@@ -5,6 +5,12 @@
   "description": "Per-building ordered production queue with continuous progress. Reserves cost on enqueue, advances fractional progress each tick rather than snapping from zero to complete, and refunds on cancellation.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "maxQueueLength", "type": "number", "required": false, "default": 5},
     {"name": "refundOnCancel", "type": "boolean", "required": false, "default": true}

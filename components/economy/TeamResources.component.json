@@ -5,6 +5,12 @@
   "description": "Per-team RTS resource ledger. Separates consumable stock, which is spent and gone, from concurrent capacity, which is occupied while a unit lives and released on death; affordability requires stock >= cost AND supply.used + cost <= supply.cap. Distinct from economy.currency, which is per-player and has no capacity axis.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "startingStock", "type": "object", "required": false, "default": {"mineral": 500, "gas": 200}},
     {"name": "startingSupplyCap", "type": "number", "required": false, "default": 15}

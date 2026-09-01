@@ -5,6 +5,12 @@
   "description": "Wall sliding and wall jumping, together, because neither is useful alone: a slide with no jump is a decoration, and a jump with no slide gives the player no time to aim it. It depends on movement.jump_core rather than duplicating it, since both answer input.jump and only one of them may fire — construction order is what lets this suppress the ground jump while the character is on a wall. After a wall jump, horizontal input is ignored for inputLockSeconds, or holding toward the wall re-sticks the character to it immediately and the jump goes nowhere.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "wallProbeDistance", "type": "number", "required": false, "default": 0.35, "description": "Sideways reach used to detect a wall. Separate from ground_sensor's downward probe: a different surface asked a different question."},
     {"name": "slideSpeed", "type": "number", "required": false, "default": 4, "description": "Terminal downward speed while sliding, replacing gravity's acceleration rather than adding to it."},

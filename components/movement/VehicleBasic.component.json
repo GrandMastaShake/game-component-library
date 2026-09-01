@@ -5,6 +5,11 @@
   "description": "Drivable vehicle with throttle/steer input, top speed, and seat-based entry/exit.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/VehicleSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "topSpeed", "type": "number", "required": false, "default": 60},
     {"name": "seatCount", "type": "number", "required": false, "default": 1}

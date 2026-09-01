@@ -5,6 +5,12 @@
   "description": "Camera kick driven by a decaying trauma value rather than by scripted shakes. Anything tagged with the `impact` intent adds trauma; trauma falls off on its own, and the offset is trauma raised to traumaExponent — so overlapping hits accumulate into one continuous shake instead of restarting a canned animation and fighting each other. It names no events at all: it is a pure intent sink, so a new emitter that tags itself `impact` shakes the camera without this descriptor changing. It publishes its offset and roll rather than insisting on applying them: where presentation.camera_follow is in the build, the camera composes them into the one view matrix, and this yields. It emits nothing either, deliberately — a shakeStarted event would be one more thing in the catalogue that nobody listens to.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "traumaPerImpact", "type": "number", "required": false, "default": 0.35, "description": "Trauma added by one impact, on a 0..1 scale. Three hits in quick succession reach full shake; one does not."},
     {"name": "traumaDecayPerSecond", "type": "number", "required": false, "default": 1.4, "description": "How fast trauma bleeds off. At the default a single impact is spent in about a quarter of a second."},

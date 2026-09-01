@@ -5,6 +5,9 @@
   "description": "Client-server RemoteEvent/RemoteFunction plumbing that relays trade UI actions (offer, accept, cancel) to the Trade Coordinator and streams state updates back to both clients.",
   "version": "0.1.0",
   "platform": ["roblox"],
+  "implementations": [
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/TradeRemoteHandler.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "rateLimitPerSecond", "type": "number", "required": false, "default": 5}
   ],

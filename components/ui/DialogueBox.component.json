@@ -5,6 +5,11 @@
   "description": "Branching NPC dialogue renderer with typed-text effect and choice buttons.",
   "version": "0.1.0",
   "platform": ["roblox", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/DialogueSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "tree", "type": "object", "required": true, "description": "Dialogue tree with nodes and choices"},
     {"name": "typeSpeed", "type": "number", "required": false, "default": 0.03}

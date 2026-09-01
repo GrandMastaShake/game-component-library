@@ -5,6 +5,12 @@
   "description": "Generic countdown/interval timer utility used across cooldowns, autosave ticks, weather transitions, and quest timers.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/TimerSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "durationSeconds", "type": "number", "required": true},
     {"name": "repeats", "type": "boolean", "required": false, "default": false}

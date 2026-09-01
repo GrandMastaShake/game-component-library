@@ -5,6 +5,11 @@
   "description": "Tracks experience points and level, computing level-up thresholds from a curve.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/XPSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "curve", "type": "string", "required": false, "default": "linear"},
     {"name": "startingLevel", "type": "number", "required": false, "default": 1}

@@ -1,5 +1,9 @@
 {
   "id":"social.home_trade_stand","name":"Home Trade Stand","category":"social","description":"A placeable in-home listing surface for pets/items a player is willing to trade. It exposes browseable listings to visitors and routes an accepted offer into the server-authoritative trade flow.","version":"0.1.0","platform":["roblox","web","agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "unmapped", "module": null}
+  ],
   "inputs":[{"name":"maxListings","type":"number","required":false,"default":12},{"name":"allowVisitorOffers","type":"boolean","required":false,"default":true}],
   "outputs":[{"name":"activeListings","type":"array"},{"name":"visitorCount","type":"number"}],
   "events":{"emits":["social.tradeOpened","social.listingAdded","social.listingRemoved"],"listensTo":["housing.visitorEntered","inventory.itemAdded","social.tradeCommitted","social.tradeRejected"]},

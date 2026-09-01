@@ -5,6 +5,12 @@
   "description": "Finite state machine for autonomous entity behavior across idle, moving, attacking, fleeing, gathering, and patrolling. Its only output channel is a command request on the command bus, so it never mutates entities directly. Categorised as utility rather than movement because it governs engagement and gathering, not locomotion alone.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "detectionRange", "type": "number", "required": false, "default": 15},
     {"name": "actionCooldownSeconds", "type": "number", "required": false, "default": 1.0},

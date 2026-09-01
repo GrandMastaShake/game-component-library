@@ -5,6 +5,12 @@
   "description": "Generates and enforces a consistent, harmonious color palette across procedurally generated assets and UI elements.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/ColorPaletteSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "baseHue", "type": "number", "required": false, "default": 0},
     {"name": "paletteSize", "type": "number", "required": false, "default": 6}

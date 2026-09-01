@@ -5,6 +5,10 @@
   "description": "Weapon/armor equip slots that modify combat stats when items are equipped.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/EquipmentSystem.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "slotTypes", "type": "array", "required": false, "default": ["weapon", "armor", "accessory"]}
   ],

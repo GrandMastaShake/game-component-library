@@ -5,6 +5,11 @@
   "description": "Time-of-day simulation driving lighting, spawn tables, and ambient events.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "dayLengthMinutes", "type": "number", "required": false, "default": 20},
     {"name": "startTime", "type": "number", "required": false, "default": 6}

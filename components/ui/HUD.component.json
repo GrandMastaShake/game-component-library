@@ -5,6 +5,11 @@
   "description": "Configurable heads-up display panel that renders health, currency, and notification widgets, plus per-entity world-space overlays (nameplates, health bars, and behavior status icons).",
   "version": "0.2.0",
   "platform": ["roblox", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/ui.hud.adapter.lua"},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "showHealth", "type": "boolean", "required": false, "default": true},
     {"name": "showCurrency", "type": "boolean", "required": false, "default": true},

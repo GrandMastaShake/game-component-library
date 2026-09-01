@@ -5,6 +5,12 @@
   "description": "Fixed-slot inventory with stacking and rarity metadata, built on the Core Inventory primitive.",
   "version": "0.1.1",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/Inventory.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "slotCount", "type": "number", "required": false, "default": 20},
     {"name": "maxStackSize", "type": "number", "required": false, "default": 99}

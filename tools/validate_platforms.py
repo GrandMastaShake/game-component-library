@@ -31,13 +31,20 @@ quietly passing it.
 Rules
 -----
 Blocking:
-  PLAT001  claims a target this repo can check, and the implementation is absent
+  PLAT001  `platform` claims a target this repo can check, implementation absent
+  PLAT002  an `implementations` entry asserts a module that is not on disk
+  PLAT003  an `implementations` status contradicts what is on disk
 
 Advisory (worth a human look, not a failure):
   PLAT010  claims a runtime target this repo has no way to check
+  PLAT011  a `platform` target with no matching `implementations` entry
   PLAT020  sourceModule names a path outside this repository, so nothing here
            can verify it — and being a single string it can only ever describe
            one target's implementation
+
+PLAT002 only applies to statuses that ASSERT a module is present. A
+`not-implemented` entry deliberately points at an upstream module that is not
+here, which is the whole reason that status exists.
 
 Exit code is non-zero only for PLAT001 findings that are not in the baseline,
 so the advisories can accumulate visibly without wedging CI.
@@ -63,6 +70,14 @@ NOT_A_RUNTIME = {"agnostic"}
 TARGET_LOCATIONS: dict[str, Callable[[str], str]] = {
     "roblox": lambda component_id: f"roblox-adapters/{component_id}.adapter.lua",
 }
+
+# The old platform enum's names, mapped to the target names implementations uses.
+TARGET_RENAMES = {"web": "canvas2d"}
+
+# Statuses that claim an implementation is present HERE. `not-implemented`
+# points at an upstream module on purpose, and `external` at another repo, so
+# neither asserts anything this validator could look for.
+ASSERTS_MODULE_PRESENT = {"running", "constructor-verified", "scaffold"}
 
 
 @dataclass(frozen=True)
@@ -129,6 +144,63 @@ def check_component(root: Path, component: dict[str, Any]) -> list[Finding]:
                     "error",
                 )
             )
+
+    implementations = component.get("implementations")
+    if isinstance(implementations, list):
+        declared_targets = {
+            e.get("target") for e in implementations if isinstance(e, dict)
+        }
+        for raw in platforms:
+            if not isinstance(raw, str) or raw in NOT_A_RUNTIME:
+                continue
+            target = TARGET_RENAMES.get(raw, raw)
+            if target not in declared_targets:
+                findings.append(
+                    Finding(
+                        "PLAT011",
+                        component_id,
+                        target,
+                        f"platform claims '{raw}' with no matching implementations entry",
+                        "warning",
+                    )
+                )
+        for entry in implementations:
+            if not isinstance(entry, dict):
+                continue
+            target = entry.get("target") or "?"
+            status = entry.get("status")
+            module = entry.get("module")
+            # Only statuses that assert a module is present are checked for it.
+            if status in ASSERTS_MODULE_PRESENT:
+                if not isinstance(module, str) or not (root / module).exists():
+                    findings.append(
+                        Finding(
+                            "PLAT002",
+                            component_id,
+                            target,
+                            f"status '{status}' asserts a module, but {module!r} is not on disk",
+                            "error",
+                        )
+                    )
+            locate = TARGET_LOCATIONS.get(target)
+            if locate is not None and isinstance(component_id, str):
+                on_disk = (root / locate(component_id)).exists()
+                asserts = status in ASSERTS_MODULE_PRESENT
+                if asserts != on_disk:
+                    findings.append(
+                        Finding(
+                            "PLAT003",
+                            component_id,
+                            target,
+                            (
+                                f"status '{status}' says the implementation is "
+                                f"{'present' if asserts else 'absent'}, but "
+                                f"{locate(component_id)} is "
+                                f"{'present' if on_disk else 'absent'}"
+                            ),
+                            "error",
+                        )
+                    )
 
     source_module = component.get("sourceModule")
     if isinstance(source_module, str) and not (root / source_module).exists():
@@ -242,6 +314,19 @@ def main() -> int:
         "errorCount": len(errors),
         "knownCount": len(known),
         "warningCount": len(warnings),
+        "migratedToImplementations": sum(
+            1 for _, c in components if isinstance(c.get("implementations"), list)
+        ),
+        "implementationStatuses": dict(
+            sorted(
+                Counter(
+                    f"{e.get('target')}:{e.get('status')}"
+                    for _, c in components
+                    for e in (c.get("implementations") or [])
+                    if isinstance(e, dict)
+                ).items()
+            )
+        ),
         "findingsByCode": dict(sorted(Counter(f.code for f in findings).items())),
         "errors": [f.as_dict() for f in errors],
         "warnings": [f.as_dict() for f in warnings],

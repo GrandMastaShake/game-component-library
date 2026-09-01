@@ -5,6 +5,11 @@
   "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/Skills.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "treeDefinition", "type": "object", "required": true}
   ],

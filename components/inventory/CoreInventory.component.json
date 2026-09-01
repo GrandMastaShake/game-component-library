@@ -5,6 +5,12 @@
   "description": "Low-level key-value item storage primitive (add/remove/query) that higher-level inventory bricks like Slotted Bag are built on top of.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "constructor-verified", "module": "roblox-adapters/inventory.core_inventory.adapter.lua"},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "initialItems", "type": "array", "required": false, "default": []}
   ],

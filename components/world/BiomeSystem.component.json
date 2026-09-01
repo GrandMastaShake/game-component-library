@@ -5,6 +5,11 @@
   "description": "Assigns biome types (forest, desert, tundra, etc.) across generated terrain based on noise-driven temperature/moisture maps.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/BiomeSystem.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "biomeTypes", "type": "array", "required": false, "default": ["forest", "desert", "tundra", "plains"]}
   ],
