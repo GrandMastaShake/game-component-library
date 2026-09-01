@@ -288,6 +288,11 @@
     },
     {
       "code": "PLAT001",
+      "component": "world.mob_patrol",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT001",
       "component": "world.noise_lib",
       "target": "roblox"
     },
