@@ -1,0 +1,26 @@
+{
+  "id": "presentation.camera_follow",
+  "name": "Camera Follow",
+  "category": "presentation",
+  "description": "Owns the view: where the world is drawn from, and the only transform applied to it. It follows a target within a deadzone rather than centring on it exactly, because a camera pinned to a walking character makes the whole world jitter under every step, and smooths what is left so a jump does not snap the view. It also composes screen shake into the same matrix, since a shake is a camera effect and two components cannot each own the transform — presentation.screen_shake publishes an offset and a roll, and yields the view when a camera is present. The target is read optionally rather than declared as a dependency, so the same camera follows a side-view body or a top-down walker without either being required.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "deadzoneWidth", "type": "number", "required": false, "default": 4, "description": "How far the target may move horizontally before the camera starts following, in world units. Zero pins the camera to the target and makes every footstep move the world."},
+    {"name": "deadzoneHeight", "type": "number", "required": false, "default": 3, "description": "The vertical equivalent. Usually larger than it looks it should be: a jump is a big vertical excursion that the player does not want the camera to chase."},
+    {"name": "smoothingSeconds", "type": "number", "required": false, "default": 0.15, "description": "Roughly how long the camera takes to close the gap once the target leaves the deadzone. 0 follows rigidly; large values read as the camera losing track."},
+    {"name": "clampToWorldBounds", "type": "boolean", "required": false, "default": true, "description": "Whether the view is kept inside the world rectangle, so the edge of the level is never on screen. Turn it off for a world with no meaningful edge."},
+    {"name": "zoom", "type": "number", "required": false, "default": 1, "description": "Scale applied to the view. Above 1 shows less of the world and makes the camera's work visible even in a level that would otherwise fit on one screen."}
+  ],
+  "outputs": [
+    {"name": "center", "type": "vector3", "description": "The point the view is centred on, in world units."},
+    {"name": "ownsViewTransform", "type": "boolean", "description": "Always true while this component is in the build. Anything that would otherwise set its own view transform reads this and yields, so the view has exactly one owner."}
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": ["presentation", "camera", "view", "core"],
+  "provenance": "library-native"
+}
