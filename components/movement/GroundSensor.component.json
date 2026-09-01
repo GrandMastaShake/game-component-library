@@ -5,6 +5,12 @@
   "description": "The single source of ground contact: whether the character is standing on walkable ground, how long since it last was, and the normal of the surface under it. Every air-mobility component reads this rather than probing independently, because coyote time is defined as time-since-grounded and three separate probes would disagree about when that clock started. Ground steeper than maxWalkableAngle reports as airborne with isOnSteepSlope set, so a character slides off a cliff face instead of standing on it.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "probeDistance", "type": "number", "required": false, "default": 0.15, "description": "How far below the feet to sample, in the same units as movement.basic_walk walkSpeed. Too small and the sensor flickers on stairs; too large and the character appears grounded while falling."},
     {"name": "maxWalkableAngle", "type": "number", "required": false, "default": 50, "description": "Degrees from vertical. A surface steeper than this is not ground: isGrounded stays false and isOnSteepSlope goes true."},

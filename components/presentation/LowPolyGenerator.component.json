@@ -5,6 +5,11 @@
   "description": "Procedurally generates simplified low-polygon meshes for props, rocks, trees, and terrain features to keep part counts and rendering cost low.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/LowPolyGenerator.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "targetFaceCount", "type": "number", "required": false, "default": 200},
     {"name": "shapeType", "type": "string", "required": false, "default": "rock"}

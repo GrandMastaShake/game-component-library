@@ -5,6 +5,10 @@
   "description": "Ranked leaderboard backed by a numeric stat (XP, wins, currency) with top-N query support.",
   "version": "0.1.0",
   "platform": ["roblox", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/LeaderboardSystem.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "statKey", "type": "string", "required": true},
     {"name": "topN", "type": "number", "required": false, "default": 100}

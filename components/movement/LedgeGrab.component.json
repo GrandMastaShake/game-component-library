@@ -5,6 +5,12 @@
   "description": "Catches an edge the character is falling past and hangs there until the player climbs or drops. Detection is the two-probe test: something at hand height is solid and nothing at head height is, which is what distinguishes a ledge from a wall. regrabCooldownSeconds exists because without it, dropping from a ledge re-satisfies the grab test on the very next frame and the character is stuck to it forever.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "grabReach", "type": "number", "required": false, "default": 0.6, "description": "Forward reach of the hand and head probes."},
     {"name": "hangHeightOffset", "type": "number", "required": false, "default": -0.9, "description": "Where the character settles relative to the ledge lip. Negative hangs below it."},

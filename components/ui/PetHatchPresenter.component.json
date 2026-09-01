@@ -5,6 +5,12 @@
   "description": "Library-native bridge that converts a trusted pet hatch result into a normalized player-notification request containing pet, rarity, and reveal data.",
   "version": "0.2.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [{"name": "revealSeconds", "type": "number", "required": false, "default": 3}],
   "outputs": [{"name": "lastPresentation", "type": "object"}],
   "events": {"emits": ["ui.notificationRequested"], "listensTo": ["pets.hatched"]},

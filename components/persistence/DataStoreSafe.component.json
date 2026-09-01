@@ -5,6 +5,9 @@
   "description": "Wraps raw platform datastore calls with retry/backoff, request budgeting, and corruption checks so save data never gets silently dropped.",
   "version": "0.1.0",
   "platform": ["roblox", "agnostic"],
+  "implementations": [
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/DataStoreSafe.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "maxRetries", "type": "number", "required": false, "default": 3},
     {"name": "backoffSeconds", "type": "number", "required": false, "default": 2}

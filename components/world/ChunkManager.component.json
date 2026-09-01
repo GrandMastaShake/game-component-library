@@ -5,6 +5,11 @@
   "description": "Streams terrain chunks in/out around the player based on render distance, calling the terrain generator per-chunk on demand.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/ChunkManager.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "chunkSize", "type": "number", "required": false, "default": 64},
     {"name": "renderDistance", "type": "number", "required": false, "default": 4}

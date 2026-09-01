@@ -5,6 +5,10 @@
   "description": "Single-target close-range attack with cooldown and damage falloff by range.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "damage", "type": "number", "required": true},
     {"name": "range", "type": "number", "required": false, "default": 4},

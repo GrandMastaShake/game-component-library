@@ -5,6 +5,10 @@
   "description": "Two-player item and currency trade UI with confirm/cancel, backed by server-authoritative validation via Trade Coordinator.",
   "version": "0.1.1",
   "platform": ["roblox", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/TradeSystem.lua", "note": "Upstream module named; no adapter written."}
+  ],
   "inputs": [
     {"name": "maxItemsPerSide", "type": "number", "required": false, "default": 8}
   ],

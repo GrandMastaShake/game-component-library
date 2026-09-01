@@ -1,5 +1,11 @@
 {
   "id":"social.party_credit_guard","name":"Party Credit Guard","category":"social","description":"Library-native idempotency bridge for cooperative quest rewards. It deduplicates shared credit by party, player, quest, and credit key before emitting a one-time safe quest-credit signal.","version":"0.1.0","platform":["roblox","godot","unity","web","agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs":[{"name":"deduplicationWindowSeconds","type":"number","required":false,"default":300}],"outputs":[{"name":"processedCreditKeys","type":"array"}],
   "events":{"emits":["progression.sharedQuestCreditSafe"],"listensTo":["social.sharedQuestCredit"]},"dependencies":["social.party_system"],"tags":["party","idempotency","cooperative","safety"],"provenance":"library-native"
 }

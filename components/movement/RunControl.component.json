@@ -5,6 +5,12 @@
   "description": "Horizontal locomotion for a side-view body: accelerate toward the input direction, decelerate to a stop when it is released, and turn around faster than you accelerate from rest. It owns horizontal velocity outright, which is why airControlFraction lives here rather than on movement.jump_core — whoever owns the velocity has to apply the multiplier, and splitting the two across components means one of them writing into the other's state. Distinct from movement.basic_walk, which declares no deceleration and is written for a body with no gravity axis; the two are alternatives, not companions. It emits nothing on purpose: movement.started already has an emitter and three listeners, and a second source would deliver every one of them twice.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "maxRunSpeed", "type": "number", "required": false, "default": 7, "description": "Top horizontal speed in world units per second."},
     {"name": "groundAcceleration", "type": "number", "required": false, "default": 60, "description": "How hard the body accelerates toward the input direction while grounded. At the defaults top speed arrives in about a tenth of a second, which reads as responsive; a tenth of this reads as ice."},

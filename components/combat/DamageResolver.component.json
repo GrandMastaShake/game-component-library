@@ -5,6 +5,12 @@
   "description": "Resolves a landed attack into final damage: armor mitigation, armor penetration, critical multiplier, and bounded variance. Armor penetration reduces the effective armor of the defender before mitigation is applied and never adds damage, and mitigation is clamped so a fully armored target still takes minDamageFraction of base damage.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "armorCoefficient", "type": "number", "required": false, "default": 0.05},
     {"name": "minDamageFraction", "type": "number", "required": false, "default": 0.2},

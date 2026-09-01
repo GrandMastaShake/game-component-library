@@ -5,6 +5,12 @@
   "description": "Per-team fog of war. Tracks the three-state tile lattice of unexplored, explored, and visible, recomputing visible tiles only for entities that moved and retaining explored tiles permanently.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "revealRadius", "type": "number", "required": false, "default": 10},
     {"name": "persistExplored", "type": "boolean", "required": false, "default": true}

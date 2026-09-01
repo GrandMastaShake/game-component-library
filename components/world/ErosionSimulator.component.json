@@ -5,6 +5,11 @@
   "description": "Post-processes a heightmap with simulated water/wind erosion to produce more natural-looking terrain.",
   "version": "0.1.0",
   "platform": ["roblox", "godot", "unity", "agnostic"],
+  "implementations": [
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/ErosionSimulator.lua", "note": "Upstream module named; no adapter written."},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "iterations", "type": "number", "required": false, "default": 50000},
     {"name": "erosionRate", "type": "number", "required": false, "default": 0.3}

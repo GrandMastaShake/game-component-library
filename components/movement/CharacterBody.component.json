@@ -5,6 +5,12 @@
   "description": "The moving body itself: position, velocity, size, gravity, and the collision resolution that turns one into the other. Everything else in the side-view movement set sets a velocity and lets this integrate it. Resolution is axis-separated — horizontal first, then vertical — so a body sliding along a wall keeps its other axis instead of sticking, and a blocked axis zeroes only that component of velocity. Gravity lives here rather than on the jump, so a build with locomotion and no jump still falls; before this existed, gravity arrived with whichever component happened to declare movement.physics_core, which made falling depend on being able to jump. It emits nothing: movement.ground_sensor already announces landing and takeoff, and a body that reported the same contact again would be one fact with two sources. It listens for world.hazardEntered and puts itself back at the spawn, because only the component that owns position may reset position — a hazard reaching in to move the body would be one component writing another's state, which is the defect this ownership rule exists to prevent. Whether it does so is respawnOnHazard's business, so the hazard reports a fact and the body keeps the policy.",
   "version": "0.2.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "width", "type": "number", "required": false, "default": 0.7, "description": "Body width in world units. Narrower than a tile on a tile-based stage, so a one-tile gap is passable."},
     {"name": "height", "type": "number", "required": false, "default": 1.4},

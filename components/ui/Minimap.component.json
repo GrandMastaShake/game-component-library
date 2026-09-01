@@ -5,6 +5,11 @@
   "description": "Scaled overview of terrain, entities, and camera frustum in grid space, with click-to-pan. Scale is derived from map extent in tiles rather than pixels, so the projection stays unit-consistent at any map size.",
   "version": "0.1.0",
   "platform": ["roblox", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [
     {"name": "widthPx", "type": "number", "required": false, "default": 200},
     {"name": "heightPx", "type": "number", "required": false, "default": 200},

@@ -5,6 +5,12 @@
   "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers.",
   "version": "0.2.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "scaffold", "module": "roblox-adapters/persistence.save_system.adapter.lua"},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
   "inputs": [{"name": "autosaveIntervalSeconds", "type": "number", "required": false, "default": 120}],
   "outputs": [{"name": "lastSavedAt", "type": "number"}],
   "events": {"emits": ["persistence.saved", "persistence.saveFailed"], "listensTo": ["inventory.itemAdded", "economy.earned", "progression.leveledUp"]},
