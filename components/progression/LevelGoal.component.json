@@ -1,0 +1,26 @@
+{
+  "id": "progression.level_goal",
+  "name": "Level Goal",
+  "category": "progression",
+  "description": "The end of the level: a region that, once the player reaches it, means they finished. It fires once by default, because a goal that re-fires every frame the player stands in it turns a completion into a stutter of completions. It reports the elapsed time with the event, which is the one number a level's ending is almost always asked for. progression.levelCompleted carries both the `notify` and `persist` intents — finishing is worth telling the player about and worth writing down, and a build with a toast and a save gets both without either being wired to this.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "inputs": [
+    {"name": "region", "type": "object", "required": true, "description": "The goal rectangle in world units, {x, y, width, height}. Required with no default: a level whose goal is at the origin is not a level."},
+    {"name": "completeOnce", "type": "boolean", "required": false, "default": true, "description": "Whether reaching the goal can fire more than once. False suits a lap or a checkpoint reused as a goal; true is what a level ending means."},
+    {"name": "label", "type": "string", "required": false, "default": "Goal", "description": "What the goal is called, carried on the event so a toast can say something better than 'levelCompleted'."}
+  ],
+  "outputs": [
+    {"name": "isComplete", "type": "boolean"},
+    {"name": "elapsedSeconds", "type": "number", "description": "Time since the component was constructed, stopped at completion. This is the level's clock."},
+    {"name": "isPlayerInside", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["progression.levelCompleted"],
+    "listensTo": []
+  },
+  "eventIntents": {"progression.levelCompleted": ["notify", "persist"]},
+  "dependencies": ["movement.character_body"],
+  "tags": ["progression", "goal", "platformer", "level"],
+  "provenance": "library-native"
+}
