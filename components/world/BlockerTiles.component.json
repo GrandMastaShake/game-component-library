@@ -1,0 +1,112 @@
+{
+  "id": "world.blocker_tiles",
+  "name": "Blocker Tiles",
+  "category": "world",
+  "description": "The cells that do not play along. A blocker occupies a board position and refuses something the ordinary rules allow: a wall cannot be swapped or fallen through, ice freezes the piece under it until a match breaks the ice rather than the piece, and a crate is cleared only by a match that lands NEXT to it because it holds no piece of its own. Those three are one component because they differ by two declared flags -- whether the cell holds a piece and whether it blocks a fall -- and splitting them into three would triple the wiring for no new idea.\n\nLayers are what make a blocker a puzzle rather than an obstacle: a two-layer ice clears to one-layer ice and reports the step, so the board can show progress toward something that has not happened yet. That is also why clearing is an event rather than a silent decrement -- an objective counting ice needs to hear each layer, not just the final one.\n\nThe component owns which cells are blocked and how much life each has. It owns no matching: world.match_resolver decides what cleared and where, and this decides what that did to the furniture.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "blockers",
+      "type": "array",
+      "required": true,
+      "description": "Placed blockers: position, kind, layers, and whether the cell holds a piece and blocks a fall. Required -- the layout is the level, and a default would be a board somebody else designed."
+    },
+    {
+      "name": "clearedByAdjacent",
+      "type": "array",
+      "required": false,
+      "default": [
+        "crate",
+        "chain"
+      ],
+      "description": "Kinds cleared by a match landing beside them rather than on them. A crate holds no piece, so nothing can ever match on it."
+    },
+    {
+      "name": "blocksFall",
+      "type": "array",
+      "required": false,
+      "default": [
+        "wall",
+        "crate"
+      ],
+      "description": "Kinds a falling piece cannot pass through. This is what makes a board with holes in it behave like a board with holes in it."
+    },
+    {
+      "name": "spreadEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether an unchecked blocker grows into a neighbouring cell each turn. Off by default: spreading is a difficulty spike that should be asked for."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "blockedCells",
+      "type": "array",
+      "description": "Positions currently occupied by a blocker."
+    },
+    {
+      "name": "layersAt",
+      "type": "object",
+      "description": "Remaining layers per blocked position."
+    },
+    {
+      "name": "remaining",
+      "type": "number",
+      "description": "Blockers still standing, for an objective to count."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.blockerDamaged",
+      "world.blockerCleared",
+      "world.blockerSpread",
+      "world.allBlockersCleared"
+    ],
+    "listensTo": [
+      "world.matchCleared",
+      "world.cascadeSettled"
+    ]
+  },
+  "dependencies": [
+    "world.match_resolver"
+  ],
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "obstacles",
+    "puzzle"
+  ],
+  "provenance": "library-native"
+}
