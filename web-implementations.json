@@ -1,7 +1,7 @@
 {
-  "note": "What the consuming web application implements, per target. The library cannot see that repository, so `implementations` entries for web targets are status `external` by definition — this file is the declaration that makes them reviewable rather than assumed. Before it existed, 39 of 71 descriptors named a canvas2d implementation while the app registered all 71: the undercount was invisible because nothing compared the two.",
-  "source": "game-architect-studio — generator/bricks/*.ts (canvas2d), generator/voxel/*.ts (webgl)",
-  "verifiedOn": "2026-09-01",
+  "note": "What the consuming web application implements, per target. The library cannot see that repository, so `implementations` entries for web targets are status `external` by definition \u2014 this file is the declaration that makes them reviewable rather than assumed. Before it existed, 39 of 71 descriptors named a canvas2d implementation while the app registered all 71: the undercount was invisible because nothing compared the two.",
+  "source": "game-architect-studio \u2014 generator/bricks/*.ts (canvas2d), generator/voxel/*.ts (webgl)",
+  "verifiedOn": "2026-09-02",
   "howToRefresh": "In the app: grep the register() calls in generator/bricks/*.ts for the canvas2d list. Then: python3 tools/declare_implementations.py",
   "targets": {
     "canvas2d": [
@@ -47,7 +47,9 @@
       "presentation.screen_shake",
       "presentation.style_presets",
       "presentation.tile_cursor",
+      "progression.cascade_scoring",
       "progression.level_goal",
+      "progression.level_objective_set",
       "progression.production_queue",
       "progression.quest_log",
       "progression.skills_tree",
@@ -74,8 +76,10 @@
       "world.environment_builder",
       "world.erosion_simulator",
       "world.hazard_volume",
+      "world.match_resolver",
       "world.mob_patrol",
       "world.noise_lib",
+      "world.swap_validator",
       "world.terrain_generator",
       "world.tile_grid",
       "world.vision_system",
