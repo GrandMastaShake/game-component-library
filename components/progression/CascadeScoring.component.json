@@ -2,7 +2,7 @@
   "id": "progression.cascade_scoring",
   "name": "Cascade Scoring",
   "category": "progression",
-  "description": "Points, and the escalation that makes a long chain feel earned. A cleared piece is worth a base value multiplied by the depth of the cascade that cleared it, so the fourth automatic pass pays several times the first \u2014 which is the whole reason a player sets up a move rather than taking the first match they see. The multiplier curve is declared rather than hardcoded because it is the difference between a game that rewards planning and one that rewards speed. Score is reported continuously and banked at settle, so the HUD can count up while the board is still resolving without ever showing a number the level did not actually award.",
+  "description": "Points, and the escalation that makes a long chain feel earned. A cleared piece is worth a base value multiplied by the depth of the cascade that cleared it, so the fourth automatic pass pays several times the first \u2014 which is the whole reason a player sets up a move rather than taking the first match they see. The multiplier curve is declared rather than hardcoded because it is the difference between a game that rewards planning and one that rewards speed. A multiplier tile reaches the score through world.multiplierApplied rather than by reaching into it: scoring owns the number, so anything that wants to change it says so and this decides what that means. Score is reported continuously and banked at settle, so the HUD can count up while the board is still resolving without ever showing a number the level did not actually award.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -96,7 +96,8 @@
     ],
     "listensTo": [
       "world.matchCleared",
-      "world.cascadeSettled"
+      "world.cascadeSettled",
+      "world.multiplierApplied"
     ]
   },
   "dependencies": [

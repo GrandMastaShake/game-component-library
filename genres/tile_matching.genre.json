@@ -1,7 +1,7 @@
 {
   "id": "genre.tile_matching",
   "name": "Tile-Matching",
-  "description": "Swap two pieces and watch the consequences fall. The pack separates the four things a match-3 usually tangles together: world.match_resolver owns the board and the cascade, world.swap_validator owns legality and the rescue from a dead board, progression.cascade_scoring owns points, and progression.level_objective_set owns what the level is actually asking for. That split is what lets the same board serve a score attack and a collect-twenty-blue level without either being special-cased. Special pieces are created by match SHAPE rather than length, which is the line between two otherwise identical games in this family.",
+  "description": "Swap two pieces and watch the consequences fall. The pack separates the four things a match-3 usually tangles together: world.match_resolver owns the board and the cascade, world.swap_validator owns legality and the rescue from a dead board, progression.cascade_scoring owns points, and progression.level_objective_set owns what the level is actually asking for. That split is what lets the same board serve a score attack and a collect-twenty-blue level without either being special-cased. Special pieces are created by match SHAPE rather than length, which is the line between two otherwise identical games in this family. The board's furniture is separate again: world.blocker_tiles owns the cells that refuse the ordinary rules and world.multiplier_tile owns the ones worth more, so a level is laid out by placing them rather than by teaching the resolver about ice.",
   "version": "0.1.0",
   "loop": "inspect grid \u2192 swap \u2192 cascade/score \u2192 level target",
   "views": [
@@ -19,7 +19,9 @@
     "world.swap_validator",
     "progression.level_objective_set",
     "inventory.booster_pieces",
-    "progression.cascade_scoring"
+    "progression.cascade_scoring",
+    "world.blocker_tiles",
+    "world.multiplier_tile"
   ],
   "signatureCompound": {
     "name": "One Swap, Four Cascades",
