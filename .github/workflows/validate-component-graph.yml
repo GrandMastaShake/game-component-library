@@ -18,6 +18,8 @@ jobs:
         run: python3 tools/validate_topology.py --baseline art/topology-baseline.json --report reports/topology.json
       - name: Validate platform claims (fails on findings not in the baseline)
         run: python3 tools/validate_platforms.py --baseline platform-baseline.json --report reports/platforms.json
+      - name: Validate the assembly graph (fails on findings not in the baseline)
+        run: python3 tools/validate_assembly.py --baseline art/assembly-baseline.json --report reports/assembly.json
       - name: Check implementations match the declared web coverage
         run: python3 tools/declare_implementations.py --check
       - run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json

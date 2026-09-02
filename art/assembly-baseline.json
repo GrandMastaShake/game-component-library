@@ -1,0 +1,270 @@
+{
+  "note": "Assembly-graph findings accepted when the graph was imported. Each line is a known defect in the imported data, not a rule being waived: removing one means the graph was corrected. Adding one should be a deliberate, reviewed decision.",
+  "accepted": [
+    {
+      "code": "ASM001",
+      "subject": "art.hemisphere -horn_left-> art.horn_straight",
+      "detail": "art.hemisphere declares sockets ['ear_left', 'ear_right', 'hat', 'neck_bottom', 'nose'], not 'horn_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.hemisphere -horn_right-> art.horn_straight",
+      "detail": "art.hemisphere declares sockets ['ear_left', 'ear_right', 'hat', 'neck_bottom', 'nose'], not 'horn_right'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.hemisphere -horn_left-> art.horn_curved",
+      "detail": "art.hemisphere declares sockets ['ear_left', 'ear_right', 'hat', 'neck_bottom', 'nose'], not 'horn_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.hemisphere -horn_right-> art.horn_curved",
+      "detail": "art.hemisphere declares sockets ['ear_left', 'ear_right', 'hat', 'neck_bottom', 'nose'], not 'horn_right'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.sphere -mouth-> art.tusk",
+      "detail": "canMirror on 'mouth', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.sphere -nose-> art.tusk",
+      "detail": "canMirror on 'nose', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.hemisphere -mouth-> art.tusk",
+      "detail": "art.hemisphere declares sockets ['ear_left', 'ear_right', 'hat', 'neck_bottom', 'nose'], not 'mouth'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.hemisphere -mouth-> art.tusk",
+      "detail": "canMirror on 'mouth', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.hemisphere -nose-> art.tusk",
+      "detail": "canMirror on 'nose', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.snout -mouth-> art.tusk",
+      "detail": "art.snout is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.snout -mouth-> art.tusk",
+      "detail": "canMirror on 'mouth', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.snout -nose-> art.tusk",
+      "detail": "art.snout is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.snout -nose-> art.tusk",
+      "detail": "canMirror on 'nose', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.hemisphere -mouth-> art.beak",
+      "detail": "art.hemisphere declares sockets ['ear_left', 'ear_right', 'hat', 'neck_bottom', 'nose'], not 'mouth'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -head_top-> art.collar",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'head_top'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cylinder -neck_bottom-> art.collar",
+      "detail": "art.cylinder declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'neck_bottom'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cuboid -neck_bottom-> art.collar",
+      "detail": "art.cuboid declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'neck_bottom'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.limb_arm -paw_end-> art.limb_paw",
+      "detail": "canMirror on 'paw_end', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.cylinder -tail-> art.tentacle",
+      "detail": "canMirror on 'tail', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.cuboid -tail-> art.tentacle",
+      "detail": "canMirror on 'tail', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_left-> art.tentacle",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_right-> art.tentacle",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_right'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -tail-> art.tentacle",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'tail'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.sphere -tail-> art.tentacle",
+      "detail": "canMirror on 'tail', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -leg_left-> art.tentacle",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'leg_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -leg_right-> art.tentacle",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'leg_right'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -tail-> art.spike",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'tail'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.sphere -tail-> art.spike",
+      "detail": "canMirror on 'tail', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_left-> art.spike",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_right-> art.spike",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_right'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cylinder -horn_left-> art.spike",
+      "detail": "art.cylinder declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'horn_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cylinder -horn_right-> art.spike",
+      "detail": "art.cylinder declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'horn_right'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.cylinder -tail-> art.spike",
+      "detail": "canMirror on 'tail', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cuboid -horn_left-> art.spike",
+      "detail": "art.cuboid declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'horn_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cuboid -horn_right-> art.spike",
+      "detail": "art.cuboid declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'horn_right'"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.cuboid -tail-> art.spike",
+      "detail": "canMirror on 'tail', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.limb_arm -hat-> art.gem",
+      "detail": "art.limb_arm declares sockets ['child_limb', 'paw_end'], not 'hat'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.limb_arm -nose-> art.gem",
+      "detail": "art.limb_arm declares sockets ['child_limb', 'paw_end'], not 'nose'"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.crown -paw_end-> art.gem",
+      "detail": "art.crown is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.crown -hat-> art.gem",
+      "detail": "art.crown is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.crown -nose-> art.gem",
+      "detail": "art.crown is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.shield -paw_end-> art.gem",
+      "detail": "art.shield is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.shield -hat-> art.gem",
+      "detail": "art.shield is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.shield -nose-> art.gem",
+      "detail": "art.shield is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM008",
+      "subject": "art.limb_paw -paw_end-> art.ring",
+      "detail": "art.limb_paw is not an anchor \u2014 it is a part"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.limb_paw -paw_end-> art.ring",
+      "detail": "canMirror on 'paw_end', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM004",
+      "subject": "art.limb_arm -paw_end-> art.ring",
+      "detail": "canMirror on 'paw_end', which is not a left/right pair \u2014 both copies land in the same place"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_left-> art.star_extrude",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_right-> art.star_extrude",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_right'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cylinder -hat-> art.star_extrude",
+      "detail": "art.cylinder declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'hat'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.cuboid -hat-> art.star_extrude",
+      "detail": "art.cuboid declares sockets ['arm_left', 'arm_right', 'head_top', 'leg_left', 'leg_right', 'tail', 'wing_left', 'wing_right'], not 'hat'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_left-> art.rounded_badge",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_left'"
+    },
+    {
+      "code": "ASM001",
+      "subject": "art.sphere -arm_right-> art.rounded_badge",
+      "detail": "art.sphere declares sockets ['ear_left', 'ear_right', 'hat', 'horn_left', 'horn_right', 'mouth', 'neck_bottom', 'nose'], not 'arm_right'"
+    }
+  ]
+}
