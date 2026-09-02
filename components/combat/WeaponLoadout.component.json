@@ -5,10 +5,6 @@
   "description": "Owns the answer to 'what am I holding and what does pulling the trigger mean right now': active slot, swap order, and fire mode. It does not spawn projectiles — it translates trigger intent into combat.fireRequested with the resolved weapon stats attached, and combat.projectile_system takes it from there. It does not count bullets either: combat.ammo_economy listens to the same event and owns the magazine, so a dry fire is rejected by the economy rather than by a second conditional here. Slot count is deliberately small and fixed per config; inventory breadth — how many weapons you own at all — is inventory.core_inventory's problem, and conflating the two is how shooters accidentally become inventory managers.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

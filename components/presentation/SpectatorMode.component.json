@@ -5,10 +5,6 @@
   "description": "What happens to your camera after you die: follow a surviving teammate, cycle through candidates, or free-cam within bounds. It is a routing layer over presentation.camera_follow — it changes WHO is followed, never how following works — and it owns the cycling inputs because dead players still need agency, and a forced static corpse-cam is how matches lose their audience mid-round. It does not adjudicate what a spectator may see for competitive integrity; it exposes fogRadius and team-only restrictions as config, because the integrity policy is a ruleset decision that changes per tournament while the camera mechanics do not.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "The arena's hostile set dressing on a schedule: crushers that sweep, floor sections that drop, lava that rises. It owns the phase script \u2014 which hazard volumes arm when, and how the pressure escalates as the match runs long, because an arena that never changes rewards parking in the safest corner. The hazards themselves are world.hazard_volume instances armed and disarmed by this component rather than reimplemented here, and world.hazardEntered coming back from those volumes is how the script knows it is actually biting. It does not own match rules or win conditions \u2014 a shrinking floor forces an endgame, but deciding the winner is the mode's job. Timing comes from utility.timer_system so hazard phases and race clocks share one source of truth.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

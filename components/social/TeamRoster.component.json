@@ -5,10 +5,6 @@
   "description": "The two sides: which entities are on which team, what position each plays, and which AI role fills the empty slots. It extends social.party_system's grouping semantics to adversarial, symmetric groups with a headcount rule — a party cooperates, a roster competes, and reusing the grouping plumbing is why this component is small. Positions are data (name, zone, responsibilities) read by both utility.behavior_fsm-driven teammates and world.goal_zone's attribution, so 'goalkeeper' means the same thing to the AI and the scoreboard. Substitutions and mid-match balancing are roster mutations with events, because a silently swapped team breaks every downstream attribution and every spectator's mental model at once.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

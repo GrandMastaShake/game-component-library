@@ -4,7 +4,9 @@
   "category": "world",
   "description": "The door that asks what you have become: a passage or terrain feature that checks acquired powers and stays shut until the player owns the answer. It owns the requirement list and the pass/reject decision, and it owns them alone — it deliberately does not grant anything, because progression.power_up_grant is the only component allowed to mutate what the player can do, and a gate that also hands out powers hides progression inside geography. Its sibling world.door_gate checks the level's current state (switches, plates); this gate checks the player's accumulated state, and the distinction matters because the two open on different evidence and fail for different reasons. The rejection path is a first-class output: a gate that silently refuses teaches nothing, so the missing-power list is published for whatever hint or UI layer wants it rather than rendered here.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

@@ -5,10 +5,6 @@
   "description": "Per-region completion accounting for the 100% run. It owns the region definitions \u2014 which collectibles, alcoves, and goals belong to which region \u2014 and the percentage math, because a completion percentage that three systems each compute their own way will disagree at exactly the moment a player goes for the last percent. It counts; it does not scatter. Collectible placement and pickup are the scatter system's job (its collected signal feeds region counts here), secrets announce themselves as world.alcoveDiscovered, and region goals arrive as progression.levelCompleted \u2014 this component is the ledger those events settle into. It does not own the reward for finishing a region, only the announcement that it happened, and it never reveals where the missing items are; that tease belongs to ui.guided_hint_system, which reads this ledger rather than keeping its own.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

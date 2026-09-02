@@ -5,10 +5,6 @@
   "description": "Records a lap as a timestamped input stream against world.track_circuit's race clock and plays it back as a non-colliding rival. Inputs rather than positions are stored, so a ghost is cheap, seeks cleanly, and stays honest \u2014 playback re-simulates through the same movement stack, with sparse position keyframes kept only to correct drift when physics or tuning have changed since the recording. Recording brackets itself on world.raceStarted and world.raceFinished, so no caller has to remember to stop the tape. Storage goes through persistence.save_system rather than a private file, keeping quota, retry, and corruption policy in one place. This component owns record, storage, and playback timing only: rendering the translucent car belongs to presentation, and whether the recorded lap was valid is track_circuit's call, already answered before the save.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Unlock-once, travel-forever nodes. A waypoint is dormant until touched; afterwards it is a permanent entry in the travel graph and travel between any two unlocked nodes is free \u2014 the genre's promise is that backtracking is a choice, not a tax. This component owns the unlock state and the teleport, nothing more. Discovery presentation belongs to world.point_of_interest_network (what the map knows), the marker glyphs belong to ui.minimap, and the travel UI is the map itself: this component listens to ui.minimapClicked so the map never has to learn what a waypoint is.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

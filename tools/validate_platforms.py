@@ -37,6 +37,7 @@ Blocking:
 
 Advisory (worth a human look, not a failure):
   PLAT010  claims a runtime target this repo has no way to check
+  PLAT012  `platform` claims a target that `implementations` calls 'unmapped'
   PLAT011  a `platform` target with no matching `implementations` entry
   PLAT020  sourceModule names a path outside this repository, so nothing here
            can verify it — and being a single string it can only ever describe
@@ -46,7 +47,7 @@ PLAT002 only applies to statuses that ASSERT a module is present. A
 `not-implemented` entry deliberately points at an upstream module that is not
 here, which is the whole reason that status exists.
 
-Exit code is non-zero only for PLAT001 findings that are not in the baseline,
+Exit code is non-zero for any ERROR-severity finding not in the baseline,
 so the advisories can accumulate visibly without wedging CI.
 """
 
@@ -73,6 +74,14 @@ TARGET_LOCATIONS: dict[str, Callable[[str], str]] = {
 
 # The old platform enum's names, mapped to the target names implementations uses.
 TARGET_RENAMES = {"web": "canvas2d"}
+
+# `web` is not one runtime. This repository ships two -- a Canvas 2D runtime and
+# a WebGL one -- and a contract implemented in either is genuinely claimable as
+# web. Four voxel contracts are exactly that: canvas2d 'unmapped', webgl
+# running. Collapsing web to canvas2d alone would call all four a contradiction.
+PLATFORM_SATISFIED_BY = {
+    "web": ("canvas2d", "webgl"),
+}
 
 # Statuses that claim an implementation is present HERE. `not-implemented`
 # points at an upstream module on purpose, and `external` at another repo, so
@@ -150,6 +159,11 @@ def check_component(root: Path, component: dict[str, Any]) -> list[Finding]:
         declared_targets = {
             e.get("target") for e in implementations if isinstance(e, dict)
         }
+        status_by_target = {
+            e.get("target"): e.get("status")
+            for e in implementations
+            if isinstance(e, dict)
+        }
         for raw in platforms:
             if not isinstance(raw, str) or raw in NOT_A_RUNTIME:
                 continue
@@ -162,6 +176,36 @@ def check_component(root: Path, component: dict[str, Any]) -> list[Finding]:
                         target,
                         f"platform claims '{raw}' with no matching implementations entry",
                         "warning",
+                    )
+                )
+                continue
+
+            # PLAT012 -- THE TWO FIELDS CONTRADICT EACH OTHER.
+            #
+            # `platform` and `implementations` both answer "where does this
+            # run", and PR #12/#13 set out to replace the first with the second
+            # but left both live with nothing keeping them in step. That gap
+            # shipped 103 components in #20 whose implementations declared every
+            # target 'unmapped' while platform claimed roblox, godot, unity and
+            # web -- 103 errors, and library main red from the merge onwards.
+            #
+            # PLAT011 could not see it: those components DO have matching
+            # entries. The entries just say the opposite of the claim.
+            candidates = PLATFORM_SATISFIED_BY.get(raw, (target,))
+            declared = [t for t in candidates if t in status_by_target]
+            if declared and all(status_by_target[t] == "unmapped" for t in declared):
+                where = " and ".join(declared)
+                findings.append(
+                    Finding(
+                        "PLAT012",
+                        component_id,
+                        target,
+                        (
+                            f"platform claims '{raw}' while implementations "
+                            f"declares {where} 'unmapped' -- the two fields "
+                            "contradict; drop the claim or land the implementation"
+                        ),
+                        "error",
                     )
                 )
         for entry in implementations:
@@ -267,13 +311,18 @@ def main() -> int:
             return 2
         payload = {
             "note": (
-                "Descriptors claiming a target this repository can check, where the "
-                "implementation is absent. Accepted at the time platform validation "
-                "was introduced. Removing an entry is either the implementation "
-                "landing or the claim being corrected; adding one should be a "
-                "deliberate, reviewed decision. See fixtures 10 and 11 in the "
-                "consuming app: the durable fix is a per-target implementation list, "
-                "because status belongs to a brick-target pair rather than to a brick."
+                "Accepted platform-claim debt, recorded so a new rule can land at "
+                "error severity without going red on descriptors that predate it. "
+                "PLAT001: claims a target this repository can check, implementation "
+                "absent -- accepted when platform validation was introduced. "
+                "PLAT012: `platform` claims a target that the same descriptor's "
+                "`implementations` declares 'unmapped' -- the two fields answer the "
+                "same question and drifted apart, accepted when PLAT012 was "
+                "introduced. Removing an entry is either the implementation landing "
+                "or the claim being corrected; adding one should be a deliberate, "
+                "reviewed decision. See fixtures 10 and 11 in the consuming app: the "
+                "durable fix is a per-target implementation list, because status "
+                "belongs to a brick-target pair rather than to a brick."
             ),
             "accepted": sorted(
                 (

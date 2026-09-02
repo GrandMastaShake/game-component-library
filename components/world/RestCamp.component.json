@@ -5,10 +5,6 @@
   "description": "The long exhale between fights \u2014 a full party resource reset, priced in risk. Resting restores health and per-rest abilities in one shot, because a rest that half-works teaches players to rest twice, and per-rest abilities then collapse into per-fight abilities with extra clicks. The price is the ambush roll: biome, recent noise, and whether a watch was posted feed a probability that world.mob_patrol or a dynamic spawner converts into an actual interruption. This component owns the rest transaction and the risk roll. It does not own the ambush itself, and it never touches inventory \u2014 rations spent while camping go through inventory.slotted_bag like anywhere else.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

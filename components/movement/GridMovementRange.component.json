@@ -5,10 +5,6 @@
   "description": "The blue tiles. Given a unit's position and movement budget this computes the reachable set \u2014 flood fill over world.tile_grid with per-terrain costs and obstacle blocking \u2014 plus the attack overlay derived from it, because move-then-shoot range is a union of tiles, not a circle. world.tile_grid owns the board and movement.pathfinding_system can find A path; this component owns the budget question \u2014 ALL paths within N points \u2014 which is why it sits on top of both instead of replacing either. It deliberately knows nothing about whose turn it is: combat.turn_order_queue announces the active unit, and this answers for whoever that is, player or AI alike.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

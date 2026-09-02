@@ -5,10 +5,6 @@
   "description": "A relentless pursuer built on three rules: it always knows roughly where you are, it never moves faster than dread allows, and it announces itself before it arrives. Pathing is movement.pathfinding_system's; the stalker's contribution is offscreen telegraphing — audio stingers, lighting dips — driven by distance bands, because an unstoppable threat that arrives silently reads as unfair rather than frightening. It loses the trail through world.hiding_spot state and broken line of sight, never through a stealth stat, so hiding works because the fiction says the locker works. Noise pulls it: gunfire and loud movement are evidence, which is why the horror game's shotgun is also a dinner bell. What happens on catch is combat.damage_resolver's business or the setpiece script's — this component's job ends at contact.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

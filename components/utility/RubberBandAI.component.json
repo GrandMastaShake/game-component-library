@@ -5,10 +5,6 @@
   "description": "Keeps AI racers inside a believable gap of the player by scaling their pace, never by teleporting them. It exists because racing against a void is boring and racing against perfect drivers is humiliating; the band is what makes midfield battles happen at any skill level. This component owns only the handicap calculation \u2014 it reads race position from world.checkpointCrossed and world.lapCompleted (progress facts owned by world.track_circuit) and emits a pace multiplier. It does not drive the cars: the multiplier lands on the AI vehicle's movement.vehicle_tuning parameters, so a boosted rival obeys the same physics as the player and can still be out-braked into a corner. Difficulty selection is deliberately just the band width; there is no hidden skill model here.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

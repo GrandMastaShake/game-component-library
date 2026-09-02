@@ -5,10 +5,6 @@
   "description": "The active-skill layer that turns a basic attack into a build. Each slot binds an ability definition \u2014 cooldown, resource cost, targeting mode \u2014 and this component owns only the slot lifecycle: is it off cooldown, can the resource be paid, and when does it fire. The moment an ability connects it hands a damage packet to combat.damage_resolver, because a second place where damage numbers are computed is a place where balance patches land twice. Ongoing effects an ability leaves behind are combat.status_effects' problem \u2014 a burn that ticks for five seconds is status, not hotbar \u2014 and passive gear bonuses never pass through here either, since combat.equipment_slots applies those directly. What this component pointedly refuses to own is the UI: ui.hud renders the slots off the same cooldown events, so the hotbar runs headless in tests.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

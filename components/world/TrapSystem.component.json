@@ -5,10 +5,6 @@
   "description": "A hidden hazard with a three-state lifecycle: undetected, detected, resolved (disarmed or triggered). world.hazard_volume owns the damage once a trap fires \u2014 a trap is not a second damage system, it is a visibility and agency layer over one. Detection keys off a perception check (progression.attribute_sheet answers those), disarm is a check with failure consequences, and a triggered trap delegates the hurt to the volume it wraps. Owning only the lifecycle keeps the trap honest in every view: an isometric crawler and a first-person grid-stepper render it differently but run the same three states.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

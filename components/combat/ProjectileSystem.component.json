@@ -5,10 +5,6 @@
   "description": "Owns everything between the trigger pull and the damage handoff: spawn, flight, and termination of projectiles. Hitscan is modelled as a projectile with infinite speed and zero travel time, so one code path serves both pistols and rockets — the difference is a tuning row, not a second system. Spread and recoil live here because they modify the shot at the instant of firing; deciding WHEN a shot may fire is combat.weapon_loadout's job, and deciding what a hit DOES is combat.damage_resolver's. This component never decrements ammo: it listens for combat.fireRequested and trusts that combat.ammo_economy has already counted the bullet, because two components counting the same resource is how magazines go negative. Ballistic drop reads movement.physics_core's gravity so a bullet and a thrown rock agree about the world.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

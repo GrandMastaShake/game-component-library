@@ -1,5 +1,5 @@
 {
-  "note": "Descriptors claiming a target this repository can check, where the implementation is absent. Accepted at the time platform validation was introduced. Removing an entry is either the implementation landing or the claim being corrected; adding one should be a deliberate, reviewed decision. See fixtures 10 and 11 in the consuming app: the durable fix is a per-target implementation list, because status belongs to a brick-target pair rather than to a brick.",
+  "note": "Accepted platform-claim debt, recorded so a new rule can land at error severity without going red on descriptors that predate it. PLAT001: claims a target this repository can check, implementation absent -- accepted when platform validation was introduced. PLAT012: `platform` claims a target that the same descriptor's `implementations` declares 'unmapped' -- the two fields answer the same question and drifted apart, accepted when PLAT012 was introduced. Removing an entry is either the implementation landing or the claim being corrected; adding one should be a deliberate, reviewed decision. See fixtures 10 and 11 in the consuming app: the durable fix is a per-target implementation list, because status belongs to a brick-target pair rather than to a brick.",
   "accepted": [
     {
       "code": "PLAT001",
@@ -315,6 +315,721 @@
       "code": "PLAT001",
       "component": "world.world_builder",
       "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.damage_resolver",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.damage_resolver",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.damage_resolver",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.equipment_slots",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.melee_basic",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.melee_basic",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "combat.status_effects",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "economy.currency",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "economy.currency",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "economy.team_resources",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "economy.team_resources",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "economy.team_resources",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "housing.home_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "housing.home_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.core_inventory",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.core_inventory",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.crafting_bench",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.crafting_bench",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.loot_table",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.slotted_bag",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "inventory.slotted_bag",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.basic_walk",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.character_body",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.character_body",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.character_body",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.dash_ability",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.dash_ability",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.dash_ability",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.ground_sensor",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.ground_sensor",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.ground_sensor",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.jump_core",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.jump_core",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.jump_core",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.ledge_grab",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.ledge_grab",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.ledge_grab",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.pathfinding_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.pathfinding_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.physics_core",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.physics_core",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.run_control",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.run_control",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.run_control",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.vehicle_basic",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.vehicle_basic",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.wall_interaction",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.wall_interaction",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "movement.wall_interaction",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "persistence.save_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "persistence.save_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "pets.egg_hatchery",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "pets.egg_hatchery",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "pets.egg_hatchery",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.atmosphere_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.atmosphere_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.audio_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.audio_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.camera_follow",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.camera_follow",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.camera_follow",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.color_palette",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.color_palette",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.lod_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.lod_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.low_poly_generator",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.low_poly_generator",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.object_placer",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.object_placer",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.particle_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.particle_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.particle_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.screen_shake",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.screen_shake",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.screen_shake",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.style_presets",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "presentation.style_presets",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.level_goal",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.level_goal",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.level_goal",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.production_queue",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.production_queue",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.production_queue",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.quest_log",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.skills_tree",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.skills_tree",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.xp_leveling",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "progression.xp_leveling",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.home_trade_stand",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.party_credit_guard",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.party_credit_guard",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.party_credit_guard",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.party_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.party_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "social.party_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.dialogue_box",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.hud",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.minimap",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.minimap",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.notification_toast",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.pet_hatch_presenter",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.pet_hatch_presenter",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "ui.pet_hatch_presenter",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.behavior_fsm",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.behavior_fsm",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.behavior_fsm",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.command_bus",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.command_bus",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.command_bus",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.timer_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "utility.timer_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.biome_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.biome_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.cave_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.cave_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.chunk_manager",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.chunk_manager",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.day_night_cycle",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.day_night_cycle",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.day_night_cycle",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.environment_builder",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.environment_builder",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.erosion_simulator",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.erosion_simulator",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.hazard_volume",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.hazard_volume",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.hazard_volume",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.mob_patrol",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.mob_patrol",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.mob_patrol",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.noise_lib",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.noise_lib",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.terrain_generator",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.terrain_generator",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.vision_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.vision_system",
+      "target": "roblox"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.vision_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.water_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.water_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.weather_system",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.weather_system",
+      "target": "unity"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.world_builder",
+      "target": "godot"
+    },
+    {
+      "code": "PLAT012",
+      "component": "world.world_builder",
+      "target": "unity"
     }
   ]
 }

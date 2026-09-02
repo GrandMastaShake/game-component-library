@@ -5,10 +5,6 @@
   "description": "Stakes on a race: virtual cash, or the pink slip itself. It owns stake escrow \u2014 both sides' stakes are taken through economy.currency before the flag, held, then paid or forfeited when world.raceFinished declares the order \u2014 so a wager can never be welched on and insufficient funds is rejected by the same ledger that prices parts. Pink-slip transfers move a vehicle between garage rosters; this component records the transfer intent and lets housing.garage_management execute it, because ownership rules ('not the car you are sitting in', slot caps) live there. Virtual currency only, by design and by tag \u2014 nothing here maps to real-money wagering. It does not own the race result (world.track_circuit owns laps and order), does not own matchmaking, and takes no house cut by default: the drama is the stake, not the rake.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Seamless paging with an opinion about entities. world.chunk_manager already pages terrain data in and out around the player; this component adds the lifecycle policy terrain alone cannot express \u2014 which entities despawn when their chunk unloads, which persist by snapshotting through persistence.save_system, and which scripted set-pieces must never be culled mid-fight. The seam is the product: transitions are prefetched a ring ahead so the player never watches the world blink into existence. It owns entity lifecycle across page boundaries only. It does not mesh chunks (presentation.voxel_mesher), does not grade detail (presentation.lod_system), and does not decide what spawns in a fresh chunk (world.dynamic_encounter_spawner).",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

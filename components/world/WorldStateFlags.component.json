@@ -5,10 +5,6 @@
   "description": "The world's memory of what you changed: the bridge stays repaired, the warlord stays dead, the gate stays open. A flag is a named boolean-or-value with a settable or set-once policy and a query interface everything else reads \u2014 doors, spawners, dialogue conditions. ui.dialogue_tree_engine writes consequence flags here rather than keeping them, because a consequence that dies with the conversation is a consequence the world forgot. persistence.save_system owns the bytes; this component owns the semantics \u2014 namespacing, defaults, and the rule that clearing a story flag is an explicit act, never a side effect of some other system's cleanup.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "The housing category's answer for a game where home is a garage: multi-vehicle ownership, part installation, and visual customization under one roof. It owns the roster of owned vehicles, which one is currently deployed, and the act of installing a purchased part \u2014 expressed as a new preset on that vehicle's movement.vehicle_tuning sheet, so an engine swap and a tune change travel the same code path and nothing bypasses the tuning contract. Money never touches this component: it listens for economy.spent and installs what the receipt describes, which keeps refunds, insufficient funds, and pricing entirely in economy.currency's audit trail. Entry and exit (movement.vehicleEntered / movement.vehicleExited) tell it when the deployed vehicle is actually in use, which is what makes 'you cannot sell the car you are sitting in' a rule instead of a bug report. It does not own the race, the drive, or the driver's skills \u2014 progression.driver_progression is the person; this is the metal.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

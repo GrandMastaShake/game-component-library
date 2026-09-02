@@ -4,7 +4,9 @@
   "category": "economy",
   "description": "Placement and pickup of coins, rings, gems — the low-stakes economy that paces a level. It owns the spawn pattern, the magnet that pulls nearby pickups toward the player, and the respawn rules, because those three decisions define how a level rewards its routes. It deliberately does not own what a pickup is worth: economy.collectible_collected carries a value, and economy.currency is one possible sink for it. A score counter, a 1-up counter, and a shop wallet can all listen to the same event without this component knowing any of them exist. It also does not own the pickup fanfare — presentation.particle_system and presentation.audio_system already do feedback, and a collectible that renders its own celebration can't be restyled.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

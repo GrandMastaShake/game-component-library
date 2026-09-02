@@ -4,7 +4,9 @@
   "category": "world",
   "description": "The world as a data structure: rooms as nodes, connections as edges, and edges optionally gated by powers, so the whole lock-and-key topology of a metroidvania lives in one queryable place. It owns the graph, the player's current room, first-visit facts, and region grouping — the things every other system argues about when they each keep their own copy. It deliberately does not render anything: ui.map_reveal_system decides what the player is allowed to see, and ui.minimap draws it. It also does not evaluate gates; world.ability_gate owns pass/reject, and this component only consumes the outcome to update which edges are currently traversable. The payoff is the query layer: reachable-from-here given current powers is a graph traversal over owned data, which is what backtrack hints, sequence-break detection, and completion tracking all actually need.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},
