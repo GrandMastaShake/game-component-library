@@ -5,10 +5,15 @@
   "howToRefresh": "In the app: grep the register() calls in generator/bricks/*.ts for the canvas2d list. Then: python3 tools/declare_implementations.py",
   "targets": {
     "canvas2d": [
+      "combat.action_point_economy",
+      "combat.cover_bonus_grid",
       "combat.damage_resolver",
       "combat.equipment_slots",
       "combat.melee_basic",
       "combat.status_effects",
+      "combat.tactical_attack",
+      "combat.turn_order_queue",
+      "combat.unit_roster",
       "economy.currency",
       "economy.team_resources",
       "housing.home_system",
@@ -21,6 +26,7 @@
       "movement.character_body",
       "movement.dash_ability",
       "movement.grid_agent",
+      "movement.grid_movement_range",
       "movement.grid_pathfinder",
       "movement.ground_sensor",
       "movement.jump_core",
