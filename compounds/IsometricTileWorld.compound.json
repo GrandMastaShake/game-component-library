@@ -1,0 +1,140 @@
+{
+  "id": "compound.isometric_tile_world",
+  "name": "Isometric Tile World",
+  "version": "0.1.0",
+  "description": "A world seen from a fixed three-quarter angle: noise shapes a heightfield, the heightfield is quantised into stepped tile elevations, props are scattered on it, and the whole scene is ordered back to front and painted without a depth buffer. It shares its terrain half with the voxel compound and its input half with nothing else in the library, because pointing at a tile is a problem only a projected world has. The two contracts that carry the weight are presentation.depth_sorter, which decides what hides what, and presentation.tile_cursor, which decides what you are pointing at; both are wrong in the same way if elevation is ignored, and both are correct only if elevation is respected.",
+  "targetPlatform": "web",
+  "components": [
+    {
+      "id": "world.noise_lib",
+      "role": "shared value-noise source",
+      "config": {
+        "seed": 7,
+        "octaves": 4
+      }
+    },
+    {
+      "id": "world.terrain_generator",
+      "role": "continuous surface height, before it is stepped",
+      "config": {
+        "maxHeight": 100
+      }
+    },
+    {
+      "id": "world.biome_system",
+      "role": "assigns a surface type per tile",
+      "config": {
+        "biomeTypes": [
+          "forest",
+          "desert",
+          "tundra",
+          "plains"
+        ]
+      }
+    },
+    {
+      "id": "world.tile_grid",
+      "role": "authoritative tile store, one elevation per column",
+      "config": {
+        "width": 48,
+        "height": 48,
+        "elevationLevels": 8
+      }
+    },
+    {
+      "id": "presentation.iso_projection",
+      "role": "tile space to screen space, and back",
+      "config": {
+        "tileWidth": 64,
+        "tileHeight": 32,
+        "elevationPixels": 16
+      }
+    },
+    {
+      "id": "presentation.depth_sorter",
+      "role": "back-to-front draw order over tiles and props",
+      "config": {
+        "cullOffscreen": true
+      }
+    },
+    {
+      "id": "presentation.tile_cursor",
+      "role": "the tile under the pointer, accounting for height",
+      "config": {
+        "elevationAware": true
+      }
+    },
+    {
+      "id": "presentation.low_poly_generator",
+      "role": "prop geometry",
+      "config": {}
+    },
+    {
+      "id": "presentation.object_placer",
+      "role": "scatters props across the grid",
+      "config": {
+        "density": 0.2,
+        "propTypes": [
+          "tree",
+          "rock",
+          "bush"
+        ]
+      }
+    },
+    {
+      "id": "presentation.color_palette",
+      "role": "surface colours per biome",
+      "config": {}
+    }
+  ],
+  "wiring": [
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "world.biome_system"
+    },
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "world.tile_grid"
+    },
+    {
+      "from": "world.biome_system",
+      "event": "world.biomeAssigned",
+      "to": "world.tile_grid"
+    },
+    {
+      "from": "world.biome_system",
+      "event": "world.biomeAssigned",
+      "to": "presentation.object_placer"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileGridBuilt",
+      "to": "presentation.depth_sorter"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileChanged",
+      "to": "presentation.depth_sorter"
+    },
+    {
+      "from": "presentation.object_placer",
+      "event": "presentation.objectsPlaced",
+      "to": "presentation.depth_sorter"
+    }
+  ],
+  "criticalComponents": [
+    "world.tile_grid",
+    "presentation.iso_projection",
+    "presentation.depth_sorter"
+  ],
+  "acceptanceCriteria": [
+    "Screen and tile coordinates round-trip: projecting a tile and inverting the result returns the tile it started from, for every tile on the grid.",
+    "A pointer anywhere inside a tile's drawn diamond names that tile and no other.",
+    "The cursor names the tile a player would say they are pointing at on sloped ground, not the tile the flat inverse gives.",
+    "No object is drawn before something it hides: for every pair where one volume occludes another, the occluder is later in the draw order.",
+    "A multi-tile prop standing across an elevation change is ordered correctly against both the ground it stands on and the ground behind it.",
+    "Removing presentation.depth_sorter from the build produces a visibly wrong scene rather than a missing one, which is what makes it critical."
+  ]
+}

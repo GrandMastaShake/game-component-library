@@ -1,0 +1,85 @@
+{
+  "id": "world.tile_grid",
+  "name": "Tile Grid",
+  "category": "world",
+  "description": "The authoritative store for an isometric world: a fixed rectangle of tiles, each carrying a surface type and an integer elevation level. It is deliberately not a voxel volume. A voxel volume stores every cell in a column and can be hollowed out; a tile grid stores one height per column and cannot, which is the trade that lets an isometric world be drawn back to front by a painter instead of meshed.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/iso/IsoWorld.ts); not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null,
+      "note": "An isometric grid is drawn in 2D. The 3D runtime uses world.voxel_volume."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "width",
+      "type": "number",
+      "required": false,
+      "default": 48,
+      "description": "Tiles along the x axis."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "required": false,
+      "default": 48,
+      "description": "Tiles along the y axis."
+    },
+    {
+      "name": "elevationLevels",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Distinct integer heights a tile may take, 0 to elevationLevels-1. Isometric elevation is stepped, not continuous: a tile is on a level or it is not, and that is what lets one tile cleanly occlude another."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tileCount",
+      "type": "number"
+    },
+    {
+      "name": "elevationAt",
+      "type": "function"
+    },
+    {
+      "name": "surfaceAt",
+      "type": "function"
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.tileGridBuilt",
+      "world.tileChanged"
+    ],
+    "listensTo": [
+      "world.terrainGenerated",
+      "world.biomeAssigned"
+    ]
+  },
+  "eventIntents": {
+    "world.tileChanged": [
+      "persist"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "isometric",
+    "tiles",
+    "grid",
+    "elevation",
+    "world",
+    "2d"
+  ]
+}

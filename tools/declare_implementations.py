@@ -12,6 +12,16 @@ reviewable in a diff; this script applies it, and `--check` fails if the
 descriptors have drifted from it. Ids in the manifest that name no descriptor
 are an error either way — that is the failure mode this is really guarding
 against, a manifest that quietly stops meaning anything.
+
+Both directions, and the second one had to be added later. The first version
+walked the manifest and checked the descriptors agreed, which catches a
+descriptor that has fallen behind the list and misses a descriptor that has run
+ahead of it: four new components were written claiming `external` for canvas2d,
+the manifest did not list any of them, and `--check` passed. That is the same
+one-sided comparison this file exists to stop — the undercount it was written
+for was invisible for exactly the same reason. A claim is only reviewable if
+every claim appears in the reviewed list, so an `external` status the manifest
+does not name is now an error too.
 """
 
 from __future__ import annotations
@@ -68,6 +78,23 @@ def main() -> int:
             changed.append(f"{cid}: {target} -> external")
             if not args.check:
                 path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+    # The other direction: a descriptor claiming `external` for a target the
+    # manifest never named. Nothing put that claim in front of a reviewer, which
+    # is the whole job of the manifest, so it is an error rather than drift to
+    # be applied — the fix is to add the id to web-implementations.json, and
+    # this script cannot know whether the app really implements it.
+    declared = {t: set(ids) for t, ids in manifest["targets"].items()}
+    for cid, (_path, data) in sorted(known.items()):
+        for impl in data.get("implementations", []):
+            if impl.get("status") != "external":
+                continue
+            target = impl.get("target")
+            if cid not in declared.get(target, set()):
+                problems.append(
+                    f"{cid} declares implementations[{target}] = external, which "
+                    f"{MANIFEST} does not list — an unreviewed claim"
+                )
 
     for line in changed:
         print(("drift: " if args.check else "set: ") + line)
