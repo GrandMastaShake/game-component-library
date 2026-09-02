@@ -1,0 +1,115 @@
+{
+  "id": "progression.drift_scoring",
+  "name": "Drift Scoring",
+  "category": "progression",
+  "description": "Converts sustained slides into bankable style points. It owns the judgement of what counts as a drift \u2014 minimum slip angle, minimum speed, minimum hold time \u2014 and the multiplier that grows while the slide is held, because the tension of a drift game is that the score exists only as long as the risk does. Banking and losing are tied to the track's own events: points bank when world.checkpointCrossed confirms the car survived to a gate, and the live stake drops on world.lapInvalidated, so cutting the corner to save a drift never pays. It reads slip from the vehicle produced by movement.vehicle_basic's motion and movement.vehicle_tuning's grip, but owns neither. It also does not post scores anywhere \u2014 social.leaderboard and ui.hud are the sinks for progression.driftBanked.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "minSlipAngleDeg",
+      "type": "number",
+      "required": false,
+      "default": 15,
+      "description": "Slip angle below which the car is cornering, not drifting. Set just above what good grip driving produces, or every fast corner scores."
+    },
+    {
+      "name": "minSpeed",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Speed floor for scoring. Prevents farming points with slow donuts in a car park."
+    },
+    {
+      "name": "minHoldSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "How long the slip must be sustained before progression.driftStarted fires. Filters out incidental twitches on landing or bump."
+    },
+    {
+      "name": "multiplierPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Growth rate of the live multiplier while the drift holds, capped by maxMultiplier."
+    },
+    {
+      "name": "maxMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Cap on the live multiplier. The cap is the risk ceiling: the longer the slide, the more there is to lose on lapInvalidated."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeDriftScore",
+      "type": "number",
+      "description": "Unbanked points riding on the current drift. Zero whenever no drift is live."
+    },
+    {
+      "name": "currentMultiplier",
+      "type": "number"
+    },
+    {
+      "name": "bankedTotal",
+      "type": "number",
+      "description": "Points safely banked this race. Only this figure should ever reach a leaderboard."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.driftStarted",
+      "progression.driftBanked",
+      "progression.driftDropped"
+    ],
+    "listensTo": [
+      "world.checkpointCrossed",
+      "world.lapInvalidated"
+    ]
+  },
+  "dependencies": [
+    "movement.vehicle_basic"
+  ],
+  "tags": [
+    "racing",
+    "drift",
+    "scoring",
+    "style"
+  ],
+  "provenance": "library-native"
+}

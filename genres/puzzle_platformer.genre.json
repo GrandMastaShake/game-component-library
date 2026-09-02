@@ -1,0 +1,44 @@
+{
+  "id": "genre.puzzle_platformer",
+  "name": "Puzzle Platformer",
+  "description": "Traversal where the level itself is the opponent: read the room, change its state, then cross it. The pack layers stateful machinery — switches, weighted plates, crates, doors, teleporters — over the platformer kit, plus rewind as the genre's signature mercy. Wiring is channel-based throughout, so puzzles are data: rearranging the room never rewrites the logic. Platformer-pack components are reused here as members, not reintroduced.",
+  "version": "0.1.0",
+  "loop": "observe → manipulate world state → traverse → exit",
+  "views": ["side-scroll-2d", "isometric"],
+  "memberComponents": [
+    "movement.jump_core",
+    "movement.ground_sensor",
+    "movement.wall_interaction",
+    "movement.dash_ability",
+    "movement.physics_core",
+    "progression.level_goal",
+    "world.hazard_volume",
+    "presentation.camera_follow",
+    "utility.behavior_fsm",
+    "utility.command_bus",
+    "world.moving_platform",
+    "world.spring_launcher",
+    "progression.checkpoint_flag"
+  ],
+  "newComponents": [
+    "world.switch_mechanism",
+    "world.door_gate",
+    "world.pushable_block",
+    "world.pressure_plate",
+    "world.teleport_pair",
+    "utility.rewind_time"
+  ],
+  "signatureCompound": {
+    "name": "Crate, Plate, Door",
+    "description": "The minimal proof of the loop: a crate-only pressure plate holds a door open, the player must push the block onto it and cross before anything disturbs the arrangement — with rewind as the undo when the crate falls in a pit. Switch, plate, block, and door all talk over named channels, demonstrating that the puzzle is wiring, not bespoke code.",
+    "memberIds": [
+      "world.switch_mechanism",
+      "world.pushable_block",
+      "world.pressure_plate",
+      "world.door_gate",
+      "utility.rewind_time",
+      "movement.jump_core"
+    ]
+  },
+  "tags": ["precision-action", "puzzle", "side-scroll", "rewind"]
+}

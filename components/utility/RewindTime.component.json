@@ -1,0 +1,74 @@
+{
+  "id": "utility.rewind_time",
+  "name": "Rewind Time",
+  "category": "utility",
+  "description": "Braid-style rewind: a rolling history of state snapshots that can be played backward on demand. It owns the ring buffer, the snapshot cadence, and the rewind playback cursor, because 'what did the world look like N seconds ago' is one question and should have one answer. It deliberately does not decide what is worth remembering — participating components register snapshot channels and this component records whatever is on them, so a platform can rewind while a consumed collectible stays collected, which is a design choice and not a bug. It also does not own the global clock: utility.timer_system ticks, and this component samples against it. Rewind composes rather than replaces a time limit — a timer that counts down while history accrues is the seed of a future time-modifier kit, and this component keeps that door open by treating history length as data.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "channels",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "State channels to record each snapshot — e.g. player position, block grid positions, door states. Opt-in by design: anything not listed is immune to rewind, which is how 'the door stays open' puzzles work."
+    },
+    {
+      "name": "historySeconds",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Depth of the ring buffer. Memory grows linearly with this times snapshotRateHz; eight seconds at twenty hertz is the genre's comfortable default."
+    },
+    {
+      "name": "snapshotRateHz",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Snapshots per second. Below ~15 the rewind visibly steps; above ~30 the smoothness gain stops justifying the memory."
+    },
+    {
+      "name": "rewindSpeed",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Playback rate while rewinding. 1 plays back at real time; 2 burns through history twice as fast, which suits long histories."
+    },
+    {
+      "name": "resumeMode",
+      "type": "string",
+      "required": false,
+      "default": "atRelease",
+      "description": "atRelease resumes from wherever the player lets go; oldest always rewinds to the buffer floor. Release-controlled rewind is the Braid feel; oldest suits death-rewind setpieces."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "oldestAvailableSeconds",
+      "type": "number",
+      "description": "How far back the buffer currently reaches, exposed so the UI can show the rewind budget honestly instead of letting the player hit an invisible wall."
+    },
+    {"name": "isRewinding", "type": "boolean"}
+  ],
+  "events": {
+    "emits": [
+      "utility.rewindStarted",
+      "utility.rewindStopped",
+      "utility.rewindHistoryExhausted"
+    ],
+    "listensTo": [
+      "input.rewind",
+      "utility.timerTicked"
+    ]
+  },
+  "dependencies": ["utility.timer_system"],
+  "tags": ["puzzle", "time", "rewind", "state-history"],
+  "provenance": "library-native"
+}

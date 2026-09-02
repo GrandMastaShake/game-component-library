@@ -1,0 +1,98 @@
+{
+  "id": "presentation.hit_feedback",
+  "name": "Hit Feedback",
+  "category": "presentation",
+  "description": "Converts combat outcomes into the three signals a player reads in under 100 milliseconds: a hitmarker on confirmed hit, a directional indicator when damage arrives, and a distinct kill confirm. It is a pure translator — it changes no state, owns no numbers, and every fact it renders is emitted by someone else (combat.projectile_system, combat.damage_resolver). Screen shake and impact particles are deliberately NOT here: presentation.screen_shake and presentation.particle_system already listen to combat events, and stacking three feedback systems on one event is how a routine hit starts to feel like a jump scare. What the signals look like is ui.hud's rendering concern; this component decides which signal, when, and how strong.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "hitmarkerDurationMs",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "How long the hit confirm stays on screen. Short enough to read as a reflex, not a notification — past about 200 ms players start perceiving it as UI lag instead of feedback."
+    },
+    {
+      "name": "damageDirectionFadeMs",
+      "type": "number",
+      "required": false,
+      "default": 800,
+      "description": "Fade time for the directional damage arc. Longer than the hitmarker because 'where am I being shot from' is positional information the player acts on, not just confirmation."
+    },
+    {
+      "name": "killConfirmDistinct",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a kill gets its own marker treatment. It should: the kill confirm is the moment the player stops shooting that target, and ambiguity here wastes ammo into corpses."
+    },
+    {
+      "name": "headshotDistinct",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether critical hits get a distinct variant. The hit event carries the zone metadata; this flag only decides if the feedback honors it."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeIndicators",
+      "type": "number",
+      "description": "Damage-direction arcs currently on screen. Multiple simultaneous sources stack; this count lets the HUD cap the stack before the screen becomes a clock face."
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.hitmarkerShown"
+    ],
+    "listensTo": [
+      "combat.projectileHit",
+      "combat.damageResolved",
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "ui.hud"
+  ],
+  "tags": [
+    "shooter",
+    "feedback",
+    "hitmarker",
+    "juice"
+  ],
+  "provenance": "library-native"
+}

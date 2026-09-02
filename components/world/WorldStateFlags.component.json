@@ -1,0 +1,89 @@
+{
+  "id": "world.world_state_flags",
+  "name": "World State Flags",
+  "category": "world",
+  "description": "The world's memory of what you changed: the bridge stays repaired, the warlord stays dead, the gate stays open. A flag is a named boolean-or-value with a settable or set-once policy and a query interface everything else reads \u2014 doors, spawners, dialogue conditions. ui.dialogue_tree_engine writes consequence flags here rather than keeping them, because a consequence that dies with the conversation is a consequence the world forgot. persistence.save_system owns the bytes; this component owns the semantics \u2014 namespacing, defaults, and the rule that clearing a story flag is an explicit act, never a side effect of some other system's cleanup.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "flagDefinitions",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Known flags with defaults and set-once policies. Declaring flags up front turns typo'd flag names from silent quest-breakers into load-time errors."
+    },
+    {
+      "name": "namespaceBy",
+      "type": "string",
+      "required": false,
+      "default": "zone",
+      "description": "How flag names partition: zone | global | faction. Namespacing keeps two zones' 'bridge_repaired' from colliding into one confusing bridge."
+    },
+    {
+      "name": "strictUnknownFlagReads",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether reading an undeclared flag throws instead of returning null. Strict in development, lenient in production \u2014 a shipped game should degrade, not crash."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "flagCount",
+      "type": "number",
+      "description": "How many flags diverge from defaults \u2014 a save-size proxy."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.worldFlagChanged"
+    ],
+    "listensTo": [
+      "ui.consequenceFlagSet",
+      "progression.questCompleted"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "open-world",
+    "persistence",
+    "state"
+  ],
+  "provenance": "library-native"
+}

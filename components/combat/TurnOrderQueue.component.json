@@ -1,0 +1,103 @@
+{
+  "id": "combat.turn_order_queue",
+  "name": "Turn Order Queue",
+  "category": "combat",
+  "description": "Whose turn it is, in what order, and when the round rolls over. Initiative is rolled once per combatant at battle start \u2014 modified by combat.status_effects, since a slowed unit should act late \u2014 then the queue is fixed until someone dies or a delay action inserts them elsewhere. The queue owns sequencing only: what a unit may DO with its turn is combat.action_point_economy's budget, and ending a turn early is the player's call via input.endTurn, not the queue's. Rounds are the queue's second product: combat.roundStarted exists so per-round systems \u2014 damage-over-time ticks, reinforcement timers \u2014 have exactly one heartbeat to follow instead of everyone counting turns privately and disagreeing.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "initiativeDieSides",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Die rolled per combatant for initiative. A big die makes order swingy; a small die makes the dex stat king. d20 splits the difference."
+    },
+    {
+      "name": "allowDelayTurn",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a unit may yield to a later slot in the same round. Delay is the entry-level tactics verb; disabling it is a hardcore statement."
+    },
+    {
+      "name": "tieBreakBy",
+      "type": "string",
+      "required": false,
+      "default": "dexterity",
+      "description": "Attribute consulted on tied initiative rolls. Deterministic tie-breaks keep replays and replays-of-replays identical."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeUnitId",
+      "type": "string",
+      "description": "The unit whose turn is live."
+    },
+    {
+      "name": "roundNumber",
+      "type": "number",
+      "description": "One-based round counter."
+    },
+    {
+      "name": "queuePreview",
+      "type": "array",
+      "description": "Upcoming order, for the UI timeline players plan against."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.turnStarted",
+      "combat.turnEnded",
+      "combat.roundStarted"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "input.endTurn",
+      "input.delayTurn"
+    ]
+  },
+  "dependencies": [
+    "combat.status_effects"
+  ],
+  "tags": [
+    "tactics",
+    "turns",
+    "initiative",
+    "core"
+  ],
+  "provenance": "library-native"
+}

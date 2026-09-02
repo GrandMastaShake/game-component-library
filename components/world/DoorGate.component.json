@@ -1,0 +1,71 @@
+{
+  "id": "world.door_gate",
+  "name": "Door Gate",
+  "category": "world",
+  "description": "A passage controlled by one or more named conditions. It owns the condition set — which channels must be on, and whether all of them or any of them suffice — plus the open/closed state and the reason it is still locked, because 'why won't this open' is the question the player is always asking and the answer should come from one place. It deliberately does not own the conditions themselves: switches come from world.switch_mechanism, weight from world.pressure_plate, and acquired-power checks from world.ability_gate, its metroidvania sibling. The moment a gate starts checking what the player has learned instead of what the level currently says, it has become an ability gate and should be built as one. It also does not animate itself; the door mesh reacts to world.door_opened through presentation.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "requiredChannels",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Channel ids this gate listens to. Channels are named wires from switches and plates, so a gate's wiring is data and survives level edits."
+    },
+    {
+      "name": "requireAll",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "True makes every channel a conjunct (the classic two-lever door); false makes any one sufficient (redundant emergency releases)."
+    },
+    {
+      "name": "startsOpen",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the gate begins passable. An open gate that closes behind the player is a trap door; a closed gate that opens is a goal."
+    },
+    {
+      "name": "relocks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the gate closes again when its conditions stop being met. Relocking gates pair with momentary switches and pressure plates to make hold-the-state puzzles; permanent gates suit irreversible progress."
+    }
+  ],
+  "outputs": [
+    {"name": "isOpen", "type": "boolean"},
+    {
+      "name": "unmetConditions",
+      "type": "array",
+      "description": "The channels currently keeping the gate shut, exposed so a HUD or hint system can answer 'what am I missing' without reimplementing the check."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.doorOpened",
+      "world.doorClosed",
+      "world.doorRejected"
+    ],
+    "listensTo": [
+      "world.switchToggled",
+      "world.pressurePlatePressed",
+      "world.pressurePlateReleased"
+    ]
+  },
+  "dependencies": [
+    "world.switch_mechanism",
+    "world.pressure_plate"
+  ],
+  "tags": ["puzzle", "door", "gate", "level-furniture"],
+  "provenance": "library-native"
+}

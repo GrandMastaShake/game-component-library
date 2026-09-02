@@ -1,0 +1,43 @@
+{
+  "id": "genre.metroidvania",
+  "name": "Metroidvania",
+  "description": "Traversal compounded into a world: explore, hit a gate that names the power you lack, come back with it, and watch the map color in behind you. The pack's spine is three cooperating components — the map graph owns topology, power-up grant owns capability mutation, and the ability gate checks one against the other — so lock-and-key design is data all the way down. Platformer and puzzle components carry the moment-to-moment movement; save system and minimap make the world durable and legible.",
+  "version": "0.1.0",
+  "loop": "explore → hit ability gate → backtrack with new power → unlock region",
+  "views": ["side-scroll-2d"],
+  "memberComponents": [
+    "movement.jump_core",
+    "movement.ground_sensor",
+    "movement.wall_interaction",
+    "movement.ledge_grab",
+    "movement.dash_ability",
+    "movement.physics_core",
+    "ui.minimap",
+    "persistence.save_system",
+    "progression.xp_leveling",
+    "progression.skills_tree",
+    "world.moving_platform",
+    "world.spring_launcher",
+    "progression.checkpoint_flag"
+  ],
+  "newComponents": [
+    "world.ability_gate",
+    "world.interconnected_map_graph",
+    "progression.power_up_grant",
+    "world.boss_room_seal",
+    "ui.map_reveal_system"
+  ],
+  "signatureCompound": {
+    "name": "Gate and Backtrack",
+    "description": "The genre in miniature: the player reaches a high-ledge gate, is rejected with the missing power named, finds the double-jump grant elsewhere in the graph, and returns to pass — the map revealing each room as it is first visited. If this loop works, every larger metroidvania is repetition and variation of it.",
+    "memberIds": [
+      "world.interconnected_map_graph",
+      "world.ability_gate",
+      "progression.power_up_grant",
+      "movement.jump_core",
+      "ui.map_reveal_system",
+      "persistence.save_system"
+    ]
+  },
+  "tags": ["precision-action", "metroidvania", "lock-and-key", "exploration"]
+}

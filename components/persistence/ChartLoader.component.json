@@ -1,0 +1,64 @@
+{
+  "id": "persistence.chart_loader",
+  "name": "Chart Loader",
+  "category": "persistence",
+  "description": "Beatmaps as data: parsing, validating, and serving chart files with their difficulty tiers. Charts are read-only content — they are loaded, never written — which is why this sits in persistence next to the save system rather than in world or ui: the boundary it guards is 'bytes on disk become trustworthy structs', the same boundary as every other loader in the category. It owns the registry, difficulty selection, and validation, because a malformed note time discovered mid-song is a crash with an audience; failing at load with a named reason is this component's whole job. It deliberately does not own runtime note flow — ui.note_highway turns the loaded chart into motion — and it does not own the tempo map's meaning, which utility.beat_clock interprets against the audio clock. Storage mechanics defer to persistence.datastore_safe; charts are content, but the read path should be the safe one everywhere.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "chartRegistry",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Available charts: id, title, audio reference, and per-difficulty chart data. The registry is content inventory — what the song select screen lists."
+    },
+    {
+      "name": "defaultDifficulty",
+      "type": "string",
+      "required": false,
+      "default": "normal",
+      "description": "Tier used when a chart is requested without one. The tier names are chart metadata, not code — a pack can ship easy/normal/hard/expert or its own ladder."
+    },
+    {
+      "name": "validateOnLoad",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether note times, lanes, and the bpm map are checked before the chart is served. Disabling it ships broken charts to the highway; there is no good reason outside a content-debug build."
+    },
+    {
+      "name": "maxNotesPerChart",
+      "type": "number",
+      "required": false,
+      "default": 10000,
+      "description": "Validation ceiling that catches truncated or runaway files. A three-minute chart at expert density is a few thousand notes; ten times that is a corrupt file, not a hard song."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "loadedChart",
+      "type": "object",
+      "description": "The validated chart struct: notes with beat times and lanes, bpm map, metadata. This is the only shape the highway accepts."
+    },
+    {"name": "availableDifficulties", "type": "array"},
+    {"name": "noteCount", "type": "number"}
+  ],
+  "events": {
+    "emits": [
+      "persistence.chartLoaded",
+      "persistence.chartLoadFailed"
+    ],
+    "listensTo": ["input.selectChart"]
+  },
+  "dependencies": ["persistence.datastore_safe"],
+  "tags": ["rhythm", "chart", "beatmap", "content", "loader"],
+  "provenance": "library-native"
+}

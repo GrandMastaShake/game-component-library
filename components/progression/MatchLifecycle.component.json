@@ -1,0 +1,114 @@
+{
+  "id": "progression.match_lifecycle",
+  "name": "Match Lifecycle",
+  "category": "progression",
+  "description": "The state machine that owns a match's shape: lobby, deployment, live phases, endgame, podium. It is deliberately thin — each phase's rules live in the component that owns them (world.zone_collapse shrinks, combat.downed_revive decides who is still standing) — and this component only sequences the phases and decides, from defeat and bleed-out counts, when one competitor or squad remains. Placement is awarded here because 'where you finished' is a match-scoped fact; social.leaderboard consumes progression.placementAwarded for anything persistent, and this component keeps no history of its own. Built on utility.behavior_fsm rather than a private switch statement so the phase graph is inspectable, debuggable, and moddable like every other state machine in the library.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "minPlayersToStart",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Lobby population required before the countdown begins. Below this the lobby waits indefinitely; a dev or test harness can set 1, but the shipped default should never let a match start uncontested."
+    },
+    {
+      "name": "lobbyCountdownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 15,
+      "description": "Time from reaching minPlayersToStart to deployment. Long enough for late joiners to load in, short enough that the lobby itself never becomes the game."
+    },
+    {
+      "name": "endgamePhaseThreshold",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Zone phase index at which the match is considered endgame. The lifecycle only labels the transition — what endgame MEANS (faster ticks, final-circle rules) belongs to world.zone_collapse's config."
+    },
+    {
+      "name": "podiumDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "How long the results phase holds before teardown. The podium is the match's only moment of pure ceremony; cutting it short makes 20 minutes of tension end in a loading spinner."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentPhase",
+      "type": "string",
+      "description": "One of lobby, deployment, live, endgame, podium. Every other match-scoped component keys off this rather than maintaining its own clock."
+    },
+    {
+      "name": "competitorsRemaining",
+      "type": "number",
+      "description": "Live count of players or squads still in. The victory check is this reaching one — there is no separate win condition to keep in sync."
+    },
+    {
+      "name": "isMatchOver",
+      "type": "boolean",
+      "description": "True from the moment a winner is decided through podium teardown."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.matchPhaseChanged",
+      "progression.matchEnded",
+      "progression.placementAwarded"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "combat.bleedOut",
+      "world.zoneShrinkCompleted",
+      "utility.timerCompleted"
+    ]
+  },
+  "dependencies": [
+    "utility.behavior_fsm",
+    "utility.timer_system",
+    "social.leaderboard"
+  ],
+  "tags": [
+    "battle-royale",
+    "match",
+    "state-machine",
+    "flow",
+    "core"
+  ],
+  "provenance": "library-native"
+}

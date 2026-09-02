@@ -1,0 +1,100 @@
+{
+  "id": "combat.boss_encounter_script",
+  "name": "Boss Encounter Script",
+  "category": "combat",
+  "description": "The contract a boss fight fulfils: engage on arena entry, phase changes on health thresholds, arena lock while engaged, clean resolution either way. utility.behavior_fsm owns the generic state machine and could express any one boss; this component owns the encounter semantics every boss shares, so 'seal the doors at engage, drop the reward at defeat' is written once and varied by data, not re-scripted per fight. It does not own the boss's attacks \u2014 those are combat.melee_basic or combat.hotbar_abilities on the boss entity \u2014 and it does not own the loot, which inventory.loot_table and inventory.affix_loot_generator roll after combat.entityDefeated like any other kill, only louder.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "phaseThresholds",
+      "type": "array",
+      "required": false,
+      "default": [
+        0.66,
+        0.33
+      ],
+      "description": "Health fractions where the phase flips. Two thresholds is the classic three-act fight; the array is the whole design surface."
+    },
+    {
+      "name": "lockArenaOnEngage",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the arena seals when the fight starts. Locking commits the player; unlocked arenas invite kiting the boss backwards through the dungeon, which is a genre break."
+    },
+    {
+      "name": "enrageTimerSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Soft enrage after which the fight gets lethal. Zero disables it; without an enrage, patient builds turn every boss into a timer test of the player's bladder, not skill."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentPhase",
+      "type": "number",
+      "description": "Zero-based phase index, for AI and arena consumers."
+    },
+    {
+      "name": "engaged",
+      "type": "boolean",
+      "description": "True from arena entry until defeat or party wipe."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.bossEngaged",
+      "combat.bossPhaseChanged",
+      "combat.bossDefeated"
+    ],
+    "listensTo": [
+      "world.hazardEntered",
+      "utility.behaviorChanged",
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "utility.behavior_fsm"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "boss",
+    "encounter"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "progression.power_up_grant",
+  "name": "Power-Up Grant",
+  "category": "progression",
+  "description": "The acquirable mutation: double jump, wall cling, dash — new verbs delivered as parameter overrides on the movement components the player already has, never as parallel implementations. A double jump is movement.jump_core with maxJumps raised to 2; building a second jump component would split the forgiveness windows, the event stream, and every downstream count in two. This component owns exactly the grant transaction: marking a powerId as held and applying its declared overrides to named sibling inputs. It deliberately does not own the pickup fantasy (presentation handles the fanfare), does not own gating (world.ability_gate checks what this grants), and does not own persistence — persistence.save_system records progression.power_up_granted like any other durable fact. Because overrides are data, a designer can ship a new power by writing one grant entry and one gate requirement, touching no movement code.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "powerId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Stable identifier for this power — the same string world.ability_gate lists in requiredPowerIds. One id, one mutation, one check."
+    },
+    {
+      "name": "targetOverrides",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Entries of {component, input, value} applied on grant — e.g. {movement.jump_core, maxJumps, 2}. The grant composes existing verbs; it never shadows them with new logic."
+    },
+    {
+      "name": "grantOn",
+      "type": "string",
+      "required": false,
+      "default": "touch",
+      "description": "touch grants on contact (classic pickup pedestal); interact requires a deliberate press, which suits upgrades with a ceremony or a choice attached."
+    },
+    {
+      "name": "uniqueGrant",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether holding the power already makes the pickup inert. True for permanent abilities; false only for repeatable boosts, which arguably belong to economy instead."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "grantedPowerIds",
+      "type": "array",
+      "description": "Every power the player holds. This array is the player's capability fingerprint — the thing gates, maps, and save files all read."
+    },
+    {"name": "isGranted", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["progression.powerUpGranted"],
+    "listensTo": ["input.interact"]
+  },
+  "dependencies": [
+    "movement.jump_core",
+    "movement.dash_ability",
+    "movement.wall_interaction"
+  ],
+  "tags": ["metroidvania", "power-up", "unlock", "progression"],
+  "provenance": "library-native"
+}

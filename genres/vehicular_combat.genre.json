@@ -1,0 +1,46 @@
+{
+  "id": "genre.vehicular_combat",
+  "name": "Vehicular Combat",
+  "description": "The arena racer where the cars are the arsenal: drive, weaponize, ram, and be the last vehicle rolling. This pack reuses the Driving/Racing kit \u2014 a combat car is still a tuned car \u2014 and adds the vehicle-specific weapon layer: hardpoints and turret arcs on the hull, a speed-times-mass ram model, damage bands that visibly degrade the loser's handling, and arenas that escalate on a script. The design stance: projectiles and hit resolution stay with the generic combat systems; what this pack owns is everything that only makes sense bolted to a chassis.",
+  "version": "0.1.0",
+  "loop": "drive \u2192 weaponize \u2192 ram/shoot \u2192 last vehicle rolling",
+  "views": [
+    "top-down",
+    "voxel"
+  ],
+  "memberComponents": [
+    "movement.vehicle_basic",
+    "movement.vehicle_tuning",
+    "movement.physics_core",
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "combat.projectile_system",
+    "world.hazard_volume",
+    "presentation.screen_shake",
+    "presentation.particle_system",
+    "ui.hud",
+    "utility.timer_system"
+  ],
+  "newComponents": [
+    "combat.vehicle_mount_weapons",
+    "combat.ram_damage_model",
+    "world.arena_hazards",
+    "combat.vehicle_damage_states"
+  ],
+  "signatureCompound": {
+    "name": "Last Vehicle Rolling",
+    "description": "The arena loop end to end: vehicle_mount_weapons puts arcs and ammo on the hull and hands projectiles to combat.projectile_system, ram_damage_model converts collisions into resolver-routed damage, vehicle_damage_states turns accumulated hits into degraded tuning so every landed shot changes how the target drives, and arena_hazards escalates the floor under everyone until combat.vehicleDisabled leaves exactly one engine running.",
+    "memberIds": [
+      "combat.vehicle_mount_weapons",
+      "combat.ram_damage_model",
+      "combat.vehicle_damage_states",
+      "world.arena_hazards"
+    ]
+  },
+  "tags": [
+    "vehicular-combat",
+    "arena",
+    "vehicles",
+    "weapons"
+  ]
+}

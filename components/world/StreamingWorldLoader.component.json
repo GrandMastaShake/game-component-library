@@ -1,0 +1,107 @@
+{
+  "id": "world.streaming_world_loader",
+  "name": "Streaming World Loader",
+  "category": "world",
+  "description": "Seamless paging with an opinion about entities. world.chunk_manager already pages terrain data in and out around the player; this component adds the lifecycle policy terrain alone cannot express \u2014 which entities despawn when their chunk unloads, which persist by snapshotting through persistence.save_system, and which scripted set-pieces must never be culled mid-fight. The seam is the product: transitions are prefetched a ring ahead so the player never watches the world blink into existence. It owns entity lifecycle across page boundaries only. It does not mesh chunks (presentation.voxel_mesher), does not grade detail (presentation.lod_system), and does not decide what spawns in a fresh chunk (world.dynamic_encounter_spawner).",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "prefetchRadius",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Rings of chunks beyond the active set kept warm. One ring hides the seam at walking speed; vehicles and sprint builds need two, at real memory cost."
+    },
+    {
+      "name": "entitySnapshotOnUnload",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether unloaded entities serialize their state instead of resetting. False is the classic 'the bandit camp fully healed while you were away' bug-as-feature."
+    },
+    {
+      "name": "neverCullTags",
+      "type": "array",
+      "required": false,
+      "default": [
+        "boss",
+        "quest-critical"
+      ],
+      "description": "Entity tags exempt from unload culling. A boss that despawns because the player ran away far enough is a cheese strategy, not a memory optimization."
+    },
+    {
+      "name": "maxEntitiesPerChunk",
+      "type": "number",
+      "required": false,
+      "default": 64,
+      "description": "Cap that forces spawners to budget. Without a cap, a rich chunk pages in a slideshow."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pagedInEntities",
+      "type": "number",
+      "description": "Live entity count restored this session."
+    },
+    {
+      "name": "snapshottedEntities",
+      "type": "number",
+      "description": "Entities serialized on unload, for memory telemetry."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.entitiesPagedIn",
+      "world.entitiesPagedOut"
+    ],
+    "listensTo": [
+      "world.chunkLoaded",
+      "world.chunkUnloaded"
+    ]
+  },
+  "dependencies": [
+    "world.chunk_manager",
+    "presentation.lod_system"
+  ],
+  "tags": [
+    "open-world",
+    "streaming",
+    "lifecycle",
+    "core"
+  ],
+  "provenance": "library-native"
+}

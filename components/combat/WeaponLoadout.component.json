@@ -1,0 +1,123 @@
+{
+  "id": "combat.weapon_loadout",
+  "name": "Weapon Loadout",
+  "category": "combat",
+  "description": "Owns the answer to 'what am I holding and what does pulling the trigger mean right now': active slot, swap order, and fire mode. It does not spawn projectiles — it translates trigger intent into combat.fireRequested with the resolved weapon stats attached, and combat.projectile_system takes it from there. It does not count bullets either: combat.ammo_economy listens to the same event and owns the magazine, so a dry fire is rejected by the economy rather than by a second conditional here. Slot count is deliberately small and fixed per config; inventory breadth — how many weapons you own at all — is inventory.core_inventory's problem, and conflating the two is how shooters accidentally become inventory managers.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "slotCount",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Weapons carried and hot-swappable. Two is the genre default because a third slot turns mid-fight decisions into menu navigation. Excess weapons stay in inventory, not here."
+    },
+    {
+      "name": "swapTimeSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.4,
+      "description": "Dead time between requesting a swap and the new weapon being able to fire. This is the tax that makes weapon choice a commitment; setting it to 0 makes slot count meaningless."
+    },
+    {
+      "name": "availableFireModes",
+      "type": "array",
+      "required": false,
+      "default": [
+        "semi",
+        "auto",
+        "burst"
+      ],
+      "description": "Fire modes the equipped weapon profile may declare. The loadout validates a weapon's mode against this list rather than trusting the data, because a typo'd mode otherwise fails silently at the trigger."
+    },
+    {
+      "name": "burstCount",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Shots per trigger pull in burst mode. Burst exists as a first-class mode, not a macro over semi-auto, because burst pacing (the pause BETWEEN bursts) is a balance lever semi cannot express."
+    },
+    {
+      "name": "autoFireRatePerSecond",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Maximum request rate in auto mode. The loadout gates trigger intent at this rate; it never asks combat.ammo_economy whether the shot is affordable — that rejection comes back as its own event."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeSlot",
+      "type": "number",
+      "description": "Index of the currently equipped slot. UI reads this; gameplay logic should read the weapon profile carried on combat.fireRequested instead."
+    },
+    {
+      "name": "activeFireMode",
+      "type": "string",
+      "description": "The mode the next trigger pull will use."
+    },
+    {
+      "name": "isSwapping",
+      "type": "boolean",
+      "description": "True during the swap dead time. Fire requests arriving now are buffered, not dropped, so a swap-cancel feels responsive rather than eaten."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.weaponEquipped",
+      "combat.fireModeChanged",
+      "combat.fireRequested"
+    ],
+    "listensTo": [
+      "input.fire",
+      "input.weaponSlot",
+      "input.fireModeToggle"
+    ]
+  },
+  "dependencies": [
+    "combat.projectile_system",
+    "combat.ammo_economy"
+  ],
+  "tags": [
+    "shooter",
+    "weapons",
+    "loadout",
+    "fire-modes",
+    "core"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,66 @@
+{
+  "id": "progression.checkpoint_flag",
+  "name": "Checkpoint Flag",
+  "category": "progression",
+  "description": "Ordered respawn markers that turn one long level into a series of short commitments. Each flag owns its place in the order and the respawn placement; the set of flags shares one 'furthest reached' fact so a later flag never loses progress to an earlier one the player brushed past on the way back. It deliberately does not own death detection — world.hazard_volume already reports world.hazard_entered, and a second death definition would double every kill downstream. It also does not reset the run: health, inventory, and collectibles are their own components' state, and which of them a death should roll back is a game-level decision, not a flag's. Cross-session persistence of the reached checkpoint belongs to persistence.save_system, not to this component.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "checkpointOrder",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "This flag's position in the level sequence. Order, not distance, decides which checkpoint is active — flags placed on a backtrack route must still sort by intended progression."
+    },
+    {
+      "name": "respawnOffset",
+      "type": "array",
+      "required": false,
+      "default": [0, 1],
+      "description": "Where the player reappears relative to the flag. Slightly above and clear of the trigger volume, so respawning never immediately reactivates the flag or an adjacent hazard."
+    },
+    {
+      "name": "singleActivation",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the flag fires progression.checkpoint_reached only the first time. Re-fireable flags let speedrun routing re-arm respawn points, at the cost of noisier downstream counting."
+    },
+    {
+      "name": "respawnDelaySeconds",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Pause between the hazard event and repositioning. Instant respawns hide what killed the player; long ones punish. One second is the genre's reading of 'fair'."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isActive",
+      "type": "boolean",
+      "description": "True only on the furthest-reached flag — the single source of the respawn point for the whole level."
+    },
+    {"name": "respawnPosition", "type": "array"}
+  ],
+  "events": {
+    "emits": [
+      "progression.checkpointReached",
+      "progression.playerRespawned"
+    ],
+    "listensTo": ["world.hazardEntered"]
+  },
+  "dependencies": [
+    "movement.character_body",
+    "world.hazard_volume"
+  ],
+  "tags": ["platformer", "checkpoint", "respawn", "progression"],
+  "provenance": "library-native"
+}

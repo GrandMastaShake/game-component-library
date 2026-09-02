@@ -1,0 +1,87 @@
+{
+  "id": "world.moving_platform",
+  "name": "Moving Platform",
+  "category": "world",
+  "description": "A carrier that moves itself along a waypoint path and carries whatever stands on it. The hard part of a moving platform is not the path — it is ride detection: the rider must inherit the platform's displacement exactly, or feet slide and jumps go wrong. This component listens to movement.grounded / movement.leftGround so it knows when a body lands on or leaves it, but it deliberately does not own the rider's physics: gravity, collision, and the grounded fact itself stay with movement.physics_core and movement.ground_sensor. It also does not decide when to run. Loop mode covers self-driven carriers; anything condition-driven starts and stops by listening to world.switch_toggled, which world.switch_mechanism owns — a platform that grew its own lever logic would duplicate that component.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "pathPoints",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Ordered waypoints the platform travels through. Two points make a shuttle; three or more make a circuit. Vertical-only pairs give elevators."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Travel speed between waypoints in units per second. Constant speed, not eased — easing on a carrier reads as the floor slipping under the player."
+    },
+    {
+      "name": "loopMode",
+      "type": "string",
+      "required": false,
+      "default": "pingpong",
+      "description": "pingpong reverses at each end; cycle wraps from the last waypoint back to the first; once stops at the end until re-triggered."
+    },
+    {
+      "name": "waitAtEndpointsSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Dwell time at each waypoint before moving again. A short dwell lets riders step on and off deliberately instead of fighting a floor that never stops."
+    },
+    {
+      "name": "requiresRider",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When true, the platform only moves while someone is grounded on it — the classic ferry. When false it runs on loopMode alone."
+    },
+    {
+      "name": "transferVelocity",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a rider leaving the platform keeps its velocity. True makes jumping off a rising platform carry you higher; false is easier to read but feels like hitting a ceiling of glue."
+    }
+  ],
+  "outputs": [
+    {"name": "position", "type": "array"},
+    {"name": "currentWaypointIndex", "type": "number"},
+    {
+      "name": "isMoving",
+      "type": "boolean",
+      "description": "False during endpoint dwells and while waiting for a rider under requiresRider, not just when the path ends."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.platformStartedMoving",
+      "world.platformStopped",
+      "world.platformEndpointReached"
+    ],
+    "listensTo": [
+      "movement.grounded",
+      "movement.leftGround",
+      "world.switchToggled"
+    ]
+  },
+  "dependencies": [
+    "movement.physics_core",
+    "movement.ground_sensor",
+    "world.switch_mechanism"
+  ],
+  "tags": ["platformer", "traversal", "carrier", "level-furniture"],
+  "provenance": "library-native"
+}

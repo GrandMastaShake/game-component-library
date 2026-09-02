@@ -1,0 +1,100 @@
+{
+  "id": "combat.ram_damage_model",
+  "name": "Ram Damage Model",
+  "category": "combat",
+  "description": "Turns closing speed and mass into collision damage, with crumple thresholds that mark when a hit was structural. It exists because in a vehicular combat game the bumper is the most-used weapon, and if ramming is just physics knockback there is no game. This component owns the speed-times-mass formula and the self-damage fraction that makes a reckless T-bone cost the attacker too. It does not subtract health itself: computed damage is handed to combat.damage_resolver, so armor, resistances, and status effects keep one home, and a shielded target mitigates a ram the same way it mitigates a shell. Crumple is reported as an event for combat.vehicle_damage_states and presentation to consume; this model does not decide what crumpling means for handling or visuals.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "massTons",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "Vehicle mass used in the damage formula. Heavy builds hit harder and take less relative self-damage, which is the entire reason to drive a truck."
+    },
+    {
+      "name": "damagePerSpeedMass",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Conversion from closing speed times mass to base damage. Tune against expected top speeds so a full-speed head-on is decisive but not instantly lethal."
+    },
+    {
+      "name": "selfDamageFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Share of dealt damage the rammer takes back. At 0 ramming is free and every race becomes a demo derby; at 1 it is a last resort."
+    },
+    {
+      "name": "crumpleSpeedThreshold",
+      "type": "number",
+      "required": false,
+      "default": 25,
+      "description": "Closing speed above which the collision counts as structural and combat.vehicleCrumpled fires. Below it the hit is a bump \u2014 damage only, no state change."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastRamSpeed",
+      "type": "number",
+      "description": "Closing speed of the most recent ram, exposed for kill-feed flavor and drift-scoring drop logic."
+    },
+    {
+      "name": "totalRamDamageDealt",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.ramDamageDealt",
+      "combat.vehicleCrumpled"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "movement.physics_core"
+  ],
+  "tags": [
+    "vehicle",
+    "collision",
+    "ram",
+    "damage"
+  ],
+  "provenance": "library-native"
+}

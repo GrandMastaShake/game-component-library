@@ -1,0 +1,109 @@
+{
+  "id": "movement.grid_movement_range",
+  "name": "Grid Movement Range",
+  "category": "movement",
+  "description": "The blue tiles. Given a unit's position and movement budget this computes the reachable set \u2014 flood fill over world.tile_grid with per-terrain costs and obstacle blocking \u2014 plus the attack overlay derived from it, because move-then-shoot range is a union of tiles, not a circle. world.tile_grid owns the board and movement.pathfinding_system can find A path; this component owns the budget question \u2014 ALL paths within N points \u2014 which is why it sits on top of both instead of replacing either. It deliberately knows nothing about whose turn it is: combat.turn_order_queue announces the active unit, and this answers for whoever that is, player or AI alike.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "terrainCostTable",
+      "type": "object",
+      "required": false,
+      "default": {
+        "road": 0.5,
+        "plain": 1,
+        "forest": 2,
+        "water": 99
+      },
+      "description": "Movement-point cost per terrain tag. 99 is the polite infinity: technically crossable, never actually reached."
+    },
+    {
+      "name": "diagonalMovementCost",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Cost of a diagonal step. 1.5 approximates real distance; 1 makes diagonals strictly better, which quietly warps every formation."
+    },
+    {
+      "name": "zoneOfControl",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether stepping adjacent to an enemy ends movement. ZoC is what makes frontlines frontlines; without it, every melee unit is a revolving door."
+    },
+    {
+      "name": "showAttackOverlay",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the attackable set is computed alongside the reachable set. Off only for games where attacks are strictly adjacent."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "reachableTiles",
+      "type": "array",
+      "description": "Tiles the active unit can stop on this turn."
+    },
+    {
+      "name": "attackableTiles",
+      "type": "array",
+      "description": "Tiles targetable after any legal move \u2014 the red tiles."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.rangeComputed",
+      "movement.moveExecuted"
+    ],
+    "listensTo": [
+      "combat.turnStarted",
+      "presentation.tileSelected"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid",
+    "movement.pathfinding_system"
+  ],
+  "tags": [
+    "tactics",
+    "grid",
+    "movement",
+    "core"
+  ],
+  "provenance": "library-native"
+}

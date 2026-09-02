@@ -1,0 +1,104 @@
+{
+  "id": "persistence.limited_save",
+  "name": "Limited Save",
+  "category": "persistence",
+  "description": "Ink-ribbon saving: each manual save consumes a finite token held in the inventory, so 'should I save now' becomes the same species of decision as 'should I heal now' — and in this genre, deciding wrong is content. The write itself is delegated to persistence.save_system; durability, slots, and corruption handling are solved there, and this component is a gate on WHEN save_system may fire plus the token bookkeeping. Requiring a save-point location is config, not law, but the default holds it because save-anywhere plus scarce tokens is just a harder difficulty setting, while save-rooms are pacing architecture. Autosaves and setpiece checkpoints may bypass the token, but the bypass is explicit and counted — invisible free saves quietly delete the tension the tokens exist to create.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tokenItemId",
+      "type": "string",
+      "required": false,
+      "default": "save_token",
+      "description": "Inventory item consumed per save. An item, not a counter, so tokens obey the same scarcity rules as everything else — inventory.scarcity_inventory will happily make you choose between a token and a herb."
+    },
+    {
+      "name": "tokensPerSave",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Tokens consumed per write. Kept as an input because 'the final act costs two' is a legitimate escalation, and it should be a data change, not a patch."
+    },
+    {
+      "name": "savePointRequired",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether saving only works at designated save-point volumes. The save-room is the genre's exhale — a lit room with a typewriter — and this flag is what protects it from becoming a menu item."
+    },
+    {
+      "name": "allowFreeAutosave",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether checkpoint scripts may write without a token. Free autosaves are counted in savesMade with a flag on the event payload, so postmortems can tell player-earned saves from design-granted ones."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tokensRemaining",
+      "type": "number",
+      "description": "Live count of token items in inventory.core_inventory. Read, never cached — the inventory is the ledger."
+    },
+    {
+      "name": "savesMade",
+      "type": "number",
+      "description": "Lifetime successful writes this run. Rank screens and the genre's beloved 'S rank in under three saves' challenge both read this number."
+    }
+  ],
+  "events": {
+    "emits": [
+      "persistence.saveTokenConsumed",
+      "persistence.saveDenied"
+    ],
+    "listensTo": [
+      "input.requestSave",
+      "persistence.saved"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system",
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "survival-horror",
+    "save",
+    "tokens",
+    "scarcity"
+  ],
+  "provenance": "library-native"
+}

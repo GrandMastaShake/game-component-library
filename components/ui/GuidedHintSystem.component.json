@@ -1,0 +1,97 @@
+{
+  "id": "ui.guided_hint_system",
+  "name": "Guided Hint System",
+  "category": "ui",
+  "description": "The progressive hot/cold ping that rescues a stalled hunt without solving it. It owns hint escalation \u2014 a vague direction, then a distance band, then a marker \u2014 spaced by cooldown, because a hint that instantly answers is a waypoint and a hint that never improves is a taunt. It aims itself by reading progression.completion_tracker's remaining counts rather than tracking collectibles on its own, so the hint and the percentage can never disagree about what is left. What it never does is trigger the discovery moment: for secrets it pings the neighborhood and stops, since world.hidden_alcove owns the fanfare and a hint that fires the fanfare has stolen the best beat in the genre. Escalation resets on progress \u2014 a new progression.completionChanged means the player is moving again and does not need to be rescued.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "hintCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 45,
+      "description": "Minimum time between pings. Long enough that each hint is a nudge the player acts on, not a trail of breadcrumbs."
+    },
+    {
+      "name": "escalationStages",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "How many increasingly specific stages a stuck player climbs: direction, then distance band, then marker. The last stage is the game's admission that the hunt has gone long."
+    },
+    {
+      "name": "freeHintAfterSeconds",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Idle time without progress after which a stage-one ping is offered unprompted. Zero disables the offer for purist 100% runs."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeHintStage",
+      "type": "number",
+      "description": "Current escalation stage, 0 when idle. UI uses it to render direction versus marker without re-deriving it."
+    },
+    {
+      "name": "hintsUsed",
+      "type": "number",
+      "description": "Lifetime hint count, for the stats screen and for 'no-hint run' achievement checks."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.hintPinged",
+      "ui.hintEscalated",
+      "ui.hintExpired"
+    ],
+    "listensTo": [
+      "input.requestHint",
+      "progression.completionChanged"
+    ]
+  },
+  "dependencies": [
+    "progression.completion_tracker"
+  ],
+  "tags": [
+    "collectathon",
+    "hints",
+    "accessibility",
+    "guidance"
+  ],
+  "provenance": "library-native"
+}

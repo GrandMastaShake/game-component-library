@@ -1,0 +1,48 @@
+{
+  "id": "genre.exploration_collectathon",
+  "name": "Exploration / Collectathon",
+  "description": "The wander-and-complete genre: a world dense with shinies, secrets, and traversal puzzles, where the scoreboard is a completion percentage. This pack layers completion accounting, secret discovery, guided hinting, grapple traversal, and photo mode over the existing platformer kit \u2014 the movement verbs stay generic so the same pack can dress a voxel island or an isometric diorama. The design stance: every collectible is found by looking, movement is the puzzle, and the hunt ends in a fanfare the player earned, not a waypoint the game surrendered.",
+  "version": "0.1.0",
+  "loop": "wander \u2192 spot shiny \u2192 reach it (movement puzzle) \u2192 completion %",
+  "views": [
+    "voxel",
+    "isometric"
+  ],
+  "memberComponents": [
+    "movement.jump_core",
+    "movement.ground_sensor",
+    "movement.character_body",
+    "movement.run_control",
+    "movement.dash_ability",
+    "movement.physics_core",
+    "ui.minimap",
+    "progression.level_goal",
+    "presentation.camera_follow",
+    "presentation.audio_system",
+    "world.collectible_scatter"
+  ],
+  "newComponents": [
+    "progression.completion_tracker",
+    "world.hidden_alcove",
+    "ui.guided_hint_system",
+    "movement.grapple_traversal",
+    "presentation.photo_mode"
+  ],
+  "signatureCompound": {
+    "name": "Hundred Percent Run",
+    "description": "The loop-proof compound: the scatter layer (Squad A's world.collectible_scatter) fills regions, completion_tracker counts them per region, hidden_alcove fires one-shot discovery fanfares that also feed the count, guided_hint_system reads the same ledger to rescue stalled hunts without stealing discoveries, and grapple_traversal plus the jump kit make 'reach it' the actual game. A 100% run is complete when progression.runCompleted fires.",
+    "memberIds": [
+      "progression.completion_tracker",
+      "world.hidden_alcove",
+      "ui.guided_hint_system",
+      "movement.grapple_traversal",
+      "world.collectible_scatter"
+    ]
+  },
+  "tags": [
+    "collectathon",
+    "exploration",
+    "completion",
+    "traversal"
+  ]
+}

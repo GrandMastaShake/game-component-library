@@ -1,0 +1,98 @@
+{
+  "id": "world.trap_system",
+  "name": "Trap System",
+  "category": "world",
+  "description": "A hidden hazard with a three-state lifecycle: undetected, detected, resolved (disarmed or triggered). world.hazard_volume owns the damage once a trap fires \u2014 a trap is not a second damage system, it is a visibility and agency layer over one. Detection keys off a perception check (progression.attribute_sheet answers those), disarm is a check with failure consequences, and a triggered trap delegates the hurt to the volume it wraps. Owning only the lifecycle keeps the trap honest in every view: an isometric crawler and a first-person grid-stepper render it differently but run the same three states.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "detectionRadius",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Tiles within which a passive detection check can reveal the trap. Two means the party sees the trap just before the point of no return \u2014 tension without cheapness."
+    },
+    {
+      "name": "disarmDifficulty",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Default check difficulty to disarm. Per-trap data overrides this; the default exists so a designer can drop a generic dart trap without a stat block."
+    },
+    {
+      "name": "failureTriggersTrap",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a botched disarm sets the trap off. True makes disarming a gamble; false makes it free retries, which teaches players to disarm everything forever."
+    },
+    {
+      "name": "rearmable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a disarmed trap can be reset by the player and used against enemies. Delightful in the right game; off by default because it doubles the test matrix."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "trapStates",
+      "type": "object",
+      "description": "Per-trap lifecycle state: undetected | detected | disarmed | triggered."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.trapDetected",
+      "world.trapDisarmed",
+      "world.trapTriggered"
+    ],
+    "listensTo": [
+      "world.hazardEntered",
+      "input.disarmTrap"
+    ]
+  },
+  "dependencies": [
+    "world.hazard_volume"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "traps",
+    "hazards"
+  ],
+  "provenance": "library-native"
+}

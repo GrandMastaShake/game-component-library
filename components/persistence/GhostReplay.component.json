@@ -1,0 +1,107 @@
+{
+  "id": "persistence.ghost_replay",
+  "name": "Ghost Replay",
+  "category": "persistence",
+  "description": "Records a lap as a timestamped input stream against world.track_circuit's race clock and plays it back as a non-colliding rival. Inputs rather than positions are stored, so a ghost is cheap, seeks cleanly, and stays honest \u2014 playback re-simulates through the same movement stack, with sparse position keyframes kept only to correct drift when physics or tuning have changed since the recording. Recording brackets itself on world.raceStarted and world.raceFinished, so no caller has to remember to stop the tape. Storage goes through persistence.save_system rather than a private file, keeping quota, retry, and corruption policy in one place. This component owns record, storage, and playback timing only: rendering the translucent car belongs to presentation, and whether the recorded lap was valid is track_circuit's call, already answered before the save.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "sampleRateHz",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Input sampling rate. 20 Hz captures throttle and steering faithfully for arcade handling; sim-feel games with analog finesse may want 30."
+    },
+    {
+      "name": "maxGhostsPerTrack",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Stored ghosts per track, best laps kept. Bounds save size so ghost data can never crowd out real progression in the save budget."
+    },
+    {
+      "name": "recordPersonalBestOnly",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, only a new best lap is written. Races where the player finished but drove worse produce no save write at all."
+    },
+    {
+      "name": "keyframeIntervalSeconds",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Spacing of correction keyframes in the recording. Denser keyframes survive tuning changes at the cost of a larger blob."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isRecording",
+      "type": "boolean"
+    },
+    {
+      "name": "isPlayingBack",
+      "type": "boolean"
+    },
+    {
+      "name": "ghostCount",
+      "type": "number",
+      "description": "Ghosts stored for the active track. UI reads this to offer 'race your ghost' without touching the save layer."
+    }
+  ],
+  "events": {
+    "emits": [
+      "persistence.ghostRecorded",
+      "persistence.ghostLoaded"
+    ],
+    "listensTo": [
+      "world.raceStarted",
+      "world.raceFinished"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system",
+    "world.track_circuit"
+  ],
+  "tags": [
+    "racing",
+    "replay",
+    "ghost",
+    "recording"
+  ],
+  "provenance": "library-native"
+}

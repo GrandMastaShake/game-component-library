@@ -1,0 +1,64 @@
+{
+  "id": "ui.map_reveal_system",
+  "name": "Map Reveal System",
+  "category": "ui",
+  "description": "Fog-of-war for the world map: it decides which rooms the player is allowed to see and tracks how much of each region is known. Its input is trust, not geometry — world.interconnected_map_graph announces which room was entered or first visited, and this component turns those facts into reveal state, because a map that derives 'visited' from raw position can be fooled by clipping, and one that tracks its own graph duplicates the topology. It deliberately does not draw: ui.minimap renders what this marks visible, which keeps cartography policy (what to reveal) separate from cartography rendering (how it looks). For open terrain without rooms it accepts world.vision_system's tile feed as an alternate source of truth, making the same reveal pipeline serve both room-graph and tile-grid worlds. Completion percentage lives here because 'seen' is what this component uniquely knows.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "revealMode",
+      "type": "string",
+      "required": false,
+      "default": "room",
+      "description": "room reveals whole rooms on first visit; perimeter reveals only walked areas within a room; region reveals the entire region on first entry, which suits generous handheld-style maps."
+    },
+    {
+      "name": "showUnvisitedConnections",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether edges out of visited rooms are drawn before their far end is seen. Showing them advertises 'something is this way' — the genre's primary lure. Hiding them suits mystery-first design."
+    },
+    {
+      "name": "revealPersistAcrossSessions",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether reveal state is durable. The actual write is persistence.save_system's job; this flag only declares that the state is worth saving."
+    }
+  ],
+  "outputs": [
+    {"name": "revealedRoomIds", "type": "array"},
+    {
+      "name": "completionPercent",
+      "type": "number",
+      "description": "Revealed rooms over total rooms. The map-completion figure 100%-runs chase, computed from reveal state because that is the state the player can actually act on."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.mapRoomRevealed",
+      "ui.mapRegionCompleted"
+    ],
+    "listensTo": [
+      "world.roomEntered",
+      "world.roomFirstVisited",
+      "world.tileExplored"
+    ]
+  },
+  "dependencies": [
+    "world.interconnected_map_graph",
+    "ui.minimap",
+    "world.vision_system"
+  ],
+  "tags": ["metroidvania", "map", "fog-of-war", "reveal", "ui"],
+  "provenance": "library-native"
+}

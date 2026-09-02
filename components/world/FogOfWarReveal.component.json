@@ -1,0 +1,93 @@
+{
+  "id": "world.fog_of_war_reveal",
+  "name": "Fog of War Reveal",
+  "category": "world",
+  "description": "Two maps, not one: what you can see now, and what you have ever seen. world.vision_system computes current line of sight and owns the live layer; this component listens to its updates and accumulates the history layer \u2014 the dimmed, remembered geography that lets a player plan the route back. Keeping history out of the vision system matters because sight is per-frame and ephemeral while memory is per-save and persistent; conflating them is how fog ends up resetting every time the player blinks. This component owns recording and reveal queries only: rendering the two layers is a presentation concern, and persistence.save_system snapshots the history like any other state.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "revealRadiusBonus",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Extra tiles of history recorded beyond live sight. Zero means you remember exactly what you saw; a bonus forgives camera edge cases."
+    },
+    {
+      "name": "rememberEntities",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether revealed enemies stay marked on the history layer. False records terrain only \u2014 the honest default, since a remembered enemy that moved is a lie on the map."
+    },
+    {
+      "name": "persistBetweenFloors",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether history survives world.floor_descent transitions. False: every floor starts unknown. True is for single-dungeon games where the map is the progression."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "exploredTileCount",
+      "type": "number",
+      "description": "Tiles ever revealed on this floor."
+    },
+    {
+      "name": "exploredFraction",
+      "type": "number",
+      "description": "0..1 of the floor's walkable tiles revealed \u2014 the completionist metric."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.areaRevealed"
+    ],
+    "listensTo": [
+      "world.visionUpdated"
+    ]
+  },
+  "dependencies": [
+    "world.vision_system"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "exploration",
+    "visibility"
+  ],
+  "provenance": "library-native"
+}

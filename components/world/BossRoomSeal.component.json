@@ -1,0 +1,69 @@
+{
+  "id": "world.boss_room_seal",
+  "name": "Boss Room Seal",
+  "category": "world",
+  "description": "The arena contract: walls close when the fight starts and open when it ends. It owns the seal/unseal decision and the door state during the fight, because 'you may not leave' and 'you have earned the right to leave' are facts that must come from one place or every door, warp, and save point near the arena will disagree. It deliberately does not own the boss — behavior belongs to utility.behavior_fsm and whatever combat components drive the fight — and it does not own the reward, which is inventory.loot_table's table and progression.power_up_grant's mutation. Victory is detected by listening for combat.entity_defeated on the named boss entity, trusting combat.damage_resolver's fact rather than watching health bars itself. Entry is detected through the map graph's room event, not a bespoke trigger volume, so the seal stays correct when the room layout moves.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "roomId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The room this seal governs, matching a room id in world.interconnected_map_graph. Room identity comes from the graph so the seal and the map never disagree about where the arena is."
+    },
+    {
+      "name": "bossEntityId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The entity whose defeat clears the seal. Naming one entity, rather than 'everything hostile in the room', keeps add-spawning bosses from extending the lockout by accident."
+    },
+    {
+      "name": "sealOnFirstEntry",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "True seals on first entry only, so post-victory revisits are free. False reseals on every entry until the boss is dead, which suits retry-in-place design."
+    },
+    {
+      "name": "reopenOnDefeat",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether victory immediately unseals. Set false for arenas that stay closed until a scripted beat fires — the script then opens the doors by other means."
+    }
+  ],
+  "outputs": [
+    {"name": "isSealed", "type": "boolean"},
+    {
+      "name": "bossDefeated",
+      "type": "boolean",
+      "description": "The durable victory fact, kept here so save files and map markers can read it without subscribing to combat traffic."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.bossRoomSealed",
+      "world.bossRoomCleared"
+    ],
+    "listensTo": [
+      "world.roomEntered",
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "world.interconnected_map_graph",
+    "combat.damage_resolver"
+  ],
+  "tags": ["metroidvania", "boss", "arena", "seal"],
+  "provenance": "library-native"
+}

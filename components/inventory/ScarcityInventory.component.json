@@ -1,0 +1,106 @@
+{
+  "id": "inventory.scarcity_inventory",
+  "name": "Scarcity Inventory",
+  "category": "inventory",
+  "description": "Hard slot limits with forced triage: when every slot is spoken for, picking something up means choosing what to leave. It wraps inventory.core_inventory rather than replacing it — stacks, item identity, and grants still live there; this owns the cap, the triage prompt, and the drop decision. Item combining to free a slot (herb plus herb) is a recipe concern and stays in inventory.crafting_bench, because a combine button here would re-implement crafting with worse data. The design intent is fixed-inventory horror: the cap must be small enough to force real choices in the first hour, and the triage prompt must show the cost of each choice in one glance — scarcity that requires a spreadsheet reads as tedium, not dread.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxSlots",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Hard cap on carried slots. Eight is the classic survival-horror answer: enough to feel prepared, few enough that the third healing item is a moral decision."
+    },
+    {
+      "name": "allowStacking",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether identical stackables share a slot. True by default; the genre's pressure comes from variety decisions (gun or key?), not from counting bullets one slot at a time."
+    },
+    {
+      "name": "triagePromptOnFull",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a pickup into a full inventory opens the triage choice immediately instead of silently refusing. Refusal teaches players to manage space BEFORE picking up, which is the tedium this component exists to avoid."
+    },
+    {
+      "name": "dropDestroysItem",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a triage drop deletes the item or leaves it in the world. False by default — a dropped item you can come back for is a route-planning problem, which is the interesting half of scarcity."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "slotsUsed",
+      "type": "number",
+      "description": "Occupied slots out of maxSlots. The HUD renders this; AI and loot pacing may read it, but nothing should cache it."
+    },
+    {
+      "name": "isFull",
+      "type": "boolean",
+      "description": "True when slotsUsed equals maxSlots. The pickup verb checks this and routes to triage instead of failing silently."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.triageForced",
+      "inventory.itemDropped"
+    ],
+    "listensTo": [
+      "inventory.itemAdded",
+      "inventory.full",
+      "input.dropItem",
+      "input.triageChoice"
+    ]
+  },
+  "dependencies": [
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "survival-horror",
+    "scarcity",
+    "inventory",
+    "triage",
+    "core"
+  ],
+  "provenance": "library-native"
+}

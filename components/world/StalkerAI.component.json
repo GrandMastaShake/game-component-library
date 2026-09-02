@@ -1,0 +1,125 @@
+{
+  "id": "world.stalker_ai",
+  "name": "Stalker AI",
+  "category": "world",
+  "description": "A relentless pursuer built on three rules: it always knows roughly where you are, it never moves faster than dread allows, and it announces itself before it arrives. Pathing is movement.pathfinding_system's; the stalker's contribution is offscreen telegraphing — audio stingers, lighting dips — driven by distance bands, because an unstoppable threat that arrives silently reads as unfair rather than frightening. It loses the trail through world.hiding_spot state and broken line of sight, never through a stealth stat, so hiding works because the fiction says the locker works. Noise pulls it: gunfire and loud movement are evidence, which is why the horror game's shotgun is also a dinner bell. What happens on catch is combat.damage_resolver's business or the setpiece script's — this component's job ends at contact.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "patrolSpeed",
+      "type": "number",
+      "required": false,
+      "default": 2.2,
+      "description": "Search speed while no trail is hot. Slower than the player's walk on purpose: the stalker's menace comes from persistence and knowledge, not from winning a footrace."
+    },
+    {
+      "name": "pursuitSpeed",
+      "type": "number",
+      "required": false,
+      "default": 3.4,
+      "description": "Speed with a live trail. Tuned just under the player's sprint so escape is possible but expensive — a pursuer you can out-walk is weather, not a threat."
+    },
+    {
+      "name": "loseTrailSeconds",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "How long after losing sight and sound the pursuit state persists. Short enough that breaking contact works; long enough that rounding one corner never saves you."
+    },
+    {
+      "name": "telegraphDistanceBands",
+      "type": "array",
+      "required": false,
+      "default": [
+        20,
+        10,
+        4
+      ],
+      "description": "Distances at which escalating telegraphs fire (distant audio, near audio, lighting dip). Bands are crossed in both directions, so the relief of it moving AWAY is also communicated — dread needs contrast to work."
+    },
+    {
+      "name": "lastKnownMemorySeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "How long the stalker searches around the last known position before reverting to patrol. The search is a slow spiral, not a camp — a stalker that parks on your last position turns hiding into waiting."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentState",
+      "type": "string",
+      "description": "patrol, search, or pursuit — the utility.behavior_fsm state name, exposed so audio and lighting can stage the telegraph bands against actual intent."
+    },
+    {
+      "name": "distanceToTarget",
+      "type": "number",
+      "description": "Live distance to the hunted entity. Telegraphs key off this, not off vision state, because the scariest band is the one where IT knows and YOU don't."
+    },
+    {
+      "name": "isOffscreen",
+      "type": "boolean",
+      "description": "True while the stalker is outside every player view. Telegraph events only fire offscreen — a monster you can see needs no announcer."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.stalkerSpotted",
+      "world.stalkerLostTrail",
+      "world.stalkerCaughtPrey"
+    ],
+    "listensTo": [
+      "world.visionUpdated",
+      "presentation.soundPlayed",
+      "combat.projectileFired",
+      "world.hidden"
+    ]
+  },
+  "dependencies": [
+    "movement.pathfinding_system",
+    "utility.behavior_fsm",
+    "world.mob_patrol"
+  ],
+  "tags": [
+    "survival-horror",
+    "stalker",
+    "pursuer",
+    "ai",
+    "dread"
+  ],
+  "provenance": "library-native"
+}

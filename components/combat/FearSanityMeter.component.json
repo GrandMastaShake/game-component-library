@@ -1,0 +1,123 @@
+{
+  "id": "combat.fear_sanity_meter",
+  "name": "Fear Sanity Meter",
+  "category": "combat",
+  "description": "Accumulating dread as a resource the horror economy spends against the player. Fear rises from witnessing — line of sight to the stalker through world.vision_system — from darkness, and from isolation; it falls in lit, safe, occupied space. Threshold crossings, not the raw value, are what the game acts on: aim sway, audio hallucination, UI distortion are all subscribed effects, so the meter never has to know what 'scary' looks like in any given game. At full break it does NOT kill — it applies control penalties through subscribers, because a sanity spiral that kills directly removes the chance to recover, and the recovery scramble IS the genre. Fear while hidden is special-cased: hiding lowers acquisition but being cornered in a locker with the stalker outside is its own threshold event, fed by world.hidden rather than a guess.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "witnessGainPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Fear gained per second with line of sight to a threat, scaled by proximity. Seeing the stalker must cost something — otherwise the optimal play is to watch it, and a watched monster stops being one."
+    },
+    {
+      "name": "darknessGainPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Fear gained per second in darkness with no threat visible. Small but relentless: the dark is the genre's default state, and this drain is what makes light a resource instead of a rendering setting."
+    },
+    {
+      "name": "safeDecayPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Fear shed per second in lit, threat-free space. Recovery must be slower than the worst gains, or fear becomes a stat you wait out — and waiting out dread is the one thing it must never be."
+    },
+    {
+      "name": "thresholds",
+      "type": "array",
+      "required": false,
+      "default": [
+        25,
+        50,
+        75
+      ],
+      "description": "Fear levels at which combat.fearThresholdCrossed fires with the crossed tier. Subscribers attach escalating effects per tier; the meter emits the crossing, never the effect."
+    },
+    {
+      "name": "breakDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "How long a full break's penalty window lasts before the meter force-settles to the top threshold. The break is a punishment beat with an ending, not a death — an endless break is a soft-locked run."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "fearLevel",
+      "type": "number",
+      "description": "Current fear, 0 to 100. Subscribers may read it for continuous effects (breathing audio, vignette) but thresholds are the contract for discrete ones."
+    },
+    {
+      "name": "currentThreshold",
+      "type": "number",
+      "description": "Highest threshold currently met, or 0 below the first. UI tiers and effect stacks both read this single number."
+    },
+    {
+      "name": "isBroken",
+      "type": "boolean",
+      "description": "True during the break window. Control-scheme penalties key off this; nothing else should infer a break from the raw level."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.fearThresholdCrossed",
+      "combat.sanityBroken",
+      "combat.fearRecovered"
+    ],
+    "listensTo": [
+      "world.visionUpdated",
+      "world.stalkerSpotted",
+      "world.hidden"
+    ]
+  },
+  "dependencies": [
+    "world.vision_system",
+    "presentation.atmosphere_system"
+  ],
+  "tags": [
+    "survival-horror",
+    "fear",
+    "sanity",
+    "dread",
+    "core"
+  ],
+  "provenance": "library-native"
+}

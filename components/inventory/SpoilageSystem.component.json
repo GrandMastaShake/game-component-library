@@ -1,0 +1,99 @@
+{
+  "id": "inventory.spoilage_system",
+  "name": "Spoilage System",
+  "category": "inventory",
+  "description": "Per-item freshness that ticks down inside the inventory and converts food into waste. Freshness is item metadata with a half-life per item class; spoiled items are CONVERTED, not deleted — into a spoiled variant or compost — because silent deletion punishes players for not reading a wiki, while conversion keeps the loss legible and even useful. The tick batches on day boundaries and timer completions rather than per-frame, because spoilage is a logistics pressure, not a twitch mechanic, and per-frame freshness is a float nobody can read. Preservation (salt, icebox, drying rack) is a drain multiplier supplied by the container holding the item, so storage gameplay composes without this component knowing what an icebox is.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "defaultHalfLifeDays",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Game days for an unclassed perishable to lose half its freshness. Item classes override this in data; the default exists so a designer who forgets gets a gentle clock, not immortal food."
+    },
+    {
+      "name": "tickMode",
+      "type": "string",
+      "required": false,
+      "default": "daily",
+      "description": "'daily' batches decay on world.dawnStarted; 'timer' ticks on utility.timerCompleted for finer-grained modes. Daily is the default because one visible freshness step per morning is readable; hourly wobble is not."
+    },
+    {
+      "name": "spoiledItemSuffix",
+      "type": "string",
+      "required": false,
+      "default": "_spoiled",
+      "description": "Suffix mapping a spoiled item id to its converted form ('berries' to 'berries_spoiled'). Conversion target is a naming convention, not a lookup table, so new perishables spoil correctly the day they are authored."
+    },
+    {
+      "name": "containerPreserveMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Drain multiplier applied when the containing storage declares preservation. Read from the container per tick; this component never asks what KIND of storage it is, which is why iceboxes and salt pits both work without code here."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "spoiledTotalCount",
+      "type": "number",
+      "description": "Lifetime count of items converted to spoiled form. A telemetry number for tuning the half-life ladder — if nothing ever spoils, the clock is decorative."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.itemFreshnessChanged",
+      "inventory.itemSpoiled"
+    ],
+    "listensTo": [
+      "inventory.itemAdded",
+      "world.dawnStarted",
+      "utility.timerCompleted"
+    ]
+  },
+  "dependencies": [
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "survival",
+    "spoilage",
+    "food",
+    "logistics"
+  ],
+  "provenance": "library-native"
+}

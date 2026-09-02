@@ -1,0 +1,101 @@
+{
+  "id": "combat.cover_bonus_grid",
+  "name": "Cover Bonus Grid",
+  "category": "combat",
+  "description": "Directional cover, computed from the map, applied to the shot. Standing adjacent to a wall on the attacker's side makes the shot harder; the bonus belongs to the defender and flips with attack direction, which is exactly why cover is computed per attack instead of stored per tile \u2014 a tile is not 'in cover', a shot is. world.tile_grid supplies the geometry and combat.damage_resolver applies the final number; this component's whole job is the modifier in between, and it never touches damage directly, so a tactics game and a tactics-adjacent RPG share one resolver. Half cover versus full cover is data on the tile, not a special case in code.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "halfCoverMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Incoming hit-chance or damage scale past half cover. 0.8 makes cover meaningful without making it a wall."
+    },
+    {
+      "name": "fullCoverMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Scale past full cover. 0.5 is the strong statement: full cover halves the problem, flanking deletes it."
+    },
+    {
+      "name": "coverTags",
+      "type": "array",
+      "required": false,
+      "default": [
+        "low_wall",
+        "pillar",
+        "crate"
+      ],
+      "description": "Tile feature tags that grant cover, as data, so level designers add cover objects without code."
+    },
+    {
+      "name": "flankingIgnoresCover",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether attacks from an uncovered side bypass the bonus. True is what makes cover a positioning puzzle instead of a stat."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastCoverAssessment",
+      "type": "object",
+      "description": "Direction, tier, and multiplier of the most recent shot evaluated."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.coverApplied"
+    ],
+    "listensTo": [
+      "world.tileGridBuilt",
+      "movement.moveExecuted"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid",
+    "combat.damage_resolver"
+  ],
+  "tags": [
+    "tactics",
+    "cover",
+    "positioning"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,102 @@
+{
+  "id": "world.hidden_alcove",
+  "name": "Hidden Alcove",
+  "category": "world",
+  "description": "A secret space that knows when it has been found. It owns the discovery check \u2014 entered volume plus actually seen, reusing world.vision_system's explored-tile state rather than keeping a second fog map, because two sources of 'have I seen this' is how secrets announce themselves through walls \u2014 and the one-shot discovered flag per alcove that makes the fanfare fire exactly once per save. The reward is deliberately not granted here: world.alcoveDiscovered is an announcement, and whether it means a loot roll, a lore entry, or a statue is the listener's genre decision. It does not own the hinting that leads a player close (ui.guided_hint_system pings near, never reveals) and it does not own counting secrets toward completion; progression.completion_tracker listens for the same event and does the arithmetic.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "alcoveId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Stable id for this alcove, used as the discovered-flag key and by completion tracking's region definitions."
+    },
+    {
+      "name": "discoveryRequiresLineOfSight",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, entering the volume is not enough \u2014 the alcove must be visible via the vision system. Prevents accidentally 'finding' a secret by clipping its trigger in the dark."
+    },
+    {
+      "name": "interactToConfirm",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When true, discovery completes only on input.interact inside the volume, for secrets that should feel examined rather than stumbled into."
+    },
+    {
+      "name": "fanfareCueId",
+      "type": "string",
+      "required": false,
+      "default": "secret_found",
+      "description": "Audio cue id played on first discovery. Just the id \u2014 presentation.audio_system owns playback and mixing."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "discovered",
+      "type": "boolean",
+      "description": "One-shot flag per alcove. Once true it never resets within the save."
+    },
+    {
+      "name": "discoveryCount",
+      "type": "number",
+      "description": "Total discoveries this session, exposed for stats and achievement sinks."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.alcoveDiscovered"
+    ],
+    "listensTo": [
+      "world.tileExplored",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "world.vision_system"
+  ],
+  "tags": [
+    "collectathon",
+    "secrets",
+    "exploration",
+    "discovery"
+  ],
+  "provenance": "library-native"
+}

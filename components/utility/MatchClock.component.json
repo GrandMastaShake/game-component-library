@@ -1,0 +1,117 @@
+{
+  "id": "utility.match_clock",
+  "name": "Match Clock",
+  "category": "utility",
+  "description": "Periods, stoppages, and overtime: the official time a match is played against, distinct from utility.timer_system's raw countdown. It owns period structure (halves, quarters), stoppage accounting — the clock pauses while the drama doesn't — and the overtime rule as a plug point, because golden goal versus shootout is a config row, not a code branch. Score-triggered resets listen to world.goalScored so kickoff timing survives ruleset changes without a rewire. It displays nothing: ui.hud renders utility.periodStarted and utility.periodEnded like any other timer event, and the clock never learns what a scoreboard looks like.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "periodCount",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Halves, quarters, or innings — same mechanism, different count. Two halves with a midpoint break is the default because the break is where substitutions and strategy talks live."
+    },
+    {
+      "name": "periodLengthSeconds",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Regulation length of one period. Five minutes is the video-game half: long enough for a comeback narrative, short enough that a blowout ends before it curdles."
+    },
+    {
+      "name": "stoppageTime",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether dead time is banked and replayed at period end. On by default because stoppage time is where the genre keeps its last-gasp goals; arcade modes turn it off and get a cleaner clock."
+    },
+    {
+      "name": "overtimeRule",
+      "type": "string",
+      "required": false,
+      "default": "golden_goal",
+      "description": "What a tied regulation produces: 'golden_goal', 'extra_periods', or 'shootout'. The clock sequences whichever rule is named; the rule's resolution logic belongs to whoever owns its mechanics."
+    },
+    {
+      "name": "overtimeLengthSeconds",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Length of an overtime period when the rule needs one. Ignored entirely under golden goal, which is the point of keeping it separate — the clock should not know why it is running."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentPeriod",
+      "type": "number",
+      "description": "1-indexed period in progress, or the regulation count plus one during overtime. Commentary, HUD, and stamina drain modifiers all read this one number."
+    },
+    {
+      "name": "clockSeconds",
+      "type": "number",
+      "description": "Official time remaining in the period, frozen during stoppages. This is the authoritative match clock; utility.timer_system underneath is just the metronome."
+    },
+    {
+      "name": "isOvertime",
+      "type": "boolean",
+      "description": "True once regulation ends tied. Rule systems gate on this rather than comparing scores themselves, because 'tied at the whistle' is a moment, not a query."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.periodStarted",
+      "utility.periodEnded",
+      "utility.overtimeStarted",
+      "utility.matchClockExpired"
+    ],
+    "listensTo": [
+      "utility.timerCompleted",
+      "world.goalScored"
+    ]
+  },
+  "dependencies": [
+    "utility.timer_system"
+  ],
+  "tags": [
+    "sports",
+    "clock",
+    "periods",
+    "overtime"
+  ],
+  "provenance": "library-native"
+}

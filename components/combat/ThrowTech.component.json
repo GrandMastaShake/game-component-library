@@ -1,0 +1,76 @@
+{
+  "id": "combat.throw_tech",
+  "name": "Throw Tech",
+  "category": "combat",
+  "description": "The grappler layer: throw initiation, the escape window, and the resolution. Throws exist to beat block, and techs exist so throws cannot be a free answer — the rock-paper-scissors closes only if both halves live in one component, because a throw and its escape are one interaction with two participants and splitting them invites desync between 'you were thrown' and 'you teched'. This component owns the range check, the tech window, and the outcome (landed, teched, whiffed). It deliberately does not own throw damage — combat.damage_resolver computes it from the same fact — and it does not own command grabs, which are just moves in combat.combo_chain's tables that route here for resolution. The tech window listens to its own combat.throw_started event, so the defender's escape deadline is derived from the attacker's initiation rather than a second, racier signal.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "grabRange",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "Contact distance for a throw to connect. Slightly beyond jab range is the classic value — close enough to threaten blockers, not so far it replaces striking."
+    },
+    {
+      "name": "techWindowFrames",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Frames after combat.throw_started during which the defender's throw input escapes. Ten is reactable for trained players, unreactable on pure guess — the intended mind-game."
+    },
+    {
+      "name": "throwDamage",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Base damage handed to combat.damage_resolver on a landed throw. Unteched throws should sting but never out-damage a real combo."
+    },
+    {
+      "name": "throwInvulnerableFrames",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Startup frames during which the thrower cannot be hit out of the throw. Zero keeps throws honest; nonzero turns them into reversals and warps the defensive game."
+    },
+    {
+      "name": "whiffRecoveryFrames",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Recovery after a throw that connects with nothing. Whiffed throws must be punishable or throwing on every knockdown becomes free."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "throwState",
+      "type": "string",
+      "description": "idle, started, landed, teched, or whiffed — the interaction's single source of truth for both fighters."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.throwStarted",
+      "combat.throwLanded",
+      "combat.throwTeched"
+    ],
+    "listensTo": [
+      "input.throw",
+      "combat.throwStarted"
+    ]
+  },
+  "dependencies": [
+    "combat.hitbox_hurtbox",
+    "combat.damage_resolver"
+  ],
+  "tags": ["fighting", "throw", "grapple", "tech"],
+  "provenance": "library-native"
+}

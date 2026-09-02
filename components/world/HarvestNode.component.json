@@ -1,0 +1,110 @@
+{
+  "id": "world.harvest_node",
+  "name": "Harvest Node",
+  "category": "world",
+  "description": "A choppable, minable, gatherable resource point: a hit-point pool depleted per swing, a loot roll on depletion, and a respawn timer. Yields come from inventory.loot_table rolls so node contents are data shared with every other loot source in the game — a tree and a treasure chest speak the same reward language. The node owns its respawn because 'when does this forest come back' is world pacing, but whether the player is ALLOWED to harvest it is decided from the incoming hit's tool metadata, and the tool itself stays with whoever swung it. It does not place nodes — that is world.terrain_generator or world.world_builder's job; this is the behavior of one node once it exists, and keeping placement out is what lets the same descriptor serve hand-built and procedural maps.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "hitPoints",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Swings required to deplete the node with a qualifying tool. The node's health pool, not its loot, is the pacing lever — five swings of a tree is a rhythm, fifty is a chore."
+    },
+    {
+      "name": "lootTableId",
+      "type": "string",
+      "required": false,
+      "default": "wood_basic",
+      "description": "Roll definition handed to inventory.loot_table on depletion. Rare drops (the occasional resin, the geode in the rock) live in the table, so node descriptors stay boring and reusable."
+    },
+    {
+      "name": "requiredToolTier",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Minimum tool tier whose hits count. The check reads metadata on combat.hit; a sub-tier hit is ignored rather than punished, because bouncing the player off a rock teaches nothing."
+    },
+    {
+      "name": "respawnSeconds",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time from depletion to regrowth. Set per node type at placement; a single global value would make every resource equally renewable, which quietly flattens the gathering map."
+    },
+    {
+      "name": "partialYieldPerHit",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether each qualifying hit rolls a fraction of the table, or everything waits for depletion. Partial yields feel generous per swing; depletion yields make the final hit an event. Pick per resource, not globally."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "remainingHitPoints",
+      "type": "number",
+      "description": "Swings left before depletion. Presentation layers read this for crack-and-shake staging; gameplay should not branch on it."
+    },
+    {
+      "name": "isDepleted",
+      "type": "boolean",
+      "description": "True from depletion until respawn. A depleted node ignores hits entirely — it is scenery with a timer."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.nodeHarvested",
+      "world.nodeDepleted",
+      "world.nodeRespawned"
+    ],
+    "listensTo": [
+      "combat.hit"
+    ]
+  },
+  "dependencies": [
+    "inventory.loot_table"
+  ],
+  "tags": [
+    "survival",
+    "harvest",
+    "resources",
+    "gathering"
+  ],
+  "provenance": "library-native"
+}

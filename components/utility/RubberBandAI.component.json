@@ -1,0 +1,102 @@
+{
+  "id": "utility.rubber_band_ai",
+  "name": "Rubber Band AI",
+  "category": "utility",
+  "description": "Keeps AI racers inside a believable gap of the player by scaling their pace, never by teleporting them. It exists because racing against a void is boring and racing against perfect drivers is humiliating; the band is what makes midfield battles happen at any skill level. This component owns only the handicap calculation \u2014 it reads race position from world.checkpointCrossed and world.lapCompleted (progress facts owned by world.track_circuit) and emits a pace multiplier. It does not drive the cars: the multiplier lands on the AI vehicle's movement.vehicle_tuning parameters, so a boosted rival obeys the same physics as the player and can still be out-braked into a corner. Difficulty selection is deliberately just the band width; there is no hidden skill model here.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxGapSeconds",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Time gap to the player beyond which the band pulls. This is the difficulty knob \u2014 narrower bands produce relentless packs, wider bands let a strong player break away."
+    },
+    {
+      "name": "catchUpFactor",
+      "type": "number",
+      "required": false,
+      "default": 1.15,
+      "description": "Pace multiplier applied to AI behind the band. Kept modest so the catch-up reads as pressure, not as a car materializing in the mirror."
+    },
+    {
+      "name": "fallBackFactor",
+      "type": "number",
+      "required": false,
+      "default": 0.9,
+      "description": "Pace multiplier applied to AI ahead of the band. Below 1.0 so a dominant player still gets a race in the mirrors."
+    },
+    {
+      "name": "updateIntervalSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How often handicaps are recomputed. Coarse updates are fine \u2014 per-frame adjustment makes the band visible as speed pulsing."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentHandicaps",
+      "type": "object",
+      "description": "Racer id to active pace multiplier. Exposed for telemetry and difficulty-tuning review, not for gameplay reads."
+    },
+    {
+      "name": "bandedRacerCount",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.paceAdjusted"
+    ],
+    "listensTo": [
+      "world.checkpointCrossed",
+      "world.lapCompleted"
+    ]
+  },
+  "dependencies": [
+    "world.track_circuit",
+    "movement.vehicle_basic"
+  ],
+  "tags": [
+    "racing",
+    "ai",
+    "difficulty",
+    "pacing"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,105 @@
+{
+  "id": "world.drop_deployment",
+  "name": "Drop Deployment",
+  "category": "world",
+  "description": "Owns the first sixty seconds of a match: selecting a point on the drop path, the skydive down, and the landing. Selection happens on the map because 'where do I commit' is the genre's opening bet — hot-drop for loot density, cold-drop for safety — and the component keeps the commitment binding once made, since a re-pickable drop deletes the bet. The descent is a scripted movement state with capped steering: fully free flight would turn deployment into a traversal exploit that skips the ground game. The moment boots touch ground, control returns to the normal movement stack and touchdown is movement.ground_sensor's event like any other landing; this component's responsibility ends exactly there.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "dropPathDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "How long the drop vehicle takes to cross the map. Players may exit at any point along it; the path is published on the map so the decision is informed, not a dice roll."
+    },
+    {
+      "name": "steerSpeed",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Horizontal steering speed while descending. Capped well below ground sprint speed so the dive closes distance vertically but cannot be used as a lateral travel tool."
+    },
+    {
+      "name": "diveSpeed",
+      "type": "number",
+      "required": false,
+      "default": 45,
+      "description": "Maximum vertical descent rate. Racing the drop is real strategy — first to the loot wins it — so dive speed is a tunable, not a constant."
+    },
+    {
+      "name": "minDeployHeight",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Altitude at which the final descent stage (chute, glide, whatever the fiction says) forces open. Exists so a player cannot free-fall to ground level and skip the vulnerable slow-descent window."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isDropping",
+      "type": "boolean",
+      "description": "True from drop-vehicle exit until landing. Combat and loot systems gate on this — a dropping player is a spectator with velocity."
+    },
+    {
+      "name": "selectedDropPoint",
+      "type": "object",
+      "description": "The committed landing target, set once at selection and never revised. Downstream systems (squad pings, AI drop logic) read this rather than re-deriving intent."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.dropPointSelected",
+      "world.deploymentLanded"
+    ],
+    "listensTo": [
+      "progression.matchPhaseChanged",
+      "input.selectDropPoint",
+      "input.dive"
+    ]
+  },
+  "dependencies": [
+    "movement.character_body",
+    "ui.minimap"
+  ],
+  "tags": [
+    "battle-royale",
+    "drop",
+    "skydive",
+    "deployment"
+  ],
+  "provenance": "library-native"
+}

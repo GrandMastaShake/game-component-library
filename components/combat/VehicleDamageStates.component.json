@@ -1,0 +1,104 @@
+{
+  "id": "combat.vehicle_damage_states",
+  "name": "Vehicle Damage States",
+  "category": "combat",
+  "description": "Discrete damage bands \u2014 pristine, damaged, critical, disabled \u2014 that degrade vehicle performance as hits accumulate. It exists because hit points alone make damage invisible until the kill, and a combat driving game wants every landed shot to change how the target drives. This component owns the band thresholds and the performance multiplier per band. Crucially, it applies degradation by rewriting the active tune through movement.vehicle_tuning rather than touching physics itself, so a crippled engine and a stock engine are the same code path and a repair is just another preset swap. It listens to combat.damageResolved (weapons) and combat.ramDamageDealt (collisions) so both damage sources feed one band ladder. It does not own repair \u2014 parts and currency live with garage and economy systems \u2014 and it does not draw the smoke; presentation subscribes to the band-change event for that.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "bandThresholds",
+      "type": "array",
+      "required": false,
+      "default": [0.6, 0.3, 0.05],
+      "description": "Health fractions where bands transition, descending. Three thresholds give four states; more thresholds make degradation smoother but less legible."
+    },
+    {
+      "name": "speedMultiplierPerBand",
+      "type": "array",
+      "required": false,
+      "default": [1, 0.85, 0.65, 0.4],
+      "description": "Top-speed multiplier per band, written into the active tune. A critical car that can still cruise at full speed removes the incentive to finish it off."
+    },
+    {
+      "name": "steeringMultiplierPerBand",
+      "type": "array",
+      "required": false,
+      "default": [1, 0.9, 0.75, 0.5],
+      "description": "Steering response per band. Kept gentler than speed loss \u2014 a damaged car should feel wounded, not undriveable, until the disabled band."
+    },
+    {
+      "name": "disableThreshold",
+      "type": "number",
+      "required": false,
+      "default": 0.05,
+      "description": "Health fraction at which combat.vehicleDisabled fires. Above zero so 'disabled' and 'destroyed' stay distinct moments the mode can rule on separately."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentBand",
+      "type": "number",
+      "description": "Index into the band ladder. Presentation reads this for visual damage stages; audio reads it for engine strain."
+    },
+    {
+      "name": "performanceMultiplier",
+      "type": "number",
+      "description": "Aggregate multiplier currently applied to the tune, for telemetry and spectator UI."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.vehicleDamageStateChanged",
+      "combat.vehicleDisabled"
+    ],
+    "listensTo": [
+      "combat.damageResolved",
+      "combat.ramDamageDealt"
+    ]
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "movement.vehicle_tuning"
+  ],
+  "tags": [
+    "vehicle",
+    "damage",
+    "degradation",
+    "states"
+  ],
+  "provenance": "library-native"
+}

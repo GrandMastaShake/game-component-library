@@ -1,0 +1,101 @@
+{
+  "id": "social.street_rep_tiers",
+  "name": "Street Rep Tiers",
+  "category": "social",
+  "description": "The named ladder the underground runs on \u2014 Rookie through Kingpin \u2014 and the gates hung on each rung: which events unlock, which shop stock appears, which rivals will race you. It owns tier thresholds and unlock declarations, nothing more. Raw reputation bookkeeping is intentionally deferred to the generic reputation ledger (social.reputation_system in the RPG family pack); this component consumes rep-granting signals it can already observe \u2014 economy.gigCompleted, progression.questCompleted, economy.wagerWon \u2014 and translates accumulated standing into 'what changed for you today'. It does not pay out money (gigs and wagers do that), does not grant driver skill (progression.driver_progression), and never blocks content silently: every locked thing names the tier that opens it, because a gate you cannot read is just a wall.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tierLadder",
+      "type": "array",
+      "required": false,
+      "default": ["rookie", "known", "respected", "feared", "kingpin"],
+      "description": "Ordered tier names with standing thresholds. Named tiers rather than numbers, because 'the Feared tier races' is a sentence a quest writer can use."
+    },
+    {
+      "name": "demotionEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether losing standing can drop a tier. Off by default: earned access is a progression promise, and the grind-back after demotion reads as punishment rather than stakes."
+    },
+    {
+      "name": "shopStockPerTier",
+      "type": "object",
+      "required": false,
+      "default": null,
+      "description": "Tier to unlocked part and vehicle stock. Shops read this mapping; this component never touches inventory itself."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentTier",
+      "type": "string"
+    },
+    {
+      "name": "progressToNextTier",
+      "type": "number",
+      "description": "Fraction of the way to the next tier, 0 to 1. UI renders this as the rep bar; keeping it here means every surface agrees on the number."
+    },
+    {
+      "name": "unlockedEventIds",
+      "type": "array",
+      "description": "Events open at the current tier. Read by the gig board and race calendar when composing their listings."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.repTierChanged",
+      "social.repEventUnlocked"
+    ],
+    "listensTo": [
+      "economy.gigCompleted",
+      "progression.questCompleted",
+      "economy.wagerWon"
+    ]
+  },
+  "dependencies": [
+    "economy.gig_economy"
+  ],
+  "tags": [
+    "driver-rpg",
+    "reputation",
+    "tiers",
+    "gating"
+  ],
+  "provenance": "library-native"
+}

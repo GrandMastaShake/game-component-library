@@ -1,0 +1,134 @@
+{
+  "id": "world.zone_collapse",
+  "name": "Zone Collapse",
+  "category": "world",
+  "description": "The shrinking safe area that gives a battle royale its clock. Owns the zone geometry per phase (center and radius), the shrink schedule, and the escalating damage tick outside it. Being outside the zone IS a hazard, and the tick is delivered through world.hazard_volume rather than a private damage path so 'on fire from the zone' and 'on fire from lava' share one pipeline — but the damage ladder lives here, because zone damage must escalate on the match clock, not on hazard tuning. The next circle is revealed a phase ahead (world.zoneRevealed) because the rotation decision is the strategy layer; killing stragglers is only enforcement. When phases advance and when the match ends is progression.match_lifecycle's call — this component enforces geography, never victory.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "phaseRadii",
+      "type": "array",
+      "required": false,
+      "default": [
+        500,
+        300,
+        180,
+        100,
+        50,
+        20,
+        5
+      ],
+      "description": "Safe-zone radius per phase, largest first. Declared as data rather than computed from a shrink factor so designers can hand-place the tense endgame circles instead of accepting whatever the math produces."
+    },
+    {
+      "name": "damagePerTickByPhase",
+      "type": "array",
+      "required": false,
+      "default": [
+        1,
+        2,
+        5,
+        8,
+        12,
+        18,
+        25
+      ],
+      "description": "Damage per tick while outside the zone, indexed by phase. Escalation is the point: early zone is a nudge, late zone is a wall. Must be tuned against combat.damage_resolver's health pools, not in isolation."
+    },
+    {
+      "name": "tickIntervalSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "How often outside-zone damage is applied. Ticks rather than continuous drain so the damage is legible and so world.hazard_volume's enter/exit semantics still mean something."
+    },
+    {
+      "name": "shrinkDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "How long the boundary takes to travel from current radius to the next phase's radius. The travel window — not the damage — is what creates the rotation fights the genre is about."
+    },
+    {
+      "name": "revealAheadPhases",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How many phases ahead the next circle is shown on the map. 0 turns the mode into pure reaction; 2+ removes the gamble. One phase is the genre's settled answer."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentPhase",
+      "type": "number",
+      "description": "Index into phaseRadii. progression.match_lifecycle reads this to know when the endgame has begun."
+    },
+    {
+      "name": "currentRadius",
+      "type": "number",
+      "description": "Live safe-zone radius, interpolating during a shrink. The minimap renders this; nothing else should compute its own copy."
+    },
+    {
+      "name": "isShrinking",
+      "type": "boolean",
+      "description": "True while the boundary is moving. AI and audio both key off this — the shrink is the match's loudest sentence."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.zoneRevealed",
+      "world.zoneShrinkStarted",
+      "world.zoneShrinkCompleted"
+    ],
+    "listensTo": [
+      "progression.matchPhaseChanged",
+      "utility.timerCompleted"
+    ]
+  },
+  "dependencies": [
+    "world.hazard_volume",
+    "ui.minimap"
+  ],
+  "tags": [
+    "battle-royale",
+    "zone",
+    "circle",
+    "pacing",
+    "core"
+  ],
+  "provenance": "library-native"
+}

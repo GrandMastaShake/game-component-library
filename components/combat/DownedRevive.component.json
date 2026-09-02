@@ -1,0 +1,119 @@
+{
+  "id": "combat.downed_revive",
+  "name": "Downed Revive",
+  "category": "combat",
+  "description": "The second chance between 'health hit zero' and 'out of the match'. Intercepts the lethal blow into a downed state with a bleed-out timer, and owns the revive channel: range, duration, interruption on damage. It does not heal — a completed revive applies a fixed reviveHealthFraction and hands the entity back to combat.damage_resolver's authority, because two components writing health is how players end up immortal. Solo modes simply never enable it. Its presence in a squad match is what turns 'finish the downed player' into a decision — spend the ammo and exposure, or let the clock do it — instead of an automatic.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "bleedOutSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Time from downed to fully dead. This is the rescue window and the tension budget in one number; under 15 seconds revives never happen, over 60 the downed state loses its teeth."
+    },
+    {
+      "name": "reviveChannelSeconds",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Uninterrupted channel time to complete a revive. Long enough that reviving mid-fight is a real commitment — the channel, not the bleed-out, is what the defending team shoots at."
+    },
+    {
+      "name": "reviveHealthFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.3,
+      "description": "Health restored on a successful revive, as a fraction of max. Deliberately low: a revived player should rejoin the fight as a liability being protected, not a reset button."
+    },
+    {
+      "name": "reviveRange",
+      "type": "number",
+      "required": false,
+      "default": 2.5,
+      "description": "Maximum distance between reviver and downed player. Contact-range by default so the revive physically commits the rescuer next to a target everyone is already aiming at."
+    },
+    {
+      "name": "damageInterruptsRevive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether damage to the reviver breaks the channel. True, because an uninterruptible revive turns the mechanic into a scripted trade instead of a contested play."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isDowned",
+      "type": "boolean",
+      "description": "True from the lethal blow until revived or bled out. Movement and weapon systems gate on this — a downed player crawls, and nothing here decides how crawling works."
+    },
+    {
+      "name": "bleedOutRemaining",
+      "type": "number",
+      "description": "Seconds left before death. The HUD's countdown and the killer's decision both read this same number."
+    },
+    {
+      "name": "reviveProgress",
+      "type": "number",
+      "description": "Channel completion, 0 to 1, for whoever is reviving this entity. Zero when no channel is active."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.downed",
+      "combat.reviveStarted",
+      "combat.revived",
+      "combat.bleedOut"
+    ],
+    "listensTo": [
+      "combat.damageResolved",
+      "input.revive"
+    ]
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "social.party_system"
+  ],
+  "tags": [
+    "battle-royale",
+    "downed",
+    "revive",
+    "squad",
+    "stakes"
+  ],
+  "provenance": "library-native"
+}

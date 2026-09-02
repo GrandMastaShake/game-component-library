@@ -1,0 +1,77 @@
+{
+  "id": "utility.beat_clock",
+  "name": "Beat Clock",
+  "category": "utility",
+  "description": "The song's position as ground truth: a sample-accurate mapping from audio playback position to beats and bars, with latency calibration. It exists separately from utility.timer_system because frame timers drift against the audio hardware clock — over a three-minute song that drift is multiple judgement windows, and a rhythm game whose clock slides reads as broken no matter how generous the windows are. This component owns the bpm map, the beat/bar phase, and the two latency offsets (audio output and input path) that calibration measures; it deliberately does not play audio — presentation.audio_system starts and stops the track, and this clock reads the position. It also does not react to its own beats: ui.note_highway and utility.judgement_window subscribe, and the clock stays ignorant of both, so the same clock can drive a lane game, a dance game, or a boss that attacks on the downbeat.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "bpmMap",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Entries of {beat, bpm} marking tempo changes. A map rather than a scalar because real charts accelerate; constant-bpm songs are a one-entry map."
+    },
+    {
+      "name": "offsetSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Where beat zero sits in the audio. Almost no chart starts exactly at sample zero, and a wrong offset poisons every beat that follows."
+    },
+    {
+      "name": "audioLatencySeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Output-path delay: what the player hears lags the clock. Measured by calibration, not guessed — Bluetooth alone can add a fifth of a second."
+    },
+    {
+      "name": "inputLatencySeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Input-path delay: the press lags the player's intent. Combined with audio latency, this is the number judgement deltas are corrected by."
+    },
+    {
+      "name": "calibrationStepSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.01,
+      "description": "Increment the calibration flow nudges offsets by. Ten milliseconds is fine enough to converge, coarse enough that manual calibration terminates."
+    }
+  ],
+  "outputs": [
+    {"name": "songPositionSeconds", "type": "number"},
+    {"name": "currentBeat", "type": "number"},
+    {
+      "name": "beatPhase",
+      "type": "number",
+      "description": "0..1 position within the current beat — the value scroll positions and pulse animations interpolate from."
+    },
+    {"name": "calibratedLatencySeconds", "type": "number"}
+  ],
+  "events": {
+    "emits": [
+      "utility.beatTicked",
+      "utility.songStarted",
+      "utility.songEnded",
+      "utility.latencyCalibrated"
+    ],
+    "listensTo": [
+      "presentation.musicChanged",
+      "input.calibrate"
+    ]
+  },
+  "dependencies": ["presentation.audio_system"],
+  "tags": ["rhythm", "beat", "timing", "calibration", "core"],
+  "provenance": "library-native"
+}

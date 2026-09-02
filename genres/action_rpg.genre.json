@@ -1,0 +1,46 @@
+{
+  "id": "genre.action_rpg",
+  "name": "Action RPG",
+  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery.",
+  "version": "0.1.0",
+  "loop": "fight in real time \u2192 loot \u2192 build character \u2192 bigger fight",
+  "views": [
+    "isometric",
+    "top-down"
+  ],
+  "memberComponents": [
+    "combat.melee_basic",
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "combat.equipment_slots",
+    "progression.xp_leveling",
+    "progression.skills_tree",
+    "inventory.loot_table",
+    "progression.quest_log",
+    "inventory.slotted_bag"
+  ],
+  "newComponents": [
+    "combat.hotbar_abilities",
+    "inventory.affix_loot_generator",
+    "combat.enemy_tier_scaling",
+    "inventory.potion_belt",
+    "world.waypoint_travel"
+  ],
+  "signatureCompound": {
+    "name": "Dungeon Run Loop",
+    "description": "Kill a pack with hotbar abilities resolved through damage_resolver, roll the drop through loot_table into affix_loot_generator, wear what rolled well, and let xp_leveling plus enemy_tier_scaling raise both sides for the next pull. If this loop runs headless, the genre exists.",
+    "memberIds": [
+      "combat.hotbar_abilities",
+      "combat.damage_resolver",
+      "inventory.loot_table",
+      "inventory.affix_loot_generator",
+      "progression.xp_leveling",
+      "combat.enemy_tier_scaling"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "real-time",
+    "loot"
+  ]
+}

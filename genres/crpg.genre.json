@@ -1,0 +1,42 @@
+{
+  "id": "genre.crpg",
+  "name": "CRPG",
+  "description": "A party of interlocking builds fighting tactical encounters, talking through branching dialogue where stats open doors, and living with consequences factions remember. The spine is dialogue_tree_engine wired to attribute_sheet and reputation_system: words are mechanics here, not decoration.",
+  "version": "0.1.0",
+  "loop": "party of builds \u2192 tactical encounters \u2192 dialogue choices \u2192 branching story",
+  "views": [
+    "isometric"
+  ],
+  "memberComponents": [
+    "social.party_system",
+    "ui.dialogue_box",
+    "progression.quest_log",
+    "progression.skills_tree",
+    "combat.status_effects",
+    "persistence.save_system"
+  ],
+  "newComponents": [
+    "social.party_formation",
+    "ui.dialogue_tree_engine",
+    "progression.attribute_sheet",
+    "social.reputation_system",
+    "world.rest_camp"
+  ],
+  "signatureCompound": {
+    "name": "Branching Encounter",
+    "description": "Walk the party in under party_formation, talk through dialogue_tree_engine with attribute_sheet rolling the checks, and let reputation_system plus the quest log turn the outcome into standing the next quest gate reads. Combat is optional; consequence is not.",
+    "memberIds": [
+      "social.party_formation",
+      "ui.dialogue_tree_engine",
+      "progression.attribute_sheet",
+      "social.reputation_system",
+      "progression.quest_log"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "party",
+    "dialogue",
+    "branching"
+  ]
+}

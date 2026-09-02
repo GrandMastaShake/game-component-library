@@ -1,0 +1,110 @@
+{
+  "id": "world.track_circuit",
+  "name": "Track Circuit",
+  "category": "world",
+  "description": "The definition of a lap: an ordered checkpoint sequence laid over a spline, the radius that counts as crossing each gate, and the validation that decides whether a lap counts. It exists because 'who is winning' is only computable once 'what progress means' is nailed down, and progress on a circuit is gate order, not distance to a finish line. This component owns gate order, lap counting, and wrong-way or gate-skip detection \u2014 reported as world.lapInvalidated rather than enforced physically, because whether a skipped gate means respawn, penalty, or disqualification is a race-rules decision made above it. It does not own grid placement, standings, or podium logic, and it deliberately borrows timing from utility.timer_system instead of keeping a private clock, so replays, ghosts, and race control all read the same time. Race start and reset arrive as named commands via utility.command_bus rather than bespoke inputs.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "checkpointPositions",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Ordered gate positions along the spline. Order is the contract: gates must be crossed in sequence for a lap to validate."
+    },
+    {
+      "name": "lapCount",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Laps required to finish the race. world.raceFinished fires when the first racer completes this count."
+    },
+    {
+      "name": "checkpointRadius",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Distance from a gate that counts as crossing it. Wide gates forgive arcade lines; tight gates reward precision and make cutting detectable."
+    },
+    {
+      "name": "allowCheckpointSkip",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When false, crossing gate N+1 before gate N invalidates the lap. Rally-style point-to-point stages may set this true and validate only gate order overall."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "trackLength",
+      "type": "number",
+      "description": "Spline length in world units, exposed so pacing systems such as utility.rubber_band_ai can reason in seconds rather than units."
+    },
+    {
+      "name": "checkpointCount",
+      "type": "number"
+    },
+    {
+      "name": "leaderLap",
+      "type": "number",
+      "description": "Highest validated lap among tracked racers. Standings UI derives position from lap plus last checkpoint, both readable here."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.raceStarted",
+      "world.checkpointCrossed",
+      "world.lapCompleted",
+      "world.lapInvalidated",
+      "world.raceFinished"
+    ],
+    "listensTo": [
+      "utility.commandRequested"
+    ]
+  },
+  "dependencies": [
+    "utility.timer_system"
+  ],
+  "tags": [
+    "racing",
+    "track",
+    "checkpoints",
+    "laps",
+    "core"
+  ],
+  "provenance": "library-native"
+}

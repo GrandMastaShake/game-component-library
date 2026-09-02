@@ -1,0 +1,118 @@
+{
+  "id": "world.fire_warmth",
+  "name": "Fire Warmth",
+  "category": "world",
+  "description": "Heat sources and the warmth field they radiate: campfires, torches, stoves. Owns fuel burn-down, radius falloff, and extinction — out of fuel, drowned by rain, or stamped out. The field is continuous queryable state sampled per tick rather than enter/exit events, because temperature is a negotiation between every source and the weather at once, and threshold events cannot express 'almost warm enough'. Fire being DANGEROUS (spread, burns) is deliberately not here: world.hazard_volume composed at the same location owns that, because one component that is both comfort and threat cannot be tuned — lowering the burn radius would silently shrink the cozy radius too. Visuals are presentation.particle_system's; this component is the physics of cozy.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "baseRadius",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Warmth reach at full fuel, in world units. Sized so a campfire warms a shelter's interior but not its roofline — warmth you never have to position is warmth that stops being gameplay."
+    },
+    {
+      "name": "warmthAtCenter",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Degrees of effective temperature contributed at the source, falling off with distance. combat.vital_stats adds this to the ambient reading; it is a contribution, not an override, so two fires genuinely stack."
+    },
+    {
+      "name": "fuelBurnPerMinute",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Fuel units consumed per game minute. Feeding the fire is the loop; a fire that never eats is a radiator, and radiators belong to base stats, not to this component."
+    },
+    {
+      "name": "rainExtinguishes",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether exposed fires die in rain via world.weatherChanged. True by default because 'get a roof over the fire' is one of survival's first engineering lessons, and an all-weather fire skips it."
+    },
+    {
+      "name": "falloffCurve",
+      "type": "string",
+      "required": false,
+      "default": "linear",
+      "description": "How warmth decays across the radius: linear, quadratic, or step. Quadratic rewards huddling close; linear rewards room-sized shelters. The curve, not the peak, is where fire placement strategy lives."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isLit",
+      "type": "boolean",
+      "description": "True while burning. An unlit fireplace still occupies the world — it is a promise and a fuel slot, not debris."
+    },
+    {
+      "name": "fuelRemaining",
+      "type": "number",
+      "description": "Fuel units left. At zero the fire goes out on the next tick; the warning radius flicker is presentation's reading of this number, not a separate event."
+    },
+    {
+      "name": "currentRadius",
+      "type": "number",
+      "description": "Effective warmth radius right now, shrinking as fuel runs low. A dying fire pulls the player toward it physically — the field geometry carries the drama."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.fireLit",
+      "world.fireExtinguished",
+      "world.warmthChanged"
+    ],
+    "listensTo": [
+      "input.ignite",
+      "input.addFuel",
+      "world.weatherChanged",
+      "housing.structurePlaced"
+    ]
+  },
+  "dependencies": [
+    "presentation.particle_system"
+  ],
+  "tags": [
+    "survival",
+    "fire",
+    "warmth",
+    "temperature"
+  ],
+  "provenance": "library-native"
+}

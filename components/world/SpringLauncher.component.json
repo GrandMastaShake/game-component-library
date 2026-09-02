@@ -1,0 +1,59 @@
+{
+  "id": "world.spring_launcher",
+  "name": "Spring Launcher",
+  "category": "world",
+  "description": "The bounce pad: contact imparts a fixed launch velocity and the level does the rest. It owns the launch vector, whether the rider's incoming velocity is overridden or augmented, and the re-arm delay. It deliberately owns nothing after the instant of launch — the arc belongs to gravity in movement.physics_core, and mid-air steering is movement.run_control's airControlFraction, the same division of labor JumpCore documents for ordinary jumps. A spring launch is not a jump: it must not consume movement.jump_core's maxJumps counter, so the player keeps their air options after a bounce. Re-arm matters more than it looks — a spring that refires every frame turns a landing into a pinball loop.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "launchVelocity",
+      "type": "number",
+      "required": false,
+      "default": 14,
+      "description": "Speed imparted along launchDirection. Tune against movement.physics_core gravity, exactly as jumpVelocity is tuned in movement.jump_core — the two live on the same arc math."
+    },
+    {
+      "name": "launchDirection",
+      "type": "string",
+      "required": false,
+      "default": "up",
+      "description": "up for floor springs, forward for dash pads, normal to bounce off the surface the pad sits on — the choice that lets one component serve springs, boosters, and wall bumpers."
+    },
+    {
+      "name": "overrideIncomingVelocity",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "True replaces the rider's velocity with the launch vector, making spring height deterministic regardless of fall speed. False adds it, which rewards falling fast into the pad but is harder to design around."
+    },
+    {
+      "name": "rearmDelaySeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.2,
+      "description": "Dead time after a launch before the spring can fire again. Prevents double-fires from a single landing and gives the animation time to read."
+    }
+  ],
+  "outputs": [
+    {"name": "isArmed", "type": "boolean"},
+    {"name": "lastLaunchedEntity", "type": "string"}
+  ],
+  "events": {
+    "emits": ["world.springLaunched"],
+    "listensTo": ["movement.grounded"]
+  },
+  "dependencies": [
+    "movement.physics_core",
+    "movement.character_body"
+  ],
+  "tags": ["platformer", "traversal", "launcher", "level-furniture"],
+  "provenance": "library-native"
+}

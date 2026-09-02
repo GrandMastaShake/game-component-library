@@ -1,0 +1,46 @@
+{
+  "id": "genre.survival_adventure",
+  "name": "Survival Adventure",
+  "description": "The gather-craft-endure loop: land in a generated world, turn nodes into materials, materials into shelter and fire, and fire into surviving the night — then push deeper. combat.vital_stats supplies the drain, world.harvest_node and housing.build_placement supply the economy of answers, and world.fire_warmth plus inventory.spoilage_system make warmth and food logistics problems instead of inventory trivia.",
+  "version": "0.1.0",
+  "loop": "gather → craft → eat/shelter → push deeper",
+  "views": [
+    "top-down",
+    "voxel",
+    "isometric"
+  ],
+  "memberComponents": [
+    "inventory.crafting_bench",
+    "inventory.core_inventory",
+    "inventory.loot_table",
+    "world.terrain_generator",
+    "world.day_night_cycle",
+    "world.weather_system",
+    "world.hazard_volume",
+    "persistence.save_system"
+  ],
+  "newComponents": [
+    "combat.vital_stats",
+    "world.harvest_node",
+    "housing.build_placement",
+    "world.fire_warmth",
+    "inventory.spoilage_system"
+  ],
+  "signatureCompound": {
+    "name": "Survive the First Night",
+    "description": "Daylight hours to harvest wood and stone, a placed shelter and a lit fire before dusk, and vital stats that would kill an unprepared player overnight. The compound proves the loop's causal chain: gather feeds build, build feeds warmth, warmth beats the night's temperature drain.",
+    "memberIds": [
+      "combat.vital_stats",
+      "world.harvest_node",
+      "housing.build_placement",
+      "world.fire_warmth",
+      "world.day_night_cycle"
+    ]
+  },
+  "tags": [
+    "genre-pack",
+    "survival",
+    "crafting",
+    "squad-b"
+  ]
+}

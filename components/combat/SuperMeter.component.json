@@ -1,0 +1,82 @@
+{
+  "id": "combat.super_meter",
+  "name": "Super Meter",
+  "category": "combat",
+  "description": "The comeback resource: a meter that fills from combat and pays for EX moves and supers. It owns the accounting — gain rates per source, the cap, and the spend transaction — and deliberately nothing the meter buys. What a super does is move data in combat.combo_chain's tables; when a meter-full activation is requested, this component validates and debits, and the move layer executes. Keeping the wallet separate from the shop means balance passes touch exactly one file when tuning economy versus exactly one table when tuning moves. Gain sources are events, not polling: it listens to combat.hit_confirmed and combat.hurt_received, which is why taking damage can pay you — the genre's built-in comeback mechanic — without this component knowing anything about health. It does not render the meter; ui.hud reads the outputs.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "maxMeter",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "The cap. Stock-based systems express stocks as multiples of a spend cost rather than changing this — the meter stays one scalar."
+    },
+    {
+      "name": "gainOnHitDealt",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Meter per confirmed hit dealt. Offense pays best, but not so well that the leader snowballs out of reach."
+    },
+    {
+      "name": "gainOnHitTaken",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Meter per hit received — the comeback dial. Raising it steepens the rubber band; zero removes it and rewards pure dominance."
+    },
+    {
+      "name": "gainOnWhiff",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Meter for a move that connects with nothing. A small whiff gain keeps zoners participating in the meter economy; zero makes whiffing purely a risk."
+    },
+    {
+      "name": "startingMeter",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Meter at round start. Nonzero starts suit comeback rounds and boss-rush modifiers; tournament default is zero."
+    },
+    {
+      "name": "carryBetweenRounds",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the meter survives a round reset. Carrying is the genre standard — hoarded meter is a round-two strategy, and zeroing it flattens that decision."
+    }
+  ],
+  "outputs": [
+    {"name": "meter", "type": "number"},
+    {
+      "name": "isFull",
+      "type": "boolean",
+      "description": "Published separately so the HUD flash and activation checks read one boolean instead of comparing against maxMeter everywhere."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.meterGained",
+      "combat.meterFilled",
+      "combat.meterSpent"
+    ],
+    "listensTo": [
+      "combat.hitConfirmed",
+      "combat.hurtReceived",
+      "input.super"
+    ]
+  },
+  "dependencies": ["combat.hitbox_hurtbox"],
+  "tags": ["fighting", "meter", "resource", "super"],
+  "provenance": "library-native"
+}
