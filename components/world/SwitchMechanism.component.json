@@ -4,7 +4,9 @@
   "category": "world",
   "description": "A hand-operated binary state broadcaster: levers, buttons, and pull-chains. Its entire job is to hold an on/off fact and announce changes on a named channel, because in a puzzle platformer the interesting question is never the switch — it is what the switch wakes up. It therefore deliberately knows nothing about its consumers: world.door_gate subscribes to the channel, and the same switch can feed a door, a platform, and a timer without this component growing any of their logic. Anything that must be stood on or weighed down is world.pressure_plate, its floor-bound sibling; a switch that also reads weight would blur the one distinction puzzle design relies on. Visual and audio state changes are presentation's job, reached through the event.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

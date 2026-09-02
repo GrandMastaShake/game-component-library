@@ -5,10 +5,6 @@
   "description": "Converts combat outcomes into the three signals a player reads in under 100 milliseconds: a hitmarker on confirmed hit, a directional indicator when damage arrives, and a distinct kill confirm. It is a pure translator — it changes no state, owns no numbers, and every fact it renders is emitted by someone else (combat.projectile_system, combat.damage_resolver). Screen shake and impact particles are deliberately NOT here: presentation.screen_shake and presentation.particle_system already listen to combat events, and stacking three feedback systems on one event is how a routine hit starts to feel like a jump scare. What the signals look like is ui.hud's rendering concern; this component decides which signal, when, and how strong.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

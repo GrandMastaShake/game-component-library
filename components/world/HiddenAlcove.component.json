@@ -5,10 +5,6 @@
   "description": "A secret space that knows when it has been found. It owns the discovery check \u2014 entered volume plus actually seen, reusing world.vision_system's explored-tile state rather than keeping a second fog map, because two sources of 'have I seen this' is how secrets announce themselves through walls \u2014 and the one-shot discovered flag per alcove that makes the fanfare fire exactly once per save. The reward is deliberately not granted here: world.alcoveDiscovered is an announcement, and whether it means a loot roll, a lore entry, or a statue is the listener's genre decision. It does not own the hinting that leads a player close (ui.guided_hint_system pings near, never reveals) and it does not own counting secrets toward completion; progression.completion_tracker listens for the same event and does the arithmetic.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Freezes the action and hands the camera to the player: free orbit, framing controls, filters, capture. It exists because a collectathon's payoff is a world worth looking at, and a player who just earned the vista wants the screenshot. This component owns the mode toggle, the detached camera while active, and the capture itself; on entry it takes over from presentation.camera_follow and hands control back on exit, so there is always exactly one camera authority. Filters are referenced as presentation.color_palette presets rather than implemented here, and hiding the HUD is a request the HUD honors, not a panel this component reaches into. It does not own where captures go \u2014 gallery and export are a persistence and platform concern \u2014 and it does not pause game logic; whether the world freezes is a time-scale decision made by the game mode, which keeps photo mode safe to offer in games where the world should keep breathing.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

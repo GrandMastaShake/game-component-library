@@ -5,10 +5,6 @@
   "description": "The shrinking safe area that gives a battle royale its clock. Owns the zone geometry per phase (center and radius), the shrink schedule, and the escalating damage tick outside it. Being outside the zone IS a hazard, and the tick is delivered through world.hazard_volume rather than a private damage path so 'on fire from the zone' and 'on fire from lava' share one pipeline — but the damage ladder lives here, because zone damage must escalate on the match clock, not on hazard tuning. The next circle is revealed a phase ahead (world.zoneRevealed) because the rotation decision is the strategy layer; killing stragglers is only enforcement. When phases advance and when the match ends is progression.match_lifecycle's call — this component enforces geography, never victory.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

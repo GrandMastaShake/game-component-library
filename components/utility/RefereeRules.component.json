@@ -5,10 +5,6 @@
   "description": "The adjudication layer: fouls, offsides, out-of-bounds, and advantage. Rules are evaluated from events and positions, never polled per-frame per-player — a foul is a possession-loss event plus context, not a collision-callback storm, because a referee that runs a physics query per tick will eventually disagree with the replay. Advantage is first-class: when the fouled team keeps the ball, play continues and the foul is banked, since stopping play by default makes the referee the most influential player on the pitch. Cards and penalties are escalations emitted as data; what a red card MEANS — send-off, suspension, roster shrink — belongs to social.team_roster and the match flow, not to the whistle.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

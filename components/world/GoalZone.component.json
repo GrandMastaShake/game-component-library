@@ -5,10 +5,6 @@
   "description": "The scoring volume and the rules around it: what counts (the whole ball across the line), who it counts for (attacking direction), and what happens after (kickoff reset or live rebound, per mode). It follows the volume pattern of world.hazard_volume but keeps its own event — a goal is a scoring fact, not damage, and downstream consumers like utility.match_clock and social.leaderboard should never have to filter hazard traffic to find it. Attribution reads the ball's last-toucher metadata written by movement.ball_carrier, so own goals are computed from data rather than guessed from geometry. The zone detects and records; celebrating, resetting the pitch, and updating the scoreboard each belong to whoever owns those jobs.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

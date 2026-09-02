@@ -4,7 +4,9 @@
   "category": "world",
   "description": "A carrier that moves itself along a waypoint path and carries whatever stands on it. The hard part of a moving platform is not the path — it is ride detection: the rider must inherit the platform's displacement exactly, or feet slide and jumps go wrong. This component listens to movement.grounded / movement.leftGround so it knows when a body lands on or leaves it, but it deliberately does not own the rider's physics: gravity, collision, and the grounded fact itself stay with movement.physics_core and movement.ground_sensor. It also does not decide when to run. Loop mode covers self-driven carriers; anything condition-driven starts and stops by listening to world.switch_toggled, which world.switch_mechanism owns — a platform that grew its own lever logic would duplicate that component.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

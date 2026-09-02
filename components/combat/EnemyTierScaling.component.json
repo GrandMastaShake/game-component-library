@@ -5,10 +5,6 @@
   "description": "Keeps a wolf from being a joke at level five and a raid boss at level six. Given a player level or zone band it produces the multiplier set \u2014 health, damage, XP reward \u2014 that anything spawning enemies should apply. It deliberately owns only the curve, not the spawn: world.mob_patrol and world.dynamic_encounter_spawner decide when and where, and combat.damage_resolver never sees these multipliers, because scaling belongs at spawn time \u2014 applying it inside the damage pipeline would double-count it on every hit. Owning the curve in one place is what makes 'zone two feels too easy' a one-file fix instead of an archeology expedition.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

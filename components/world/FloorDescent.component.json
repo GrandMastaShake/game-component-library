@@ -5,10 +5,6 @@
   "description": "The stack of floors and the seed that makes them reproducible. Each descent increments depth and derives the floor's seed from the run seed plus depth \u2014 never a fresh random roll, because a floor that changes when you revisit it breaks both speedruns and save audits. The generator lineage matters here: the consuming app's dd-dungeon-generator.ts family already proves this contract in TypeScript outside this repository, and this descriptor is the library-native contract those generators would adapt to, not a port of them. This component owns depth, seeds, and the transition between floors. It owns nothing about room contents \u2014 world.room_template stamps the rooms, and whatever lives in them arrives via world.mob_patrol or combat.boss_encounter_script.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Periods, stoppages, and overtime: the official time a match is played against, distinct from utility.timer_system's raw countdown. It owns period structure (halves, quarters), stoppage accounting — the clock pauses while the drama doesn't — and the overtime rule as a plug point, because golden goal versus shootout is a config row, not a code branch. Score-triggered resets listen to world.goalScored so kickoff timing survives ruleset changes without a rewire. It displays nothing: ui.hud renders utility.periodStarted and utility.periodEnded like any other timer event, and the clock never learns what a scoreboard looks like.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

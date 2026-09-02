@@ -5,10 +5,6 @@
   "description": "The named ladder the underground runs on \u2014 Rookie through Kingpin \u2014 and the gates hung on each rung: which events unlock, which shop stock appears, which rivals will race you. It owns tier thresholds and unlock declarations, nothing more. Raw reputation bookkeeping is intentionally deferred to the generic reputation ledger (social.reputation_system in the RPG family pack); this component consumes rep-granting signals it can already observe \u2014 economy.gigCompleted, progression.questCompleted, economy.wagerWon \u2014 and translates accumulated standing into 'what changed for you today'. It does not pay out money (gigs and wagers do that), does not grant driver skill (progression.driver_progression), and never blocks content silently: every locked thing names the tier that opens it, because a gate you cannot read is just a wall.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

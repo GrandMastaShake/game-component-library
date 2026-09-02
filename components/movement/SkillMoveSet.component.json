@@ -5,10 +5,6 @@
   "description": "Named dribble moves — stepover, feint, spin — as committed animations with a risk/reward roll, not free-floating style. Each move locks the carrier for its duration and pits the mover's controlRating against the defender's reaction: success emits movement.defenderBeaten, failure risks movement.ballLoose, and the same roll decides both so a move can never be safe AND brilliant. It layers on movement.ball_carrier rather than replacing basic dribbling, because skill moves are exceptions to control and exceptions should pay for their spotlight. Which moves a player owns is per-entity data, so a youth-academy fullback and a star winger legitimately carry different sets — the set is progression surface, not a global unlock list.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

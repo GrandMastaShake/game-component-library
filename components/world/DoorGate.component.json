@@ -4,7 +4,9 @@
   "category": "world",
   "description": "A passage controlled by one or more named conditions. It owns the condition set — which channels must be on, and whether all of them or any of them suffice — plus the open/closed state and the reason it is still locked, because 'why won't this open' is the question the player is always asking and the answer should come from one place. It deliberately does not own the conditions themselves: switches come from world.switch_mechanism, weight from world.pressure_plate, and acquired-power checks from world.ability_gate, its metroidvania sibling. The moment a gate starts checking what the player has learned instead of what the level currently says, it has become an ability gate and should be built as one. It also does not animate itself; the door mesh reacts to world.door_opened through presentation.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

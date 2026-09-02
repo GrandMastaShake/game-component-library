@@ -5,10 +5,6 @@
   "description": "The small bandolier that keeps healing out of backpack tetris. inventory.slotted_bag owns storage truth; the belt is a bounded window onto consumable stacks, so drinking here decrements the same stack the bag counts \u2014 a belt holding its own copies of items is a dupe bug waiting to ship. It owns only the use verb: pick the slot, check the stack, apply the effect (through combat.status_effects when the potion leaves a buff rather than a flat heal), and report empty when the stack runs dry. It does not decide what a potion does \u2014 that is item data \u2014 and it does not auto-pick which potion you meant; ambiguity is the player's problem by design.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

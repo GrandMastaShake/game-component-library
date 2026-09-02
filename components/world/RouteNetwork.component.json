@@ -5,10 +5,6 @@
   "description": "The node-and-edge graph a transport company is made of: stations and depots as nodes, legs as edges with travel-time estimates, and per-route timetables over the top. It exists because 'expand the network' is the genre's verb and there must be one authoritative answer to 'is there a route from A to B, and when does it run'. This component owns the logical route \u2014 stops, order, schedule \u2014 not the geometry: actual paths over the world come from movement.pathfinding_system, so a blocked road invalidates a leg through path failure rather than through a second collision model here. Terrain changes arrive as world.tileChanged and world.tileGridBuilt, and a route whose legs no longer path is reported as world.routeBlocked, not silently dropped, because a dead route with vehicles assigned is a decision for utility.depot_dispatch, not a disappearance. It does not own the vehicles that run the routes or the cargo and passengers that ride them; those are dispatch and manifest concerns that read this graph.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Two maps, not one: what you can see now, and what you have ever seen. world.vision_system computes current line of sight and owns the live layer; this component listens to its updates and accumulates the history layer \u2014 the dimmed, remembered geography that lets a player plan the route back. Keeping history out of the vision system matters because sight is per-frame and ephemeral while memory is per-save and persistent; conflating them is how fog ends up resetting every time the player blinks. This component owns recording and reveal queries only: rendering the two layers is a presentation concern, and persistence.save_system snapshots the history like any other state.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

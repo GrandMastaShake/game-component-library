@@ -4,7 +4,9 @@
   "category": "persistence",
   "description": "Beatmaps as data: parsing, validating, and serving chart files with their difficulty tiers. Charts are read-only content — they are loaded, never written — which is why this sits in persistence next to the save system rather than in world or ui: the boundary it guards is 'bytes on disk become trustworthy structs', the same boundary as every other loader in the category. It owns the registry, difficulty selection, and validation, because a malformed note time discovered mid-song is a crash with an audience; failing at load with a named reason is this component's whole job. It deliberately does not own runtime note flow — ui.note_highway turns the loaded chart into motion — and it does not own the tempo map's meaning, which utility.beat_clock interprets against the audio clock. Storage mechanics defer to persistence.datastore_safe; charts are content, but the read path should be the safe one everywhere.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

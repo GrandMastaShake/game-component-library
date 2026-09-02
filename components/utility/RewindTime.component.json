@@ -4,7 +4,9 @@
   "category": "utility",
   "description": "Braid-style rewind: a rolling history of state snapshots that can be played backward on demand. It owns the ring buffer, the snapshot cadence, and the rewind playback cursor, because 'what did the world look like N seconds ago' is one question and should have one answer. It deliberately does not decide what is worth remembering — participating components register snapshot channels and this component records whatever is on them, so a platform can rewind while a consumed collectible stays collected, which is a design choice and not a bug. It also does not own the global clock: utility.timer_system ticks, and this component samples against it. Rewind composes rather than replaces a time limit — a timer that counts down while history accrues is the seed of a future time-modifier kit, and this component keeps that door open by treating history length as data.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},
