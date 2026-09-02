@@ -1,0 +1,102 @@
+{
+  "id": "combat.tactical_attack",
+  "name": "Tactical Attack",
+  "category": "combat",
+  "description": "One unit shoots another, on a turn, at a tile it is allowed to shoot. The pack priced shots before it could take one: cover_bonus_grid computes the modifier, action_point_economy charges for the verb, and grid_movement_range publishes the red tiles -- and combat.melee_basic, the library's only other source of combat.hit, swings in a facing direction from a real-time walker, which is not a thing a unit standing on a tile can do.\n\nIt decides only whether the shot LANDS. Legality is grid_movement_range's attackable set, the modifier is cover_bonus_grid's assessment, and the damage is combat.damage_resolver's -- this rolls against a base chance scaled by cover and emits combat.hit or combat.miss accordingly. Splitting it that way is what lets a game change the cover rules, the range rules and the damage rules independently, which is the whole reason those three are separate components.\n\nA miss is announced rather than swallowed, because the wallet charges for the attempt: a free miss turns every turn into a fishing expedition, and a player who sees nothing happen assumes the click was lost.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "baseHitChance",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Chance to land with no cover in the way. 0.8 leaves room for cover to matter without making an open-field shot a coin toss."
+    },
+    {
+      "name": "damage",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Damage handed to combat.damage_resolver on a landed shot. The resolver owns what that becomes."
+    },
+    {
+      "name": "friendlyFire",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a unit may target its own side. Off by default, because the usual reason it happens is a misclick."
+    },
+    {
+      "name": "minHitChance",
+      "type": "number",
+      "required": false,
+      "default": 0.05,
+      "description": "Floor under the modified chance, so no shot is arithmetically impossible. A 0% shot reads as a broken button rather than a bad idea."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastShot",
+      "type": "object",
+      "description": "Attacker, target, cover tier, final chance, and whether it landed."
+    },
+    {
+      "name": "shotsTaken",
+      "type": "number",
+      "description": "Attempts this battle, landed or not."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.hit",
+      "combat.miss",
+      "combat.attackRejected"
+    ],
+    "listensTo": [
+      "input.attack"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster",
+    "combat.cover_bonus_grid",
+    "combat.damage_resolver",
+    "movement.grid_movement_range"
+  ],
+  "tags": [
+    "tactics",
+    "combat",
+    "grid",
+    "core"
+  ],
+  "provenance": "library-native"
+}

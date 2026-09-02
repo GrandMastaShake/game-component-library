@@ -23,7 +23,8 @@
     "combat.action_point_economy",
     "combat.cover_bonus_grid",
     "combat.type_chart",
-    "progression.permadeath_flag"
+    "progression.permadeath_flag",
+    "combat.tactical_attack"
   ],
   "signatureCompound": {
     "name": "The Turn Loop",

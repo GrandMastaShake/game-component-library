@@ -90,7 +90,8 @@
       "combat.turnStarted",
       "combat.turnEnded",
       "movement.moveExecuted",
-      "combat.hit"
+      "combat.hit",
+      "combat.miss"
     ]
   },
   "dependencies": [
