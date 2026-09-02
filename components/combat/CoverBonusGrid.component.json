@@ -86,7 +86,8 @@
   },
   "dependencies": [
     "world.tile_grid",
-    "combat.damage_resolver"
+    "combat.damage_resolver",
+    "combat.unit_roster"
   ],
   "tags": [
     "tactics",

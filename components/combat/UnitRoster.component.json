@@ -1,0 +1,110 @@
+{
+  "id": "combat.unit_roster",
+  "name": "Unit Roster",
+  "category": "combat",
+  "description": "Who is on the board, which side they are on, and which tile they stand on. Every tactics component asks one of those three questions and none of them owned the answer: the turn queue rolls initiative per combatant, the movement range floods out from a unit's tile, and cover is priced between an attacker and a defender. Each was written as though somebody else held the roster, and nobody did.\n\nA unit is an identity with a position, not a position with a name. That is why moving is an event this component hears rather than a field a caller writes: movement.grid_movement_range decides which tiles are legal and announces the move, this records where the unit now is, and the two cannot disagree because only one of them is allowed to answer. The same rule ends a unit -- combat.damage_resolver announces the defeat, and removal is this component reacting to it rather than the resolver reaching across.\n\nStats live here because they are per unit and consulted by everyone: the queue wants a dexterity to break ties, the range wants a movement allowance, the resolver wants hit points. It is deliberately not a character sheet -- progression.attribute_sheet owns the RPG one -- and deliberately not a party: social.party_formation is about who you bring, this is about who is standing here now.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "units",
+      "type": "array",
+      "required": true,
+      "description": "The starting board: id, team, tile x and y, and stats. Required, because a roster with a default is somebody else's battle."
+    },
+    {
+      "name": "teams",
+      "type": "array",
+      "required": false,
+      "default": [
+        "player",
+        "enemy"
+      ],
+      "description": "Sides, in the order they are offered a turn when initiative ties all the way down. Two is the genre default; three is a free-for-all."
+    },
+    {
+      "name": "removeOnDefeat",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a defeated unit leaves the board. False keeps the body as an obstacle, which some games use as cover and most do not want."
+    },
+    {
+      "name": "blockOccupiedTiles",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a unit's tile is impassable to others. Off for games where units stack or pass through allies -- but the frontline stops meaning anything."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "units",
+      "type": "array",
+      "description": "Live roster: id, team, x, y, and stats."
+    },
+    {
+      "name": "unitAt",
+      "type": "function",
+      "description": "The unit standing on a tile, or null."
+    },
+    {
+      "name": "positionOf",
+      "type": "function",
+      "description": "The tile a unit id stands on, or null once it is gone."
+    },
+    {
+      "name": "aliveByTeam",
+      "type": "object",
+      "description": "Survivors per team, which is what a victory condition counts."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.unitMoved",
+      "combat.rosterChanged",
+      "combat.teamEliminated"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "movement.moveExecuted"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "tactics",
+    "units",
+    "grid",
+    "core"
+  ],
+  "provenance": "library-native"
+}

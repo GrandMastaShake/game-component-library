@@ -88,7 +88,9 @@
     ],
     "listensTo": [
       "combat.turnStarted",
-      "combat.turnEnded"
+      "combat.turnEnded",
+      "movement.moveExecuted",
+      "combat.hit"
     ]
   },
   "dependencies": [

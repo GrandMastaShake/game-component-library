@@ -87,7 +87,8 @@
     ]
   },
   "dependencies": [
-    "combat.status_effects"
+    "combat.status_effects",
+    "combat.unit_roster"
   ],
   "tags": [
     "tactics",

@@ -9,6 +9,7 @@
     "top-down"
   ],
   "memberComponents": [
+    "combat.unit_roster",
     "world.tile_grid",
     "utility.behavior_fsm",
     "combat.damage_resolver",
