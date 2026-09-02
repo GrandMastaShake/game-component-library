@@ -1,0 +1,72 @@
+{
+  "id": "ui.note_highway",
+  "name": "Note Highway",
+  "category": "ui",
+  "description": "The scrolling lanes: chart data becomes notes that travel toward a receptor line at a readable approach rate. It owns lane geometry, spawn/despawn bookkeeping, and the approach seconds that convert song time into screen space — the one translation no other component is positioned to do. It deliberately owns no timing truth of its own: every position derives from utility.beat_clock's song position, so pausing, seeking, or latency recalibration moves the whole highway consistently instead of desyncing lanes from audio. It also does not judge — a note crossing the receptor is announced as ui.note_passed_receptor, and utility.judgement_window decides what the crossing meant. Chart parsing is persistence.chart_loader's job; this component consumes loaded chart data, never raw files, so a malformed beatmap fails at load time rather than mid-song.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "laneCount",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Number of lanes, matched to the chart's note data. Four keys and seven keys are different skills; the highway serves both by not baking the count into its geometry."
+    },
+    {
+      "name": "approachSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "How long a note is visible before reaching the receptor — the difficulty-independent speed setting. Players tune this to taste; judgement windows stay in time, not pixels, so it changes readability, not difficulty."
+    },
+    {
+      "name": "scrollDirection",
+      "type": "string",
+      "required": false,
+      "default": "down",
+      "description": "down, up, left, or right. Direction is pure presentation — time-to-receptor math is identical — which is why it is one field and not four components."
+    },
+    {
+      "name": "despawnAfterReceptorSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.2,
+      "description": "How long a missed note lingers past the receptor before despawning. Long enough that the miss reads as a miss, not a vanishing."
+    }
+  ],
+  "outputs": [
+    {"name": "visibleNoteCount", "type": "number"},
+    {"name": "notesPassedReceptor", "type": "number"},
+    {
+      "name": "highwayProgress",
+      "type": "number",
+      "description": "0..1 through the chart, for progress bars and practice-mode seeking."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.noteSpawned",
+      "ui.notePassedReceptor",
+      "ui.highwayCompleted"
+    ],
+    "listensTo": [
+      "utility.beatTicked",
+      "utility.songStarted",
+      "persistence.chartLoaded"
+    ]
+  },
+  "dependencies": [
+    "utility.beat_clock",
+    "persistence.chart_loader"
+  ],
+  "tags": ["rhythm", "lanes", "notes", "scrolling", "core"],
+  "provenance": "library-native"
+}

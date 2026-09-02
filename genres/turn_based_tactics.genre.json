@@ -1,0 +1,43 @@
+{
+  "id": "genre.turn_based_tactics",
+  "name": "Turn-Based Tactics",
+  "description": "Grid combat where the turn is a budget and position is the argument: initiative orders the units, action points price their verbs, the grid prices their steps, and cover prices their mistakes. TypeChart ships here and is shared forward with the Monster Taming pack.",
+  "version": "0.1.0",
+  "loop": "scout \u2192 position units \u2192 action economy per turn \u2192 objective",
+  "views": [
+    "isometric",
+    "top-down"
+  ],
+  "memberComponents": [
+    "world.tile_grid",
+    "utility.behavior_fsm",
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "world.vision_system",
+    "utility.command_bus"
+  ],
+  "newComponents": [
+    "combat.turn_order_queue",
+    "movement.grid_movement_range",
+    "combat.action_point_economy",
+    "combat.cover_bonus_grid",
+    "combat.type_chart",
+    "progression.permadeath_flag"
+  ],
+  "signatureCompound": {
+    "name": "The Turn Loop",
+    "description": "turn_order_queue announces whose turn it is, action_point_economy hands them a budget, grid_movement_range shows where the budget walks, and cover_bonus_grid prices every shot taken along the way. One full turn through these four is the entire genre in miniature.",
+    "memberIds": [
+      "combat.turn_order_queue",
+      "combat.action_point_economy",
+      "movement.grid_movement_range",
+      "combat.cover_bonus_grid"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "tactics",
+    "grid",
+    "turn-based"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "economy.combo_multiplier",
+  "name": "Combo Multiplier",
+  "category": "economy",
+  "description": "The streak economy of a rhythm game: consecutive good-enough judgements build a streak, thresholds raise a multiplier, and a miss breaks both. It owns the streak, the tier table, and the break rules, and it owns nothing upstream — judgements arrive as facts from utility.judgement_window, so tightening the perfect window never touches scoring and revaluing a perfect never touches timing. The multiplier is the genre's risk engine: a long streak makes the next note worth more, which is exactly when players tighten up, and that tension only works if streak state lives in one auditable place rather than being reconstructed from the judgement log. Score itself is emitted as a value on each event; economy.currency or a session scoreboard decides where it accumulates, because a rhythm score and a shop wallet should not share a ledger by accident.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "multiplierTiers",
+      "type": "array",
+      "required": false,
+      "default": [{"streak": 10, "multiplier": 2}, {"streak": 25, "multiplier": 4}, {"streak": 50, "multiplier": 8}],
+      "description": "Streak thresholds and their multipliers, applied at the highest tier met. Doubling tiers are tradition; flatter curves suit score-attack modes where the lead should be catchable."
+    },
+    {
+      "name": "baseScorePerNote",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "Score before multiplier for a perfect. Good typically scores a fixed fraction via goodScoreFraction; misses score zero by definition."
+    },
+    {
+      "name": "goodScoreFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "What a good judgement pays relative to perfect. 0.5 keeps accuracy meaningfully ahead of flailing without making one good ruin a run."
+    },
+    {
+      "name": "goodKeepsCombo",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a good sustains the streak. True is the forgiving standard; false makes only perfects count, the hardcore mode where combo and accuracy are the same skill."
+    },
+    {
+      "name": "breakOnMiss",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a miss zeroes the streak. Effectively always true — a miss that does not break combo makes the multiplier decoration rather than stakes."
+    }
+  ],
+  "outputs": [
+    {"name": "currentStreak", "type": "number"},
+    {"name": "currentMultiplier", "type": "number"},
+    {
+      "name": "totalScore",
+      "type": "number",
+      "description": "Running score for the session. Held here so the HUD reads one number; long-term persistence of best scores is persistence.save_system's job."
+    },
+    {"name": "maxStreak", "type": "number"}
+  ],
+  "events": {
+    "emits": [
+      "economy.comboIncreased",
+      "economy.comboBroken",
+      "economy.multiplierChanged"
+    ],
+    "listensTo": [
+      "utility.judgementPerfect",
+      "utility.judgementGood",
+      "utility.judgementMiss"
+    ]
+  },
+  "dependencies": [
+    "utility.judgement_window",
+    "economy.currency"
+  ],
+  "tags": ["rhythm", "combo", "score", "multiplier"],
+  "provenance": "library-native"
+}

@@ -1,0 +1,104 @@
+{
+  "id": "combat.hotbar_abilities",
+  "name": "Hotbar Abilities",
+  "category": "combat",
+  "description": "The active-skill layer that turns a basic attack into a build. Each slot binds an ability definition \u2014 cooldown, resource cost, targeting mode \u2014 and this component owns only the slot lifecycle: is it off cooldown, can the resource be paid, and when does it fire. The moment an ability connects it hands a damage packet to combat.damage_resolver, because a second place where damage numbers are computed is a place where balance patches land twice. Ongoing effects an ability leaves behind are combat.status_effects' problem \u2014 a burn that ticks for five seconds is status, not hotbar \u2014 and passive gear bonuses never pass through here either, since combat.equipment_slots applies those directly. What this component pointedly refuses to own is the UI: ui.hud renders the slots off the same cooldown events, so the hotbar runs headless in tests.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "slots",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "How many ability slots the bar exposes. Six is the ARPG convention: enough for a build identity, few enough that every slot is a choice rather than a filing cabinet."
+    },
+    {
+      "name": "globalCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Minimum gap between any two casts. Exists so macro-speed casting cannot fire six skills in one frame; per-ability cooldowns stack on top of this."
+    },
+    {
+      "name": "resourceRefundOnInterrupt",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether an interrupted cast returns its resource cost. Refunding reads as generous; not refunding makes interrupts a real counter-play tool. False is the safer default."
+    },
+    {
+      "name": "allowMoveCast",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether casting roots the caster. Rooting during a cast is the classic risk/reward dial; mobility builds set this true and pay for it elsewhere."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeCooldowns",
+      "type": "array",
+      "description": "Per-slot seconds remaining, in slot order."
+    },
+    {
+      "name": "lastCastAbilityId",
+      "type": "string",
+      "description": "Most recent successful cast, for combo and telemetry consumers."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.abilityCast",
+      "combat.abilityRejected",
+      "combat.cooldownStarted"
+    ],
+    "listensTo": [
+      "input.abilitySlot"
+    ]
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "combat.status_effects"
+  ],
+  "tags": [
+    "arpg",
+    "abilities",
+    "cooldowns",
+    "core"
+  ],
+  "provenance": "library-native"
+}

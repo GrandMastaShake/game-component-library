@@ -1,0 +1,101 @@
+{
+  "id": "world.rest_camp",
+  "name": "Rest Camp",
+  "category": "world",
+  "description": "The long exhale between fights \u2014 a full party resource reset, priced in risk. Resting restores health and per-rest abilities in one shot, because a rest that half-works teaches players to rest twice, and per-rest abilities then collapse into per-fight abilities with extra clicks. The price is the ambush roll: biome, recent noise, and whether a watch was posted feed a probability that world.mob_patrol or a dynamic spawner converts into an actual interruption. This component owns the rest transaction and the risk roll. It does not own the ambush itself, and it never touches inventory \u2014 rations spent while camping go through inventory.slotted_bag like anywhere else.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "restDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Real time the rest takes. Long enough to feel like a commitment, short enough to not be a loading screen with a campfire."
+    },
+    {
+      "name": "baseAmbushChance",
+      "type": "number",
+      "required": false,
+      "default": 0.15,
+      "description": "Ambush probability before modifiers. 0.15 is often enough to make posting a watch a habit, rare enough that resting stays worth it."
+    },
+    {
+      "name": "requiresSafeZone",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether rest is restricted to designated campsites. True is the hardcore mode; false lets the ambush chance carry the entire risk budget."
+    },
+    {
+      "name": "restoresPerRestAbilities",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether per-rest ability charges come back. The whole point of the component; exposed so a survival variant can say no."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastRestOutcome",
+      "type": "string",
+      "description": "completed | interrupted \u2014 for camp UI and analytics."
+    },
+    {
+      "name": "ambushChance",
+      "type": "number",
+      "description": "The computed probability for the pending rest, shown to the player before committing."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.restCompleted",
+      "world.restInterrupted"
+    ],
+    "listensTo": [
+      "input.restRequested"
+    ]
+  },
+  "dependencies": [
+    "social.party_system"
+  ],
+  "tags": [
+    "crpg",
+    "rest",
+    "resource-reset"
+  ],
+  "provenance": "library-native"
+}

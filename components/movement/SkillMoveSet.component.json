@@ -1,0 +1,115 @@
+{
+  "id": "movement.skill_move_set",
+  "name": "Skill Move Set",
+  "category": "movement",
+  "description": "Named dribble moves — stepover, feint, spin — as committed animations with a risk/reward roll, not free-floating style. Each move locks the carrier for its duration and pits the mover's controlRating against the defender's reaction: success emits movement.defenderBeaten, failure risks movement.ballLoose, and the same roll decides both so a move can never be safe AND brilliant. It layers on movement.ball_carrier rather than replacing basic dribbling, because skill moves are exceptions to control and exceptions should pay for their spotlight. Which moves a player owns is per-entity data, so a youth-academy fullback and a star winger legitimately carry different sets — the set is progression surface, not a global unlock list.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "moveSet",
+      "type": "array",
+      "required": false,
+      "default": [
+        "stepover",
+        "feint",
+        "spin"
+      ],
+      "description": "Moves this entity may attempt, by name against the shared move table. The default trio covers the three risk tiers; anything fancier is earned per-player, which is what keeps move-spam from being the meta."
+    },
+    {
+      "name": "commitLockSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.6,
+      "description": "Input lockout while a move animates. The lock is the price of the move — cancelling mid-animation would let players sample the roll and bail, which converts risk/reward into pure reward."
+    },
+    {
+      "name": "successBonus",
+      "type": "number",
+      "required": false,
+      "default": 0.15,
+      "description": "Flat bonus added to the mover's controlRating for the roll. Small on purpose: a move should tilt the odds, not replace the stat — otherwise the move name matters more than the player using it."
+    },
+    {
+      "name": "failureLooseChance",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Probability a failed move spills the ball loose instead of merely failing in place. Half by default: failure must sometimes be recoverable, or attempting a move inside your own half becomes strictly irrational."
+    },
+    {
+      "name": "staminaCostPerMove",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Stamina charged per attempt, success or fail. The cost is what stops move-chains from being free; it reads whoever owns stamina (combat.vital_stats in survival crossovers, a match stat here) rather than keeping a private battery."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeMove",
+      "type": "string",
+      "description": "Name of the move currently animating, empty when idle. Animation and camera layers read this; gameplay systems should read the outcome events instead."
+    },
+    {
+      "name": "isCommitted",
+      "type": "boolean",
+      "description": "True during the lock window. movement.ball_carrier consults this before accepting a pass or shoot input, so a committed player cannot accidentally pass mid-stepover."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.skillMovePerformed",
+      "movement.defenderBeaten",
+      "movement.skillMoveFailed"
+    ],
+    "listensTo": [
+      "input.skillMove",
+      "movement.possessionGained"
+    ]
+  },
+  "dependencies": [
+    "movement.ball_carrier"
+  ],
+  "tags": [
+    "sports",
+    "dribbling",
+    "skill-moves",
+    "flair"
+  ],
+  "provenance": "library-native"
+}

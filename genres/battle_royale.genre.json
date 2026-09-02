@@ -1,0 +1,48 @@
+{
+  "id": "genre.battle_royale",
+  "name": "Battle Royale",
+  "description": "The shooter kit dropped into a closing arena: commit to a landing, loot under time pressure, rotate with the zone, and be the last squad standing. The pack reuses the entire Shooter fire pipeline and adds the match-scoped machinery — progression.match_lifecycle sequences lobby to podium, world.zone_collapse supplies the clock, combat.downed_revive makes squadmates worth saving, and presentation.spectator_mode keeps the dead in their seats.",
+  "version": "0.1.0",
+  "loop": "drop → loot → zone shrinks → last one standing",
+  "views": [
+    "top-down",
+    "voxel"
+  ],
+  "memberComponents": [
+    "combat.projectile_system",
+    "combat.weapon_loadout",
+    "combat.ammo_economy",
+    "combat.cover_system",
+    "combat.aim_assist",
+    "presentation.hit_feedback",
+    "inventory.loot_table",
+    "inventory.core_inventory",
+    "ui.minimap",
+    "social.party_system",
+    "social.leaderboard"
+  ],
+  "newComponents": [
+    "world.zone_collapse",
+    "world.drop_deployment",
+    "progression.match_lifecycle",
+    "presentation.spectator_mode",
+    "combat.downed_revive"
+  ],
+  "signatureCompound": {
+    "name": "Last Squad Standing",
+    "description": "A full compressed match: deploy from the drop path, loot and fight inside a multi-phase zone collapse, down-and-revive through the mid-game, and resolve to a podium through the lifecycle state machine. Proves the match has a beginning, a middle, and an end — not just a shrinking circle.",
+    "memberIds": [
+      "world.drop_deployment",
+      "world.zone_collapse",
+      "progression.match_lifecycle",
+      "combat.downed_revive",
+      "combat.weapon_loadout"
+    ]
+  },
+  "tags": [
+    "genre-pack",
+    "battle-royale",
+    "combat",
+    "squad-b"
+  ]
+}

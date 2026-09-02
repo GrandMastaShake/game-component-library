@@ -1,0 +1,115 @@
+{
+  "id": "movement.ball_carrier",
+  "name": "Ball Carrier",
+  "category": "movement",
+  "description": "Possession as a physical state: who has the ball, what it costs them, and how it leaves. Carrying constrains the carrier — a speed multiplier, no tackling while holding — because possession must cost something or every player on the pitch is always the ball. Passing and shooting hand the ball to movement.physics_core as a free body with intent metadata (target teammate, lead distance); a ball in flight belongs to physics, and possession is only re-adjudicated on contact, never claimed at range. Dribbling is a leash, not a weld: the ball stays within controlRadius while control holds, and hard direction changes test controlRating to see whether it comes loose — which is what makes movement.skill_move_set's committed moves a gamble instead of a combo video.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "controlRadius",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "Leash distance between carrier and ball while dribbling. Wide enough that sprinting doesn't outrun the ball, tight enough that defenders can see the gap they are aiming a tackle at."
+    },
+    {
+      "name": "carrierSpeedMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 0.9,
+      "description": "Movement speed scale while in possession. The tax that makes off-ball runs matter — if the carrier is fastest, the correct play is never to pass, and the sport collapses into a relay."
+    },
+    {
+      "name": "passSpeed",
+      "type": "number",
+      "required": false,
+      "default": 18,
+      "description": "Launch speed of a pass toward its target, with lead distance computed from the target's velocity. A pass is a prediction; the metadata rides with the ball so interceptions can be credited to the reader, not the roller."
+    },
+    {
+      "name": "shotSpeed",
+      "type": "number",
+      "required": false,
+      "default": 28,
+      "description": "Launch speed of a shot. Faster than any pass because a shot is the one ball nobody is expected to catch — world.goal_zone and the keeper both read the same incoming physics body."
+    },
+    {
+      "name": "controlRating",
+      "type": "number",
+      "required": false,
+      "default": 0.7,
+      "description": "0-1 chance the leash holds through a hard direction change or contact. This is the per-player skill knob; movement.skill_move_set borrows it for its success rolls rather than keeping a second dribble stat."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "hasPossession",
+      "type": "boolean",
+      "description": "True while this entity holds the ball. Exactly one entity in the match should report true at any tick; the component treats duplicate possession as a bug, not a shared-custody feature."
+    },
+    {
+      "name": "ballState",
+      "type": "string",
+      "description": "carried, inFlight, or loose. Everything downstream — referee context, AI positioning, the goal zone — reads this one word instead of reconstructing it from positions."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.possessionGained",
+      "movement.possessionLost",
+      "movement.passCompleted",
+      "movement.ballLoose"
+    ],
+    "listensTo": [
+      "input.pass",
+      "input.shoot",
+      "input.dribble"
+    ]
+  },
+  "dependencies": [
+    "movement.character_body",
+    "movement.physics_core"
+  ],
+  "tags": [
+    "sports",
+    "ball",
+    "possession",
+    "passing",
+    "core"
+  ],
+  "provenance": "library-native"
+}

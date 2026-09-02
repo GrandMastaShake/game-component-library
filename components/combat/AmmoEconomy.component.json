@@ -1,0 +1,118 @@
+{
+  "id": "combat.ammo_economy",
+  "name": "Ammo Economy",
+  "category": "combat",
+  "description": "The magazine, the reserve, and the reload — the three numbers that turn a shooter from infinite DPS into resource pressure. Split from combat.weapon_loadout on purpose: the loadout is declarative (what is equipped) while this owns mutable state (what is left), and mixing the two makes every swap a state migration bug. Reserve ammunition is an inventory concern, so when reserveSource is 'inventory' every reload draws through inventory.core_inventory and ammo pickups feed the same pool the rest of the game uses. Reload is interruptible by default because an uninterruptible reload in a cover shooter reads as a stun the player did not earn; a weapon swap cancels it and the partial magazine is kept, never rounded up.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "magazineSize",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Rounds held in the weapon. The magazine, not the reserve, is the pacing lever: it decides how long a fight can go before someone has to stop and be vulnerable."
+    },
+    {
+      "name": "startingReserve",
+      "type": "number",
+      "required": false,
+      "default": 90,
+      "description": "Rounds outside the weapon at spawn when reserveSource is 'standalone'. Ignored when drawing from inventory — there the reserve is simply however many ammo items the player holds."
+    },
+    {
+      "name": "reserveSource",
+      "type": "string",
+      "required": false,
+      "default": "inventory",
+      "description": "'inventory' draws reloads from inventory.core_inventory so crafting and loot feed ammo; 'standalone' keeps a private counter for arena modes that want ammo decoupled from the item economy."
+    },
+    {
+      "name": "reloadTimeSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.6,
+      "description": "Channel duration per reload. Per-weapon overrides arrive with the weapon profile on equip; this default exists so a bare component still produces a playable rhythm."
+    },
+    {
+      "name": "reloadInterruptible",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a swap or dash cancels the channel. Cancelling keeps the old magazine state — an interrupted reload never refunds rounds, which is what keeps the decision to reload a risk."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "magazineAmmo",
+      "type": "number",
+      "description": "Rounds in the weapon right now. The HUD reads this; combat.projectile_system never does — it fires on request and lets the rejection event do the talking."
+    },
+    {
+      "name": "reserveAmmo",
+      "type": "number",
+      "description": "Rounds available for future reloads. In inventory mode this is a live count of matching ammo items, not a cached number."
+    },
+    {
+      "name": "isReloading",
+      "type": "boolean",
+      "description": "True for the reload channel. Fire requests during the channel are rejected by the economy, not queued, because a queued shot after a reload reads as input lag."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.magazineEmptied",
+      "combat.reloadStarted",
+      "combat.reloaded",
+      "combat.ammoChanged"
+    ],
+    "listensTo": [
+      "combat.fireRequested",
+      "input.reload"
+    ]
+  },
+  "dependencies": [
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "shooter",
+    "ammo",
+    "reload",
+    "resource",
+    "economy"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,105 @@
+{
+  "id": "housing.garage_management",
+  "name": "Garage Management",
+  "category": "housing",
+  "description": "The housing category's answer for a game where home is a garage: multi-vehicle ownership, part installation, and visual customization under one roof. It owns the roster of owned vehicles, which one is currently deployed, and the act of installing a purchased part \u2014 expressed as a new preset on that vehicle's movement.vehicle_tuning sheet, so an engine swap and a tune change travel the same code path and nothing bypasses the tuning contract. Money never touches this component: it listens for economy.spent and installs what the receipt describes, which keeps refunds, insufficient funds, and pricing entirely in economy.currency's audit trail. Entry and exit (movement.vehicleEntered / movement.vehicleExited) tell it when the deployed vehicle is actually in use, which is what makes 'you cannot sell the car you are sitting in' a rule instead of a bug report. It does not own the race, the drive, or the driver's skills \u2014 progression.driver_progression is the person; this is the metal.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxVehicleSlots",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Roster size. A hard cap is what makes pink-slip wins meaningful \u2014 taking a rival's car forces a decision about your own."
+    },
+    {
+      "name": "installRequiresStored",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, parts can only be installed on a stored vehicle. Wrenching on the car mid-race is not a build strategy this genre supports."
+    },
+    {
+      "name": "customizationSlots",
+      "type": "array",
+      "required": false,
+      "default": ["paint", "wheels", "spoiler", "livery"],
+      "description": "Visual customization categories per vehicle. Purely cosmetic: if a slot changed performance it would be a part, not a customization."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ownedVehicleCount",
+      "type": "number"
+    },
+    {
+      "name": "deployedVehicleId",
+      "type": "string"
+    },
+    {
+      "name": "installedParts",
+      "type": "object",
+      "description": "Vehicle id to installed part list. Read by shop UI to grey out duplicates and by resale logic to value a modified car."
+    }
+  ],
+  "events": {
+    "emits": [
+      "housing.vehicleStored",
+      "housing.vehicleDeployed",
+      "housing.partInstalled",
+      "housing.vehicleCustomized"
+    ],
+    "listensTo": [
+      "economy.spent",
+      "movement.vehicleEntered",
+      "movement.vehicleExited"
+    ]
+  },
+  "dependencies": [
+    "economy.currency",
+    "movement.vehicle_basic",
+    "movement.vehicle_tuning"
+  ],
+  "tags": [
+    "driver-rpg",
+    "garage",
+    "vehicles",
+    "customization",
+    "core"
+  ],
+  "provenance": "library-native"
+}

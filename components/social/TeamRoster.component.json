@@ -1,0 +1,118 @@
+{
+  "id": "social.team_roster",
+  "name": "Team Roster",
+  "category": "social",
+  "description": "The two sides: which entities are on which team, what position each plays, and which AI role fills the empty slots. It extends social.party_system's grouping semantics to adversarial, symmetric groups with a headcount rule — a party cooperates, a roster competes, and reusing the grouping plumbing is why this component is small. Positions are data (name, zone, responsibilities) read by both utility.behavior_fsm-driven teammates and world.goal_zone's attribution, so 'goalkeeper' means the same thing to the AI and the scoreboard. Substitutions and mid-match balancing are roster mutations with events, because a silently swapped team breaks every downstream attribution and every spectator's mental model at once.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "teamCount",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Sides in the match. Two is the sport; three-plus is a supported variant for arena modes, kept as an input so the roster math never hardcodes a binary."
+    },
+    {
+      "name": "playersPerTeam",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Headcount per side. The number defines the sport more than the ball does — 5 is small-sided and readable, 11 needs a minimap, and both run on this same descriptor."
+    },
+    {
+      "name": "positions",
+      "type": "array",
+      "required": false,
+      "default": [
+        "goalkeeper",
+        "defender",
+        "midfielder",
+        "forward"
+      ],
+      "description": "Named roles with zone data attached at the match level. Assignment prefers filling positions in order, because a team of five forwards is a highlight reel for exactly one side."
+    },
+    {
+      "name": "fillWithAI",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether empty slots get behavior-driven teammates. The AI role receives the position's zone and responsibilities verbatim — an AI left back and a human left back should be interchangeable to every system but the input one."
+    },
+    {
+      "name": "allowSubstitutions",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether bench swaps are legal mid-match. Substitutions emit events rather than mutating quietly, since a swap mid-play changes who the referee and the scoreboard think anyone is."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "rosterSizes",
+      "type": "array",
+      "description": "Live headcount per team, humans and AI together. Balance checks and forfeit rules read this; nobody maintains a shadow count."
+    },
+    {
+      "name": "teamsFull",
+      "type": "boolean",
+      "description": "True when every side meets playersPerTeam. Match-start gates read this rather than re-deriving fullness from the roster."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.teamAssigned",
+      "social.roleAssigned",
+      "social.substitutionMade"
+    ],
+    "listensTo": [
+      "social.partyMemberJoined",
+      "input.substitute"
+    ]
+  },
+  "dependencies": [
+    "social.party_system",
+    "utility.behavior_fsm"
+  ],
+  "tags": [
+    "sports",
+    "teams",
+    "roster",
+    "positions",
+    "ai-roles"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,71 @@
+{
+  "id": "combat.hitbox_hurtbox",
+  "name": "Hitbox / Hurtbox",
+  "category": "combat",
+  "description": "Frame-data-accurate collision for fighting games: per-move box sets keyed to animation phases (startup, active, recovery), overlap resolution with priority, and trade detection when both sides connect on the same frame. It exists because combat.melee_basic answers 'a swing happened' while a fighting game needs 'this rectangle was live for exactly frames 9 through 14' — the difference between an action game and a genre where whiff punishing is the core skill. This component owns the boxes and the contact facts, and deliberately nothing downstream of contact: damage numbers, scaling, and knockback belong to combat.damage_resolver, cancel timing to combat.combo_chain, and invulnerability display to presentation. Boxes attach to movement.character_body so they track the body through knockback and throws without a second transform pipeline.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "moveDataTable",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Per-move records: startup / active / recovery frame spans and the hitbox rectangles live during active frames. Frame data is the game — this table is where a designer's intent becomes measurable."
+    },
+    {
+      "name": "hitPriority",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Tiebreak class when overlapping hitboxes contest the same hurtbox on the same frame. Higher wins; equal priorities trade."
+    },
+    {
+      "name": "invulnerableFrameSpans",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Frame ranges during which this fighter's hurtboxes are withdrawn — invincible reversals, throw techs. Declared per move, not granted ad hoc, so invulnerability is auditable frame data."
+    },
+    {
+      "name": "teamId",
+      "type": "string",
+      "required": false,
+      "default": "solo",
+      "description": "Friendly-fire filter. In versus play each fighter is their own team; the field exists so assist and tag variants do not hit their own side."
+    }
+  ],
+  "outputs": [
+    {"name": "activeHitboxes", "type": "array"},
+    {"name": "activeHurtboxes", "type": "array"},
+    {
+      "name": "currentFramePhase",
+      "type": "string",
+      "description": "startup, active, or recovery for the move in flight — the single fact training-mode overlays and AI both read."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.hitConfirmed",
+      "combat.hurtReceived",
+      "combat.tradeOccurred"
+    ],
+    "listensTo": [
+      "combat.hit",
+      "input.attack"
+    ]
+  },
+  "dependencies": [
+    "movement.character_body",
+    "combat.melee_basic"
+  ],
+  "tags": ["fighting", "hitbox", "frame-data", "combat", "core"],
+  "provenance": "library-native"
+}

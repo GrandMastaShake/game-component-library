@@ -1,0 +1,108 @@
+{
+  "id": "progression.network_efficiency_score",
+  "name": "Network Efficiency Score",
+  "category": "progression",
+  "description": "One number for how healthy the transport company is: on-time rate, load factor, coverage, and profit per route-kilometer folded into a legible 0\u2013100 score with milestone thresholds that gate expansion unlocks. It exists because a tycoon game drowns the player in ledgers, and somebody has to answer 'am I doing well' before the bankruptcy notice does. This component owns only the formula and the thresholds \u2014 every input metric is produced elsewhere: schedules and blockages from world.route_network, queues and served passengers from world.passenger_flow, revenue from the economy.earned ledger. It never penalizes directly: a falling score is information, and the carrot is progression.networkMilestoneReached unlocking new vehicle classes and map regions. Publishing the formula's weights is a design stance \u2014 a score the player cannot reason about is a weather report, and this genre wants engineering.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "weights",
+      "type": "object",
+      "required": false,
+      "default": {
+        "onTimeRate": 0.3,
+        "loadFactor": 0.3,
+        "coverage": 0.2,
+        "profitPerRouteKm": 0.2
+      },
+      "description": "Metric weights in the composite score. Public by design \u2014 the player optimizes what they can see."
+    },
+    {
+      "name": "milestoneThresholds",
+      "type": "array",
+      "required": false,
+      "default": [40, 60, 80, 95],
+      "description": "Score values that fire progression.networkMilestoneReached. Spaced so each tier of unlocks arrives just as the current network feels solved."
+    },
+    {
+      "name": "evaluationIntervalSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "How often the score recomputes. Slow enough that the number is a trend line, not a twitchy gauge that punishes a single late bus."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentScore",
+      "type": "number",
+      "description": "Composite 0-100 score. The headline number on the company dashboard."
+    },
+    {
+      "name": "metricBreakdown",
+      "type": "object",
+      "description": "Per-metric contributions to the score, so a falling number always names its cause."
+    },
+    {
+      "name": "milestonesReached",
+      "type": "array"
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.networkScoreChanged",
+      "progression.networkMilestoneReached"
+    ],
+    "listensTo": [
+      "world.routeScheduleUpdated",
+      "world.passengerDemandChanged",
+      "economy.earned"
+    ]
+  },
+  "dependencies": [
+    "world.route_network",
+    "world.passenger_flow",
+    "economy.currency"
+  ],
+  "tags": [
+    "tycoon",
+    "scoring",
+    "efficiency",
+    "milestones"
+  ],
+  "provenance": "library-native"
+}

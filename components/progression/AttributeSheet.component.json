@@ -1,0 +1,108 @@
+{
+  "id": "progression.attribute_sheet",
+  "name": "Attribute Sheet",
+  "category": "progression",
+  "description": "STR/DEX/INT and everything derived from them. progression.xp_leveling owns the moment of growth \u2014 the level-up event and the points it grants; this sheet owns where those points land and what they mean: the raw attributes, the derived stats (carry weight, crit chance, check modifiers), and the check roll itself. Owning the roll here matters because dialogue, traps, and combat all ask the same question \u2014 does 14 DEX beat difficulty 12? \u2014 and the answer must come from one implementation of the dice or the game lies to somebody. It does not own what a passed check unlocks; the asker decides, which is what keeps the sheet usable by every system that checks.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "attributeNames",
+      "type": "array",
+      "required": false,
+      "default": [
+        "STR",
+        "DEX",
+        "CON",
+        "INT",
+        "WIS",
+        "CHA"
+      ],
+      "description": "The attribute set. Six is the tabletop inheritance; fewer is fine, but the check consumers must agree with this list."
+    },
+    {
+      "name": "pointsPerLevel",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Attribute points granted per level-up. One keeps every level a real decision; three turns leveling into shopping."
+    },
+    {
+      "name": "checkDieSides",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Die rolled for checks. d20 by convention: flat, swingy, and legible to anyone who has ever held one."
+    },
+    {
+      "name": "derivedStatTable",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Formulas mapping attributes to derived stats, as data. Data so that rebalancing derived stats never touches the roller."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "attributes",
+      "type": "object",
+      "description": "Current raw attribute values."
+    },
+    {
+      "name": "derivedStats",
+      "type": "object",
+      "description": "Computed derived values, refreshed on any attribute change."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.attributeIncreased",
+      "progression.attributeCheckRolled"
+    ],
+    "listensTo": [
+      "progression.leveledUp"
+    ]
+  },
+  "dependencies": [
+    "progression.xp_leveling"
+  ],
+  "tags": [
+    "crpg",
+    "attributes",
+    "checks"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,109 @@
+{
+  "id": "combat.aim_assist",
+  "name": "Aim Assist",
+  "category": "combat",
+  "description": "A dial, not an aimbot. Two independent mechanisms: friction slows the reticle while it passes over a target, and magnetism nudges the aim vector toward the nearest valid target inside a cone — each tunable down to exactly zero for competitive modes where assist is a rules violation. It operates on the aim vector BEFORE combat.projectile_system consumes it, and it never fires, never selects outside its cone, and never tracks through walls: target validity reuses the same line-of-sight queries the camera and vision systems trust, because a private LOS test here is how aim assist learns to shoot through geometry. The component exists so the assist conversation happens in one config instead of being smeared across input code.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "magnetismStrength",
+      "type": "number",
+      "required": false,
+      "default": 0.15,
+      "description": "How strongly the aim vector is pulled toward the best target in the cone, 0 to 1. Small on purpose: magnetism you can feel as a tug is magnetism that fights the player during target switches."
+    },
+    {
+      "name": "frictionStrength",
+      "type": "number",
+      "required": false,
+      "default": 0.3,
+      "description": "Reticle slowdown while over a target, 0 to 1. Friction is the less controversial assist because it never moves the crosshair — it only resists the player's own motion."
+    },
+    {
+      "name": "assistConeDegrees",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Angular radius around the aim vector where targets are eligible. Kept narrow so assist helps with the target you are already looking at; wide cones pick targets for the player, which is the line this component refuses to cross."
+    },
+    {
+      "name": "maxAssistDistance",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Beyond this range no assist applies. Prevents the cone from vacuuming up distant pixels the player cannot reasonably be aiming at."
+    },
+    {
+      "name": "enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Master switch, exposed per-player rather than per-match so accessibility settings and competitive lobbies can disagree without a fork in the input path."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "assistActive",
+      "type": "boolean",
+      "description": "True while any assist force is being applied this tick. Telemetry reads this to separate assisted kills from raw ones."
+    },
+    {
+      "name": "assistedTargetId",
+      "type": "string",
+      "description": "Entity currently receiving assist focus, empty when none. UI may highlight it; gameplay logic must not treat it as a lock."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.aimTargetAcquired",
+      "combat.aimAssistApplied"
+    ],
+    "listensTo": [
+      "input.aim"
+    ]
+  },
+  "dependencies": [
+    "presentation.camera_follow"
+  ],
+  "tags": [
+    "shooter",
+    "aim",
+    "accessibility",
+    "assist"
+  ],
+  "provenance": "library-native"
+}

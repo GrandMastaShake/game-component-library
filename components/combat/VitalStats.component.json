@@ -1,0 +1,115 @@
+{
+  "id": "combat.vital_stats",
+  "name": "Vital Stats",
+  "category": "combat",
+  "description": "Hunger, thirst, temperature, and stamina as four drains with consequences, not four progress bars. Each stat depletes on its own clock and crosses a threshold that routes damage through combat.damage_resolver — starvation is damage, freezing is damage, one death pipeline with many causes, so no parallel health system ever forks. Temperature is the odd one out: instead of a pure timer it samples world.weather_system and world.fire_warmth's warmth field every tick, because 'stand near the fire' must beat 'stand in the blizzard' through actual simulation rather than scripted safe zones. What REFILLS a stat — eating, drinking, resting — is the verb of whoever did it; this component owns only the drain and the consequence, which is what keeps food, beds, and campfires composable without VitalStats knowing any of them exist.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "hungerDrainPerMinute",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Hunger lost per game minute on a 0-100 scale. At the default, a full stomach lasts about an hour and a half of play — long enough to forget, short enough to plan around."
+    },
+    {
+      "name": "thirstDrainPerMinute",
+      "type": "number",
+      "required": false,
+      "default": 1.4,
+      "description": "Thirst lost per game minute. Deliberately faster than hunger: the genre's settled instinct is that water is the early-game pressure and food the mid-game one."
+    },
+    {
+      "name": "staminaRegenPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Stamina recovered per second while not exerting. Exertion costs are charged by whoever exerts (sprint, chop, swim) against the staminaLevel output — this component only owns the recovery curve."
+    },
+    {
+      "name": "temperatureNeutral",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Ambient temperature at which the temperature stat drifts toward full. Below it, the drain scales with the gap minus whatever warmth world.fire_warmth contributes at the player's position."
+    },
+    {
+      "name": "depletionDamagePerSecond",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Damage routed to combat.damage_resolver per second per fully depleted stat. Multiple depleted stats stack, which is what makes ignoring two meters at once a death spiral instead of a lifestyle."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "staminaLevel",
+      "type": "number",
+      "description": "Current stamina, 0 to 100. Exerting systems read and spend against this; it is the only stat designed to cycle within a single fight."
+    },
+    {
+      "name": "anyDepleted",
+      "type": "boolean",
+      "description": "True while at least one stat sits at zero and is dealing damage. The HUD's urgent state keys off this rather than four separate watchers."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.vitalWarning",
+      "combat.vitalDepleted",
+      "combat.vitalRestored"
+    ],
+    "listensTo": [
+      "world.weatherChanged",
+      "world.warmthChanged",
+      "inventory.itemRemoved"
+    ]
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "world.weather_system"
+  ],
+  "tags": [
+    "survival",
+    "hunger",
+    "thirst",
+    "temperature",
+    "stamina",
+    "core"
+  ],
+  "provenance": "library-native"
+}

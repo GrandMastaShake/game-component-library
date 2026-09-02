@@ -1,0 +1,119 @@
+{
+  "id": "utility.referee_rules",
+  "name": "Referee Rules",
+  "category": "utility",
+  "description": "The adjudication layer: fouls, offsides, out-of-bounds, and advantage. Rules are evaluated from events and positions, never polled per-frame per-player — a foul is a possession-loss event plus context, not a collision-callback storm, because a referee that runs a physics query per tick will eventually disagree with the replay. Advantage is first-class: when the fouled team keeps the ball, play continues and the foul is banked, since stopping play by default makes the referee the most influential player on the pitch. Cards and penalties are escalations emitted as data; what a red card MEANS — send-off, suspension, roster shrink — belongs to social.team_roster and the match flow, not to the whistle.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "offsideEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the offside rule is evaluated at all. Off by necessity in small-sided modes — offside needs a defensive line to mean anything, and three-a-side has no line."
+    },
+    {
+      "name": "advantageWindowSeconds",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "How long after a foul the referee waits to see if the fouled team keeps usable possession before whistling. The window is the whole rule: too short and advantage never pays, too long and the foul is forgotten."
+    },
+    {
+      "name": "foulSeverityThresholds",
+      "type": "object",
+      "required": false,
+      "default": {
+        "freeKick": 0.3,
+        "yellowCard": 0.6,
+        "redCard": 0.9
+      },
+      "description": "Severity scores (from contact speed, angle, and ball-playing intent on the possession event) that escalate the call. Thresholds in data so league rulesets differ without a code change."
+    },
+    {
+      "name": "outOfBoundsMargin",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Distance past the touchline the whole ball must travel before the whistle. The margin exists so a ball grazing the line plays on — matching world.goal_zone's full-crossing philosophy on every boundary."
+    },
+    {
+      "name": "cardAccumulationLimit",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Yellow cards that escalate to a red. The referee tracks accumulation and emits the escalation; the send-off itself is social.team_roster's mutation, keeping discipline's paperwork and its consequences in separate hands."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeAdvantage",
+      "type": "boolean",
+      "description": "True while a banked foul is inside its advantage window. AI and commentary read this to understand why the obvious foul wasn't whistled — the silence must be explainable."
+    },
+    {
+      "name": "foulsByTeam",
+      "type": "array",
+      "description": "Running foul counts per side. Broadcast graphics and aggro tuning both consume it; the referee itself never acts on the count, only on the next foul's severity."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.foulCalled",
+      "utility.offsideCalled",
+      "utility.outOfBounds",
+      "utility.advantagePlayed"
+    ],
+    "listensTo": [
+      "movement.possessionGained",
+      "movement.possessionLost",
+      "movement.ballLoose"
+    ]
+  },
+  "dependencies": [
+    "world.goal_zone",
+    "utility.match_clock"
+  ],
+  "tags": [
+    "sports",
+    "referee",
+    "rules",
+    "fouls",
+    "offside"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,107 @@
+{
+  "id": "combat.action_point_economy",
+  "name": "Action Point Economy",
+  "category": "combat",
+  "description": "The per-turn budget: moving costs points, attacking costs points, items cost points, and when the wallet is empty the turn is over. combat.turn_order_queue says whose wallet is active; this component says what is inside it and what each action charges. Keeping the economy separate from the queue matters because games tune them independently \u2014 a boss with two turns is a queue change, a boss whose attacks cost double is an economy change, and neither should require touching the other's code. Unspent points never roll over by default: banking AP turns tactics into hoarding, so rollover is an explicit opt-in, not an accident.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "actionPointsPerTurn",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Base wallet size. Two is the genre's sweet spot: move-and-act, or act twice, but never everything."
+    },
+    {
+      "name": "actionCosts",
+      "type": "object",
+      "required": false,
+      "default": {
+        "move": 1,
+        "attack": 1,
+        "item": 1,
+        "skill": 2
+      },
+      "description": "Price list as data. Skills costing more than basics is what keeps the basic attack from becoming a typo."
+    },
+    {
+      "name": "allowPointBanking",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether unspent points carry into the next turn. Opt-in only: banking rewards passing turns, which rewards boredom."
+    },
+    {
+      "name": "maxBankedPoints",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Cap when banking is enabled. One banked point is a tactical reserve; three is a savings account."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pointsRemaining",
+      "type": "number",
+      "description": "Live wallet for the active unit."
+    },
+    {
+      "name": "actionsTaken",
+      "type": "array",
+      "description": "Actions spent this turn, for undo UI and replays."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.actionPointsSpent",
+      "combat.actionPointsExhausted"
+    ],
+    "listensTo": [
+      "combat.turnStarted",
+      "combat.turnEnded"
+    ]
+  },
+  "dependencies": [
+    "combat.turn_order_queue"
+  ],
+  "tags": [
+    "tactics",
+    "action-economy",
+    "budget"
+  ],
+  "provenance": "library-native"
+}

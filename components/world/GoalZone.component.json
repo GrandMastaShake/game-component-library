@@ -1,0 +1,108 @@
+{
+  "id": "world.goal_zone",
+  "name": "Goal Zone",
+  "category": "world",
+  "description": "The scoring volume and the rules around it: what counts (the whole ball across the line), who it counts for (attacking direction), and what happens after (kickoff reset or live rebound, per mode). It follows the volume pattern of world.hazard_volume but keeps its own event — a goal is a scoring fact, not damage, and downstream consumers like utility.match_clock and social.leaderboard should never have to filter hazard traffic to find it. Attribution reads the ball's last-toucher metadata written by movement.ball_carrier, so own goals are computed from data rather than guessed from geometry. The zone detects and records; celebrating, resetting the pitch, and updating the scoreboard each belong to whoever owns those jobs.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "volumeSize",
+      "type": "array",
+      "required": false,
+      "default": [
+        4,
+        2,
+        0.5
+      ],
+      "description": "Goal mouth dimensions in world units: width, height, and the depth of the decision plane. The depth is thin but nonzero so 'across the line' is a volume crossing with a frame of tolerance, not a float equality test."
+    },
+    {
+      "name": "requireFullCrossing",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the entire ball must pass the plane. True is the sport's rule and the drama engine — a goal that counts on a graze removes every goal-line argument the replay camera was invented for."
+    },
+    {
+      "name": "resetAfterGoal",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether play stops for a kickoff reset. False produces arcade modes where the ball stays live off the net; the flag is here so the zone itself never has to know which mode it is in."
+    },
+    {
+      "name": "allowOwnGoals",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a defensive last touch credits the attacking side with the scorer flagged. Own goals are half the genre's comedy and most of its tragedy; removing them is a ruleset decision, not a default."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "goalsConceded",
+      "type": "number",
+      "description": "Goals scored against this zone's defending side. Each goal zone counts its own concession; the match score is derived by whoever owns the scoreboard, keeping the zones symmetric."
+    },
+    {
+      "name": "lastScorerId",
+      "type": "string",
+      "description": "Entity credited with the most recent goal, taken from the ball's last-toucher metadata. Empty on a pure rebound with no touch — an honest empty, not a guess."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.goalScored",
+      "world.scoreRejected"
+    ],
+    "listensTo": [
+      "movement.ballLoose",
+      "movement.possessionLost"
+    ]
+  },
+  "dependencies": [
+    "movement.physics_core"
+  ],
+  "tags": [
+    "sports",
+    "goal",
+    "scoring",
+    "volume",
+    "core"
+  ],
+  "provenance": "library-native"
+}

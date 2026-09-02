@@ -1,0 +1,75 @@
+{
+  "id": "combat.combo_chain",
+  "name": "Combo Chain",
+  "category": "combat",
+  "description": "The grammar of offense: which move may cancel into which, inside what frame window, plus the input buffer and motion-input recognition (quarter-circles, dragon punches) that make intent legible at fighting-game speed. It owns the chain table and the buffer because both answer the same question — 'what did the player mean, and are they allowed to do it now' — and splitting them produces the classic bug where a buffered input fires a move the cancel rules would have forbidden. It deliberately does not own contact: combat.hitbox_hurtbox reports combat.hit_confirmed, and a cancel window opens on confirmed hits (hit-confirming) rather than on button presses, which is what separates real chains from mash-friendly animation blending. It also does not own damage scaling; scaling on chain depth is combat.damage_resolver's knob, fed by the step count this publishes.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "chainTable",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Entries of {fromMove, toMove, windowFrames, cancelType}. The table is the character: two fighters with identical moves but different tables play nothing alike."
+    },
+    {
+      "name": "inputBufferFrames",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "How long an input is remembered before it expires. Eight frames forgives early presses without letting players queue whole strings blindly."
+    },
+    {
+      "name": "cancelWindowFrames",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Default window after a confirmed hit during which a legal cancel is accepted, used when a chain entry does not override it."
+    },
+    {
+      "name": "motionInputTable",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Direction sequences that read as special motions, with per-motion leniency. Leniency is per motion because a quarter-circle and a 360 deserve different mercy."
+    },
+    {
+      "name": "dropResetFrames",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Frames without a confirmed hit before the chain resets to neutral. Long enough to survive a whiffed linker, short enough that a dropped combo cannot be resurrected."
+    }
+  ],
+  "outputs": [
+    {"name": "currentChainStep", "type": "number"},
+    {"name": "bufferedInput", "type": "string"},
+    {"name": "lastMotionRecognized", "type": "string"}
+  ],
+  "events": {
+    "emits": [
+      "combat.comboAdvanced",
+      "combat.comboDropped",
+      "combat.motionInputRecognized"
+    ],
+    "listensTo": [
+      "combat.hitConfirmed",
+      "input.attack",
+      "input.motion"
+    ]
+  },
+  "dependencies": [
+    "combat.hitbox_hurtbox",
+    "combat.melee_basic"
+  ],
+  "tags": ["fighting", "combo", "cancel", "motion-input", "core"],
+  "provenance": "library-native"
+}

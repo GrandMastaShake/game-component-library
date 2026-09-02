@@ -1,0 +1,46 @@
+{
+  "id": "genre.open_world",
+  "name": "Open World",
+  "description": "A seamless streamed world where discovery is the progression: POIs reveal themselves, encounters spawn at your level just out of sight, and the world keeps your changes. Sandbox RPG folds into this pack \u2014 world_state_flags and the POI network are what make roaming feel authored.",
+  "version": "0.1.0",
+  "loop": "roam \u2192 discover POI \u2192 engage content on your terms \u2192 world reacts",
+  "views": [
+    "voxel",
+    "top-down"
+  ],
+  "memberComponents": [
+    "world.chunk_manager",
+    "world.terrain_generator",
+    "world.biome_system",
+    "world.world_builder",
+    "world.day_night_cycle",
+    "world.weather_system",
+    "world.mob_patrol",
+    "presentation.lod_system",
+    "progression.quest_log"
+  ],
+  "newComponents": [
+    "world.point_of_interest_network",
+    "world.streaming_world_loader",
+    "world.dynamic_encounter_spawner",
+    "world.world_state_flags",
+    "movement.vehicle_summon"
+  ],
+  "signatureCompound": {
+    "name": "Roam and React",
+    "description": "streaming_world_loader pages the world and its entities seamlessly as the player roams, point_of_interest_network turns geography into discovered content, dynamic_encounter_spawner populates it at the right level, and world_state_flags makes what the player did there permanent. The loop is the map filling in.",
+    "memberIds": [
+      "world.streaming_world_loader",
+      "world.point_of_interest_network",
+      "world.dynamic_encounter_spawner",
+      "world.world_state_flags",
+      "world.chunk_manager"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "open-world",
+    "streaming",
+    "discovery"
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "id": "economy.wager_races",
+  "name": "Wager Races",
+  "category": "economy",
+  "description": "Stakes on a race: virtual cash, or the pink slip itself. It owns stake escrow \u2014 both sides' stakes are taken through economy.currency before the flag, held, then paid or forfeited when world.raceFinished declares the order \u2014 so a wager can never be welched on and insufficient funds is rejected by the same ledger that prices parts. Pink-slip transfers move a vehicle between garage rosters; this component records the transfer intent and lets housing.garage_management execute it, because ownership rules ('not the car you are sitting in', slot caps) live there. Virtual currency only, by design and by tag \u2014 nothing here maps to real-money wagering. It does not own the race result (world.track_circuit owns laps and order), does not own matchmaking, and takes no house cut by default: the drama is the stake, not the rake.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "allowPinkSlips",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether vehicle-ownership stakes are offered. The genre's signature bet; disable for audiences where losing a car is too harsh a beat."
+    },
+    {
+      "name": "minStake",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "Floor on cash stakes. A non-trivial floor keeps wagers as events with ceremony instead of spammed coin flips."
+    },
+    {
+      "name": "maxStakeFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Largest stake as a fraction of the poorer party's balance. Caps the downside so one bad beat cannot end a campaign save."
+    },
+    {
+      "name": "houseCutFraction",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Share of the pot skimmed per race. Zero by default; a sink only if the wider economy needs one, set deliberately and visibly."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeWager",
+      "type": "object",
+      "description": "Current escrow: parties, stake type, amounts. Null between races. Read by the pre-race ceremony UI."
+    },
+    {
+      "name": "escrowHeld",
+      "type": "number",
+      "description": "Cash currently held in escrow, surfaced for audit and balance tooling."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.wagerPlaced",
+      "economy.wagerWon",
+      "economy.wagerLost"
+    ],
+    "listensTo": [
+      "world.raceFinished"
+    ]
+  },
+  "dependencies": [
+    "economy.currency",
+    "world.track_circuit"
+  ],
+  "tags": [
+    "driver-rpg",
+    "wager",
+    "pink-slip",
+    "virtual-currency-only",
+    "stakes"
+  ],
+  "provenance": "library-native"
+}

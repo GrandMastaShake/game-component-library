@@ -1,0 +1,94 @@
+{
+  "id": "inventory.potion_belt",
+  "name": "Potion Belt",
+  "category": "inventory",
+  "description": "The small bandolier that keeps healing out of backpack tetris. inventory.slotted_bag owns storage truth; the belt is a bounded window onto consumable stacks, so drinking here decrements the same stack the bag counts \u2014 a belt holding its own copies of items is a dupe bug waiting to ship. It owns only the use verb: pick the slot, check the stack, apply the effect (through combat.status_effects when the potion leaves a buff rather than a flat heal), and report empty when the stack runs dry. It does not decide what a potion does \u2014 that is item data \u2014 and it does not auto-pick which potion you meant; ambiguity is the player's problem by design.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "beltSlots",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Quick-use slots. Four is a real constraint: health, mana, utility, and one slot the build argues about."
+    },
+    {
+      "name": "autoRefillFromBag",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the next stack of the same potion slides into the slot when one empties. Manual refill is hardcore; auto is the genre default."
+    },
+    {
+      "name": "useCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Minimum gap between sips. Without it, a full stack is a health bar with extra steps."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "beltContents",
+      "type": "array",
+      "description": "Item id and stack count per slot."
+    },
+    {
+      "name": "potionsRemaining",
+      "type": "number",
+      "description": "Total across all belt slots, for the HUD counter."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.potionUsed",
+      "inventory.potionEmpty"
+    ],
+    "listensTo": [
+      "input.potionSlot"
+    ]
+  },
+  "dependencies": [
+    "inventory.slotted_bag"
+  ],
+  "tags": [
+    "arpg",
+    "consumables",
+    "quick-use"
+  ],
+  "provenance": "library-native"
+}

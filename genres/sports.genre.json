@@ -1,0 +1,45 @@
+{
+  "id": "genre.sports",
+  "name": "Sports",
+  "description": "Possession sport: win the ball, advance it against a defensive shape, score across a line, and reset — against a clock with periods, stoppages, and a referee. movement.ball_carrier makes possession a physical state with a cost, world.goal_zone turns the line into a rules-driven scoring fact, and social.team_roster, utility.match_clock, and utility.referee_rules supply the structure that makes two mobs chasing a ball into a match.",
+  "version": "0.1.0",
+  "loop": "possession → advance → score → reset",
+  "views": [
+    "top-down",
+    "side-scroll-2d"
+  ],
+  "memberComponents": [
+    "movement.character_body",
+    "movement.run_control",
+    "movement.physics_core",
+    "utility.timer_system",
+    "social.leaderboard",
+    "ui.hud",
+    "utility.behavior_fsm"
+  ],
+  "newComponents": [
+    "movement.ball_carrier",
+    "world.goal_zone",
+    "social.team_roster",
+    "utility.match_clock",
+    "utility.referee_rules",
+    "movement.skill_move_set"
+  ],
+  "signatureCompound": {
+    "name": "Possession to Goal",
+    "description": "Two rosters, one ball, one clock: carry, pass, and skill-move through a defensive line, score across the goal zone's decision plane, and reset to kickoff as the match clock banks the stoppage. Proves the loop's causal chain: possession costs speed, advancement risks the ball, and scoring is a rules event, not a collision.",
+    "memberIds": [
+      "movement.ball_carrier",
+      "world.goal_zone",
+      "social.team_roster",
+      "utility.match_clock",
+      "movement.skill_move_set"
+    ]
+  },
+  "tags": [
+    "genre-pack",
+    "sports",
+    "possession",
+    "squad-b"
+  ]
+}

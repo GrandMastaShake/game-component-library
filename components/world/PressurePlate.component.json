@@ -1,0 +1,66 @@
+{
+  "id": "world.pressure_plate",
+  "name": "Pressure Plate",
+  "category": "world",
+  "description": "The floor-bound sibling of world.switch_mechanism: a switch that reads weight instead of hands. It owns the pressed/released fact on a named channel, the source filter — player, crate, or either — and a release delay, because a plate that flickers as a crate micro-bounces makes every door it feeds stutter. The source filter is the design surface: player-only plates force escort-free solutions, crate-only plates make the crate the key, and any-source plates let the player choose, which is why one component must distinguish all three. It deliberately does not own what the weight triggers; consumers subscribe to the channel exactly as they do for switches. It also does not detect the crate itself — world.pushable_block announces world.block_settled, and this component trusts that fact rather than reimplementing collision.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "channelId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The wire name this plate broadcasts on, shared vocabulary with world.switch_mechanism so doors cannot tell — and do not care — which kind of control feeds them."
+    },
+    {
+      "name": "acceptedSources",
+      "type": "string",
+      "required": false,
+      "default": "any",
+      "description": "player, crate, or any. This single field is the difference between 'stand here while the door opens', 'fetch the crate', and 'your choice'."
+    },
+    {
+      "name": "requiresContinuousWeight",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "True releases the plate when weight leaves (hold-the-door puzzles); false latches after first press (a one-way commitment, closer to a switch in spirit)."
+    },
+    {
+      "name": "releaseDelaySeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.2,
+      "description": "Grace period before an unweighted plate reports released. Absorbs bounce and foot-shuffle so consumers see one clean press instead of a flutter."
+    }
+  ],
+  "outputs": [
+    {"name": "isPressed", "type": "boolean"},
+    {
+      "name": "pressingSource",
+      "type": "string",
+      "description": "What is currently holding the plate — player, crate, or none — so hint systems can say why a crate-only plate ignores the player."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.pressurePlatePressed",
+      "world.pressurePlateReleased"
+    ],
+    "listensTo": [
+      "world.blockSettled",
+      "world.blockPushed"
+    ]
+  },
+  "dependencies": ["world.pushable_block"],
+  "tags": ["puzzle", "plate", "weight", "level-furniture"],
+  "provenance": "library-native"
+}

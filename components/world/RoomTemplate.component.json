@@ -1,0 +1,88 @@
+{
+  "id": "world.room_template",
+  "name": "Room Template",
+  "category": "world",
+  "description": "Hand-authored rooms inside a procedural layout. world.floor_descent owns the topology \u2014 how many rooms and how they connect; this component owns what a room IS: a stamp of tiles, props, spawn sockets, and reward anchors, chosen by tags ('treasure', 'shrine', 'ambush') that the floor's depth budget weights. Stamps exist because pure noise makes dungeons with no rhythm \u2014 the memorable room is authored, and the procedural layer's job is placement, not invention. It does not own the contents of its sockets: it declares WHERE a boss or trap may sit, and combat.boss_encounter_script or world.trap_system claims the socket.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "templateLibrary",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Stamps keyed by id, each carrying tags and spawn sockets. The library is content: designers add rooms without touching the placer."
+    },
+    {
+      "name": "minSpecialRoomsPerFloor",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Guarantees at least one authored-feeling beat per floor. Zero lets a floor be pure corridor, which reads as a generator bug even when it is legal."
+    },
+    {
+      "name": "allowRotation",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether stamps may be placed rotated. Rotation multiplies the effective library size; some stamps with directional gags must opt out in their data."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "placedRooms",
+      "type": "array",
+      "description": "Template id, transform, and socket list per placed room."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.roomPlaced"
+    ],
+    "listensTo": [
+      "world.floorGenerated"
+    ]
+  },
+  "dependencies": [
+    "world.floor_descent"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "rooms",
+    "procedural"
+  ],
+  "provenance": "library-native"
+}

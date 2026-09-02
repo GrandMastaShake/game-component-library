@@ -1,0 +1,92 @@
+{
+  "id": "combat.type_chart",
+  "name": "Type Chart",
+  "category": "combat",
+  "description": "The elemental multiplication table: fire beats grass, grass beats water, and the numbers behind 'beats'. It is a pure lookup \u2014 attacker type, defender type, multiplier \u2014 shared verbatim with the Monster Taming pack, which is why it owns the chart and nothing else: no damage (combat.damage_resolver consumes the multiplier it is handed), no statuses (a burn a fire move inflicts is combat.status_effects' row in the ledger), no UI. Being query-driven instead of event-driven is deliberate: the multiplier is needed inside the damage pipeline synchronously, and an event round-trip would deliver the answer a frame late to a resolver that already moved on.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "chart",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "attacker \u2192 defender \u2192 multiplier table. Missing pairs mean neutral (1.0), so a two-element game is a four-line file and a twenty-element game is still just data."
+    },
+    {
+      "name": "stabBonus",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Same-type attack bonus when the attacker's own element matches the move's. Rewards thematic teams without making off-type moves useless."
+    },
+    {
+      "name": "immunityThreshold",
+      "type": "number",
+      "required": false,
+      "default": 0.05,
+      "description": "Multipliers below this report as immunity. 'Barely works' and 'does not work' are different feelings, and the chart should say which."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastMultiplier",
+      "type": "number",
+      "description": "Result of the most recent lookup, for combat log and floating text."
+    },
+    {
+      "name": "lastEffectiveness",
+      "type": "string",
+      "description": "immune | resisted | neutral | effective \u2014 the word the UI shouts."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.typeAdvantageApplied"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [
+    "combat.damage_resolver"
+  ],
+  "tags": [
+    "tactics",
+    "elements",
+    "multipliers",
+    "shared-with-monster-taming"
+  ],
+  "provenance": "library-native"
+}

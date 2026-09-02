@@ -1,0 +1,41 @@
+{
+  "id": "genre.platformer",
+  "name": "Platformer",
+  "description": "The precision-traversal baseline: jump, avoid, collect, reach the goal. The pack assumes the existing movement kit (jump, dash, wall, ledge, ground sensing) and adds the level furniture a platformer cannot ship without — carriers, springs, checkpoints, and the collectible economy that paces a stage. Coyote time and jump buffering are intentionally absent from the new list: movement.jump_core already owns both, and this pack treats that as settled.",
+  "version": "0.1.0",
+  "loop": "traverse → jump/avoid → collect → reach goal",
+  "views": ["side-scroll-2d", "voxel"],
+  "memberComponents": [
+    "movement.jump_core",
+    "movement.ground_sensor",
+    "movement.wall_interaction",
+    "movement.ledge_grab",
+    "movement.dash_ability",
+    "movement.physics_core",
+    "progression.level_goal",
+    "world.hazard_volume",
+    "presentation.camera_follow",
+    "utility.timer_system"
+  ],
+  "newComponents": [
+    "world.moving_platform",
+    "economy.collectible_scatter",
+    "world.spring_launcher",
+    "progression.checkpoint_flag"
+  ],
+  "signatureCompound": {
+    "name": "One Clean Stage",
+    "description": "A single level that proves the loop: jump across moving platforms, spring to a high route, collect the scatter along the intended arc, die once to a hazard and respawn at the checkpoint, then touch the goal. Every new component in the pack is load-bearing in this compound.",
+    "memberIds": [
+      "movement.jump_core",
+      "movement.ground_sensor",
+      "world.moving_platform",
+      "world.spring_launcher",
+      "economy.collectible_scatter",
+      "progression.checkpoint_flag",
+      "world.hazard_volume",
+      "progression.level_goal"
+    ]
+  },
+  "tags": ["precision-action", "traversal", "side-scroll"]
+}

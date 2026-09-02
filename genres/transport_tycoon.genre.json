@@ -1,0 +1,47 @@
+{
+  "id": "genre.transport_tycoon",
+  "name": "Transport Tycoon",
+  "description": "The logistics builder: draw routes between stations, assign a fleet, feed the schedules, and grow a network whose efficiency score is the scoreboard. This pack composes the squad's vehicle DNA with the library's economy and grid systems into the full loop \u2014 routes are a graph over the tile world, cargo is priced by supply and demand, passengers arrive with the sun, vehicles wear out on a maintenance clock, and one public number tells you whether the company is engineering or weather. The design stance: every metric the score consumes is produced by a system the player can inspect, and nothing is ever punished without a visible cause.",
+  "version": "0.1.0",
+  "loop": "build route \u2192 assign vehicles \u2192 optimize throughput \u2192 expand network",
+  "views": [
+    "isometric",
+    "top-down"
+  ],
+  "memberComponents": [
+    "economy.team_resources",
+    "economy.currency",
+    "progression.production_queue",
+    "movement.pathfinding_system",
+    "movement.vehicle_basic",
+    "world.tile_grid",
+    "world.day_night_cycle",
+    "ui.minimap",
+    "presentation.iso_projection",
+    "inventory.core_inventory"
+  ],
+  "newComponents": [
+    "world.route_network",
+    "inventory.cargo_manifest",
+    "utility.depot_dispatch",
+    "world.passenger_flow",
+    "progression.network_efficiency_score"
+  ],
+  "signatureCompound": {
+    "name": "Route Profit Loop",
+    "description": "The network loop end to end: route_network defines stops, legs, and timetables over pathfinding geometry and flags blocked routes when the world changes, depot_dispatch assigns vehicles to those routes and pulls them for service before they fail, cargo_manifest quotes station prices from supply and demand while passenger_flow fills platforms on the day/night rush, and network_efficiency_score folds on-time rate, load factor, coverage, and profit into the 0-100 number whose milestones unlock the next expansion.",
+    "memberIds": [
+      "world.route_network",
+      "utility.depot_dispatch",
+      "inventory.cargo_manifest",
+      "world.passenger_flow",
+      "progression.network_efficiency_score"
+    ]
+  },
+  "tags": [
+    "tycoon",
+    "logistics",
+    "routes",
+    "management"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "world.pushable_block",
+  "name": "Pushable Block",
+  "category": "world",
+  "description": "The grid-snapped crate: a body the player relocates one tile at a time. It owns the push rules — the pusher must be grounded, aligned to a face, and pushing into a free tile — and it owns the settle, because 'the block has arrived' is a fact other components build on (pressure plates weigh it, pits swallow it). Snapping to the grid is deliberate: free-physics crates drift off plates and wedge in doorways, and the puzzle stops being about intent. This component does not own what the block is for — world.pressure_plate decides whether a resting block matters. It does not own falling either; gravity stays with movement.physics_core, which is why canFall is a flag here and not a physics reimplementation. Climbability is likewise not its business: movement.ledge_grab decides what is grabbable.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "gridSize",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The tile size pushes snap to. Must match the level's collision grid or pushes will fight the geometry."
+    },
+    {
+      "name": "pushSpeed",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Tile-crossing speed during a push. Slow enough to read as effort, fast enough that repositioning a crate never feels like a tax."
+    },
+    {
+      "name": "requiresGroundedPusher",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether mid-air pushes are rejected. Almost always true — airborne shoves let players solve crate puzzles without ever landing, which unthreads the intended route."
+    },
+    {
+      "name": "canFall",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the block obeys gravity when pushed off a ledge. Falling crates enable drop-the-key puzzles; floating ones are for purely planar rooms."
+    },
+    {
+      "name": "pushCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.3,
+      "description": "Dead time after a push settles before the next can start. Without it, a held input slides the block continuously and the grid snap becomes cosmetic."
+    }
+  ],
+  "outputs": [
+    {"name": "gridPosition", "type": "array"},
+    {"name": "isMoving", "type": "boolean"},
+    {
+      "name": "isSettled",
+      "type": "boolean",
+      "description": "True only when the block is snapped to the grid and at rest — the state a pressure plate can trust."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.blockPushed",
+      "world.blockSettled",
+      "world.blockFell"
+    ],
+    "listensTo": ["input.interact"]
+  },
+  "dependencies": ["movement.physics_core"],
+  "tags": ["puzzle", "crate", "push", "level-furniture"],
+  "provenance": "library-native"
+}

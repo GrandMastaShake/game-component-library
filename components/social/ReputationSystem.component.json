@@ -1,0 +1,102 @@
+{
+  "id": "social.reputation_system",
+  "name": "Reputation System",
+  "category": "social",
+  "description": "What the world thinks of you, per faction, on a number that only moves for deeds somebody saw. progression.quest_log records what you did; this component interprets it socially \u2014 a completed contract raises the issuing faction, and a betrayal witnessed by one faction ripples to its allies at a fraction of the weight. Tiers (hostile through allied) are thresholds over the number, crossed exactly once per direction, so shops, guards, and quest gates each get one clean event instead of a stream of near-misses. It owns standing only: the discounts, gates, and ambushes standing causes belong to whoever listens, and when a reputation consequence must become permanent geography, world.world_state_flags \u2014 not this component \u2014 is where it lands.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "factions",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Faction ids with ally/enemy relationships, as data. The ripple mechanic reads these edges; a faction web is content, not code."
+    },
+    {
+      "name": "tierThresholds",
+      "type": "object",
+      "required": false,
+      "default": {
+        "hostile": -50,
+        "neutral": 0,
+        "friendly": 25,
+        "allied": 75
+      },
+      "description": "Standing values where tiers flip. Asymmetric on purpose: trust is slower to earn than to burn."
+    },
+    {
+      "name": "rippleFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.25,
+      "description": "Fraction of a standing change applied to allied factions. Zero makes factions silos; one makes the faction web a single faction with extra steps."
+    },
+    {
+      "name": "decayPerDay",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Drift toward neutral per in-game day. Zero means deeds are forever, which is the CRPG promise; nonzero is for living-world games that want forgiveness."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "standings",
+      "type": "object",
+      "description": "Current standing value per faction."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.reputationChanged",
+      "social.reputationTierCrossed"
+    ],
+    "listensTo": [
+      "progression.questCompleted",
+      "ui.consequenceFlagSet"
+    ]
+  },
+  "dependencies": [
+    "progression.quest_log"
+  ],
+  "tags": [
+    "crpg",
+    "factions",
+    "consequence"
+  ],
+  "provenance": "library-native"
+}

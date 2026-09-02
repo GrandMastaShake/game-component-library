@@ -1,0 +1,41 @@
+{
+  "id": "genre.dungeon_crawler",
+  "name": "Dungeon Crawler",
+  "description": "Descend a seeded stack of procedural floors where authored rooms, traps, fog, and a boss at the bottom turn 'one more floor' into a session. The app's dd-* TypeScript generators already prove this loop; this pack declares the library-native contract they map onto.",
+  "version": "0.1.0",
+  "loop": "enter floor \u2192 rooms/corridors \u2192 traps/treasure/boss \u2192 descend",
+  "views": [
+    "top-down",
+    "voxel",
+    "isometric"
+  ],
+  "memberComponents": [
+    "movement.pathfinding_system",
+    "inventory.loot_table",
+    "world.hazard_volume",
+    "world.vision_system"
+  ],
+  "newComponents": [
+    "world.floor_descent",
+    "world.room_template",
+    "world.trap_system",
+    "world.fog_of_war_reveal",
+    "combat.boss_encounter_script"
+  ],
+  "signatureCompound": {
+    "name": "Floor Descent Loop",
+    "description": "floor_descent derives the seed and emits the floor, room_template stamps authored rooms into it, fog_of_war_reveal records what the party has seen, trap_system hides the teeth, and boss_encounter_script closes the bottom floor. Descend, repeat, die wiser.",
+    "memberIds": [
+      "world.floor_descent",
+      "world.room_template",
+      "world.fog_of_war_reveal",
+      "world.trap_system",
+      "combat.boss_encounter_script"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "procedural",
+    "dungeon"
+  ]
+}

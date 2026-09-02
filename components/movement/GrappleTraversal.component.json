@@ -1,0 +1,112 @@
+{
+  "id": "movement.grapple_traversal",
+  "name": "Grapple Traversal",
+  "category": "movement",
+  "description": "Aim-at-anchor swing and pull traversal, the movement verb that turns a collectible on a spire into a puzzle with a stylish answer. It owns anchor validation \u2014 range, line of sight, and the anchor tag so level authors decide what is grappable \u2014 the rope constraint while attached, and a release that preserves swing momentum, because the joy of a grapple is energy conservation and a release that clamps velocity feels like hitting glass. Mid-swing steering defers to movement.run_control's air control for the same reason JumpCore defers horizontal velocity: the component that owns horizontal motion applies the multipliers. It grapples geometry only \u2014 pulling enemies or items is a combat and inventory verb that would drag targeting rules into a movement component. Ground and air state come from movement.grounded and movement.leftGround so a grapple fired mid-coyote-time behaves exactly like a jump would.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxRange",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "description": "Furthest anchor distance. Range is a level-design lever: short ropes make anchor placement a breadcrumb trail, long ropes make the whole skyline reachable."
+    },
+    {
+      "name": "pullSpeed",
+      "type": "number",
+      "required": false,
+      "default": 14,
+      "description": "Reel-in speed when pulling straight to the anchor. Below jump apex speed the pull feels like a winch; well above it, like a zip."
+    },
+    {
+      "name": "swingGravityScale",
+      "type": "number",
+      "required": false,
+      "default": 0.6,
+      "description": "Gravity multiplier while swinging. Reduced gravity lengthens the arc and gives the player time to steer and plan the release."
+    },
+    {
+      "name": "releaseBoost",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "Velocity multiplier applied at release. Slightly above 1 so a well-timed release beats a jump \u2014 the skill expression of the verb."
+    },
+    {
+      "name": "anchorTag",
+      "type": "string",
+      "required": false,
+      "default": "grappleAnchor",
+      "description": "Tag marking valid anchors. Authors opt geometry in; nothing is grappable by default."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isAttached",
+      "type": "boolean"
+    },
+    {
+      "name": "ropeLength",
+      "type": "number",
+      "description": "Current constraint length, exposed so audio and camera can react to swing tension."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.grappleAttached",
+      "movement.grappleReleased",
+      "movement.grappleFailed"
+    ],
+    "listensTo": [
+      "input.grapple",
+      "movement.grounded",
+      "movement.leftGround"
+    ]
+  },
+  "dependencies": [
+    "movement.character_body",
+    "movement.physics_core"
+  ],
+  "tags": [
+    "collectathon",
+    "traversal",
+    "grapple",
+    "movement"
+  ],
+  "provenance": "library-native"
+}

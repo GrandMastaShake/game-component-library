@@ -1,0 +1,66 @@
+{
+  "id": "world.switch_mechanism",
+  "name": "Switch Mechanism",
+  "category": "world",
+  "description": "A hand-operated binary state broadcaster: levers, buttons, and pull-chains. Its entire job is to hold an on/off fact and announce changes on a named channel, because in a puzzle platformer the interesting question is never the switch — it is what the switch wakes up. It therefore deliberately knows nothing about its consumers: world.door_gate subscribes to the channel, and the same switch can feed a door, a platform, and a timer without this component growing any of their logic. Anything that must be stood on or weighed down is world.pressure_plate, its floor-bound sibling; a switch that also reads weight would blur the one distinction puzzle design relies on. Visual and audio state changes are presentation's job, reached through the event.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "channelId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The wire name this switch broadcasts on. Consumers match on channelId, never on proximity — a puzzle's wiring should survive the level being rearranged."
+    },
+    {
+      "name": "mechanismKind",
+      "type": "string",
+      "required": false,
+      "default": "lever",
+      "description": "lever, button, or chain. Kind is a skin plus an animation cue; it changes presentation, not behavior — behavior comes from mode."
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "required": false,
+      "default": "toggle",
+      "description": "toggle flips state on each use; momentary is on only while held or for pulseSeconds after a press. Momentary switches create timed-runs; toggles create permanent world changes."
+    },
+    {
+      "name": "initialState",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "State when the level loads, before any interaction."
+    },
+    {
+      "name": "interactRange",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "How close the player must be to use the switch. Generous ranges forgive imprecise landing; tight ones make the switch itself a platforming target."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "state",
+      "type": "boolean",
+      "description": "The one fact this component owns. Everything downstream is someone else's reaction to it."
+    }
+  ],
+  "events": {
+    "emits": ["world.switchToggled"],
+    "listensTo": ["input.interact"]
+  },
+  "dependencies": [],
+  "tags": ["puzzle", "switch", "interaction", "level-furniture"],
+  "provenance": "library-native"
+}

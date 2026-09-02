@@ -1,0 +1,102 @@
+{
+  "id": "presentation.photo_mode",
+  "name": "Photo Mode",
+  "category": "presentation",
+  "description": "Freezes the action and hands the camera to the player: free orbit, framing controls, filters, capture. It exists because a collectathon's payoff is a world worth looking at, and a player who just earned the vista wants the screenshot. This component owns the mode toggle, the detached camera while active, and the capture itself; on entry it takes over from presentation.camera_follow and hands control back on exit, so there is always exactly one camera authority. Filters are referenced as presentation.color_palette presets rather than implemented here, and hiding the HUD is a request the HUD honors, not a panel this component reaches into. It does not own where captures go \u2014 gallery and export are a persistence and platform concern \u2014 and it does not pause game logic; whether the world freezes is a time-scale decision made by the game mode, which keeps photo mode safe to offer in games where the world should keep breathing.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxCameraDistance",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "How far the free camera may roam from the player. Bounded so photo mode cannot be used as a scouting wallhack in games where that matters."
+    },
+    {
+      "name": "fovRange",
+      "type": "array",
+      "required": false,
+      "default": [20, 100],
+      "description": "Adjustable field-of-view bounds. Wide bounds enable dramatic compression shots; narrow bounds keep every capture recognizably in-world."
+    },
+    {
+      "name": "filterPresetIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Color-palette preset ids offered as filters. Empty means captures are unfiltered, not that filters are broken."
+    },
+    {
+      "name": "hideUI",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Request HUD suppression while active. A request, not a takeover \u2014 the HUD decides how it hides."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isActive",
+      "type": "boolean"
+    },
+    {
+      "name": "capturedCount",
+      "type": "number",
+      "description": "Captures taken this session, for stats and for photo-challenge quests that count shots."
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.photoModeEntered",
+      "presentation.photoModeExited",
+      "presentation.photoCaptured"
+    ],
+    "listensTo": [
+      "input.togglePhotoMode"
+    ]
+  },
+  "dependencies": [
+    "presentation.camera_follow"
+  ],
+  "tags": [
+    "collectathon",
+    "photo",
+    "camera",
+    "capture"
+  ],
+  "provenance": "library-native"
+}

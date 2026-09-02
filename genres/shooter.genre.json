@@ -1,0 +1,47 @@
+{
+  "id": "genre.shooter",
+  "name": "Shooter",
+  "description": "Twin-stick and first-person shooting: target acquisition, trigger discipline, ammo pressure, and cover. The pack's spine is the fire pipeline — combat.weapon_loadout turns intent into combat.fireRequested, combat.ammo_economy counts the bullet, combat.projectile_system flies it, combat.damage_resolver settles the hit — with combat.cover_system, combat.aim_assist, and presentation.hit_feedback shaping positioning, accessibility, and feel around that spine.",
+  "version": "0.1.0",
+  "loop": "acquire target → fire/manage ammo → take cover/reposition → clear",
+  "views": [
+    "top-down",
+    "voxel"
+  ],
+  "memberComponents": [
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "ui.hud",
+    "presentation.camera_follow",
+    "presentation.first_person_camera",
+    "presentation.screen_shake",
+    "presentation.particle_system",
+    "movement.pathfinding_system"
+  ],
+  "newComponents": [
+    "combat.projectile_system",
+    "combat.weapon_loadout",
+    "combat.ammo_economy",
+    "combat.cover_system",
+    "combat.aim_assist",
+    "presentation.hit_feedback"
+  ],
+  "signatureCompound": {
+    "name": "Twin-Stick Firefight",
+    "description": "One arena, one armed player, waves of pathing enemies: the trigger pipeline (loadout → ammo → projectile → damage) runs under sustained pressure while cover and hit feedback keep the exchange readable. If this loop feels fair and legible, the pack works.",
+    "memberIds": [
+      "combat.weapon_loadout",
+      "combat.ammo_economy",
+      "combat.projectile_system",
+      "combat.damage_resolver",
+      "combat.cover_system",
+      "presentation.hit_feedback"
+    ]
+  },
+  "tags": [
+    "genre-pack",
+    "shooter",
+    "combat",
+    "squad-b"
+  ]
+}

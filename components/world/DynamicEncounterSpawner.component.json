@@ -1,0 +1,98 @@
+{
+  "id": "world.dynamic_encounter_spawner",
+  "name": "Dynamic Encounter Spawner",
+  "category": "world",
+  "description": "Pop-in with a level conscience. When a chunk activates, this rolls the encounter table for its biome and level band, asks combat.enemy_tier_scaling for the multiplier set, and places the group where the player is not currently looking \u2014 spawning in view reads as a bug even when it is a feature. It owns only the birth: the moment a mob exists it belongs to world.mob_patrol for behaviour and combat.damage_resolver for outcomes. Culling is symmetric \u2014 encounters that outlive their relevance leave through world.streaming_world_loader's lifecycle, never by vanishing, because a mob that blinks out mid-chase teaches the player the world is wallpaper.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "encounterTables",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Per-biome tables of group compositions and weights. The table is content; the spawner is the referee that keeps it fair."
+    },
+    {
+      "name": "minSpawnDistanceFromPlayer",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "description": "No spawns inside this radius. Combined with the out-of-sight rule, this is the difference between 'the world is alive' and 'enemies teleport at you'."
+    },
+    {
+      "name": "spawnOutOfSight",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Require spawn points to be outside the player's current view. Turning this off is valid for ambush-setpiece games and wrong for almost everyone else."
+    },
+    {
+      "name": "respawnCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 300,
+      "description": "Minimum time before a cleared chunk may roll a new encounter. Five minutes keeps backtracking calm without making the world feel emptied."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeEncounters",
+      "type": "number",
+      "description": "Live spawned groups, for density telemetry."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.encounterSpawned",
+      "world.encounterCulled"
+    ],
+    "listensTo": [
+      "world.chunkLoaded",
+      "world.entitiesPagedOut"
+    ]
+  },
+  "dependencies": [
+    "world.mob_patrol",
+    "combat.enemy_tier_scaling"
+  ],
+  "tags": [
+    "open-world",
+    "spawning",
+    "encounters"
+  ],
+  "provenance": "library-native"
+}

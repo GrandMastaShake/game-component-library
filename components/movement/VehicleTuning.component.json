@@ -1,0 +1,120 @@
+{
+  "id": "movement.vehicle_tuning",
+  "name": "Vehicle Tuning",
+  "category": "movement",
+  "description": "The per-vehicle feel sheet: acceleration curve, grip, drift tendency, and steering response, stored as named presets and applied on top of movement.vehicle_basic's stock handling. It exists because two cars sharing the same VehicleBasic should not drive the same, and the difference between them is data, not code. This component owns the parameter set and when it is applied \u2014 it re-asserts the tune on movement.vehicleEntered because VehicleBasic resets to stock handling on seat change. It does not own the physics integration (movement.physics_core turns the resulting numbers into motion) or the entry/seat logic (VehicleBasic). It also stores no progression: a part that improves grip is an economy and inventory fact, and what reaches this component is only the final numbers a garage system computed.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "presetName",
+      "type": "string",
+      "required": false,
+      "default": "stock",
+      "description": "Named tune preset to apply. Presets are how garages and part systems talk to this component \u2014 they install a preset name, never raw physics constants."
+    },
+    {
+      "name": "acceleration",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Units per second squared at full throttle from standstill. Tuned against topSpeed: a high top speed with weak acceleration reads as a highway cruiser, not a sluggish car."
+    },
+    {
+      "name": "topSpeed",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Ceiling on forward speed under power. Overrides movement.vehicle_basic's stock value while this tune is active."
+    },
+    {
+      "name": "gripCoefficient",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Lateral grip multiplier. Below 1 the tail slides; progression.drift_scoring reads the resulting slip angle, so this knob indirectly sets how easy drift points are to start."
+    },
+    {
+      "name": "driftFactor",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "How much steering input converts to yaw while sliding. Distinct from grip: grip decides when a slide starts, driftFactor decides how steerable the car remains inside one."
+    },
+    {
+      "name": "steeringResponse",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Steering angle ramp rate multiplier. High values suit twitch arcade handling; low values give the weighted feel expected from heavy vehicles."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activePreset",
+      "type": "string"
+    },
+    {
+      "name": "effectiveTopSpeed",
+      "type": "number",
+      "description": "Top speed after all multipliers, including any performance degradation written in by combat.vehicle_damage_states \u2014 damage rides the same path as tuning so 'damaged handling' and 'tuned handling' never diverge."
+    },
+    {
+      "name": "effectiveAcceleration",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.tuneApplied"
+    ],
+    "listensTo": [
+      "movement.vehicleEntered"
+    ]
+  },
+  "dependencies": [
+    "movement.vehicle_basic",
+    "movement.physics_core"
+  ],
+  "tags": [
+    "vehicle",
+    "tuning",
+    "racing",
+    "feel",
+    "core"
+  ],
+  "provenance": "library-native"
+}

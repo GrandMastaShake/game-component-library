@@ -1,0 +1,114 @@
+{
+  "id": "housing.build_placement",
+  "name": "Build Placement",
+  "category": "housing",
+  "description": "Grid-snapped placement of shelters, furniture, and workbenches as a player verb: ghost preview, validity rules (support, clearance, slope), and material consumption on confirm. It is the survival cousin of presentation.object_placer — object_placer is a level-authoring tool that answers to a designer, while this answers to a player carrying limited wood, so it owns costs, rejection, and refunds that the authoring tool never needs. Materials leave through inventory.core_inventory BEFORE the ghost turns solid, so a placement can never duplicate resources, and removal refunds a fixed fraction through the same door. Structural logic — does this wall hold that roof — is a rules callback the game supplies; this component owns the transaction, not architecture.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "gridSize",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Snap increment in world units, matched to world.tile_grid's cell size. Free placement (0) is supported but off by default — the grid is what makes player-built bases readable instead of soup."
+    },
+    {
+      "name": "maxSlopeDegrees",
+      "type": "number",
+      "required": false,
+      "default": 35,
+      "description": "Steepest terrain the ghost stays valid on. Beyond it placement is rejected rather than compensated, because auto-leveling terrain under a player's build is a silent world edit."
+    },
+    {
+      "name": "requireSupport",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether elevated pieces must trace to ground through other placed pieces. The floating-castle exploit is charming exactly once; after that it is a bug report."
+    },
+    {
+      "name": "snapRotationDegrees",
+      "type": "number",
+      "required": false,
+      "default": 45,
+      "description": "Rotation increment per rotate input. 45 degrees gives diagonals without inviting the micro-angle fiddling that a free rotate would."
+    },
+    {
+      "name": "refundFractionOnRemove",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Fraction of materials returned when the player removes their own structure. Below 1 by design: full refunds make bases infinitely rearrangeable and delete the commitment that makes building a survival decision."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ghostValid",
+      "type": "boolean",
+      "description": "Whether the current ghost would place if confirmed this tick. UI renders red or green from this; the confirm path re-validates independently, so this is presentation, not authority."
+    },
+    {
+      "name": "placedCount",
+      "type": "number",
+      "description": "Structures placed by this placer instance. Telemetry and build-limit caps read it; the count itself enforces nothing."
+    }
+  ],
+  "events": {
+    "emits": [
+      "housing.structurePlaced",
+      "housing.structureRemoved",
+      "housing.placementRejected"
+    ],
+    "listensTo": [
+      "input.placeStructure",
+      "input.rotatePlacement",
+      "input.cancelPlacement"
+    ]
+  },
+  "dependencies": [
+    "presentation.object_placer",
+    "world.tile_grid",
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "survival",
+    "building",
+    "placement",
+    "shelter"
+  ],
+  "provenance": "library-native"
+}

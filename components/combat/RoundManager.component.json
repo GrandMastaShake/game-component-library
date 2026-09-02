@@ -1,0 +1,79 @@
+{
+  "id": "combat.round_manager",
+  "name": "Round Manager",
+  "category": "combat",
+  "description": "The match as a state machine: intro, fight, knockout, round end, match end, best-of-N scoring, and the round clock. It owns the lifecycle and the win tally because every other fighting component needs a single answer to 'is combat legal right now' — inputs during intro, hits after KO, and meter gain between rounds all key off the round state this publishes. It deliberately does not own the clock mechanism: utility.timer_system counts, and this component decides what the count means, including whether time-out goes to the higher-health fighter or a draw. It also does not own match-level stakes beyond the score — bracket position, wagers, and ladder effects belong to social.leaderboard and whatever tournament layer consumes combat.match_ended. Round resets reposition the fighters through movement.character_body; this component orders the reset but does not move anyone itself.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "roundsToWin",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Wins needed to take the match. Two is the genre default; one makes every round match point, three lengthens sets for tournament play."
+    },
+    {
+      "name": "roundSeconds",
+      "type": "number",
+      "required": false,
+      "default": 99,
+      "description": "The round clock, handed to utility.timer_system. 99 is tradition; shorter clocks force engagement in zoning-heavy matchups."
+    },
+    {
+      "name": "introSeconds",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Locked-out period before combat is legal. Long enough for the round callout to read, short enough that rematches do not drag."
+    },
+    {
+      "name": "timeOutRule",
+      "type": "string",
+      "required": false,
+      "default": "higherHealthWins",
+      "description": "What an expired clock means: higherHealthWins rewards the life lead, draw awards no one. The rule is match design, not timing, so it lives here and not in the timer."
+    },
+    {
+      "name": "endOfRoundFreezeSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Hitstop-style freeze after the deciding blow before positions reset. The beat that lets a KO land emotionally before the next round starts."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "roundState",
+      "type": "string",
+      "description": "intro, fight, ko, roundEnd, or matchEnd — the fact every other combat component gates itself on."
+    },
+    {"name": "roundNumber", "type": "number"},
+    {"name": "winsPerFighter", "type": "array"}
+  ],
+  "events": {
+    "emits": [
+      "combat.roundStarted",
+      "combat.roundEnded",
+      "combat.matchEnded",
+      "combat.drawRound"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "utility.timerCompleted"
+    ]
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "utility.timer_system"
+  ],
+  "tags": ["fighting", "rounds", "match", "state-machine"],
+  "provenance": "library-native"
+}

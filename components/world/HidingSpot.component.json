@@ -1,0 +1,105 @@
+{
+  "id": "world.hiding_spot",
+  "name": "Hiding Spot",
+  "category": "world",
+  "description": "Lockers, closets, under-bed gaps: enterable volumes that break the stalker's acquisition. Owns entry and exit rules — occupancy, noise on entry, time to settle — and the detection check when a pursuer searches the room. Entering a locker the stalker SAW you enter is death, and that rule lives here rather than in the AI because it is a property of the spot: the locker lies, and the lie is only good if no one watched you tell it. While hidden, the player's movement and camera constraints belong to their own components; this publishes the hidden fact and the spot's exposure state, which world.stalker_ai and combat.fear_sanity_meter both consume — hiding should calm acquisition while sharpening dread, and that split only works if the two systems read the same fact independently.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "settleSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Time from entry until the hidden state takes effect. The gap is the gamble: dive in with the stalker six steps behind and the settle window decides whether the lie was fast enough."
+    },
+    {
+      "name": "entryNoiseRadius",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Radius in which entering the spot is audible, reported through the same noise channel as footsteps. Slamming a locker is a confession; the radius is what makes the last three steps before hiding a crouch."
+    },
+    {
+      "name": "detectIfSeenEntering",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether witnessed entry defeats the spot entirely. True by default — a hiding place that works while watched is a force field, and force fields are a different genre."
+    },
+    {
+      "name": "maxOccupants",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How many entities the spot hides at once. One, because a two-person locker turns a dread beat into a comedy beat — which a co-op mode may want, and can now say so in data."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isOccupied",
+      "type": "boolean",
+      "description": "True while anyone is inside, settled or not. An occupied locker refuses entry; it does not stack tenants."
+    },
+    {
+      "name": "occupantHidden",
+      "type": "boolean",
+      "description": "True only after the settle window completes with detection rules satisfied. This is the fact world.stalker_ai trusts — entry is not hiding."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.hidden",
+      "world.hidingCompromised",
+      "world.hidingExited"
+    ],
+    "listensTo": [
+      "input.hide",
+      "input.exitHiding"
+    ]
+  },
+  "dependencies": [
+    "world.vision_system",
+    "movement.character_body"
+  ],
+  "tags": [
+    "survival-horror",
+    "hiding",
+    "stealth",
+    "locker"
+  ],
+  "provenance": "library-native"
+}

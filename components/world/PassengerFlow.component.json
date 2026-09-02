@@ -1,0 +1,105 @@
+{
+  "id": "world.passenger_flow",
+  "name": "Passenger Flow",
+  "category": "world",
+  "description": "The station catchment simulation: who wants to travel, from where to where, and when. It owns demand generation per station from catchment size and time of day \u2014 rush hours ride world.day_night_cycle's dawn and dusk rather than a private clock, so passenger pressure and the visible sky never disagree \u2014 and the queues that build when a route's capacity falls short of its catchment. Schedules changing (world.routeScheduleUpdated) re-aims demand immediately, because a passenger's loyalty is to the timetable, not to the company. Fares are collected on delivery by economy.currency and capacity is the vehicle's manifest; this component only produces the crowd and its patience. Overcrowding is announced as world.stationOvercrowded for the score and advisory layers \u2014 it never penalizes by itself, since a tycoon game teaches through lost revenue, not through fines the player did not choose.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "baseDemandPerStation",
+      "type": "number",
+      "required": false,
+      "default": 40,
+      "description": "Passengers wanting travel per station per game hour before multipliers. Sets the baseline a single-bus route can serve."
+    },
+    {
+      "name": "rushHourMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 2.5,
+      "description": "Demand multiplier during dawn and dusk rush windows. The spike is what makes fleet sizing a peak-versus-average tradeoff."
+    },
+    {
+      "name": "catchmentRadiusTiles",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Tiles around a station that feed its demand. Overlapping catchments make station placement a territorial decision."
+    },
+    {
+      "name": "patienceSeconds",
+      "type": "number",
+      "required": false,
+      "default": 180,
+      "description": "How long a queued passenger waits before giving up. Lost patience is lost fare revenue \u2014 the flow's only teeth, and they are economic."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "waitingPassengers",
+      "type": "object",
+      "description": "Station id to queue length. The platform crowd UI and the overcrowding check both read this."
+    },
+    {
+      "name": "servedPassengersPerHour",
+      "type": "number",
+      "description": "Throughput actually delivered, the denominator of every load-factor conversation."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.passengerDemandChanged",
+      "world.stationOvercrowded"
+    ],
+    "listensTo": [
+      "world.dawnStarted",
+      "world.duskStarted",
+      "world.routeScheduleUpdated"
+    ]
+  },
+  "dependencies": [
+    "world.route_network",
+    "world.day_night_cycle"
+  ],
+  "tags": [
+    "tycoon",
+    "passengers",
+    "demand",
+    "simulation"
+  ],
+  "provenance": "library-native"
+}

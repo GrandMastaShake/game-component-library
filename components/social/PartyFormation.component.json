@@ -1,0 +1,102 @@
+{
+  "id": "social.party_formation",
+  "name": "Party Formation",
+  "category": "social",
+  "description": "Which party member you are driving right now, and where the other three stand. social.party_system owns membership \u2014 who is in the party at all; this component owns arrangement: march order, spacing template, and the control handoff when the player swaps from the wizard to the fighter. The swap is a handoff, not a possession \u2014 the vacated character falls to utility.behavior_fsm's AI, which is exactly why this component emits the swap and does not script the AI itself. Formation data is tactical geometry only: it deliberately knows nothing about stats, which live in progression.attribute_sheet, or about turns, which a tactics layer would own.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "formationTemplates",
+      "type": "array",
+      "required": false,
+      "default": [
+        "line",
+        "column",
+        "wedge",
+        "ring"
+      ],
+      "description": "Named spacing presets the player can cycle. Templates are data because every party composition argues for a different default."
+    },
+    {
+      "name": "swapCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.3,
+      "description": "Minimum gap between control swaps. Prevents swap-spam from becoming an iframe exploit while staying below perceptible lag."
+    },
+    {
+      "name": "followDistance",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Tiles between members while following the leader. Tight enough to read as a party, loose enough to not trip over doorframes."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeMemberId",
+      "type": "string",
+      "description": "The member currently under direct player control."
+    },
+    {
+      "name": "currentFormation",
+      "type": "string",
+      "description": "Name of the active spacing template."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.activeCharacterChanged",
+      "social.formationChanged"
+    ],
+    "listensTo": [
+      "social.partyMemberJoined",
+      "input.swapCharacter",
+      "input.cycleFormation"
+    ]
+  },
+  "dependencies": [
+    "social.party_system"
+  ],
+  "tags": [
+    "crpg",
+    "party",
+    "control",
+    "core"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "genre.rhythm",
+  "name": "Rhythm",
+  "description": "Hit the input on the beat, be graded on how on the beat you were. The pack is a four-stage pipeline with clean seams: the chart loader validates beatmaps as data, the beat clock turns audio position into timing truth with latency calibration, the highway renders that truth as scrolling lanes, and the judgement window grades each press — with the combo multiplier scoring what the judgement proves. UI-forward by design: the pipeline works over any backdrop because none of it touches world state.",
+  "version": "0.1.0",
+  "loop": "chart scrolls → hit inputs on beat → accuracy score → grade",
+  "views": ["ui-forward"],
+  "memberComponents": [
+    "presentation.audio_system",
+    "ui.hud",
+    "utility.timer_system",
+    "progression.xp_leveling",
+    "social.leaderboard"
+  ],
+  "newComponents": [
+    "utility.beat_clock",
+    "ui.note_highway",
+    "utility.judgement_window",
+    "economy.combo_multiplier",
+    "persistence.chart_loader"
+  ],
+  "signatureCompound": {
+    "name": "Chart to Grade",
+    "description": "One song end to end: a validated chart loads, the calibrated beat clock drives notes down the highway, every press is graded perfect/good/miss, the streak feeds the multiplier, and the final score posts to the leaderboard. Each stage consumes the previous stage's facts and adds exactly one of its own.",
+    "memberIds": [
+      "persistence.chart_loader",
+      "utility.beat_clock",
+      "ui.note_highway",
+      "utility.judgement_window",
+      "economy.combo_multiplier",
+      "social.leaderboard"
+    ]
+  },
+  "tags": ["precision-action", "rhythm", "music", "ui-forward"]
+}

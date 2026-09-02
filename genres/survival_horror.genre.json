@@ -1,0 +1,46 @@
+{
+  "id": "genre.survival_horror",
+  "name": "Survival Horror",
+  "description": "The survival kit stripped of comfort and pointed at dread: explore hostile space, ration an inventory that can never hold enough, evade a pursuer that announces itself just late enough, and spend save tokens like they are ammunition. Reuses VitalStats and SpoilageSystem from Survival Adventure but removes the building answers — housing is replaced by world.hiding_spot, warmth by light, and safety by the decision of when to save.",
+  "version": "0.1.0",
+  "loop": "explore dread space → ration scarce resources → evade/fight → survive setpiece",
+  "views": [
+    "top-down",
+    "voxel",
+    "isometric"
+  ],
+  "memberComponents": [
+    "combat.vital_stats",
+    "inventory.spoilage_system",
+    "inventory.core_inventory",
+    "world.vision_system",
+    "presentation.atmosphere_system",
+    "presentation.audio_system",
+    "utility.behavior_fsm",
+    "world.mob_patrol"
+  ],
+  "newComponents": [
+    "combat.fear_sanity_meter",
+    "inventory.scarcity_inventory",
+    "world.stalker_ai",
+    "world.hiding_spot",
+    "persistence.limited_save"
+  ],
+  "signatureCompound": {
+    "name": "Evade the Stalker",
+    "description": "A pursuit through a dark wing: the stalker converges on noise and sight, the player breaks line of sight into a hiding spot while the fear meter punishes both being seen and hiding too long, and the whole sequence sits between two token-gated saves. Proves that dread, scarcity, and pursuit reinforce rather than stack.",
+    "memberIds": [
+      "world.stalker_ai",
+      "world.hiding_spot",
+      "combat.fear_sanity_meter",
+      "inventory.scarcity_inventory",
+      "persistence.limited_save"
+    ]
+  },
+  "tags": [
+    "genre-pack",
+    "survival-horror",
+    "dread",
+    "squad-b"
+  ]
+}

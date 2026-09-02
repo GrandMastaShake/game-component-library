@@ -1,0 +1,119 @@
+{
+  "id": "combat.projectile_system",
+  "name": "Projectile System",
+  "category": "combat",
+  "description": "Owns everything between the trigger pull and the damage handoff: spawn, flight, and termination of projectiles. Hitscan is modelled as a projectile with infinite speed and zero travel time, so one code path serves both pistols and rockets — the difference is a tuning row, not a second system. Spread and recoil live here because they modify the shot at the instant of firing; deciding WHEN a shot may fire is combat.weapon_loadout's job, and deciding what a hit DOES is combat.damage_resolver's. This component never decrements ammo: it listens for combat.fireRequested and trusts that combat.ammo_economy has already counted the bullet, because two components counting the same resource is how magazines go negative. Ballistic drop reads movement.physics_core's gravity so a bullet and a thrown rock agree about the world.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "projectileSpeed",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Muzzle velocity in units per second. Values at or above 1000 are treated as hitscan — no simulated flight, just an immediate ray query. Kept as a number rather than a boolean flag so a 'fast bullet' and a 'laser' differ only in degree."
+    },
+    {
+      "name": "maxRange",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Travel distance before the projectile expires unhit. Exists so missed shots terminate; without it every stray round simulates forever and the active count becomes a memory leak with recoil."
+    },
+    {
+      "name": "spreadDegrees",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Base cone of random deviation per shot. Bloom from sustained fire or movement is layered on by combat.weapon_loadout via the fire request payload — this is the floor, not the ceiling."
+    },
+    {
+      "name": "recoilKick",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Aim displacement applied to the shooter per shot, in degrees. Reported here because it is a property of the round being fired; recovering from recoil (return-to-center speed) belongs to whoever owns the camera or aim vector."
+    },
+    {
+      "name": "gravityScale",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Multiplier on movement.physics_core's gravity for ballistic drop. 0 is a flat laser-like trajectory, 1 drops like a thrown object. Read per shot so tracer darts and grenades can coexist on one system."
+    },
+    {
+      "name": "collisionRadius",
+      "type": "number",
+      "required": false,
+      "default": 0.1,
+      "description": "Thickness of the projectile for hit tests. 0 is a pure ray (hitscan feel); larger values let slow projectiles catch grazes, which reads as generosity rather than inaccuracy."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeProjectileCount",
+      "type": "number",
+      "description": "Live simulated projectiles right now. Hitscan shots never appear here — they resolve in the same tick they are requested."
+    },
+    {
+      "name": "lastShotResolved",
+      "type": "boolean",
+      "description": "Whether the most recent fire request produced at least one hit. A convenience for feedback layers; the full hit list is on the event, not this output."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.projectileFired",
+      "combat.projectileHit",
+      "combat.projectileExpired"
+    ],
+    "listensTo": [
+      "combat.fireRequested"
+    ]
+  },
+  "dependencies": [
+    "combat.damage_resolver",
+    "movement.physics_core"
+  ],
+  "tags": [
+    "shooter",
+    "projectiles",
+    "hitscan",
+    "ballistic",
+    "core"
+  ],
+  "provenance": "library-native"
+}

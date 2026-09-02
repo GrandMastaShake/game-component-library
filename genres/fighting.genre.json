@@ -1,0 +1,40 @@
+{
+  "id": "genre.fighting",
+  "name": "Fighting",
+  "description": "Two fighters, one screen, sixty frames a second of decisions. The pack adds the genre's non-negotiables: frame-data-accurate hitboxes and hurtboxes, a cancel-and-buffer combo grammar, block and parry as the defensive answer, throws and techs to close the rock-paper-scissors, a meter economy, and a round manager that defines when combat is even legal. Everything is built over the existing combat resolver and status effects rather than beside them, so balance has one front door.",
+  "version": "0.1.0",
+  "loop": "neutral → footsies → combo/punish → round end",
+  "views": ["side-scroll-2d"],
+  "memberComponents": [
+    "movement.character_body",
+    "combat.melee_basic",
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "utility.behavior_fsm",
+    "ui.hud",
+    "presentation.screen_shake",
+    "presentation.particle_system"
+  ],
+  "newComponents": [
+    "combat.hitbox_hurtbox",
+    "combat.combo_chain",
+    "combat.block_parry_system",
+    "combat.round_manager",
+    "combat.super_meter",
+    "combat.throw_tech"
+  ],
+  "signatureCompound": {
+    "name": "Neutral to Punish",
+    "description": "One exchange that exercises the whole pack: a whiffed heavy is punished through a hit-confirmed cancel chain, the defender's attempted parry comes out a frame late, meter fills on both sides, and the round ends on the clock or the KO. Hitboxes, combo grammar, defense, meter, and round state each own exactly one fact in the exchange.",
+    "memberIds": [
+      "combat.hitbox_hurtbox",
+      "combat.combo_chain",
+      "combat.block_parry_system",
+      "combat.super_meter",
+      "combat.round_manager",
+      "combat.damage_resolver",
+      "ui.hud"
+    ]
+  },
+  "tags": ["precision-action", "fighting", "versus", "frame-data"]
+}

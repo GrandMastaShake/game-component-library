@@ -1,0 +1,104 @@
+{
+  "id": "presentation.spectator_mode",
+  "name": "Spectator Mode",
+  "category": "presentation",
+  "description": "What happens to your camera after you die: follow a surviving teammate, cycle through candidates, or free-cam within bounds. It is a routing layer over presentation.camera_follow — it changes WHO is followed, never how following works — and it owns the cycling inputs because dead players still need agency, and a forced static corpse-cam is how matches lose their audience mid-round. It does not adjudicate what a spectator may see for competitive integrity; it exposes fogRadius and team-only restrictions as config, because the integrity policy is a ruleset decision that changes per tournament while the camera mechanics do not.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "cycleOrder",
+      "type": "string",
+      "required": false,
+      "default": "squad-first",
+      "description": "Candidate ordering for the cycle inputs: 'squad-first' keeps you watching your team before strangers, because the emotional stake in a squad match is your squad. 'nearest' and 'random' exist for free-for-all modes."
+    },
+    {
+      "name": "allowFreeCam",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the spectator may detach from any player. Off by default — free cam is an information exploit in any mode where dead players can talk to living ones."
+    },
+    {
+      "name": "freeCamRadius",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Bounds for free cam when allowed, measured from the death point. Present so that enabling free cam for casual modes does not silently become full-map vision."
+    },
+    {
+      "name": "switchDelaySeconds",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Settle time after death before the first spectate target engages. Instant cuts from your own death to someone else's mid-fight camera read as a teleport; the beat lets the death land first."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isSpectating",
+      "type": "boolean",
+      "description": "True while routing the camera to someone else's view. UI uses this to swap the HUD from player to observer chrome."
+    },
+    {
+      "name": "spectatedEntityId",
+      "type": "string",
+      "description": "Current follow target, empty in free cam. presentation.camera_follow consumes this verbatim."
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.spectateTargetChanged"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "combat.bleedOut",
+      "input.spectateNext",
+      "input.spectatePrev"
+    ]
+  },
+  "dependencies": [
+    "presentation.camera_follow"
+  ],
+  "tags": [
+    "battle-royale",
+    "spectator",
+    "camera",
+    "observer"
+  ],
+  "provenance": "library-native"
+}

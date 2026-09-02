@@ -1,0 +1,98 @@
+{
+  "id": "ui.dialogue_tree_engine",
+  "name": "Dialogue Tree Engine",
+  "category": "ui",
+  "description": "The brain behind ui.dialogue_box. The box renders lines and reports which button was pressed; this engine owns what those presses mean \u2014 node-graph traversal, conditional branches gated on progression.attribute_sheet checks, and consequence flags that outlive the conversation. Checks are resolved by asking the attribute sheet, never by reading stats directly, so dice rules live in exactly one place. It does not own what a consequence flag does to the world: world.world_state_flags and social.reputation_system listen for ui.consequenceFlagSet and decide. It also refuses to persist itself \u2014 save and load of conversation position is persistence.save_system's job, driven by the same events everything else hears.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "dialogueGraphs",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Node tables keyed by conversation id: text ref, choices, conditions, consequences. Content lives in data so writers never touch engine code."
+    },
+    {
+      "name": "defaultSkillCheckDifficulty",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Difficulty used when a check omits its own. 10 is a coin-flip for an average build \u2014 the right baseline for checks that exist to flavor, not to gate."
+    },
+    {
+      "name": "allowRevisitResolvedNodes",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the player can re-ask resolved branches. False keeps choices weighty; true is the accessibility-friendly codex mode."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentNodeId",
+      "type": "string",
+      "description": "Where the active conversation currently sits."
+    },
+    {
+      "name": "activeConsequenceFlags",
+      "type": "array",
+      "description": "Flags set so far by the active conversation."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.dialogueNodeAdvanced",
+      "ui.skillCheckPassed",
+      "ui.skillCheckFailed",
+      "ui.consequenceFlagSet"
+    ],
+    "listensTo": [
+      "ui.dialogueChoiceMade"
+    ]
+  },
+  "dependencies": [
+    "ui.dialogue_box",
+    "progression.attribute_sheet"
+  ],
+  "tags": [
+    "crpg",
+    "dialogue",
+    "branching",
+    "core"
+  ],
+  "provenance": "library-native"
+}

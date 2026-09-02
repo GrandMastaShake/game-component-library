@@ -1,0 +1,105 @@
+{
+  "id": "combat.cover_system",
+  "name": "Cover System",
+  "category": "combat",
+  "description": "Owns the relationship between a character and cover geometry: snapping to a cover edge, leaning or peeking, and the exposure fraction that everything downstream reads. It does not reduce damage itself — it publishes exposureFraction and combat.damage_resolver applies it, because mitigation math already has one home and a second one guarantees the two drift apart. Cover volumes are level data, not components; this queries them through the character's own spatial context. Moving along cover is still movement.run_control's velocity — this component only constrains which directions are legal while attached, so detaching (or a dash) returns full steering with no state to unwind.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "snapDistance",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "How close to a cover edge the attach request reaches. Too generous and players magnetize across doorways; too tight and cover feels unapproachable. Tuned against movement.run_control's top speed, not in isolation."
+    },
+    {
+      "name": "peekExposureFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.35,
+      "description": "Fraction of the hittable profile presented while leaning out to fire. The peek is the core cover transaction — safety traded for shots — so this number, not damage, is where cover balance lives."
+    },
+    {
+      "name": "crouchExposureFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.2,
+      "description": "Exposure while hunkered behind low cover. Lower than peek because hunkering yields no shots; if the two are equal, no one ever hunkers."
+    },
+    {
+      "name": "detachOnSprint",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a sprint input breaks cover instantly. True, because a sprint that fails while attached to cover reads as ignored input — the same fairness rule as jump buffering, applied to leaving safety."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "inCover",
+      "type": "boolean",
+      "description": "True while attached to a cover edge. AI reads this to decide flanking; the HUD reads it for the lean prompt."
+    },
+    {
+      "name": "exposureFraction",
+      "type": "number",
+      "description": "Current hittable fraction, 0 to 1, blending between hunker and peek. This is the single number combat.damage_resolver consumes — cover is one multiplier, not a rules engine."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.coverEntered",
+      "combat.coverExited",
+      "combat.coverPeeked"
+    ],
+    "listensTo": [
+      "input.takeCover",
+      "input.lean",
+      "movement.dashStarted"
+    ]
+  },
+  "dependencies": [
+    "movement.character_body"
+  ],
+  "tags": [
+    "shooter",
+    "cover",
+    "positioning",
+    "defense"
+  ],
+  "provenance": "library-native"
+}

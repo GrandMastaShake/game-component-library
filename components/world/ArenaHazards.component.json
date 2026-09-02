@@ -1,0 +1,96 @@
+{
+  "id": "world.arena_hazards",
+  "name": "Arena Hazards",
+  "category": "world",
+  "description": "The arena's hostile set dressing on a schedule: crushers that sweep, floor sections that drop, lava that rises. It owns the phase script \u2014 which hazard volumes arm when, and how the pressure escalates as the match runs long, because an arena that never changes rewards parking in the safest corner. The hazards themselves are world.hazard_volume instances armed and disarmed by this component rather than reimplemented here, and world.hazardEntered coming back from those volumes is how the script knows it is actually biting. It does not own match rules or win conditions \u2014 a shrinking floor forces an endgame, but deciding the winner is the mode's job. Timing comes from utility.timer_system so hazard phases and race clocks share one source of truth.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "phaseScript",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Ordered phases: which hazard ids arm, disarm, or mutate per phase. Authored per arena; the component only executes and escalates it."
+    },
+    {
+      "name": "phaseIntervalSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Base time between phases. Short enough that vehicle health totals outlast two or three phases, so hazards shape the fight rather than end it."
+    },
+    {
+      "name": "escalate",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, later phases tighten intervals and widen hazard coverage. The escalation curve is what guarantees a match cannot stall forever."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentPhase",
+      "type": "number"
+    },
+    {
+      "name": "activeHazardCount",
+      "type": "number",
+      "description": "Armed hazard volumes right now. HUD warning lights and audio tension both read this rather than tracking volumes themselves."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.arenaPhaseChanged",
+      "world.arenaHazardTriggered"
+    ],
+    "listensTo": [
+      "world.hazardEntered",
+      "utility.timerCompleted"
+    ]
+  },
+  "dependencies": [
+    "world.hazard_volume",
+    "utility.timer_system"
+  ],
+  "tags": [
+    "arena",
+    "hazards",
+    "vehicular-combat",
+    "escalation"
+  ],
+  "provenance": "library-native"
+}

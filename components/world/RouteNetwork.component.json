@@ -1,0 +1,104 @@
+{
+  "id": "world.route_network",
+  "name": "Route Network",
+  "category": "world",
+  "description": "The node-and-edge graph a transport company is made of: stations and depots as nodes, legs as edges with travel-time estimates, and per-route timetables over the top. It exists because 'expand the network' is the genre's verb and there must be one authoritative answer to 'is there a route from A to B, and when does it run'. This component owns the logical route \u2014 stops, order, schedule \u2014 not the geometry: actual paths over the world come from movement.pathfinding_system, so a blocked road invalidates a leg through path failure rather than through a second collision model here. Terrain changes arrive as world.tileChanged and world.tileGridBuilt, and a route whose legs no longer path is reported as world.routeBlocked, not silently dropped, because a dead route with vehicles assigned is a decision for utility.depot_dispatch, not a disappearance. It does not own the vehicles that run the routes or the cargo and passengers that ride them; those are dispatch and manifest concerns that read this graph.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxRoutes",
+      "type": "number",
+      "required": false,
+      "default": 32,
+      "description": "Route cap per company. A real cap forces consolidation decisions late-game instead of letting the map dissolve into spaghetti."
+    },
+    {
+      "name": "scheduleResolutionMinutes",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Timetable granularity in game minutes. Coarser than this and headways stop mattering; finer and schedule editing becomes a spreadsheet job."
+    },
+    {
+      "name": "autoRelinkOnTileChange",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, a tile change triggers an immediate path revalidation for affected legs rather than waiting for the next scheduled check."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "routeCount",
+      "type": "number"
+    },
+    {
+      "name": "totalNetworkLength",
+      "type": "number",
+      "description": "Summed leg lengths across routes, exposed for score and upkeep calculations."
+    },
+    {
+      "name": "blockedRouteIds",
+      "type": "array",
+      "description": "Routes currently failing path validation. Dispatch and efficiency scoring both read this rather than revalidating."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.routeAdded",
+      "world.routeRemoved",
+      "world.routeBlocked",
+      "world.routeScheduleUpdated"
+    ],
+    "listensTo": [
+      "world.tileGridBuilt",
+      "world.tileChanged"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid",
+    "movement.pathfinding_system"
+  ],
+  "tags": [
+    "tycoon",
+    "routes",
+    "logistics",
+    "schedules",
+    "core"
+  ],
+  "provenance": "library-native"
+}

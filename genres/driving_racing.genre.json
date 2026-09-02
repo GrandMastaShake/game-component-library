@@ -1,0 +1,45 @@
+{
+  "id": "genre.driving_racing",
+  "name": "Driving / Racing",
+  "description": "The pure circuit racer: launch, corner, drift, overtake, place. This pack is the shared foundation for every vehicle genre in the squad \u2014 VehicleTuning defines how a car feels, TrackCircuit defines what progress means, and DriftScoring, RubberBandAI, and GhostReplay turn a solo time trial into a contest against the pack, the clock, and your own best self. The design stance: handling is data, a lap is a contract enforced by gates, and every assist (rubber band, ghost) operates inside the same physics the player drives, never around it.",
+  "version": "0.1.0",
+  "loop": "launch \u2192 corner/drift \u2192 overtake \u2192 finish/place",
+  "views": [
+    "top-down",
+    "voxel"
+  ],
+  "memberComponents": [
+    "movement.vehicle_basic",
+    "movement.physics_core",
+    "utility.timer_system",
+    "social.leaderboard",
+    "presentation.screen_shake",
+    "ui.minimap",
+    "ui.hud",
+    "presentation.camera_follow"
+  ],
+  "newComponents": [
+    "movement.vehicle_tuning",
+    "world.track_circuit",
+    "progression.drift_scoring",
+    "utility.rubber_band_ai",
+    "persistence.ghost_replay"
+  ],
+  "signatureCompound": {
+    "name": "Lap Attack",
+    "description": "The smallest race that proves the genre: track_circuit validates gates and laps on timer_system's clock, vehicle_tuning gives each car its feel, rubber_band_ai keeps AI rivals in the fight by pace-scaling through the same tuning path, drift_scoring banks style points at checkpoints, and ghost_replay records the whole thing against the race clock so the next attempt races the last one. world.raceFinished is both the result and the save trigger.",
+    "memberIds": [
+      "world.track_circuit",
+      "movement.vehicle_tuning",
+      "utility.rubber_band_ai",
+      "progression.drift_scoring",
+      "persistence.ghost_replay"
+    ]
+  },
+  "tags": [
+    "racing",
+    "driving",
+    "vehicles",
+    "time-trial"
+  ]
+}

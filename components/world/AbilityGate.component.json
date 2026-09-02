@@ -1,0 +1,69 @@
+{
+  "id": "world.ability_gate",
+  "name": "Ability Gate",
+  "category": "world",
+  "description": "The door that asks what you have become: a passage or terrain feature that checks acquired powers and stays shut until the player owns the answer. It owns the requirement list and the pass/reject decision, and it owns them alone — it deliberately does not grant anything, because progression.power_up_grant is the only component allowed to mutate what the player can do, and a gate that also hands out powers hides progression inside geography. Its sibling world.door_gate checks the level's current state (switches, plates); this gate checks the player's accumulated state, and the distinction matters because the two open on different evidence and fail for different reasons. The rejection path is a first-class output: a gate that silently refuses teaches nothing, so the missing-power list is published for whatever hint or UI layer wants it rather than rendered here.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "requiredPowerIds",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Power ids the player must hold — matching progression.power_up_grant's powerId values — for this gate to pass."
+    },
+    {
+      "name": "requireAll",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "True demands every listed power (compound gates for late-game shortcuts); false passes on any one (multiple valid solutions to one obstacle)."
+    },
+    {
+      "name": "permanentlyOpen",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Once passed, stay open. Almost always true in a metroidvania — re-checking on every revisit turns backtracking, the genre's core pleasure, into a chore."
+    },
+    {
+      "name": "blocksEnemiesToo",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the gate physically obstructs everything or filters by the player's powers only. Filtering is the default; a gate that also walls off enemies changes encounter design, not just access."
+    }
+  ],
+  "outputs": [
+    {"name": "isPassable", "type": "boolean"},
+    {
+      "name": "missingPowerIds",
+      "type": "array",
+      "description": "The powers the player still lacks, published so a hint system can answer 'not yet — you need the wall-cling' without reimplementing the check."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.abilityGatePassed",
+      "world.abilityGateRejected"
+    ],
+    "listensTo": [
+      "progression.powerUpGranted",
+      "progression.skillUnlocked"
+    ]
+  },
+  "dependencies": [
+    "progression.power_up_grant",
+    "progression.skills_tree"
+  ],
+  "tags": ["metroidvania", "gate", "ability-check", "lock-and-key"],
+  "provenance": "library-native"
+}

@@ -1,0 +1,74 @@
+{
+  "id": "combat.block_parry_system",
+  "name": "Block / Parry System",
+  "category": "combat",
+  "description": "The defensive verb pair: block reduces a confirmed hit to chip, parry voids it entirely inside a tight window. They live in one component because they share the same upstream fact — combat.hit_confirmed — and differ only in timing and cost; two components would race each other to answer the same event. This component owns the guard state, the parry window, and the guard-integrity meter that makes turtling expensive, and it deliberately stops there: the damage that chip reduces, and the stun a parry inflicts, are computed by combat.damage_resolver and combat.status_effects respectively, because the moment a block system starts applying its own damage math there are two resolvers and every balance pass touches both. Punish logic after a parry is likewise not here — a parry emits its fact, and combat.combo_chain decides what the defender is now allowed to do with the advantage.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "parryWindowFrames",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Frames after the parry input during which a confirmed hit is voided. Four is deliberately ungenerous — parry is the high-risk answer; block is the safe one."
+    },
+    {
+      "name": "blockstunFrames",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Base frames the defender is locked after blocking. Per-move overrides come from the attacker's frame data; this is the fallback."
+    },
+    {
+      "name": "chipDamageFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.1,
+      "description": "Fraction of a hit's damage that leaks through block, passed to combat.damage_resolver rather than applied here. Zero makes block free and rounds stall; 0.1 keeps pressure honest."
+    },
+    {
+      "name": "guardIntegrityMax",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "The meter that drains per blocked hit and breaks at zero. Guard break converts infinite blocking into a resource decision."
+    },
+    {
+      "name": "guardRegenPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Integrity recovered per second while not blocking. Regen only when disengaged, so resetting to neutral is the way to heal your guard."
+    }
+  ],
+  "outputs": [
+    {"name": "isBlocking", "type": "boolean"},
+    {"name": "guardIntegrity", "type": "number"},
+    {"name": "lastParryFrame", "type": "number"}
+  ],
+  "events": {
+    "emits": [
+      "combat.attackBlocked",
+      "combat.parrySucceeded",
+      "combat.guardBroken"
+    ],
+    "listensTo": [
+      "combat.hitConfirmed",
+      "input.block"
+    ]
+  },
+  "dependencies": [
+    "combat.hitbox_hurtbox",
+    "combat.damage_resolver"
+  ],
+  "tags": ["fighting", "defense", "block", "parry"],
+  "provenance": "library-native"
+}

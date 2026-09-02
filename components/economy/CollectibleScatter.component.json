@@ -1,0 +1,86 @@
+{
+  "id": "economy.collectible_scatter",
+  "name": "Collectible Scatter",
+  "category": "economy",
+  "description": "Placement and pickup of coins, rings, gems — the low-stakes economy that paces a level. It owns the spawn pattern, the magnet that pulls nearby pickups toward the player, and the respawn rules, because those three decisions define how a level rewards its routes. It deliberately does not own what a pickup is worth: economy.collectible_collected carries a value, and economy.currency is one possible sink for it. A score counter, a 1-up counter, and a shop wallet can all listen to the same event without this component knowing any of them exist. It also does not own the pickup fanfare — presentation.particle_system and presentation.audio_system already do feedback, and a collectible that renders its own celebration can't be restyled.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "spawnPattern",
+      "type": "string",
+      "required": false,
+      "default": "scatter",
+      "description": "How pickups are arranged: scatter fills a region, line traces a jump arc (use the arc to teach the intended trajectory), ring circles a hazard, grid fills evenly."
+    },
+    {
+      "name": "count",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "How many pickups this scatter owns. Density is a difficulty dial: sparse lines guide, dense fields reward exploration."
+    },
+    {
+      "name": "collectibleValue",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Value attached to each economy.collectible_collected event. The component does not spend or bank it — that is the listener's economy."
+    },
+    {
+      "name": "magnetRadius",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Distance within which pickups drift toward the player. Zero requires touching each one, which suits precision challenges; a generous radius suits speed runs."
+    },
+    {
+      "name": "magnetSpeed",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "How fast an attracted pickup travels. Slower than player top speed lets a runner outrun their own pickups, which reads as broken; keep it comfortably faster."
+    },
+    {
+      "name": "collectRadius",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Contact distance that counts as a pickup once magnetism brings one close, or directly when magnetRadius is zero."
+    },
+    {
+      "name": "respawnSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Seconds before a collected pickup returns. Zero means never — the default, because respawning currency invites farming loops the designer didn't intend."
+    }
+  ],
+  "outputs": [
+    {"name": "remainingCount", "type": "number"},
+    {"name": "collectedCount", "type": "number"},
+    {
+      "name": "isCleared",
+      "type": "boolean",
+      "description": "True when every pickup is collected and none will respawn. The 100%-run signal."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.collectibleCollected",
+      "economy.collectibleRespawned",
+      "economy.scatterCleared"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": ["collectible", "pickup", "platformer", "economy", "pacing"],
+  "provenance": "library-native"
+}

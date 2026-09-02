@@ -1,0 +1,96 @@
+{
+  "id": "combat.enemy_tier_scaling",
+  "name": "Enemy Tier Scaling",
+  "category": "combat",
+  "description": "Keeps a wolf from being a joke at level five and a raid boss at level six. Given a player level or zone band it produces the multiplier set \u2014 health, damage, XP reward \u2014 that anything spawning enemies should apply. It deliberately owns only the curve, not the spawn: world.mob_patrol and world.dynamic_encounter_spawner decide when and where, and combat.damage_resolver never sees these multipliers, because scaling belongs at spawn time \u2014 applying it inside the damage pipeline would double-count it on every hit. Owning the curve in one place is what makes 'zone two feels too easy' a one-file fix instead of an archeology expedition.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "scalingCurve",
+      "type": "string",
+      "required": false,
+      "default": "linear",
+      "description": "linear | exponential | banded. Banded snaps enemies to fixed tiers per zone; linear and exponential interpolate. The curve is a content statement, not just math."
+    },
+    {
+      "name": "statsPerLevel",
+      "type": "number",
+      "required": false,
+      "default": 0.08,
+      "description": "Fractional stat growth per level of gap. 0.08 keeps a ten-level gap meaningful without making it a wall; exponential curves should start lower."
+    },
+    {
+      "name": "maxLevelGap",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Beyond this gap the curve clamps, so endgame players trivializing starter zones is a feature, and starter players wandering into the endgame get a firm no."
+    },
+    {
+      "name": "scaleRewards",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether XP and loot tier scale alongside stats. Decoupling these is how you get degenerate farm spots; couple them until you have a reason not to."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentMultiplierSet",
+      "type": "object",
+      "description": "health/damage/reward multipliers for the current context."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.tierAssigned",
+      "combat.statsScaled"
+    ],
+    "listensTo": [
+      "progression.leveledUp"
+    ]
+  },
+  "dependencies": [
+    "progression.xp_leveling"
+  ],
+  "tags": [
+    "arpg",
+    "scaling",
+    "difficulty"
+  ],
+  "provenance": "library-native"
+}

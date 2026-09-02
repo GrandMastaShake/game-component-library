@@ -1,0 +1,72 @@
+{
+  "id": "utility.judgement_window",
+  "name": "Judgement Window",
+  "category": "utility",
+  "description": "The arbiter of timing: each note input is compared against the song position and graded perfect, good, or miss by tiered windows. It owns the window widths, the delta calculation, and the unhit-note miss — the note that scrolls past the receptor untouched is as much a judgement as a late press, and both must come from one place or combo counting forks. Deltas are corrected by utility.beat_clock's calibrated latency before grading, because a perfect press on a laggy headset is a perfect press; the correction lives in the clock, this component consumes it, and neither duplicates the other. It deliberately does not score: a tier is a fact, and what a perfect is worth — points, combo, health — belongs to economy.combo_multiplier and whoever else listens. Grading against time rather than frames is deliberate: frame-graded rhythm games change difficulty with the frame rate.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "perfectWindowSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.045,
+      "description": "Absolute delta for the top tier. 45 ms is the mainstream rhythm default — tight enough to mean something, loose enough to be humanly repeatable."
+    },
+    {
+      "name": "goodWindowSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.09,
+      "description": "Absolute delta for the middle tier. The gap between perfect and good is the accuracy skill ceiling; the gap between good and miss is the game's forgiveness."
+    },
+    {
+      "name": "missWindowSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.135,
+      "description": "Beyond this delta a press does not count at all. Capping the miss window prevents mashing early through dense sections from registering as late hits."
+    },
+    {
+      "name": "allowEarlyHits",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether early presses grade symmetrically with late ones. Symmetric is standard; late-only grading suits games that punish anticipation."
+    }
+  ],
+  "outputs": [
+    {"name": "lastJudgement", "type": "string"},
+    {
+      "name": "lastDeltaSeconds",
+      "type": "number",
+      "description": "Signed, latency-corrected offset of the last press from its note. Published so practice UI can show 'early by 12 ms' instead of a bare tier."
+    },
+    {"name": "judgementCounts", "type": "object"}
+  ],
+  "events": {
+    "emits": [
+      "utility.judgementPerfect",
+      "utility.judgementGood",
+      "utility.judgementMiss"
+    ],
+    "listensTo": [
+      "input.hitNote",
+      "ui.notePassedReceptor",
+      "utility.beatTicked"
+    ]
+  },
+  "dependencies": [
+    "utility.beat_clock",
+    "ui.note_highway"
+  ],
+  "tags": ["rhythm", "judgement", "timing", "accuracy"],
+  "provenance": "library-native"
+}

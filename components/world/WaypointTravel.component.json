@@ -1,0 +1,90 @@
+{
+  "id": "world.waypoint_travel",
+  "name": "Waypoint Travel",
+  "category": "world",
+  "description": "Unlock-once, travel-forever nodes. A waypoint is dormant until touched; afterwards it is a permanent entry in the travel graph and travel between any two unlocked nodes is free \u2014 the genre's promise is that backtracking is a choice, not a tax. This component owns the unlock state and the teleport, nothing more. Discovery presentation belongs to world.point_of_interest_network (what the map knows), the marker glyphs belong to ui.minimap, and the travel UI is the map itself: this component listens to ui.minimapClicked so the map never has to learn what a waypoint is.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "travelChannelSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Cast time before the teleport lands. Zero makes waypoints a combat escape hatch; a short channel keeps retreats honest without punishing errands."
+    },
+    {
+      "name": "requireDiscovered",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a waypoint must be touched before it is a valid destination. The alternative \u2014 all nodes open from the start \u2014 deletes the exploration loop."
+    },
+    {
+      "name": "allowInCombat",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the channel may start while enemies are engaged. False, because a waypoint that works mid-fight is an invulnerability button."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "unlockedWaypoints",
+      "type": "array",
+      "description": "Ids of every node the player has activated."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.waypointUnlocked",
+      "world.waypointTravelled"
+    ],
+    "listensTo": [
+      "input.waypointActivate",
+      "ui.minimapClicked"
+    ]
+  },
+  "dependencies": [
+    "ui.minimap"
+  ],
+  "tags": [
+    "arpg",
+    "travel",
+    "world-navigation"
+  ],
+  "provenance": "library-native"
+}

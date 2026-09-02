@@ -1,0 +1,103 @@
+{
+  "id": "world.floor_descent",
+  "name": "Floor Descent",
+  "category": "world",
+  "description": "The stack of floors and the seed that makes them reproducible. Each descent increments depth and derives the floor's seed from the run seed plus depth \u2014 never a fresh random roll, because a floor that changes when you revisit it breaks both speedruns and save audits. The generator lineage matters here: the consuming app's dd-dungeon-generator.ts family already proves this contract in TypeScript outside this repository, and this descriptor is the library-native contract those generators would adapt to, not a port of them. This component owns depth, seeds, and the transition between floors. It owns nothing about room contents \u2014 world.room_template stamps the rooms, and whatever lives in them arrives via world.mob_patrol or combat.boss_encounter_script.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "runSeed",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The seed the whole run derives from. Required because a descent with no seed is a different dungeon every load, which is a roguelike decision, not a default."
+    },
+    {
+      "name": "maxDepth",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Floors before the bottom, where the boss or the win condition lives. A depth budget is a session-length budget."
+    },
+    {
+      "name": "floorSizeByDepth",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Room counts and dimensions as a function of depth, as data. Early floors small for pace, deep floors large for stakes."
+    },
+    {
+      "name": "allowAscent",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether stairs go back up. Ascent enables retreat-and-return runs; disabling it makes every descent a point of no return."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentDepth",
+      "type": "number",
+      "description": "How far down the party currently is."
+    },
+    {
+      "name": "currentFloorSeed",
+      "type": "number",
+      "description": "The derived seed of the active floor, exposed for regen and debugging."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.floorGenerated",
+      "world.floorDescended"
+    ],
+    "listensTo": [
+      "input.descend",
+      "input.ascend"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "procedural",
+    "floors",
+    "core"
+  ],
+  "provenance": "library-native"
+}

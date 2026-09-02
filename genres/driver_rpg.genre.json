@@ -1,0 +1,52 @@
+{
+  "id": "genre.driver_rpg",
+  "name": "Driver RPG",
+  "description": "The driving/RPG mashup: an underground career where the driver levels separately from the car. Take procedurally generated gigs, earn cash and standing, pour both into the garage and the person behind the wheel, climb named rep tiers that gate events and shop stock, and settle the biggest rivalries in wager races for cash or pink slips. This pack reuses the Driving/Racing kit for the moments at the wheel and the RPG family's quest, dialogue, and reputation systems for the moments between them; what it adds is the connective tissue \u2014 gigs, garage, driver skills, tiers, stakes \u2014 that makes a racing game into a career. The design stance: the car is equipment, the driver is the character, and reputation is the real XP bar.",
+  "version": "0.1.0",
+  "loop": "take driving gigs \u2192 earn \u2192 upgrade ride & driver \u2192 rep unlocks tiers \u2192 story races",
+  "views": [
+    "voxel",
+    "top-down"
+  ],
+  "memberComponents": [
+    "movement.vehicle_basic",
+    "movement.vehicle_tuning",
+    "world.track_circuit",
+    "progression.drift_scoring",
+    "persistence.ghost_replay",
+    "economy.currency",
+    "progression.xp_leveling",
+    "progression.skills_tree",
+    "progression.quest_log",
+    "ui.dialogue_box",
+    "ui.hud",
+    "social.reputation_system",
+    "world.point_of_interest_network"
+  ],
+  "newComponents": [
+    "progression.driver_progression",
+    "housing.garage_management",
+    "economy.gig_economy",
+    "social.street_rep_tiers",
+    "economy.wager_races"
+  ],
+  "signatureCompound": {
+    "name": "Gig to Garage Loop",
+    "description": "The career loop that proves the mashup: gig_economy offers contracts through quest_log and pays through currency, street_rep_tiers converts completed gigs and won wagers into named tiers that re-stock the shop and unlock events, driver_progression turns feats at the wheel (banked drifts, clean laps) into focus and cornering-style skills that survive any car sale, garage_management installs purchased parts as new tune presets on the stored roster, and wager_races puts it all on the line \u2014 escrow in, world.raceFinished settles, and a lost pink slip lands in a rival's garage roster.",
+    "memberIds": [
+      "economy.gig_economy",
+      "social.street_rep_tiers",
+      "progression.driver_progression",
+      "housing.garage_management",
+      "economy.wager_races",
+      "movement.vehicle_tuning"
+    ]
+  },
+  "tags": [
+    "driver-rpg",
+    "career",
+    "vehicles",
+    "reputation",
+    "mashup"
+  ]
+}

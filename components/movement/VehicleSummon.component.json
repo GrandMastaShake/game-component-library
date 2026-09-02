@@ -1,0 +1,106 @@
+{
+  "id": "movement.vehicle_summon",
+  "name": "Vehicle Summon",
+  "category": "movement",
+  "description": "The whistle. Open worlds are big, and walking back to where you parked is not content; this component owns the summon verb \u2014 validate the target point's terrain, respect cooldown and zone rules, and materialise the ride at the nearest legal spot. Everything after materialisation belongs to movement.vehicle_basic, which owns physics, boarding, and the drive itself; the summon deliberately ends at 'the vehicle exists next to you'. It does not own multi-vehicle storage or upgrades \u2014 that is a garage system's job, out of scope for this pack \u2014 and it never summons into combat, because an armoured mount on demand is an escape button with horsepower.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "summonCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Minimum gap between summons. Long enough that dismissing to dodge a fall and re-summoning is not a strategy."
+    },
+    {
+      "name": "maxSummonDistance",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "How far away the vehicle may materialise. Close enough to read as 'it came to you', far enough to not clip through the player."
+    },
+    {
+      "name": "allowedTerrains",
+      "type": "array",
+      "required": false,
+      "default": [
+        "road",
+        "field",
+        "beach"
+      ],
+      "description": "Terrain tags where materialisation is legal. Water is excluded by omission \u2014 a horse arriving mid-lake is a support ticket, not a feature."
+    },
+    {
+      "name": "dismissRefundCooldown",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a voluntary dismiss refunds the cooldown. True encourages parking etiquette; false punishes it, which is backwards."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "summonedVehicleId",
+      "type": "string",
+      "description": "The live vehicle entity, null when unsummoned."
+    },
+    {
+      "name": "summonOnCooldown",
+      "type": "boolean",
+      "description": "For the HUD whistle icon."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.vehicleSummoned",
+      "movement.vehicleDismissed"
+    ],
+    "listensTo": [
+      "input.summonVehicle",
+      "input.dismissVehicle"
+    ]
+  },
+  "dependencies": [
+    "movement.vehicle_basic"
+  ],
+  "tags": [
+    "open-world",
+    "vehicles",
+    "traversal"
+  ],
+  "provenance": "library-native"
+}
