@@ -1,0 +1,3494 @@
+{
+  "$comment": "How art shapes attach to one another. The shape contracts say what a part IS; this says where it goes and how it joins. Derived from the V6/V7 assembly graph produced by the shapes-from-2D project, with every anchor and part rewritten to the art.* id it corresponds to -- all 36 mapped exactly, which is why the join is worth making explicit.",
+  "provenance": {
+    "source": "3d_shapes_full_package_v7/assembly_graph.json (V6 assembly graph, V7 repackaging)",
+    "importedOn": "2026-09-01",
+    "note": "Synthetic and rule-based, like the shape contracts it references: joint types and socket offsets are authored construction rules, not measurements of real assets. Angular limits are NOT part of this data, which is why the range-versus-topology rule remains unanswerable."
+  },
+  "anchors": {
+    "art.sphere": {
+      "role": "head",
+      "sockets": {
+        "ear_left": {
+          "offset": [
+            -0.55,
+            0.35,
+            0.0
+          ]
+        },
+        "ear_right": {
+          "offset": [
+            0.55,
+            0.35,
+            0.0
+          ]
+        },
+        "horn_left": {
+          "offset": [
+            -0.35,
+            0.55,
+            0.0
+          ]
+        },
+        "horn_right": {
+          "offset": [
+            0.35,
+            0.55,
+            0.0
+          ]
+        },
+        "nose": {
+          "offset": [
+            0,
+            0,
+            0.55
+          ]
+        },
+        "mouth": {
+          "offset": [
+            0,
+            -0.2,
+            0.5
+          ]
+        },
+        "hat": {
+          "offset": [
+            0,
+            0.6,
+            0
+          ]
+        },
+        "neck_bottom": {
+          "offset": [
+            0,
+            -0.55,
+            0
+          ]
+        }
+      }
+    },
+    "art.hemisphere": {
+      "role": "head_alt",
+      "sockets": {
+        "ear_left": {
+          "offset": [
+            -0.55,
+            0.2,
+            0
+          ]
+        },
+        "ear_right": {
+          "offset": [
+            0.55,
+            0.2,
+            0
+          ]
+        },
+        "nose": {
+          "offset": [
+            0,
+            0.1,
+            0.55
+          ]
+        },
+        "hat": {
+          "offset": [
+            0,
+            0.55,
+            0
+          ]
+        },
+        "neck_bottom": {
+          "offset": [
+            0,
+            -0.1,
+            0
+          ]
+        }
+      }
+    },
+    "art.cylinder": {
+      "role": "body_torso",
+      "sockets": {
+        "arm_left": {
+          "offset": [
+            -0.55,
+            0.3,
+            0
+          ]
+        },
+        "arm_right": {
+          "offset": [
+            0.55,
+            0.3,
+            0
+          ]
+        },
+        "leg_left": {
+          "offset": [
+            -0.25,
+            -0.55,
+            0
+          ]
+        },
+        "leg_right": {
+          "offset": [
+            0.25,
+            -0.55,
+            0
+          ]
+        },
+        "head_top": {
+          "offset": [
+            0,
+            0.55,
+            0
+          ]
+        },
+        "tail": {
+          "offset": [
+            0,
+            -0.2,
+            -0.5
+          ]
+        },
+        "wing_left": {
+          "offset": [
+            -0.55,
+            0.1,
+            0
+          ]
+        },
+        "wing_right": {
+          "offset": [
+            0.55,
+            0.1,
+            0
+          ]
+        }
+      }
+    },
+    "art.cuboid": {
+      "role": "body_torso_box",
+      "sockets": {
+        "arm_left": {
+          "offset": [
+            -0.55,
+            0.2,
+            0
+          ]
+        },
+        "arm_right": {
+          "offset": [
+            0.55,
+            0.2,
+            0
+          ]
+        },
+        "leg_left": {
+          "offset": [
+            -0.2,
+            -0.55,
+            0
+          ]
+        },
+        "leg_right": {
+          "offset": [
+            0.2,
+            -0.55,
+            0
+          ]
+        },
+        "head_top": {
+          "offset": [
+            0,
+            0.55,
+            0
+          ]
+        },
+        "tail": {
+          "offset": [
+            0,
+            0,
+            -0.55
+          ]
+        },
+        "wing_left": {
+          "offset": [
+            -0.55,
+            0.1,
+            0
+          ]
+        },
+        "wing_right": {
+          "offset": [
+            0.55,
+            0.1,
+            0
+          ]
+        }
+      }
+    },
+    "art.limb_arm": {
+      "role": "arm_segment",
+      "sockets": {
+        "paw_end": {
+          "offset": [
+            0,
+            -0.55,
+            0
+          ]
+        },
+        "child_limb": {
+          "offset": [
+            0,
+            -0.45,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "parts": {
+    "art.ear_pointed": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "ear_left",
+        "ear_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.22,
+        0.35,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.ear_rounded": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "ear_left",
+        "ear_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.25,
+        0.28,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.ear_floppy": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "ear_left",
+        "ear_right"
+      ],
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.2,
+        0.45,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.horn_straight": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "horn_left",
+        "horn_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    "art.horn_curved": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "horn_left",
+        "horn_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    "art.antler": {
+      "attachesTo": [
+        "art.sphere"
+      ],
+      "socketNames": [
+        "horn_left",
+        "horn_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.4,
+        0.7,
+        0.3
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    "art.tusk": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere",
+        "art.snout"
+      ],
+      "socketNames": [
+        "mouth",
+        "nose"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    "art.snout": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "nose"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.4,
+        0.3,
+        0.3
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.beak": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "mouth",
+        "nose"
+      ],
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.3,
+        0.22,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.1,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.hat_brim": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "hat"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        1.3,
+        0.15,
+        1.3
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.crown": {
+      "attachesTo": [
+        "art.sphere",
+        "art.hemisphere"
+      ],
+      "socketNames": [
+        "hat"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        1.1,
+        0.5,
+        1.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.collar": {
+      "attachesTo": [
+        "art.sphere",
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "neck_bottom",
+        "head_top"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.limb_arm": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "arm_left",
+        "arm_right"
+      ],
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.28,
+        0.7,
+        0.28
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.limb_paw": {
+      "attachesTo": [
+        "art.limb_arm"
+      ],
+      "socketNames": [
+        "paw_end"
+      ],
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.55,
+        0.3,
+        0.7
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.tail_straight": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "tail"
+      ],
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.tail_curved": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "tail"
+      ],
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.2,
+        0.65,
+        0.2
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.tail_bushy": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "tail"
+      ],
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.35,
+        0.6,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.tail_fish": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "tail"
+      ],
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.6,
+        0.35,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.tentacle": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid",
+        "art.sphere"
+      ],
+      "socketNames": [
+        "arm_left",
+        "arm_right",
+        "tail",
+        "leg_left",
+        "leg_right"
+      ],
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.wing_bat": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "wing_left",
+        "wing_right"
+      ],
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        1.8,
+        1.2,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.wing_feathered": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "wing_left",
+        "wing_right"
+      ],
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        1.8,
+        1.1,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.fin_dorsal": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "tail"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.08,
+        0.5,
+        0.4
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.fin_pectoral": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "arm_left",
+        "arm_right"
+      ],
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.7,
+        0.35,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.spike": {
+      "attachesTo": [
+        "art.sphere",
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "horn_left",
+        "horn_right",
+        "tail",
+        "arm_left",
+        "arm_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    "art.shield": {
+      "attachesTo": [
+        "art.limb_arm"
+      ],
+      "socketNames": [
+        "paw_end",
+        "child_limb"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        1.4,
+        1.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.potion": {
+      "attachesTo": [
+        "art.limb_arm"
+      ],
+      "socketNames": [
+        "paw_end"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.4,
+        0.6,
+        0.4
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.gem": {
+      "attachesTo": [
+        "art.limb_arm",
+        "art.crown",
+        "art.shield"
+      ],
+      "socketNames": [
+        "paw_end",
+        "hat",
+        "nose"
+      ],
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.coin": {
+      "attachesTo": [
+        "art.limb_arm"
+      ],
+      "socketNames": [
+        "paw_end"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.35,
+        0.05,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.button": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "arm_left",
+        "arm_right",
+        "leg_left",
+        "leg_right"
+      ],
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    "art.ring": {
+      "attachesTo": [
+        "art.limb_paw",
+        "art.limb_arm"
+      ],
+      "socketNames": [
+        "paw_end"
+      ],
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.35,
+        0.1,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    "art.star_extrude": {
+      "attachesTo": [
+        "art.sphere",
+        "art.cylinder",
+        "art.cuboid"
+      ],
+      "socketNames": [
+        "hat",
+        "arm_left",
+        "arm_right"
+      ],
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleRelativeToAnchor": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    "art.rounded_badge": {
+      "attachesTo": [
+        "art.cylinder",
+        "art.cuboid",
+        "art.sphere"
+      ],
+      "socketNames": [
+        "arm_left",
+        "arm_right"
+      ],
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleRelativeToAnchor": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    }
+  },
+  "edges": [
+    {
+      "anchor": "art.sphere",
+      "part": "art.ear_pointed",
+      "socket": "ear_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.22,
+        0.35,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.ear_pointed",
+      "socket": "ear_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.22,
+        0.35,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.ear_pointed",
+      "socket": "ear_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.22,
+        0.35,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.ear_pointed",
+      "socket": "ear_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.22,
+        0.35,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.ear_rounded",
+      "socket": "ear_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.25,
+        0.28,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.ear_rounded",
+      "socket": "ear_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.25,
+        0.28,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.ear_rounded",
+      "socket": "ear_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.25,
+        0.28,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.ear_rounded",
+      "socket": "ear_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.25,
+        0.28,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.ear_floppy",
+      "socket": "ear_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.2,
+        0.45,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.ear_floppy",
+      "socket": "ear_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.2,
+        0.45,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.ear_floppy",
+      "socket": "ear_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.2,
+        0.45,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.ear_floppy",
+      "socket": "ear_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.2,
+        0.45,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.horn_straight",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.horn_straight",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.horn_straight",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.horn_straight",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.horn_curved",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.horn_curved",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.horn_curved",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.horn_curved",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.5,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.antler",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.4,
+        0.7,
+        0.3
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.antler",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.4,
+        0.7,
+        0.3
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tusk",
+      "socket": "mouth",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tusk",
+      "socket": "nose",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.tusk",
+      "socket": "mouth",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.tusk",
+      "socket": "nose",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.snout",
+      "part": "art.tusk",
+      "socket": "mouth",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.snout",
+      "part": "art.tusk",
+      "socket": "nose",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.08,
+        0.35,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.snout",
+      "socket": "nose",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.4,
+        0.3,
+        0.3
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.snout",
+      "socket": "nose",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.4,
+        0.3,
+        0.3
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.beak",
+      "socket": "mouth",
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleHint": [
+        0.3,
+        0.22,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.1,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.beak",
+      "socket": "nose",
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleHint": [
+        0.3,
+        0.22,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.1,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.beak",
+      "socket": "mouth",
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleHint": [
+        0.3,
+        0.22,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.1,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.beak",
+      "socket": "nose",
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleHint": [
+        0.3,
+        0.22,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.1,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.hat_brim",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.3,
+        0.15,
+        1.3
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.hat_brim",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.3,
+        0.15,
+        1.3
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.crown",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.1,
+        0.5,
+        1.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.hemisphere",
+      "part": "art.crown",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.1,
+        0.5,
+        1.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.collar",
+      "socket": "neck_bottom",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.collar",
+      "socket": "head_top",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.collar",
+      "socket": "neck_bottom",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.collar",
+      "socket": "head_top",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.collar",
+      "socket": "neck_bottom",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.collar",
+      "socket": "head_top",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.2,
+        0.2,
+        1.2
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.limb_arm",
+      "socket": "arm_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.28,
+        0.7,
+        0.28
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.limb_arm",
+      "socket": "arm_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.28,
+        0.7,
+        0.28
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.limb_arm",
+      "socket": "arm_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.28,
+        0.7,
+        0.28
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.limb_arm",
+      "socket": "arm_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.28,
+        0.7,
+        0.28
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.limb_paw",
+      "socket": "paw_end",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.55,
+        0.3,
+        0.7
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tail_straight",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleHint": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tail_straight",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleHint": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tail_curved",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleHint": [
+        0.2,
+        0.65,
+        0.2
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tail_curved",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleHint": [
+        0.2,
+        0.65,
+        0.2
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tail_bushy",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleHint": [
+        0.35,
+        0.6,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tail_bushy",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": false,
+      "scaleHint": [
+        0.35,
+        0.6,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tail_fish",
+      "socket": "tail",
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.35,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tail_fish",
+      "socket": "tail",
+      "jointType": "hinge",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.35,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tentacle",
+      "socket": "arm_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tentacle",
+      "socket": "arm_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tentacle",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tentacle",
+      "socket": "leg_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.tentacle",
+      "socket": "leg_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tentacle",
+      "socket": "arm_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tentacle",
+      "socket": "arm_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tentacle",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tentacle",
+      "socket": "leg_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.tentacle",
+      "socket": "leg_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tentacle",
+      "socket": "arm_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tentacle",
+      "socket": "arm_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tentacle",
+      "socket": "tail",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tentacle",
+      "socket": "leg_left",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.tentacle",
+      "socket": "leg_right",
+      "jointType": "ball_socket",
+      "canMirror": true,
+      "scaleHint": [
+        0.15,
+        0.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.wing_bat",
+      "socket": "wing_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.2,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.wing_bat",
+      "socket": "wing_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.2,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.wing_bat",
+      "socket": "wing_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.2,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.wing_bat",
+      "socket": "wing_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.2,
+        0.08
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.wing_feathered",
+      "socket": "wing_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.1,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.wing_feathered",
+      "socket": "wing_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.1,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.wing_feathered",
+      "socket": "wing_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.1,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.wing_feathered",
+      "socket": "wing_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        1.8,
+        1.1,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.fin_dorsal",
+      "socket": "tail",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.08,
+        0.5,
+        0.4
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.fin_dorsal",
+      "socket": "tail",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.08,
+        0.5,
+        0.4
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.fin_pectoral",
+      "socket": "arm_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.7,
+        0.35,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.fin_pectoral",
+      "socket": "arm_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.7,
+        0.35,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.fin_pectoral",
+      "socket": "arm_left",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.7,
+        0.35,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.fin_pectoral",
+      "socket": "arm_right",
+      "jointType": "hinge",
+      "canMirror": true,
+      "scaleHint": [
+        0.7,
+        0.35,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.spike",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.spike",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.spike",
+      "socket": "tail",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.spike",
+      "socket": "arm_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.spike",
+      "socket": "arm_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.spike",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.spike",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.spike",
+      "socket": "tail",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.spike",
+      "socket": "arm_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.spike",
+      "socket": "arm_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.spike",
+      "socket": "horn_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.spike",
+      "socket": "horn_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.spike",
+      "socket": "tail",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.spike",
+      "socket": "arm_left",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.spike",
+      "socket": "arm_right",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.1,
+        0.3,
+        0.1
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": 3
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.shield",
+      "socket": "paw_end",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.4,
+        1.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.shield",
+      "socket": "child_limb",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        1.4,
+        1.8,
+        0.15
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        -0.5
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.potion",
+      "socket": "paw_end",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.4,
+        0.6,
+        0.4
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.gem",
+      "socket": "paw_end",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.gem",
+      "socket": "hat",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.gem",
+      "socket": "nose",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.crown",
+      "part": "art.gem",
+      "socket": "paw_end",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.crown",
+      "part": "art.gem",
+      "socket": "hat",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.crown",
+      "part": "art.gem",
+      "socket": "nose",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.shield",
+      "part": "art.gem",
+      "socket": "paw_end",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.shield",
+      "part": "art.gem",
+      "socket": "hat",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.shield",
+      "part": "art.gem",
+      "socket": "nose",
+      "jointType": "embedded",
+      "canMirror": false,
+      "scaleHint": [
+        0.18,
+        0.22,
+        0.18
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.coin",
+      "socket": "paw_end",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.35,
+        0.05,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.button",
+      "socket": "arm_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.button",
+      "socket": "arm_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.button",
+      "socket": "leg_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.button",
+      "socket": "leg_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.button",
+      "socket": "arm_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.button",
+      "socket": "arm_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.button",
+      "socket": "leg_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.button",
+      "socket": "leg_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.12,
+        0.04,
+        0.12
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.limb_paw",
+      "part": "art.ring",
+      "socket": "paw_end",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.1,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.limb_arm",
+      "part": "art.ring",
+      "socket": "paw_end",
+      "jointType": "rigid",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.1,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.star_extrude",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.star_extrude",
+      "socket": "arm_left",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.star_extrude",
+      "socket": "arm_right",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.star_extrude",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.star_extrude",
+      "socket": "arm_left",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.star_extrude",
+      "socket": "arm_right",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.star_extrude",
+      "socket": "hat",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.star_extrude",
+      "socket": "arm_left",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.star_extrude",
+      "socket": "arm_right",
+      "jointType": "rigid",
+      "canMirror": false,
+      "scaleHint": [
+        0.6,
+        0.15,
+        0.6
+      ],
+      "pivotOffset": [
+        0,
+        -0.5,
+        0
+      ],
+      "lodDisappearsAt": null
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.rounded_badge",
+      "socket": "arm_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cylinder",
+      "part": "art.rounded_badge",
+      "socket": "arm_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.rounded_badge",
+      "socket": "arm_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.cuboid",
+      "part": "art.rounded_badge",
+      "socket": "arm_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.rounded_badge",
+      "socket": "arm_left",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    },
+    {
+      "anchor": "art.sphere",
+      "part": "art.rounded_badge",
+      "socket": "arm_right",
+      "jointType": "surface_weld",
+      "canMirror": true,
+      "scaleHint": [
+        0.35,
+        0.08,
+        0.35
+      ],
+      "pivotOffset": [
+        0,
+        0,
+        0
+      ],
+      "lodDisappearsAt": 2
+    }
+  ]
+}

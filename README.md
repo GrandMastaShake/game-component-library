@@ -8,6 +8,7 @@ A schema-driven, AI-assemblable library of modular game systems—**elements** a
 
 - **75 component descriptors** spanning movement, combat, inventory, economy, social, world, UI, pets, progression, persistence, presentation, housing, and utility.
 - **10 validated compounds** for reusable multi-system gameplay loops.
+- **An assembly graph** — 5 anchor shapes, 32 parts and 139 attachments, each with a joint type, a named socket and an offset, checked against the shape contracts' topology.
 - Component-graph and compound validators for malformed descriptors, missing members/dependencies, bad event wires, duplicates, and cycles.
 - A platform-aware build-manifest compiler, readiness evaluator, and coverage-roadmap generator.
 - A dependency-injection adapter runtime for integrating `roblox-modular-lib` without hard-coded cross-repository paths.

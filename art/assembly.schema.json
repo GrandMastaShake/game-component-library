@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AssemblyGraph",
+  "description": "How art shapes attach to one another. The shape contracts say what a part is; this says where it goes and how it joins. Declaring an attachment is not a claim that any mesh exists -- it is a claim about what a mesh must satisfy if it does. Angular limits are deliberately absent: the source data records that a joint is a hinge and never how far it bends, and inventing ranges here would make the range-versus-topology rule check its own guesses.",
+  "type": "object",
+  "required": [
+    "anchors",
+    "parts",
+    "edges"
+  ],
+  "properties": {
+    "$comment": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "anchors": {
+      "type": "object",
+      "description": "Shapes other shapes hang off. Keyed by art.* id.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "role",
+          "sockets"
+        ],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "sockets": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": [
+                "offset"
+              ],
+              "properties": {
+                "offset": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parts": {
+      "type": "object",
+      "description": "Shapes that attach to an anchor. Keyed by art.* id.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "attachesTo",
+          "socketNames",
+          "jointType"
+        ],
+        "properties": {
+          "attachesTo": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "socketNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "jointType": {
+            "type": "string",
+            "enum": [
+              "rigid",
+              "hinge",
+              "ball_socket",
+              "surface_weld",
+              "embedded"
+            ]
+          },
+          "canMirror": {
+            "type": "boolean"
+          },
+          "scaleRelativeToAnchor": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "pivotOffset": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "lodDisappearsAt": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "One attachment: a part, on an anchor, at a named socket.",
+      "items": {
+        "type": "object",
+        "required": [
+          "anchor",
+          "part",
+          "socket",
+          "jointType"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "anchor": {
+            "type": "string",
+            "pattern": "^art\\.[a-z0-9_]+$"
+          },
+          "part": {
+            "type": "string",
+            "pattern": "^art\\.[a-z0-9_]+$"
+          },
+          "socket": {
+            "type": "string"
+          },
+          "jointType": {
+            "type": "string",
+            "enum": [
+              "rigid",
+              "hinge",
+              "ball_socket",
+              "surface_weld",
+              "embedded"
+            ]
+          },
+          "canMirror": {
+            "type": "boolean"
+          },
+          "scaleHint": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "pivotOffset": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "lodDisappearsAt": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
