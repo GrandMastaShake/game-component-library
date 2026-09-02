@@ -1,0 +1,82 @@
+{
+  "id": "presentation.iso_projection",
+  "name": "Isometric Projection",
+  "category": "presentation",
+  "description": "Maps tile coordinates to screen pixels and back. The forward half is the three lines everybody writes; the inverse is the half that gets skipped, and skipping it is why an isometric prototype can draw a world it cannot tell you the mouse is over. Both directions are declared here so they can be held to being exact inverses of each other.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/iso/IsoProjection.ts); not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null,
+      "note": "A 3D camera does its own projection."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tileWidth",
+      "type": "number",
+      "required": false,
+      "default": 64,
+      "description": "Screen width of one tile diamond, in pixels."
+    },
+    {
+      "name": "tileHeight",
+      "type": "number",
+      "required": false,
+      "default": 32,
+      "description": "Screen height of one tile diamond. The 2:1 ratio against tileWidth is what makes the grid read as isometric rather than merely rotated."
+    },
+    {
+      "name": "elevationPixels",
+      "type": "number",
+      "required": false,
+      "default": 16,
+      "description": "Pixels one elevation level lifts a tile up the screen."
+    },
+    {
+      "name": "zoom",
+      "type": "number",
+      "required": false,
+      "default": 1
+    }
+  ],
+  "outputs": [
+    {
+      "name": "toScreen",
+      "type": "function"
+    },
+    {
+      "name": "toTile",
+      "type": "function"
+    },
+    {
+      "name": "visibleTileBounds",
+      "type": "function"
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.viewportMoved"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": [
+    "isometric",
+    "projection",
+    "rendering",
+    "camera",
+    "2d",
+    "picking"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "presentation.depth_sorter",
+  "name": "Depth Sorter",
+  "category": "presentation",
+  "description": "Orders everything in an isometric scene back to front so a painter can draw it without a depth buffer. Sorting by tile x+y is the usual answer, and it is correct only while every object sits on exactly one tile at one elevation. A building three tiles deep, or anything standing on a cliff, breaks it. This contract declares the ordering as a relation between pairs of volumes rather than as a sort key, because a relation is what it actually is: separated on an axis, the object further along that axis is in front, and the draw order is a topological sort of those pairs.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/iso/DepthSort.ts); not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null,
+      "note": "A depth buffer solves this in 3D."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "cullOffscreen",
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "maxSortedObjects",
+      "type": "number",
+      "required": false,
+      "default": 4000,
+      "description": "The pairwise ordering is quadratic in the number of objects whose screen boxes could overlap. Above this count the scene is banded and sorted band by band rather than whole."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "drawOrder",
+      "type": "array"
+    },
+    {
+      "name": "sortedCount",
+      "type": "number"
+    },
+    {
+      "name": "lastSortMs",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.sceneSorted",
+      "presentation.sortCycleDetected"
+    ],
+    "listensTo": [
+      "world.tileGridBuilt",
+      "world.tileChanged",
+      "presentation.objectsPlaced"
+    ]
+  },
+  "eventIntents": {
+    "presentation.sortCycleDetected": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "presentation.iso_projection"
+  ],
+  "tags": [
+    "isometric",
+    "rendering",
+    "sorting",
+    "occlusion",
+    "painter",
+    "2d"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "presentation.tile_cursor",
+  "name": "Tile Cursor",
+  "category": "presentation",
+  "description": "Turns a screen position into the tile a player believes they are pointing at. On flat ground that is one inverse projection. With elevation it is not: a raised tile draws upward into the screen space of the tiles behind it, so the topmost tile under the cursor is usually not the one the flat inverse names. Resolving that is this contract's only job, and it is the difference between a world you can look at and a world you can click on.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/iso/IsoProjection.ts, pickTile); not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null,
+      "note": "The 3D runtime picks with a raycast."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "elevationAware",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When false the cursor reports the tile the flat inverse gives, which is wrong wherever the ground is not flat. Kept declarable because it is the cheaper path and it is correct on a level map."
+    },
+    {
+      "name": "searchDepth",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "How far back along the view axis to look for a raised tile that draws over the flat answer. Bounded in practice by the tallest column the grid allows."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "hoveredTile",
+      "type": "object"
+    },
+    {
+      "name": "selectedTile",
+      "type": "object"
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.tileHovered",
+      "presentation.tileSelected"
+    ],
+    "listensTo": [
+      "input.pointerMoved",
+      "input.pointerPressed"
+    ]
+  },
+  "eventIntents": {
+    "presentation.tileSelected": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "presentation.iso_projection",
+    "world.tile_grid"
+  ],
+  "tags": [
+    "isometric",
+    "input",
+    "picking",
+    "cursor",
+    "selection",
+    "2d"
+  ]
+}
