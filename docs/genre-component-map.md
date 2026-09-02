@@ -1,9 +1,9 @@
-# Genre Component Map — Top 30
+# Genre Component Map — 35 Genres
 
 Working brainstorm for expanding the Game Component Library from "one game
 (pet-survival) done well" into a genre-spanning component catalog.
 
-Status: DRAFT for alignment — swarm pass happens after sign-off.
+Status: Pass 1 shipped ([PR #20](https://github.com/GrandMastaShake/game-component-library/pull/20) — squads A–D, genres #1–28 + exploration). Pass 2 (squads E, F, G) covers the remaining 15, including the Tile-Matching / Logic Puzzle split and Casino & Gacha as the slot-30 winner. Learning/Educational is deferred as its own initiative.
 
 ## Context: what we already have
 
@@ -223,64 +223,86 @@ Naming convention for genre ids: `genre.<slug>` (e.g. `genre.platformer`).
 - **Reuse:** FloorDescent (#13), AffixLootGenerator (#11), PermadeathFlag (#15), Dungeon Crawler kit.
 - **New:** `RunSeedManager` ★ (deterministic run from seed, daily-run support), `RunMetaProgression` ★ (unlock pool persists between deaths), `DraftOnLevelUp` (choose-1-of-3 on run milestones), `DeathSummary` (run stats, unlock credits).
 
-### 29. Tile-Matching / Logic Puzzle  *(casual puzzle pack: match-3 + sudoku-like)*
-- **Loop:** inspect grid → make move → cascade/score → level target.
+### 29. Tile-Matching  *(match-3 family — split from Logic Puzzle in pass 2 planning)*
+- **Loop:** inspect grid → swap → cascade/score → level target.
 - **View:** UI grid; 2D.
 - **Reuse:** TileGrid, TimerSystem, Leaderboard, XPLeveling (level map), AudioSystem.
-- **New:** `MatchResolver` ★ (match detection, cascades, special pieces), `SwapValidator` (legal-move check + shuffle-on-deadlock), `LevelObjectiveSet` (score/collect/clear targets w/ move limits), `LogicGridEngine` ★ (constraint-satisfaction core for sudoku/nonogram/picross — generator + validator + hint tiers), `HintSystem`.
+- **New:** `MatchResolver` ★ (match detection, cascades, special pieces), `SwapValidator` (legal-move check + shuffle-on-deadlock), `LevelObjectiveSet` (score/collect/clear targets w/ move limits), `BoosterPieces` (earned/created power pieces), `CascadeScoring`.
 
-### 30. Bench swap slot
-The 30th slot is intentionally open — pick one from the bench below
-before the swarm launches. Recommendation: **Point & Click / Escape
-Room** (shares `DialogueTreeEngine` from #12 and `HotspotLayer` pattern;
-strong fit for the isometric and side-scroll views).
+### 30. Casino & Gacha  *(slot-30 winner — chance games pack)*
+- **Loop:** earn/pull → reveal → collect or convert duplicates → pity builds → banner rotates.
+- **View:** UI-forward; presentation-heavy reveal sequences.
+- **Reuse:** Currency, LootTable, NotificationToast, SaveSystem, AudioSystem, ParticleSystem.
+- **New:** `ProbabilityCore` ★ (seeded, auditable weighted RNG with published rates), `GachaBanner` ★ (rotating rate-up pools, pull counters, spark/exchange), `PitySystem` (hard/soft pity per banner), `DuplicateConverter` (dupes → shards/currency), `SlotReelResolver` (reel strips + paylines, honest presentation).
+- **Hard rule:** virtual currency only — no real-money wagering, no cash-out, ever. `WagerRaces` (#19) follows the same rule.
 
 ---
 
-## The Bench (Tier 2 — swap candidates)
+## Squad G — Cerebral & Sandbox (honorable tier)
 
-These are real genres with real component demand, parked to keep the
-first swarm pass at 6×5. Any can swap into the top 30 before launch:
+### 31. Logic Puzzle  *(sudoku-like: sudoku, nonogram, picross, kakuro — own pack)*
+- **Loop:** given constraints → deduce → fill cells → puzzle complete.
+- **View:** UI grid; 2D.
+- **Reuse:** TileGrid, TimerSystem, Leaderboard, SaveSystem (progress), AudioSystem.
+- **New:** `LogicGridEngine` ★ (constraint-satisfaction core: generator + validator + solution-uniqueness check), `HintSystem` ★ (tiered hints from candidate-elimination up to strategy explanation), `PuzzleDifficultyRater` (grades generated puzzles by techniques required), `PencilMarks` (candidate notation), `DailyPuzzleSeed`.
 
-| Genre | Why benched | Signature new components |
+### 32. Point & Click / Escape Room
+- **Loop:** examine scene → collect clues/items → combine → unlock next space.
+- **View:** isometric, side-scroll-2d.
+- **Reuse:** DialogueTreeEngine (#12), CoreInventory, DialogueBox, SaveSystem, AtmosphereSystem.
+- **New:** `HotspotLayer` ★ (clickable regions w/ context-sensitive cursor), `InventoryCombine` ★ (item+item and item+hotspot rules), `PuzzleLockChain` (multi-stage interdependent locks), `RoomEscapeTimer` (optional pressure mode), `NarrativeJournal` (auto clue log).
+
+### 33. Text / Interactive Fiction
+- **Loop:** read passage → choose/type → world state shifts → next passage.
+- **View:** UI-forward.
+- **Reuse:** DialogueBox, SaveSystem, AudioSystem, AtmosphereSystem.
+- **New:** `PassageEngine` ★ (node graph of text passages w/ live state interpolation), `ChoiceConsequence` ★ (flags + branch conditions), `TextParserFallback` (verb-noun parser mode for parser-IF), `StoryStats` (tracked variables surfaced to the reader), `SaveBookmark` (named multi-slot checkpoints).
+
+### 34. Physics Sandbox
+- **Loop:** spawn/join parts → apply forces → watch emergent behavior → iterate.
+- **View:** side-scroll-2d, voxel.
+- **Reuse:** PhysicsCore, BehaviorFSM, CommandBus, ObjectPlacer, ParticleSystem.
+- **New:** `RagdollSystem` ★ (multi-body limbs w/ constraints), `JointBuilder` ★ (hinges/springs/pistons composable into contraptions), `FluidBuoyancy`, `ContraptionSaveLoad` (shareable builds), `ForceVisualizer` (debug/pedagogy overlay).
+
+### 35. Programming Game
+- **Loop:** read puzzle spec → write/visual-script a solution → run against test harness → optimize.
+- **View:** top-down, ui-forward.
+- **Reuse:** BehaviorFSM, CommandBus, HUD, Leaderboard, LevelGoal.
+- **New:** `VisualNodeScript` ★ (node-graph scripting w/ type-checked wires), `CodePuzzleValidator` ★ (test-case harness w/ pass/fail telemetry), `RobotCommandQueue` (compiled program → queued actor execution), `SandboxedVM` ★ (resource-capped script execution — the safety story: memory/time/op limits, no host access), `DebuggerOverlay` (breakpoints, watch values).
+
+---
+
+## The Bench (deferred)
+
+| Genre | Status | Signature components when picked up |
 |---|---|---|
-| Point & Click / Escape Room | **Recommended for slot 30.** One pack covers both | `HotspotLayer`, `InventoryCombine`, `PuzzleLockChain`, `RoomEscapeTimer` |
-| Text / Interactive Fiction | UI-heavy, thin physics needs | `PassageEngine`, `ChoiceConsequence`, `TextParserFallback` |
-| Physics Sandbox | Component-light beyond PhysicsCore extensions | `RagdollSystem`, `JointBuilder`, `FluidBuoyancy` |
-| Programming Game | Niche but beloved; needs a sandboxed-VM safety story | `VisualNodeScript`, `CodePuzzleValidator`, `RobotCommandQueue` |
-| Learning / Educational | Content platform more than genre | `QuizEngine`, `SpacedRepetition`, `CurriculumMap` |
-| Casino & Gacha | Chance mechanics — virtual currency only, never real-money wagering | `ProbabilityCore`, `GachaBanner`, `PitySystem`, `SlotReelResolver` |
+| Learning / Educational | **Deferred — its own initiative.** A pedagogy platform (curriculum mapping, spaced repetition, assessment) more than a component pack; deserves a dedicated design pass rather than a squad slot | `QuizEngine`, `SpacedRepetition`, `CurriculumMap` |
 
 **Cross-cutting note:** "time limit" from the original brainstorm isn't a
-genre — it's a modifier. `TimerSystem` + the proposed `RewindTime`,
+genre — it's a modifier. `TimerSystem` + `RewindTime`,
 `RoomEscapeTimer`, and `MatchClock` cover it as a composable layer over
 any genre pack.
 
-## Swarm plan (6 squads × 5 genres)
+## Swarm plan
 
-Each squad delivers, per genre:
+**Pass 1 — SHIPPED** ([PR #20](https://github.com/GrandMastaShake/game-component-library/pull/20)):
+Squads A–D, 20 genre packs (#1–28 plus exploration/collectathon), 103 new
+components. Catalog: 79 → 182, both validators green.
 
-1. `genres/<slug>.genre.json` — genre pack descriptor (new file type):
-   id, loop summary, view fit, member component ids (reuse), new
-   component id list, one signature compound sketch.
-2. `components/<category>/<Name>.component.json` for every **new**
-   component, schema-valid, `provenance: library-native`,
-   `implementations: [{target: "agnostic", status: "unmapped"}]`.
-3. All new files must pass `tools/validate_component_graph.py`.
+**Pass 2 — 3 squads × 5 genres (15 packs):**
 
 | Squad | Genres |
 |---|---|
-| A — Precision Action | Platformer, Puzzle Platformer, Metroidvania, Fighting, Rhythm |
-| B — Combat & Stakes | Shooter, Battle Royale, Survival Adventure, Survival Horror, Sports |
-| C — RPG Family | Action RPG, CRPG, Dungeon Crawler, Open World, Turn-Based Tactics |
-| D — Machines & Logistics | Exploration/Collectathon, Driving/Racing, Vehicular Combat, Driver RPG, Transport Tycoon |
 | E — Sims & Creatures | Construction & Management, Life Sim, Pet Sim, Monster Taming, Idle |
-| F — Table & Chance | Card/Deckbuilder, Board, Roguelike, Tile-Matching/Logic, Slot 30 (bench swap) |
+| F — Table & Chance | Card/Deckbuilder, Board, Roguelike, Tile-Matching, Casino & Gacha |
+| G — Cerebral & Sandbox | Logic Puzzle, Point & Click/Escape Room, Text/IF, Physics Sandbox, Programming |
 
-Open questions before launch:
-- Genre pack file format: new `genre.schema.json` + `genres/` dir, or
-  keep it docs-only until the format proves itself?
-- Do new components land on a branch + PR (recommended) or direct to
-  main?
-- Slot 30: Point & Click / Escape Room (recommended), Casino & Gacha,
-  or Physics Sandbox?
+Each squad delivers, per genre:
+
+1. `genres/<slug>.genre.json` validating against `genre.schema.json`.
+2. `components/<category>/<Name>.component.json` for every **new**
+   component, schema-valid, `provenance: library-native`, all five
+   runtime targets `unmapped`.
+3. Everything passes `tools/validate_component_graph.py` and
+   `tools/validate_compounds.py`.
+4. Lands on a branch + PR, never direct to main.
