@@ -14,6 +14,7 @@ jobs:
         with: {python-version: "3.11"}
       - run: python3 tools/validate_component_graph.py --report reports/component-graph.json
       - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
+      - run: python3 tools/validate_genres.py --report reports/genre-validation.json
       - name: Validate art topology (fails on findings not in the baseline)
         run: python3 tools/validate_topology.py --baseline art/topology-baseline.json --report reports/topology.json
       - name: Validate platform claims (fails on findings not in the baseline)
