@@ -5,10 +5,6 @@
   "description": "The per-vehicle feel sheet: acceleration curve, grip, drift tendency, and steering response, stored as named presets and applied on top of movement.vehicle_basic's stock handling. It exists because two cars sharing the same VehicleBasic should not drive the same, and the difference between them is data, not code. This component owns the parameter set and when it is applied \u2014 it re-asserts the tune on movement.vehicleEntered because VehicleBasic resets to stock handling on seat change. It does not own the physics integration (movement.physics_core turns the resulting numbers into motion) or the entry/seat logic (VehicleBasic). It also stores no progression: a part that improves grip is an economy and inventory fact, and what reaches this component is only the final numbers a garage system computed.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

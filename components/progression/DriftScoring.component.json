@@ -5,10 +5,6 @@
   "description": "Converts sustained slides into bankable style points. It owns the judgement of what counts as a drift \u2014 minimum slip angle, minimum speed, minimum hold time \u2014 and the multiplier that grows while the slide is held, because the tension of a drift game is that the score exists only as long as the risk does. Banking and losing are tied to the track's own events: points bank when world.checkpointCrossed confirms the car survived to a gate, and the live stake drops on world.lapInvalidated, so cutting the corner to save a drift never pays. It reads slip from the vehicle produced by movement.vehicle_basic's motion and movement.vehicle_tuning's grip, but owns neither. It also does not post scores anywhere \u2014 social.leaderboard and ui.hud are the sinks for progression.driftBanked.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

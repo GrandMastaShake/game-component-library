@@ -4,7 +4,9 @@
   "category": "utility",
   "description": "The arbiter of timing: each note input is compared against the song position and graded perfect, good, or miss by tiered windows. It owns the window widths, the delta calculation, and the unhit-note miss — the note that scrolls past the receptor untouched is as much a judgement as a late press, and both must come from one place or combo counting forks. Deltas are corrected by utility.beat_clock's calibrated latency before grading, because a perfect press on a laggy headset is a perfect press; the correction lives in the clock, this component consumes it, and neither duplicates the other. It deliberately does not score: a tier is a fact, and what a perfect is worth — points, combo, health — belongs to economy.combo_multiplier and whoever else listens. Grading against time rather than frames is deliberate: frame-graded rhythm games change difficulty with the frame rate.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

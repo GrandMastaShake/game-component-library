@@ -5,10 +5,6 @@
   "description": "Owns the first sixty seconds of a match: selecting a point on the drop path, the skydive down, and the landing. Selection happens on the map because 'where do I commit' is the genre's opening bet — hot-drop for loot density, cold-drop for safety — and the component keeps the commitment binding once made, since a re-pickable drop deletes the bet. The descent is a scripted movement state with capped steering: fully free flight would turn deployment into a traversal exploit that skips the ground game. The moment boots touch ground, control returns to the normal movement stack and touchdown is movement.ground_sensor's event like any other landing; this component's responsibility ends exactly there.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -4,7 +4,9 @@
   "category": "combat",
   "description": "The match as a state machine: intro, fight, knockout, round end, match end, best-of-N scoring, and the round clock. It owns the lifecycle and the win tally because every other fighting component needs a single answer to 'is combat legal right now' — inputs during intro, hits after KO, and meter gain between rounds all key off the round state this publishes. It deliberately does not own the clock mechanism: utility.timer_system counts, and this component decides what the count means, including whether time-out goes to the higher-health fighter or a draw. It also does not own match-level stakes beyond the score — bracket position, wagers, and ladder effects belong to social.leaderboard and whatever tournament layer consumes combat.match_ended. Round resets reposition the fighters through movement.character_body; this component orders the reset but does not move anyone itself.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

@@ -5,10 +5,6 @@
   "description": "Hand-authored rooms inside a procedural layout. world.floor_descent owns the topology \u2014 how many rooms and how they connect; this component owns what a room IS: a stamp of tiles, props, spawn sockets, and reward anchors, chosen by tags ('treasure', 'shrine', 'ambush') that the floor's depth budget weights. Stamps exist because pure noise makes dungeons with no rhythm \u2014 the memorable room is authored, and the procedural layer's job is placement, not invention. It does not own the contents of its sockets: it declares WHERE a boss or trap may sit, and combat.boss_encounter_script or world.trap_system claims the socket.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

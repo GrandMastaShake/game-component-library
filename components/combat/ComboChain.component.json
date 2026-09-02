@@ -4,7 +4,9 @@
   "category": "combat",
   "description": "The grammar of offense: which move may cancel into which, inside what frame window, plus the input buffer and motion-input recognition (quarter-circles, dragon punches) that make intent legible at fighting-game speed. It owns the chain table and the buffer because both answer the same question — 'what did the player mean, and are they allowed to do it now' — and splitting them produces the classic bug where a buffered input fires a move the cancel rules would have forbidden. It deliberately does not own contact: combat.hitbox_hurtbox reports combat.hit_confirmed, and a cancel window opens on confirmed hits (hit-confirming) rather than on button presses, which is what separates real chains from mash-friendly animation blending. It also does not own damage scaling; scaling on chain depth is combat.damage_resolver's knob, fed by the step count this publishes.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

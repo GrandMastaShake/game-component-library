@@ -5,10 +5,6 @@
   "description": "Directional cover, computed from the map, applied to the shot. Standing adjacent to a wall on the attacker's side makes the shot harder; the bonus belongs to the defender and flips with attack direction, which is exactly why cover is computed per attack instead of stored per tile \u2014 a tile is not 'in cover', a shot is. world.tile_grid supplies the geometry and combat.damage_resolver applies the final number; this component's whole job is the modifier in between, and it never touches damage directly, so a tactics game and a tactics-adjacent RPG share one resolver. Half cover versus full cover is data on the tile, not a special case in code.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

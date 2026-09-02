@@ -5,10 +5,6 @@
   "description": "The definition of a lap: an ordered checkpoint sequence laid over a spline, the radius that counts as crossing each gate, and the validation that decides whether a lap counts. It exists because 'who is winning' is only computable once 'what progress means' is nailed down, and progress on a circuit is gate order, not distance to a finish line. This component owns gate order, lap counting, and wrong-way or gate-skip detection \u2014 reported as world.lapInvalidated rather than enforced physically, because whether a skipped gate means respawn, penalty, or disqualification is a race-rules decision made above it. It does not own grid placement, standings, or podium logic, and it deliberately borrows timing from utility.timer_system instead of keeping a private clock, so replays, ghosts, and race control all read the same time. Race start and reset arrive as named commands via utility.command_bus rather than bespoke inputs.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

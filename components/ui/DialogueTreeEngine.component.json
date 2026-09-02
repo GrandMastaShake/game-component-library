@@ -5,10 +5,6 @@
   "description": "The brain behind ui.dialogue_box. The box renders lines and reports which button was pressed; this engine owns what those presses mean \u2014 node-graph traversal, conditional branches gated on progression.attribute_sheet checks, and consequence flags that outlive the conversation. Checks are resolved by asking the attribute sheet, never by reading stats directly, so dice rules live in exactly one place. It does not own what a consequence flag does to the world: world.world_state_flags and social.reputation_system listen for ui.consequenceFlagSet and decide. It also refuses to persist itself \u2014 save and load of conversation position is persistence.save_system's job, driven by the same events everything else hears.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

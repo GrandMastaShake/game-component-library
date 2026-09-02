@@ -5,10 +5,6 @@
   "description": "The opt-in contract that turns a defeat into a funeral. When enabled, a combat.entityDefeated on a player unit is not a knockout \u2014 the unit leaves the roster, its gear returns to inventory.core_inventory, and the loss is written through persistence.save_system immediately, because a permadeath that only exists until the next save is one reload away from meaning nothing. This component owns the policy and its irrevocability. It does not own the death itself \u2014 combat.damage_resolver decided that \u2014 and it does not own the memorial: it emits the loss and lets the game decide whether the fallen get a graveyard, a statue, or a line in the credits. Off by default, because permadeath is a mode a player chooses, not a surprise a tutorial springs.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

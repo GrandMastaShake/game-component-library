@@ -5,10 +5,6 @@
   "description": "Aim-at-anchor swing and pull traversal, the movement verb that turns a collectible on a spire into a puzzle with a stylish answer. It owns anchor validation \u2014 range, line of sight, and the anchor tag so level authors decide what is grappable \u2014 the rope constraint while attached, and a release that preserves swing momentum, because the joy of a grapple is energy conservation and a release that clamps velocity feels like hitting glass. Mid-swing steering defers to movement.run_control's air control for the same reason JumpCore defers horizontal velocity: the component that owns horizontal motion applies the multipliers. It grapples geometry only \u2014 pulling enemies or items is a combat and inventory verb that would drag targeting rules into a movement component. Ground and air state come from movement.grounded and movement.leftGround so a grapple fired mid-coyote-time behaves exactly like a jump would.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

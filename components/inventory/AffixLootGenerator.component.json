@@ -5,10 +5,6 @@
   "description": "The dice behind the drop. inventory.loot_table decides WHAT falls out of a monster; this component decides HOW GOOD the copy is \u2014 rarity tier first, then affix count from rarity, then each affix rolled inside its tier's value range. Splitting this from loot_table matters because drop tables are content (designers edit them per monster, per zone) while affix math is system (tuned globally, once, and feared thereafter). It does not own where the item goes: the finished item is emitted, and inventory.core_inventory or inventory.slotted_bag decides whether it fits. It also refuses to render \u2014 rarity color and the stat card belong to ui.hud and the tooltip layer, and a generator that picks colors has opinions no loot system should have.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

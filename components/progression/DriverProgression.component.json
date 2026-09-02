@@ -5,10 +5,6 @@
   "description": "The driver grows separately from the car. This component owns driver-only growth \u2014 cornering-style specializations, a focus meter built by clean driving and spent on demand \u2014 kept deliberately distinct from vehicle stats so that selling the car never sells the person, and a great driver in a beater still feels like one. XP arrives from progression.xp_leveling; what this component adds is deciding which driver skills that XP unlocks through progression.skills_tree, and crediting skill-relevant feats: banked drifts (progression.driftBanked) and completed laps (world.lapCompleted) are the moments that prove a cornering style, so they feed the focus meter rather than only the scoreboard. It does not own vehicle upgrades \u2014 parts are housing.garage_management's business \u2014 and it does not own what the world thinks of the driver; reputation tiers and their gates belong to social.street_rep_tiers. The focus meter is the genre's risk dial: spending focus sharpens steering response for a sector, so the driver's skill economy is spent at the wheel, not in a menu.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

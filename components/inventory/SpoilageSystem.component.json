@@ -5,10 +5,6 @@
   "description": "Per-item freshness that ticks down inside the inventory and converts food into waste. Freshness is item metadata with a half-life per item class; spoiled items are CONVERTED, not deleted — into a spoiled variant or compost — because silent deletion punishes players for not reading a wiki, while conversion keeps the loss legible and even useful. The tick batches on day boundaries and timer completions rather than per-frame, because spoilage is a logistics pressure, not a twitch mechanic, and per-frame freshness is a float nobody can read. Preservation (salt, icebox, drying rack) is a drain multiplier supplied by the container holding the item, so storage gameplay composes without this component knowing what an icebox is.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Turns closing speed and mass into collision damage, with crumple thresholds that mark when a hit was structural. It exists because in a vehicular combat game the bumper is the most-used weapon, and if ramming is just physics knockback there is no game. This component owns the speed-times-mass formula and the self-damage fraction that makes a reckless T-bone cost the attacker too. It does not subtract health itself: computed damage is handed to combat.damage_resolver, so armor, resistances, and status effects keep one home, and a shielded target mitigates a ram the same way it mitigates a shell. Crumple is reported as an event for combat.vehicle_damage_states and presentation to consume; this model does not decide what crumpling means for handling or visuals.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

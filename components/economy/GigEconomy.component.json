@@ -5,10 +5,6 @@
   "description": "The procedural contract generator that gives a driver a reason to start the engine: courier runs, race challenges, getaway jobs. It owns offer generation \u2014 payout scaled by distance, risk, and the driver's tier \u2014 plus acceptance windows and completion payout, which is disbursed through economy.currency so every earning stays in the audited ledger. Contracts are expressed as quests in progression.quest_log rather than through a parallel objective system, deliberately: the quest UI, waypoints, and reward plumbing already exist, and a gig that did not appear in the quest log would feel like a scam. world locations for pickup and drop-off are read from the world graph (the point-of-interest network when one is present), but this component does not own the map. It also does not own which gigs are offered \u2014 tier gating belongs to social.street_rep_tiers \u2014 and it does not own the driving; a timed courier run is hard because of the route, not because of any trick here.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

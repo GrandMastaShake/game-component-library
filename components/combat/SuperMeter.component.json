@@ -4,7 +4,9 @@
   "category": "combat",
   "description": "The comeback resource: a meter that fills from combat and pays for EX moves and supers. It owns the accounting — gain rates per source, the cap, and the spend transaction — and deliberately nothing the meter buys. What a super does is move data in combat.combo_chain's tables; when a meter-full activation is requested, this component validates and debits, and the move layer executes. Keeping the wallet separate from the shop means balance passes touch exactly one file when tuning economy versus exactly one table when tuning moves. Gain sources are events, not polling: it listens to combat.hit_confirmed and combat.hurt_received, which is why taking damage can pay you — the genre's built-in comeback mechanic — without this component knowing anything about health. It does not render the meter; ui.hud reads the outputs.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

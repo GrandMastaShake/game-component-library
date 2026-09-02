@@ -4,7 +4,9 @@
   "category": "utility",
   "description": "The song's position as ground truth: a sample-accurate mapping from audio playback position to beats and bars, with latency calibration. It exists separately from utility.timer_system because frame timers drift against the audio hardware clock — over a three-minute song that drift is multiple judgement windows, and a rhythm game whose clock slides reads as broken no matter how generous the windows are. This component owns the bpm map, the beat/bar phase, and the two latency offsets (audio output and input path) that calibration measures; it deliberately does not play audio — presentation.audio_system starts and stops the track, and this clock reads the position. It also does not react to its own beats: ui.note_highway and utility.judgement_window subscribe, and the clock stays ignorant of both, so the same clock can drive a lane game, a dance game, or a boss that attacks on the downbeat.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

@@ -5,10 +5,6 @@
   "description": "The progressive hot/cold ping that rescues a stalled hunt without solving it. It owns hint escalation \u2014 a vague direction, then a distance band, then a marker \u2014 spaced by cooldown, because a hint that instantly answers is a waypoint and a hint that never improves is a taunt. It aims itself by reading progression.completion_tracker's remaining counts rather than tracking collectibles on its own, so the hint and the percentage can never disagree about what is left. What it never does is trigger the discovery moment: for secrets it pings the neighborhood and stops, since world.hidden_alcove owns the fanfare and a hint that fires the fanfare has stolen the best beat in the genre. Escalation resets on progress \u2014 a new progression.completionChanged means the player is moving again and does not need to be rescued.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

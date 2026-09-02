@@ -5,10 +5,6 @@
   "description": "One number for how healthy the transport company is: on-time rate, load factor, coverage, and profit per route-kilometer folded into a legible 0\u2013100 score with milestone thresholds that gate expansion unlocks. It exists because a tycoon game drowns the player in ledgers, and somebody has to answer 'am I doing well' before the bankruptcy notice does. This component owns only the formula and the thresholds \u2014 every input metric is produced elsewhere: schedules and blockages from world.route_network, queues and served passengers from world.passenger_flow, revenue from the economy.earned ledger. It never penalizes directly: a falling score is information, and the carrot is progression.networkMilestoneReached unlocking new vehicle classes and map regions. Publishing the formula's weights is a design stance \u2014 a score the player cannot reason about is a weather report, and this genre wants engineering.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "Whose turn it is, in what order, and when the round rolls over. Initiative is rolled once per combatant at battle start \u2014 modified by combat.status_effects, since a slowed unit should act late \u2014 then the queue is fixed until someone dies or a delay action inserts them elsewhere. The queue owns sequencing only: what a unit may DO with its turn is combat.action_point_economy's budget, and ending a turn early is the player's call via input.endTurn, not the queue's. Rounds are the queue's second product: combat.roundStarted exists so per-round systems \u2014 damage-over-time ticks, reinforcement timers \u2014 have exactly one heartbeat to follow instead of everyone counting turns privately and disagreeing.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

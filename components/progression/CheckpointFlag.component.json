@@ -4,7 +4,9 @@
   "category": "progression",
   "description": "Ordered respawn markers that turn one long level into a series of short commitments. Each flag owns its place in the order and the respawn placement; the set of flags shares one 'furthest reached' fact so a later flag never loses progress to an earlier one the player brushed past on the way back. It deliberately does not own death detection — world.hazard_volume already reports world.hazard_entered, and a second death definition would double every kill downstream. It also does not reset the run: health, inventory, and collectibles are their own components' state, and which of them a death should roll back is a game-level decision, not a flag's. Cross-session persistence of the reached checkpoint belongs to persistence.save_system, not to this component.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

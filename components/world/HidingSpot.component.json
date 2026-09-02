@@ -5,10 +5,6 @@
   "description": "Lockers, closets, under-bed gaps: enterable volumes that break the stalker's acquisition. Owns entry and exit rules — occupancy, noise on entry, time to settle — and the detection check when a pursuer searches the room. Entering a locker the stalker SAW you enter is death, and that rule lives here rather than in the AI because it is a property of the spot: the locker lies, and the lie is only good if no one watched you tell it. While hidden, the player's movement and camera constraints belong to their own components; this publishes the hidden fact and the spot's exposure state, which world.stalker_ai and combat.fear_sanity_meter both consume — hiding should calm acquisition while sharpening dread, and that split only works if the two systems read the same fact independently.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
