@@ -1,0 +1,91 @@
+{
+  "id": "progression.draft_on_level_up",
+  "name": "Draft On Level Up",
+  "category": "progression",
+  "description": "The choose-one-of-three that turns leveling into build-crafting. When progression.leveledUp fires, this component offers a small draw from the run's draft pool \u2014 stat boons, new verbs, synergies \u2014 and applies the pick immediately, because a level-up reward queued for later is a level-up reward forgotten. Options are drawn without replacement so one level never offers the same boon twice. It owns the offer and the application. It does not own when leveling happens \u2014 progression.xp_leveling decides that \u2014 and it does not own the pool's contents, which are run content declared as data. The card draft after combat is ui.draft_reward_screen's job; the two are siblings on purpose, since combat drafts grow the deck while level-up drafts grow the build, and conflating them makes both screens worse.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "draftPool",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Boon ids eligible this run, as data. Required: a level-up with an empty pool is a promise the run cannot keep."
+    },
+    {
+      "name": "choicesPerDraft",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Options shown per level. Three balances commitment against regret; two reads as forced, four reads as homework."
+    },
+    {
+      "name": "allowReroll",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the player may redraw the offer. A reroll button devalues commitment; if a design enables it, it should charge for it."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastOffer",
+      "type": "array",
+      "description": "The boon ids most recently offered, kept for UI restore after interruption."
+    },
+    {
+      "name": "draftsTaken",
+      "type": "number",
+      "description": "Drafts resolved this run \u2014 the build's spine, countable at a glance in ui.death_summary."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.levelUpDraftOffered",
+      "progression.levelUpDraftChosen"
+    ],
+    "listensTo": [
+      "progression.leveledUp"
+    ]
+  },
+  "dependencies": [
+    "progression.xp_leveling"
+  ],
+  "tags": [
+    "roguelike",
+    "draft",
+    "level-up",
+    "build"
+  ],
+  "provenance": "library-native"
+}

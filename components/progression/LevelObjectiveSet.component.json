@@ -1,0 +1,109 @@
+{
+  "id": "progression.level_objective_set",
+  "name": "Level Objective Set",
+  "category": "progression",
+  "description": "What this level actually asks for, which is rarely just points. A level declares a set of objectives \u2014 reach a score, collect twenty blue, clear the ice from the bottom row \u2014 and a budget, usually moves and sometimes seconds. All objectives must be met before the budget runs out, and the AND is deliberate: an OR turns a designed level into whichever goal is cheapest. Progress is reported per objective rather than as one percentage, because a player who is failing needs to know which one is failing. The set owns the win and loss decisions and nothing else; the board does not know it is being scored.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "objectives",
+      "type": "array",
+      "required": true,
+      "description": "Objective definitions: kind, target and the piece or tile it concerns. Required \u2014 this is the level."
+    },
+    {
+      "name": "moveBudget",
+      "type": "number",
+      "required": false,
+      "default": 25,
+      "description": "Moves allowed. 0 means the level is timed instead."
+    },
+    {
+      "name": "timeBudgetSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Seconds allowed. 0 means the level is move-limited."
+    },
+    {
+      "name": "starThresholds",
+      "type": "array",
+      "required": false,
+      "default": [
+        0.6,
+        0.8,
+        1.0
+      ],
+      "description": "Fractions of the score target that earn one, two and three stars."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "progressByObjective",
+      "type": "object",
+      "description": "Completion per objective."
+    },
+    {
+      "name": "movesRemaining",
+      "type": "number",
+      "description": "Moves left in the budget."
+    },
+    {
+      "name": "starsEarned",
+      "type": "number",
+      "description": "Stars the current score would award."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.objectiveProgressed",
+      "progression.levelCleared",
+      "progression.levelFailed"
+    ],
+    "listensTo": [
+      "world.matchCleared",
+      "world.swapAccepted",
+      "world.cascadeSettled"
+    ]
+  },
+  "dependencies": [
+    "utility.timer_system"
+  ],
+  "tags": [
+    "tile-matching",
+    "objectives",
+    "levels",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

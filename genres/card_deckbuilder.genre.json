@@ -1,0 +1,41 @@
+{
+  "id": "genre.card_deckbuilder",
+  "name": "Card / Deckbuilder",
+  "description": "The deckbuilder pack: draw a hand, spend a per-turn energy budget, play cards whose effects are pure data, then grow and refine the deck through post-combat drafts. The pack treats the deck as run-scoped inventory rather than a new subsystem \u2014 inventory.core_inventory owns the collection, inventory.deck_manager owns the piles, and the division is deliberate: cards you own and cards you drew this turn are different facts with different lifetimes. Effects route through utility.command_bus and resolve through the existing combat kit, so a deckbuilder built on this pack gets damage, status, and rejection semantics for free and only has to design cards.",
+  "version": "0.1.0",
+  "loop": "draw hand \u2192 spend energy \u2192 play cards \u2192 reward draft \u2192 thin/refine deck",
+  "views": [
+    "ui-forward"
+  ],
+  "memberComponents": [
+    "inventory.core_inventory",
+    "inventory.loot_table",
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "utility.command_bus"
+  ],
+  "newComponents": [
+    "inventory.deck_manager",
+    "utility.card_effect_dsl",
+    "combat.energy_per_turn",
+    "ui.draft_reward_screen",
+    "progression.relic_passive"
+  ],
+  "signatureCompound": {
+    "name": "One Combat, One Draft",
+    "description": "A single encounter that proves the loop: deck_manager draws the opening hand from a seeded shuffle, energy_per_turn refills and refuses, card_effect_dsl resolves two plays through damage_resolver and status_effects, a relic fires off combat.turnStarted, the enemy falls, and draft_reward_screen offers three cards \u2014 the player takes one, and it is in the deck for the next fight.",
+    "memberIds": [
+      "inventory.deck_manager",
+      "combat.energy_per_turn",
+      "utility.card_effect_dsl",
+      "combat.damage_resolver",
+      "progression.relic_passive",
+      "ui.draft_reward_screen"
+    ]
+  },
+  "tags": [
+    "deckbuilder",
+    "cards",
+    "ui-forward"
+  ]
+}

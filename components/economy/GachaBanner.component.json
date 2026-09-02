@@ -1,0 +1,107 @@
+{
+  "id": "economy.gacha_banner",
+  "name": "Gacha Banner",
+  "category": "economy",
+  "description": "A pool, a window, and a counter the player can see. A banner is a time-boxed pool with rate-ups on featured outcomes, and its counter is the thing that makes it fair to run at all: pulls-since-featured is an output, not an internal, so a player always knows where they stand. Spark \u2014 a guaranteed exchange after a declared number of pulls \u2014 is supported as a first-class input because a pool with no ceiling is a pool that can take an unbounded amount for nothing. Rotation is announced ahead of expiry rather than at it, and counters carry across a rotation or reset according to a declared rule rather than by accident. VIRTUAL CURRENCY ONLY: this component has no concept of a payment method, and adding one would be a different contract with a different name.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "banners",
+      "type": "array",
+      "required": true,
+      "description": "Banner definitions: id, pool table, featured outcomes, rate-up multiplier and window. Required."
+    },
+    {
+      "name": "sparkAtPulls",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Pulls after which the featured outcome may be exchanged outright. 0 disables the ceiling, which should be a deliberate decision."
+    },
+    {
+      "name": "counterCarriesOnRotation",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether pity and spark counters survive a banner rotation."
+    },
+    {
+      "name": "announceRotationHours",
+      "type": "number",
+      "required": false,
+      "default": 48,
+      "description": "Notice given before a banner closes."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeBanner",
+      "type": "object",
+      "description": "The banner currently open, or null."
+    },
+    {
+      "name": "pullsSinceFeatured",
+      "type": "number",
+      "description": "Counter shown to the player."
+    },
+    {
+      "name": "sparkProgress",
+      "type": "number",
+      "description": "Fraction of the way to a guaranteed exchange."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.pullResolved",
+      "economy.bannerRotated",
+      "economy.sparkAvailable",
+      "economy.sparkClaimed"
+    ],
+    "listensTo": [
+      "utility.drawResolved",
+      "economy.spent",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "utility.probability_core",
+    "economy.currency"
+  ],
+  "tags": [
+    "gacha",
+    "banner",
+    "disclosure",
+    "economy"
+  ],
+  "provenance": "library-native"
+}

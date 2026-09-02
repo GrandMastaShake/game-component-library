@@ -1,0 +1,106 @@
+{
+  "id": "economy.auto_producer",
+  "name": "Auto Producer",
+  "category": "economy",
+  "description": "The generators that earn while you watch, and the cost curve that decides how long you watch. Each tier produces a resource on an interval and is bought at a price that grows geometrically, which is the shape that makes an incremental game feel like an incremental game: the next one is always nearly affordable. Tiers may produce other tiers rather than currency, and that is what turns a list of buttons into a machine. Production is computed from elapsed time rather than ticked per frame, so a slow frame does not cost the player output and a fast one does not gift it.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tiers",
+      "type": "array",
+      "required": true,
+      "description": "Generator definitions: id, base cost, cost growth, base output, and what the output is. Required \u2014 the tier ladder is the game."
+    },
+    {
+      "name": "costGrowth",
+      "type": "number",
+      "required": false,
+      "default": 1.15,
+      "description": "Default multiplier applied to a tier's price per purchase. 1.15 is the genre's load-bearing constant."
+    },
+    {
+      "name": "bulkBuyEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether x10 and max-affordable purchases are offered."
+    },
+    {
+      "name": "tickSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Production interval. Output is elapsed-time based, so this is a reporting cadence rather than a rate."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "ownedByTier",
+      "type": "object",
+      "description": "Count owned per tier."
+    },
+    {
+      "name": "ratePerSecond",
+      "type": "number",
+      "description": "Current total production rate."
+    },
+    {
+      "name": "nextCostByTier",
+      "type": "object",
+      "description": "Price of the next purchase per tier."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.producerPurchased",
+      "economy.producerTicked",
+      "economy.producerPurchaseRejected"
+    ],
+    "listensTo": [
+      "economy.earned",
+      "progression.prestigeCompleted",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "economy.currency",
+    "utility.timer_system"
+  ],
+  "tags": [
+    "idle",
+    "incremental",
+    "generators",
+    "economy"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "genre.board_game",
+  "name": "Board Game",
+  "description": "The tabletop pack: seeded dice, a branching track of effect-bearing spaces, tokens that lap and capture, a chance deck, and pass-and-play turn order. The design stance is that a board game is an auditable system wearing a party's clothes \u2014 every roll is reproducible from utility.dice_roll_resolver's seed, every shuffle from the deck's, because the genre runs on contested luck and the only durable answer to 'the game cheated' is a log. Chance-deck piles deliberately compose inventory.deck_manager rather than re-deriving shuffle logic, and hidden-information handoff is treated as a first-class beat rather than an afterthought.",
+  "version": "0.1.0",
+  "loop": "roll/activate \u2192 move token \u2192 resolve space \u2192 pass turn",
+  "views": [
+    "top-down",
+    "isometric"
+  ],
+  "memberComponents": [
+    "world.tile_grid",
+    "utility.timer_system",
+    "social.party_system",
+    "economy.currency",
+    "ui.hud"
+  ],
+  "newComponents": [
+    "utility.dice_roll_resolver",
+    "world.board_track_path",
+    "movement.token_movement",
+    "inventory.card_draw_deck",
+    "social.hotseat_turn_pass"
+  ],
+  "signatureCompound": {
+    "name": "A Full Turn Around the Board",
+    "description": "One complete turn that proves the loop: dice_roll_resolver rolls a seeded 2d6, token_movement walks the token that many edges and passes start for a lap payout, board_track_path resolves the landing space \u2014 a chance space, so card_draw_deck reveals a card that economy.currency acts on \u2014 then hotseat_turn_pass clears hidden state and hands the device to the next player.",
+    "memberIds": [
+      "utility.dice_roll_resolver",
+      "movement.token_movement",
+      "world.board_track_path",
+      "inventory.card_draw_deck",
+      "economy.currency",
+      "social.hotseat_turn_pass"
+    ]
+  },
+  "tags": [
+    "board-game",
+    "tabletop",
+    "hotseat",
+    "auditable"
+  ]
+}

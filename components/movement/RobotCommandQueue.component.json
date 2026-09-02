@@ -1,0 +1,106 @@
+{
+  "id": "movement.robot_command_queue",
+  "name": "Robot Command Queue",
+  "category": "movement",
+  "description": "Turns a compiled program into an actor doing one thing at a time. Instructions are queued and consumed at a visible rate, because the point of the genre is watching the program run and seeing where it goes wrong \u2014 a robot that teleports to the answer teaches nothing. A command that cannot be performed, walking into a wall, faults rather than being skipped, and the fault carries the instruction index so the editor can highlight the line responsible. Step and run are the same mechanism at different rates, which is why single-stepping needs no separate mode.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "commandsPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Execution rate. Low enough to watch is the whole point; step mode is this at zero."
+    },
+    {
+      "name": "queueDepth",
+      "type": "number",
+      "required": false,
+      "default": 64,
+      "description": "Instructions buffered ahead of the actor."
+    },
+    {
+      "name": "faultOnImpossible",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether an impossible command faults rather than being skipped. Skipping hides the bug the player is looking for."
+    },
+    {
+      "name": "loopGuardIterations",
+      "type": "number",
+      "required": false,
+      "default": 10000,
+      "description": "Repeats before a program is halted as non-terminating."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "queued",
+      "type": "array",
+      "description": "Instructions waiting."
+    },
+    {
+      "name": "currentInstruction",
+      "type": "object",
+      "description": "What the actor is doing, with its index."
+    },
+    {
+      "name": "faulted",
+      "type": "object",
+      "description": "The failing instruction and why, or null."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.commandExecuted",
+      "movement.commandFaulted",
+      "movement.queueDrained"
+    ],
+    "listensTo": [
+      "utility.programCompiled",
+      "input.pause"
+    ]
+  },
+  "dependencies": [
+    "utility.command_bus",
+    "utility.visual_node_script"
+  ],
+  "tags": [
+    "programming-game",
+    "execution",
+    "robots",
+    "debugging"
+  ],
+  "provenance": "library-native"
+}

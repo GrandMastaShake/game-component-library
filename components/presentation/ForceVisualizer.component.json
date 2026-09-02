@@ -1,0 +1,109 @@
+{
+  "id": "presentation.force_visualizer",
+  "name": "Force Visualizer",
+  "category": "presentation",
+  "description": "Draws the forces, which in a sandbox is not debug output but the lesson. A player who can see the torque on a joint learns why the arm bends; one who cannot is guessing. Vectors are scaled logarithmically because linear scaling makes a strong force fill the screen and a weak one invisible, and the interesting comparisons are between forces orders of magnitude apart. The overlay is deliberately a presentation component with no simulation authority: it reads what the solver did and draws it, so switching it on can never change a result \u2014 a visualiser that perturbs the thing it measures is worse than none.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "show",
+      "type": "array",
+      "required": false,
+      "default": [
+        "gravity",
+        "buoyancy",
+        "jointReaction",
+        "motor"
+      ],
+      "description": "Force kinds drawn when the overlay is on."
+    },
+    {
+      "name": "scale",
+      "type": "string",
+      "required": false,
+      "default": "log",
+      "description": "How vector length maps to magnitude. Log keeps forces orders of magnitude apart comparable on one screen."
+    },
+    {
+      "name": "colorByKind",
+      "type": "object",
+      "required": false,
+      "default": {
+        "gravity": "#7aa2f7",
+        "buoyancy": "#7dcfff",
+        "jointReaction": "#e0af68",
+        "motor": "#9ece6a"
+      },
+      "description": "Colour per force kind."
+    },
+    {
+      "name": "enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the overlay is drawn."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "drawnVectors",
+      "type": "number",
+      "description": "Vectors rendered this frame."
+    },
+    {
+      "name": "largestMagnitude",
+      "type": "number",
+      "description": "Biggest force currently acting, for scaling the legend."
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.overlayToggled"
+    ],
+    "listensTo": [
+      "movement.jointStrained",
+      "world.bodyFloated",
+      "input.toggleDebug"
+    ]
+  },
+  "dependencies": [
+    "movement.physics_core"
+  ],
+  "tags": [
+    "physics-sandbox",
+    "visualisation",
+    "pedagogy",
+    "presentation"
+  ],
+  "provenance": "library-native"
+}

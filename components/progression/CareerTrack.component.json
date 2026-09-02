@@ -1,0 +1,107 @@
+{
+  "id": "progression.career_track",
+  "name": "Career Track",
+  "category": "progression",
+  "description": "Models a job as a leveled track with a daily schedule, performance, and promotion gates. A sim holding a job is committed to shift hours on the world clock; attending on time and in a good mood builds performance, and crossing the performance threshold at a level grants promotion with a salary step. The track is data-driven (level titles, hours, salaries, requirements) so 'astronaut' and 'dishwasher' differ in a table, not in code. Career owns employment state and promotion logic only: it does not simulate the sim physically going to work \u2014 that is a schedule hand-off to the agent's autonomy layer \u2014 and it does not pay wages directly, it emits progression.shiftCompleted with the wage amount and lets economy.currency's listeners apply the income, because money movement must stay in the economy category where save and audit tooling already watch it. Skill requirements for promotion reference progression.skills_tree levels rather than duplicating skill state.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "careerTracks",
+      "type": "array",
+      "required": true,
+      "description": "Track definitions: id, ordered levels with title, salary, shift hours, and skill requirements. Branching tracks (chef vs. mixologist at level 5) are expressed as two tracks sharing an entry requirement."
+    },
+    {
+      "name": "performancePerShift",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Performance gained for a completed shift at baseline mood. Promotion pacing is this value divided into the threshold, so tune here first."
+    },
+    {
+      "name": "moodPerformanceMultiplier",
+      "type": "object",
+      "required": false,
+      "default": {
+        "happy": 1.5,
+        "fine": 1.0,
+        "miserable": 0.5
+      },
+      "description": "How shift performance scales with mood at clock-in. This is the mechanical link that makes fulfilling needs before work a strategy rather than flavor."
+    },
+    {
+      "name": "promotionThreshold",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "Performance points required per promotion. Flat across levels by default; raise per level in the track data for longer endgames."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "employment",
+      "type": "object",
+      "description": "Current job: track id, level, performance progress, and today's shift window. Null when unemployed."
+    },
+    {
+      "name": "nextPromotionRequirements",
+      "type": "object",
+      "description": "What stands between the sim and the next level \u2014 performance remaining plus unmet skill requirements \u2014 so the career panel can show a checklist instead of a mystery."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.shiftStarted",
+      "progression.shiftCompleted",
+      "progression.promotionEarned",
+      "progression.jobLost"
+    ],
+    "listensTo": [
+      "world.dawnStarted",
+      "world.duskStarted",
+      "progression.skillUnlocked",
+      "input.jobAction"
+    ]
+  },
+  "dependencies": [
+    "world.day_night_cycle",
+    "progression.skills_tree"
+  ],
+  "tags": [
+    "life-sim",
+    "career",
+    "jobs",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

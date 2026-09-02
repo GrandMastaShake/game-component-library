@@ -1,0 +1,94 @@
+{
+  "id": "pets.pet_show_judge",
+  "name": "Pet Show Judge",
+  "category": "pets",
+  "description": "Runs scored pet competitions: entrants are evaluated across weighted criteria (stats, grooming, rarity, trick performance), ranked, and awarded placements. Judging is deterministic given the entrants \u2014 the score breakdown is fully inspectable per criterion, because a competition the player cannot audit feels rigged, and in a collection game 'rigged' is fatal. Criteria weights are configured per show tier, so a beginner show rewards care basics while a championship weights trained stats, giving training a long-term purpose. The judge owns scoring and placement only: it does not schedule shows (a calendar or event system can open entries), it does not pay prizes (it emits the placement and lets economy.currency's listeners award the purse), and it does not modify the pet \u2014 show results become lineage and prestige facts through events, not by reaching into pets.pet_companion.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "showTiers",
+      "type": "array",
+      "required": true,
+      "description": "Tier definitions: id, entry requirements, criteria weights, and prize table. Weights per tier are the difficulty curve of the competition scene."
+    },
+    {
+      "name": "maxEntrants",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Field size per show. Small fields keep placements meaningful and the results screen readable; AI filler entrants are generated when player entrants are short."
+    },
+    {
+      "name": "entryFee",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Currency cost to enter. A non-zero fee turns showing into a wager on your own care and training, which sharpens the decision."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentShow",
+      "type": "object",
+      "description": "The open or running show: tier, entrant list, and phase. Null between shows."
+    },
+    {
+      "name": "scoreBreakdowns",
+      "type": "array",
+      "description": "Per-entrant criterion-by-criterion scores \u2014 the audit trail that makes the result defensible and teachable."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.showEntered",
+      "pets.showScored",
+      "pets.showPlacementAwarded"
+    ],
+    "listensTo": [
+      "input.enterShow",
+      "pets.trainingSessionCompleted",
+      "pets.trainingStatGained"
+    ]
+  },
+  "dependencies": [
+    "pets.pet_companion",
+    "economy.currency"
+  ],
+  "tags": [
+    "pet-sim",
+    "competition",
+    "scoring",
+    "collection"
+  ],
+  "provenance": "library-native"
+}

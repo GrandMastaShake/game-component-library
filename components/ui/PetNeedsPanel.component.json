@@ -1,0 +1,93 @@
+{
+  "id": "ui.pet_needs_panel",
+  "name": "Pet Needs Panel",
+  "category": "ui",
+  "description": "The care dashboard for the equipped pet: feeding, cleanliness, and play meters with action buttons that request care interactions. It is a projection and a remote control, not a simulation \u2014 the meters render pets.pet_companion's authoritative hunger and happiness state, and the buttons emit care-action requests that the training and care systems fulfill. Keeping state out of the panel is deliberate: a UI that caches its own copy of 'hunger' will eventually disagree with the pet, and every disagreement is a bug report. The panel also owns the at-a-glance warning affordance (a meter flashing at critical) but not the consequence of ignoring it \u2014 the pet's own systems decide what chronic neglect does. Unlike the human-scale social.needs_decay meters, pet needs here are few, visible, and player-driven: the pet does not feed itself, which is exactly what makes the care loop the player's job.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "meterDefinitions",
+      "type": "array",
+      "required": true,
+      "description": "Meters to display: id, source output on the pet, critical threshold, and the care action that refills it. Data-driven so a pet with a 'grooming' meter needs no panel code change."
+    },
+    {
+      "name": "warningThreshold",
+      "type": "number",
+      "required": false,
+      "default": 0.25,
+      "description": "Meter level below which the warning affordance shows. Low enough to give the player time to act, high enough that the warning is not permanent decoration."
+    },
+    {
+      "name": "careActionCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Minimum interval between accepted care actions. Prevents feed-spam from trivializing the loop and gives animations room to play."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "meterLevels",
+      "type": "object",
+      "description": "Current displayed level per meter, read from the pet each tick rather than stored."
+    },
+    {
+      "name": "activeWarnings",
+      "type": "array",
+      "description": "Meter ids currently below the warning threshold, so the HUD badge and the panel never compute the warning condition twice."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.petCareActionRequested",
+      "ui.petNeedWarningShown"
+    ],
+    "listensTo": [
+      "pets.hungry",
+      "pets.equipped",
+      "pets.unequipped",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "pets.pet_companion"
+  ],
+  "tags": [
+    "pet-sim",
+    "care",
+    "hud",
+    "needs"
+  ],
+  "provenance": "library-native"
+}

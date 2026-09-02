@@ -1,0 +1,111 @@
+{
+  "id": "progression.cascade_scoring",
+  "name": "Cascade Scoring",
+  "category": "progression",
+  "description": "Points, and the escalation that makes a long chain feel earned. A cleared piece is worth a base value multiplied by the depth of the cascade that cleared it, so the fourth automatic pass pays several times the first \u2014 which is the whole reason a player sets up a move rather than taking the first match they see. The multiplier curve is declared rather than hardcoded because it is the difference between a game that rewards planning and one that rewards speed. Score is reported continuously and banked at settle, so the HUD can count up while the board is still resolving without ever showing a number the level did not actually award.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "basePointsPerPiece",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Points for one ordinary cleared piece."
+    },
+    {
+      "name": "cascadeMultipliers",
+      "type": "array",
+      "required": false,
+      "default": [
+        1,
+        1.5,
+        2.5,
+        4,
+        6
+      ],
+      "description": "Multiplier per cascade depth. The last entry applies to every deeper pass."
+    },
+    {
+      "name": "specialPieceBonus",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Extra points for clearing a special piece."
+    },
+    {
+      "name": "bankOnSettle",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether score is committed only once the board stops moving, so the HUD never shows points the level did not award."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "score",
+      "type": "number",
+      "description": "Points banked this level."
+    },
+    {
+      "name": "pendingScore",
+      "type": "number",
+      "description": "Points earned by a cascade still resolving."
+    },
+    {
+      "name": "bestCascade",
+      "type": "number",
+      "description": "Deepest cascade this level."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.scoreChanged",
+      "progression.cascadeScored",
+      "progression.scoreBanked"
+    ],
+    "listensTo": [
+      "world.matchCleared",
+      "world.cascadeSettled"
+    ]
+  },
+  "dependencies": [
+    "world.match_resolver"
+  ],
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "scoring",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

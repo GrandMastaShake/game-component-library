@@ -1,0 +1,92 @@
+{
+  "id": "world.board_track_path",
+  "name": "Board Track Path",
+  "category": "world",
+  "description": "The board as a graph, not a grid. Spaces are nodes, movement edges may branch or run one-way, and each space carries an effect id that is broadcast when a token lands \u2014 this component owns the topology and the landing resolution, and borrows world.tile_grid only for coordinates and rendering, because loops, branches, and one-way edges are things a raw grid cannot express. Branch choices are data-driven (player choice, die result, or fixed) and raised as an event so the turn UI can ask the active player. It does not own token positions \u2014 movement.token_movement does, and announces arrivals via movement.tokenMoved \u2014 and it does not know what 'draw a card' or 'pay 200' mean: it emits the space's effect id and lets inventory.card_draw_deck or economy.currency do their own jobs.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "trackGraph",
+      "type": "object",
+      "required": true,
+      "default": null,
+      "description": "Nodes with ids, grid coordinates, effect ids, and outgoing edges; edges may be marked one-way or branch. Required because a track with no topology is a floor tile with ambitions."
+    },
+    {
+      "name": "startSpaceId",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The space tokens begin on and lap past. Named explicitly because 'the first node in the list' is an accident, not a design."
+    },
+    {
+      "name": "branchChoiceMode",
+      "type": "string",
+      "required": false,
+      "default": "player",
+      "description": "player | die | fixed \u2014 who or what picks at a branch. player asks via world.branchChoiceRequested; die defers to utility.dice_roll_resolver; fixed follows the edge order in trackGraph."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "spaceCount",
+      "type": "number"
+    },
+    {
+      "name": "branchSpaceIds",
+      "type": "array",
+      "description": "Spaces with more than one outgoing edge \u2014 the decision points, surfaced so UI can telegraph them before arrival."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.spaceEntered",
+      "world.spaceEffectResolved",
+      "world.branchChoiceRequested"
+    ],
+    "listensTo": [
+      "movement.tokenMoved"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "board-game",
+    "track",
+    "spaces",
+    "graph",
+    "core"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "progression.relic_passive",
+  "name": "Relic Passive",
+  "category": "progression",
+  "description": "Run-scoped modifiers that fire off events instead of clicks. A relic is a listener with a rule: when combat.entityDefeated fires, heal two; when combat.turnStarted fires, gain one energy. This component owns the roster of held relics, their trigger conditions, and their stacking policy, and it registers every modification through utility.command_bus rather than editing combat math directly \u2014 relics that reach inside combat.damage_resolver are how balance dies. It does not own acquisition: relics arrive from shops, drafts, or boss rewards, all of which simply grant an id. And it does not own persistence: a relic is born and dies with the run, so progression.run_meta_progression never hears about it \u2014 that separation is the entire difference between a run and an account.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "stackingPolicy",
+      "type": "string",
+      "required": false,
+      "default": "unique",
+      "description": "unique: duplicates are re-rolled or converted; stack: duplicates multiply the effect; refresh: duplicates renew duration-style relics. unique is the default because it is the only policy that stays auditable at a glance."
+    },
+    {
+      "name": "maxRelics",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Cap on simultaneously held relics. 0 means unlimited \u2014 the genre norm, since relic synergy is the fun. Set a cap only if relic count is itself a balance lever."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeRelics",
+      "type": "array",
+      "description": "Relic ids currently held this run, in acquisition order."
+    },
+    {
+      "name": "relicTriggerCount",
+      "type": "number",
+      "description": "Lifetime triggers this run. A relic that never fires is either broken or mis-signed; this count is how you tell."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.relicAcquired",
+      "progression.relicTriggered"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "combat.turnStarted"
+    ]
+  },
+  "dependencies": [
+    "utility.command_bus"
+  ],
+  "tags": [
+    "deckbuilder",
+    "roguelike",
+    "relics",
+    "passives",
+    "run-scoped"
+  ],
+  "provenance": "library-native"
+}

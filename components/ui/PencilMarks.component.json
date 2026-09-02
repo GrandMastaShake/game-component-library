@@ -1,0 +1,93 @@
+{
+  "id": "ui.pencil_marks",
+  "name": "Pencil Marks",
+  "category": "ui",
+  "description": "The notation players actually think in. A cell can hold a set of candidates as well as an answer, and the two are different states rather than the same field styled differently \u2014 committing an answer must not silently discard the working that led to it, because undoing a wrong commit should restore the marks. Auto-elimination is offered and is off by default: a solver that removes candidates for you is doing the deduction the puzzle exists to ask for, and it should be an accessibility choice rather than the standard experience.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "autoEliminate",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether placing a value clears that candidate from its peers. Off by default: this is the deduction the puzzle is asking for."
+    },
+    {
+      "name": "maxCandidatesPerCell",
+      "type": "number",
+      "required": false,
+      "default": 9,
+      "description": "Candidates a cell may hold."
+    },
+    {
+      "name": "preserveMarksOnCommit",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether marks survive committing an answer, so an undo restores the working."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "marks",
+      "type": "object",
+      "description": "Candidate sets by cell."
+    },
+    {
+      "name": "markedCellCount",
+      "type": "number",
+      "description": "Cells carrying at least one candidate."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.markAdded",
+      "ui.markRemoved",
+      "ui.marksCleared"
+    ],
+    "listensTo": [
+      "utility.puzzleGenerated",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "logic-puzzle",
+    "notation",
+    "ui",
+    "accessibility"
+  ],
+  "provenance": "library-native"
+}

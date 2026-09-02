@@ -1,0 +1,106 @@
+{
+  "id": "persistence.contraption_save_load",
+  "name": "Contraption Save Load",
+  "category": "persistence",
+  "description": "A build you can hand to someone else. A contraption serialises to parts, joints and their tuning \u2014 never to simulation state, because a save that captured mid-flight velocities would restore a machine already falling over. Versioning is the real problem: a build shared today must still load after a joint kind gains an input, so the format carries a version and unknown fields are preserved rather than dropped, which is what lets an old client round-trip a newer build without silently destroying it. Loading is validated before it is applied, so a corrupt share is refused whole rather than leaving half a machine in the scene.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "formatVersion",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Schema version written into every save."
+    },
+    {
+      "name": "preserveUnknownFields",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether fields this client does not understand survive a round-trip. The only thing that makes sharing across versions safe."
+    },
+    {
+      "name": "validateBeforeApply",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a load is checked whole before anything is spawned, so a corrupt share leaves no half-machine behind."
+    },
+    {
+      "name": "maxParts",
+      "type": "number",
+      "required": false,
+      "default": 500,
+      "description": "Parts a single contraption may contain."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "savedBuilds",
+      "type": "array",
+      "description": "Contraptions stored locally."
+    },
+    {
+      "name": "lastLoadResult",
+      "type": "object",
+      "description": "Outcome of the most recent load, including refusals."
+    },
+    {
+      "name": "partCount",
+      "type": "number",
+      "description": "Parts in the contraption currently in the scene."
+    }
+  ],
+  "events": {
+    "emits": [
+      "persistence.contraptionSaved",
+      "persistence.contraptionLoaded",
+      "persistence.contraptionRejected"
+    ],
+    "listensTo": [
+      "movement.jointCreated",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system",
+    "movement.joint_builder"
+  ],
+  "tags": [
+    "physics-sandbox",
+    "sharing",
+    "serialisation",
+    "persistence"
+  ],
+  "provenance": "library-native"
+}

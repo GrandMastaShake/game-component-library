@@ -1,0 +1,94 @@
+{
+  "id": "social.needs_decay",
+  "name": "Needs Decay",
+  "category": "social",
+  "description": "Drives a sim's motive meters \u2014 hunger, energy, fun, social, bladder, hygiene, or any configured set \u2014 downward over time at per-meter rates, and turns critically low meters into autonomy pressure. The meter set is data-driven because a life sim lives or dies on which needs it models, and hardcoding The Sims' eight would make the component useless for anything simpler. Decay rates are flat curves modified by moodlets, not by gameplay systems reaching in directly: when a need is fulfilled, the fulfilling action emits and this component restores the meter, which keeps 'how much does a nap help' in exactly one place. This is the single-sim scale of need simulation; population-scale satisfaction for hundreds of background citizens belongs to world.citizen_agent_sim. It does not decide what the sim does about a critical need \u2014 autonomy arbitration belongs to utility.behavior_fsm, which reads the priority signals this component emits.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "needs",
+      "type": "array",
+      "required": true,
+      "description": "Need definitions: id, decay per minute, critical threshold, and fulfillment value. Decay rates here are the genre's difficulty curve \u2014 energy decaying faster than hunger produces naps; the reverse produces snack loops."
+    },
+    {
+      "name": "decayWhileAsleep",
+      "type": "number",
+      "required": false,
+      "default": 0.25,
+      "description": "Global decay multiplier during sleep. Below 1 so sleeping pauses most needs while energy refills; 0 would let players sleep through every problem."
+    },
+    {
+      "name": "criticalGraceSeconds",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "How long a meter may sit below its critical threshold before autonomy is allowed to override player direction. The grace window keeps a critical need urgent without making the sim instantly disobedient."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "needLevels",
+      "type": "object",
+      "description": "Current level per need in [0, 1], the authoritative motive state that UI panels and autonomy both read."
+    },
+    {
+      "name": "mostUrgentNeed",
+      "type": "string",
+      "description": "Id of the lowest need weighted by criticality, so autonomy does not recompute priority every tick."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.needDepleted",
+      "social.needCritical",
+      "social.needFulfilled"
+    ],
+    "listensTo": [
+      "utility.timerTicked",
+      "social.moodletApplied",
+      "social.moodletExpired",
+      "input.fulfillNeed"
+    ]
+  },
+  "dependencies": [
+    "utility.behavior_fsm"
+  ],
+  "tags": [
+    "life-sim",
+    "needs",
+    "autonomy",
+    "motives"
+  ],
+  "provenance": "library-native"
+}

@@ -3,7 +3,7 @@
 Working brainstorm for expanding the Game Component Library from "one game
 (pet-survival) done well" into a genre-spanning component catalog.
 
-Status: Pass 1 shipped ([PR #20](https://github.com/GrandMastaShake/game-component-library/pull/20) — squads A–D, genres #1–28 + exploration). Pass 2 (squads E, F, G) covers the remaining 15, including the Tile-Matching / Logic Puzzle split and Casino & Gacha as the slot-30 winner. Learning/Educational is deferred as its own initiative.
+Status: **all 35 shipped.** Pass 1 ([PR #20](https://github.com/GrandMastaShake/game-component-library/pull/20) — squads A–D, genres #1–28 + exploration) and pass 2 (squads E, F, G — the remaining 15, including the Tile-Matching / Logic Puzzle split and Casino & Gacha as the slot-30 winner). Learning/Educational is deferred as its own initiative.
 
 ## Context: what we already have
 
@@ -289,7 +289,18 @@ any genre pack.
 Squads A–D, 20 genre packs (#1–28 plus exploration/collectathon), 103 new
 components. Catalog: 79 → 182, both validators green.
 
-**Pass 2 — 3 squads × 5 genres (15 packs):**
+**Pass 2 — SHIPPED.** 15 genre packs, 73 new components. Catalog: 184 → 257,
+genres: 20 → 35. All seven validators green, including `validate_genres.py`,
+which did not exist when pass 1 landed and which pass 2 was written against
+from the start.
+
+Two things pass 2 inherited rather than introduced. Monster Taming had been
+left at 2 of its 5 components, and the gap was load-bearing: `pets.monster_dex`
+listens for `pets.evolutionCompleted`, which nothing emitted, so
+`validate_component_graph` was failing until `pets.evolution_tree` was written.
+And the 30 components drafted before #22 carried the `platform` /
+`implementations` contradiction PLAT012 now catches; they were corrected to
+`["agnostic"]` on the way in rather than baselined.
 
 | Squad | Genres |
 |---|---|

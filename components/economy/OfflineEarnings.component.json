@@ -1,0 +1,106 @@
+{
+  "id": "economy.offline_earnings",
+  "name": "Offline Earnings",
+  "category": "economy",
+  "description": "What the game did while you were gone, and the cap that keeps that honest. On return the elapsed wall-clock is converted into production at the rate that was running at the moment of departure, never at the current rate, because crediting an upgrade bought after the fact would let a player bank time and spend it retroactively. The cap is the load-bearing input: uncapped catch-up turns the genre into a calendar reminder, and a cap that is too generous makes the foreground loop pointless. Clock movement is treated as suspicious rather than trusted \u2014 a jump larger than the cap is clamped and reported rather than paid, which is the difference between a forgiving design and one that can be farmed by changing the device date.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxOfflineHours",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Hours of absence that earn. Beyond this the timer simply stops, which is the whole reason players come back rather than leaving it running forever."
+    },
+    {
+      "name": "offlineRateFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Share of the online rate earned while away. Below 1 keeps the foreground loop worth playing."
+    },
+    {
+      "name": "clampSuspiciousJumps",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a clock jump beyond the cap is clamped and reported rather than paid."
+    },
+    {
+      "name": "minimumAbsenceSeconds",
+      "type": "number",
+      "required": false,
+      "default": 60,
+      "description": "Absences shorter than this earn nothing, so alt-tabbing is not a strategy."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pendingReport",
+      "type": "object",
+      "description": "The unclaimed catch-up summary, or null."
+    },
+    {
+      "name": "lastSeenAt",
+      "type": "number",
+      "description": "Epoch seconds recorded at departure."
+    },
+    {
+      "name": "cappedThisReturn",
+      "type": "boolean",
+      "description": "Whether the cap bound on the most recent return."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.offlineEarningsReady",
+      "economy.offlineEarningsClaimed",
+      "economy.offlineClockRejected"
+    ],
+    "listensTo": [
+      "persistence.profileLoaded",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "economy.currency",
+    "persistence.save_system"
+  ],
+  "tags": [
+    "idle",
+    "incremental",
+    "offline",
+    "economy"
+  ],
+  "provenance": "library-native"
+}

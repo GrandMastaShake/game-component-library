@@ -1,0 +1,109 @@
+{
+  "id": "progression.prestige_reset",
+  "name": "Prestige Reset",
+  "category": "progression",
+  "description": "Trading everything you have for going faster next time. Prestige converts current progress into a meta-currency by a declared curve, wipes the layers marked resettable, and leaves the rest standing \u2014 and which layers are which is the entire design of an incremental game, so it is an input rather than a convention. The conversion is previewable before it is committed: a player who cannot see what a reset buys is being asked to gamble their save, and the genre's whole appeal is that the maths is visible. Multipliers earned this way are permanent and stack additively by default, because a multiplicative stack makes the third prestige trivial and the tenth meaningless.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "conversionCurve",
+      "type": "string",
+      "required": false,
+      "default": "sqrt",
+      "description": "How lifetime earnings become meta-currency. 'sqrt' is the genre default: generous early, punishing to farm."
+    },
+    {
+      "name": "resetLayers",
+      "type": "array",
+      "required": false,
+      "default": [
+        "currency",
+        "producers",
+        "upgrades"
+      ],
+      "description": "Which layers a prestige wipes. Anything absent survives, which is how permanent progress is expressed."
+    },
+    {
+      "name": "minimumEarningsToPrestige",
+      "type": "number",
+      "required": false,
+      "default": 1000000,
+      "description": "Floor below which prestige is refused, so the first one lands after a real run."
+    },
+    {
+      "name": "multiplierStacking",
+      "type": "string",
+      "required": false,
+      "default": "additive",
+      "description": "How permanent multipliers combine. Additive keeps the tenth prestige meaningful."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "metaCurrency",
+      "type": "number",
+      "description": "Permanent currency accumulated across resets."
+    },
+    {
+      "name": "prestigeCount",
+      "type": "number",
+      "description": "Resets performed."
+    },
+    {
+      "name": "previewGain",
+      "type": "number",
+      "description": "What a reset would grant right now."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.prestigePreviewed",
+      "progression.prestigeCompleted",
+      "progression.prestigeRejected"
+    ],
+    "listensTo": [
+      "economy.earned",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "economy.currency"
+  ],
+  "tags": [
+    "idle",
+    "incremental",
+    "prestige",
+    "meta-progression"
+  ],
+  "provenance": "library-native"
+}

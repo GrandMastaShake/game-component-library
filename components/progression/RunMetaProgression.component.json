@@ -1,0 +1,91 @@
+{
+  "id": "progression.run_meta_progression",
+  "name": "Run Meta Progression",
+  "category": "progression",
+  "description": "What death buys you. Between runs, a persistent unlock pool \u2014 new cards, characters, starting items, difficulty tiers \u2014 is purchased with meta currency earned from run performance, so even a floor-two faceplant moves the account forward. It owns the pool, the prices, and the balance, written through persistence.save_system immediately on every purchase and grant, because meta progress lost to a crash teaches players to fear the save system instead of the dungeon. It pairs deliberately with progression.permadeath_flag: permadeath makes the run's end matter, this makes the ending matter differently, and neither is a complete roguelike alone. It does not own in-run power \u2014 run-scoped modifiers such as relics die with the run and never enter this pool \u2014 and it does not judge run performance; the credit grant arrives, this component banks it.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "unlockPool",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Purchasable unlocks as {id, price, prerequisiteIds}. Required because an empty pool is a progression screen with nothing to say."
+    },
+    {
+      "name": "startingUnlockIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Unlocks a fresh profile already holds. The baseline kit every player starts with; keep it small enough that the pool still has somewhere to go."
+    },
+    {
+      "name": "deathCreditBase",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Currency granted at run end before performance bonuses. Non-zero by design: a run that pays nothing on death trains players to quit at the first bad floor."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "unlockedIds",
+      "type": "array",
+      "description": "Everything the profile has permanently unlocked, in purchase order."
+    },
+    {
+      "name": "metaCurrencyBalance",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.metaUnlockPurchased",
+      "progression.metaCurrencyGranted"
+    ],
+    "listensTo": [
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system",
+    "progression.permadeath_flag"
+  ],
+  "tags": [
+    "roguelike",
+    "meta-progression",
+    "unlocks",
+    "core"
+  ],
+  "provenance": "library-native"
+}

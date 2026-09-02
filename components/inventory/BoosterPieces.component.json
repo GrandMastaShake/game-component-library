@@ -1,0 +1,116 @@
+{
+  "id": "inventory.booster_pieces",
+  "name": "Booster Pieces",
+  "category": "inventory",
+  "description": "The pieces that break the rules, and the accounting that stops them breaking the game. A booster is either created on the board by a match shape or spent from an inventory before a move, and the two paths are deliberately different: earned boosters are the reward for playing well, held boosters are the reward for having played before. Combining two specials is its own effect rather than the sum of both, which is the interaction players learn to hunt for. Held boosters are consumed on use and refused when absent rather than silently doing nothing, since a booster that appears to fire and does not is worse than one that is greyed out.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "boosterTypes",
+      "type": "array",
+      "required": false,
+      "default": [
+        "colourBomb",
+        "cross",
+        "duplicator",
+        "hammer"
+      ],
+      "description": "Boosters this game recognises, whether created on the board or held."
+    },
+    {
+      "name": "combinationRules",
+      "type": "object",
+      "required": false,
+      "default": {
+        "colourBomb+cross": "clearAllOfColourAsCross"
+      },
+      "description": "What two specials do together when swapped. Absent pairs fall back to firing both in sequence."
+    },
+    {
+      "name": "startingStock",
+      "type": "object",
+      "required": false,
+      "default": {
+        "hammer": 3
+      },
+      "description": "Held boosters a new profile begins with."
+    },
+    {
+      "name": "consumeOnUse",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether held boosters are spent when fired."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "held",
+      "type": "object",
+      "description": "Counts of boosters in inventory."
+    },
+    {
+      "name": "onBoard",
+      "type": "array",
+      "description": "Special pieces currently on the grid."
+    },
+    {
+      "name": "lastCombination",
+      "type": "string",
+      "description": "The combination rule most recently applied, or null."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.boosterUsed",
+      "inventory.boosterCombined",
+      "inventory.boosterRejected"
+    ],
+    "listensTo": [
+      "world.specialPieceCreated",
+      "world.swapAccepted",
+      "input.useItem"
+    ]
+  },
+  "dependencies": [
+    "inventory.core_inventory",
+    "world.match_resolver"
+  ],
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "boosters",
+    "inventory"
+  ],
+  "provenance": "library-native"
+}

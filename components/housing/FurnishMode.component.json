@@ -1,0 +1,96 @@
+{
+  "id": "housing.furnish_mode",
+  "name": "Furnish Mode",
+  "category": "housing",
+  "description": "The buy-and-decorate editing mode for a home: a modal state where the catalog is open, the grid is visible, and clicks place or move furniture instead of driving the live sim. Mode separation is the point \u2014 a click that might buy a sofa must never also tell the sim to walk, so entering furnish mode suspends live-mode input routing and restores it on exit. This component owns mode state, the furniture catalog, and purchase validation; it does not own the placed result. housing.home_system remains the authority on plot state and saved furniture \u2014 furnish_mode requests placements and purchases, and home_system accepts or rejects them, which means build-mode exploits funnel through the same authority as every other placement. Economy is similarly delegated: furnishing costs are validated against economy.currency and paid by it, never by this component's own ledger.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "furnitureCatalog",
+      "type": "array",
+      "required": true,
+      "description": "Placeable definitions: id, footprint in tiles, price, comfort/need tags, and unlock requirements. Need tags are what let furnishings fulfill social.needs_decay motives, tying decoration to gameplay."
+    },
+    {
+      "name": "sellbackFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Fraction of price returned when selling placed furniture. The 20% depreciation is genre tradition: it makes redecorating a decision, not a free shuffle."
+    },
+    {
+      "name": "allowOverlap",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether footprints may overlap. False is the honest default; true is for decorative clutter layers where collision would be pedantic."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isActive",
+      "type": "boolean",
+      "description": "Whether furnish mode is currently entered. Live-mode systems should read this (or listen to the mode events) to suspend their input routing."
+    },
+    {
+      "name": "ghostPlacement",
+      "type": "object",
+      "description": "The item currently under the cursor with validity and rotation, so the renderer can draw the green/red ghost without re-deriving validity."
+    }
+  ],
+  "events": {
+    "emits": [
+      "housing.furnishModeEntered",
+      "housing.furnishModeExited",
+      "housing.furnishPurchaseRequested"
+    ],
+    "listensTo": [
+      "input.toggleFurnishMode",
+      "presentation.tileSelected",
+      "input.rotatePlacement",
+      "input.cancelPlacement",
+      "housing.furniturePlaced"
+    ]
+  },
+  "dependencies": [
+    "housing.home_system",
+    "economy.currency"
+  ],
+  "tags": [
+    "life-sim",
+    "build-mode",
+    "decoration",
+    "player-housing"
+  ],
+  "provenance": "library-native"
+}

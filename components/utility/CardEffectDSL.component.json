@@ -1,0 +1,99 @@
+{
+  "id": "utility.card_effect_dsl",
+  "name": "Card Effect DSL",
+  "category": "utility",
+  "description": "The interpreter that turns card data into game verbs. A card is a row of data \u2014 cost, target rule, an ordered list of effect steps with triggers \u2014 and this component walks the row and dispatches each step onto utility.command_bus instead of hard-coding card behavior, because a deckbuilder lives or dies on how fast a designer can ship a card without touching engine code. It owns parsing, cost validation, and target resolution. It does not own the numbers: damage steps are handed to combat.damage_resolver, status steps to combat.status_effects, and energy payment is checked against combat.energy_per_turn before the first step fires \u2014 a card that cannot be paid for is rejected whole, never half-resolved, because partial resolution is where card-game bugs breed.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "targetModes",
+      "type": "array",
+      "required": false,
+      "default": [
+        "enemy",
+        "ally",
+        "self",
+        "all"
+      ],
+      "description": "Which targeting rules cards may declare. Restricting the list is a design tool: a set with no 'ally' targeting reads very differently at the deckbuilding screen."
+    },
+    {
+      "name": "allowChainedTriggers",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether effects triggered mid-resolution may themselves trigger further effects. Off by default: unbounded chains are where card games go to become un-debuggable."
+    },
+    {
+      "name": "maxStepsPerCard",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Hard cap on effect steps in one card. A guardrail against malformed data, not a design budget \u2014 real cards rarely need more than three."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastResolvedCard",
+      "type": "object",
+      "description": "The card id, paid cost, chosen targets, and per-step outcomes of the most recent play \u2014 the full replay record."
+    },
+    {
+      "name": "cardsRejected",
+      "type": "number",
+      "description": "Lifetime count of plays refused for cost, target, or legality. A rising count is a UI problem, not a rules problem."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.cardResolved",
+      "utility.cardRejected"
+    ],
+    "listensTo": [
+      "input.playCard"
+    ]
+  },
+  "dependencies": [
+    "utility.command_bus",
+    "combat.damage_resolver",
+    "combat.status_effects"
+  ],
+  "tags": [
+    "deckbuilder",
+    "cards",
+    "dsl",
+    "data-driven",
+    "core"
+  ],
+  "provenance": "library-native"
+}

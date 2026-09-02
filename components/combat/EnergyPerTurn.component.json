@@ -1,0 +1,89 @@
+{
+  "id": "combat.energy_per_turn",
+  "name": "Energy Per Turn",
+  "category": "combat",
+  "description": "The per-turn budget that makes a hand of cards a decision instead of a shopping list. Energy refills when the turn rolls over and cards spend from it, so the hand you keep is the hand you can afford. It is deliberately separate from combat.action_point_economy: action points budget a unit's turn on a tactics grid, energy budgets a hand of cards, and merging them would saddle each genre with the other's vocabulary and edge cases. This component owns the balance, the refill, and the refusal. It does not decide what anything costs \u2014 costs live in card data, and utility.card_effect_dsl asks this component before resolving, which is why the rejection event exists here rather than there.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "baseEnergy",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Energy granted at each refill. Three with mostly-one-cost cards is the genre's proven center; every point above it is a large power increase, not a small one."
+    },
+    {
+      "name": "maxEnergy",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Hard cap for energy-gain effects. Uncapped energy turns one combo into the whole game."
+    },
+    {
+      "name": "refillOnTurnStart",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "False gives carry-over energy, a real variant where saving is a strategy. It changes how every card is valued, so it is opt-in rather than a toggle to flip casually."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentEnergy",
+      "type": "number"
+    },
+    {
+      "name": "energySpentThisTurn",
+      "type": "number",
+      "description": "Running total since the last refill, for relics and card text that care about spending rather than balance."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.energyRefilled",
+      "combat.energySpent",
+      "combat.energySpendRejected"
+    ],
+    "listensTo": [
+      "input.endTurn"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "deckbuilder",
+    "resource",
+    "energy",
+    "turn"
+  ],
+  "provenance": "library-native"
+}

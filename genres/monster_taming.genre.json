@@ -1,0 +1,42 @@
+{
+  "id": "genre.monster_taming",
+  "name": "Monster Taming",
+  "description": "Weaken it, catch it, raise it, and take it somewhere that tests it. The pack is built on the Pet Sim kit rather than beside it, because a captured creature and a raised pet want the same care systems -- the difference is that this genre also fights. Capture is a probability the player can influence, which is the design that makes a throw feel earned rather than random; pets.monster_dex turns that into completion pressure; and pets.evolution_tree makes the same species branch on how it was played rather than on a menu choice. The gym gauntlet is the campaign spine and the badge is its durable output, read by world gates rather than inferred from a win.",
+  "version": "0.1.0",
+  "loop": "encounter wild \u2192 weaken \u2192 capture \u2192 build team \u2192 battle gyms",
+  "views": [
+    "top-down",
+    "isometric"
+  ],
+  "memberComponents": [
+    "pets.pet_companion",
+    "social.party_system",
+    "combat.turn_order_queue",
+    "combat.type_chart",
+    "progression.xp_leveling",
+    "inventory.slotted_bag"
+  ],
+  "newComponents": [
+    "pets.capture_mechanic",
+    "pets.monster_dex",
+    "pets.evolution_tree",
+    "pets.team_composition",
+    "pets.gym_challenge"
+  ],
+  "signatureCompound": {
+    "name": "Caught, Raised, Evolved, Registered",
+    "description": "One creature through the whole pack: capture_mechanic resolves a weaken-and-throw into a catch, team_composition finds it a slot or a box, evolution_tree offers a branch once it has been levelled and trained, and monster_dex records both forms -- which is the reason evolution_tree's completed event carries the old species id as well as the new one. Without that field the registry would lose half the collection.",
+    "memberIds": [
+      "pets.capture_mechanic",
+      "pets.team_composition",
+      "pets.evolution_tree",
+      "pets.monster_dex"
+    ]
+  },
+  "tags": [
+    "monster-taming",
+    "collection",
+    "turn-based",
+    "creatures"
+  ]
+}

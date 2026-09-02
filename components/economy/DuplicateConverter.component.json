@@ -1,0 +1,103 @@
+{
+  "id": "economy.duplicate_converter",
+  "name": "Duplicate Converter",
+  "category": "economy",
+  "description": "What a copy you already own turns into. Duplicates are the majority of a collection game's output, and a genre that treats them as nothing teaches players that pulling is mostly disappointment. Conversion is declared per rarity, so a duplicate legendary is worth meaningfully more than a duplicate common, and the shards it produces are ordinary currency that other components can spend. Conversion is automatic by default and announced, because a player who has to visit a menu to convert will one day discover a thousand unconverted copies and reasonably feel the game wasted them.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "shardsByRarity",
+      "type": "object",
+      "required": false,
+      "default": {
+        "common": 1,
+        "rare": 5,
+        "epic": 20,
+        "legendary": 100
+      },
+      "description": "Shards granted per duplicate, by rarity."
+    },
+    {
+      "name": "automatic",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether duplicates convert on receipt rather than waiting in a menu."
+    },
+    {
+      "name": "shardCurrencyId",
+      "type": "string",
+      "required": false,
+      "default": "shards",
+      "description": "Currency the conversion pays into."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "shardBalance",
+      "type": "number",
+      "description": "Shards held."
+    },
+    {
+      "name": "convertedCount",
+      "type": "number",
+      "description": "Duplicates converted so far."
+    },
+    {
+      "name": "pendingConversions",
+      "type": "array",
+      "description": "Duplicates awaiting a manual convert, when automatic is false."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.duplicateConverted",
+      "economy.shardsGranted"
+    ],
+    "listensTo": [
+      "economy.pullResolved",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "economy.currency",
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "gacha",
+    "duplicates",
+    "conversion",
+    "economy"
+  ],
+  "provenance": "library-native"
+}

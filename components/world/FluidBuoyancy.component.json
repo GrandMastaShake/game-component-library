@@ -1,0 +1,105 @@
+{
+  "id": "world.fluid_buoyancy",
+  "name": "Fluid Buoyancy",
+  "category": "world",
+  "description": "Whether a thing floats, and how grudgingly. Buoyancy is computed from the submerged fraction against the fluid's density, so a part that is half under lifts half as hard and a heavy part sinks without needing to be told to \u2014 which is what makes a sandbox feel like it has physics rather than rules. Drag is separated from buoyancy because they are different forces that players tune for different reasons: one decides whether the boat floats, the other whether it is worth sailing. Fluid regions are volumes rather than a global water level, so a sandbox can have a bucket and a lake in the same scene.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "fluidRegions",
+      "type": "array",
+      "required": true,
+      "description": "Volumes with their densities. Required: a global water level cannot express a bucket and a lake at once."
+    },
+    {
+      "name": "defaultDensity",
+      "type": "number",
+      "required": false,
+      "default": 1000,
+      "description": "Density of an unlabelled fluid, in kg/m3."
+    },
+    {
+      "name": "linearDrag",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Resistance to movement through the fluid."
+    },
+    {
+      "name": "angularDrag",
+      "type": "number",
+      "required": false,
+      "default": 0.4,
+      "description": "Resistance to rotation within the fluid."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "submergedFraction",
+      "type": "object",
+      "description": "Fraction under the surface, per body."
+    },
+    {
+      "name": "buoyantForce",
+      "type": "object",
+      "description": "Upward force applied, per body."
+    },
+    {
+      "name": "floating",
+      "type": "array",
+      "description": "Bodies currently at rest on a surface."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.bodyEnteredFluid",
+      "world.bodyExitedFluid",
+      "world.bodyFloated"
+    ],
+    "listensTo": [
+      "movement.jointCreated",
+      "movement.ragdollActivated"
+    ]
+  },
+  "dependencies": [
+    "movement.physics_core",
+    "world.water_system"
+  ],
+  "tags": [
+    "physics-sandbox",
+    "buoyancy",
+    "fluid",
+    "simulation"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "genre.point_and_click",
+  "name": "Point & Click / Escape Room",
+  "description": "Look at everything, take what moves, and work out what goes with what. The pack is organised around the genre's two historical failures. Pixel-hunting is answered by world.hotspot_layer, which offers a highlight-all key and reports hotspots that are exhausted, so a stuck player is never re-searching solved ground. Moon logic is answered by inventory.inventory_combine's refusal lines: a rule may say why it does not apply, and a specific refusal teaches where a generic shrug does not. world.puzzle_lock_chain makes the room a dependency graph rather than a list, which is what lets it publish a frontier of currently-solvable locks -- the single query that separates a player who is stuck from one who is lost.",
+  "version": "0.1.0",
+  "loop": "examine scene \u2192 collect clues \u2192 combine \u2192 unlock next space",
+  "views": [
+    "isometric",
+    "side-scroll-2d"
+  ],
+  "memberComponents": [
+    "ui.dialogue_tree_engine",
+    "inventory.core_inventory",
+    "ui.dialogue_box",
+    "persistence.save_system",
+    "presentation.atmosphere_system"
+  ],
+  "newComponents": [
+    "world.hotspot_layer",
+    "inventory.inventory_combine",
+    "world.puzzle_lock_chain",
+    "utility.room_escape_timer",
+    "ui.narrative_journal"
+  ],
+  "signatureCompound": {
+    "name": "The Rope, The Hook, The Door",
+    "description": "Three components and a graph: hotspot_layer offers the rope with a take cursor and reports the hook as usable, inventory_combine accepts rope-on-hook in either order and produces a grapple, puzzle_lock_chain sees its condition met and opens the door -- publishing a new frontier as it does, which narrative_journal records under the thread the player was already following.",
+    "memberIds": [
+      "world.hotspot_layer",
+      "inventory.inventory_combine",
+      "world.puzzle_lock_chain",
+      "ui.narrative_journal"
+    ]
+  },
+  "tags": [
+    "point-and-click",
+    "escape-room",
+    "adventure",
+    "puzzle"
+  ]
+}

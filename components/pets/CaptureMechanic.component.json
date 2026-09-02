@@ -1,0 +1,101 @@
+{
+  "id": "pets.capture_mechanic",
+  "name": "Capture Mechanic",
+  "category": "pets",
+  "description": "The weaken-then-capture loop: throw a capture device at a wild monster, run the shake sequence, and resolve catch probability against the target's remaining health, status, and rarity. Probability is computed server-authoritative style from a published formula \u2014 catch rate scales down with rarity and up with missing health and applied status effects \u2014 because capture odds the player cannot reason about feel like pure luck, and the genre's core skill expression is engineering favorable odds before the throw. The shake count is presentation of an already-decided result, never an independent RNG per shake, so replays and seeds stay deterministic. This component owns the capture attempt and its resolution only: the weakening is combat's job (combat.damage_resolver and combat.status_effects produce the state this formula reads), the device is inventory's job (inventory.slotted_bag supplies and consumes it), and where a caught monster goes is pets.team_composition's decision. It listens for damage and status events rather than polling, so capture odds always reflect the current battle.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "captureDevices",
+      "type": "array",
+      "required": true,
+      "description": "Device definitions: item id, catch multiplier, and any conditional bonuses (type-matched, night-only). Multipliers stack onto the base formula, keeping device progression in the item data."
+    },
+    {
+      "name": "baseCatchRate",
+      "type": "number",
+      "required": false,
+      "default": 0.3,
+      "description": "Catch probability for a full-health, status-free, common monster with a basic device. Every other modifier multiplies this anchor."
+    },
+    {
+      "name": "healthBonusCurve",
+      "type": "string",
+      "required": false,
+      "default": "inverse-linear",
+      "description": "How missing health raises odds. Inverse-linear is readable; a threshold curve (flat until 25%) makes 'get it low' a sharper tactical goal."
+    },
+    {
+      "name": "shakeCount",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Shakes shown before the result reveals. Pure presentation of a decided outcome \u2014 raising it raises tension, not difficulty."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentCatchOdds",
+      "type": "number",
+      "description": "Live catch probability against the current target with the selected device, surfaced so the player can make an informed throw."
+    },
+    {
+      "name": "attemptInProgress",
+      "type": "boolean",
+      "description": "True from throw until resolution, during which further throws are rejected."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.captureAttempted",
+      "pets.captureSucceeded",
+      "pets.captureFailed"
+    ],
+    "listensTo": [
+      "input.throw",
+      "combat.damageResolved",
+      "combat.effectApplied",
+      "combat.turnEnded"
+    ]
+  },
+  "dependencies": [
+    "inventory.slotted_bag"
+  ],
+  "tags": [
+    "monster-taming",
+    "capture",
+    "probability",
+    "collection"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,92 @@
+{
+  "id": "world.service_coverage",
+  "name": "Service Coverage",
+  "category": "world",
+  "description": "Maintains per-service radius maps over the tile grid \u2014 power, water, police, fire, schools \u2014 so that 'is this cell served?' is an O(1) lookup instead of a per-query distance scan against every building. Coverage maps are recomputed incrementally when a service structure is placed or removed, never on read, because in this genre reads (tooltips, growth checks, citizen happiness) outnumber writes (placements) by orders of magnitude. The component owns coverage geometry only: it does not simulate what a service does to its covered cells \u2014 utility consumption, crime, and education outcomes belong to whichever system consumes the coverage answer, and world.zone_planner's growth rules and world.citizen_agent_sim's satisfaction are expected consumers. It also does not visualize the radius; that overlay is a presentation concern for the build-mode UI that asks this component for the map.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "services",
+      "type": "array",
+      "required": true,
+      "description": "Service definitions: id, coverage radius in tiles, and falloff curve. A linear falloff suits power; a hard radius suits police response."
+    },
+    {
+      "name": "gridResolution",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Tiles per coverage sample. 1 is per-cell accuracy; 4 quarters memory and update cost for large maps at the price of blocky service boundaries."
+    },
+    {
+      "name": "overlapStacks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether two overlapping sources of the same service compound their effect. False (diminishing to a cap) is the genre norm and prevents station-spam strategies."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "coverageMaps",
+      "type": "object",
+      "description": "Per-service grid of coverage strength in [0, 1], the authoritative answer to every 'is this cell served' question."
+    },
+    {
+      "name": "unservedCells",
+      "type": "array",
+      "description": "Developed cells with zero coverage from a required service, maintained as a list so advisory systems do not rescan the map."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.coverageChanged",
+      "world.serviceGapDetected"
+    ],
+    "listensTo": [
+      "housing.structurePlaced",
+      "housing.structureRemoved",
+      "world.zoneCellDeveloped"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "city-builder",
+    "services",
+    "coverage-radius",
+    "management-sim"
+  ],
+  "provenance": "library-native"
+}

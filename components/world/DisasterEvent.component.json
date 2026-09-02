@@ -1,0 +1,104 @@
+{
+  "id": "world.disaster_event",
+  "name": "Disaster Event",
+  "category": "world",
+  "description": "Schedules, telegraphs, and resolves city-scale disaster events \u2014 fires, floods, meteor strikes, or any configured calamity \u2014 as a three-phase state machine: warning, active, aftermath. The warning phase exists because a disaster with no telegraph is a coin flip, not a challenge; players must get a window to respond or evacuate before damage begins. Damage itself is not applied here: this component marks affected cells and emits, and the actual destruction, cost, and hazard behavior belong to the systems that own those facts \u2014 world.hazard_volume applies ongoing area effects, housing and world structures decide what breaks, and economy.currency decides what repairs cost. Disasters can be random (seeded, so replays and daily cities stay deterministic), scripted, or player-invoked for the sandbox mayor who just wants to watch the world burn.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "disasterTable",
+      "type": "array",
+      "required": true,
+      "description": "Disaster definitions: id, footprint shape and size, warning duration, active duration, and intensity scaling. Data-driven so 'alien invasion' and 'kitchen fire' share one state machine."
+    },
+    {
+      "name": "randomDisastersEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Master switch for ambient disasters. Many players consider random disasters a betrayal of their city; the toggle is a genre expectation, not an option."
+    },
+    {
+      "name": "randomIntervalMinutes",
+      "type": "array",
+      "required": false,
+      "default": [
+        15,
+        45
+      ],
+      "description": "In-game minute range between ambient disasters, drawn from a seeded RNG. The wide band keeps disasters surprising without clustering."
+    },
+    {
+      "name": "seed",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Seed for disaster scheduling. Deterministic scheduling lets a shared-seed city challenge be fair across players."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeDisaster",
+      "type": "object",
+      "description": "The current disaster with phase, footprint cells, and remaining duration; null when the city is at peace."
+    },
+    {
+      "name": "disasterHistory",
+      "type": "array",
+      "description": "Resolved disasters with cells affected and duration, for post-mortem reports and achievement checks."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.disasterWarningIssued",
+      "world.disasterStarted",
+      "world.disasterEnded"
+    ],
+    "listensTo": [
+      "utility.timerCompleted",
+      "input.invokeDisaster",
+      "world.tileGridBuilt"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid",
+    "utility.timer_system"
+  ],
+  "tags": [
+    "city-builder",
+    "disaster",
+    "event-scripting",
+    "management-sim"
+  ],
+  "provenance": "library-native"
+}

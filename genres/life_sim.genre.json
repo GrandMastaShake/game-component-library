@@ -1,0 +1,42 @@
+{
+  "id": "genre.life_sim",
+  "name": "Life Sim",
+  "description": "Small needs, long consequences. The pack runs on the idea that autonomy is more interesting than obedience: social.needs_decay drives characters to act on their own, and the player's role is to arrange a life in which those actions go well rather than to issue orders. Moodlets are the memory that makes that legible -- a character who was embarrassed this morning is a different character this afternoon -- and social.relationship_graph is what turns two such characters meeting into a story rather than an animation. Career and furnishing sit on top as the two long arcs the player actually steers, and both are deliberately slower than the needs beneath them.",
+  "version": "0.1.0",
+  "loop": "fulfill needs \u2192 build relationships \u2192 advance career \u2192 decorate home",
+  "views": [
+    "isometric",
+    "top-down"
+  ],
+  "memberComponents": [
+    "housing.home_system",
+    "world.citizen_agent_sim",
+    "ui.dialogue_box",
+    "progression.skills_tree",
+    "world.day_night_cycle",
+    "persistence.save_system"
+  ],
+  "newComponents": [
+    "social.needs_decay",
+    "social.relationship_graph",
+    "progression.career_track",
+    "social.moodlet_system",
+    "housing.furnish_mode"
+  ],
+  "signatureCompound": {
+    "name": "A Bad Morning Becomes a Bad Date",
+    "description": "Why this genre needs a memory: needs_decay lets energy bottom out overnight, moodlet_system records the resulting exhaustion as a stacking modifier, career_track's morning shift goes badly because of it, and relationship_graph reads the whole chain when the character meets someone that evening. One unmet need, four hours later, a different conversation.",
+    "memberIds": [
+      "social.needs_decay",
+      "social.moodlet_system",
+      "progression.career_track",
+      "social.relationship_graph"
+    ]
+  },
+  "tags": [
+    "life-sim",
+    "simulation",
+    "autonomy",
+    "social"
+  ]
+}
