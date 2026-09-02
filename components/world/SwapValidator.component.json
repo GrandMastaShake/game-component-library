@@ -1,0 +1,106 @@
+{
+  "id": "world.swap_validator",
+  "name": "Swap Validator",
+  "category": "world",
+  "description": "Decides whether a move is a move, and rescues a board that has run out of them. A swap is legal only if it produces a match, which is the rule that makes the genre a puzzle rather than a fidget toy \u2014 and rejecting a swap has to be visible, so the rejection is an event and not a silent snap-back. The second job is the one players never see working: after every settle the validator counts remaining legal moves, and on zero it reshuffles rather than presenting a dead board. Reshuffling is announced, because a board that rearranges itself with no explanation reads as a bug. A hint is the same search stopped at the first result, which is why it lives here rather than in a separate component.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "requireMatchToSwap",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether swaps that make no match are refused. False is the relaxed variant."
+    },
+    {
+      "name": "shuffleOnDeadlock",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a board with no legal move reshuffles rather than ending the level."
+    },
+    {
+      "name": "hintAfterIdleSeconds",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Idle time before a legal move is suggested. 0 disables hints."
+    },
+    {
+      "name": "maxShufflesPerLevel",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Reshuffles allowed before the level is declared unwinnable and ends honestly."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "legalMoveCount",
+      "type": "number",
+      "description": "Legal swaps available on the current board."
+    },
+    {
+      "name": "suggestedMove",
+      "type": "object",
+      "description": "The move a hint would offer, or null."
+    },
+    {
+      "name": "shufflesUsed",
+      "type": "number",
+      "description": "Reshuffles performed this level."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.swapAccepted",
+      "world.swapRejected",
+      "world.boardReshuffled",
+      "world.boardDeadlocked"
+    ],
+    "listensTo": [
+      "world.cascadeSettled",
+      "input.swap"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "validation",
+    "puzzle"
+  ],
+  "provenance": "library-native"
+}

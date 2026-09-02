@@ -1,0 +1,101 @@
+{
+  "id": "world.zone_planner",
+  "name": "Zone Planner",
+  "category": "world",
+  "description": "Designates zone types (residential, commercial, industrial, or any configured set) onto regions of an existing tile grid, and owns the growth rules that decide whether a zoned cell develops. Growth is evaluated per cell against demand pressure and service coverage, so a zone designation is a promise of intent, not a building \u2014 nothing appears until the rules say the land is worth developing. This component deliberately does not place structures: world.environment_builder and presentation.object_placer own the act of putting geometry in the world, and zone_planner only tells them where development is wanted. It also does not simulate the people who fill the zones \u2014 that is world.citizen_agent_sim, which listens for zone designations to decide where citizens can live and work. The planner's boundary is land-use state and growth eligibility; everything visual and everything agentic lives downstream.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "zoneTypes",
+      "type": "array",
+      "required": true,
+      "description": "The zoning palette: ids like residential/commercial/industrial, each with its own growth rules. Data-driven so a farming sim can ship crop/pasture instead of R/C/I without a schema change."
+    },
+    {
+      "name": "growthTickSeconds",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "How often growth eligibility is re-evaluated per zoned cell. Growth on every frame is wasted work in a genre where nothing meaningful changes in under a second."
+    },
+    {
+      "name": "dezoneRefundFraction",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Fraction of development value returned when the player clears a developed zone. 0 makes bulldozing a pure loss, which is the classic genre pressure; higher values soften the sim for casual play."
+    },
+    {
+      "name": "maxZoneBrushSize",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Largest single-stroke paint area in tiles. Exists to keep one misclick from rezoning a city, and to give higher tiers a meaningful unlock."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "zonedCells",
+      "type": "object",
+      "description": "Map of cell coordinates to zone assignment, including development state (vacant, growing, developed)."
+    },
+    {
+      "name": "growthEligibility",
+      "type": "object",
+      "description": "Per-cell pass/fail growth evaluation with reasons, so advisory UI can explain 'why won't this area develop' instead of leaving the player guessing."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.zoneDesignated",
+      "world.zoneCleared",
+      "world.zoneCellDeveloped"
+    ],
+    "listensTo": [
+      "input.paintZone",
+      "input.clearZone",
+      "presentation.tileSelected",
+      "world.tileGridBuilt"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "city-builder",
+    "zoning",
+    "management-sim",
+    "land-use"
+  ],
+  "provenance": "library-native"
+}

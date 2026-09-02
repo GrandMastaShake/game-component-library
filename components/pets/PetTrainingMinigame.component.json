@@ -1,0 +1,105 @@
+{
+  "id": "pets.pet_training_minigame",
+  "name": "Pet Training Minigame",
+  "category": "pets",
+  "description": "Turns training into play: short, repeatable skill challenges (timing bars, target fetch, trick sequences) that convert player dexterity into pet stats. A session is initiated per training stat, runs against a timer, and scores the player's performance into a stat gain scaled by the pet's happiness \u2014 a neglected pet trains poorly, which makes the care loop load-bearing instead of cosmetic. The minigame owns session lifecycle and scoring only: it does not store the resulting stats on itself (the pet owns its own growth, and this component emits the gain for the pet or its progression layer to apply), and it does not decide what stats exist \u2014 stat definitions come in as data so a racing-pet game and a show-pet game train different things with the same machine. The payoff cadence (small frequent gains, capped sessions per day) is tuned here because runaway training is the genre's classic exploit.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "trainingGames",
+      "type": "array",
+      "required": true,
+      "description": "Minigame definitions: id, trained stat, duration, scoring curve, and difficulty tiers. Each game is a data entry plus a view; the session machine underneath is shared."
+    },
+    {
+      "name": "maxSessionsPerDay",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Daily cap on completed training sessions per pet. The cap is the anti-grind lever: without it, optimal play is a training marathon, and the rest of the game dies."
+    },
+    {
+      "name": "happinessEfficiencyCurve",
+      "type": "object",
+      "required": false,
+      "default": {
+        "low": 0.5,
+        "normal": 1.0,
+        "high": 1.25
+      },
+      "description": "Stat-gain multiplier by pet happiness band. Below 1 at low happiness so care is a prerequisite for effective training, above 1 at high happiness so a loved pet visibly thrives."
+    },
+    {
+      "name": "sessionDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Default session length. Short enough to be a break in the loop, long enough that scoring has signal."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sessionState",
+      "type": "object",
+      "description": "Active session: game id, elapsed time, and running score. Null when idle."
+    },
+    {
+      "name": "sessionsToday",
+      "type": "number",
+      "description": "Completed sessions in the current day, so the UI can show the remaining allowance before the player starts a wasted session."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.trainingSessionStarted",
+      "pets.trainingSessionCompleted",
+      "pets.trainingStatGained"
+    ],
+    "listensTo": [
+      "ui.petCareActionRequested",
+      "input.interact",
+      "utility.timerCompleted"
+    ]
+  },
+  "dependencies": [
+    "pets.pet_companion",
+    "utility.timer_system"
+  ],
+  "tags": [
+    "pet-sim",
+    "training",
+    "minigame",
+    "stats"
+  ],
+  "provenance": "library-native"
+}

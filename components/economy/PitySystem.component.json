@@ -1,0 +1,105 @@
+{
+  "id": "economy.pity_system",
+  "name": "Pity System",
+  "category": "economy",
+  "description": "The promise that a bad streak ends. Hard pity guarantees the featured outcome at a declared pull count; soft pity raises the rate progressively over a window before it. Both are per banner, both are published, and both are outputs the player can read \u2014 a pity system nobody can see is indistinguishable from no pity system, and the genre's reputation problems come mostly from that gap. The component adjusts the effective rate and says so, rather than reaching into the table: utility.probability_core still owns the draw and still logs it, so the audit trail shows the boosted rate that was actually used.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "hardPityAt",
+      "type": "number",
+      "required": false,
+      "default": 90,
+      "description": "Pulls at which the featured outcome is guaranteed."
+    },
+    {
+      "name": "softPityFrom",
+      "type": "number",
+      "required": false,
+      "default": 74,
+      "description": "Pull at which the rate begins climbing."
+    },
+    {
+      "name": "softPityStep",
+      "type": "number",
+      "required": false,
+      "default": 0.06,
+      "description": "Rate added per pull once soft pity has begun."
+    },
+    {
+      "name": "resetOnFeatured",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the counter resets when the featured outcome is drawn."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "effectiveRate",
+      "type": "number",
+      "description": "The rate in force for the next pull, after pity."
+    },
+    {
+      "name": "pullsToHardPity",
+      "type": "number",
+      "description": "Pulls remaining before the guarantee."
+    },
+    {
+      "name": "inSoftPity",
+      "type": "boolean",
+      "description": "Whether the climbing rate is currently applied."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.pityAdvanced",
+      "economy.pityTriggered",
+      "economy.pityReset"
+    ],
+    "listensTo": [
+      "economy.pullResolved",
+      "economy.bannerRotated"
+    ]
+  },
+  "dependencies": [
+    "economy.gacha_banner"
+  ],
+  "tags": [
+    "gacha",
+    "pity",
+    "disclosure",
+    "economy"
+  ],
+  "provenance": "library-native"
+}

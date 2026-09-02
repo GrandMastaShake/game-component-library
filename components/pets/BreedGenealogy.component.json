@@ -1,0 +1,100 @@
+{
+  "id": "pets.breed_genealogy",
+  "name": "Breed Genealogy",
+  "category": "pets",
+  "description": "Breeds two parent pets into an egg and records the family tree, with trait inheritance resolved as a weighted draw from both parents plus a mutation chance. Inheritance is per-trait independent draws rather than 'child is a blend of parents', because blends converge every lineage to the same beige average within three generations while independent draws preserve variance \u2014 the thing collectors actually chase. The genealogy graph is append-only and survives trades, so a pet's pedigree is a fact about the pet, not about its current owner. This component owns pairing validation, trait resolution, and lineage records; it does not hatch the result \u2014 the egg it produces goes to pets.egg_hatchery, which already owns the hatch ceremony and its table resolution, and duplicating that here would give the library two hatch truths. Rarity math on inherited traits defers to the hatch table's weights rather than inventing a parallel rarity system.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "traitTable",
+      "type": "array",
+      "required": true,
+      "description": "Inheritable trait definitions: id, dominance weight, and rarity. Dominance weights bias the draw toward one parent; equal weights are a coin flip per trait."
+    },
+    {
+      "name": "mutationChance",
+      "type": "number",
+      "required": false,
+      "default": 0.05,
+      "description": "Probability that a trait ignores both parents and rolls fresh from the table. Mutations are the long-tail that keeps breeding interesting after the lineage stabilizes."
+    },
+    {
+      "name": "inbreedingGenerations",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "How many generations of shared ancestry disqualify a pairing. Prevents degenerate self-line optimization loops and protects the rarity economy."
+    },
+    {
+      "name": "breedingCooldownHours",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "description": "In-game hours before a parent can breed again. The throttle that makes each pairing a decision rather than a slot machine."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lineageGraph",
+      "type": "object",
+      "description": "Pet id to parents, grandparents, and inherited trait record \u2014 the pedigree, append-only and ownership-independent."
+    },
+    {
+      "name": "lastBredEgg",
+      "type": "object",
+      "description": "The egg item produced by the most recent pairing, with resolved traits, ready to hand to pets.egg_hatchery."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.breedingCompleted",
+      "pets.breedingRejected",
+      "pets.traitInherited",
+      "pets.lineageRecorded"
+    ],
+    "listensTo": [
+      "input.breedRequest",
+      "pets.hatched"
+    ]
+  },
+  "dependencies": [
+    "pets.egg_hatchery"
+  ],
+  "tags": [
+    "pet-sim",
+    "breeding",
+    "inheritance",
+    "collection"
+  ],
+  "provenance": "library-native"
+}

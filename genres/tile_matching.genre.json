@@ -1,0 +1,40 @@
+{
+  "id": "genre.tile_matching",
+  "name": "Tile-Matching",
+  "description": "Swap two pieces and watch the consequences fall. The pack separates the four things a match-3 usually tangles together: world.match_resolver owns the board and the cascade, world.swap_validator owns legality and the rescue from a dead board, progression.cascade_scoring owns points, and progression.level_objective_set owns what the level is actually asking for. That split is what lets the same board serve a score attack and a collect-twenty-blue level without either being special-cased. Special pieces are created by match SHAPE rather than length, which is the line between two otherwise identical games in this family.",
+  "version": "0.1.0",
+  "loop": "inspect grid \u2192 swap \u2192 cascade/score \u2192 level target",
+  "views": [
+    "top-down"
+  ],
+  "memberComponents": [
+    "world.tile_grid",
+    "utility.timer_system",
+    "social.leaderboard",
+    "progression.xp_leveling",
+    "presentation.audio_system"
+  ],
+  "newComponents": [
+    "world.match_resolver",
+    "world.swap_validator",
+    "progression.level_objective_set",
+    "inventory.booster_pieces",
+    "progression.cascade_scoring"
+  ],
+  "signatureCompound": {
+    "name": "One Swap, Four Cascades",
+    "description": "The genre in a single move: swap_validator accepts a swap because it makes a line, match_resolver clears it and lets the board fall, the fall makes another line and the cascade counter climbs, cascade_scoring escalates the multiplier with each pass, and level_objective_set watches its collect target fill. Four passes from one deliberate move is the whole reason players plan instead of matching the first thing they see.",
+    "memberIds": [
+      "world.swap_validator",
+      "world.match_resolver",
+      "progression.cascade_scoring",
+      "progression.level_objective_set"
+    ]
+  },
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "puzzle",
+    "casual"
+  ]
+}

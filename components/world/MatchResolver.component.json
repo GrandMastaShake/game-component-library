@@ -1,0 +1,110 @@
+{
+  "id": "world.match_resolver",
+  "name": "Match Resolver",
+  "category": "world",
+  "description": "Finds the matches, clears them, and lets what falls make more. Detection is run-length in both axes over the grid, and the resolver's real work is the CASCADE: clearing drops the pieces above, dropping creates new lines, and the loop continues until a pass finds nothing. Each pass is announced separately so scoring can escalate per step, which is where the genre's entire dopamine curve lives. Special pieces are created by match SHAPE rather than by length alone \u2014 a five in a row and an L of five are different rewards \u2014 and the shape rules are declared here because they are the difference between two match-3 games that otherwise look identical. The resolver owns the board; it owns no score, no timer and no objective.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "minimumMatch",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Pieces in a line before it clears."
+    },
+    {
+      "name": "pieceTypes",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Distinct ordinary piece types. Fewer means more accidental cascades; more means a sparser board."
+    },
+    {
+      "name": "specialRules",
+      "type": "object",
+      "required": false,
+      "default": {
+        "line5": "colourBomb",
+        "L5": "cross",
+        "square4": "duplicator"
+      },
+      "description": "Match shapes that create special pieces, keyed by shape. The line between one match-3 and another."
+    },
+    {
+      "name": "gravityDirection",
+      "type": "string",
+      "required": false,
+      "default": "down",
+      "description": "Which way cleared space is refilled from."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "grid",
+      "type": "array",
+      "description": "Current board contents."
+    },
+    {
+      "name": "cascadeDepth",
+      "type": "number",
+      "description": "Passes resolved since the last player move."
+    },
+    {
+      "name": "lastCleared",
+      "type": "array",
+      "description": "Pieces removed by the most recent pass."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.matchCleared",
+      "world.cascadeStarted",
+      "world.cascadeSettled",
+      "world.specialPieceCreated"
+    ],
+    "listensTo": [
+      "world.swapAccepted",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "cascade",
+    "puzzle"
+  ],
+  "provenance": "library-native"
+}

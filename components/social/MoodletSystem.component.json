@@ -1,0 +1,99 @@
+{
+  "id": "social.moodlet_system",
+  "name": "Moodlet System",
+  "category": "social",
+  "description": "Aggregates recent events into stacking, timed mood modifiers \u2014 'promoted: +2 happy for 4 hours', 'grudge formed: -3 for a day' \u2014 and resolves the stack into a single mood value everything else reads. Moodlets are additive and individually expiring rather than a mood number pushed around directly, because a sim who was promoted and then stepped in a puddle should feel both, and 'mood = 5' cannot hold two truths at once. Sources apply moodlets by emitting their own events; this component maps event payloads to configured moodlet definitions, so adding a new cause is a table entry, not a code path. It owns the stack and the resolved mood only: it does not change what the sim does \u2014 autonomy (utility.behavior_fsm) and needs (social.needs_decay) listen for moodlet application and adjust their own behavior, keeping the arrow of causation one-directional and cycle-free.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "moodletDefinitions",
+      "type": "array",
+      "required": true,
+      "description": "Moodlet types: id, mood delta, duration, and stack rule (refresh, stack, ignore-duplicate). The stack rule is per-definition because 'well-rested' should refresh while 'embarrassed' should pile up."
+    },
+    {
+      "name": "maxActiveMoodlets",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "Cap on simultaneously active moodlets; the weakest drops off when full. Prevents degenerate stacking and bounds the mood panel's height."
+    },
+    {
+      "name": "moodBands",
+      "type": "object",
+      "required": false,
+      "default": {
+        "miserable": -5,
+        "fine": 0,
+        "happy": 5
+      },
+      "description": "Thresholds mapping the summed stack to named mood bands. Consumers read the band, not the sum, so display and gameplay never disagree about what counts as happy."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeMoodlets",
+      "type": "array",
+      "description": "The live stack with remaining durations, for the mood panel and for save-state round-tripping."
+    },
+    {
+      "name": "currentMood",
+      "type": "string",
+      "description": "The resolved mood band id \u2014 the single value career performance, autonomy, and dialogue tone all key off."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.moodletApplied",
+      "social.moodletExpired",
+      "social.moodChanged"
+    ],
+    "listensTo": [
+      "social.needFulfilled",
+      "social.needCritical",
+      "social.relationshipChanged",
+      "social.grudgeFormed",
+      "progression.promotionEarned"
+    ]
+  },
+  "dependencies": [
+    "social.needs_decay"
+  ],
+  "tags": [
+    "life-sim",
+    "mood",
+    "modifiers",
+    "emergent-storytelling"
+  ],
+  "provenance": "library-native"
+}

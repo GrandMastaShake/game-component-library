@@ -1,0 +1,47 @@
+{
+  "id": "genre.roguelike",
+  "name": "Roguelike",
+  "description": "The run-based pack: a seeded run starts, procedural floors descend, the build is drafted mid-run, death is permanent, and the account advances anyway. It stands on the Dungeon Crawler kit \u2014 world.floor_descent owns the floor stack, inventory.affix_loot_generator owns the drops, progression.permadeath_flag owns the funeral \u2014 and adds the run-level contract those pieces assume but never declared: one seed to reproduce everything, a meta pool that outlives the run, drafts at level milestones, and an obituary that converts the loss into visible progress. The stance: a roguelike is not a dungeon crawler with death, it is a loop where death is the product, and every new component here exists to make the death reproducible, educational, and worth something.",
+  "version": "0.1.0",
+  "loop": "run starts \u2192 procedural floors \u2192 build draft \u2192 die \u2192 meta-progress",
+  "views": [
+    "top-down",
+    "isometric",
+    "side-scroll-2d"
+  ],
+  "memberComponents": [
+    "world.floor_descent",
+    "inventory.affix_loot_generator",
+    "progression.permadeath_flag",
+    "world.room_template",
+    "world.trap_system",
+    "world.fog_of_war_reveal",
+    "combat.boss_encounter_script",
+    "progression.xp_leveling",
+    "persistence.save_system"
+  ],
+  "newComponents": [
+    "world.run_seed_manager",
+    "progression.run_meta_progression",
+    "progression.draft_on_level_up",
+    "ui.death_summary"
+  ],
+  "signatureCompound": {
+    "name": "One Run, Start to Funeral",
+    "description": "A complete run that proves the loop: run_seed_manager issues a reproducible seed, floor_descent derives floors from it and affix_loot_generator rolls drops from it, draft_on_level_up shapes the build at each level, permadeath_flag makes the final hit stick, run_meta_progression banks the credits, and death_summary shows the player exactly what the run was and what it bought.",
+    "memberIds": [
+      "world.run_seed_manager",
+      "world.floor_descent",
+      "progression.draft_on_level_up",
+      "progression.permadeath_flag",
+      "progression.run_meta_progression",
+      "ui.death_summary"
+    ]
+  },
+  "tags": [
+    "roguelike",
+    "procedural",
+    "runs",
+    "meta-progression"
+  ]
+}

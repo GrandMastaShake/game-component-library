@@ -1,0 +1,102 @@
+{
+  "id": "social.relationship_graph",
+  "name": "Relationship Graph",
+  "category": "social",
+  "description": "Maintains the pairwise affinity graph between sims, with decay, grudges, and romance as layered state rather than a single number. Affinity is per-ordered-pair (A can like B while B tolerates A) because asymmetric relationships are where the genre's stories come from. Interactions move affinity by configured amounts; grudges are discrete negative flags with their own expiry, kept separate from the affinity score so that 'still mad about the pool ladder incident' survives an otherwise warm friendship. Romance is a state machine (stranger \u2192 crush \u2192 partner \u2192 ex) gated on affinity thresholds, not a parallel meter, because romance that is just 'affinity but pink' produces incoherent stories. The graph owns state and transitions only: it does not decide which interactions are available \u2014 ui.dialogue_box and the interaction menu ask this component for relationship state and filter their options, and social.moodlet_system listens to relationship events to turn a betrayal into a mood.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "interactionEffects",
+      "type": "object",
+      "required": true,
+      "description": "Interaction id to affinity delta (and optionally grudge or romance intent). Centralizing the table here means rebalancing a conversation is a data edit, not a code search."
+    },
+    {
+      "name": "affinityDecayPerDay",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Daily drift of affinity toward neutral. Non-zero decay is what makes neglected friendships fade; 0 makes every relationship permanent, which reads as inhuman."
+    },
+    {
+      "name": "grudgeExpiryDays",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "In-game days before a grudge expires. Grudges outliving their cause is realistic; grudges without expiry make the social web calcify."
+    },
+    {
+      "name": "romanceThresholds",
+      "type": "object",
+      "required": false,
+      "default": {
+        "crush": 40,
+        "partner": 70
+      },
+      "description": "Affinity values that gate romance state transitions. Kept tunable because the distance between 'crush' and 'partner' is the pacing of every love story the sim tells."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "affinityMatrix",
+      "type": "object",
+      "description": "Ordered-pair affinity values in [-100, 100], the authoritative social web."
+    },
+    {
+      "name": "relationshipStates",
+      "type": "object",
+      "description": "Per-pair discrete states (acquaintance, friend, rival, crush, partner, ex) derived from affinity plus flags, so consumers read a label instead of re-deriving thresholds."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.relationshipChanged",
+      "social.romanceStateChanged",
+      "social.grudgeFormed",
+      "social.grudgeExpired"
+    ],
+    "listensTo": [
+      "ui.dialogueChoiceMade",
+      "input.socialInteraction",
+      "world.dawnStarted"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "life-sim",
+    "relationships",
+    "social-graph",
+    "romance"
+  ],
+  "provenance": "library-native"
+}

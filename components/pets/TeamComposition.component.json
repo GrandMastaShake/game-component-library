@@ -1,0 +1,108 @@
+{
+  "id": "pets.team_composition",
+  "name": "Team Composition",
+  "category": "pets",
+  "description": "Six on the belt, the rest in boxes. The active party is a hard-capped ordered list because order is a tactical decision \u2014 the lead creature is the one that meets the next encounter \u2014 and everything beyond the cap lives in addressable storage rather than being refused, since a taming game that drops a capture because the party is full has thrown away the player's work. Withdraw and deposit are the same operation seen from two sides, and both are refused rather than silently reordered when they would empty the party: a team of zero is not a state any encounter can start from. The component owns membership and order; it owns nothing about what the creatures can do, which is the difference between this and inventory.slotted_bag holding six items.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "partySize",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Maximum active creatures. Six is the genre's convention and the number its battle UIs are drawn for; changing it is a design statement, not a tweak."
+    },
+    {
+      "name": "boxCount",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Storage boxes available beyond the active party."
+    },
+    {
+      "name": "boxCapacity",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Creatures per box."
+    },
+    {
+      "name": "allowEmptyParty",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the last active creature may be deposited. False refuses the move, because the alternative is an encounter with nothing to send out."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "party",
+      "type": "array",
+      "description": "Active creatures in battle order, lead first."
+    },
+    {
+      "name": "boxes",
+      "type": "array",
+      "description": "Stored creatures, grouped by box."
+    },
+    {
+      "name": "leadCreature",
+      "type": "string",
+      "description": "Id of the creature that meets the next encounter."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.partyChanged",
+      "pets.creatureDeposited",
+      "pets.creatureWithdrawn",
+      "pets.partyMoveRejected"
+    ],
+    "listensTo": [
+      "pets.captureSucceeded",
+      "pets.hatched",
+      "input.swapPartySlot"
+    ]
+  },
+  "dependencies": [
+    "pets.pet_companion",
+    "social.party_system"
+  ],
+  "tags": [
+    "monster-taming",
+    "party",
+    "storage",
+    "roster"
+  ],
+  "provenance": "library-native"
+}

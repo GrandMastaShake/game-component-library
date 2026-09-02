@@ -1,0 +1,96 @@
+{
+  "id": "ui.demand_indicators",
+  "name": "Demand Indicators",
+  "category": "ui",
+  "description": "The RCI-style demand bars and advisory feed that tell the player what to zone next. Demand is derived, not stored: each bar is a read-model computed from zone vacancy, citizen satisfaction, and tax income, so the indicator can never disagree with the simulation it summarizes \u2014 it owns no truth of its own. That is the deliberate design boundary: world.zone_planner owns land use, world.citizen_agent_sim owns population state, economy.currency owns the treasury, and this component only projects their state into a glanceable HUD plus advisory events ('residential demand high', 'power coverage low in district north'). Advisories are throttled and deduplicated because a sim that nags on every tick trains the player to ignore the feed entirely.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "demandWindows",
+      "type": "array",
+      "required": true,
+      "description": "The indicator definitions: id, source signals, and thresholds. Ships as R/C/I by default but is data-driven so a farming sim can show crop demand instead."
+    },
+    {
+      "name": "advisoryCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Minimum time before the same advisory may repeat. The difference between a helpful advisor and noise."
+    },
+    {
+      "name": "smoothingFactor",
+      "type": "number",
+      "required": false,
+      "default": 0.2,
+      "description": "Exponential smoothing applied to bar movement so a single arrival or departure does not make the UI lurch. 0 is raw values, 1 is frozen."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "demandLevels",
+      "type": "object",
+      "description": "Current value per demand indicator in [-1, 1]: negative is oversupply, positive is unmet demand."
+    },
+    {
+      "name": "activeAdvisories",
+      "type": "array",
+      "description": "Advisories currently in effect with severity and the signal that raised them, so the UI can deep-link 'click to see the problem district'."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.demandChanged",
+      "ui.advisoryIssued",
+      "ui.advisoryResolved"
+    ],
+    "listensTo": [
+      "world.citizenSpawned",
+      "world.citizenDeparted",
+      "world.citizenUnhappy",
+      "world.zoneCellDeveloped",
+      "world.serviceGapDetected",
+      "economy.spent"
+    ]
+  },
+  "dependencies": [
+    "world.zone_planner"
+  ],
+  "tags": [
+    "city-builder",
+    "hud",
+    "advisory",
+    "read-model"
+  ],
+  "provenance": "library-native"
+}

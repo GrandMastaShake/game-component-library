@@ -1,0 +1,100 @@
+{
+  "id": "pets.monster_dex",
+  "name": "Monster Dex",
+  "category": "pets",
+  "description": "The seen/caught registry for every species in the game, with completion milestones and rewards. Entries have two tiers \u2014 'seen' records silhouette and habitat on first encounter, 'caught' fills in full data \u2014 because the gap between seen and caught is the collector's to-do list, and collapsing them removes the genre's most durable motivation. The registry is keyed by species id and is player-scoped and permanent: trades and releases never un-catch an entry. This component owns registration and completion state only: it does not define the species (species data arrives as input), it does not grant the monsters themselves (pets.capture_mechanic and pets.egg_hatchery do that and emit), and it does not hand out rewards directly \u2014 milestone events carry the reward payload for economy.currency or inventory systems to fulfill, keeping item and money grants in their owning categories.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "speciesCatalog",
+      "type": "array",
+      "required": true,
+      "description": "Species definitions: id, display data, rarity tier, and habitat. The registry iterates this catalog, so completion percentage always means 'of the configured world', never 'of what has shipped so far'."
+    },
+    {
+      "name": "milestones",
+      "type": "array",
+      "required": false,
+      "default": [
+        10,
+        25,
+        50,
+        75,
+        100
+      ],
+      "description": "Caught-percentage thresholds that grant completion rewards. Percent-based rather than count-based so adding species later does not invalidate earned milestones."
+    },
+    {
+      "name": "trackSeen",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether encounters register the seen tier. Disabling it turns the dex into a pure caught-list for harsher collection games."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "entries",
+      "type": "object",
+      "description": "Species id to entry state (unseen, seen, caught) plus first-seen and first-caught metadata."
+    },
+    {
+      "name": "completionPercent",
+      "type": "number",
+      "description": "Caught entries over catalog size, the headline number for completionist play and milestone checks."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.dexEntryRegistered",
+      "pets.dexMilestoneReached",
+      "pets.dexCompleted"
+    ],
+    "listensTo": [
+      "pets.captureSucceeded",
+      "pets.hatched",
+      "pets.evolutionCompleted",
+      "world.encounterSpawned"
+    ]
+  },
+  "dependencies": [
+    "pets.capture_mechanic"
+  ],
+  "tags": [
+    "monster-taming",
+    "collection",
+    "registry",
+    "completion"
+  ],
+  "provenance": "library-native"
+}

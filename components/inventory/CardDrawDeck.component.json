@@ -1,0 +1,94 @@
+{
+  "id": "inventory.card_draw_deck",
+  "name": "Card Draw Deck",
+  "category": "inventory",
+  "description": "The chance deck on the board: draw when a space says so, reveal to the table, do what the card says, discard face-up. Pile and shuffle mechanics are deliberately not reimplemented here \u2014 this component composes inventory.deck_manager in a single-deck, reshuffle-on-empty configuration, because one correct seeded shuffle in the library beats two almost-correct ones. What it adds is the board-game contract: draws are triggered by space effects rather than a turn structure, every draw is public, and declared cards are kept in front of the player instead of discarded until spent. It does not own what card effects do \u2014 the effect id is broadcast, and the owning system (economy.currency, movement.token_movement) acts on it. A deck that resolved its own effects would be a rules engine, and this genre already has one too many of those.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "cardList",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Card ids with their effect ids, in initial deck order before the first shuffle. Required \u2014 an empty chance deck is a space that lies to players."
+    },
+    {
+      "name": "keepableCardIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Cards held in front of the player instead of discarded (the get-out-of-jail pattern). Kept cards leave the deck's cycle until spent, which the deck manager's pile counts reflect honestly."
+    },
+    {
+      "name": "reshuffleOnEmpty",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the discard pile refreshes an empty deck. False models a deck that is simply gone \u2014 rare, but some endgame designs want the well to run dry."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastDrawnCard",
+      "type": "object",
+      "description": "Card id, effect id, and drawing player \u2014 public by design, since the table saw it."
+    },
+    {
+      "name": "cardsRemaining",
+      "type": "number"
+    },
+    {
+      "name": "heldKeeps",
+      "type": "array",
+      "description": "Kept cards and their holders, so the UI can show who is sitting on a reprieve."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.chanceCardDrawn",
+      "inventory.chanceDeckReshuffled"
+    ],
+    "listensTo": [
+      "world.spaceEffectResolved"
+    ]
+  },
+  "dependencies": [
+    "inventory.deck_manager"
+  ],
+  "tags": [
+    "board-game",
+    "chance-deck",
+    "cards"
+  ],
+  "provenance": "library-native"
+}

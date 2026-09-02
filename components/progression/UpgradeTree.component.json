@@ -1,0 +1,103 @@
+{
+  "id": "progression.upgrade_tree",
+  "name": "Upgrade Tree",
+  "category": "progression",
+  "description": "Spending that changes the rules rather than the numbers. An upgrade is a node with a cost, a prerequisite set and an effect, and the tree is the shape those prerequisites make \u2014 which is what separates a shop from a progression system. Milestone nodes unlock on totals rather than purchases, so a player who has been patient is rewarded without having to spend, and that is the mechanism idle games use to keep an absent player interested. Effects are declared, never computed here: this component decides that an upgrade is OWNED and says so, and the components it names decide what owning it means.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "nodes",
+      "type": "array",
+      "required": true,
+      "description": "Upgrade nodes: id, cost, prerequisites, and the declared effect key. Required, because the tree is content."
+    },
+    {
+      "name": "milestoneThresholds",
+      "type": "array",
+      "required": false,
+      "default": [
+        10,
+        100,
+        1000,
+        10000
+      ],
+      "description": "Lifetime totals that unlock milestone nodes without a purchase."
+    },
+    {
+      "name": "refundable",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether purchased nodes can be sold back. False is the genre norm; true turns the tree into a loadout."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "owned",
+      "type": "array",
+      "description": "Node ids purchased."
+    },
+    {
+      "name": "available",
+      "type": "array",
+      "description": "Nodes whose prerequisites are met and which are affordable."
+    },
+    {
+      "name": "lockedBy",
+      "type": "object",
+      "description": "Per unavailable node, what is still missing."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.upgradePurchased",
+      "progression.upgradeUnlocked",
+      "progression.milestoneReached"
+    ],
+    "listensTo": [
+      "economy.earned",
+      "economy.producerPurchased",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "economy.currency"
+  ],
+  "tags": [
+    "idle",
+    "incremental",
+    "upgrades",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

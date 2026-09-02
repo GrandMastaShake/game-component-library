@@ -1,0 +1,112 @@
+{
+  "id": "world.citizen_agent_sim",
+  "name": "Citizen Agent Sim",
+  "category": "world",
+  "description": "Runs a population of needs-driven agents that commute between home, work, and commerce on a daily schedule, making the abstract zone grid legible as a living city. Each citizen holds a home assignment, a job assignment, and a satisfaction value derived from commute length and unmet needs; a citizen whose needs stay unmet long enough leaves, which is the feedback loop that punishes bad planning without a fail state. Pathing between destinations is delegated to movement.pathfinding_system \u2014 this component decides where a citizen wants to go and why, never how to walk there. It does not own the needs meters themselves (social.needs_decay owns per-agent meter decay for the life-sim scale) nor the zone supply it consumes (world.zone_planner owns that); it is the assignment and itinerary layer that sits between the two, and it is intentionally reusable by any genre that needs believable background population rather than individually simulated protagonists.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "populationCap",
+      "type": "number",
+      "required": false,
+      "default": 500,
+      "description": "Hard ceiling on simultaneously simulated agents. Beyond this, new arrivals are counted statistically rather than simulated, which keeps tick cost flat as the city grows."
+    },
+    {
+      "name": "commuteToleranceMinutes",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "In-game minutes of commute a citizen accepts before satisfaction decays. The single strongest lever for 'traffic matters' versus 'traffic is flavor'."
+    },
+    {
+      "name": "unhappyDepartureDays",
+      "type": "number",
+      "required": false,
+      "default": 7,
+      "description": "In-game days of sustained unhappiness before a citizen abandons their home and job. Long enough that one bad week is recoverable, short enough that neglect hollows out a district."
+    },
+    {
+      "name": "schedule",
+      "type": "object",
+      "required": false,
+      "default": {
+        "workStartHour": 8,
+        "workEndHour": 17,
+        "leisureHour": 20
+      },
+      "description": "Daily itinerary anchors in world.day_night_cycle hours. All citizens share the anchors with per-agent jitter, so rush hours emerge instead of being scripted."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "population",
+      "type": "number",
+      "description": "Current simulated citizen count, distinct from any statistical overflow beyond populationCap."
+    },
+    {
+      "name": "averageSatisfaction",
+      "type": "number",
+      "description": "Population-wide satisfaction in [0, 1], the headline number demand indicators and win conditions should read rather than sampling agents individually."
+    },
+    {
+      "name": "commuteLoad",
+      "type": "object",
+      "description": "Per-route agent counts for the current commute window, so road or transit visualization can be driven by real itineraries."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.citizenSpawned",
+      "world.citizenDeparted",
+      "world.citizenUnhappy"
+    ],
+    "listensTo": [
+      "world.zoneDesignated",
+      "world.zoneCellDeveloped",
+      "world.dawnStarted",
+      "world.duskStarted"
+    ]
+  },
+  "dependencies": [
+    "world.zone_planner",
+    "movement.pathfinding_system"
+  ],
+  "tags": [
+    "city-builder",
+    "agent-simulation",
+    "population",
+    "management-sim"
+  ],
+  "provenance": "library-native"
+}

@@ -1,0 +1,98 @@
+{
+  "id": "utility.dice_roll_resolver",
+  "name": "Dice Roll Resolver",
+  "category": "utility",
+  "description": "Dice, done honestly. Parses standard notation (2d6+3), rolls from a seeded stream, and appends every result to a bounded roll log, because a board game where a contested roll cannot be replayed is a board game whose luck arguments never end. The seed cursor advances deterministically per die and is emitted with each result, so any roll can be reproduced exactly \u2014 the same audit contract world.floor_descent applies to dungeons, applied to polyhedrals. This component owns uniform discrete dice only. Weighted tables with disclosed odds \u2014 gacha pools, drop rates \u2014 belong to utility.probability_core, whose published-rates input exists for odds that must be advertised; dice odds are disclosed by the notation itself. It does not own what a roll means: movement distance, space effects, and contests are decided by the components that asked for the roll.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "seed",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The stream every roll derives from. Required for the same reason world.floor_descent requires a run seed: unseeded dice cannot be audited, replayed, or argued about productively."
+    },
+    {
+      "name": "maxDicePerRoll",
+      "type": "number",
+      "required": false,
+      "default": 50,
+      "description": "Guard against malformed notation asking for a million dice. Real systems rarely exceed ten."
+    },
+    {
+      "name": "explodeOnMax",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a max-face die rerolls and adds. A real mechanic in some systems; off by default because it changes every published probability the notation implies."
+    },
+    {
+      "name": "rollLogCapacity",
+      "type": "number",
+      "required": false,
+      "default": 1000,
+      "description": "How many rolls the audit log retains. Bounded so long sessions do not grow memory without bound; a thousand rolls is several game nights."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastRoll",
+      "type": "object",
+      "description": "Notation, individual faces, modifier, total, and the seed cursor \u2014 the complete audit record of the most recent roll."
+    },
+    {
+      "name": "rollCount",
+      "type": "number",
+      "description": "Rolls since seed init. Also the index into the audit log."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.diceRolled",
+      "utility.diceRollRejected"
+    ],
+    "listensTo": [
+      "input.rollDice"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "board-game",
+    "dice",
+    "rng",
+    "seeded",
+    "auditable",
+    "core"
+  ],
+  "provenance": "library-native"
+}

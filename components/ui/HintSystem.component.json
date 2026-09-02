@@ -1,0 +1,109 @@
+{
+  "id": "ui.hint_system",
+  "name": "Hint System",
+  "category": "ui",
+  "description": "Help that teaches rather than solves. Hints are tiered: the first says where to look, the second says which technique applies, and only the last fills a cell \u2014 because a hint button that answers immediately converts a puzzle game into a clicking game, and players use it anyway if it is the only option offered. Each tier is derived from the solver's own reasoning, so the explanation is the actual reason the cell is forced rather than a plausible sentence attached afterwards. Hint use is counted and reported, which lets a difficulty rater and a leaderboard both treat an assisted solve honestly.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tiers",
+      "type": "array",
+      "required": false,
+      "default": [
+        "locate",
+        "technique",
+        "reveal"
+      ],
+      "description": "Escalation order. Each press advances one step rather than jumping to the answer."
+    },
+    {
+      "name": "costPerHint",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Currency charged per hint. 0 keeps hints free."
+    },
+    {
+      "name": "maxHintsPerPuzzle",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Hints allowed. 0 means unlimited."
+    },
+    {
+      "name": "explainTechnique",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the technique tier names the rule being applied, which is the part that actually teaches."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentTier",
+      "type": "number",
+      "description": "Escalation reached on the active hint."
+    },
+    {
+      "name": "hintsUsed",
+      "type": "number",
+      "description": "Hints taken on this puzzle."
+    },
+    {
+      "name": "explanation",
+      "type": "string",
+      "description": "The reasoning behind the current hint, or empty."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.hintRequested",
+      "ui.hintGiven",
+      "ui.hintExhausted"
+    ],
+    "listensTo": [
+      "utility.cellRejected",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "utility.logic_grid_engine"
+  ],
+  "tags": [
+    "logic-puzzle",
+    "hints",
+    "teaching",
+    "ui"
+  ],
+  "provenance": "library-native"
+}

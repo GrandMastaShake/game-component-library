@@ -1,0 +1,105 @@
+{
+  "id": "utility.sandboxed_vm",
+  "name": "Sandboxed VM",
+  "category": "utility",
+  "description": "Runs player-authored programs under limits that cannot be argued with. THIS IS THE SAFETY CONTRACT OF THE GENRE: a game that executes code its players wrote, and in many designs code other players wrote and shared, must bound what that code can consume and must give it no reach outside its own world. Memory, instruction count and wall-clock are all capped, and exceeding any of them halts with a named reason rather than freezing the tab \u2014 a hang is indistinguishable from a crash to the player and blames the game for the program. There is deliberately no host access of any kind: no filesystem, no network, no clock beyond the ticks the VM is given. A program interacts with the world only through the command queue, which is the single audited doorway.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxInstructions",
+      "type": "number",
+      "required": false,
+      "default": 1000000,
+      "description": "Instructions before a program is halted. The primary defence against an accidental infinite loop."
+    },
+    {
+      "name": "maxMemoryBytes",
+      "type": "number",
+      "required": false,
+      "default": 1048576,
+      "description": "Memory a program may allocate."
+    },
+    {
+      "name": "maxWallClockMs",
+      "type": "number",
+      "required": false,
+      "default": 2000,
+      "description": "Real time a single run may take, so a slow program cannot freeze the frame."
+    },
+    {
+      "name": "hostAccess",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Present and false so the absence is explicit rather than implied. No filesystem, network or host clock is reachable, and this input exists to be read, not flipped."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "running",
+      "type": "boolean",
+      "description": "Whether a program is currently executing."
+    },
+    {
+      "name": "usage",
+      "type": "object",
+      "description": "Instructions, memory and milliseconds consumed by the last run."
+    },
+    {
+      "name": "haltReason",
+      "type": "string",
+      "description": "Why the last run stopped: completed, or the limit hit."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.programStarted",
+      "utility.programHalted",
+      "utility.limitExceeded"
+    ],
+    "listensTo": [
+      "utility.programCompiled",
+      "input.pause"
+    ]
+  },
+  "dependencies": [
+    "utility.command_bus"
+  ],
+  "tags": [
+    "programming-game",
+    "sandbox",
+    "safety",
+    "limits"
+  ],
+  "provenance": "library-native"
+}

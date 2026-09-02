@@ -1,0 +1,103 @@
+{
+  "id": "utility.probability_core",
+  "name": "Probability Core",
+  "category": "utility",
+  "description": "Weighted random that can be audited afterwards. Every draw is taken from a seeded stream and logged with the seed cursor, the table used and the result, so any pull can be reproduced exactly \u2014 which is the only durable answer to an accusation of rigging, and the reason this exists instead of a call to a random function. Rates are PUBLISHED: the declared odds are an output, not a comment, and the component refuses a table whose weights do not sum to the advertised rates rather than quietly normalising them, because silent normalisation is how a disclosed 1% becomes an actual 0.7%. Uniform dice belong to utility.dice_roll_resolver, whose odds the notation already discloses; this owns tables whose odds must be stated.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tables",
+      "type": "object",
+      "required": true,
+      "description": "Weighted tables keyed by id, each entry carrying an outcome and a weight. Required \u2014 the odds are the product."
+    },
+    {
+      "name": "publishedRates",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Advertised probability per outcome. Checked against the weights on load; a mismatch is refused rather than normalised."
+    },
+    {
+      "name": "logCapacity",
+      "type": "number",
+      "required": false,
+      "default": 500,
+      "description": "Draws retained for audit before the oldest is dropped."
+    },
+    {
+      "name": "refuseUnpublishedTables",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a table with no declared rates may be drawn from at all. True is the honest default for anything a player pays into."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "declaredRates",
+      "type": "object",
+      "description": "The published probability per outcome, for display."
+    },
+    {
+      "name": "drawLog",
+      "type": "array",
+      "description": "Recent draws with their seed cursors, for audit."
+    },
+    {
+      "name": "cursor",
+      "type": "number",
+      "description": "Position in the seeded stream."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.drawResolved",
+      "utility.tableRejected",
+      "utility.ratesPublished"
+    ],
+    "listensTo": [
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "world.noise_lib"
+  ],
+  "tags": [
+    "gacha",
+    "probability",
+    "auditable",
+    "disclosure"
+  ],
+  "provenance": "library-native"
+}

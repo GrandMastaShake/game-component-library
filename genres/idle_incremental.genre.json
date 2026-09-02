@@ -1,0 +1,40 @@
+{
+  "id": "genre.idle_incremental",
+  "name": "Idle / Incremental",
+  "description": "A number goes up, and the interesting part is what you spend it on. The pack's honest position is that an idle game is an economics toy, so every curve is declared rather than tuned in code: cost growth, offline rate, prestige conversion and achievement multipliers are all inputs, because those four numbers ARE the game and a designer needs to move them without touching a component. Offline earnings are capped and clock jumps are refused rather than paid, which is the difference between a design that respects absence and one that can be farmed by changing the device date. Prestige is previewable before it is committed, because asking a player to wipe a save on faith is asking too much.",
+  "version": "0.1.0",
+  "loop": "produce \u2192 spend on multiplier \u2192 prestige \u2192 repeat faster",
+  "views": [
+    "ui-forward"
+  ],
+  "memberComponents": [
+    "economy.currency",
+    "progression.production_queue",
+    "utility.timer_system",
+    "persistence.save_system",
+    "ui.notification_toast"
+  ],
+  "newComponents": [
+    "economy.offline_earnings",
+    "progression.prestige_reset",
+    "economy.auto_producer",
+    "progression.upgrade_tree",
+    "progression.achievement_milestones"
+  ],
+  "signatureCompound": {
+    "name": "The Reset That Pays For Itself",
+    "description": "The moment the genre turns from grinding into playing: auto_producer's tiers have stalled against a geometric cost curve, upgrade_tree has nothing affordable left, prestige_reset previews what wiping would grant, and the player takes it -- returning to zero with a permanent multiplier that makes the next hour take ten minutes. offline_earnings covers the gap while they are away, capped so returning still matters.",
+    "memberIds": [
+      "economy.auto_producer",
+      "progression.upgrade_tree",
+      "progression.prestige_reset",
+      "economy.offline_earnings"
+    ]
+  },
+  "tags": [
+    "idle",
+    "incremental",
+    "economy",
+    "ui-forward"
+  ]
+}

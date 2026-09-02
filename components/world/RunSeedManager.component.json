@@ -1,0 +1,96 @@
+{
+  "id": "world.run_seed_manager",
+  "name": "Run Seed Manager",
+  "category": "world",
+  "description": "One seed to rule the run. Issues the seed every other system derives from \u2014 floors, loot, drafts \u2014 and guarantees the whole run is reproducible from it, because a roguelike that cannot replay a run cannot verify a death, a speedrun, or a bug report. Daily runs are the same contract with a calendar-derived seed: every player gets the same dungeon on the same day, and the seed is published alongside any leaderboard entry so a record can be checked rather than believed. This component owns seed issuance, daily rotation, and persistence of the active run's seed through persistence.save_system. It does not own what the seed grows: world.floor_descent derives per-floor seeds from it, inventory.affix_loot_generator rolls drops from it, and neither should ever touch a random source this component did not hand them.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "runSeed",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Player- or rematch-chosen seed. Null means generate one and expose it via activeRunSeed \u2014 the run must always know its seed even when the player does not pick it."
+    },
+    {
+      "name": "dailyRunsEnabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the calendar-seeded shared run is offered. The daily is the genre's community engine; disabling it is a scope decision, not a tuning one."
+    },
+    {
+      "name": "dailySeedSalt",
+      "type": "string",
+      "required": false,
+      "default": "daily",
+      "description": "Domain-separates daily seeds from player-chosen ones, so a crafted seed cannot collide with a future daily and pre-solve it."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeRunSeed",
+      "type": "number",
+      "description": "The seed the current run derives from. Always populated once a run starts, whether chosen or generated."
+    },
+    {
+      "name": "runNumber",
+      "type": "number",
+      "description": "Runs started on this profile. Lifetime context for meta progression and telemetry."
+    },
+    {
+      "name": "isDailyRun",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.runSeedAssigned",
+      "world.dailyRunStarted"
+    ],
+    "listensTo": [
+      "input.startRun"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "roguelike",
+    "seed",
+    "deterministic",
+    "daily-run",
+    "core"
+  ],
+  "provenance": "library-native"
+}

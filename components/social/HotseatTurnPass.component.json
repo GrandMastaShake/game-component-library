@@ -1,0 +1,94 @@
+{
+  "id": "social.hotseat_turn_pass",
+  "name": "Hotseat Turn Pass",
+  "category": "social",
+  "description": "Pass-and-play turn order for one screen. Owns whose turn it is, the seat order, and the end-of-turn handoff \u2014 including the brief pass-the-device beat that keeps the next player's hand and hidden information private from the last player's wandering eyes. Networked multiplayer is social.party_system's job; this component depends on party_system only for the roster it sequences and otherwise assumes everyone shares one machine. It owns turn order and the handoff. It does not own what a turn contains \u2014 rolling, moving, and resolving are requested by the active player and owned by dice, track, and spaces \u2014 and it does not own turn timers: utility.timer_system already counts down, and a second clock is a bug farm.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "playerOrder",
+      "type": "array",
+      "required": true,
+      "default": null,
+      "description": "Player ids in seat order, drawn from the social.party_system roster. Required because turn order is the one fact this component exists to know."
+    },
+    {
+      "name": "handoffDelaySeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "The privacy beat between turns: hidden information is cleared, the next player is named, then control passes. Zero is legal but reads as a glitch on shared screens."
+    },
+    {
+      "name": "allowTurnUndo",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the outgoing player may retract an ended turn before handoff completes. Off by default; take-backs in hotseat are a social contract, not a feature."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activePlayerId",
+      "type": "string"
+    },
+    {
+      "name": "turnNumber",
+      "type": "number"
+    },
+    {
+      "name": "completedRounds",
+      "type": "number",
+      "description": "Full circuits of the seat order. Many board-game rules key off rounds rather than turns; both counts are kept so neither has to be derived."
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.hotseatTurnPassed",
+      "social.hotseatRoundCompleted"
+    ],
+    "listensTo": [
+      "input.endTurn"
+    ]
+  },
+  "dependencies": [
+    "social.party_system"
+  ],
+  "tags": [
+    "board-game",
+    "hotseat",
+    "turn-order",
+    "local-multiplayer"
+  ],
+  "provenance": "library-native"
+}

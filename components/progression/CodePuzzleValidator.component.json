@@ -1,0 +1,104 @@
+{
+  "id": "progression.code_puzzle_validator",
+  "name": "Code Puzzle Validator",
+  "category": "progression",
+  "description": "The test harness that decides whether a solution is a solution. A puzzle declares cases with inputs and expected outputs, and the program is run against all of them rather than the visible one \u2014 hidden cases are what stop a player hardcoding the example and are declared as such so the UI can say honestly that more tests exist. Failure reports the first differing case with both values, because 'wrong' teaches nothing and this genre is a teaching genre. Efficiency is scored separately from correctness: instructions executed and cycles taken are reported alongside pass or fail, since optimising a working program is the second half of the loop.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "cases",
+      "type": "array",
+      "required": true,
+      "description": "Test cases with inputs, expected outputs and whether they are hidden. Required."
+    },
+    {
+      "name": "revealHiddenOnPass",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether hidden cases are shown once solved, so a player can learn what they were actually up against."
+    },
+    {
+      "name": "scoreEfficiency",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether instruction and cycle counts are reported alongside the verdict."
+    },
+    {
+      "name": "stopOnFirstFailure",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the run halts at the first failing case, reporting both values."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "passed",
+      "type": "boolean",
+      "description": "Whether every case succeeded."
+    },
+    {
+      "name": "firstFailure",
+      "type": "object",
+      "description": "The first differing case, with expected and actual."
+    },
+    {
+      "name": "efficiency",
+      "type": "object",
+      "description": "Instructions executed and cycles taken."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.solutionPassed",
+      "progression.solutionFailed",
+      "progression.efficiencyScored"
+    ],
+    "listensTo": [
+      "utility.programCompiled",
+      "utility.programHalted"
+    ]
+  },
+  "dependencies": [
+    "utility.visual_node_script"
+  ],
+  "tags": [
+    "programming-game",
+    "testing",
+    "verification",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

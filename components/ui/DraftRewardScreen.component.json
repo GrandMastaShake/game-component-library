@@ -1,0 +1,93 @@
+{
+  "id": "ui.draft_reward_screen",
+  "name": "Draft Reward Screen",
+  "category": "ui",
+  "description": "The choose-one-of-three that builds the deck. After a combat clears, this component offers a small set of cards drawn from inventory.loot_table pools, and the chosen card enters the run deck through inventory.deck_manager \u2014 the screen never edits piles itself, because deck membership is the deck manager's bookkeeping, not a UI concern. The skip option is first-class: thinning is a strategy, and a draft with no skip forces bloat on players who already know better. This component owns the offer and the choice. It does not own the pools (inventory.loot_table does, as content) or the rarity math behind them, and it does not own drafts that happen outside combat rewards \u2014 progression.draft_on_level_up is the sibling for level-up choices, kept separate because combat drafts grow the deck while level-up drafts grow the build.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "choicesOffered",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Cards shown per draft. Three is the genre standard: two feels like a coin flip, four reads as a wall."
+    },
+    {
+      "name": "allowSkip",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the player may take nothing. Keep it true unless the design specifically wants forced bloat as pressure."
+    },
+    {
+      "name": "skipReward",
+      "type": "object",
+      "required": false,
+      "default": null,
+      "description": "Optional compensation for skipping (heal, currency). Null means skipping is its own reward: a thinner deck."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastOffer",
+      "type": "array",
+      "description": "The card ids most recently presented, kept for UI restore after interruption."
+    },
+    {
+      "name": "draftsSkipped",
+      "type": "number",
+      "description": "How often the player took nothing \u2014 the clearest signal that draft pools are mis-tuned."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.draftOffered",
+      "ui.draftCardChosen",
+      "ui.draftSkipped"
+    ],
+    "listensTo": [
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "inventory.loot_table",
+    "inventory.deck_manager"
+  ],
+  "tags": [
+    "deckbuilder",
+    "draft",
+    "rewards",
+    "ui"
+  ],
+  "provenance": "library-native"
+}

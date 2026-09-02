@@ -1,0 +1,111 @@
+{
+  "id": "movement.joint_builder",
+  "name": "Joint Builder",
+  "category": "movement",
+  "description": "Hinges, springs and pistons, and the rule that a contraption is just joints that agree. The builder is the authoring verb of the genre: a player selects two parts, picks a joint kind, and the machine gains a degree of freedom. Every joint kind is the same contract with different limits, which is why they are one component rather than four \u2014 a hinge is a spring with infinite stiffness on five axes. Joints break under declared load, because a contraption that cannot fail is a contraption with no engineering in it, and the break is announced so the debris can be simulated rather than deleted.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "jointKinds",
+      "type": "array",
+      "required": false,
+      "default": [
+        "hinge",
+        "spring",
+        "piston",
+        "fixed",
+        "ball"
+      ],
+      "description": "Joint types the builder offers."
+    },
+    {
+      "name": "breakForce",
+      "type": "number",
+      "required": false,
+      "default": 5000,
+      "description": "Load a joint carries before it fails. 0 makes joints unbreakable, which removes the engineering."
+    },
+    {
+      "name": "springStiffness",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Default stiffness for spring joints."
+    },
+    {
+      "name": "motorMaxTorque",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Torque a powered hinge or piston can apply."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "joints",
+      "type": "array",
+      "description": "Joints in the current contraption."
+    },
+    {
+      "name": "degreesOfFreedom",
+      "type": "number",
+      "description": "Unconstrained axes across the assembly."
+    },
+    {
+      "name": "brokenThisSession",
+      "type": "number",
+      "description": "Joints that have failed under load."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.jointCreated",
+      "movement.jointBroke",
+      "movement.jointRejected"
+    ],
+    "listensTo": [
+      "input.interact",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "movement.physics_core"
+  ],
+  "tags": [
+    "physics-sandbox",
+    "construction",
+    "joints",
+    "simulation"
+  ],
+  "provenance": "library-native"
+}

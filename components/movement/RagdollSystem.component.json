@@ -1,0 +1,105 @@
+{
+  "id": "movement.ragdoll_system",
+  "name": "Ragdoll System",
+  "category": "movement",
+  "description": "A body as several bodies that disagree with each other politely. Limbs are rigid parts joined by constrained joints, and the interesting decisions are all about what happens when the solver cannot satisfy every constraint at once: iteration count trades stability for cost, and a limit on separation is what stops a ragdoll exploding when two constraints fight. Blending between animated and simulated is the feature that makes ragdolls usable rather than a death effect \u2014 a body can go limp progressively \u2014 which is why the blend is an input rather than a boolean. movement.character_body still owns the single upright body; this owns the collection that stops being upright.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "limbs",
+      "type": "array",
+      "required": true,
+      "description": "Body parts with their masses, shapes and parent joints. Required \u2014 a skeleton is content."
+    },
+    {
+      "name": "solverIterations",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Constraint passes per step. More is stabler and slower; below about six a ragdoll starts to jitter."
+    },
+    {
+      "name": "maxJointSeparation",
+      "type": "number",
+      "required": false,
+      "default": 0.05,
+      "description": "Distance a joint may be pulled apart before it is hard-clamped, which is what stops a body exploding when constraints fight."
+    },
+    {
+      "name": "animationBlend",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "0 fully simulated, 1 fully animated. Values between are how a body goes limp progressively rather than instantly."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "limbTransforms",
+      "type": "array",
+      "description": "Position and orientation per limb."
+    },
+    {
+      "name": "settled",
+      "type": "boolean",
+      "description": "Whether the body has come to rest."
+    },
+    {
+      "name": "strainByJoint",
+      "type": "object",
+      "description": "Constraint error per joint, for debugging and for breaking."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.ragdollActivated",
+      "movement.ragdollSettled",
+      "movement.jointStrained"
+    ],
+    "listensTo": [
+      "combat.damageResolved",
+      "movement.grounded",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "movement.physics_core"
+  ],
+  "tags": [
+    "physics-sandbox",
+    "ragdoll",
+    "constraints",
+    "simulation"
+  ],
+  "provenance": "library-native"
+}

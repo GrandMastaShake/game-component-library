@@ -1,0 +1,96 @@
+{
+  "id": "ui.story_stats",
+  "name": "Story Stats",
+  "category": "ui",
+  "description": "The variables the reader is allowed to see. Interactive fiction runs on hidden numbers, and surfacing a chosen few \u2014 reputation, resolve, days remaining \u2014 turns invisible bookkeeping into a thing the reader can play toward. Which variables are shown is an input because that is a narrative decision: a mystery may want its suspicion meter hidden until the second act, and revealing it is an event rather than a settings change. Changes are announced with their direction so the interface can show a rise or a fall, which is most of what a stat display is for.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tracked",
+      "type": "array",
+      "required": true,
+      "description": "Flag names surfaced to the reader, with their display labels. Required."
+    },
+    {
+      "name": "showChangeIndicators",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether rises and falls are signalled, which is most of a stat display's value."
+    },
+    {
+      "name": "hiddenUntilRevealed",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Tracked stats that stay concealed until the story reveals them."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "visible",
+      "type": "object",
+      "description": "Currently shown stats and their values."
+    },
+    {
+      "name": "lastChange",
+      "type": "object",
+      "description": "The most recent change and its direction."
+    },
+    {
+      "name": "concealed",
+      "type": "array",
+      "description": "Tracked stats not yet revealed."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.statChanged",
+      "ui.statRevealed"
+    ],
+    "listensTo": [
+      "ui.consequenceFlagSet",
+      "ui.passageEntered"
+    ]
+  },
+  "dependencies": [
+    "ui.choice_consequence"
+  ],
+  "tags": [
+    "interactive-fiction",
+    "stats",
+    "narrative",
+    "ui"
+  ],
+  "provenance": "library-native"
+}

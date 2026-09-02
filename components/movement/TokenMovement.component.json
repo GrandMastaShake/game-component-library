@@ -1,0 +1,93 @@
+{
+  "id": "movement.token_movement",
+  "name": "Token Movement",
+  "category": "movement",
+  "description": "Moving the piece around the track. Advances a token along world.board_track_path's edges by whatever a roll or card granted, counts laps as it passes the start space, and resolves captures when one token lands on another. It owns positions, lap counts, and capture resolution \u2014 and nothing about how far to move: the number arrives via utility.diceRolled or a card effect, and this component treats both identically, because a mover that cares where its move came from is a rules engine wearing a mover's clothes. Route choice at a branch is answered through input.chooseBranch after world.board_track_path asks; this component executes the choice, it does not make it. It also declines to decide what laps mean \u2014 lapsToWin defaults to zero because the win rule belongs to the game mode, not the mover.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tokensPerPlayer",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Pieces each player controls. Above one, captures and blocks become positional play instead of coincidence."
+    },
+    {
+      "name": "captureRule",
+      "type": "string",
+      "required": false,
+      "default": "sendToStart",
+      "description": "sendToStart | swap | coexist \u2014 what happens when a landing space is occupied. coexist disables captures entirely, which is the right call for race-to-the-finish designs."
+    },
+    {
+      "name": "lapsToWin",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "0 means laps are tracked and emitted but not a verdict. The win condition belongs to the game mode; this component only promises the count is right."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tokenPositions",
+      "type": "object",
+      "description": "Space id per token id \u2014 the whole board state in one read."
+    },
+    {
+      "name": "lapsCompleted",
+      "type": "object",
+      "description": "Lap count per player, for pass-start payouts and finish detection."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.tokenMoved",
+      "movement.tokenCaptured",
+      "movement.tokenLapCompleted"
+    ],
+    "listensTo": [
+      "utility.diceRolled",
+      "input.chooseBranch"
+    ]
+  },
+  "dependencies": [
+    "world.board_track_path"
+  ],
+  "tags": [
+    "board-game",
+    "tokens",
+    "laps",
+    "captures"
+  ],
+  "provenance": "library-native"
+}
