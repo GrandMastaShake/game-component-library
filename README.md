@@ -6,8 +6,8 @@ A schema-driven, AI-assemblable library of modular game systems—**elements** a
 
 ## What exists
 
-- **79 component descriptors** spanning movement, combat, inventory, economy, social, world, UI, pets, progression, persistence, presentation, housing, and utility.
-- **11 validated compounds** for reusable multi-system gameplay loops.
+- **81 component descriptors** spanning movement, combat, inventory, economy, social, world, UI, pets, progression, persistence, presentation, housing, and utility.
+- **12 validated compounds** for reusable multi-system gameplay loops.
 - **An assembly graph** — 5 anchor shapes, 32 parts and 139 attachments, each with a joint type, a named socket and an offset, checked against the shape contracts' topology.
 - Component-graph and compound validators for malformed descriptors, missing members/dependencies, bad event wires, duplicates, and cycles.
 - A platform-aware build-manifest compiler, readiness evaluator, and coverage-roadmap generator.
