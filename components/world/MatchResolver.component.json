@@ -2,7 +2,7 @@
   "id": "world.match_resolver",
   "name": "Match Resolver",
   "category": "world",
-  "description": "Finds the matches, clears them, and lets what falls make more. Detection is run-length in both axes over the grid, and the resolver's real work is the CASCADE: clearing drops the pieces above, dropping creates new lines, and the loop continues until a pass finds nothing. Each pass is announced separately so scoring can escalate per step, which is where the genre's entire dopamine curve lives. Special pieces are created by match SHAPE rather than by length alone \u2014 a five in a row and an L of five are different rewards \u2014 and the shape rules are declared here because they are the difference between two match-3 games that otherwise look identical. The resolver owns the board; it owns no score, no timer and no objective.",
+  "description": "Finds the matches, clears them, and lets what falls make more. Detection is run-length in both axes over the grid, and the resolver's real work is the CASCADE: clearing drops the pieces above, dropping creates new lines, and the loop continues until a pass finds nothing. Each pass is announced separately so scoring can escalate per step, which is where the genre's entire dopamine curve lives. Special pieces are created by match SHAPE rather than by length alone \u2014 a five in a row and an L of five are different rewards \u2014 and the shape rules are declared here because they are the difference between two match-3 games that otherwise look identical. The resolver owns the board outright -- its size, its contents and its refills -- and owns no score, no timer and no objective.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,12 +30,26 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
   ],
   "inputs": [
+    {
+      "name": "columns",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Board width in cells. Declared here because the board is this component's own: an earlier draft depended on world.tile_grid for it, which is a TERRAIN grid publishing elevationAt and surfaceAt and has nothing a match-3 board can use."
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Board height in cells."
+    },
     {
       "name": "minimumMatch",
       "type": "number",
@@ -97,9 +112,7 @@
       "input.confirm"
     ]
   },
-  "dependencies": [
-    "world.tile_grid"
-  ],
+  "dependencies": [],
   "tags": [
     "tile-matching",
     "match-3",

@@ -2,7 +2,7 @@
   "id": "world.swap_validator",
   "name": "Swap Validator",
   "category": "world",
-  "description": "Decides whether a move is a move, and rescues a board that has run out of them. A swap is legal only if it produces a match, which is the rule that makes the genre a puzzle rather than a fidget toy \u2014 and rejecting a swap has to be visible, so the rejection is an event and not a silent snap-back. The second job is the one players never see working: after every settle the validator counts remaining legal moves, and on zero it reshuffles rather than presenting a dead board. Reshuffling is announced, because a board that rearranges itself with no explanation reads as a bug. A hint is the same search stopped at the first result, which is why it lives here rather than in a separate component.",
+  "description": "Decides whether a move is a move, and rescues a board that has run out of them. A swap is legal only if it produces a match, which is the rule that makes the genre a puzzle rather than a fidget toy \u2014 and rejecting a swap has to be visible, so the rejection is an event and not a silent snap-back. The second job is the one players never see working: after every settle the validator counts remaining legal moves, and on zero it reshuffles rather than presenting a dead board. Reshuffling is announced, because a board that rearranges itself with no explanation reads as a bug. A hint is the same search stopped at the first result, which is why it lives here rather than in a separate component. The validator depends on world.match_resolver because it has to see the board to judge a swap, and the board belongs to the resolver.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -94,7 +95,7 @@
     ]
   },
   "dependencies": [
-    "world.tile_grid"
+    "world.match_resolver"
   ],
   "tags": [
     "tile-matching",
