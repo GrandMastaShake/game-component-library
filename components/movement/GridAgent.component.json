@@ -1,0 +1,116 @@
+{
+  "id": "movement.grid_agent",
+  "name": "Grid Agent",
+  "category": "movement",
+  "description": "Something that stands on tiles and steps between them. It is deliberately not movement.character_body: a character body is a box in continuous space that gravity acts on and that can be anywhere, and an agent on a grid is on a tile or it is not. The difference is not cosmetic — a tile can be OCCUPIED, which is what lets one unit block another, what makes a footprint mean something, and what a turn can be taken in. The two are alternatives, not layers, and a build that has both wants two different things from the same word.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/iso/GridAgent.ts); not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null,
+      "note": "The 3D runtime moves a character body through continuous space."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "footprintWidth",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Tiles occupied along x. A footprint larger than one tile is why occupancy is stored per tile rather than as a single position."
+    },
+    {
+      "name": "footprintDepth",
+      "type": "number",
+      "required": false,
+      "default": 1
+    },
+    {
+      "name": "maxStepUp",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Elevation levels this agent can climb in one step. The single most consequential number here: it decides which parts of a map are reachable at all, and it is easy to leave at a value that fences an agent into the flat patch it spawned on."
+    },
+    {
+      "name": "maxStepDown",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Levels this agent can drop in one step. Deliberately larger than maxStepUp by default, because falling is easier than climbing — which makes reachability ASYMMETRIC. An agent can walk down into ground it cannot walk back out of, and any build that lets a player send a unit somewhere has to decide whether that is a trap or a feature."
+    },
+    {
+      "name": "stepDurationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.22
+    },
+    {
+      "name": "blocksOthers",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether this agent's tiles are impassable to other agents. False is what a ghost, a projectile, or an overlapping crowd wants."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tile",
+      "type": "object"
+    },
+    {
+      "name": "occupiedTiles",
+      "type": "array"
+    },
+    {
+      "name": "isMoving",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.agentMoved",
+      "movement.agentArrived",
+      "movement.agentBlocked"
+    ],
+    "listensTo": [
+      "movement.gridPathFound",
+      "world.tileChanged"
+    ]
+  },
+  "eventIntents": {
+    "movement.agentMoved": [
+      "persist"
+    ],
+    "movement.agentBlocked": [
+      "notify"
+    ],
+    "movement.agentArrived": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid"
+  ],
+  "tags": [
+    "grid",
+    "isometric",
+    "tiles",
+    "movement",
+    "agent",
+    "unit",
+    "occupancy",
+    "tactics",
+    "elevation"
+  ]
+}

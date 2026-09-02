@@ -1,0 +1,127 @@
+{
+  "id": "compound.stepped_grid_movement",
+  "name": "Stepped Grid Movement",
+  "version": "0.1.0",
+  "description": "Point at a tile and something walks there, over ground that has height. This is the substrate several genres share rather than a game in itself: turn-based tactics, roguelikes, board games, construction sims and transport builders all differ above this line and agree below it — tiles, occupancy, and a route that honours what the mover can climb. Splitting it out is the claim that those genres want ONE movement layer rather than five, and the place to find out is here.",
+  "targetPlatform": "web",
+  "components": [
+    {
+      "id": "world.noise_lib",
+      "role": "shared value-noise source",
+      "config": {
+        "seed": 7,
+        "octaves": 4
+      }
+    },
+    {
+      "id": "world.terrain_generator",
+      "role": "continuous surface height, before it is stepped",
+      "config": {
+        "maxHeight": 100
+      }
+    },
+    {
+      "id": "world.tile_grid",
+      "role": "authoritative tile store, one elevation per column",
+      "config": {
+        "width": 48,
+        "height": 48,
+        "elevationLevels": 8
+      }
+    },
+    {
+      "id": "presentation.iso_projection",
+      "role": "tile space to screen space, and back",
+      "config": {
+        "tileWidth": 64,
+        "tileHeight": 32,
+        "elevationPixels": 16
+      }
+    },
+    {
+      "id": "presentation.depth_sorter",
+      "role": "back-to-front draw order, agents included",
+      "config": {
+        "cullOffscreen": true
+      }
+    },
+    {
+      "id": "presentation.tile_cursor",
+      "role": "names the destination tile",
+      "config": {
+        "elevationAware": true
+      }
+    },
+    {
+      "id": "movement.grid_agent",
+      "role": "occupies tiles, steps between them",
+      "config": {
+        "maxStepUp": 1,
+        "maxStepDown": 3
+      }
+    },
+    {
+      "id": "movement.grid_pathfinder",
+      "role": "routes that honour the agent's climb limits",
+      "config": {
+        "allowDiagonal": true,
+        "climbCostPerLevel": 1.5
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "world.tile_grid"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileGridBuilt",
+      "to": "presentation.depth_sorter"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileGridBuilt",
+      "to": "movement.grid_pathfinder"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileChanged",
+      "to": "presentation.depth_sorter"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileChanged",
+      "to": "movement.grid_pathfinder"
+    },
+    {
+      "from": "world.tile_grid",
+      "event": "world.tileChanged",
+      "to": "movement.grid_agent"
+    },
+    {
+      "from": "presentation.tile_cursor",
+      "event": "presentation.tileSelected",
+      "to": "movement.grid_pathfinder"
+    },
+    {
+      "from": "movement.grid_pathfinder",
+      "event": "movement.gridPathFound",
+      "to": "movement.grid_agent"
+    }
+  ],
+  "criticalComponents": [
+    "world.tile_grid",
+    "movement.grid_agent",
+    "movement.grid_pathfinder"
+  ],
+  "acceptanceCriteria": [
+    "Every path returned is walkable step by step: each pair of consecutive tiles is adjacent, no step climbs more than maxStepUp or drops more than maxStepDown, and no tile in it is occupied by a blocking agent.",
+    "Every path returned is a cheapest one. A* with a heuristic that does not admit diagonal movement returns plausible routes that are not the shortest, and nothing about them looks wrong.",
+    "Raising a tile under a route invalidates that route rather than leaving an agent to walk up a wall.",
+    "Reachability is not symmetric when maxStepDown exceeds maxStepUp: an agent can enter ground it cannot leave, and the build says which tiles those are rather than discovering it when a unit is stranded.",
+    "Two agents with different climb limits get different routes across the same map, and the one that cannot make the climb is told so rather than given a route it will fail to walk.",
+    "An unreachable destination fails within maxExpandedNodes instead of expanding the whole map."
+  ]
+}

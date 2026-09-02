@@ -19,6 +19,8 @@
       "movement.basic_walk",
       "movement.character_body",
       "movement.dash_ability",
+      "movement.grid_agent",
+      "movement.grid_pathfinder",
       "movement.ground_sensor",
       "movement.jump_core",
       "movement.ledge_grab",

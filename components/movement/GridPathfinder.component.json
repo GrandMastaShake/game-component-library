@@ -1,0 +1,110 @@
+{
+  "id": "movement.grid_pathfinder",
+  "name": "Grid Pathfinder",
+  "category": "movement",
+  "description": "Finds a route between two tiles that the agent asking for it can actually walk, which means honouring its climb limits rather than only its footprint. movement.pathfinding_system is the continuous-space answer and depends on world.terrain_generator; this one depends on world.tile_grid and on the agent, because on stepped ground the question 'is there a path' has no answer until you say who is walking. Two agents with different maxStepUp get different routes across the same map, and one of them may get none.",
+  "version": "0.1.0",
+  "platform": [
+    "web"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application (generator/iso/GridPath.ts); not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null,
+      "note": "The 3D runtime has no tile graph to search."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "allowDiagonal",
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "diagonalCost",
+      "type": "number",
+      "required": false,
+      "default": 1.4142,
+      "description": "Cost of a diagonal step relative to 1 for a straight one. It is not a look-and-feel knob: a search that allows diagonals must use a heuristic that admits them, and pairing diagonal movement with a Manhattan heuristic overestimates the remaining distance and quietly returns routes that are not the shortest."
+    },
+    {
+      "name": "cutCorners",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a diagonal step may pass between two blocked tiles. False is the answer that matches what a player expects to be able to do."
+    },
+    {
+      "name": "climbCostPerLevel",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "Extra cost per level of elevation change. Zero makes hills free and routes go straight over them; large values make agents walk around."
+    },
+    {
+      "name": "maxPathLength",
+      "type": "number",
+      "required": false,
+      "default": 200
+    },
+    {
+      "name": "maxExpandedNodes",
+      "type": "number",
+      "required": false,
+      "default": 20000,
+      "description": "A bound on the search, so an unreachable destination on a large map fails in bounded time rather than expanding every tile."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastPath",
+      "type": "array"
+    },
+    {
+      "name": "lastCost",
+      "type": "number"
+    },
+    {
+      "name": "lastExpandedNodes",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.gridPathFound",
+      "movement.gridPathFailed"
+    ],
+    "listensTo": [
+      "world.tileGridBuilt",
+      "world.tileChanged",
+      "presentation.tileSelected"
+    ]
+  },
+  "eventIntents": {
+    "movement.gridPathFailed": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid",
+    "movement.grid_agent"
+  ],
+  "tags": [
+    "grid",
+    "isometric",
+    "tiles",
+    "pathfinding",
+    "navigation",
+    "astar",
+    "tactics",
+    "elevation"
+  ]
+}
