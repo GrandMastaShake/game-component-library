@@ -84,7 +84,8 @@
       "combat.attackRejected"
     ],
     "listensTo": [
-      "input.attack"
+      "input.attack",
+      "utility.commandDispatched"
     ]
   },
   "dependencies": [
