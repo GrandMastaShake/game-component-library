@@ -89,7 +89,8 @@
     ],
     "listensTo": [
       "combat.turnStarted",
-      "presentation.tileSelected"
+      "presentation.tileSelected",
+      "utility.commandDispatched"
     ]
   },
   "dependencies": [

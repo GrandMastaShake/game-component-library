@@ -84,7 +84,8 @@
     "listensTo": [
       "combat.entityDefeated",
       "input.endTurn",
-      "input.delayTurn"
+      "input.delayTurn",
+      "utility.commandDispatched"
     ]
   },
   "dependencies": [
