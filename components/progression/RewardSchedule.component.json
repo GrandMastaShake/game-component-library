@@ -1,0 +1,39 @@
+{
+  "id": "progression.reward_schedule",
+  "name": "Reward Schedule",
+  "category": "progression",
+  "description": "Decides WHEN an accomplishment pays out, using the four operant-conditioning schedules: fixed-interval (every N seconds), fixed-ratio (every N achievements), variable-ratio (a chance per achievement, the slot-machine curve) and variable-interval (a chance per second). Accepts any event an emitter tags with the `achievement` intent, so a genre that declares its own accomplishments is paid without this component naming them, and emits a single grant tagged `reward` that currency, inventory and XP all accept by intent. It is the bridge between accomplishing something and being paid for it, which the library otherwise only has for combat and trade.",
+  "version": "0.1.0",
+  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "schedule", "type": "string", "required": false, "default": "fixed-ratio", "description": "fixed-interval | fixed-ratio | variable-ratio | variable-interval"},
+    {"name": "ratio", "type": "number", "required": false, "default": 1, "description": "Achievements per payout for fixed-ratio; the mean for variable-ratio."},
+    {"name": "intervalSeconds", "type": "number", "required": false, "default": 60, "description": "Seconds per payout for fixed-interval; the mean for variable-interval."},
+    {"name": "rewardKind", "type": "string", "required": false, "default": "currency", "description": "What a payout grants: currency | item | xp."},
+    {"name": "rewardAmount", "type": "number", "required": false, "default": 1},
+    {"name": "itemId", "type": "string", "required": false, "default": null, "description": "Which item, when rewardKind is item."}
+  ],
+  "outputs": [
+    {"name": "sinceLastReward", "type": "number"},
+    {"name": "nextRewardAt", "type": "number"},
+    {"name": "totalGranted", "type": "number"}
+  ],
+  "events": {
+    "emits": ["progression.rewardGranted", "progression.rewardSkipped"],
+    "listensTo": []
+  },
+  "eventIntents": {
+    "progression.rewardGranted": ["reward", "notify", "persist"],
+    "progression.rewardSkipped": ["notify"]
+  },
+  "sinkFor": ["achievement"],
+  "dependencies": ["utility.probability_core"],
+  "tags": ["reward", "progression", "economy", "idle", "gacha"],
+  "provenance": "Vocabulary from the operant-conditioning schedules; surveyed in game-architect-studio/docs/prior-art.md (idle-game-library)."
+}

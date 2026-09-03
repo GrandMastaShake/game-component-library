@@ -112,6 +112,7 @@
       "input.confirm"
     ]
   },
+  "eventIntents": {"world.matchCleared": ["achievement"]},
   "dependencies": [],
   "tags": [
     "tile-matching",

@@ -59,6 +59,7 @@
     ],
     "listensTo": ["world.hazardEntered"]
   },
+  "eventIntents": {"progression.checkpointReached": ["achievement"]},
   "dependencies": [
     "movement.character_body",
     "world.hazard_volume"

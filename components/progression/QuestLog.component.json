@@ -62,7 +62,7 @@
     "progression.questCompleted": [
       "persist",
       "notify"
-    ]
+    , "achievement"]
   },
   "dependencies": [
     "economy.currency"

@@ -72,6 +72,7 @@
       "progression.questCompleted"
     ]
   },
+  "sinkFor": ["reward"],
   "dependencies": [],
   "tags": [
     "xp",

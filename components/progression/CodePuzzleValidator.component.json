@@ -91,6 +91,7 @@
       "utility.programHalted"
     ]
   },
+  "eventIntents": {"progression.solutionPassed": ["achievement"]},
   "dependencies": [
     "utility.visual_node_script"
   ],
