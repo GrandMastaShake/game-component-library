@@ -80,6 +80,11 @@
       "name": "actionsTaken",
       "type": "array",
       "description": "Actions spent this turn, for undo UI and replays."
+    },
+    {
+      "name": "canAfford",
+      "type": "function",
+      "description": "Whether the active unit can pay for a named action right now. The price list is this component's input, so everyone else asking `pointsRemaining > 0` is guessing at a number they cannot see -- correct while every action costs one and quietly wrong the moment a skill costs two."
     }
   ],
   "events": {
