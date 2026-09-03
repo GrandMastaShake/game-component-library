@@ -74,6 +74,11 @@
       "description": "Live roster: id, team, x, y, and stats."
     },
     {
+      "name": "teams",
+      "type": "array",
+      "description": "The sides, in the order they were declared. First is the one a player is expected to be holding, which is the convention everything that has to tell the two apart already needs: a fog of war reveals around one side's units, and an AI takes turns for the others. Publishing it means both read the same answer instead of each picking a rule."
+    },
+    {
       "name": "unitAt",
       "type": "function",
       "description": "The unit standing on a tile, or null."
