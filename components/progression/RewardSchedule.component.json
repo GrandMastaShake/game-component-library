@@ -4,7 +4,7 @@
   "category": "progression",
   "description": "Decides WHEN an accomplishment pays out, using the four operant-conditioning schedules: fixed-interval (every N seconds), fixed-ratio (every N achievements), variable-ratio (a chance per achievement, the slot-machine curve) and variable-interval (a chance per second). Accepts any event an emitter tags with the `achievement` intent, so a genre that declares its own accomplishments is paid without this component naming them, and emits a single grant tagged `reward` that currency, inventory and XP all accept by intent. It is the bridge between accomplishing something and being paid for it, which the library otherwise only has for combat and trade.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": ["agnostic"],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "godot", "status": "unmapped", "module": null},
