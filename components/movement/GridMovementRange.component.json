@@ -95,7 +95,8 @@
   "dependencies": [
     "world.tile_grid",
     "movement.pathfinding_system",
-    "combat.unit_roster"
+    "combat.unit_roster",
+    "combat.action_point_economy"
   ],
   "tags": [
     "tactics",

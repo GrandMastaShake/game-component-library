@@ -91,7 +91,8 @@
     "combat.unit_roster",
     "combat.cover_bonus_grid",
     "combat.damage_resolver",
-    "movement.grid_movement_range"
+    "movement.grid_movement_range",
+    "combat.action_point_economy"
   ],
   "tags": [
     "tactics",
