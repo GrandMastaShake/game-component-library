@@ -2,7 +2,7 @@
   "id": "progression.reward_schedule",
   "name": "Reward Schedule",
   "category": "progression",
-  "description": "Decides WHEN an accomplishment pays out, using the four operant-conditioning schedules: fixed-interval (every N seconds), fixed-ratio (every N achievements), variable-ratio (a chance per achievement, the slot-machine curve) and variable-interval (a chance per second). Accepts any event an emitter tags with the `achievement` intent, so a genre that declares its own accomplishments is paid without this component naming them, and emits a single grant tagged `reward` that currency, inventory and XP all accept by intent. It is the bridge between accomplishing something and being paid for it, which the library otherwise only has for combat and trade.",
+  "description": "Decides WHEN an accomplishment pays out, using the four operant-conditioning schedules: fixed-interval (every N seconds), fixed-ratio (every N achievements), variable-ratio (a chance per achievement, the slot-machine curve) and variable-interval (a chance per second). Accepts any event an emitter tags with the `achievement` intent, so a genre that declares its own accomplishments is paid without this component naming them, and emits one payout tagged `reward` carrying a LIST of grants, so coins and experience arrive together rather than needing a schedule each; currency, inventory and XP each take the entries whose kind is theirs and ignore the rest. It is the bridge between accomplishing something and being paid for it, which the library otherwise only has for combat and trade.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -53,24 +53,16 @@
       "description": "Seconds per payout for fixed-interval; the mean for variable-interval."
     },
     {
-      "name": "rewardKind",
-      "type": "string",
+      "name": "grants",
+      "type": "array",
       "required": false,
-      "default": "currency",
-      "description": "What a payout grants: currency | item | xp."
-    },
-    {
-      "name": "rewardAmount",
-      "type": "number",
-      "required": false,
-      "default": 1
-    },
-    {
-      "name": "itemId",
-      "type": "string",
-      "required": false,
-      "default": null,
-      "description": "Which item, when rewardKind is item."
+      "default": [
+        {
+          "kind": "currency",
+          "amount": 1
+        }
+      ],
+      "description": "What ONE payout gives, as a list. Each entry is {kind: currency | item | xp, amount, itemId}. A payout delivers ALL of them, because a quest that pays coins AND experience is the normal case, and one kind per schedule forces two schedules to say it."
     }
   ],
   "outputs": [

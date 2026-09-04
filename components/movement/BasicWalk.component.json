@@ -56,7 +56,8 @@
   "events": {
     "emits": [
       "movement.started",
-      "movement.stopped"
+      "movement.stopped",
+      "movement.blocked"
     ],
     "listensTo": [
       "input.moveDirection"
