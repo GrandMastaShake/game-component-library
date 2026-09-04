@@ -2,7 +2,7 @@
   "id": "movement.basic_walk",
   "name": "Basic Walk",
   "category": "movement",
-  "description": "Ground-based locomotion with configurable speed and acceleration.",
+  "description": "Ground-based locomotion with configurable speed and acceleration. Movement CONTINUES while a direction is held rather than advancing once per press, because `input.moveDirection` reports whether the key is still down and a body that ignores that makes the player tap to walk. It also accepts `input.faceDirection`, which turns without moving — the aim half of a twin-stick or the look half of a shoulder-button strafe, and the thing a player needs when the swing scans the way they are pointed and they do not want to step into what they are hitting.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -40,6 +40,20 @@
       "type": "number",
       "required": false,
       "default": 8
+    },
+    {
+      "name": "startX",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Where the body begins along X, in tiles. Null means the middle of the board. A region entered by walking off a neighbour should begin at the border it was entered THROUGH, not at the centre, or every crossing teleports the player away from the place they were walking toward."
+    },
+    {
+      "name": "startY",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "The same along Y. Null means the middle."
     }
   ],
   "outputs": [
@@ -60,7 +74,8 @@
       "movement.blocked"
     ],
     "listensTo": [
-      "input.moveDirection"
+      "input.moveDirection",
+      "input.faceDirection"
     ]
   },
   "dependencies": [],

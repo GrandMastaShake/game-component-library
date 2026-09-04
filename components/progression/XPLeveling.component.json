@@ -46,6 +46,13 @@
       "type": "number",
       "required": false,
       "default": 1
+    },
+    {
+      "name": "startingXp",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Experience already banked toward the next level when this component is constructed. `startingLevel` alone loses everything earned since the last level-up, which matters wherever a run is rebuilt rather than continued — walking into a new region, reloading a save, changing floor. A level and a level-and-a-half are different states and only one of them was expressible."
     }
   ],
   "outputs": [
@@ -72,7 +79,9 @@
       "progression.questCompleted"
     ]
   },
-  "sinkFor": ["reward"],
+  "sinkFor": [
+    "reward"
+  ],
   "dependencies": [],
   "tags": [
     "xp",
