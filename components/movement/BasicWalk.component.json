@@ -2,7 +2,7 @@
   "id": "movement.basic_walk",
   "name": "Basic Walk",
   "category": "movement",
-  "description": "Ground-based locomotion with configurable speed and acceleration. Movement CONTINUES while a direction is held rather than advancing once per press, because `input.moveDirection` reports whether the key is still down and a body that ignores that makes the player tap to walk. It also accepts `input.faceDirection`, which turns without moving — the aim half of a twin-stick or the look half of a shoulder-button strafe, and the thing a player needs when the swing scans the way they are pointed and they do not want to step into what they are hitting.",
+  "description": "Ground-based locomotion with configurable speed and acceleration. Movement CONTINUES while a direction is held rather than advancing once per press, because `input.moveDirection` reports whether the key is still down and a body that ignores that makes the player tap to walk. It also accepts `input.faceDirection`, which turns without moving, and `input.aim`, which points the body continuously at a screen position so an attack can be swung or fired along the exact bearing rather than snapped to one of four — the aim half of a twin-stick or the look half of a shoulder-button strafe, and the thing a player needs when the swing scans the way they are pointed and they do not want to step into what they are hitting.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -65,6 +65,11 @@
     {
       "name": "velocity",
       "type": "vector3"
+    },
+    {
+      "name": "aimAngle",
+      "type": "number",
+      "description": "Where the body is pointed, in radians, measured from due east and increasing clockwise on screen. `input.aim` sets it continuously — a mouse, a stick — while `input.faceDirection` and `input.moveDirection` snap it to the nearest quarter turn. A component that swings along a line needs the angle; one that picks a sprite needs the quarter turn; both are the same fact at different resolutions, which is why this is published beside the four-way facing rather than instead of it."
     }
   ],
   "events": {
@@ -75,7 +80,8 @@
     ],
     "listensTo": [
       "input.moveDirection",
-      "input.faceDirection"
+      "input.faceDirection",
+      "input.aim"
     ]
   },
   "dependencies": [],
