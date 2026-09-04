@@ -22,6 +22,7 @@
     "emits": ["economy.earned", "economy.spent", "economy.insufficientFunds"],
     "listensTo": ["social.tradeCommitted"]
   },
+  "sinkFor": ["reward"],
   "dependencies": [],
   "tags": ["currency", "progression"],
   "sourceModule": "roblox-modular-lib/src/CurrencySystem.lua"
