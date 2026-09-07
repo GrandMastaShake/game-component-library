@@ -24,7 +24,8 @@
     "world.terrain_generator",
     "world.biome_system",
     "presentation.color_palette",
-    "presentation.object_placer"
+    "presentation.object_placer",
+    "world.edge_transition"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
