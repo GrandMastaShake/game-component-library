@@ -2,7 +2,7 @@
   "id": "movement.basic_walk",
   "name": "Basic Walk",
   "category": "movement",
-  "description": "Ground-based locomotion with configurable speed and acceleration. Movement CONTINUES while a direction is held rather than advancing once per press, because `input.moveDirection` reports whether the key is still down and a body that ignores that makes the player tap to walk. It also accepts `input.faceDirection`, which turns without moving, and `input.aim`, which points the body continuously at a screen position so an attack can be swung or fired along the exact bearing rather than snapped to one of four — the aim half of a twin-stick or the look half of a shoulder-button strafe, and the thing a player needs when the swing scans the way they are pointed and they do not want to step into what they are hitting.",
+  "description": "Ground-based locomotion with configurable speed and acceleration. Movement CONTINUES while a direction is held rather than advancing once per press, because `input.moveDirection` reports whether the key is still down and a body that ignores that makes the player tap to walk. It also accepts `input.faceDirection`, which turns without moving, and `input.aim`, which points the body continuously at a screen position so an attack can be swung or fired along the exact bearing rather than snapped to one of four — the aim half of a twin-stick or the look half of a shoulder-button strafe, and the thing a player needs when the swing scans the way they are pointed and they do not want to step into what they are hitting. It also names itself: `unitId` is the id this body answers to on the board, and a successful step is announced as `movement.moveExecuted` — the same event a tactical move uses. That is what lets a real-time player character BE a unit in combat.unit_roster rather than a second, parallel position nothing else can see. Without it a build has a walker the enemies cannot find and a roster entry that never moves, and the pursuers converge on a phantom.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -54,6 +54,13 @@
       "required": false,
       "default": null,
       "description": "The same along Y. Null means the middle."
+    },
+    {
+      "name": "unitId",
+      "type": "string",
+      "required": false,
+      "default": "player",
+      "description": "The id this body answers to on the board. A step is announced as movement.moveExecuted carrying it, so a combat.unit_roster holding a unit of the same id tracks the player exactly as it tracks a tactical unit — and the player then has health, a team, and a place in everything that reads the roster, for free. A build with no roster ignores the event and nothing changes."
     }
   ],
   "outputs": [
@@ -76,7 +83,8 @@
     "emits": [
       "movement.started",
       "movement.stopped",
-      "movement.blocked"
+      "movement.blocked",
+      "movement.moveExecuted"
     ],
     "listensTo": [
       "input.moveDirection",

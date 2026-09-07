@@ -6,6 +6,7 @@
   "targets": {
     "canvas2d": [
       "combat.action_point_economy",
+      "combat.contact_attack",
       "combat.cover_bonus_grid",
       "combat.damage_resolver",
       "combat.enemy_tier_scaling",

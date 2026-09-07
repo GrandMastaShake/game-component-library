@@ -1,0 +1,106 @@
+{
+  "id": "combat.contact_attack",
+  "name": "Contact Attack",
+  "category": "combat",
+  "description": "A unit standing within reach of a hostile strikes it, on a cooldown, with no turn structure — the real-time counterpart of combat.tactical_attack. The gap it fills is narrow and total: movement.pursuit_agent brings an enemy to melee range and stops, utility.behavior_fsm only plans when combat.turnStarted fires, and combat.melee_basic is the PLAYER's swing, keyed to input.attack and depending on the player's own body. So a real-time build could be chased and never hit. An enemy that closes on you and then stands there is not a threat, it is scenery.\n\nIt owns the CADENCE and nothing else: reach, cooldown, and which sides swing. It does not own the number — the damage rides on combat.hit and combat.damage_resolver applies mitigation and variance, exactly as it does for a player's swing, because two places that compute damage are two places a balance patch has to land. It does not own the position — combat.unit_roster is asked who is standing where and on which side. It does not decide who to chase; that is movement.pursuit_agent's, and this brick will strike whatever happens to be in reach whether or not anything walked there on purpose.\n\nBy default only sides other than the roster's FIRST swing automatically, which is the convention combat.unit_roster publishes `teams` for: the first is the one a player is expected to be holding, and a player swings on purpose. A build with nobody at the controls turns that off and both sides fight.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "reach",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Tiles at which a strike lands, measured the same way movement.pursuit_agent measures its stopAtRange. Setting this shorter than a pursuer's stop distance is the classic silent standoff: the pursuer stops at 2, the swing reaches 1, and nothing ever connects."
+    },
+    {
+      "name": "cooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "Seconds between one unit's strikes. Per attacker, not global — a pack of four is four times the pressure, which is the whole reason a pack is scarier than a single enemy."
+    },
+    {
+      "name": "damage",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "What the strike asks for before mitigation. combat.damage_resolver still owns armour and variance, so this is the request and not the result."
+    },
+    {
+      "name": "playerTeamAttacks",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the roster's first team — the one a player is expected to be holding — also strikes automatically. Off, because a player swings on purpose and an avatar that auto-attacks anything it walks past takes the decision away from them. On for a build with nobody at the controls, an autobattler, or a simulation of a fight."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "strikesLanded",
+      "type": "number",
+      "description": "How many strikes this component has announced. A measurement of zero is the finding when a pack is visibly surrounding a player and nothing is happening."
+    },
+    {
+      "name": "readyIn",
+      "type": "object",
+      "description": "Seconds until each attacker may strike again, by unit id. Published so a HUD can show incoming pressure rather than a player discovering it as a health bar dropping."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.hit",
+      "combat.contactMade"
+    ],
+    "listensTo": [
+      "movement.pursuitArrived"
+    ]
+  },
+  "eventIntents": {
+    "combat.contactMade": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster",
+    "combat.damage_resolver"
+  ],
+  "tags": [
+    "combat",
+    "melee",
+    "realtime",
+    "enemy",
+    "action"
+  ],
+  "provenance": "Found by playing the Action RPG top-down build: three wolves crossed the map, stopped at melee range, and stood there forever because nothing in a real-time build turns arrival into a swing."
+}

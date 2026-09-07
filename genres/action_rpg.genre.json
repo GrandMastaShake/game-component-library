@@ -28,7 +28,8 @@
     "combat.enemy_tier_scaling",
     "inventory.potion_belt",
     "world.waypoint_travel",
-    "movement.pursuit_agent"
+    "movement.pursuit_agent",
+    "combat.contact_attack"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",
