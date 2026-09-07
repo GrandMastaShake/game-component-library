@@ -14,6 +14,7 @@
       "combat.equipment_slots",
       "combat.hotbar_abilities",
       "combat.melee_basic",
+      "combat.spawn_director",
       "combat.status_effects",
       "combat.tactical_attack",
       "combat.turn_order_queue",

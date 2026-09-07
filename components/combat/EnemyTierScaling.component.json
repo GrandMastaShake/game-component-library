@@ -2,7 +2,7 @@
   "id": "combat.enemy_tier_scaling",
   "name": "Enemy Tier Scaling",
   "category": "combat",
-  "description": "Keeps a wolf from being a joke at level five and a raid boss at level six. Given a player level or zone band it produces the multiplier set \u2014 health, damage, XP reward \u2014 that anything spawning enemies should apply. It deliberately owns only the curve, not the spawn: world.mob_patrol and world.dynamic_encounter_spawner decide when and where, and combat.damage_resolver never sees these multipliers, because scaling belongs at spawn time \u2014 applying it inside the damage pipeline would double-count it on every hit. Owning the curve in one place is what makes 'zone two feels too easy' a one-file fix instead of an archeology expedition.",
+  "description": "Keeps a wolf from being a joke at level five and a raid boss at level six. Given a player level or zone band it produces the multiplier set — health, damage, XP reward — that anything spawning enemies should apply. It deliberately owns only the curve, not the spawn: world.mob_patrol and world.dynamic_encounter_spawner decide when and where, and combat.damage_resolver never sees these multipliers, because scaling belongs at spawn time — applying it inside the damage pipeline would double-count it on every hit. Owning the curve in one place is what makes 'zone two feels too easy' a one-file fix instead of an archeology expedition. TWO READINGS OF ONE CURVE, and it only ever published the first. `multipliersFor` measures a GAP — how much stronger this enemy is than the player expects — so at parity it returns 1, which is correct and is not growth: a level-8 wolf matched to a level-8 player comes out identical to the level-1 wolf a level-1 player met, and a build that scales this way produces a world that never gets bigger while looking like it should. Found by playing to level 5 and measuring a multiplier of 0.76 on enemies that had never changed.\n\n`statsAtLevel` is the other reading: the same curve measured from level 1, which is what a spawner needs to decide what a level-8 creature actually IS. The two are not redundant — one answers \"is this fight fair\" and the other answers \"what am I making\" — and keeping both here is what stops a spawner growing a second curve of its own, which would be the second place difficulty is decided.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -70,6 +70,11 @@
       "name": "currentMultiplierSet",
       "type": "object",
       "description": "health/damage/reward multipliers for the current context."
+    },
+    {
+      "name": "statsAtLevel",
+      "type": "object",
+      "description": "The multiplier set for a creature OF a given level, measured from level 1 rather than against the player — health, damage and xpReward for what a level-N version of something is worth. Asked at spawn by whatever decides a creature's stats, synchronously, for the same reason multipliersFor is a query: an event arrives a frame after the unit does."
     }
   ],
   "events": {

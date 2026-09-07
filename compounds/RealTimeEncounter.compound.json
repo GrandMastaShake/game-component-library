@@ -1,0 +1,90 @@
+{
+  "id": "compound.real_time_encounter",
+  "name": "Real-Time Encounter",
+  "version": "0.1.0",
+  "description": "Everything needed to make a place with hostiles in it, in real time, with no turn structure — drop these in together and a region roams, notices, chases, strikes, and refills. It exists because the six components are individually small and useless: a pursuer with nothing telling it who to chase picks the nearest thing forever, an aggro table with nothing to execute its decisions is a spreadsheet, and a director that spawns into a build with no roster spawns into nothing. Naming the SET is what makes them a thing you can pop into another game rather than six things you have to know to ask for.\n\nThe division is deliberate and is the whole reason it is six and not one: combat.unit_roster is the only thing that writes a position; combat.aggro_table is the only thing that decides who is hunting whom; movement.patrol_route and movement.pursuit_agent carry out the two ways of walking and neither chooses a target; combat.contact_attack owns the cadence of a strike and not the number; combat.damage_resolver owns the number and not the consequence. Each was written after finding the seam that appears when one component owns two of those.\n\nWhat it deliberately does NOT include: a player. Every one of these treats the roster's FIRST team as the side being hunted, and what puts a body on that team is the host's business — movement.basic_walk announcing itself with a unitId in a top-down build, a tactics squad placed by a level, or nothing at all in a simulation of two AI sides. That is what makes the same six components work behind a walking game and a turn-based one.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "combat.unit_roster",
+      "role": "the board: who is here, which side, which tile, how much is left",
+      "config": { "defaultHealth": 12 }
+    },
+    {
+      "id": "combat.aggro_table",
+      "role": "who is hunting whom — noticing, threat, and forgetting",
+      "config": { "leashMultiple": 1.6, "forgetSeconds": 6 }
+    },
+    {
+      "id": "movement.patrol_route",
+      "role": "what a hostile does before it has noticed you",
+      "config": { "radius": 5, "tilesPerSecond": 0.7 }
+    },
+    {
+      "id": "movement.pursuit_agent",
+      "role": "carries out a chase; asks the aggro table who",
+      "config": { "tilesPerSecond": 1.6, "stopAtRange": 1 }
+    },
+    {
+      "id": "combat.contact_attack",
+      "role": "an arrival becomes a strike, on a cooldown",
+      "config": { "reach": 1, "cooldownSeconds": 1.8 }
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "the one place a damage number is computed",
+      "config": {}
+    }
+  ],
+  "connections": [
+    {
+      "from": "combat.aggro_table",
+      "event": "combat.aggroGained",
+      "to": "movement.patrol_route"
+    },
+    {
+      "from": "movement.pursuit_agent",
+      "event": "movement.moveExecuted",
+      "to": "combat.unit_roster"
+    },
+    {
+      "from": "movement.patrol_route",
+      "event": "movement.moveExecuted",
+      "to": "combat.unit_roster"
+    },
+    {
+      "from": "movement.pursuit_agent",
+      "event": "movement.pursuitArrived",
+      "to": "combat.contact_attack"
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver"
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.damageResolved",
+      "to": "combat.aggro_table"
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.unit_roster"
+    }
+  ],
+  "criticalComponents": [
+    "combat.unit_roster",
+    "combat.aggro_table",
+    "combat.damage_resolver"
+  ],
+  "acceptanceCriteria": [
+    "A hostile that has not noticed the player roams near where it spawned rather than standing still.",
+    "A hostile notices the player only within the detection range utility.behavior_fsm declares, and keeps hunting past it only as far as leashMultiple allows.",
+    "Hitting a hostile makes it hunt the attacker specifically, even when another target is nearer.",
+    "A pack converges on distinct tiles around its target rather than queueing behind one another.",
+    "A hostile that reaches its target strikes on a cooldown; a hostile that arrives and never strikes is the standoff reach shorter than stopAtRange produces.",
+    "Every damage number in the encounter is computed in combat.damage_resolver and nowhere else.",
+    "Removing combat.aggro_table leaves a build that still runs: pursuit falls back to the nearest target and patrol becomes unconditional."
+  ]
+}

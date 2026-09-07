@@ -36,7 +36,8 @@
     "movement.pursuit_agent",
     "combat.contact_attack",
     "combat.aggro_table",
-    "movement.patrol_route"
+    "movement.patrol_route",
+    "combat.spawn_director"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",
