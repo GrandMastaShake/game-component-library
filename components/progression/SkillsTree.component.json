@@ -2,7 +2,7 @@
   "id": "progression.skills_tree",
   "name": "Skills Tree",
   "category": "progression",
-  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements.",
+  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember. A node that unlocks and changes NOTHING is a list of words on a panel, which is what this was: it published names, and no component in any build read one. The fix is not for this component to reach into combat and movement and apply effects — that is the second place a number gets computed, and it would make a progression component a combat component. It publishes `bonuses`, a summed table of the modifiers its unlocked nodes declare, and the components that own those numbers read it. So the CONTENT of a skill lives in the request's treeDefinition where a designer can change it, the summing lives here, and applying it stays with whoever owns the thing being modified.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -38,7 +38,22 @@
     {
       "name": "treeDefinition",
       "type": "object",
-      "required": true
+      "required": true,
+      "description": "The tree: {skills: [{id, name, atLevel, effect?}]}. `effect` is an optional object of named modifiers — {meleeDamage: 1}, {meleeRange: 1} — which are summed into the `bonuses` output for the owning components to read. A node with no effect is legal and is a title rather than a power, which is a real thing to want and should not be mistaken for one that was meant to do something and does not."
+    },
+    {
+      "name": "initialUnlocked",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Node ids already unlocked when the build starts. Prerequisites are NOT re-checked against this list: it is a restore, not a purchase, and re-validating it would let a tree edited between sessions silently delete a player's build."
+    },
+    {
+      "name": "initialPoints",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Unspent points at the start. Null means the tree's own starting allowance, which is what a fresh character gets."
     }
   ],
   "outputs": [
@@ -49,6 +64,11 @@
     {
       "name": "availablePoints",
       "type": "number"
+    },
+    {
+      "name": "bonuses",
+      "type": "object",
+      "description": "Every `effect` on every unlocked node, summed by key — e.g. {meleeDamage: 2, meleeRange: 1}. Read by the components those keys belong to: combat.melee_basic owns reach and the damage it requests, movement.basic_walk owns pace. Additive because two nodes granting the same bonus should stack in the obvious way, and because a designer reading the tree should be able to add the numbers up in their head and get the same answer the game does."
     }
   ],
   "events": {

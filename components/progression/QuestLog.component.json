@@ -2,7 +2,7 @@
   "id": "progression.quest_log",
   "name": "Quest Log",
   "category": "progression",
-  "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit.",
+  "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit. The QUESTS themselves are the level's, not this component's. Without an input for them every game that picked up a quest log got the same four — gather six things, collect four wood, collect three stone — so an Action RPG shipped with a forager's errands and a player was asked to fetch lumber in a genre about killing things. A log that invents its own content is a log that has an opinion about what game it is in, which is exactly the opinion a component is not allowed to have.",
   "version": "0.3.1",
   "platform": [
     "roblox",
@@ -34,6 +34,13 @@
       "type": "number",
       "required": false,
       "default": 5
+    },
+    {
+      "name": "quests",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "The level's quests: [{id, text, kind, target, reward, item?}]. `kind` is what counts toward it — 'hit' for a blow the player landed, 'collect' for an item named by `item`. Empty falls back to a small generic set so a build that forgets to configure it still runs and still shows something, which is the honest failure: a visibly generic quest is a prompt to write real ones, an empty panel is a bug report."
     }
   ],
   "outputs": [
@@ -61,8 +68,9 @@
   "eventIntents": {
     "progression.questCompleted": [
       "persist",
-      "notify"
-    , "achievement"]
+      "notify",
+      "achievement"
+    ]
   },
   "dependencies": [
     "economy.currency"

@@ -2,7 +2,7 @@
   "id": "combat.unit_roster",
   "name": "Unit Roster",
   "category": "combat",
-  "description": "Who is on the board, which side they are on, which tile they stand on, and how much of them is left. Every tactics component asks one of those three questions and none of them owned the answer: the turn queue rolls initiative per combatant, the movement range floods out from a unit's tile, and cover is priced between an attacker and a defender. Each was written as though somebody else held the roster, and nobody did.\n\nA unit is an identity with a position, not a position with a name. That is why moving is an event this component hears rather than a field a caller writes: movement.grid_movement_range decides which tiles are legal and announces the move, this records where the unit now is, and the two cannot disagree because only one of them is allowed to answer. The same rule ends a unit -- combat.damage_resolver announces the defeat, and removal is this component reacting to it rather than the resolver reaching across.\n\nStats live here because they are per unit and consulted by everyone: the queue wants a dexterity to break ties, the range wants a movement allowance, the resolver wants hit points. It is deliberately not a character sheet -- progression.attribute_sheet owns the RPG one -- and deliberately not a party: social.party_formation is about who you bring, this is about who is standing here now.",
+  "description": "Who is on the board, which side they are on, which tile they stand on, and how much of them is left. Every tactics component asks one of those three questions and none of them owned the answer: the turn queue rolls initiative per combatant, the movement range floods out from a unit's tile, and cover is priced between an attacker and a defender. Each was written as though somebody else held the roster, and nobody did.\n\nA unit is an identity with a position, not a position with a name. That is why moving is an event this component hears rather than a field a caller writes: movement.grid_movement_range decides which tiles are legal and announces the move, this records where the unit now is, and the two cannot disagree because only one of them is allowed to answer. The same rule ends a unit -- combat.damage_resolver announces the defeat, and removal is this component reacting to it rather than the resolver reaching across.\n\nStats live here because they are per unit and consulted by everyone: the queue wants a dexterity to break ties, the range wants a movement allowance, the resolver wants hit points. It is deliberately not a character sheet -- progression.attribute_sheet owns the RPG one -- and deliberately not a party: social.party_formation is about who you bring, this is about who is standing here now. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember. A unit ARRIVING follows the same rule as a unit moving and a unit dying: it is an event this component hears, not a write somebody else performs. combat.spawn_director decides that a region needs another hostile and announces it; this is what admits it to the board. Any other arrangement gives the board two authors, and two authors is how a spawner and a roster end up disagreeing about how many things are in the room.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -72,6 +72,13 @@
       "required": false,
       "default": 10,
       "description": "Health for a unit whose own record does not state one. A roster already owns whether a unit is standing; health is that same fact at more resolution, and keeping the two together is what stops a second component deciding a unit is dead while this one still lists it. A unit record may override it per unit — a boar is not a wolf."
+    },
+    {
+      "name": "initialHealth",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Remaining health per unit id, applied over whatever the `units` list says. It exists because health and POSITION have opposite lifetimes across a region crossing: the level decides where everyone stands in the new region, and the player's remaining health is the one thing that must survive from the old one. Carrying the whole units array instead would drag the previous region's enemies along with it."
     }
   ],
   "outputs": [
@@ -119,7 +126,8 @@
     ],
     "listensTo": [
       "combat.entityDefeated",
-      "movement.moveExecuted"
+      "movement.moveExecuted",
+      "combat.unitSpawned"
     ]
   },
   "dependencies": [],

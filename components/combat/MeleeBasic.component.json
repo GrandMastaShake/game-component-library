@@ -2,7 +2,7 @@
   "id": "combat.melee_basic",
   "name": "Basic Melee Attack",
   "category": "combat",
-  "description": "Single-target close-range attack with cooldown and damage falloff by range.",
+  "description": "Single-target close-range attack with cooldown and damage falloff by range. Reach and the damage it requests are ITS numbers, so it is where a character's melee bonuses are applied: it reads `meleeDamage` and `meleeRange` from progression.skills_tree's `bonuses` and from combat.equipment_slots' `totalStatBonus` — the same named keys from both, summed, because what a character learned and what they are carrying are the same kind of fact to the thing swinging and adds them to its own declared inputs. The skill tree does not reach in and change them, and combat.damage_resolver still owns mitigation and variance — the request grows, the resolution does not move.",
   "version": "0.1.0",
   "platform": [
     "roblox",

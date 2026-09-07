@@ -24,7 +24,8 @@
     "world.terrain_generator",
     "world.biome_system",
     "presentation.color_palette",
-    "presentation.object_placer"
+    "presentation.object_placer",
+    "world.edge_transition"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
@@ -33,7 +34,10 @@
     "inventory.potion_belt",
     "world.waypoint_travel",
     "movement.pursuit_agent",
-    "combat.contact_attack"
+    "combat.contact_attack",
+    "combat.aggro_table",
+    "movement.patrol_route",
+    "combat.spawn_director"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",

@@ -6,6 +6,7 @@
   "targets": {
     "canvas2d": [
       "combat.action_point_economy",
+      "combat.aggro_table",
       "combat.contact_attack",
       "combat.cover_bonus_grid",
       "combat.damage_resolver",
@@ -13,6 +14,7 @@
       "combat.equipment_slots",
       "combat.hotbar_abilities",
       "combat.melee_basic",
+      "combat.spawn_director",
       "combat.status_effects",
       "combat.tactical_attack",
       "combat.turn_order_queue",
@@ -40,6 +42,7 @@
       "movement.jump_core",
       "movement.ledge_grab",
       "movement.pathfinding_system",
+      "movement.patrol_route",
       "movement.physics_core",
       "movement.pursuit_agent",
       "movement.run_control",
