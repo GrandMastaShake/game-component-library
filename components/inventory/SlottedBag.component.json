@@ -2,7 +2,7 @@
   "id": "inventory.slotted_bag",
   "name": "Slotted Bag",
   "category": "inventory",
-  "description": "Fixed-slot inventory with stacking and rarity metadata, built on the Core Inventory primitive.",
+  "description": "Fixed-slot inventory with stacking and rarity metadata, built on the Core Inventory primitive. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember.",
   "version": "0.1.1",
   "platform": [
     "roblox",
@@ -47,6 +47,13 @@
       "type": "number",
       "required": false,
       "default": 99
+    },
+    {
+      "name": "initialItems",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "What the bag already holds when the build starts. Stacking and the slot limit apply to it exactly as they do to anything picked up afterwards, so a carried bag that no longer fits is refused at the boundary rather than quietly overflowing."
     }
   ],
   "outputs": [

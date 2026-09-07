@@ -2,7 +2,7 @@
   "id": "combat.equipment_slots",
   "name": "Equipment Slots",
   "category": "combat",
-  "description": "Weapon/armor equip slots that modify combat stats when items are equipped.",
+  "description": "Weapon/armor equip slots that modify combat stats when items are equipped. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -38,6 +38,13 @@
         "armor",
         "accessory"
       ]
+    },
+    {
+      "name": "initialEquipped",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "What is already worn when the build starts, as slot -> item. A slot the current slotTypes does not name is dropped rather than invented, so narrowing the slot list cannot leave an item equipped nowhere."
     }
   ],
   "outputs": [

@@ -2,7 +2,7 @@
   "id": "progression.skills_tree",
   "name": "Skills Tree",
   "category": "progression",
-  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements.",
+  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -39,6 +39,20 @@
       "name": "treeDefinition",
       "type": "object",
       "required": true
+    },
+    {
+      "name": "initialUnlocked",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Node ids already unlocked when the build starts. Prerequisites are NOT re-checked against this list: it is a restore, not a purchase, and re-validating it would let a tree edited between sessions silently delete a player's build."
+    },
+    {
+      "name": "initialPoints",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "description": "Unspent points at the start. Null means the tree's own starting allowance, which is what a fresh character gets."
     }
   ],
   "outputs": [
