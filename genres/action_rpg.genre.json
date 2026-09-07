@@ -34,7 +34,9 @@
     "inventory.potion_belt",
     "world.waypoint_travel",
     "movement.pursuit_agent",
-    "combat.contact_attack"
+    "combat.contact_attack",
+    "combat.aggro_table",
+    "movement.patrol_route"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",

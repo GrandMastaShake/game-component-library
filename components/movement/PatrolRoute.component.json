@@ -1,0 +1,106 @@
+{
+  "id": "movement.patrol_route",
+  "name": "Patrol Route",
+  "category": "movement",
+  "description": "What something does when it is not hunting anybody: roam near where it belongs. It is the other half of movement.pursuit_agent, and the reason both exist is that a world where enemies stand perfectly still until they see you is a world of statues — the moment before being noticed is most of what makes being noticed feel like anything.\n\nHOME IS WHERE IT SPAWNED, not a route a designer drew. A patrol path is content, and content that has to be authored per enemy per level is content that will not be authored, so the default is a radius around the tile the unit started on and a designer who wants a real route supplies waypoints instead. Either way it is an ANCHOR: a wanderer that drifts is a wanderer that ends up somewhere it was never meant to guard.\n\nIt yields immediately and completely to combat.aggro_table: a unit with a target is not patrolling, and this stops rather than fighting the pursuer for the same body. Where no aggro component is in the build it patrols unconditionally, which is honest — nothing in that build knows how to notice anything. It emits movement.moveExecuted, the same event a tactical move and a pursuit both use, so combat.unit_roster stays the only thing that writes a position and no third event is invented for the third way of walking.\n\nIt does not own the pace of a chase, the decision to chase, or where the body IS. Those are the pursuer's, the aggro table's, and the roster's.\n\nNOT world.mob_patrol, which the catalogue already has and which is a different thing wearing a similar word. That one is a platformer package: it OWNS its mobs — it spawns them, paces them along a surface, turns them at ledges and resolves contact as a stomp or a hazard — and it depends on movement.character_body because all of that is side-scroller physics. This owns no entities at all. It moves units that combat.unit_roster already holds, on a tile grid, and resolves nothing: a hit is combat.contact_attack's and noticing is combat.aggro_table's. Two components can both be called patrol and still be a package and a verb.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "radius",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "How far from home a patroller will wander, in tiles. It is an anchor and not a drift: without one, a roamer performs a random walk and a random walk has no home, so after two minutes the thing guarding the bridge is in the woods."
+    },
+    {
+      "name": "tilesPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Roaming pace, deliberately separate from movement.pursuit_agent's and deliberately slower by default. The change of pace when something notices you is the clearest signal in the whole encounter, and one shared number would throw it away."
+    },
+    {
+      "name": "pauseSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "How long a patroller waits at the end of a leg before choosing the next one. Continuous motion reads as a machine on rails; the pause is what makes it read as an animal."
+    },
+    {
+      "name": "waypoints",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "An authored route per unit id, as {unitId: [{x, y}, ...]}, walked in order and looped. Where a unit has one it is used instead of the radius, so a guard can be given a beat while everything else in the level roams. A named unit with an empty route roams rather than standing still, because an empty list is far more likely to be a level that was not finished than a deliberate statue."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "patrolling",
+      "type": "array",
+      "description": "Which units are currently roaming, and the tile each is heading for. A measurement of zero while a build visibly contains idle enemies is the finding, and without this it is invisible."
+    },
+    {
+      "name": "homeOf",
+      "type": "object",
+      "description": "The anchor tile each patroller is roaming around. Published because it is decided here — from wherever the unit spawned — and a level that wants to check its guards are guarding the right places has no other way to ask."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.moveExecuted",
+      "movement.patrolLegCompleted"
+    ],
+    "listensTo": [
+      "combat.aggroGained"
+    ]
+  },
+  "eventIntents": {
+    "movement.patrolLegCompleted": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster"
+  ],
+  "tags": [
+    "movement",
+    "ai",
+    "patrol",
+    "roam",
+    "enemy",
+    "realtime"
+  ],
+  "provenance": "Asked for alongside combat.aggro_table: \"we want the wolves to kind of roam an area before going for the player once they can see them\"."
+}
