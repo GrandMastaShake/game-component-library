@@ -107,6 +107,42 @@ Do not resolve this by loosening the components' dependencies. A pursuer that
 works without a roster is a pursuer that has invented a second place positions
 live, which is the exact defect the roster was created to remove.
 
+## Before building the next genre: ask what it already costs
+
+```
+python3 tools/compound_fit.py compound.real_time_encounter
+python3 tools/compound_fit.py compound.real_time_encounter genre.dungeon_crawler
+python3 tools/compound_fit.py --report reports/compound-fit.json
+```
+
+It **changes nothing**. Wiring a kit into a pack is a decision about that genre,
+made when that genre is being built; a tool that quietly did it would be making
+thirty-four such decisions on nobody's behalf. This reports the delta and stops.
+
+It answers two questions about every compound against every genre, because a
+cost with nothing to compare it to is just a number:
+
+- **What is the relation?** How many of the kit's members the pack already
+  names, out of how many. Five of six is a kit a pack nearly has; one of six is
+  a kit it barely touches. Both are "5 to add" without the denominator.
+- **Compared to what?** How the addition measures against the pack's own size.
+  Four members is cheap against a pack of thirty and is a rewrite against a
+  pack of eight.
+
+It also reports, separately, how many of a kit's members have no reviewed
+canvas2d implementation — because **adoptable and playable are different
+questions**, and a pack that names three unimplemented components has adopted a
+promise rather than a system.
+
+Two readings from the first run worth keeping:
+
+- `genre.crpg` is **one component** from `compound.party_quest_sharing_loop`
+  (9% of its pack) — the cheapest grab in the catalogue.
+- `genre.dungeon_crawler` names **none** of the real-time encounter kit, and
+  adopting it would grow that pack by 67%. That is a signal about the pack, not
+  the kit: a nine-component Dungeon Crawler is thin for a genre whose loop is
+  entirely about fighting things in corridors.
+
 ## Adding a compound
 
 1. Write the recipe in `compounds/`, naming a `role` for every member — the
