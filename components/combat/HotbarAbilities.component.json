@@ -2,7 +2,7 @@
   "id": "combat.hotbar_abilities",
   "name": "Hotbar Abilities",
   "category": "combat",
-  "description": "The active-skill layer that turns a basic attack into a build. Each slot binds an ability definition \u2014 cooldown, resource cost, targeting mode \u2014 and this component owns only the slot lifecycle: is it off cooldown, can the resource be paid, and when does it fire. The moment an ability connects it hands a damage packet to combat.damage_resolver by emitting combat.hit \u2014 the same event a basic swing emits, so there is one damage pipeline rather than a second private one, because a second place where damage numbers are computed is a place where balance patches land twice. Ongoing effects an ability leaves behind are combat.status_effects' problem \u2014 a burn that ticks for five seconds is status, not hotbar \u2014 and passive gear bonuses never pass through here either, since combat.equipment_slots applies those directly. What this component pointedly refuses to own is the UI: ui.hud renders the slots off the same cooldown events, so the hotbar runs headless in tests.",
+  "description": "The active-skill layer that turns a basic attack into a build. Each slot binds an ability definition — cooldown, resource cost, targeting mode — and this component owns only the slot lifecycle: is it off cooldown, can the resource be paid, and when does it fire. The moment an ability connects it hands a damage packet to combat.damage_resolver by emitting combat.hit — the same event a basic swing emits, so there is one damage pipeline rather than a second private one, because a second place where damage numbers are computed is a place where balance patches land twice. Ongoing effects an ability leaves behind are combat.status_effects' problem — a burn that ticks for five seconds is status, not hotbar — and passive gear bonuses never pass through here either, since combat.equipment_slots applies those directly. What this component pointedly refuses to own is the UI: ui.hud renders the slots off the same cooldown events, so the hotbar runs headless in tests. Two things it could not previously be told. `range` is how far a slot can be aimed: with no such number an ability lands wherever the caller names, which means anywhere on the map, and the caller ends up inventing a reach the contract never granted. `abilities` is the kit itself — `slots` is a COUNT, and a count with no list means every game that binds a hotbar binds the same six, so two different genres shipped the same spellbook. Both are the request's to supply and neither is this component's to guess.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -63,6 +63,20 @@
       "required": false,
       "default": false,
       "description": "Whether casting roots the caster. Rooting during a cast is the classic risk/reward dial; mobility builds set this true and pay for it elsewhere."
+    },
+    {
+      "name": "range",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "How far from the caster a slot may be aimed, in tiles. It exists because an ability with no range is an ability that reaches across the whole map, and because the thing that draws an aiming cursor has to read the reach from somewhere — a host that hardcodes its own is a host promising a reach the game does not have."
+    },
+    {
+      "name": "abilities",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "The kit: [{id, cooldown, damage, cost?, effect?, effectSeconds?}], bound to slots in order and truncated to `slots`. Empty falls back to a generic starter set, because a hotbar with no abilities is a row of dead keys and a build should be playable before it is authored — but a genre that ships the fallback is a genre wearing somebody else's spellbook."
     }
   ],
   "outputs": [
@@ -75,6 +89,11 @@
       "name": "lastCastAbilityId",
       "type": "string",
       "description": "Most recent successful cast, for combo and telemetry consumers."
+    },
+    {
+      "name": "range",
+      "type": "number",
+      "description": "The reach above, republished so whatever draws the aiming cursor reads the same number the ability obeys rather than a copy of it."
     }
   ],
   "events": {
