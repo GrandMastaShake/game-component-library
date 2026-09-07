@@ -1,0 +1,119 @@
+{
+  "id": "combat.aggro_table",
+  "name": "Aggro Table",
+  "category": "combat",
+  "description": "Who is hunting whom, and why. The single answer to a question three components were each answering privately: movement.pursuit_agent picked the nearest enemy every tick, utility.behavior_fsm decided independently that it was 'attacking', and combat.contact_attack struck whatever happened to be in reach. Three components agreeing by coincidence is three components that will one day disagree, and the disagreement looks like an enemy that walks toward you while facing away and swinging at nothing.\n\nIt owns NOTICING, REMEMBERING and FORGETTING. Noticing is range plus whatever the build uses for sight — where world.vision_system is present it is asked, so an enemy cannot see you through a wall it could not see you through if you were the one looking. Remembering is threat: hitting something makes it hunt you specifically, which is what makes a pack peel off a companion and come for the one who fired, and it is the only reason a target further away can outrank a nearer one. Forgetting is the leash and the timer, and it deliberately uses two distances rather than one, because a single threshold makes a target hovering at the edge get noticed and dropped and noticed again, and an enemy that flickers reads as broken rather than as cautious.\n\nWhat it does NOT own: the range at which noticing happens, which utility.behavior_fsm declares as detectionRange and publishes, because two numbers for one idea are two numbers that will disagree. Nor moving — movement.pursuit_agent carries out a chase and movement.patrol_route carries out a roam, and both ask this WHO rather than deciding it. Nor striking, which is combat.contact_attack's. It never touches a position and never emits a hit.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "leashMultiple",
+      "type": "number",
+      "required": false,
+      "default": 1.6,
+      "description": "How much further than the notice range a hunter follows before losing interest, as a multiple of it. The gap between the two distances is the whole point: one threshold flickers, and an enemy that flickers reads as broken. At or below 1 the hysteresis is off and the flicker comes back."
+    },
+    {
+      "name": "threatPerDamage",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Threat earned per point of damage dealt to a hunter. This is what lets a player pull a pack off somebody else: threat outranks distance, so the one who hurt it is the one it comes for even when another target is closer."
+    },
+    {
+      "name": "forgetSeconds",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "How long a hunter keeps a target it can no longer see or reach before dropping it. Zero would make every corner a memory wipe; too long and an enemy tracks you across a map it has no business knowing about."
+    },
+    {
+      "name": "requiresLineOfSight",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether noticing needs an unobstructed view, asked of world.vision_system where the build has one. Off for a build with no walls worth speaking of, or one that wants enemies to hear rather than see. Where no vision component is present this changes nothing, because there is nothing to ask and range is the whole answer."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "targetOf",
+      "type": "object",
+      "description": "The unit id each hunter is currently hunting, or null. This is the question movement.pursuit_agent and combat.contact_attack should both be asking, and the reason they can no longer disagree about the answer."
+    },
+    {
+      "name": "hunters",
+      "type": "array",
+      "description": "Every hunter with a target, its target, and the threat that chose it. Published for a HUD and for a test: 'nothing is hunting anybody' is the finding when a pack is visibly standing around, and it is invisible without this."
+    },
+    {
+      "name": "threatOn",
+      "type": "object",
+      "description": "Threat accumulated by each hunter against each target. Exposed because a player who cannot see why the pack switched to them has no way to learn to control it, and a designer tuning threatPerDamage is tuning blind without it."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.aggroGained",
+      "combat.aggroLost",
+      "combat.aggroSwitched"
+    ],
+    "listensTo": [
+      "combat.damageResolved",
+      "combat.rosterChanged"
+    ]
+  },
+  "eventIntents": {
+    "combat.aggroGained": [
+      "notify"
+    ],
+    "combat.aggroLost": [
+      "notify"
+    ],
+    "combat.aggroSwitched": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster"
+  ],
+  "tags": [
+    "combat",
+    "ai",
+    "aggro",
+    "threat",
+    "enemy",
+    "realtime"
+  ],
+  "provenance": "Asked for after playing the Action RPG: the wolves charged from anywhere on the map, and there was no component whose job it was to decide they had seen you."
+}
