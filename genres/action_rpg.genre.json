@@ -20,7 +20,11 @@
     "inventory.slotted_bag",
     "movement.basic_walk",
     "combat.unit_roster",
-    "utility.behavior_fsm"
+    "utility.behavior_fsm",
+    "world.terrain_generator",
+    "world.biome_system",
+    "presentation.color_palette",
+    "presentation.object_placer"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
