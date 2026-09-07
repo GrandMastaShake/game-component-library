@@ -1,0 +1,105 @@
+{
+  "id": "movement.pursuit_agent",
+  "name": "Pursuit Agent",
+  "category": "movement",
+  "description": "Executes movement commands in real time, continuously, with no turn structure \u2014 the counterpart of movement.grid_movement_range for a game that does not take turns. utility.behavior_fsm decides an entity WANTS to close on something and says so on the command bus; that request has to be carried out by somebody, and until this existed the only executor in the catalogue was the turn-based one, which drags combat.action_point_economy and combat.turn_order_queue in behind it. An action game importing a turn queue to make a wolf walk is the wrong answer to the right question. It owns the movement only: whose turn it is is nobody's question here, what the entity wants is the FSM's, where the entity IS belongs to combat.unit_roster, and it emits movement.moveExecuted rather than an event of its own so the roster updates through the same path a tactical move already uses. Reusing that event is the point \u2014 a catalogue that invents an event per movement style ends up with two rosters listening to two events about the same fact.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tilesPerSecond",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "How fast a pursuing entity crosses tiles. A pack that moves faster than the player is a chase nobody wins, so this is the single number that decides whether an encounter is a fight or a funeral."
+    },
+    {
+      "name": "stopAtRange",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Tiles from the target at which pursuit stops. 1 is melee \u2014 close enough to strike, not so close the bodies overlap. Anything larger is a ranged attacker that keeps its distance."
+    },
+    {
+      "name": "repathSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "How often a pursuer recomputes its route. Every frame is exact and wasteful; never is a wolf walking confidently into a wall the player stepped behind."
+    },
+    {
+      "name": "separation",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether pursuers refuse to stand on each other. Without it a pack converges to one tile and reads as one enemy with several health bars."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pursuing",
+      "type": "array",
+      "description": "Entity ids currently closing on something, with their target and distance."
+    },
+    {
+      "name": "arrivedCount",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.moveExecuted",
+      "movement.pursuitArrived"
+    ],
+    "listensTo": [
+      "utility.commandDispatched"
+    ]
+  },
+  "eventIntents": {
+    "movement.pursuitArrived": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster",
+    "movement.pathfinding_system"
+  ],
+  "tags": [
+    "movement",
+    "ai",
+    "realtime",
+    "pursuit",
+    "action"
+  ],
+  "provenance": "The gap found building Action RPG: behavior_fsm requested moves, the command bus dispatched them, and nothing in a real-time build executed them."
+}

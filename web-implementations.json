@@ -40,6 +40,7 @@
       "movement.ledge_grab",
       "movement.pathfinding_system",
       "movement.physics_core",
+      "movement.pursuit_agent",
       "movement.run_control",
       "movement.vehicle_basic",
       "movement.wall_interaction",

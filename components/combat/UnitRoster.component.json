@@ -2,7 +2,7 @@
   "id": "combat.unit_roster",
   "name": "Unit Roster",
   "category": "combat",
-  "description": "Who is on the board, which side they are on, and which tile they stand on. Every tactics component asks one of those three questions and none of them owned the answer: the turn queue rolls initiative per combatant, the movement range floods out from a unit's tile, and cover is priced between an attacker and a defender. Each was written as though somebody else held the roster, and nobody did.\n\nA unit is an identity with a position, not a position with a name. That is why moving is an event this component hears rather than a field a caller writes: movement.grid_movement_range decides which tiles are legal and announces the move, this records where the unit now is, and the two cannot disagree because only one of them is allowed to answer. The same rule ends a unit -- combat.damage_resolver announces the defeat, and removal is this component reacting to it rather than the resolver reaching across.\n\nStats live here because they are per unit and consulted by everyone: the queue wants a dexterity to break ties, the range wants a movement allowance, the resolver wants hit points. It is deliberately not a character sheet -- progression.attribute_sheet owns the RPG one -- and deliberately not a party: social.party_formation is about who you bring, this is about who is standing here now.",
+  "description": "Who is on the board, which side they are on, which tile they stand on, and how much of them is left. Every tactics component asks one of those three questions and none of them owned the answer: the turn queue rolls initiative per combatant, the movement range floods out from a unit's tile, and cover is priced between an attacker and a defender. Each was written as though somebody else held the roster, and nobody did.\n\nA unit is an identity with a position, not a position with a name. That is why moving is an event this component hears rather than a field a caller writes: movement.grid_movement_range decides which tiles are legal and announces the move, this records where the unit now is, and the two cannot disagree because only one of them is allowed to answer. The same rule ends a unit -- combat.damage_resolver announces the defeat, and removal is this component reacting to it rather than the resolver reaching across.\n\nStats live here because they are per unit and consulted by everyone: the queue wants a dexterity to break ties, the range wants a movement allowance, the resolver wants hit points. It is deliberately not a character sheet -- progression.attribute_sheet owns the RPG one -- and deliberately not a party: social.party_formation is about who you bring, this is about who is standing here now.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -65,6 +65,13 @@
       "required": false,
       "default": true,
       "description": "Whether a unit's tile is impassable to others. Off for games where units stack or pass through allies -- but the frontline stops meaning anything."
+    },
+    {
+      "name": "defaultHealth",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Health for a unit whose own record does not state one. A roster already owns whether a unit is standing; health is that same fact at more resolution, and keeping the two together is what stops a second component deciding a unit is dead while this one still lists it. A unit record may override it per unit — a boar is not a wolf."
     }
   ],
   "outputs": [
@@ -92,6 +99,16 @@
       "name": "aliveByTeam",
       "type": "object",
       "description": "Survivors per team, which is what a victory condition counts."
+    },
+    {
+      "name": "healthOf",
+      "type": "object",
+      "description": "Remaining and maximum health per living unit id. Published because a damage resolver has to know what it is chipping at, and the alternative — every attacker carrying the defender’s health in its payload — asks the attacker to know something only the board knows."
+    },
+    {
+      "name": "damage",
+      "type": "object",
+      "description": "Apply damage to a unit id and report what happened: remaining health, and whether that killed it. The caller owns the NUMBER (combat.damage_resolver computes mitigation, crit and variance); this owns the consequence."
     }
   ],
   "events": {

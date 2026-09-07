@@ -3,7 +3,7 @@
   "name": "Action RPG",
   "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery.",
   "version": "0.1.0",
-  "loop": "fight in real time \u2192 loot \u2192 build character \u2192 bigger fight",
+  "loop": "fight in real time → loot → build character → bigger fight",
   "views": [
     "isometric",
     "top-down"
@@ -17,14 +17,18 @@
     "progression.skills_tree",
     "inventory.loot_table",
     "progression.quest_log",
-    "inventory.slotted_bag"
+    "inventory.slotted_bag",
+    "movement.basic_walk",
+    "combat.unit_roster",
+    "utility.behavior_fsm"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
     "inventory.affix_loot_generator",
     "combat.enemy_tier_scaling",
     "inventory.potion_belt",
-    "world.waypoint_travel"
+    "world.waypoint_travel",
+    "movement.pursuit_agent"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",
