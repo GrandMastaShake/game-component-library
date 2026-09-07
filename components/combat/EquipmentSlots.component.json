@@ -2,7 +2,7 @@
   "id": "combat.equipment_slots",
   "name": "Equipment Slots",
   "category": "combat",
-  "description": "Weapon/armor equip slots that modify combat stats when items are equipped. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember.",
+  "description": "Weapon/armor equip slots that modify combat stats when items are equipped. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember. WHICH ITEMS ARE GEAR is the level's to say, and it had no way to say it: the item-to-slot mapping lived inside the component, so a game whose loot table dropped pelts and fangs equipped nothing at all — thirty-nine items carried and three empty slots — while a game that happened to drop an axe equipped one by luck. `gear` says both halves at once: which slot an item fills and what wearing it does, because those are one decision about one item and splitting them into two inputs is two places to forget.\n\nThe bonuses it sums are published as `totalStatBonus` in the same named-key shape progression.skills_tree publishes its own, so a component that already reads a bonus by name reads both sources with no new code and no idea which one it came from. That is the point: a character is the sum of what they learned and what they are carrying, and the components that own each number should not have to care.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -45,6 +45,13 @@
       "required": false,
       "default": {},
       "description": "What is already worn when the build starts, as slot -> item. A slot the current slotTypes does not name is dropped rather than invented, so narrowing the slot list cannot leave an item equipped nowhere."
+    },
+    {
+      "name": "gear",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "What each item is, as {itemId: {slot, bonuses?}}. `slot` must be one the build's slotTypes names or the item is not gear here. `bonuses` is an object of named modifiers summed into totalStatBonus — the same keys skills publish, so meleeDamage from a fang and meleeDamage from a skill are the same number to whoever reads it. An item absent from this map is a material, not gear, and is ignored rather than force-equipped."
     }
   ],
   "outputs": [
@@ -54,7 +61,8 @@
     },
     {
       "name": "totalStatBonus",
-      "type": "object"
+      "type": "object",
+      "description": "Every bonus on every equipped item, summed by name — {meleeDamage: 2}. Declared from the start and never actually published, which made it the quietest kind of broken: a reader following the contract got undefined and had no way to tell that from a character wearing nothing. Shaped to match progression.skills_tree's `bonuses` on purpose, so one reader handles both."
     }
   ],
   "events": {
