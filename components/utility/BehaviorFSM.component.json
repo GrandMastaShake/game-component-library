@@ -58,6 +58,16 @@
     {
       "name": "states",
       "type": "object"
+    },
+    {
+      "name": "detectionRange",
+      "type": "number",
+      "description": "How far this entity notices a target, republished so the components that ACT on noticing can read it. It was an input only, which meant a real-time executor had no way to ask and pursued from anywhere on the map — a wolf that starts running at you from thirty tiles away is not a predator, it is a homing missile. Published rather than duplicated as a second input elsewhere, because two numbers for one idea is two numbers that will disagree."
+    },
+    {
+      "name": "behavior",
+      "type": "string",
+      "description": "The current behaviour name. Published beside `states` because a reader almost always wants just this, and digging it out of a status object is how a caller ends up depending on the shape of a debug readout."
     }
   ],
   "events": {

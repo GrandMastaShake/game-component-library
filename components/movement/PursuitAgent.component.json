@@ -2,7 +2,7 @@
   "id": "movement.pursuit_agent",
   "name": "Pursuit Agent",
   "category": "movement",
-  "description": "Executes movement commands in real time, continuously, with no turn structure \u2014 the counterpart of movement.grid_movement_range for a game that does not take turns. utility.behavior_fsm decides an entity WANTS to close on something and says so on the command bus; that request has to be carried out by somebody, and until this existed the only executor in the catalogue was the turn-based one, which drags combat.action_point_economy and combat.turn_order_queue in behind it. An action game importing a turn queue to make a wolf walk is the wrong answer to the right question. It owns the movement only: whose turn it is is nobody's question here, what the entity wants is the FSM's, where the entity IS belongs to combat.unit_roster, and it emits movement.moveExecuted rather than an event of its own so the roster updates through the same path a tactical move already uses. Reusing that event is the point \u2014 a catalogue that invents an event per movement style ends up with two rosters listening to two events about the same fact.",
+  "description": "Executes movement commands in real time, continuously, with no turn structure — the counterpart of movement.grid_movement_range for a game that does not take turns. utility.behavior_fsm decides an entity WANTS to close on something and says so on the command bus; that request has to be carried out by somebody, and until this existed the only executor in the catalogue was the turn-based one, which drags combat.action_point_economy and combat.turn_order_queue in behind it. An action game importing a turn queue to make a wolf walk is the wrong answer to the right question. It owns the movement only: whose turn it is is nobody's question here, what the entity wants is the FSM's, where the entity IS belongs to combat.unit_roster, and it emits movement.moveExecuted rather than an event of its own so the roster updates through the same path a tactical move already uses. Reusing that event is the point — a catalogue that invents an event per movement style ends up with two rosters listening to two events about the same fact. It does not decide how far away an entity NOTICES you: utility.behavior_fsm declares detectionRange and publishes it, and this reads it, because a second aggro number living here is a second number to keep in step with the first. Where no FSM is in the build there is nothing to notice with and everything pursues from anywhere, which is the honest fallback and the behaviour every existing build already had. `leashMultiple` is the other half of the same idea and belongs here, because giving up is a movement decision.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -48,7 +48,7 @@
       "type": "number",
       "required": false,
       "default": 1,
-      "description": "Tiles from the target at which pursuit stops. 1 is melee \u2014 close enough to strike, not so close the bodies overlap. Anything larger is a ranged attacker that keeps its distance."
+      "description": "Tiles from the target at which pursuit stops. 1 is melee — close enough to strike, not so close the bodies overlap. Anything larger is a ranged attacker that keeps its distance."
     },
     {
       "name": "repathSeconds",
@@ -63,6 +63,13 @@
       "required": false,
       "default": true,
       "description": "Whether pursuers refuse to stand on each other. Without it a pack converges to one tile and reads as one enemy with several health bars."
+    },
+    {
+      "name": "leashMultiple",
+      "type": "number",
+      "required": false,
+      "default": 1.6,
+      "description": "How much further than detectionRange a pursuer will follow before losing interest, as a multiple of it. It exists because one threshold flickers: a target hovering exactly at the edge is noticed, dropped, noticed and dropped, and the enemy reads as broken rather than as cautious. Anything at or below 1 disables the hysteresis and restores that flicker."
     }
   ],
   "outputs": [
