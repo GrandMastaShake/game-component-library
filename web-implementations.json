@@ -6,6 +6,7 @@
   "targets": {
     "canvas2d": [
       "combat.action_point_economy",
+      "combat.contact_attack",
       "combat.cover_bonus_grid",
       "combat.damage_resolver",
       "combat.enemy_tier_scaling",
@@ -40,6 +41,7 @@
       "movement.ledge_grab",
       "movement.pathfinding_system",
       "movement.physics_core",
+      "movement.pursuit_agent",
       "movement.run_control",
       "movement.vehicle_basic",
       "movement.wall_interaction",
