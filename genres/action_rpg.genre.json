@@ -25,7 +25,9 @@
     "world.biome_system",
     "presentation.color_palette",
     "presentation.object_placer",
-    "world.edge_transition"
+    "world.edge_transition",
+    "ui.minimap",
+    "world.vision_system"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
