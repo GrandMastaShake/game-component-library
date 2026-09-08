@@ -2,7 +2,7 @@
   "id": "movement.vehicle_tuning",
   "name": "Vehicle Tuning",
   "category": "movement",
-  "description": "The per-vehicle feel sheet: acceleration curve, grip, drift tendency, and steering response, stored as named presets and applied on top of movement.vehicle_basic's stock handling. It exists because two cars sharing the same VehicleBasic should not drive the same, and the difference between them is data, not code. This component owns the parameter set and when it is applied — it re-asserts the tune on movement.vehicleEntered because VehicleBasic resets to stock handling on seat change. It does not own the physics integration (movement.physics_core turns the resulting numbers into motion) or the entry/seat logic (VehicleBasic). It also stores no progression: a part that improves grip is an economy and inventory fact, and what reaches this component is only the final numbers a garage system computed.\n\nIT PUBLISHES THE WHOLE SHEET, not three numbers of six. It owns acceleration, top speed, grip, drift tendency and steering response — and declared only the first two as `effective*`, so the three that decide how a car CORNERS had no published form at all. A consumer needing them would have read something undeclared, which is the same defect as declaring an output nothing publishes, inverted: a value that exists and no contract mentions. Six inputs, six resolved outputs.\n\nThe resolved numbers are what a reader wants rather than the raw inputs, because a preset sits underneath them and a damaged car multiplies them. `effectiveGrip` is the number movement.vehicle_basic integrates against and progression.drift_scoring judges a slide by; reading `gripCoefficient` instead would miss both the preset and the damage.",
+  "description": "The per-vehicle feel sheet: acceleration curve, grip, drift tendency, and steering response, stored as named presets and applied on top of movement.vehicle_basic's stock handling. It exists because two cars sharing the same VehicleBasic should not drive the same, and the difference between them is data, not code. This component owns the parameter set and when it is applied \u2014 it re-asserts the tune on movement.vehicleEntered because VehicleBasic resets to stock handling on seat change. It does not own the physics integration (movement.physics_core turns the resulting numbers into motion) or the entry/seat logic (VehicleBasic). It also stores no progression: a part that improves grip is an economy and inventory fact, and what reaches this component is only the final numbers a garage system computed.\n\nIT PUBLISHES THE WHOLE SHEET, not three numbers of six. It owns acceleration, top speed, grip, drift tendency and steering response \u2014 and declared only the first two as `effective*`, so the three that decide how a car CORNERS had no published form at all. A consumer needing them would have read something undeclared, which is the same defect as declaring an output nothing publishes, inverted: a value that exists and no contract mentions. Six inputs, six resolved outputs.\n\nThe resolved numbers are what a reader wants rather than the raw inputs, because a preset sits underneath them and a damaged car multiplies them. `effectiveGrip` is the number movement.vehicle_basic integrates against and progression.drift_scoring judges a slide by; reading `gripCoefficient` instead would miss both the preset and the damage.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -40,7 +41,7 @@
       "type": "string",
       "required": false,
       "default": "stock",
-      "description": "Named tune preset to apply. Presets are how garages and part systems talk to this component — they install a preset name, never raw physics constants."
+      "description": "Named tune preset to apply. Presets are how garages and part systems talk to this component \u2014 they install a preset name, never raw physics constants."
     },
     {
       "name": "acceleration",
@@ -87,7 +88,7 @@
     {
       "name": "effectiveTopSpeed",
       "type": "number",
-      "description": "Top speed after all multipliers, including any performance degradation written in by combat.vehicle_damage_states — damage rides the same path as tuning so 'damaged handling' and 'tuned handling' never diverge."
+      "description": "Top speed after all multipliers, including any performance degradation written in by combat.vehicle_damage_states \u2014 damage rides the same path as tuning so 'damaged handling' and 'tuned handling' never diverge."
     },
     {
       "name": "effectiveAcceleration",
@@ -97,7 +98,7 @@
     {
       "name": "effectiveGrip",
       "type": "number",
-      "description": "Lateral grip after the preset. This is the number movement.physics_core's `planar` scrubs sideways velocity by, and the one progression.drift_scoring judges a slide against — below 1 the tail steps out."
+      "description": "Lateral grip after the preset. This is the number movement.physics_core's `planar` scrubs sideways velocity by, and the one progression.drift_scoring judges a slide against \u2014 below 1 the tail steps out."
     },
     {
       "name": "effectiveDriftFactor",
