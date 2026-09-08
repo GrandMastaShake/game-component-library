@@ -40,13 +40,15 @@
       "name": "baseHue",
       "type": "number",
       "required": false,
-      "default": 0
+      "default": 0,
+      "description": "Where the analogous arc starts, in degrees. The ramp spans roughly 70 degrees off this rather than the full wheel, because six hues spread across 360 sends terrain through magenta."
     },
     {
       "name": "paletteSize",
       "type": "number",
       "required": false,
-      "default": 6
+      "default": 6,
+      "description": "How many swatches the ramp has, 2 to 12. Fewer bands read as poster art and more as a gradient; it is also the denominator `forIndex` maps an ordinal onto."
     },
     {
       "name": "minLightness",
@@ -65,8 +67,29 @@
   ],
   "outputs": [
     {
-      "name": "colors",
-      "type": "array"
+      "name": "swatches",
+      "type": "array",
+      "description": "The ramp, ordered dark to light, as CSS colour strings. It was declared as `colors` and published as `swatches`, and nothing ever read `colors` — a declared output no implementation publishes is a contract that reads as a promise and behaves as a typo, and the only reason it survived is that the audit checks inputs and reads, not outputs."
+    },
+    {
+      "name": "water",
+      "type": "string",
+      "description": "Sea colour, which is deliberately NOT on the land ramp. Deriving it by a fixed offset from baseHue lands a green world's sea on purple, so it is anchored blue and only nudged by the hue — enough that the whole palette still shifts together."
+    },
+    {
+      "name": "forIndex",
+      "type": "function",
+      "description": "`(i, of) => string`. Maps an ordinal — elevation band, tier, rank — onto the ramp, which is the reason the ramp is ordered rather than a set."
+    },
+    {
+      "name": "baseHue",
+      "type": "number",
+      "description": "Echoed back so a consumer can shift with the palette rather than keeping its own copy of the request."
+    },
+    {
+      "name": "paletteSize",
+      "type": "number",
+      "description": "Echoed back, as baseHue is."
     }
   ],
   "events": {
