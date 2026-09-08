@@ -25,6 +25,8 @@ jobs:
         run: python3 tools/declare_implementations.py --check
       - name: Report how adoptable each compound is per genre (never fails; it is a measurement)
         run: python3 tools/compound_fit.py --report reports/compound-fit.json --max-rows 6
+      - name: Every NEW component records what it was found by (baselined; the line must not move outward)
+        run: python3 tools/validate_provenance.py --report reports/provenance.json
       - run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
       - run: python3 tools/evaluate_manifest_readiness.py reports/pet-survival-game.manifest.json --mode prototype --report reports/pet-survival-game.prototype-readiness.json
       - run: python3 tools/generate_coverage_roadmap.py reports/pet-survival-game.manifest.json --output reports/pet-survival-game.coverage-roadmap.json

@@ -27,7 +27,8 @@
     "presentation.object_placer",
     "world.edge_transition",
     "ui.minimap",
-    "world.vision_system"
+    "world.vision_system",
+    "world.tile_grid"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
