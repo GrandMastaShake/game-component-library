@@ -108,6 +108,7 @@
       "world.swap_validator",
       "world.terrain_generator",
       "world.tile_grid",
+      "world.track_circuit",
       "world.vision_system",
       "world.water_system",
       "world.weather_system",
