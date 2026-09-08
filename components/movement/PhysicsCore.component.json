@@ -2,7 +2,7 @@
   "id": "movement.physics_core",
   "name": "Physics Core",
   "category": "movement",
-  "description": "Low-level physics utility for projectile arcs, knockback impulses, and gravity-affected motion used by combat and movement bricks.",
+  "description": "Low-level physics utility for projectile arcs, knockback impulses, and gravity-affected motion used by combat and movement bricks.\n\nAND IT IS NOT ONLY SIDE-VIEW. Gravity into a vertical axis is the platformer's physics, and it was the only physics this catalogue's runtime had: a top-down vehicle has no floor to fall to. What it has is a HEADING, and the whole feel of driving lives in how much of its velocity points along that heading versus across it. `planar` is that decomposition — forward speed, lateral speed, slip angle — and it belongs here rather than in a vehicle component because it is arithmetic, and movement.vehicle_tuning, progression.drift_scoring and combat.ram_damage_model all need the same answer to \"how sideways is this\". Grip applies to the lateral component alone: a car that grips loses its sideways speed and keeps its forward speed, which is what grip means and what scrubbing both would destroy.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -56,6 +56,16 @@
     {
       "name": "computeKnockback",
       "type": "function"
+    },
+    {
+      "name": "step",
+      "type": "function",
+      "description": "Side-view integration: gravity into the vertical axis, drag on both. What the platformer bricks run on."
+    },
+    {
+      "name": "planar",
+      "type": "function",
+      "description": "Top-down integration against a heading. Returns `{forward, lateral, slipAngle}` — `lateral` is the sideways speed, and that number IS the drift."
     }
   ],
   "events": {
