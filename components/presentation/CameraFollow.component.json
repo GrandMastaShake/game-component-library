@@ -2,31 +2,116 @@
   "id": "presentation.camera_follow",
   "name": "Camera Follow",
   "category": "presentation",
-  "description": "Owns the view: where the world is drawn from, and the only transform applied to it. It follows a target within a deadzone rather than centring on it exactly, because a camera pinned to a walking character makes the whole world jitter under every step, and smooths what is left so a jump does not snap the view. It also composes screen shake into the same matrix, since a shake is a camera effect and two components cannot each own the transform — presentation.screen_shake publishes an offset and a roll, and yields the view when a camera is present. The target is read optionally rather than declared as a dependency, so the same camera follows a side-view body or a top-down walker without either being required.",
+  "description": "Owns the view: where the world is drawn from, and the only transform applied to it. It follows a target within a deadzone rather than centring on it exactly, because a camera pinned to a walking character makes the whole world jitter under every step, and smooths what is left so a jump does not snap the view. It also composes screen shake into the same matrix, since a shake is a camera effect and two components cannot each own the transform — presentation.screen_shake publishes an offset and a roll, and yields the view when a camera is present. The target is read optionally rather than declared as a dependency, so the same camera follows a side-view body or a top-down walker without either being required.\n\nAND IT CAN TURN, not just pan. A whole family of games keeps the body still in the middle of the screen and moves the WORLD around it — racing, skateboarding, biking, a dog on a lead, most sports where you are one player on a pitch. What makes those read correctly is that the view rotates with the thing it follows, so forward is always up the screen and a turn feels like the world swinging past rather than the player sliding sideways. That is a transform, and this component says it owns the only transform applied to the world, so it owns this one too — a second component composing its own rotation is exactly the collision the shake note above describes.\n\nRotation gets its own smoothing because it needs a different number from position. A camera that snaps to a heading is unreadable at speed and sickening at any speed, and the value that feels right for panning is far too quick for turning. Off by default: most games do not want it, and a view that rotates when nobody asked is worse than one that does not when they did.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "deadzoneWidth", "type": "number", "required": false, "default": 4, "description": "How far the target may move horizontally before the camera starts following, in world units. Zero pins the camera to the target and makes every footstep move the world."},
-    {"name": "deadzoneHeight", "type": "number", "required": false, "default": 3, "description": "The vertical equivalent. Usually larger than it looks it should be: a jump is a big vertical excursion that the player does not want the camera to chase."},
-    {"name": "smoothingSeconds", "type": "number", "required": false, "default": 0.15, "description": "Roughly how long the camera takes to close the gap once the target leaves the deadzone. 0 follows rigidly; large values read as the camera losing track."},
-    {"name": "clampToWorldBounds", "type": "boolean", "required": false, "default": true, "description": "Whether the view is kept inside the world rectangle, so the edge of the level is never on screen. Turn it off for a world with no meaningful edge."},
-    {"name": "zoom", "type": "number", "required": false, "default": 1, "description": "Scale applied to the view. Above 1 shows less of the world and makes the camera's work visible even in a level that would otherwise fit on one screen."}
+    {
+      "name": "deadzoneWidth",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "How far the target may move horizontally before the camera starts following, in world units. Zero pins the camera to the target and makes every footstep move the world."
+    },
+    {
+      "name": "deadzoneHeight",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "The vertical equivalent. Usually larger than it looks it should be: a jump is a big vertical excursion that the player does not want the camera to chase."
+    },
+    {
+      "name": "smoothingSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.15,
+      "description": "Roughly how long the camera takes to close the gap once the target leaves the deadzone. 0 follows rigidly; large values read as the camera losing track."
+    },
+    {
+      "name": "clampToWorldBounds",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the view is kept inside the world rectangle, so the edge of the level is never on screen. Turn it off for a world with no meaningful edge."
+    },
+    {
+      "name": "zoom",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Scale applied to the view. Above 1 shows less of the world and makes the camera's work visible even in a level that would otherwise fit on one screen."
+    },
+    {
+      "name": "followRotation",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the view turns with the target's facing, so forward is always up the screen and the world moves around a body that stays put. Needs a target that HAS a facing — movement.vehicle_basic under `continuous` motion publishes one; a stepped vehicle does not, and the camera stays upright rather than inventing a heading."
+    },
+    {
+      "name": "rotationSmoothingSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.25,
+      "description": "Roughly how long the view takes to catch up to a new heading. Separate from smoothingSeconds because the right answer differs: a camera that snaps to heading is unreadable at speed, and panning wants a much quicker number than turning. 0 snaps."
+    }
   ],
   "outputs": [
-    {"name": "center", "type": "vector3", "description": "The point the view is centred on, in world units."},
-    {"name": "ownsViewTransform", "type": "boolean", "description": "Always true while this component is in the build. Anything that would otherwise set its own view transform reads this and yields, so the view has exactly one owner."}
+    {
+      "name": "center",
+      "type": "vector3",
+      "description": "The point the view is centred on, in world units."
+    },
+    {
+      "name": "ownsViewTransform",
+      "type": "boolean",
+      "description": "Always true while this component is in the build. Anything that would otherwise set its own view transform reads this and yields, so the view has exactly one owner."
+    },
+    {
+      "name": "rotation",
+      "type": "number",
+      "description": "The view's current angle in radians, after smoothing. 0 whenever followRotation is off, so a consumer can compose it unconditionally."
+    }
   ],
   "events": {
     "emits": [],
     "listensTo": []
   },
   "dependencies": [],
-  "tags": ["presentation", "camera", "view", "core"],
+  "tags": [
+    "presentation",
+    "camera",
+    "view",
+    "core"
+  ],
   "provenance": "library-native"
 }
