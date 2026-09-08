@@ -2,7 +2,7 @@
   "id": "world.fog_of_war_reveal",
   "name": "Fog of War Reveal",
   "category": "world",
-  "description": "Two maps, not one: what you can see now, and what you have ever seen. world.vision_system computes current line of sight and owns the live layer; this component listens to its updates and accumulates the history layer — the dimmed, remembered geography that lets a player plan the route back. Keeping history out of the vision system matters because sight is per-frame and ephemeral while memory is per-save and persistent; conflating them is how fog ends up resetting every time the player blinks. This component owns recording and reveal queries only: rendering the two layers is a presentation concern, and persistence.save_system snapshots the history like any other state.\n\nTHE FRAME IS THE WORLD, NOT THE BOARD. Every count and query here used to mean \"on this floor\", which is only the right frame for a game whose world is one board at a time. A game that walks off the east edge into the next region has a memory that must span both, and under a per-board frame it does not: the build is torn down at the boundary and the history goes with it, so the map resets at exactly the moment it becomes useful. History is therefore keyed in WORLD tiles — `originX`/`originY` say where the current board sits — and `initialExplored` is the channel a host uses to hand the previous build's memory to the next one, the same way health and unlocked skills already cross. A game with one board leaves both at zero and nothing changes for it.",
+  "description": "Two maps, not one: what you can see now, and what you have ever seen. world.vision_system computes current line of sight and owns the live layer; this component listens to its updates and accumulates the history layer \u2014 the dimmed, remembered geography that lets a player plan the route back. Keeping history out of the vision system matters because sight is per-frame and ephemeral while memory is per-save and persistent; conflating them is how fog ends up resetting every time the player blinks. This component owns recording and reveal queries only: rendering the two layers is a presentation concern, and persistence.save_system snapshots the history like any other state.\n\nTHE FRAME IS THE WORLD, NOT THE BOARD. Every count and query here used to mean \"on this floor\", which is only the right frame for a game whose world is one board at a time. A game that walks off the east edge into the next region has a memory that must span both, and under a per-board frame it does not: the build is torn down at the boundary and the history goes with it, so the map resets at exactly the moment it becomes useful. History is therefore keyed in WORLD tiles \u2014 `originX`/`originY` say where the current board sits \u2014 and `initialExplored` is the channel a host uses to hand the previous build's memory to the next one, the same way health and unlocked skills already cross. A game with one board leaves both at zero and nothing changes for it.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -47,14 +48,14 @@
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether revealed enemies stay marked on the history layer. False records terrain only — the honest default, since a remembered enemy that moved is a lie on the map."
+      "description": "Whether revealed enemies stay marked on the history layer. False records terrain only \u2014 the honest default, since a remembered enemy that moved is a lie on the map."
     },
     {
       "name": "persistAcrossAreas",
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether history survives a transition to another area — world.floor_descent for a dungeon, world.edge_transition for an overworld. It named the floor case only, and a boundary crossing is the same question wearing another word; two inputs for one idea is how a game ends up remembering its dungeon and forgetting its map. False: every area starts unknown. True is for games where the map IS the progression."
+      "description": "Whether history survives a transition to another area \u2014 world.floor_descent for a dungeon, world.edge_transition for an overworld. It named the floor case only, and a boundary crossing is the same question wearing another word; two inputs for one idea is how a game ends up remembering its dungeon and forgetting its map. False: every area starts unknown. True is for games where the map IS the progression."
     },
     {
       "name": "initialExplored",
@@ -68,7 +69,7 @@
       "type": "number",
       "required": false,
       "default": 0,
-      "description": "Where the current board's left edge sits in world tiles. Added to every local tile before it is recorded, so two regions cannot claim the same key. The host owns the region grid — world.edge_transition reports that a boundary was crossed and deliberately moves nobody — so this is told to the component, not decided by it."
+      "description": "Where the current board's left edge sits in world tiles. Added to every local tile before it is recorded, so two regions cannot claim the same key. The host owns the region grid \u2014 world.edge_transition reports that a boundary was crossed and deliberately moves nobody \u2014 so this is told to the component, not decided by it."
     },
     {
       "name": "originY",
@@ -87,7 +88,7 @@
     {
       "name": "exploredFraction",
       "type": "number",
-      "description": "0..1 of the CURRENT board's walkable tiles revealed — the completionist metric, which stays per-board because \"how much of the world\" has no denominator in a game that generates more of it as you walk."
+      "description": "0..1 of the CURRENT board's walkable tiles revealed \u2014 the completionist metric, which stays per-board because \"how much of the world\" has no denominator in a game that generates more of it as you walk."
     },
     {
       "name": "exploredKeys",
