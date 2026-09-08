@@ -107,6 +107,10 @@ Do not resolve this by loosening the components' dependencies. A pursuer that
 works without a roster is a pursuer that has invented a second place positions
 live, which is the exact defect the roster was created to remove.
 
+See **[building.md](building.md)** for the order to ask things in — whether a
+concept is already owned, whether the owner can be extended rather than joined,
+and what a new component has to record about having looked.
+
 ## Before building the next genre: ask what it already costs
 
 ```

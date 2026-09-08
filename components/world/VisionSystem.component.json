@@ -2,25 +2,93 @@
   "id": "world.vision_system",
   "name": "Vision System",
   "category": "world",
-  "description": "Per-team fog of war. Tracks the three-state tile lattice of unexplored, explored, and visible, recomputing visible tiles only for entities that moved and retaining explored tiles permanently.",
+  "description": "Per-team fog of war. Tracks the three-state tile lattice of unexplored, explored, and visible, recomputing visible tiles only for entities that moved and retaining explored tiles permanently. HOW DARK the fog is was two constants, and they are not one answer for every game. A squad scouting a 14x10 board wants unexplored ground to be genuinely black — the not knowing is the tactics. A character walking a 32x20 landscape at the same opacity is standing in a lit hole in a void, with everything the level built invisible and every enemy in it invisible too. Same component, same contract, two different games, and the only thing between them is a number that a request could not set.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "revealRadius", "type": "number", "required": false, "default": 10},
-    {"name": "persistExplored", "type": "boolean", "required": false, "default": true}
+    {
+      "name": "revealRadius",
+      "type": "number",
+      "required": false,
+      "default": 10
+    },
+    {
+      "name": "persistExplored",
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "unseenOpacity",
+      "type": "number",
+      "required": false,
+      "default": 0.86,
+      "description": "How opaque the fog is over ground that has never been seen, 0 to 1. High is a board game's fog, where not knowing is the point; low is an atmosphere over a world you can still read. At 1 the map outside the reveal radius does not exist as far as a player is concerned, including anything standing in it."
+    },
+    {
+      "name": "exploredOpacity",
+      "type": "number",
+      "required": false,
+      "default": 0.42,
+      "description": "How opaque the fog is over ground that has been seen and is not currently visible. Kept separate from unseenOpacity because the gap between them is the whole information channel: it is what tells a player 'you have been here' apart from 'you can see this now', and collapsing the two throws that away whichever value survives."
+    }
   ],
   "outputs": [
-    {"name": "visibleTiles", "type": "array"},
-    {"name": "exploredTiles", "type": "array"}
+    {
+      "name": "visibleTiles",
+      "type": "array"
+    },
+    {
+      "name": "exploredTiles",
+      "type": "array"
+    }
   ],
-  "events": {"emits": ["world.visionUpdated", "world.tileExplored"], "listensTo": ["world.chunkLoaded", "movement.started", "movement.stopped"]},
+  "events": {
+    "emits": [
+      "world.visionUpdated",
+      "world.tileExplored"
+    ],
+    "listensTo": [
+      "world.chunkLoaded",
+      "movement.started",
+      "movement.stopped"
+    ]
+  },
   "dependencies": [],
-  "tags": ["fog-of-war", "vision", "rts", "world"],
+  "tags": [
+    "fog-of-war",
+    "vision",
+    "rts",
+    "world"
+  ],
   "provenance": "library-native"
 }
