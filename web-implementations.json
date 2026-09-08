@@ -47,6 +47,7 @@
       "movement.pursuit_agent",
       "movement.run_control",
       "movement.vehicle_basic",
+      "movement.vehicle_tuning",
       "movement.wall_interaction",
       "persistence.datastore_safe",
       "persistence.profile_adapter",
