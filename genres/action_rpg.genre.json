@@ -28,6 +28,7 @@
     "world.edge_transition",
     "ui.minimap",
     "world.vision_system",
+    "world.fog_of_war_reveal",
     "world.tile_grid",
     "presentation.style_presets"
   ],

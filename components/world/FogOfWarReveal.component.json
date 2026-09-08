@@ -2,7 +2,7 @@
   "id": "world.fog_of_war_reveal",
   "name": "Fog of War Reveal",
   "category": "world",
-  "description": "Two maps, not one: what you can see now, and what you have ever seen. world.vision_system computes current line of sight and owns the live layer; this component listens to its updates and accumulates the history layer \u2014 the dimmed, remembered geography that lets a player plan the route back. Keeping history out of the vision system matters because sight is per-frame and ephemeral while memory is per-save and persistent; conflating them is how fog ends up resetting every time the player blinks. This component owns recording and reveal queries only: rendering the two layers is a presentation concern, and persistence.save_system snapshots the history like any other state.",
+  "description": "Two maps, not one: what you can see now, and what you have ever seen. world.vision_system computes current line of sight and owns the live layer; this component listens to its updates and accumulates the history layer — the dimmed, remembered geography that lets a player plan the route back. Keeping history out of the vision system matters because sight is per-frame and ephemeral while memory is per-save and persistent; conflating them is how fog ends up resetting every time the player blinks. This component owns recording and reveal queries only: rendering the two layers is a presentation concern, and persistence.save_system snapshots the history like any other state.\n\nTHE FRAME IS THE WORLD, NOT THE BOARD. Every count and query here used to mean \"on this floor\", which is only the right frame for a game whose world is one board at a time. A game that walks off the east edge into the next region has a memory that must span both, and under a per-board frame it does not: the build is torn down at the boundary and the history goes with it, so the map resets at exactly the moment it becomes useful. History is therefore keyed in WORLD tiles — `originX`/`originY` say where the current board sits — and `initialExplored` is the channel a host uses to hand the previous build's memory to the next one, the same way health and unlocked skills already cross. A game with one board leaves both at zero and nothing changes for it.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -47,26 +47,62 @@
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether revealed enemies stay marked on the history layer. False records terrain only \u2014 the honest default, since a remembered enemy that moved is a lie on the map."
+      "description": "Whether revealed enemies stay marked on the history layer. False records terrain only — the honest default, since a remembered enemy that moved is a lie on the map."
     },
     {
-      "name": "persistBetweenFloors",
+      "name": "persistAcrossAreas",
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether history survives world.floor_descent transitions. False: every floor starts unknown. True is for single-dungeon games where the map is the progression."
+      "description": "Whether history survives a transition to another area — world.floor_descent for a dungeon, world.edge_transition for an overworld. It named the floor case only, and a boundary crossing is the same question wearing another word; two inputs for one idea is how a game ends up remembering its dungeon and forgetting its map. False: every area starts unknown. True is for games where the map IS the progression."
+    },
+    {
+      "name": "initialExplored",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "World tiles already remembered when this build starts, as \"x,y\" strings. The carry channel across an area transition: the host reads `exploredKeys` off the build it is tearing down and hands it back here, which is the same pattern combat.unit_roster's initialHealth and progression.skills_tree's initialUnlocked already use. Empty means a fresh memory, which is what a first region has."
+    },
+    {
+      "name": "originX",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Where the current board's left edge sits in world tiles. Added to every local tile before it is recorded, so two regions cannot claim the same key. The host owns the region grid — world.edge_transition reports that a boundary was crossed and deliberately moves nobody — so this is told to the component, not decided by it."
+    },
+    {
+      "name": "originY",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Where the current board's top edge sits in world tiles. See originX."
     }
   ],
   "outputs": [
     {
       "name": "exploredTileCount",
       "type": "number",
-      "description": "Tiles ever revealed on this floor."
+      "description": "Tiles ever revealed, across every area this memory has been carried through."
     },
     {
       "name": "exploredFraction",
       "type": "number",
-      "description": "0..1 of the floor's walkable tiles revealed \u2014 the completionist metric."
+      "description": "0..1 of the CURRENT board's walkable tiles revealed — the completionist metric, which stays per-board because \"how much of the world\" has no denominator in a game that generates more of it as you walk."
+    },
+    {
+      "name": "exploredKeys",
+      "type": "array",
+      "description": "Every remembered tile as a \"x,y\" world-space string. What a host hands to the next build's initialExplored, and what a save system snapshots."
+    },
+    {
+      "name": "bounds",
+      "type": "object",
+      "description": "`{minX,minY,maxX,maxY}` of the remembered region in world tiles, or null when nothing is remembered yet. A map that draws this instead of a fixed board size GROWS as areas are explored, which is the visible reason this component exists."
+    },
+    {
+      "name": "isExplored",
+      "type": "function",
+      "description": "`(worldX, worldY) => boolean`. The reveal query, in world tiles. A renderer with the board's origin can ask about local tiles by adding it."
     }
   ],
   "events": {
@@ -81,8 +117,11 @@
     "world.vision_system"
   ],
   "tags": [
+    "action-rpg",
     "dungeon-crawler",
     "exploration",
+    "minimap",
+    "open-world",
     "visibility"
   ],
   "provenance": "library-native"
