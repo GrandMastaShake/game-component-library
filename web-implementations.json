@@ -1,7 +1,7 @@
 {
   "note": "What the consuming web application implements, per target. The library cannot see that repository, so `implementations` entries for web targets are status `external` by definition — this file is the declaration that makes them reviewable rather than assumed. Before it existed, 39 of 71 descriptors named a canvas2d implementation while the app registered all 71: the undercount was invisible because nothing compared the two.",
   "source": "game-architect-studio — generator/bricks/*.ts (canvas2d), generator/voxel/*.ts (webgl)",
-  "verifiedOn": "2026-09-08",
+  "verifiedOn": "2026-09-09",
   "howToRefresh": "In the app: grep the register() calls in generator/bricks/*.ts for the canvas2d list. Then: python3 tools/declare_implementations.py",
   "targets": {
     "canvas2d": [
@@ -32,6 +32,7 @@
       "inventory.crafting_bench",
       "inventory.loot_table",
       "inventory.slotted_bag",
+      "movement.ai_driver",
       "movement.basic_walk",
       "movement.character_body",
       "movement.dash_ability",
@@ -50,6 +51,7 @@
       "movement.vehicle_tuning",
       "movement.wall_interaction",
       "persistence.datastore_safe",
+      "persistence.ghost_replay",
       "persistence.profile_adapter",
       "persistence.save_system",
       "pets.egg_hatchery",
@@ -68,6 +70,7 @@
       "presentation.style_presets",
       "presentation.tile_cursor",
       "progression.cascade_scoring",
+      "progression.drift_scoring",
       "progression.level_goal",
       "progression.level_objective_set",
       "progression.production_queue",
@@ -90,6 +93,7 @@
       "utility.behavior_fsm",
       "utility.command_bus",
       "utility.probability_core",
+      "utility.rubber_band_ai",
       "utility.timer_system",
       "world.biome_system",
       "world.blocker_tiles",
