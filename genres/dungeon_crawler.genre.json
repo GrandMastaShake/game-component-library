@@ -3,7 +3,7 @@
   "name": "Dungeon Crawler",
   "description": "Descend a seeded stack of procedural floors where authored rooms, traps, fog, and a boss at the bottom turn 'one more floor' into a session. The app's dd-* TypeScript generators already prove this loop; this pack declares the library-native contract they map onto.",
   "version": "0.1.0",
-  "loop": "enter floor \u2192 rooms/corridors \u2192 traps/treasure/boss \u2192 descend",
+  "loop": "enter floor → rooms/corridors → traps/treasure/boss → descend",
   "views": [
     "top-down",
     "voxel",
@@ -13,7 +13,16 @@
     "movement.pathfinding_system",
     "inventory.loot_table",
     "world.hazard_volume",
-    "world.vision_system"
+    "world.vision_system",
+    "movement.basic_walk",
+    "combat.unit_roster",
+    "combat.melee_basic",
+    "combat.damage_resolver",
+    "movement.pursuit_agent",
+    "combat.contact_attack",
+    "utility.behavior_fsm",
+    "ui.minimap",
+    "presentation.style_presets"
   ],
   "newComponents": [
     "world.floor_descent",
