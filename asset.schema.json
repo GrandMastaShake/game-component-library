@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameAsset",
+  "description": "The contract for a 3D asset a runtime can load: what it is, where things attach to it, and what it costs at each viewing distance. It sits beside component.schema.json for the same reason that one exists — a mesh nobody has declared is a mesh nobody can check, and 'it looked right in Blender' is not a claim a consuming repository can act on. A descriptor here is a claim ABOUT FILES, so every number in it must be read back out of the exported file rather than recorded from the tool that wrote it: measured on the first kart, Blender reported 52 and 24 triangles for the two far tiers and the glTF contained 46 and 19, because the exporter drops the degenerate faces aggressive decimation leaves behind.",
+  "type": "object",
+  "required": ["id", "name", "format", "sockets", "levels", "source", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Dotted id in the catalogue's own style, e.g. 'vehicle.kart'. Not a component id: an asset is what a component may be drawn as, and several components can share one.",
+      "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"
+    },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "archetype": {
+      "type": "string",
+      "description": "The body plan this follows, from the shape package's archetypes where one fits. Absent means the asset is its own shape and says so."
+    },
+    "format": {
+      "type": "string",
+      "enum": ["gltf-binary"],
+      "description": "glTF binary only, deliberately. One format the web runtime loads natively and Unity and Godot both import, rather than a per-target zoo."
+    },
+    "units": {
+      "type": "string",
+      "enum": ["metres"],
+      "default": "metres",
+      "description": "glTF is metres by convention and the voxel runtime's block is one metre, so an asset that honours this drops into the world at the right size with no scale factor to get wrong."
+    },
+    "forwardAxis": {
+      "type": "string",
+      "enum": ["+x", "-x", "+z", "-z"],
+      "description": "Which way the asset faces at rest. The car model treats heading 0 as +x, so an asset built to face anything else needs a rotation the runtime would have to remember — recording it is what makes that checkable."
+    },
+    "sockets": {
+      "type": "array",
+      "description": "Named attachment points that exist as nodes in every exported level. A socket is a promise to whatever attaches there, so the validator's job is to prove the node is really in the file.",
+      "items": {
+        "type": "object",
+        "required": ["name", "position"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "Exported as a node called 'socket_<name>'."
+          },
+          "position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Where it sits in the asset's own space, in metres."
+          },
+          "carries": {
+            "type": "string",
+            "description": "What is expected to attach here, when that is a known part."
+          },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "levels": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One entry per level of detail, coarsest last. The bands are the shape package's own: hero under 5m, gameplay 5 to 20m, far 20 to 50m, proxy beyond.",
+      "items": {
+        "type": "object",
+        "required": ["level", "distanceBand", "file", "triangles"],
+        "additionalProperties": false,
+        "properties": {
+          "level": { "type": "string", "pattern": "^lod[0-9]$" },
+          "distanceBand": {
+            "type": "string",
+            "enum": ["hero", "gameplay", "far", "proxy"]
+          },
+          "distanceRange": { "type": "string" },
+          "file": {
+            "type": "string",
+            "description": "Path inside the consuming repository. The library declares the contract; it does not host the binary."
+          },
+          "triangles": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "READ BACK OUT OF THE FILE, never recorded from the exporter. See this schema's description."
+          },
+          "bytes": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["tool", "repository"],
+      "additionalProperties": false,
+      "description": "How it was made, so it can be made again. An asset nobody can regenerate is an asset that rots the day its author leaves.",
+      "properties": {
+        "tool": { "type": "string" },
+        "repository": { "type": "string" },
+        "script": { "type": "string" },
+        "generatedOn": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "string",
+      "minLength": 40,
+      "description": "What this asset was found to be needed by, and what it is not. The same gate component descriptors carry, for the same reason: it turns 'I could not find one like this' from a private belief into a reviewable claim."
+    }
+  }
+}
