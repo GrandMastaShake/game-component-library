@@ -61,6 +61,32 @@
         }
       }
     },
+    "animations": {
+      "type": "array",
+      "description": "Named clips the exported file contains. Absent means the asset does not move, which is the honest state for a kart and a lie for a character — a rigged asset whose clips nobody declared is one where 'the walk is in there' is a private belief, exactly what the socket list exists to stop. Declaring them makes the app's check-assets open the glTF and prove each one is present and the right length.",
+      "items": {
+        "type": "object",
+        "required": ["name", "seconds"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "Exported as a glTF animation of exactly this name."
+          },
+          "seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Duration of the clip, READ BACK OUT OF THE FILE like every other number here. A clip's length is set by its frame range and the scene's frame rate, so it is the number most easily reported from the wrong one of the two."
+          },
+          "loops": {
+            "type": "boolean",
+            "description": "Whether the first and last pose match, so the clip can repeat without snapping. A walk must; a one-shot attack need not."
+          },
+          "description": { "type": "string" }
+        }
+      }
+    },
     "levels": {
       "type": "array",
       "minItems": 1,
