@@ -22,6 +22,7 @@
     "combat.contact_attack",
     "utility.behavior_fsm",
     "ui.minimap",
+    "ui.hud",
     "presentation.style_presets"
   ],
   "newComponents": [
