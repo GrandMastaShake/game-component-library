@@ -2,7 +2,7 @@
   "id": "movement.vehicle_basic",
   "name": "Basic Vehicle",
   "category": "movement",
-  "description": "Drivable vehicle with throttle/steer input, top speed, and seat-based entry/exit.\n\nHOW IT MOVES IS A DECLARED CHOICE, because the genres that use this want different answers and a constant standing between them decides for both. A freight train on transport_tycoon's network moves tile to tile along a route; a car in driving_racing has a heading and slides when it corners too fast, and the whole feel of that genre is in the sliding. Neither is a better vehicle — they are different vehicles, and this component owned only the first because grid stepping was what the runtime could do.\n\n`stepped` is the default so nothing that already drives one changes. `continuous` integrates through movement.physics_core's `planar`, which is where the arithmetic lives, and publishes `heading` and `velocity` for movement.vehicle_tuning and progression.drift_scoring to read. Under `stepped` those two are absent rather than zero: a vehicle that cannot slide has no drift to report, and reporting 0 would make a drift score look earned.",
+  "description": "Drivable vehicle with throttle/steer input, top speed, and seat-based entry/exit.\n\nHOW IT MOVES IS A DECLARED CHOICE, because the genres that use this want different answers and a constant standing between them decides for both. A freight train on transport_tycoon's network moves tile to tile along a route; a car in driving_racing has a heading and slides when it corners too fast, and the whole feel of that genre is in the sliding. Neither is a better vehicle \u2014 they are different vehicles, and this component owned only the first because grid stepping was what the runtime could do.\n\n`stepped` is the default so nothing that already drives one changes. `continuous` integrates through movement.physics_core's `planar`, which is where the arithmetic lives, and publishes `heading` and `velocity` for movement.vehicle_tuning and progression.drift_scoring to read. Under `stepped` those two are absent rather than zero: a vehicle that cannot slide has no drift to report, and reporting 0 would make a drift score look earned.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -31,6 +31,12 @@
       "target": "unity",
       "status": "unmapped",
       "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     }
   ],
   "inputs": [
@@ -51,7 +57,7 @@
       "type": "string",
       "required": false,
       "default": "stepped",
-      "description": "`stepped` moves a tile at a time at a rate set by topSpeed — right for rail, grids and anything routed. `continuous` gives the vehicle a heading and a velocity and integrates them, which is what cornering, drifting and ramming all need. An unknown value falls back to `stepped` rather than failing, because a typo in a handling model should not stop a game booting."
+      "description": "`stepped` moves a tile at a time at a rate set by topSpeed \u2014 right for rail, grids and anything routed. `continuous` gives the vehicle a heading and a velocity and integrates them, which is what cornering, drifting and ramming all need. An unknown value falls back to `stepped` rather than failing, because a typo in a handling model should not stop a game booting."
     }
   ],
   "outputs": [
@@ -66,7 +72,7 @@
     {
       "name": "heading",
       "type": "number",
-      "description": "Facing in radians. Published only under `continuous` — a stepped vehicle has no heading distinct from the direction it last moved."
+      "description": "Facing in radians. Published only under `continuous` \u2014 a stepped vehicle has no heading distinct from the direction it last moved."
     },
     {
       "name": "velocity",
