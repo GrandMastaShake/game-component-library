@@ -7,6 +7,7 @@
     "canvas2d": [
       "combat.action_point_economy",
       "combat.aggro_table",
+      "combat.boss_encounter_script",
       "combat.contact_attack",
       "combat.cover_bonus_grid",
       "combat.damage_resolver",
@@ -116,6 +117,7 @@
       "world.terrain_generator",
       "world.tile_grid",
       "world.track_circuit",
+      "world.trap_system",
       "world.vision_system",
       "world.water_system",
       "world.weather_system",
