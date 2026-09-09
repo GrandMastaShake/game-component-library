@@ -15,6 +15,11 @@ jobs:
       - run: python3 tools/validate_component_graph.py --report reports/component-graph.json
       - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
       - run: python3 tools/validate_genres.py --report reports/genre-validation.json
+      # An asset descriptor is a claim about files in a consuming repository, so
+      # this half proves only what a descriptor can contradict on its own: ids,
+      # socket names, and levels that actually get cheaper. The app's
+      # check-assets is the half that opens the glTF.
+      - run: python3 tools/validate_asset_contracts.py --report reports/assets.json
       - name: Validate art topology (fails on findings not in the baseline)
         run: python3 tools/validate_topology.py --baseline art/topology-baseline.json --report reports/topology.json
       - name: Validate platform claims (fails on findings not in the baseline)

@@ -1,0 +1,80 @@
+{
+  "id": "vehicle.kart",
+  "name": "Kart",
+  "description": "The racing pack's car, as geometry: a chassis with a nose and a seat, four wheels on their own sockets so they can turn independently of the body, and a driver socket above the seat. Built to the proportions generator/voxel/KartMesh.ts already draws in boxes, so the asset and the placeholder are the same kart at two levels of finish and swapping one for the other changes nothing about how it drives.",
+  "archetype": "cuboid",
+  "format": "gltf-binary",
+  "units": "metres",
+  "forwardAxis": "+x",
+  "sockets": [
+    {
+      "name": "wheel_front_left",
+      "position": [0.75, 0.75, 0.28],
+      "carries": "wheel",
+      "description": "Front axle, left. A wheel here turns with the steering."
+    },
+    {
+      "name": "wheel_front_right",
+      "position": [0.75, -0.75, 0.28],
+      "carries": "wheel"
+    },
+    {
+      "name": "wheel_rear_left",
+      "position": [-0.75, 0.75, 0.28],
+      "carries": "wheel",
+      "description": "Rear axle, left. Driven, and where a drift throws its tail out."
+    },
+    {
+      "name": "wheel_rear_right",
+      "position": [-0.75, -0.75, 0.28],
+      "carries": "wheel"
+    },
+    {
+      "name": "driver_seat",
+      "position": [-0.2, 0.0, 1.25],
+      "carries": "driver",
+      "description": "Where a body sits. movement.vehicle_basic's seatCount is 1 for this kart, so there is one."
+    }
+  ],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/vehicle.kart/lod0.glb",
+      "triangles": 212,
+      "bytes": 14236
+    },
+    {
+      "level": "lod1",
+      "distanceBand": "gameplay",
+      "distanceRange": "5-20m",
+      "file": "public/assets/vehicle.kart/lod1.glb",
+      "triangles": 106,
+      "bytes": 9248
+    },
+    {
+      "level": "lod2",
+      "distanceBand": "far",
+      "distanceRange": "20-50m",
+      "file": "public/assets/vehicle.kart/lod2.glb",
+      "triangles": 46,
+      "bytes": 5496
+    },
+    {
+      "level": "lod3",
+      "distanceBand": "proxy",
+      "distanceRange": ">50m",
+      "file": "public/assets/vehicle.kart/lod3.glb",
+      "triangles": 19,
+      "bytes": 3312
+    }
+  ],
+  "source": {
+    "tool": "blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3",
+    "repository": "game-architect-studio",
+    "script": "tools/blender/build_kart.py",
+    "generatedOn": "2026-09-09"
+  },
+  "provenance": "The first asset built through the Blender bridge, and the one the racing pack needs: the voxel runtime draws its karts as three.js boxes assembled in code, which is a placeholder nothing outside that one file can reuse. The library's art side is entirely creature-shaped — 47 shapes, 5 anchors and 32 parts, all ears, horns, paws and tails from the pet pipeline — so there was no vehicle anchor, no wheel socket and no way to express a car at all. Deliberately not an assembly-graph anchor yet: adding one moves the topology and assembly baselines, which is a separate reviewable change from establishing what an asset descriptor is."
+}
