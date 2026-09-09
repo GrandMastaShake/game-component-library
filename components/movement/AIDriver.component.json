@@ -31,8 +31,9 @@
     },
     {
       "target": "webgl",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     }
   ],
   "inputs": [
