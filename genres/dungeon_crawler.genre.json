@@ -27,7 +27,8 @@
     "combat.status_effects",
     "utility.behavior_fsm",
     "ui.hud",
-    "presentation.style_presets"
+    "presentation.style_presets",
+    "presentation.camera_follow"
   ],
   "newComponents": [
     "world.floor_descent",
