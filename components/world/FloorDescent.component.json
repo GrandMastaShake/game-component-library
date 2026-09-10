@@ -2,7 +2,7 @@
   "id": "world.floor_descent",
   "name": "Floor Descent",
   "category": "world",
-  "description": "The stack of floors and the seed that makes them reproducible. Each descent increments depth and derives the floor's seed from the run seed plus depth \u2014 never a fresh random roll, because a floor that changes when you revisit it breaks both speedruns and save audits. The generator lineage matters here: the consuming app's dd-dungeon-generator.ts family already proves this contract in TypeScript outside this repository, and this descriptor is the library-native contract those generators would adapt to, not a port of them. This component owns depth, seeds, and the transition between floors. It owns nothing about room contents \u2014 world.room_template stamps the rooms, and whatever lives in them arrives via world.mob_patrol or combat.boss_encounter_script.",
+  "description": "The stack of floors and the seed that makes them reproducible. Each descent increments depth and derives the floor's seed from the run seed plus depth — never a fresh random roll, because a floor that changes when you revisit it breaks both speedruns and save audits. The generator lineage matters here: the consuming app's dd-dungeon-generator.ts family already proves this contract in TypeScript outside this repository, and this descriptor is the library-native contract those generators would adapt to, not a port of them. This component owns depth, seeds, and the transition between floors. It owns nothing about room contents — world.room_template stamps the rooms, and whatever lives in them arrives via world.mob_patrol or combat.boss_encounter_script.\n\nSECRET DOORS ARE THE FLOOR'S TO KEEP. Some corridors are hidden: not walkable, not drawn, a wall where their doorway meets the room, until the player searches beside one and the roll succeeds. That is Rogue's mechanic and it lives here because a secret door is a walkability change, and this component is the only thing that says where the floor is -- a second component opening walls would be a second answer to whether a tile can be stood on. A hidden corridor is always an EXTRA route: every room is reachable without it, so a player who never searches is never stranded, and a secret is a shortcut or an alcove rather than the way down. It owns the search roll and the reveal; it does not own the fanfare or the reward -- world.hidden_alcove announces a found space and the listeners decide what it means.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -63,6 +63,20 @@
       "required": false,
       "default": true,
       "description": "Whether stairs go back up. Ascent enables retreat-and-return runs; disabling it makes every descent a point of no return."
+    },
+    {
+      "name": "secretDoors",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Hidden corridors per floor, each between two rooms not otherwise adjacent. Zero turns the mechanic off. A floor with fewer than three rooms lays none, because there is no pair left that is not already connected."
+    },
+    {
+      "name": "searchDifficulty",
+      "type": "number",
+      "required": false,
+      "default": 13,
+      "description": "The d20 target a search beside a hidden doorway must meet. Rogue rolls about one in five per tile per search; 13 is roughly two in five, which makes a second search worth pressing and a fifth not. Zero always finds, forty never does -- both useful for checks and for a genre that wants secrets to be free or fabled."
     }
   ],
   "outputs": [
@@ -75,16 +89,28 @@
       "name": "currentFloorSeed",
       "type": "number",
       "description": "The derived seed of the active floor, exposed for regen and debugging."
+    },
+    {
+      "name": "revision",
+      "type": "number",
+      "description": "Increments whenever the floor's walkability changes without the floor itself changing -- a secret door opening. Readers that cache the floor (the pathfinder) key on depth, seed AND this, or they keep routing around a door that is now open."
+    },
+    {
+      "name": "secretDoors",
+      "type": "object",
+      "description": "total and found for the current floor, and the doorway tiles, so a HUD can say '1 secret unfound' without being told where."
     }
   ],
   "events": {
     "emits": [
       "world.floorGenerated",
-      "world.floorDescended"
+      "world.floorDescended",
+      "world.secretDoorFound"
     ],
     "listensTo": [
       "input.descend",
-      "input.ascend"
+      "input.ascend",
+      "input.search"
     ]
   },
   "dependencies": [
