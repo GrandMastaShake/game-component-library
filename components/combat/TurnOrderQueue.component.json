@@ -2,7 +2,7 @@
   "id": "combat.turn_order_queue",
   "name": "Turn Order Queue",
   "category": "combat",
-  "description": "Whose turn it is, in what order, and when the round rolls over. Initiative is rolled once per combatant at battle start \u2014 modified by combat.status_effects, since a slowed unit should act late \u2014 then the queue is fixed until someone dies or a delay action inserts them elsewhere. The queue owns sequencing only: what a unit may DO with its turn is combat.action_point_economy's budget, and ending a turn early is the player's call via input.endTurn, not the queue's. Rounds are the queue's second product: combat.roundStarted exists so per-round systems \u2014 damage-over-time ticks, reinforcement timers \u2014 have exactly one heartbeat to follow instead of everyone counting turns privately and disagreeing.",
+  "description": "Whose turn it is, in what order, and when the round rolls over. Initiative is rolled once per combatant at battle start — modified by combat.status_effects, since a slowed unit should act late — then the queue is fixed until someone dies or a delay action inserts them elsewhere. The queue owns sequencing only: what a unit may DO with its turn is combat.action_point_economy's budget, and ending a turn early is the player's call via input.endTurn, not the queue's. Rounds are the queue's second product: combat.roundStarted exists so per-round systems — damage-over-time ticks, reinforcement timers — have exactly one heartbeat to follow instead of everyone counting turns privately and disagreeing.\n\nWHEN THE QUEUE STARTS is a second question, and it only became one once a build wanted to be turn-based SOMETIMES. A tactics board is turns from the first frame and this component assumed that: it rolled initiative as soon as the build was assembled. A dungeon crawl wants the opposite default — you walk the floor in real time and the moment something notices you, the board takes over until the room is clear. `startWhen` is that choice, and it is a choice about the GENRE rather than about combat, which is why it is an input here and not a second component deciding on this one's behalf.\n\nIt does not own NOTICING. combat.aggro_table owns who is hunting whom — range, sight through world.vision_system, threat and the leash that makes forgetting hysteretic — and this reads that answer rather than computing a second one. A queue that decided for itself what counts as being seen would be the fourth component to answer that question privately, which is the exact problem the aggro table was written to end.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -56,6 +56,17 @@
       "required": false,
       "default": "dexterity",
       "description": "Attribute consulted on tied initiative rolls. Deterministic tie-breaks keep replays and replays-of-replays identical."
+    },
+    {
+      "name": "startWhen",
+      "type": "string",
+      "required": false,
+      "default": "immediately",
+      "enum": [
+        "immediately",
+        "onAggro"
+      ],
+      "description": "When initiative is rolled. `immediately` is the tactics default and rolls once the build is assembled, so a board is in turns from the first frame. `onAggro` leaves the queue DORMANT — no active unit, no round — until combat.aggro_table reports a hunter with a target, and returns it to dormant when the last one lets go; that is real-time exploration that becomes turn-based on an encounter and back again. `onAggro` needs combat.aggro_table in the build: without one nothing can ever wake the queue, and a build that asks for it and omits the table gets a game that never takes a turn."
     }
   ],
   "outputs": [
@@ -73,19 +84,28 @@
       "name": "queuePreview",
       "type": "array",
       "description": "Upcoming order, for the UI timeline players plan against."
+    },
+    {
+      "name": "engaged",
+      "type": "boolean",
+      "description": "Whether the queue is currently running turns. Always true under `immediately`. Published because with `onAggro` the same build is two games — a walk and a battle — and every readout, control and cursor that differs between them needs one answer to which is running, rather than each inferring it from whether activeUnitId happens to be empty."
     }
   ],
   "events": {
     "emits": [
       "combat.turnStarted",
       "combat.turnEnded",
-      "combat.roundStarted"
+      "combat.roundStarted",
+      "combat.encounterStarted",
+      "combat.encounterEnded"
     ],
     "listensTo": [
       "combat.entityDefeated",
       "input.endTurn",
       "input.delayTurn",
-      "utility.commandDispatched"
+      "utility.commandDispatched",
+      "combat.aggroGained",
+      "combat.aggroLost"
     ]
   },
   "dependencies": [
