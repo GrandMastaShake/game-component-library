@@ -12,6 +12,7 @@
   "memberComponents": [
     "movement.pathfinding_system",
     "inventory.loot_table",
+    "inventory.affix_loot_generator",
     "world.hazard_volume",
     "world.vision_system",
     "movement.basic_walk",
