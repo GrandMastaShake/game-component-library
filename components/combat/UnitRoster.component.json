@@ -134,7 +134,9 @@
     "listensTo": [
       "combat.entityDefeated",
       "movement.moveExecuted",
-      "combat.unitSpawned"
+      "combat.unitSpawned",
+      "combat.hit",
+      "combat.miss"
     ]
   },
   "dependencies": [],
