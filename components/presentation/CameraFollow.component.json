@@ -2,7 +2,7 @@
   "id": "presentation.camera_follow",
   "name": "Camera Follow",
   "category": "presentation",
-  "description": "Owns the view: where the world is drawn from, and the only transform applied to it. It follows a target within a deadzone rather than centring on it exactly, because a camera pinned to a walking character makes the whole world jitter under every step, and smooths what is left so a jump does not snap the view. It also composes screen shake into the same matrix, since a shake is a camera effect and two components cannot each own the transform \u2014 presentation.screen_shake publishes an offset and a roll, and yields the view when a camera is present. The target is read optionally rather than declared as a dependency, so the same camera follows a side-view body or a top-down walker without either being required.\n\nAND IT CAN TURN, not just pan. A whole family of games keeps the body still in the middle of the screen and moves the WORLD around it \u2014 racing, skateboarding, biking, a dog on a lead, most sports where you are one player on a pitch. What makes those read correctly is that the view rotates with the thing it follows, so forward is always up the screen and a turn feels like the world swinging past rather than the player sliding sideways. That is a transform, and this component says it owns the only transform applied to the world, so it owns this one too \u2014 a second component composing its own rotation is exactly the collision the shake note above describes.\n\nRotation gets its own smoothing because it needs a different number from position. A camera that snaps to a heading is unreadable at speed and sickening at any speed, and the value that feels right for panning is far too quick for turning. Off by default: most games do not want it, and a view that rotates when nobody asked is worse than one that does not when they did.",
+  "description": "Owns the view: where the world is drawn from, and the only transform applied to it. It follows a target within a deadzone rather than centring on it exactly, because a camera pinned to a walking character makes the whole world jitter under every step, and smooths what is left so a jump does not snap the view. It also composes screen shake into the same matrix, since a shake is a camera effect and two components cannot each own the transform — presentation.screen_shake publishes an offset and a roll, and yields the view when a camera is present. The target is read optionally rather than declared as a dependency, so the same camera follows a side-view body or a top-down walker without either being required.\n\nAND IT CAN TURN, not just pan. A whole family of games keeps the body still in the middle of the screen and moves the WORLD around it — racing, skateboarding, biking, a dog on a lead, most sports where you are one player on a pitch. What makes those read correctly is that the view rotates with the thing it follows, so forward is always up the screen and a turn feels like the world swinging past rather than the player sliding sideways. That is a transform, and this component says it owns the only transform applied to the world, so it owns this one too — a second component composing its own rotation is exactly the collision the shake note above describes.\n\nRotation gets its own smoothing because it needs a different number from position. A camera that snaps to a heading is unreadable at speed and sickening at any speed, and the value that feels right for panning is far too quick for turning. Off by default: most games do not want it, and a view that rotates when nobody asked is worse than one that does not when they did.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -81,7 +81,7 @@
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether the view turns with the target's facing, so forward is always up the screen and the world moves around a body that stays put. Needs a target that HAS a facing \u2014 movement.vehicle_basic under `continuous` motion publishes one; a stepped vehicle does not, and the camera stays upright rather than inventing a heading."
+      "description": "Whether the view turns with the target's facing, so forward is always up the screen and the world moves around a body that stays put. Needs a target that HAS a facing — movement.vehicle_basic under `continuous` motion publishes one; a stepped vehicle does not, and the camera stays upright rather than inventing a heading."
     },
     {
       "name": "rotationSmoothingSeconds",
@@ -106,6 +106,11 @@
       "name": "rotation",
       "type": "number",
       "description": "The view's current angle in radians, after smoothing. 0 whenever followRotation is off, so a consumer can compose it unconditionally."
+    },
+    {
+      "name": "view",
+      "type": "object",
+      "description": "The view transform this component set on the canvas this frame, as a 2D affine matrix {a,b,c,d,e,f} taking world pixels to screen pixels. Published so a host can invert it -- a pointer lands on the screen, and the tile under it is on the other side of this matrix. Identity until the first draw."
     }
   ],
   "events": {
