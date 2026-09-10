@@ -24,7 +24,6 @@
     "combat.turn_order_queue",
     "combat.status_effects",
     "utility.behavior_fsm",
-    "ui.minimap",
     "ui.hud",
     "presentation.style_presets"
   ],
