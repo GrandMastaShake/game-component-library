@@ -2,7 +2,7 @@
   "id": "inventory.slotted_bag",
   "name": "Slotted Bag",
   "category": "inventory",
-  "description": "Fixed-slot inventory with stacking and rarity metadata, built on the Core Inventory primitive. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember.",
+  "description": "Fixed-slot inventory with stacking and rarity metadata, built on the Core Inventory primitive. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember.\n\nA GENERATED ITEM LANDS HERE TOO. inventory.affix_loot_generator rolls a drop on a defeat and emits inventory.itemGenerated -- 'emitted, not placed', in its own words, because it does not own where the item goes. Nothing owned the other end: the event had no listener anywhere in the catalogue, so a legendary rolled on a boss went to nobody. The bag is where a granted item lands, and a generated one is a granted one with a rarity on it.",
   "version": "0.1.1",
   "platform": [
     "roblox",
@@ -71,7 +71,8 @@
       "inventory.full"
     ],
     "listensTo": [
-      "inventory.itemGranted"
+      "inventory.itemGranted",
+      "inventory.itemGenerated"
     ]
   },
   "dependencies": [
