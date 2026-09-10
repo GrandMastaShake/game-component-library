@@ -22,6 +22,7 @@
     "combat.contact_attack",
     "combat.aggro_table",
     "combat.turn_order_queue",
+    "combat.action_point_economy",
     "combat.status_effects",
     "utility.behavior_fsm",
     "ui.hud",
