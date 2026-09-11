@@ -55,7 +55,7 @@
       "type": "object",
       "required": false,
       "default": {},
-      "description": "Room counts and dimensions as a function of depth, as data. Early floors small for pace, deep floors large for stakes."
+      "description": "Room counts and dimensions as a function of depth, as data. Early floors small for pace, deep floors large for stakes. Keyed by depth ('3'), with '*' as the answer for any depth not named; a value is a room count or {rooms, boss?}. `boss: true` lays a boss arena on that floor whatever the cadence says — the default is one every third floor — for a level that wants its fight at the bottom of the first floor."
     },
     {
       "name": "allowAscent",

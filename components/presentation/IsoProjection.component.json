@@ -48,6 +48,13 @@
       "type": "number",
       "required": false,
       "default": 1
+    },
+    {
+      "name": "spriteScale",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "How big a standing sprite is ON SCREEN, in screen pixels per art pixel, for everything that stands on a tile: characters, pillars, chests, loot. 0 means the painter's own rule (one integer step per fourteen pixels of tile). Set, it is divided by the camera's zoom so the number a request writes is the number a player sees — a build at camera zoom 2 asking for 3 draws its bodies at one and a half world pixels per art pixel, which is three on screen. The floor and wall tiles are not touched: a body can stand three-quarters the height of a wall block without the wall shrinking with it, which is the difference between a figure in a room and a figure in a dollhouse."
     }
   ],
   "outputs": [

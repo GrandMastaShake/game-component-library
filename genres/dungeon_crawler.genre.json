@@ -31,7 +31,10 @@
     "presentation.camera_follow",
     "presentation.battle_stage",
     "combat.engage_target",
-    "ui.event_log"
+    "ui.event_log",
+    "combat.equipment_slots",
+    "combat.room_encounters",
+    "inventory.ground_items"
   ],
   "newComponents": [
     "world.floor_descent",

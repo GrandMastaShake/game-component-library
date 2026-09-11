@@ -2,7 +2,7 @@
   "id": "world.room_template",
   "name": "Room Template",
   "category": "world",
-  "description": "Hand-authored rooms inside a procedural layout. world.floor_descent owns the topology \u2014 how many rooms and how they connect; this component owns what a room IS: a stamp of tiles, props, spawn sockets, and reward anchors, chosen by tags ('treasure', 'shrine', 'ambush') that the floor's depth budget weights. Stamps exist because pure noise makes dungeons with no rhythm \u2014 the memorable room is authored, and the procedural layer's job is placement, not invention. It does not own the contents of its sockets: it declares WHERE a boss or trap may sit, and combat.boss_encounter_script or world.trap_system claims the socket.",
+  "description": "Hand-authored rooms inside a procedural layout. world.floor_descent owns the topology — how many rooms and how they connect; this component owns what a room IS: a stamp of tiles, props, spawn sockets, and reward anchors, chosen by tags ('treasure', 'shrine', 'ambush') that the floor's depth budget weights. Stamps exist because pure noise makes dungeons with no rhythm — the memorable room is authored, and the procedural layer's job is placement, not invention. It does not own the contents of its sockets: it declares WHERE a boss or trap may sit, and combat.boss_encounter_script or world.trap_system claims the socket.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -41,7 +41,7 @@
       "type": "object",
       "required": false,
       "default": {},
-      "description": "Stamps keyed by id, each carrying tags and spawn sockets. The library is content: designers add rooms without touching the placer."
+      "description": "Stamps keyed by id, each carrying tags and sockets. The library is content: designers add rooms without touching the placer. A stamp is {tags, weight, tiles, legend?, passable?}: `tiles` is rows of characters where '.' is floor, 'S' a spawn socket, 'R' a reward anchor (a chest), 'T' a trap and 'G' a gear socket — a piece of equipment lying on the floor for whoever walks over it; '#' is a pillar. `legend` maps any other character to the atlas id of the prop that stands there ({'k': 'object.bookshelf'}), and `passable` lists the characters a body may walk through (webs, bones, a sconce). Every other prop is solid, unless standing it there would cut a tile off from the rest of the floor — then it is not placed, because a room you cannot cross is a generator bug however good it looks."
     },
     {
       "name": "minSpecialRoomsPerFloor",
@@ -63,6 +63,16 @@
       "name": "placedRooms",
       "type": "array",
       "description": "Template id, transform, and socket list per placed room."
+    },
+    {
+      "name": "blocksAt",
+      "type": "function",
+      "description": "Whether a solid prop stands on a tile. world.floor_descent asks this from its own isBlocked, so the walker, the pathfinder and the pursuer all get one answer about standing room without each learning about props."
+    },
+    {
+      "name": "revision",
+      "type": "number",
+      "description": "Bumped every time the stamps change — a new floor, a revisited one — so a reader caching walkability can key on it."
     }
   ],
   "events": {

@@ -1,0 +1,94 @@
+{
+  "id": "combat.room_encounters",
+  "name": "Room Encounters",
+  "category": "combat",
+  "description": "What stands in a room when you get there. world.room_template lays spawn sockets and says nothing about who fills them; combat.boss_encounter_script scripts a fight and never places the boss; combat.spawn_director tops a region up on a clock from random tiles, which is a real-time answer to a different question. A crawler needs its cast laid with the floor: a rat in the storeroom, skeletons in the crypt, a mimic beside the chest, the boss at the far end — the same guards in the same rooms every time the same floor is entered, because a floor is a place and a place has occupants.\n\nThis claims the spawn sockets. When a floor is generated it reads the placed stamps, and for each socket picks a unit from the cast keyed by the stamp's template name, or failing that by the room's tag — so a template called `crypt` can carry the dead while every other empty room draws from the general pool. The pick is seeded from the floor's seed, so revisiting a floor finds the same guards. Each unit is announced to combat.unit_roster through combat.unitSpawned, exactly as combat.spawn_director announces its arrivals, with its own health, damage, movement and dexterity; the roster stays the only author of who is on the board. Ids are numbered (`goblin_2`) unless the archetype is `unique`, which is how the boss keeps the one id combat.boss_encounter_script reads.\n\nWhat it remembers: the dead. A unit the player killed on floor three is not standing there again when they come back up, because a cleared floor that refills on the stairs is a floor that was never cleared. What it does not own: noticing, chasing, striking or turns, which are combat.aggro_table, movement.pursuit_agent, combat.contact_attack and combat.turn_order_queue's, unchanged.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "cast",
+      "type": "object",
+      "required": true,
+      "description": "Who may stand where, as {key: [{id, health, damage?, movement?, dexterity?, weight?, unique?}]}. A key is a template name or a room tag; the template wins when both are present. `id` is a prefix that gets numbered per spawn, unless `unique` is set, in which case it is the id itself and is spawned at most once per floor. `damage` is what a strike from this unit is worth, read by combat.contact_attack; absent, that component's own number applies. A socket whose key has no cast stays empty."
+    },
+    {
+      "name": "fillChance",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "The chance each spawn socket is filled, 0 to 1. Below one, a floor is a little emptier than its stamps could make it, which is what keeps a corridor of guard posts from being a corridor of guards."
+    },
+    {
+      "name": "rememberCleared",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a unit killed on a floor stays dead when that floor is revisited. Off, every visit is a fresh floor, which is the roguelike answer and the wrong one for a dungeon you go back up through."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "spawned",
+      "type": "array",
+      "description": "The units placed on the current floor, as {id, x, y, key, room}."
+    },
+    {
+      "name": "cleared",
+      "type": "number",
+      "description": "How many of the current floor's spawns are remembered dead."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.unitSpawned",
+      "combat.unitRemoved",
+      "combat.encountersPlaced"
+    ],
+    "listensTo": [
+      "world.floorGenerated",
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "world.room_template",
+    "combat.unit_roster"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "spawning",
+    "encounters",
+    "rooms"
+  ],
+  "provenance": "Asked for by the Dungeon Crawler's first level pass (2026-09-11): the crawler had a hero, one fixed boss at a written coordinate, and stamps full of spawn sockets that nothing claimed — twelve rooms and nobody in them. Searched the catalogue first: combat.spawn_director keeps a population on a clock from random tiles, world.dynamic_encounter_spawner rolls per chunk and is unmapped, world.mob_patrol is a platformer's pacing enemy; none lays a cast with the floor. Library-native, written against the studio's room stamps and unit roster."
+}

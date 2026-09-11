@@ -70,6 +70,13 @@
       "required": false,
       "default": 3,
       "description": "Integer scale the combatants are drawn at. Integer, or it is not pixel art."
+    },
+    {
+      "name": "cutFor",
+      "type": "string",
+      "required": false,
+      "default": "any",
+      "description": "Which encounters take the screen under style 'cut'. 'any' cuts on every encounter, the Pokémon answer. 'boss' cuts only when the fight includes the unit combat.boss_encounter_script scripts — the one whose id is `boss` — and leaves every other fight on the board in turns, the Baldur's Gate 2 answer: a rat in a corridor is a pause, the thing at the bottom of the floor is a scene. A boss that notices you mid-fight brings the cut with it, which is why this also hears combat.aggroGained."
     }
   ],
   "outputs": [
@@ -116,7 +123,8 @@
     ],
     "listensTo": [
       "combat.encounterStarted",
-      "combat.encounterEnded"
+      "combat.encounterEnded",
+      "combat.aggroGained"
     ]
   },
   "dependencies": [],

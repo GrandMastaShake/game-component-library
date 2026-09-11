@@ -74,7 +74,10 @@
       "world.floorDescended",
       "inventory.itemGenerated",
       "inventory.itemGranted",
-      "inventory.full"
+      "inventory.full",
+      "inventory.containerOpened",
+      "combat.itemEquipped",
+      "combat.aggroGained"
     ]
   },
   "dependencies": [],

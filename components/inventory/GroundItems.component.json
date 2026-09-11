@@ -1,0 +1,110 @@
+{
+  "id": "inventory.ground_items",
+  "name": "Ground Items",
+  "category": "inventory",
+  "description": "Things lying on the floor, and what happens when you walk over them. A dungeon's loot used to fall only out of monsters: the chests the stamps laid were drawn and never opened, and there was no way to leave a sword in a room for a player to find. This owns the floor's items. When a floor is generated it reads world.room_template's gear sockets and lays one piece of equipment on each, chosen from a pool by the floor's seed so the same floor offers the same finds; when the player's unit steps onto one, the item is granted through inventory.itemGranted and leaves the floor — unless the bag refuses it, in which case it stays where it was. A reward socket is a chest: stepping onto it opens it once, announced as inventory.containerOpened with the kind 'chest', and inventory.loot_table decides what was inside exactly as it decides what a rock yields. It remembers what was taken and what was opened per floor, so coming back up does not restock the vault.\n\nIt draws the items where they lie, through the painter, so a sword on a lattice is on its diamond. It does not draw the chest — the stamp that laid it does — but it publishes which are open so the stamp can draw the lid up. It does not decide what a chest holds, whether an item fits, or what wearing it does: those are the loot table's, the bag's and combat.equipment_slots'.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "gearPool",
+      "type": "array",
+      "required": false,
+      "default": [
+        "sword",
+        "shield"
+      ],
+      "description": "Item ids that may lie on a gear socket, drawn by the floor's seed. What each one does when worn is combat.equipment_slots' `gear` map; this only puts them on the floor."
+    },
+    {
+      "name": "chestKind",
+      "type": "string",
+      "required": false,
+      "default": "chest",
+      "description": "The `kind` a reward socket announces itself as when opened, which is the key inventory.loot_table answers under."
+    },
+    {
+      "name": "pickupOnStep",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether stepping onto an item takes it. Off, items lie there and a host has to grant them some other way — for a build that wants a pick-up gesture."
+    },
+    {
+      "name": "minPerFloor",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The floor lays at least this many pieces of gear, placing the extras on a floor tile of a room that has none — never the entrance, the stair or the boss's arena. Zero leaves it to the stamps' sockets alone. A run that prices its boss against the gear should not depend on which stamps the rooms happened to roll."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "items",
+      "type": "array",
+      "description": "What lies on the current floor, as {x, y, item}."
+    },
+    {
+      "name": "itemAt",
+      "type": "function",
+      "description": "The item on a tile, or null."
+    },
+    {
+      "name": "openedAt",
+      "type": "function",
+      "description": "Whether the chest on a tile has been opened, so the stamp that drew it can draw it open."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.itemGranted",
+      "inventory.containerOpened",
+      "inventory.itemsLaid"
+    ],
+    "listensTo": [
+      "world.floorGenerated",
+      "movement.moveExecuted",
+      "inventory.full"
+    ]
+  },
+  "dependencies": [
+    "world.room_template"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "loot",
+    "pickups",
+    "chests"
+  ],
+  "provenance": "Asked for by the Dungeon Crawler's first level pass (2026-09-11), with combat.room_encounters: the brief was gear you collect through the area so you are strong enough for the boss, and chests you can actually open. Searched the catalogue first: inventory.loot_table answers what drops and inventory.slotted_bag whether it fits, but nothing put an item on a tile or heard a footstep land on one. Library-native, written against the studio's room stamps, walker and painter."
+}
