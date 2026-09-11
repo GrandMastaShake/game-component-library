@@ -1,0 +1,89 @@
+{
+  "id": "ui.event_log",
+  "name": "Event Log",
+  "category": "ui",
+  "description": "What just happened, in words, where the eye can find it. A crawler is full of moments a player has to read off the picture -- a blow landed, a blow missed, something fell, a trap found underfoot, a wall that turned out to be a door, a floor descended, a rare thing dropped -- and a picture at sixteen pixels a tile cannot say all of them. Every crawler since Rogue has kept a line of text for exactly this. This component listens to the events those moments already emit, turns each into one short line, keeps the last few and lets them fade. It adds no rule and changes no number: it is the game's own events, narrated. Placement is a corner asked of the HUD's slot system, so it stacks with whatever else the corner holds.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxLines",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "How many lines are kept on screen at once. The oldest leaves when a new one arrives."
+    },
+    {
+      "name": "fadeSeconds",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "How long a line stays before it fades out. Long enough to read after the fight, short enough that the corner is empty when nothing is happening."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lines",
+      "type": "array",
+      "description": "The lines currently shown, oldest first, as { text, age }. A host can mirror them into its own log."
+    }
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": [
+      "combat.hit",
+      "combat.miss",
+      "combat.entityDefeated",
+      "combat.encounterStarted",
+      "combat.encounterEnded",
+      "combat.targetUnreachable",
+      "world.trapDetected",
+      "world.trapTriggered",
+      "world.trapDisarmed",
+      "world.secretDoorFound",
+      "world.floorDescended",
+      "inventory.itemGenerated",
+      "inventory.itemGranted",
+      "inventory.full"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "ui",
+    "hud",
+    "log",
+    "narration",
+    "crawler"
+  ],
+  "provenance": "Asked for in the Dungeon Crawler's UI pass, 2026-09-11: the fog, the traps, the secret doors, the loot and the turn queue all announced their moments as events and nothing put them into words -- a player read a lost health bar and a vanished goblin off the picture and guessed. Every crawler since Rogue keeps a message line. ui.notification_toast was the nearest thing in the catalogue and is the wrong shape: it hears grants, levels and earnings and shows one line at a time in its own colour; the crawler needs the fight narrated, several lines deep, through the HUD's slot system. Library-native, written against the studio's canvas2d bricks."
+}
