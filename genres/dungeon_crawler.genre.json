@@ -40,7 +40,8 @@
     "inventory.potion_belt",
     "progression.xp_leveling",
     "presentation.audio_system",
-    "world.dungeon_doors"
+    "world.dungeon_doors",
+    "ui.inventory_panel"
   ],
   "newComponents": [
     "world.floor_descent",

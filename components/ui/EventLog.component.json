@@ -82,7 +82,8 @@
       "world.doorLocked",
       "world.doorUnlocked",
       "progression.leveledUp",
-      "inventory.potionUsed"
+      "inventory.potionUsed",
+      "inventory.itemDropped"
     ]
   },
   "dependencies": [],

@@ -75,6 +75,11 @@
       "name": "potionsRemaining",
       "type": "number",
       "description": "Total across all belt slots, for the HUD counter."
+    },
+    {
+      "name": "effectOf",
+      "type": "function",
+      "description": "What drinking a carried kind would do — {heal} — or null for a thing that is not a consumable here. The inventory panel asks."
     }
   ],
   "events": {
@@ -83,7 +88,8 @@
       "inventory.potionEmpty"
     ],
     "listensTo": [
-      "input.potionSlot"
+      "input.potionSlot",
+      "inventory.useRequested"
     ]
   },
   "dependencies": [

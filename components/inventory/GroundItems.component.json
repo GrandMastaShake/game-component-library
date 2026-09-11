@@ -2,7 +2,7 @@
   "id": "inventory.ground_items",
   "name": "Ground Items",
   "category": "inventory",
-  "description": "Things lying on the floor, and what happens when you walk over them. A dungeon's loot used to fall only out of monsters: the chests the stamps laid were drawn and never opened, and there was no way to leave a sword in a room for a player to find. This owns the floor's items. When a floor is generated it reads world.room_template's gear sockets and lays one piece of equipment on each, chosen from a pool by the floor's seed so the same floor offers the same finds; when the player's unit steps onto one, the item is granted through inventory.itemGranted and leaves the floor — unless the bag refuses it, in which case it stays where it was. A reward socket is a chest: stepping onto it opens it once, announced as inventory.containerOpened with the kind 'chest', and inventory.loot_table decides what was inside exactly as it decides what a rock yields. It remembers what was taken and what was opened per floor, so coming back up does not restock the vault.\n\nIt draws the items where they lie, through the painter, so a sword on a lattice is on its diamond. It does not draw the chest — the stamp that laid it does — but it publishes which are open so the stamp can draw the lid up. It does not decide what a chest holds, whether an item fits, or what wearing it does: those are the loot table's, the bag's and combat.equipment_slots'.",
+  "description": "Things lying on the floor, and what happens when you walk over them. A dungeon's loot used to fall only out of monsters: the chests the stamps laid were drawn and never opened, and there was no way to leave a sword in a room for a player to find. This owns the floor's items. When a floor is generated it reads world.room_template's gear sockets and lays one piece of equipment on each, chosen from a pool by the floor's seed so the same floor offers the same finds; when the player's unit steps onto one, the item is granted through inventory.itemGranted and leaves the floor — unless the bag refuses it, in which case it stays where it was. A reward socket is a chest: stepping onto it opens it once, announced as inventory.containerOpened with the kind 'chest', and inventory.loot_table decides what was inside exactly as it decides what a rock yields. It remembers what was taken and what was opened per floor, so coming back up does not restock the vault.\n\nIt draws the items where they lie, through the painter, so a sword on a lattice is on its diamond. It does not draw the chest — the stamp that laid it does — but it publishes which are open so the stamp can draw the lid up. It does not decide what a chest holds, whether an item fits, or what wearing it does: those are the loot table's, the bag's and combat.equipment_slots'.\n\nAND WHAT IS DROPPED. inventory.itemDropped from the panel lays the thing at the tile it names — the player's — or the nearest free tile beside it, where the next footstep can take it back.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -101,7 +101,8 @@
     "listensTo": [
       "world.floorGenerated",
       "movement.moveExecuted",
-      "inventory.full"
+      "inventory.full",
+      "inventory.itemDropped"
     ]
   },
   "dependencies": [
