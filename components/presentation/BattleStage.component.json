@@ -5,10 +5,6 @@
   "description": "What the player looks at when a fight starts. Two answers exist and both are worth having: Baldur's Gate 2 pauses the board you were exploring and goes turn-based on it; Pokémon and Final Fantasy cut away — the map freezes, a stage takes the screen with the party on one side and the enemies on the other, initiative along the top, and the map comes back where it was when the last enemy falls. This component is the cut, and it is a PRESENTATION of the fight, not the fight: combat.turn_order_queue still decides whose turn it is, combat.unit_roster still holds who stands where and with how much health, and every rule that resolves a blow is untouched. It listens for the queue's encounterStarted and encounterEnded, slides the stage in and out over a short transition, lays the combatants out in two lanes from the queue's own order, and publishes where each one stands on the screen so a host can roll a die, draw a cursor or float a damage number over the right body. Under `style: 'pause'` it announces the same two moments and draws nothing, so a host can react to an encounter beginning without a stage in the way — the BG2 answer, with the same events.\n\nWhat it does not do: move anyone. The board underneath stays authoritative, which means a melee swing still needs the swinger adjacent on the board. A crawler that wants the JRPG feel completely — pick a target, the approach is implied — needs a resolver that closes the distance for the player, and that is a combat component, not a picture.",
   "version": "0.1.0",
   "platform": [
-    "web",
-    "roblox",
-    "godot",
-    "unity",
     "agnostic"
   ],
   "implementations": [
@@ -30,6 +26,11 @@
     },
     {
       "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
