@@ -95,6 +95,7 @@
       "ui.dialogue_box",
       "ui.event_log",
       "ui.hud",
+      "ui.inventory_panel",
       "ui.minimap",
       "ui.notification_toast",
       "ui.pet_hatch_presenter",

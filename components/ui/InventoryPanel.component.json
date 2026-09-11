@@ -1,0 +1,109 @@
+{
+  "id": "ui.inventory_panel",
+  "name": "Inventory Panel",
+  "category": "ui",
+  "description": "The bag, opened. inventory.slotted_bag owns what is carried and combat.equipment_slots what is worn, and until this existed the only way to change either was to walk over something better: gear equipped itself on pickup if it beat what was there, and a thing in the bag stayed in the bag. Every crawler since Rogue lets you open the bag, look at a thing, and choose — wear it, drink it, drop it.\n\nThis owns the panel and the choosing, not the consequences. Opened and closed by input.toggleInventory; a cell is chosen by input.inventorySelect and an action by input.inventoryAction. Each action is a REQUEST to the component that owns the verb: `equip` asks combat.equipment_slots (combat.equipRequested), `use` asks inventory.potion_belt (inventory.useRequested), `drop` removes one from inventory.core_inventory — the store the bag counts — and announces inventory.itemDropped at the player's tile for inventory.ground_items to lay. It publishes the rectangles of its cells and buttons so a host can turn a click into the input, exactly as presentation.battle_stage does, and says what a chosen thing is worth by asking the slots and the belt. Nothing is decided here that is not already somebody else's rule.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "columns",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "Cells across. Six by four is a bag you can read at a glance; a bag bigger than the grid scrolls nowhere and shows its first page, which is the honest answer until paging is asked for."
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "required": false,
+      "default": 4
+    },
+    {
+      "name": "startOpen",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the panel is up when the build starts. Off: a bag you have not opened is not on the screen."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "open",
+      "type": "boolean"
+    },
+    {
+      "name": "cells",
+      "type": "array",
+      "description": "The bag's kinds as {item, count, x, y, w, h, worn, gear, usable, selected}, in screen pixels, for a host's hit test."
+    },
+    {
+      "name": "buttons",
+      "type": "array",
+      "description": "The actions as {id, label, x, y, w, h, enabled}: equip, use, drop, close. A button that would be refused is disabled, not hidden."
+    },
+    {
+      "name": "selected",
+      "type": "string",
+      "description": "The chosen kind, or empty."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.inventoryOpened",
+      "ui.inventoryClosed",
+      "combat.equipRequested",
+      "inventory.useRequested",
+      "inventory.itemDropped"
+    ],
+    "listensTo": [
+      "input.toggleInventory",
+      "input.inventorySelect",
+      "input.inventoryAction",
+      "inventory.itemAdded",
+      "inventory.itemRemoved"
+    ]
+  },
+  "dependencies": [
+    "inventory.slotted_bag",
+    "inventory.core_inventory",
+    "ui.hud"
+  ],
+  "tags": [
+    "inventory",
+    "ui",
+    "equipment",
+    "dungeon-crawler"
+  ],
+  "provenance": "The next thing the Big Picture named for the Dungeon Crawler after the battle feel pass (2026-09-11): an inventory panel you can open and act in. Searched first: ui.hud renders panels a brick publishes and owns no bag; inventory.slotted_bag and combat.equipment_slots own the truths this panel shows and nothing owned the choosing. Library-native, written against the studio's HUD slot system and the stage's published-rectangle convention."
+}
