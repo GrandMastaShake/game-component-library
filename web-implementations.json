@@ -68,6 +68,7 @@
       "presentation.color_palette",
       "presentation.depth_sorter",
       "presentation.hit_feedback",
+      "presentation.intent_marks",
       "presentation.iso_projection",
       "presentation.lod_system",
       "presentation.low_poly_generator",
