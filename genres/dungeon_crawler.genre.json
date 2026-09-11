@@ -28,7 +28,8 @@
     "utility.behavior_fsm",
     "ui.hud",
     "presentation.style_presets",
-    "presentation.camera_follow"
+    "presentation.camera_follow",
+    "presentation.battle_stage"
   ],
   "newComponents": [
     "world.floor_descent",

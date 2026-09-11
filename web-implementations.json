@@ -59,6 +59,7 @@
       "pets.pet_companion",
       "presentation.atmosphere_system",
       "presentation.audio_system",
+      "presentation.battle_stage",
       "presentation.camera_follow",
       "presentation.color_palette",
       "presentation.depth_sorter",

@@ -1,0 +1,106 @@
+{
+  "id": "presentation.battle_stage",
+  "name": "Battle Stage",
+  "category": "presentation",
+  "description": "What the player looks at when a fight starts. Two answers exist and both are worth having: Baldur's Gate 2 pauses the board you were exploring and goes turn-based on it; Pokémon and Final Fantasy cut away — the map freezes, a stage takes the screen with the party on one side and the enemies on the other, initiative along the top, and the map comes back where it was when the last enemy falls. This component is the cut, and it is a PRESENTATION of the fight, not the fight: combat.turn_order_queue still decides whose turn it is, combat.unit_roster still holds who stands where and with how much health, and every rule that resolves a blow is untouched. It listens for the queue's encounterStarted and encounterEnded, slides the stage in and out over a short transition, lays the combatants out in two lanes from the queue's own order, and publishes where each one stands on the screen so a host can roll a die, draw a cursor or float a damage number over the right body. Under `style: 'pause'` it announces the same two moments and draws nothing, so a host can react to an encounter beginning without a stage in the way — the BG2 answer, with the same events.\n\nWhat it does not do: move anyone. The board underneath stays authoritative, which means a melee swing still needs the swinger adjacent on the board. A crawler that wants the JRPG feel completely — pick a target, the approach is implied — needs a resolver that closes the distance for the player, and that is a combat component, not a picture.",
+  "version": "0.1.0",
+  "platform": [
+    "web",
+    "roblox",
+    "godot",
+    "unity",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "style",
+      "type": "string",
+      "required": false,
+      "default": "cut",
+      "description": "'cut' takes the screen when an encounter starts, the JRPG way; 'pause' leaves the board as it is and only announces the moment, the Baldur's Gate 2 way. The fight's rules are identical under both; only what the player looks at changes."
+    },
+    {
+      "name": "transitionSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.35,
+      "description": "How long the stage takes to slide in or out. Zero snaps, which is what a test wants and no player does."
+    },
+    {
+      "name": "partySide",
+      "type": "string",
+      "required": false,
+      "default": "right",
+      "description": "Which side of the stage the player's team stands on. JRPGs put the party on the right, facing left; 'left' flips the stage."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "description": "True while the stage is on screen: style 'cut' and an encounter in progress or still sliding out. Always false under 'pause'."
+    },
+    {
+      "name": "style",
+      "type": "string",
+      "description": "The style in force, 'cut' or 'pause', so a host can tell which answer this build gave."
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "description": "0 to 1, how far the stage has slid in. A host fades its own chrome by it."
+    },
+    {
+      "name": "lanes",
+      "type": "object",
+      "description": "{ party: unitId[], foes: unitId[] } — who stands on the stage, in the order they stand top to bottom, taken from the queue's own initiative order. Empty when no encounter is in progress."
+    },
+    {
+      "name": "slotOf",
+      "type": "function",
+      "description": "(unitId) => { x, y, w, h, side } in screen pixels for a combatant on the stage, or null for anyone not on it. Where a host draws a die, a cursor or a damage number over the right body."
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.stageEntered",
+      "presentation.stageLeft"
+    ],
+    "listensTo": [
+      "combat.encounterStarted",
+      "combat.encounterEnded"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "presentation",
+    "combat",
+    "encounter",
+    "jrpg",
+    "turn-based"
+  ],
+  "provenance": "Asked for while polishing the Dungeon Crawler and planning Infinite Dungeons' encounters: the queue already paused the board on aggro the way Baldur's Gate 2 does, and the other answer — Pokémon's and Final Fantasy's cut to a battle screen with the dice rolled in the open — had no component whose job it was to be that picture. Nothing in the catalogue covered a presentation of an encounter (searched 2026-09-10: nothing under battle, transition or scene), so this is library-native, written against the studio's canvas2d brick."
+}
