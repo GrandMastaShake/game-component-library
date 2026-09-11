@@ -1,0 +1,95 @@
+{
+  "id": "combat.engage_target",
+  "name": "Engage Target",
+  "category": "combat",
+  "description": "Pick a target; the approach is implied. In a JRPG the player chooses WHO to hit and the game walks the character over and swings; on a board where a swing needs the swinger adjacent, that walk is a rule somebody has to own. This component owns it. Given a target (input.attackTarget), it asks movement.pathfinding_system for a route to a tile within reach, feeds the walker one step at a time through the same input.moveDirection a held key sends — so every rule the walker has about walls, doors, turns and action points applies unchanged — and when the target is within reach it faces it and swings through input.attack, which is the same swing combat.melee_basic has always resolved. Nothing here decides whether a blow lands or what it costs: the pathfinder decides the route, the walker decides each step, the economy decides what a step costs, the queue decides whose turn it is, the resolver decides the damage. This is the intent between them, spelled out.\n\nThe target is kept until it falls, becomes unreachable, the encounter ends, or the player takes the keys back. Under a turn queue the approach resumes on the player's next turn where it left off, so a target three turns away is still the target three turns later. It is the piece that completes presentation.battle_stage's cut: click a monster on the stage, the hero walks up and strikes.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "stopAtRange",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How close, in tiles (Chebyshev), the approach walks before it stops and swings. 1 is adjacent, which is what a melee swing needs; a build with a reach weapon sets its reach."
+    },
+    {
+      "name": "swingWhenInRange",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether arriving within range also swings. False makes this an approach only — walk up and wait — for a host that wants the strike to be its own gesture, dice and all."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "targetId",
+      "type": "string",
+      "description": "The unit being engaged, or empty when there is none."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "'idle', 'approaching', 'waiting' (not the player's turn), 'inRange', or 'unreachable'."
+    },
+    {
+      "name": "stepsRemaining",
+      "type": "number",
+      "description": "Tiles left on the current route before the target is within range. 0 when in range or idle."
+    }
+  ],
+  "events": {
+    "emits": [
+      "input.moveDirection",
+      "input.faceDirection",
+      "input.attack",
+      "combat.targetEngaged",
+      "combat.targetUnreachable",
+      "combat.targetDropped"
+    ],
+    "listensTo": [
+      "input.attackTarget",
+      "combat.entityDefeated",
+      "combat.encounterEnded"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "combat",
+    "movement",
+    "jrpg",
+    "turn-based",
+    "targeting"
+  ],
+  "provenance": "Asked for the day after presentation.battle_stage landed in the Dungeon Crawler: the cut to a battle screen was honest about its one gap — a swing still needed the swinger adjacent on the board underneath, and the stage could only say how far each foe was. Nothing in the catalogue walked a character to a chosen target and struck (searched 2026-09-11: combat.tactical_attack shoots at range, movement.grid_movement_range moves to a clicked tile, movement.pursuit_agent chases as an AI; none of them is the player's intent 'hit that one'). Library-native, written against the studio's canvas2d walker and pathfinder."
+}

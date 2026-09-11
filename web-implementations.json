@@ -12,6 +12,7 @@
       "combat.cover_bonus_grid",
       "combat.damage_resolver",
       "combat.enemy_tier_scaling",
+      "combat.engage_target",
       "combat.equipment_slots",
       "combat.hotbar_abilities",
       "combat.melee_basic",

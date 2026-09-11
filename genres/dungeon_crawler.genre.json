@@ -29,7 +29,8 @@
     "ui.hud",
     "presentation.style_presets",
     "presentation.camera_follow",
-    "presentation.battle_stage"
+    "presentation.battle_stage",
+    "combat.engage_target"
   ],
   "newComponents": [
     "world.floor_descent",
