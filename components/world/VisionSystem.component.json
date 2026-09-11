@@ -70,6 +70,11 @@
     {
       "name": "exploredTiles",
       "type": "array"
+    },
+    {
+      "name": "canSee",
+      "type": "function",
+      "description": "Whether a straight line from one tile to another crosses nothing opaque — a wall, a solid prop, a closed door, the void — asked of the same walkability the walker uses. combat.aggro_table asks this before a hunter notices anybody; without it, a monster noticed the player through the wall of the next room, which is how every crawler run began with a fight. The reveal itself uses the same line: a room behind a wall is not lit because it is within radius."
     }
   ],
   "events": {

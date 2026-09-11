@@ -34,7 +34,13 @@
     "ui.event_log",
     "combat.equipment_slots",
     "combat.room_encounters",
-    "inventory.ground_items"
+    "inventory.ground_items",
+    "presentation.hit_feedback",
+    "presentation.screen_shake",
+    "inventory.potion_belt",
+    "progression.xp_leveling",
+    "presentation.audio_system",
+    "world.dungeon_doors"
   ],
   "newComponents": [
     "world.floor_descent",

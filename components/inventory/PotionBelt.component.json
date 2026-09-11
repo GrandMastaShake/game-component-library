@@ -2,7 +2,7 @@
   "id": "inventory.potion_belt",
   "name": "Potion Belt",
   "category": "inventory",
-  "description": "The small bandolier that keeps healing out of backpack tetris. inventory.slotted_bag owns storage truth; the belt is a bounded window onto consumable stacks, so drinking here decrements the same stack the bag counts \u2014 a belt holding its own copies of items is a dupe bug waiting to ship. It owns only the use verb: pick the slot, check the stack, apply the effect (through combat.status_effects when the potion leaves a buff rather than a flat heal), and report empty when the stack runs dry. It does not decide what a potion does \u2014 that is item data \u2014 and it does not auto-pick which potion you meant; ambiguity is the player's problem by design.",
+  "description": "The small bandolier that keeps healing out of backpack tetris. inventory.slotted_bag owns storage truth; the belt is a bounded window onto consumable stacks, so drinking here decrements the same stack the bag counts — a belt holding its own copies of items is a dupe bug waiting to ship. It owns only the use verb: pick the slot, check the stack, apply the effect (through combat.status_effects when the potion leaves a buff rather than a flat heal), and report empty when the stack runs dry. It does not decide what a potion does — that is item data — and it does not auto-pick which potion you meant; ambiguity is the player's problem by design.\n\nThe belt is a WINDOW: its slots are the first few consumable kinds the bag holds, in the bag's order, and drinking one removes one from inventory.core_inventory's store — the same store the bag counts, which is why the primitive is declared here beside the bag.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -10,8 +10,9 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
       "target": "webgl",
@@ -55,6 +56,13 @@
       "required": false,
       "default": 0.5,
       "description": "Minimum gap between sips. Without it, a full stack is a health bar with extra steps."
+    },
+    {
+      "name": "effects",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "What each consumable does, as {itemId: {heal?}} — item data, which the descriptor says this component does not decide, handed in by the request. An item absent from the map is not a potion and never reaches the belt. `heal` is applied to the player's unit through combat.unit_roster's heal."
     }
   ],
   "outputs": [
@@ -79,6 +87,7 @@
     ]
   },
   "dependencies": [
+    "inventory.core_inventory",
     "inventory.slotted_bag"
   ],
   "tags": [

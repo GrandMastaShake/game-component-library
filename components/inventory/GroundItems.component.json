@@ -66,6 +66,13 @@
       "required": false,
       "default": 0,
       "description": "The floor lays at least this many pieces of gear, placing the extras on a floor tile of a room that has none — never the entrance, the stair or the boss's arena. Zero leaves it to the stamps' sockets alone. A run that prices its boss against the gear should not depend on which stamps the rooms happened to roll."
+    },
+    {
+      "name": "alwaysLay",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Items every floor gets one of, laid on a floor tile of a room with nothing in it, whatever the stamps rolled — a key when a door is locked, a potion when the boss hits for five. Laid after the gear sockets and counted apart from minPerFloor."
     }
   ],
   "outputs": [

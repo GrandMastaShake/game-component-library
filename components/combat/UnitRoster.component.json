@@ -123,6 +123,11 @@
       "name": "damage",
       "type": "object",
       "description": "Apply damage to a unit id and report what happened: remaining health, and whether that killed it. The caller owns the NUMBER (combat.damage_resolver computes mitigation, crit and variance); this owns the consequence."
+    },
+    {
+      "name": "heal",
+      "type": "function",
+      "description": "Restore health to a unit, capped at its maximum, and report what it is at. The caller owns the number — a potion's heal is item data — and this owns what the number does to the board, exactly as `damage` does."
     }
   ],
   "events": {

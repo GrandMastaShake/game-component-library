@@ -53,6 +53,13 @@
       "required": false,
       "default": 0,
       "description": "Experience already banked toward the next level when this component is constructed. `startingLevel` alone loses everything earned since the last level-up, which matters wherever a run is rebuilt rather than continued — walking into a new region, reloading a save, changing floor. A level and a level-and-a-half are different states and only one of them was expressible."
+    },
+    {
+      "name": "perLevel",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "What each level past the first is worth, as named bonuses per level — {meleeDamage: 0.5} is one more damage every two levels. Published summed and floored as `bonuses`, in the shape progression.skills_tree and combat.equipment_slots publish theirs, so combat.melee_basic reads a level the way it reads a sword. Empty, a level is a number on a panel."
     }
   ],
   "outputs": [
@@ -67,6 +74,11 @@
     {
       "name": "xpToNextLevel",
       "type": "number"
+    },
+    {
+      "name": "bonuses",
+      "type": "object",
+      "description": "The level's worth, summed: {meleeDamage: 2} at level five with half a point a level. The same named-key shape the skills tree and the equipment slots publish."
     }
   ],
   "events": {
