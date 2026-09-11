@@ -89,6 +89,7 @@
       "social.trade_remote_handler",
       "social.trade_window",
       "ui.dialogue_box",
+      "ui.event_log",
       "ui.hud",
       "ui.minimap",
       "ui.notification_toast",

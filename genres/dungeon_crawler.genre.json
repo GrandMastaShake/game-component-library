@@ -30,7 +30,8 @@
     "presentation.style_presets",
     "presentation.camera_follow",
     "presentation.battle_stage",
-    "combat.engage_target"
+    "combat.engage_target",
+    "ui.event_log"
   ],
   "newComponents": [
     "world.floor_descent",
