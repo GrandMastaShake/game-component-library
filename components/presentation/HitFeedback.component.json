@@ -2,7 +2,7 @@
   "id": "presentation.hit_feedback",
   "name": "Hit Feedback",
   "category": "presentation",
-  "description": "Converts combat outcomes into the three signals a player reads in under 100 milliseconds: a hitmarker on confirmed hit, a directional indicator when damage arrives, and a distinct kill confirm. It is a pure translator — it changes no state, owns no numbers, and every fact it renders is emitted by someone else (combat.projectile_system, combat.damage_resolver). Screen shake and impact particles are deliberately NOT here: presentation.screen_shake and presentation.particle_system already listen to combat events, and stacking three feedback systems on one event is how a routine hit starts to feel like a jump scare. What the signals look like is ui.hud's rendering concern; this component decides which signal, when, and how strong.",
+  "description": "Converts combat outcomes into the three signals a player reads in under 100 milliseconds: a hitmarker on confirmed hit, a directional indicator when damage arrives, and a distinct kill confirm. It is a pure translator — it changes no state, owns no numbers, and every fact it renders is emitted by someone else (combat.projectile_system, combat.damage_resolver). Screen shake and impact particles are deliberately NOT here: presentation.screen_shake and presentation.particle_system already listen to combat events, and stacking three feedback systems on one event is how a routine hit starts to feel like a jump scare. What the signals look like is ui.hud's rendering concern; this component decides which signal, when, and how strong.\n\nIN A DUNGEON the three signals are a white flash on the struck body, a stagger of a pixel, and a number that floats off the tile; a miss floats the word; a kill flashes harder and floats longer; and something noticing you gets a mark over its head for a second, because combat.aggroGained is the moment the fight starts and the board said nothing about it. The flash and the stagger are published for the painter to apply, since only the thing drawing the body can tint it; the numbers this draws itself, in depth order above the bodies and under the fog.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -10,8 +10,9 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
       "target": "webgl",
@@ -69,6 +70,16 @@
       "name": "activeIndicators",
       "type": "number",
       "description": "Damage-direction arcs currently on screen. Multiple simultaneous sources stack; this count lets the HUD cap the stack before the screen becomes a clock face."
+    },
+    {
+      "name": "flashAt",
+      "type": "function",
+      "description": "How hard the body on a tile is flashing, 0 to 1, for the few frames after a blow lands. The painter that draws the body asks; this owns the timing. A struck body that only loses a bar-width is a blow nobody feels."
+    },
+    {
+      "name": "nudgeAt",
+      "type": "function",
+      "description": "The pixel stagger of the body on a tile, {dx, dy}, for the moment after a blow — a knock back of a pixel or two that the painter applies and this decays."
     }
   ],
   "events": {
@@ -78,7 +89,9 @@
     "listensTo": [
       "combat.projectileHit",
       "combat.damageResolved",
-      "combat.entityDefeated"
+      "combat.entityDefeated",
+      "combat.miss",
+      "combat.aggroGained"
     ]
   },
   "dependencies": [
