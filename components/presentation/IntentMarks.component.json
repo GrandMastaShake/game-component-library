@@ -1,0 +1,93 @@
+{
+  "id": "presentation.intent_marks",
+  "name": "Intent Marks",
+  "category": "presentation",
+  "description": "What each enemy is about to do, on the board, where the enemy is. A paused board is only readable if the board says something: Baldur's Gate stops the world so you can look at it, Tangledeep marks every monster with the thing it will do, Stoneshard colours the tile you stand on by how dangerous it is. A turn queue that shows a list of names has told you the order and nothing about the room.\n\nIT INVENTS NO INTENT. combat.aggro_table already owns who each hunter is coming for — noticing, the line of sight and the forgetting included — and combat.unit_roster owns where everything stands. Between them, \"it can reach its target from there\" and \"it is coming\" are facts rather than predictions: crossed blades over a hunter already within `reach`, a chevron on the bearing to its target for one still closing, and a ring under whichever unit the queue says acts next.\n\nIt deliberately does NOT draw the tile a mob will step to. The walker owns pathing, and a mark that guessed the step becomes a lie the first time the two disagree — a bearing is true, a promise is not. By default the marks appear only while combat.turn_order_queue reports `engaged`, because off the pause a mark over every wandering rat is noise; a build with no queue is always engaged, having no pause to wait for.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "onlyWhenEngaged",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Show the marks only while the board is in turns. On: the pause is when a player reads the room, and a real-time walk stays uncluttered. Off: a build that is always turn-based, or one that wants the threat legible while walking."
+    },
+    {
+      "name": "reach",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "How far a hunter can strike from, in tiles, measured the way the melee that follows the mark measures it — Chebyshev, so a diagonal neighbour is a neighbour. One is a melee dungeon; a board of archers says three and means it."
+    },
+    {
+      "name": "markScale",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Size of the marks against the tile. Below one for a dense board where a full-size chevron would cover the thing it describes."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "intents",
+      "type": "array",
+      "description": "One entry per hunter with a target: {id, kind: 'strike'|'close', x, y, targetId, toward, acting}. `toward` is the unit bearing to the target, never a tile."
+    },
+    {
+      "name": "intentOf",
+      "type": "function",
+      "description": "One unit's intent, or null."
+    },
+    {
+      "name": "showing",
+      "type": "boolean",
+      "description": "Whether the board is in a state where marks are drawn at all."
+    }
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": []
+  },
+  "dependencies": [
+    "combat.unit_roster"
+  ],
+  "tags": [
+    "presentation",
+    "combat",
+    "turn-based",
+    "readability",
+    "dungeon-crawler"
+  ],
+  "provenance": "The last of the gaps the prior-art pass named for the Dungeon Crawler (2026-09-11), held against Baldur's Gate II, Tangledeep and Stoneshard: the board pauses and says only whose turn it is. Searched first: presentation.hit_feedback states in its own description that it translates combat OUTCOMES and deliberately leaves adjacent concerns to their own components, and intent is continuous state rather than a moment; combat.turn_order_queue owns the order and nothing visual; presentation.tile_cursor is a cursor. Nothing owned the question, so this does, and it reads every fact from a component that already owns it."
+}
