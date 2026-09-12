@@ -30,6 +30,10 @@ ROOT = Path(__file__).resolve().parent.parent
 BANDS = ["hero", "gameplay", "far", "proxy"]
 ID_RE = re.compile(r"^[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*$")
 SOCKET_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+# An SPDX identifier, loosely: letters, digits, dots and dashes. Not a list of
+# valid ones — this repository is not the authority on what licences exist, and
+# a stale allowlist would reject a perfectly good licence for being new.
+SPDX_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9.\-+]*$")
 LEVEL_RE = re.compile(r"^lod[0-9]$")
 
 
@@ -77,6 +81,39 @@ def main() -> int:
         # asset by id has to open every file to find it.
         if aid and path.name != f"{aid}.asset.json":
             errors.append(f"{label}: declares id '{aid}', so the file should be '{aid}.asset.json'")
+
+        # --- where it came from, and on whose terms ------------------------
+        # A SCHEMA IS DOCUMENTATION UNTIL SOMETHING REFUSES. This validator
+        # reads `required` off the schema and checks presence, which cannot
+        # express "vendored assets need a licence" — so the rule lives here,
+        # where it can actually say no. The failure it exists to stop is a
+        # third-party model landing in the repository with nobody able to say
+        # who made it or what they allowed, which is not a style problem.
+        source = data.get("source") or {}
+        kind = source.get("kind", "generated")
+        if kind not in ("generated", "vendored"):
+            errors.append(f"{label}: source.kind '{kind}' is neither generated nor vendored")
+        elif kind == "generated":
+            if not source.get("script"):
+                errors.append(f"{label}: is generated and names no script, so nobody can build it again")
+            if data.get("license"):
+                errors.append(f"{label}: is generated in this repository and carries a third-party licence")
+        else:
+            for field in ("url", "sha256"):
+                if not source.get(field):
+                    errors.append(f"{label}: is vendored and records no source.{field} — the archive it came from is not identifiable")
+            lic = data.get("license")
+            if not lic:
+                errors.append(f"{label}: is vendored and carries no licence, so nothing says what may be done with it")
+            else:
+                for field in ("spdx", "holder", "url", "verifiedOn", "file"):
+                    if not lic.get(field):
+                        errors.append(f"{label}: licence records no {field}")
+                # The terms have to be NAMED, not described. "free to use" is
+                # somebody's recollection of a licence; CC0-1.0 is a licence.
+                spdx = str(lic.get("spdx", ""))
+                if spdx and not SPDX_RE.match(spdx):
+                    errors.append(f"{label}: licence '{spdx}' is not an SPDX identifier")
 
         # --- sockets -------------------------------------------------------
         names: set[str] = set()

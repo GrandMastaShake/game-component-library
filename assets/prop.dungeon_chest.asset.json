@@ -1,0 +1,62 @@
+{
+  "id": "prop.dungeon_chest",
+  "name": "Dungeon Chest",
+  "description": "A chest with a separate lid node and open, close and open-close clips.",
+  "archetype": "prop",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [
+    {
+      "name": "lid",
+      "position": [
+        0.0,
+        0.36,
+        0.0
+      ],
+      "description": "Read off the model's own `lid` node."
+    }
+  ],
+  "animations": [
+    {
+      "name": "open",
+      "loop": false
+    },
+    {
+      "name": "close",
+      "loop": false
+    },
+    {
+      "name": "open-close",
+      "loop": false
+    }
+  ],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/kenney.mini-dungeon/chest.glb",
+      "triangles": 288,
+      "bytes": 34048
+    }
+  ],
+  "source": {
+    "kind": "vendored",
+    "tool": "Kenney Mini Dungeon 2.0",
+    "repository": "game-architect-studio",
+    "url": "https://kenney.nl/media/pages/assets/mini-dungeon/6cd72dc849-1785314274/kenney_mini-dungeon.zip",
+    "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8",
+    "downloadedOn": "2026-09-12",
+    "file": "Models/GLB format/chest.glb"
+  },
+  "license": {
+    "spdx": "CC0-1.0",
+    "holder": "Kenney (www.kenney.nl)",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "verifiedOn": "2026-09-12",
+    "file": "public/assets/kenney.mini-dungeon/License.txt",
+    "attributionRequired": false
+  },
+  "provenance": "inventory.ground_items already announces inventory.containerOpened and the board already draws an open chest and a shut one as two sprites. This is the same distinction in 3D, and it arrives with the animation rather than needing two models."
+}
