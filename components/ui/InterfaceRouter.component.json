@@ -1,0 +1,77 @@
+{
+  "id": "ui.interface_router",
+  "name": "Interface Router",
+  "category": "ui",
+  "description": "Orchestration layer above individual panels: lazy-loads interface modules on first navigation, keeps a back stack, drives enter/exit transitions, and broadcasts theme changes to every loaded view. The library supplies many leaf panels (hud, inventory_panel, dialogue_box) but nothing that owns which one is showing, so that role currently falls to per-project glue. Navigation is an inbound API call rather than an event, since the router is the authority on its own stack and a request event with no declared emitter would be a dangling edge; the router reports outcomes as events instead. Each registered view implements an optional Show/Hide/SetContext/OnThemeChanged surface and the router calls only what a view actually declares. Exit animation and teardown run on a detached thread so navigation never blocks the caller.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": null,
+      "note": "Contract only. Intentionally left unimplemented pending a decision on view registration style - descriptor table versus module self-registration."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "initialRoute",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "transitionSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.3
+    },
+    {
+      "name": "maxStackDepth",
+      "type": "number",
+      "required": false,
+      "default": 16
+    },
+    {
+      "name": "preloadRoutes",
+      "type": "array",
+      "required": false,
+      "default": []
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentRoute",
+      "type": "string"
+    },
+    {
+      "name": "stackDepth",
+      "type": "number"
+    },
+    {
+      "name": "loadedRoutes",
+      "type": "array"
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.routeChanged",
+      "ui.routeLoaded",
+      "ui.routeLoadFailed",
+      "ui.stackPopped"
+    ],
+    "listensTo": [
+      "presentation.paletteChanged"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "ui",
+    "navigation",
+    "routing",
+    "lazy-loading",
+    "orchestration"
+  ],
+  "provenance": "Surfaced by the same defect pass (2026-09-11), where a hand-rolled MasterUIController owned lazy loading, a back stack, transitions and theme broadcast for nine panels, which is the per-project glue this library exists to remove. Searched first: ui.hud renders a layer a brick publishes, ui.inventory_panel and ui.dialogue_box are leaves that open and close themselves, ui.passage_engine walks a story graph rather than a view stack; nothing owns which interface is currently showing. Library-native; left unimplemented pending a view-registration decision."
+}

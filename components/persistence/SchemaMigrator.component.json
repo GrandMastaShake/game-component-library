@@ -1,0 +1,62 @@
+{
+  "id": "persistence.schema_migrator",
+  "name": "Schema Migrator",
+  "category": "persistence",
+  "description": "Reconciles a loaded save payload against the current default shape so fields added after a player's last session materialise instead of reading nil. Complements persistence.datastore_safe: that component guarantees the bytes arrive, this one guarantees they have the right shape. Deep-merges saved values onto a freshly built default tree (saved scalars win, absent keys inherit defaults, nested tables recurse) and runs ordered version migrations for shape changes a merge cannot express, such as a renamed key or a scalar promoted to a table. Without it, every consumer of a save payload has to nil-guard every nested field at each call site forever.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "roblox",
+      "status": "scaffold",
+      "module": "roblox-adapters/persistence.schema_migrator.adapter.lua",
+      "note": "Pure table transform. Fully deterministic and unit-testable with no platform services."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "currentVersion",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "pruneUnknownKeys",
+      "type": "boolean",
+      "required": false,
+      "default": false
+    }
+  ],
+  "outputs": [
+    {
+      "name": "migratedFrom",
+      "type": "number"
+    },
+    {
+      "name": "didMigrate",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "persistence.schemaMigrated",
+      "persistence.schemaMigrationFailed"
+    ],
+    "listensTo": [
+      "persistence.profileLoaded"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "persistence",
+    "migration",
+    "reliability",
+    "schema"
+  ],
+  "provenance": "Surfaced by the same defect pass (2026-09-11): a view indexed Stats.ItemsDesigned on a payload saved before the Stats table existed, and the local fix was a nil-guard that would have to be repeated at every future call site. Searched first: persistence.datastore_safe guarantees the bytes arrive and says nothing about their shape, persistence.save_system and persistence.profile_adapter move payloads without reconciling them, persistence.limited_save budgets writes; none merge a loaded payload onto current defaults. Library-native, written as a pure table transform with no platform services.",
+  "implementationPath": "roblox-adapters/persistence.schema_migrator.adapter.lua"
+}

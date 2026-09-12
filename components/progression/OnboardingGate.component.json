@@ -1,0 +1,72 @@
+{
+  "id": "progression.onboarding_gate",
+  "name": "Onboarding Gate",
+  "category": "progression",
+  "description": "Routes a joining player to first-run onboarding or straight to the main experience, keyed on an explicitly persisted completion flag. Encodes a failure this contract exists to prevent: inferring first-run state from whether a preference still equals its default is unsound whenever the default is also a legitimate player choice, so a player who genuinely picks the default value is forced through onboarding on every session. The flag must be written when onboarding completes, never derived. Completion is reported by a direct call from whichever flow ran the onboarding, not by listening for an event, so the gate stays authoritative over its own flag. Fails toward showing onboarding when persistence is unreachable, since a redundant intro is recoverable and a silently skipped one is not.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": null,
+      "note": "Contract only. Routing is a two-line branch; the value is the persisted-flag discipline, not the code."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "flagKey",
+      "type": "string",
+      "required": false,
+      "default": "hasCompletedOnboarding"
+    },
+    {
+      "name": "onboardingRoute",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "defaultRoute",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "routeOnPersistenceFailure",
+      "type": "string",
+      "required": false,
+      "default": "onboarding"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selectedRoute",
+      "type": "string"
+    },
+    {
+      "name": "isFirstRun",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.onboardingRequired",
+      "progression.onboardingSkipped",
+      "progression.onboardingCompleted"
+    ],
+    "listensTo": [
+      "persistence.profileLoaded"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "onboarding",
+    "routing",
+    "first-run",
+    "retention"
+  ],
+  "provenance": "Surfaced by a routing bug in the same project (2026-09-11): first-run state was inferred from whether a style preference still equalled its default, so every player who genuinely chose that default value was re-shown the onboarding quiz on each session. Searched first: progression.completion_tracker counts run and region completion, progression.checkpoint_flag marks position within a run, progression.career_track gates shifts; all three are in-run progress markers and none is a first-session gate. Library-native; the value recorded here is the persisted-flag rule rather than the two-line branch."
+}
