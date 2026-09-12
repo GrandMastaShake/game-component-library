@@ -14,7 +14,8 @@
         0.0,
         0.0
       ],
-      "description": "Read off the model's own `door` node."
+      "description": "The model's own `door` node.",
+      "node": "door"
     }
   ],
   "animations": [

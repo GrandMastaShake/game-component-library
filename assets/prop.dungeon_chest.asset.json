@@ -14,7 +14,8 @@
         0.36,
         0.0
       ],
-      "description": "Read off the model's own `lid` node."
+      "description": "The model's own `lid` node.",
+      "node": "lid"
     }
   ],
   "animations": [
