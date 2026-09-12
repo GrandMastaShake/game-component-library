@@ -12,27 +12,17 @@
       "level": "lod0",
       "distanceBand": "hero",
       "distanceRange": "<5m",
-      "file": "public/assets/kenney.mini-dungeon/pot.glb",
-      "triangles": 284,
-      "bytes": 26516
+      "file": "public/assets/generated/pot.glb",
+      "triangles": 156,
+      "bytes": 14080
     }
   ],
   "source": {
-    "kind": "vendored",
-    "tool": "Kenney Mini Dungeon 2.0",
+    "kind": "generated",
+    "tool": "tools/mesh — pure-stdlib Python, no Blender in the loop",
     "repository": "game-architect-studio",
-    "url": "https://kenney.nl/media/pages/assets/mini-dungeon/6cd72dc849-1785314274/kenney_mini-dungeon.zip",
-    "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8",
-    "downloadedOn": "2026-09-12",
-    "file": "Models/GLB format/pot.glb"
+    "script": "tools/mesh/build_props.py",
+    "generatedOn": "2026-09-12"
   },
-  "license": {
-    "spdx": "CC0-1.0",
-    "holder": "Kenney (www.kenney.nl)",
-    "url": "http://creativecommons.org/publicdomain/zero/1.0/",
-    "verifiedOn": "2026-09-12",
-    "file": "public/assets/kenney.mini-dungeon/License.txt",
-    "attributionRequired": false
-  },
-  "provenance": "Room dressing that world.room_template already stamps. The cheapest way to make a room look occupied rather than empty."
+  "provenance": "A tapered vessel with a torus rim. Its Euler characteristic is 2 — a bowl contributes 2 and a ring contributes 0 — which the audit reported on the first run against an expectation of 4. That is the argument for generated geometry in one line: the mesh was right and the arithmetic was not, and nothing about a downloaded binary would have said so. Built and audited by tools/mesh/build_props.py: watertight, the Euler characteristic measured rather than asserted, and inside a triangle budget. The file is byte-for-byte reproducible, which is what makes the script the asset and the .glb a compiler output."
 }
