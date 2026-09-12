@@ -607,6 +607,851 @@
       "app": "infinite-dungeons",
       "generated": "2026-09-12",
       "version": 1
+    },
+    {
+      "key": "env-pellamy-bridge",
+      "file": "images/environment/env-pellamy-bridge.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-pellamy-bridge-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-pellamy-bridge",
+      "prompt": "Stone bridge over dark river at night, toll table at each end, two oil lamps, two figures facing away from each other",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-waystation-dark",
+      "file": "images/environment/env-waystation-dark.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-waystation-dark-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-waystation-dark",
+      "prompt": "Well-kept waystation completely dark on a road of lit waystations",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-greyhollow-depot",
+      "file": "images/environment/env-greyhollow-depot.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-greyhollow-depot-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-greyhollow-depot",
+      "prompt": "Grain depot yard in daylight, every lamp burning, nobody there",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-grain-loft",
+      "file": "images/environment/env-grain-loft.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-grain-loft-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-grain-loft",
+      "prompt": "Grain loft secretly lived in, bedroll, routine of objects, covered lantern",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-north-ridge",
+      "file": "images/environment/env-north-ridge.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-north-ridge-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-north-ridge",
+      "prompt": "Dawn, forty lamp housings flaring alight at once along a ridge, seen from valley",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-cold-hall",
+      "file": "images/environment/env-cold-hall.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-cold-hall-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-cold-hall",
+      "prompt": "Cold stone hall, forty seated keepers, one open ledger, one brazier",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-hollowmark-wall",
+      "file": "images/environment/env-hollowmark-wall.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-hollowmark-wall-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-hollowmark-wall",
+      "prompt": "Walled lamphouse under siege at night, its lamp still lit, seen from outside",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-oil-store",
+      "file": "images/environment/env-oil-store.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-oil-store-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-oil-store",
+      "prompt": "Cellar under oil store, barrels, small strongbox hidden near hearth flue, one candle",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-unmarked-grave",
+      "file": "images/environment/env-unmarked-grave.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-unmarked-grave-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-unmarked-grave",
+      "prompt": "Wide grass field at dusk, no stone, no lamp, no marker, no building on any horizon",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "comp-pell",
+      "file": "images/companions/comp-pell.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/comp-pell-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "comp-pell",
+      "prompt": "Androgynous 19-year-old lamplighter's apprentice, soot-smudged, lamp-hook and trim-knife, guarded eyes",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "comp-orla",
+      "file": "images/companions/comp-orla.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/comp-orla-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "comp-orla",
+      "prompt": "Weathered waystation keeper in her fifties, oil-axe, keeper's ring, cold lamp housing she will not put down",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "npc-serrin",
+      "file": "images/characters/npc-serrin.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/npc-serrin-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "npc-serrin",
+      "prompt": "Composed middle-aged road-agent, notebook and pencil, unhurried measuring expression",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "npc-aubrey",
+      "file": "images/characters/npc-aubrey.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/npc-aubrey-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "npc-aubrey",
+      "prompt": "Young sincere idealist in too-new cloak, anxious honest eyes, folded speech",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-bravo",
+      "file": "images/monsters/mob-bravo.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-bravo-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-bravo",
+      "prompt": "Hired bruiser at bridge toll table, patched leather, cudgel within reach",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-wick",
+      "file": "images/monsters/mob-wick.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-wick-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-wick",
+      "prompt": "Disciplined enforcer in old hereditary livery, oil-lamp at belt, cold dutiful expression",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-spark",
+      "file": "images/monsters/mob-spark.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-spark-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-spark",
+      "prompt": "Very young idealistic fighter, mismatched borrowed gear, homemade sash, cheap spear",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "boss-dark",
+      "file": "images/monsters/boss-dark.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/boss-dark-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-dark",
+      "prompt": "Human-shaped absence standing where a lamp should be, keeper silhouette of pure darkness drinking the light",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "boss-captain",
+      "file": "images/monsters/boss-captain.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/boss-captain-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-captain",
+      "prompt": "Calm siege captain in dark half-armor, map case, patient administrative face, distant campfires",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-lamp-oil",
+      "file": "images/items/item-lamp-oil.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-lamp-oil-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-lamp-oil",
+      "prompt": "Sealed glass flask of golden lamp oil, wax-sealed cork, faint warm glow",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-seal",
+      "file": "images/items/item-seal.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-seal-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-seal",
+      "prompt": "Heavy brass disc seal engraved with lamp-and-road emblem, worn edges",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-writ",
+      "file": "images/items/item-writ.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-writ-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-writ",
+      "prompt": "Folded parchment writ with lamp wick folded inside, grey wax seal, unburnt",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-greater-draught",
+      "file": "images/items/item-greater-draught.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-greater-draught-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-greater-draught",
+      "prompt": "Larger corked bottle of glowing ember-amber liquid, twin vapor wisps",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-salt-bread",
+      "file": "images/items/item-salt-bread.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-salt-bread-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-salt-bread",
+      "prompt": "Dense dark loaf of salt bread, coarse crust, torn end",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-ward-stone",
+      "file": "images/items/item-ward-stone.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-ward-stone-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-ward-stone",
+      "prompt": "Palm-sized flat grey stone with carved protective mark, grooves faintly amber",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-cinder-oil",
+      "file": "images/items/item-cinder-oil.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-cinder-oil-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-cinder-oil",
+      "prompt": "Dark clay bottle of cinder-oil, dull red ember glow inside",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-choke-dust",
+      "file": "images/items/item-choke-dust.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-choke-dust-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-choke-dust",
+      "prompt": "Small tied cloth pouch of grey dust, spilled powder drifting",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-bell-clay",
+      "file": "images/items/item-bell-clay.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-bell-clay-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-bell-clay",
+      "prompt": "Small unfired clay bell, hand-pressed, thumbprint, no clapper",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-ember-dram",
+      "file": "images/items/item-ember-dram.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-ember-dram-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-ember-dram",
+      "prompt": "Tiny thumb-sized vial of concentrated ember liquid, iron screw cap",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-acolyte",
+      "file": "images/backgrounds/bg-acolyte.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-acolyte-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-acolyte",
+      "prompt": "Bronze censer on chain, thin grey smoke, votive ash",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-criminal",
+      "file": "images/backgrounds/bg-criminal.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-criminal-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-criminal",
+      "prompt": "Worn lock picks in rolled leather wrap, one pick bent",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-soldier",
+      "file": "images/backgrounds/bg-soldier.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-soldier-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-soldier",
+      "prompt": "Furled old campaign banner, faded grey and dun, scarred pole",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-sage",
+      "file": "images/backgrounds/bg-sage.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-sage-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-sage",
+      "prompt": "Stack of county record books with cloth ties, dust and quill",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-courier",
+      "file": "images/backgrounds/bg-courier.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-courier-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-courier",
+      "prompt": "Weathered road satchel with stamped route tag",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-physician",
+      "file": "images/backgrounds/bg-physician.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-physician-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-physician",
+      "prompt": "Old bone saw and linen bandage roll on dark cloth",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-smith",
+      "file": "images/backgrounds/bg-smith.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-smith-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-smith",
+      "prompt": "Smith's punch and hammer head on anvil horn, faint forge glow",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-player",
+      "file": "images/backgrounds/bg-player.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-player-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-player",
+      "prompt": "Travelling player's hand drum, painted rim worn away",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-foundling",
+      "file": "images/backgrounds/bg-foundling.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-foundling-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-foundling",
+      "prompt": "Parish register open to names, one line crossed out, ribbon marker",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "bg-outlander",
+      "file": "images/backgrounds/bg-outlander.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/bg-outlander-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "bg-outlander",
+      "prompt": "Hollow-country charm of braided straw and black beads",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "keyart-lamplighters",
+      "file": "images/keyart/keyart-lamplighters.png",
+      "size": [
+        1236,
+        2676
+      ],
+      "source_fullres": "images/fullres/keyart-lamplighters-1248x2688.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-lamplighters",
+      "prompt": "Ember Road at night, waystation lamps chained into distance, one dark, lone lamplighter walking",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "keyart-mine-took",
+      "file": "images/keyart/keyart-mine-took.png",
+      "size": [
+        1236,
+        2676
+      ],
+      "source_fullres": "images/fullres/keyart-mine-took-1248x2688.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-mine-took",
+      "prompt": "Black mine headframe above grey town, mine mouth darker than night, lamps going down, fewer returning",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "ui-empty-seat",
+      "file": "images/ui/ui-empty-seat.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/ui-empty-seat-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-empty-seat",
+      "prompt": "Bedroll by campfire with shaped depression where somebody is not, cup still warm",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "ui-forge",
+      "file": "images/ui/ui-forge.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-forge-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-forge",
+      "prompt": "Worktable from above: blank ledger, unlit lamp, pencil, blank cards, setting-neutral",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "ui-death",
+      "file": "images/ui/ui-death.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-death-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-death",
+      "prompt": "Quiet aftermath: extinguished lantern tipped over, cold bedroll, ash settling, no people",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "ui-level-up",
+      "file": "images/ui/ui-level-up.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-level-up-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-level-up",
+      "prompt": "One votive candle flaring brighter among dim candles on stone steps",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "ui-campfire-wide",
+      "file": "images/ui/ui-campfire-wide.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-campfire-wide-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-campfire-wide",
+      "prompt": "Night camp in roofless ruin, two bedrolls, pot on fire, packs stacked",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-generic-revenant",
+      "file": "images/monsters/mob-generic-revenant.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-generic-revenant-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-generic-revenant",
+      "prompt": "Gaunt restless spirit of a laborer, translucent edges, mournful",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-generic-beast",
+      "file": "images/monsters/mob-generic-beast.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-generic-beast-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-generic-beast",
+      "prompt": "Lean ash-furred beast, hackles up, wary circling stance",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-generic-cultist",
+      "file": "images/monsters/mob-generic-cultist.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-generic-cultist-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-generic-cultist",
+      "prompt": "Robed devotee with small strange emblem and stub candle, more clerk than fanatic",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-generic-soldier",
+      "file": "images/monsters/mob-generic-soldier.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-generic-soldier-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-generic-soldier",
+      "prompt": "Professional soldier in dull kettle helm, spear grounded, exhausted vigilance",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "boss-generic-official",
+      "file": "images/monsters/boss-generic-official.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/boss-generic-official-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-generic-official",
+      "prompt": "Stern bureaucrat at desk with open ledger and stamp, administrative authority",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-generic-town",
+      "file": "images/environment/env-generic-town.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-generic-town-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-generic-town",
+      "prompt": "Working grey town at dusk, chimneys, carts, well, tired and administrative",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-generic-interior",
+      "file": "images/environment/env-generic-interior.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-generic-interior-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-generic-interior",
+      "prompt": "Plain institutional room, long table, ledgers, one lamp, municipal gloom",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-generic-underground",
+      "file": "images/environment/env-generic-underground.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-generic-underground-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-generic-underground",
+      "prompt": "Worked stone tunnel, old timbers, lantern hook, dark beyond the light",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-generic-wilderness",
+      "file": "images/environment/env-generic-wilderness.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-generic-wilderness-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-generic-wilderness",
+      "prompt": "Open moor under low dark sky, bare track, one dead tree",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "amb-road-wind",
+      "file": "audio/loops/amb-road-wind.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/amb-road-wind.mp3",
+      "prompt": "Cold night wind over open moorland road, no interior reverb",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "amb-lamphouse",
+      "file": "audio/loops/amb-lamphouse.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/amb-lamphouse.mp3",
+      "prompt": "Lamphouse interior: oil flame flutter, brass ticks, quiet siege stillness",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "music-forge",
+      "file": "audio/loops/music-forge.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/music-forge.mp3",
+      "prompt": "Anticipatory unresolved dark-ambient bed, low drones, distant hammer tones",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-forge-complete",
+      "file": "audio/sfx/sfx-forge-complete.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "prompt": "Deep resonant chime, a great work finishing, solemn",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-page-turn",
+      "file": "audio/sfx/sfx-page-turn.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "prompt": "Very soft single page turn, repeatable",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-check-pass",
+      "file": "audio/sfx/sfx-check-pass.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "prompt": "Quiet warm low bell confirmation, sits after dice",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-check-fail",
+      "file": "audio/sfx/sfx-check-fail.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "prompt": "Quiet low muted thud, cold exhale, understated failure",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-mark-earned",
+      "file": "audio/sfx/sfx-mark-earned.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "prompt": "Deep drum beat, slow dark choir swell, once-a-journey gravity",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
     }
   ]
 }
