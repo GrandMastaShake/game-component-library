@@ -1,0 +1,196 @@
+{
+  "id": "character.dungeon_hero",
+  "name": "Dungeon Hero",
+  "description": "The body a player walks the dungeon in, rigged and with a full clip set — idle, walk, die, pick-up, and a holding pose for each hand.",
+  "archetype": "character",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [
+    {
+      "name": "head",
+      "position": [
+        0.0,
+        1.29,
+        0.0
+      ],
+      "description": "Read off the model's own `head` node."
+    },
+    {
+      "name": "hand_right",
+      "position": [
+        -0.35,
+        0.87,
+        0.0
+      ],
+      "description": "Read off the model's own `arm-right` node."
+    },
+    {
+      "name": "hand_left",
+      "position": [
+        0.35,
+        0.87,
+        0.0
+      ],
+      "description": "Read off the model's own `arm-left` node."
+    }
+  ],
+  "animations": [
+    {
+      "name": "static",
+      "loop": true
+    },
+    {
+      "name": "idle",
+      "loop": true
+    },
+    {
+      "name": "walk",
+      "loop": true
+    },
+    {
+      "name": "sprint",
+      "loop": true
+    },
+    {
+      "name": "jump",
+      "loop": false
+    },
+    {
+      "name": "fall",
+      "loop": false
+    },
+    {
+      "name": "crouch",
+      "loop": false
+    },
+    {
+      "name": "sit",
+      "loop": false
+    },
+    {
+      "name": "drive",
+      "loop": false
+    },
+    {
+      "name": "die",
+      "loop": false
+    },
+    {
+      "name": "pick-up",
+      "loop": false
+    },
+    {
+      "name": "emote-yes",
+      "loop": false
+    },
+    {
+      "name": "emote-no",
+      "loop": false
+    },
+    {
+      "name": "holding-right",
+      "loop": false
+    },
+    {
+      "name": "holding-left",
+      "loop": false
+    },
+    {
+      "name": "holding-both",
+      "loop": false
+    },
+    {
+      "name": "holding-right-shoot",
+      "loop": false
+    },
+    {
+      "name": "holding-left-shoot",
+      "loop": false
+    },
+    {
+      "name": "holding-both-shoot",
+      "loop": false
+    },
+    {
+      "name": "attack-melee-right",
+      "loop": false
+    },
+    {
+      "name": "attack-melee-left",
+      "loop": false
+    },
+    {
+      "name": "attack-kick-right",
+      "loop": false
+    },
+    {
+      "name": "attack-kick-left",
+      "loop": false
+    },
+    {
+      "name": "interact-right",
+      "loop": false
+    },
+    {
+      "name": "interact-left",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-sit",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-look-left",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-look-right",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-forward",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-back",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-left",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-right",
+      "loop": false
+    }
+  ],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/kenney.mini-dungeon/character-human.glb",
+      "triangles": 465,
+      "bytes": 218072
+    }
+  ],
+  "source": {
+    "kind": "vendored",
+    "tool": "Kenney Mini Dungeon 2.0",
+    "repository": "game-architect-studio",
+    "url": "https://kenney.nl/media/pages/assets/mini-dungeon/6cd72dc849-1785314274/kenney_mini-dungeon.zip",
+    "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8",
+    "downloadedOn": "2026-09-12",
+    "file": "Models/GLB format/character-human.glb"
+  },
+  "license": {
+    "spdx": "CC0-1.0",
+    "holder": "Kenney (www.kenney.nl)",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "verifiedOn": "2026-09-12",
+    "file": "public/assets/kenney.mini-dungeon/License.txt",
+    "attributionRequired": false
+  },
+  "provenance": "The voxel crawler drew every body as a coloured box, which is an honest placeholder and nothing a player would look at twice. character.hero already exists and is a 132-triangle figure built for the racing pack's scale; this is a dungeon body with a walk cycle and a death, which that one has neither of. Vendored rather than modelled because a rigged humanoid with 32 clips is weeks of work that CC0 has already done, and because the pack it comes from also supplies the orc that fights it, the chest it opens and the gate it walks through — one licence, one archive, one visual register."
+}

@@ -1,0 +1,38 @@
+{
+  "id": "prop.dungeon_column",
+  "name": "Dungeon Column",
+  "description": "A column, four blocks tall in the crawler's scale.",
+  "archetype": "prop",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/kenney.mini-dungeon/column.glb",
+      "triangles": 104,
+      "bytes": 11268
+    }
+  ],
+  "source": {
+    "kind": "vendored",
+    "tool": "Kenney Mini Dungeon 2.0",
+    "repository": "game-architect-studio",
+    "url": "https://kenney.nl/media/pages/assets/mini-dungeon/6cd72dc849-1785314274/kenney_mini-dungeon.zip",
+    "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8",
+    "downloadedOn": "2026-09-12",
+    "file": "Models/GLB format/column.glb"
+  },
+  "license": {
+    "spdx": "CC0-1.0",
+    "holder": "Kenney (www.kenney.nl)",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "verifiedOn": "2026-09-12",
+    "file": "public/assets/kenney.mini-dungeon/License.txt",
+    "attributionRequired": false
+  },
+  "provenance": "The stamps' pillar, which the board draws as a two-level block and the voxel runtime as a four-block tower of the same colour as everything else."
+}

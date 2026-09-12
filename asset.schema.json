@@ -3,7 +3,15 @@
   "title": "GameAsset",
   "description": "The contract for a 3D asset a runtime can load: what it is, where things attach to it, and what it costs at each viewing distance. It sits beside component.schema.json for the same reason that one exists — a mesh nobody has declared is a mesh nobody can check, and 'it looked right in Blender' is not a claim a consuming repository can act on. A descriptor here is a claim ABOUT FILES, so every number in it must be read back out of the exported file rather than recorded from the tool that wrote it: measured on the first kart, Blender reported 52 and 24 triangles for the two far tiers and the glTF contained 46 and 19, because the exporter drops the degenerate faces aggressive decimation leaves behind.",
   "type": "object",
-  "required": ["id", "name", "format", "sockets", "levels", "source", "provenance"],
+  "required": [
+    "id",
+    "name",
+    "format",
+    "sockets",
+    "levels",
+    "source",
+    "provenance"
+  ],
   "additionalProperties": false,
   "properties": {
     "id": {
@@ -11,26 +19,39 @@
       "description": "Dotted id in the catalogue's own style, e.g. 'vehicle.kart'. Not a component id: an asset is what a component may be drawn as, and several components can share one.",
       "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"
     },
-    "name": { "type": "string" },
-    "description": { "type": "string" },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
     "archetype": {
       "type": "string",
       "description": "The body plan this follows, from the shape package's archetypes where one fits. Absent means the asset is its own shape and says so."
     },
     "format": {
       "type": "string",
-      "enum": ["gltf-binary"],
+      "enum": [
+        "gltf-binary"
+      ],
       "description": "glTF binary only, deliberately. One format the web runtime loads natively and Unity and Godot both import, rather than a per-target zoo."
     },
     "units": {
       "type": "string",
-      "enum": ["metres"],
+      "enum": [
+        "metres"
+      ],
       "default": "metres",
       "description": "glTF is metres by convention and the voxel runtime's block is one metre, so an asset that honours this drops into the world at the right size with no scale factor to get wrong."
     },
     "forwardAxis": {
       "type": "string",
-      "enum": ["+x", "-x", "+z", "-z"],
+      "enum": [
+        "+x",
+        "-x",
+        "+z",
+        "-z"
+      ],
       "description": "Which way the asset faces at rest. The car model treats heading 0 as +x, so an asset built to face anything else needs a rotation the runtime would have to remember — recording it is what makes that checkable."
     },
     "sockets": {
@@ -38,7 +59,10 @@
       "description": "Named attachment points that exist as nodes in every exported level. A socket is a promise to whatever attaches there, so the validator's job is to prove the node is really in the file.",
       "items": {
         "type": "object",
-        "required": ["name", "position"],
+        "required": [
+          "name",
+          "position"
+        ],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -48,7 +72,9 @@
           },
           "position": {
             "type": "array",
-            "items": { "type": "number" },
+            "items": {
+              "type": "number"
+            },
             "minItems": 3,
             "maxItems": 3,
             "description": "Where it sits in the asset's own space, in metres."
@@ -57,7 +83,9 @@
             "type": "string",
             "description": "What is expected to attach here, when that is a known part."
           },
-          "description": { "type": "string" }
+          "description": {
+            "type": "string"
+          }
         }
       }
     },
@@ -66,7 +94,10 @@
       "description": "Named clips the exported file contains. Absent means the asset does not move, which is the honest state for a kart and a lie for a character — a rigged asset whose clips nobody declared is one where 'the walk is in there' is a private belief, exactly what the socket list exists to stop. Declaring them makes the app's check-assets open the glTF and prove each one is present and the right length.",
       "items": {
         "type": "object",
-        "required": ["name", "seconds"],
+        "required": [
+          "name",
+          "seconds"
+        ],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -83,7 +114,9 @@
             "type": "boolean",
             "description": "Whether the first and last pose match, so the clip can repeat without snapping. A walk must; a one-shot attack need not."
           },
-          "description": { "type": "string" }
+          "description": {
+            "type": "string"
+          }
         }
       }
     },
@@ -93,15 +126,30 @@
       "description": "One entry per level of detail, coarsest last. The bands are the shape package's own: hero under 5m, gameplay 5 to 20m, far 20 to 50m, proxy beyond.",
       "items": {
         "type": "object",
-        "required": ["level", "distanceBand", "file", "triangles"],
+        "required": [
+          "level",
+          "distanceBand",
+          "file",
+          "triangles"
+        ],
         "additionalProperties": false,
         "properties": {
-          "level": { "type": "string", "pattern": "^lod[0-9]$" },
+          "level": {
+            "type": "string",
+            "pattern": "^lod[0-9]$"
+          },
           "distanceBand": {
             "type": "string",
-            "enum": ["hero", "gameplay", "far", "proxy"]
+            "enum": [
+              "hero",
+              "gameplay",
+              "far",
+              "proxy"
+            ]
           },
-          "distanceRange": { "type": "string" },
+          "distanceRange": {
+            "type": "string"
+          },
           "file": {
             "type": "string",
             "description": "Path inside the consuming repository. The library declares the contract; it does not host the binary."
@@ -111,26 +159,100 @@
             "minimum": 1,
             "description": "READ BACK OUT OF THE FILE, never recorded from the exporter. See this schema's description."
           },
-          "bytes": { "type": "integer", "minimum": 1 }
+          "bytes": {
+            "type": "integer",
+            "minimum": 1
+          }
         }
       }
     },
     "source": {
       "type": "object",
-      "required": ["tool", "repository"],
+      "required": [
+        "tool",
+        "repository"
+      ],
       "additionalProperties": false,
-      "description": "How it was made, so it can be made again. An asset nobody can regenerate is an asset that rots the day its author leaves.",
+      "description": "Where it came from, so it can be had again. For a GENERATED asset that means the script that builds it — an asset nobody can regenerate is an asset that rots the day its author leaves. For a VENDORED one there is no script and never will be: somebody else made it, and what has to survive instead is the archive it came out of and the hash that says it is the same archive. Both are reproducibility; they just answer to different things.",
       "properties": {
-        "tool": { "type": "string" },
-        "repository": { "type": "string" },
-        "script": { "type": "string" },
-        "generatedOn": { "type": "string" }
+        "tool": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        },
+        "generatedOn": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "generated",
+            "vendored"
+          ],
+          "description": "generated: built by `script` in `repository`. vendored: downloaded from `url`, third-party, and carrying a `license`. Absent means generated, which is what the assets written before this field existed are."
+        },
+        "url": {
+          "type": "string",
+          "description": "Vendored only: the archive it was taken from."
+        },
+        "sha256": {
+          "type": "string",
+          "description": "Vendored only: the archive's hash when it was taken. A CC0 pack can be revised in place; this is what makes 'the same models' checkable rather than assumed."
+        },
+        "downloadedOn": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string",
+          "description": "Vendored only: the path inside the archive, so the exact model is named rather than guessed at from a similar filename."
+        }
       }
     },
     "provenance": {
       "type": "string",
       "minLength": 40,
       "description": "What this asset was found to be needed by, and what it is not. The same gate component descriptors carry, for the same reason: it turns 'I could not find one like this' from a private belief into a reviewable claim."
+    },
+    "license": {
+      "type": "object",
+      "required": [
+        "spdx",
+        "holder",
+        "url",
+        "verifiedOn",
+        "file"
+      ],
+      "additionalProperties": false,
+      "description": "Who made it and on what terms. REQUIRED for a vendored asset and meaningless for a generated one. This repository had nowhere to record a licence at all — `source` demanded a build script and the root forbade extra properties — so the first third-party model could not have been described honestly even by somebody trying to. Recording the terms is the cheap half; `file` is the half that matters, because a licence nobody shipped a copy of is a licence nobody can check.",
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "description": "The SPDX identifier, e.g. CC0-1.0. Named rather than described so it can be matched mechanically."
+        },
+        "holder": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "description": "Where the terms were read."
+        },
+        "verifiedOn": {
+          "type": "string",
+          "description": "When they were read. A licence is a fact about a date."
+        },
+        "file": {
+          "type": "string",
+          "description": "The licence text, vendored into the consuming repository beside the models."
+        },
+        "attributionRequired": {
+          "type": "boolean",
+          "description": "Whether the terms oblige a credit. Recorded even when false, because 'not required' is a finding rather than an absence."
+        }
+      }
     }
   }
 }

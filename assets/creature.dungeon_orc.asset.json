@@ -1,0 +1,187 @@
+{
+  "id": "creature.dungeon_orc",
+  "name": "Dungeon Orc",
+  "description": "What fights you in the rooms: the same rig and the same clip set as the hero, at a heavier build.",
+  "archetype": "character",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [
+    {
+      "name": "head",
+      "position": [
+        0.0,
+        1.29,
+        0.0
+      ],
+      "description": "Read off the model's own `head` node."
+    },
+    {
+      "name": "hand_right",
+      "position": [
+        -0.35,
+        0.87,
+        0.0
+      ],
+      "description": "Read off the model's own `arm-right` node."
+    }
+  ],
+  "animations": [
+    {
+      "name": "static",
+      "loop": true
+    },
+    {
+      "name": "idle",
+      "loop": true
+    },
+    {
+      "name": "walk",
+      "loop": true
+    },
+    {
+      "name": "sprint",
+      "loop": true
+    },
+    {
+      "name": "jump",
+      "loop": false
+    },
+    {
+      "name": "fall",
+      "loop": false
+    },
+    {
+      "name": "crouch",
+      "loop": false
+    },
+    {
+      "name": "sit",
+      "loop": false
+    },
+    {
+      "name": "drive",
+      "loop": false
+    },
+    {
+      "name": "die",
+      "loop": false
+    },
+    {
+      "name": "pick-up",
+      "loop": false
+    },
+    {
+      "name": "emote-yes",
+      "loop": false
+    },
+    {
+      "name": "emote-no",
+      "loop": false
+    },
+    {
+      "name": "holding-right",
+      "loop": false
+    },
+    {
+      "name": "holding-left",
+      "loop": false
+    },
+    {
+      "name": "holding-both",
+      "loop": false
+    },
+    {
+      "name": "holding-right-shoot",
+      "loop": false
+    },
+    {
+      "name": "holding-left-shoot",
+      "loop": false
+    },
+    {
+      "name": "holding-both-shoot",
+      "loop": false
+    },
+    {
+      "name": "attack-melee-right",
+      "loop": false
+    },
+    {
+      "name": "attack-melee-left",
+      "loop": false
+    },
+    {
+      "name": "attack-kick-right",
+      "loop": false
+    },
+    {
+      "name": "attack-kick-left",
+      "loop": false
+    },
+    {
+      "name": "interact-right",
+      "loop": false
+    },
+    {
+      "name": "interact-left",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-sit",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-look-left",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-look-right",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-forward",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-back",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-left",
+      "loop": false
+    },
+    {
+      "name": "wheelchair-move-right",
+      "loop": false
+    }
+  ],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/kenney.mini-dungeon/character-orc.glb",
+      "triangles": 374,
+      "bytes": 199616
+    }
+  ],
+  "source": {
+    "kind": "vendored",
+    "tool": "Kenney Mini Dungeon 2.0",
+    "repository": "game-architect-studio",
+    "url": "https://kenney.nl/media/pages/assets/mini-dungeon/6cd72dc849-1785314274/kenney_mini-dungeon.zip",
+    "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8",
+    "downloadedOn": "2026-09-12",
+    "file": "Models/GLB format/character-orc.glb"
+  },
+  "license": {
+    "spdx": "CC0-1.0",
+    "holder": "Kenney (www.kenney.nl)",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "verifiedOn": "2026-09-12",
+    "file": "public/assets/kenney.mini-dungeon/License.txt",
+    "attributionRequired": false
+  },
+  "provenance": "combat.room_encounters places a cast and says nothing about what any of it looks like; the block world drew all of it as one red box, so a rat and a boss were the same object at the same size. Sharing the hero's rig is the point rather than a coincidence — one animation vocabulary means a mob and a player can be driven by the same code."
+}
