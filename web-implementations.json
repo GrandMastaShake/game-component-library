@@ -149,6 +149,7 @@
       "presentation.voxel_mesher",
       "world.cave_system",
       "world.chunk_manager",
+      "world.floor_descent",
       "world.noise_lib",
       "world.terrain_generator",
       "world.track_circuit",
