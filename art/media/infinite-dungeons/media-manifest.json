@@ -1,0 +1,612 @@
+{
+  "project": "infinite-dungeons",
+  "style": "painterly dark-fantasy, heavy chiaroscuro, desaturated stone/ash, single ember-amber light source, near-black backgrounds",
+  "assets": [
+    {
+      "key": "hero-paladin",
+      "file": "images/characters/hero-paladin.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-paladin-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-paladin",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "hero-rogue",
+      "file": "images/characters/hero-rogue.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-rogue-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-rogue",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "hero-wizard",
+      "file": "images/characters/hero-wizard.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-wizard-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-wizard",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "hero-ranger",
+      "file": "images/characters/hero-ranger.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-ranger-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-ranger",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "hero-fighter",
+      "file": "images/characters/hero-fighter.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-fighter-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-fighter",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "hero-cleric",
+      "file": "images/characters/hero-cleric.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-cleric-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-cleric",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "hero-barbarian",
+      "file": "images/characters/hero-barbarian.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hero-barbarian-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-barbarian",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "comp-aldric",
+      "file": "images/companions/comp-aldric.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/comp-aldric-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "comp-aldric",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "comp-tomas",
+      "file": "images/companions/comp-tomas.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/comp-tomas-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "comp-tomas",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "comp-mira-vesh",
+      "file": "images/companions/comp-mira-vesh.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/comp-mira-vesh-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "comp-mira-vesh",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-goblin",
+      "file": "images/monsters/mob-goblin.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-goblin-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-goblin",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-goblin-chief",
+      "file": "images/monsters/mob-goblin-chief.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-goblin-chief-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-goblin-chief",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-choir",
+      "file": "images/monsters/mob-choir.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-choir-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-choir",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-drowned",
+      "file": "images/monsters/mob-drowned.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-drowned-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-drowned",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "mob-zealot",
+      "file": "images/monsters/mob-zealot.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-zealot-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-zealot",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "boss-verger",
+      "file": "images/monsters/boss-verger.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/boss-verger-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-verger",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "boss-wren",
+      "file": "images/monsters/boss-wren.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/boss-wren-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-wren",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-duskhollow-pyre",
+      "file": "images/environment/env-duskhollow-pyre.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-duskhollow-pyre-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-duskhollow-pyre",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-ash-road",
+      "file": "images/environment/env-ash-road.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-ash-road-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-ash-road",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-guard-hall",
+      "file": "images/environment/env-guard-hall.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-guard-hall-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-guard-hall",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-three-tongue-door",
+      "file": "images/environment/env-three-tongue-door.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-three-tongue-door-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-three-tongue-door",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-cistern",
+      "file": "images/environment/env-cistern.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-cistern-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-cistern",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-reliquary",
+      "file": "images/environment/env-reliquary.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-reliquary-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-reliquary",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-town-below",
+      "file": "images/environment/env-town-below.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-town-below-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-town-below",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-ninth-house",
+      "file": "images/environment/env-ninth-house.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-ninth-house-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-ninth-house",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "env-last-shrine",
+      "file": "images/environment/env-last-shrine.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-last-shrine-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-last-shrine",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-draught",
+      "file": "images/items/item-draught.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-draught-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-draught",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-lantern",
+      "file": "images/items/item-lantern.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-lantern-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-lantern",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-crown-of-nails",
+      "file": "images/items/item-crown-of-nails.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-crown-of-nails-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-crown-of-nails",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-bell-clapper",
+      "file": "images/items/item-bell-clapper.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-bell-clapper-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-bell-clapper",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "item-coin-pouch",
+      "file": "images/items/item-coin-pouch.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-coin-pouch-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-coin-pouch",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "keyart-ashen-crown",
+      "file": "images/keyart/keyart-ashen-crown.png",
+      "size": [
+        1236,
+        2676
+      ],
+      "source_fullres": "images/fullres/keyart-ashen-crown-1248x2688.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-ashen-crown",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "keyart-hearth",
+      "file": "images/keyart/keyart-hearth.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/keyart-hearth-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-hearth",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "amb-cistern-water",
+      "file": "audio/loops/amb-cistern-water.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/amb-cistern-water.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "amb-dungeon-drone",
+      "file": "audio/loops/amb-dungeon-drone.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/amb-dungeon-drone.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "amb-hearth",
+      "file": "audio/loops/amb-hearth.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/amb-hearth.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "music-combat",
+      "file": "audio/loops/music-combat.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/music-combat.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "music-hymn-reversed",
+      "file": "audio/loops/music-hymn-reversed.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/music-hymn-reversed.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "music-title",
+      "file": "audio/loops/music-title.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/music-title.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "t1",
+      "file": "audio/loops/t1.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/t1.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "t2",
+      "file": "audio/loops/t2.ogg",
+      "type": "loop",
+      "format": "ogg",
+      "duration_s": 20.0,
+      "seamless": true,
+      "source_mp3": "audio/loops/t2.mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-bell-toll",
+      "file": "audio/sfx/sfx-bell-toll.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-crit",
+      "file": "audio/sfx/sfx-crit.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-death",
+      "file": "audio/sfx/sfx-death.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-dice-roll",
+      "file": "audio/sfx/sfx-dice-roll.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-hit",
+      "file": "audio/sfx/sfx-hit.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-level-up",
+      "file": "audio/sfx/sfx-level-up.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-loot",
+      "file": "audio/sfx/sfx-loot.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-miss",
+      "file": "audio/sfx/sfx-miss.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    },
+    {
+      "key": "sfx-ui-tap",
+      "file": "audio/sfx/sfx-ui-tap.mp3",
+      "type": "one-shot",
+      "format": "mp3",
+      "app": "infinite-dungeons",
+      "generated": "2026-09-12",
+      "version": 1
+    }
+  ]
+}
