@@ -56,7 +56,7 @@
     },
     "sockets": {
       "type": "array",
-      "description": "Named attachment points that exist as nodes in every exported level. A socket is a promise to whatever attaches there, so the validator's job is to prove the node is really in the file.",
+      "description": "Named attachment points that exist as nodes in every exported level. A socket is a promise to whatever attaches there, so the validator's job is to prove the node is really in the file. The NAME is this library's vocabulary — a component asks for `hand_right` and does not care what the modeller called it — and `node` is where that lives in this particular file, which is how a vendored model made by somebody with their own naming can still answer to the same word.",
       "items": {
         "type": "object",
         "required": [
@@ -68,7 +68,7 @@
           "name": {
             "type": "string",
             "pattern": "^[a-z][a-z0-9_]*$",
-            "description": "Exported as a node called 'socket_<name>'."
+            "description": "What attaches here, in this library's words. A generated asset exports it as a node called 'socket_<name>'; a vendored one names the node it already has in `node`."
           },
           "position": {
             "type": "array",
@@ -85,6 +85,10 @@
           },
           "description": {
             "type": "string"
+          },
+          "node": {
+            "type": "string",
+            "description": "Vendored assets: the node's real name in the file, when the author's naming is not this library's — Kenney's rigged characters call the right arm `arm-right`, which is neither 'socket_hand_right' nor a legal socket name here. Absent means the node is named by the convention for the asset's kind."
           }
         }
       }

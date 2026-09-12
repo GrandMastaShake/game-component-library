@@ -14,7 +14,7 @@
         1.29,
         0.0
       ],
-      "description": "Read off the model's own `head` node."
+      "description": "The model's own `head` node."
     },
     {
       "name": "hand_right",
@@ -23,7 +23,8 @@
         0.87,
         0.0
       ],
-      "description": "Read off the model's own `arm-right` node."
+      "description": "The model's own `arm-right` node.",
+      "node": "arm-right"
     }
   ],
   "animations": [
