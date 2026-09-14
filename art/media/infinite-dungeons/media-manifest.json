@@ -1452,6 +1452,272 @@
       "app": "infinite-dungeons",
       "generated": "2026-09-12",
       "version": 1
+    },
+    {
+      "key": "comp-bet",
+      "file": "images/companions/comp-bet.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/comp-bet-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "comp-bet",
+      "prompt": "Practical canary-keeper in her forties, coal-dust lines, brass birdcage on belt, quietly counting",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "npc-collier",
+      "file": "images/characters/npc-collier.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/npc-collier-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "npc-collier",
+      "prompt": "Collier in a jacket cut nobody has worn since the war, pale under dust, patient timeless expression",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "npc-warden",
+      "file": "images/characters/npc-warden.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/npc-warden-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "npc-warden",
+      "prompt": "Company warden in faded livery, tally book of 114 ruled lines, meticulous hollow duty",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "boss-tenant",
+      "file": "images/monsters/boss-tenant.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/boss-tenant-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-tenant",
+      "prompt": "Polite administrative entity in old office coat holding two pages, a party to an agreement, faintly not human",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "mob-collier",
+      "file": "images/monsters/mob-collier.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-collier-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-collier",
+      "prompt": "Collier mid-swing in a low seam, movements worn smooth by forty-one years of repetition",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "mob-deputy",
+      "file": "images/monsters/mob-deputy.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-deputy-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-deputy",
+      "prompt": "Pit deputy at attention with flame safety lamp, dust settled on shoulders, never relieved",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "mob-swimmer",
+      "file": "images/monsters/mob-swimmer.png",
+      "size": [
+        384,
+        384
+      ],
+      "source_fullres": "images/fullres/mob-swimmer-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-swimmer",
+      "prompt": "Pale patient shape beneath dark mine water, face turned up toward the surface shimmer",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-tally-board",
+      "file": "images/environment/env-tally-board.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-tally-board-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-tally-board",
+      "prompt": "Shaft-head lean-to, 114 brass discs on 114 hooks, rained on for decades, every disc clean",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-slatewick",
+      "file": "images/environment/env-slatewick.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-slatewick-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-slatewick",
+      "prompt": "Pit town at morning shift, headframe beyond, streets completely empty",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-pit-stables",
+      "file": "images/environment/env-pit-stables.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-pit-stables-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-pit-stables",
+      "prompt": "Underground stables, eleven damp head-collars on eleven pegs, every stall empty",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-pump-engine",
+      "file": "images/environment/env-pump-engine.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-pump-engine-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-pump-engine",
+      "prompt": "Beam engine stopped at top of stroke, greased and unseized, parked forty-one years",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-working-shaft",
+      "file": "images/environment/env-working-shaft.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-working-shaft-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-working-shaft",
+      "prompt": "Dry stone shaft, good ladders, a motionless warden with a lamp on every landing",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-flooded-drift",
+      "file": "images/environment/env-flooded-drift.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-flooded-drift-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-flooded-drift",
+      "prompt": "Drift with black water at head height, gauge marks cut at the waterline every ten feet",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-the-face",
+      "file": "images/environment/env-the-face.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-the-face-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-the-face",
+      "prompt": "Eleven picks left mid-swing in the coal, beyond them a dressed stone doorway and lintel",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "env-tenants-room",
+      "file": "images/environment/env-tenants-room.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/env-tenants-room-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-tenants-room",
+      "prompt": "Mortarless jointed stone room older than the county, an alcove waiting to be addressed",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "item-canary-cage",
+      "file": "images/items/item-canary-cage.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-canary-cage-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-canary-cage",
+      "prompt": "Small brass birdcage, one canary, mine-worn, coal-dusted base",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "item-safety-lamp",
+      "file": "images/items/item-safety-lamp.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-safety-lamp-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-safety-lamp",
+      "prompt": "Flame safety lamp with wire gauze, steady blue-tipped flame",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "item-brass-tally",
+      "file": "images/items/item-brass-tally.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-brass-tally-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-brass-tally",
+      "prompt": "Brass tally disc stamped 114, fresh thumbnail scratch across old patina",
+      "generated": "2026-09-13",
+      "version": 1
+    },
+    {
+      "key": "item-lease",
+      "file": "images/items/item-lease.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/item-lease-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "item-lease",
+      "prompt": "Two parchment lease pages, six wax-sealed signatures and one mark that is not a name",
+      "generated": "2026-09-13",
+      "version": 1
     }
   ]
 }
