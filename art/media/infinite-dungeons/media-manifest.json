@@ -607,6 +607,903 @@
       "app": "infinite-dungeons",
       "generated": "2026-09-12",
       "version": 1
+    },
+    {
+      "key": "mob-role-bruiser-1",
+      "file": "images/monsters/mob-role-bruiser-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-bruiser-1.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-bruiser-1",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-bruiser-2",
+      "file": "images/monsters/mob-role-bruiser-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-bruiser-2.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-bruiser-2",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-bruiser-3",
+      "file": "images/monsters/mob-role-bruiser-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-bruiser-3.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-bruiser-3",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-skirmisher-1",
+      "file": "images/monsters/mob-role-skirmisher-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-skirmisher-1.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-skirmisher-1",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-skirmisher-2",
+      "file": "images/monsters/mob-role-skirmisher-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-skirmisher-2.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-skirmisher-2",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-skirmisher-3",
+      "file": "images/monsters/mob-role-skirmisher-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-skirmisher-3.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-skirmisher-3",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-controller-1",
+      "file": "images/monsters/mob-role-controller-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-controller-1.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-controller-1",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-controller-2",
+      "file": "images/monsters/mob-role-controller-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-controller-2.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-controller-2",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-controller-3",
+      "file": "images/monsters/mob-role-controller-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-controller-3.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-controller-3",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-warden-1",
+      "file": "images/monsters/mob-role-warden-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-warden-1.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-warden-1",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-warden-2",
+      "file": "images/monsters/mob-role-warden-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-warden-2.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-warden-2",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-warden-3",
+      "file": "images/monsters/mob-role-warden-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-warden-3.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-warden-3",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-burner-1",
+      "file": "images/monsters/mob-role-burner-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-burner-1.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-burner-1",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-burner-2",
+      "file": "images/monsters/mob-role-burner-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-burner-2.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-burner-2",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-burner-3",
+      "file": "images/monsters/mob-role-burner-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/mob-role-burner-3.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-burner-3",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "boss-role-boss-1",
+      "file": "images/monsters/boss-role-boss-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/boss-role-boss-1.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-role-boss-1",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "boss-role-boss-2",
+      "file": "images/monsters/boss-role-boss-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/boss-role-boss-2.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-role-boss-2",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "boss-role-boss-3",
+      "file": "images/monsters/boss-role-boss-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/monsters/boss-role-boss-3.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-role-boss-3",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-approach",
+      "file": "images/environment/env-bio-dark-approach.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-approach.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-approach",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-settlement",
+      "file": "images/environment/env-bio-dark-settlement.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-settlement.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-settlement",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-interior",
+      "file": "images/environment/env-bio-dark-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-interior.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-interior",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-workplace",
+      "file": "images/environment/env-bio-dark-workplace.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-workplace.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-workplace",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-underground",
+      "file": "images/environment/env-bio-dark-underground.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-underground.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-underground",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-water",
+      "file": "images/environment/env-bio-dark-water.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-water.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-water",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-high",
+      "file": "images/environment/env-bio-dark-high.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-high.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-high",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-sanctum",
+      "file": "images/environment/env-bio-dark-sanctum.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-dark-sanctum.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-sanctum",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-approach",
+      "file": "images/environment/env-bio-gothic-approach.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-approach.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-approach",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-settlement",
+      "file": "images/environment/env-bio-gothic-settlement.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-settlement.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-settlement",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-interior",
+      "file": "images/environment/env-bio-gothic-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-interior.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-interior",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-workplace",
+      "file": "images/environment/env-bio-gothic-workplace.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-workplace.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-workplace",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-underground",
+      "file": "images/environment/env-bio-gothic-underground.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-underground.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-underground",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-water",
+      "file": "images/environment/env-bio-gothic-water.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-water.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-water",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-high",
+      "file": "images/environment/env-bio-gothic-high.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-high.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-high",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-gothic-sanctum",
+      "file": "images/environment/env-bio-gothic-sanctum.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-gothic-sanctum.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-gothic-sanctum",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-approach",
+      "file": "images/environment/env-bio-high-approach.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-approach.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-approach",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-settlement",
+      "file": "images/environment/env-bio-high-settlement.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-settlement.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-settlement",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-interior",
+      "file": "images/environment/env-bio-high-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-interior.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-interior",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-workplace",
+      "file": "images/environment/env-bio-high-workplace.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-workplace.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-workplace",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-underground",
+      "file": "images/environment/env-bio-high-underground.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-underground.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-underground",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-water",
+      "file": "images/environment/env-bio-high-water.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-water.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-water",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-high",
+      "file": "images/environment/env-bio-high-high.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-high.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-high",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-sanctum",
+      "file": "images/environment/env-bio-high-sanctum.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-high-sanctum.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-sanctum",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-approach",
+      "file": "images/environment/env-bio-eldritch-approach.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-approach.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-approach",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-settlement",
+      "file": "images/environment/env-bio-eldritch-settlement.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-settlement.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-settlement",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-interior",
+      "file": "images/environment/env-bio-eldritch-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-interior.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-interior",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-workplace",
+      "file": "images/environment/env-bio-eldritch-workplace.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-workplace.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-workplace",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-underground",
+      "file": "images/environment/env-bio-eldritch-underground.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-underground.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-underground",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-water",
+      "file": "images/environment/env-bio-eldritch-water.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-water.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-water",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-high",
+      "file": "images/environment/env-bio-eldritch-high.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-high.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-high",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-sanctum",
+      "file": "images/environment/env-bio-eldritch-sanctum.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/environment/env-bio-eldritch-sanctum.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-sanctum",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-victory",
+      "file": "images/ui/ui-victory.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-victory.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-victory",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-long-rest",
+      "file": "images/ui/ui-long-rest.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-long-rest.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-long-rest",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-chapter-card",
+      "file": "images/ui/ui-chapter-card.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-chapter-card.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-chapter-card",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-skill-check",
+      "file": "images/ui/ui-skill-check.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-skill-check.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-skill-check",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-ending-mercy",
+      "file": "images/ui/ui-ending-mercy.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-ending-mercy.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-ending-mercy",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-ending-steel",
+      "file": "images/ui/ui-ending-steel.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-ending-steel.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-ending-steel",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-ending-strange",
+      "file": "images/ui/ui-ending-strange.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-ending-strange.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-ending-strange",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-journal-empty",
+      "file": "images/ui/ui-journal-empty.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-journal-empty.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-journal-empty",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-pack-empty",
+      "file": "images/ui/ui-pack-empty.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-pack-empty.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-pack-empty",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-settings",
+      "file": "images/ui/ui-settings.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-settings.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-settings",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-scar",
+      "file": "images/ui/ui-scar.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-scar.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-scar",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-bond",
+      "file": "images/ui/ui-bond.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/ui/ui-bond.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-bond",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-blessed",
+      "file": "images/ui/status-blessed.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-blessed.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-blessed",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-shielded",
+      "file": "images/ui/status-shielded.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-shielded.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-shielded",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-hexed",
+      "file": "images/ui/status-hexed.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-hexed.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-hexed",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-marked",
+      "file": "images/ui/status-marked.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-marked.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-marked",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-held",
+      "file": "images/ui/status-held.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-held.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-held",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-burning",
+      "file": "images/ui/status-burning.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-burning.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-burning",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-guarded",
+      "file": "images/ui/status-guarded.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/ui/status-guarded.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-guarded",
+      "generated": "2026-09-14",
+      "version": 1
     }
   ]
 }
