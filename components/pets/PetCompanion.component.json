@@ -49,7 +49,8 @@
     "emits": [
       "pets.equipped",
       "pets.unequipped",
-      "pets.hungry"
+      "pets.hungry",
+      "pets.evolutionCompleted"
     ],
     "listensTo": [
       "movement.started"
