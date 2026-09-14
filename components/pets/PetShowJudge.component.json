@@ -2,15 +2,37 @@
   "id": "pets.pet_show_judge",
   "name": "Pet Show Judge",
   "category": "pets",
-  "description": "Runs scored pet competitions: entrants are evaluated across weighted criteria (stats, grooming, rarity, trick performance), ranked, and awarded placements. Judging is deterministic given the entrants — the score breakdown is fully inspectable per criterion, because a competition the player cannot audit feels rigged, and in a collection game 'rigged' is fatal. Criteria weights are configured per show tier, so a beginner show rewards care basics while a championship weights trained stats, giving training a long-term purpose. The judge owns scoring and placement only: it does not schedule shows (a calendar or event system can open entries), it does not pay prizes (it emits the placement and lets economy.currency's listeners award the purse), and it does not modify the pet — show results become lineage and prestige facts through events, not by reaching into pets.pet_companion.",
+  "description": "Runs scored pet competitions: entrants are evaluated across weighted criteria (stats, grooming, rarity, trick performance), ranked, and awarded placements. Judging is deterministic given the entrants \u2014 the score breakdown is fully inspectable per criterion, because a competition the player cannot audit feels rigged, and in a collection game 'rigged' is fatal. Criteria weights are configured per show tier, so a beginner show rewards care basics while a championship weights trained stats, giving training a long-term purpose. The judge owns scoring and placement only: it does not schedule shows (a calendar or event system can open entries), it does not pay prizes (it emits the placement and lets economy.currency's listeners award the purse), and it does not modify the pet \u2014 show results become lineage and prestige facts through events, not by reaching into pets.pet_companion.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -43,7 +65,7 @@
     {
       "name": "scoreBreakdowns",
       "type": "array",
-      "description": "Per-entrant criterion-by-criterion scores — the audit trail that makes the result defensible and teachable."
+      "description": "Per-entrant criterion-by-criterion scores \u2014 the audit trail that makes the result defensible and teachable."
     }
   ],
   "events": {
@@ -62,6 +84,11 @@
     "pets.pet_companion",
     "economy.currency"
   ],
-  "tags": ["pet-sim", "competition", "scoring", "collection"],
+  "tags": [
+    "pet-sim",
+    "competition",
+    "scoring",
+    "collection"
+  ],
   "provenance": "library-native"
 }

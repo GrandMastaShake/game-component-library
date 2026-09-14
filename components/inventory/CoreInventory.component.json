@@ -18,6 +18,7 @@
     {"name": "itemCount", "type": "number"}
   ],
   "events": {"emits": ["inventory.itemAdded", "inventory.itemRemoved"], "listensTo": []},
+  "sinkFor": ["reward"],
   "dependencies": [],
   "tags": ["primitive", "storage"],
   "sourceModule": "roblox-modular-lib/src/Inventory.lua"

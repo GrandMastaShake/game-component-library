@@ -2,13 +2,9 @@
   "id": "progression.draft_on_level_up",
   "name": "Draft On Level Up",
   "category": "progression",
-  "description": "The choose-one-of-three that turns leveling into build-crafting. When progression.leveledUp fires, this component offers a small draw from the run's draft pool — stat boons, new verbs, synergies — and applies the pick immediately, because a level-up reward queued for later is a level-up reward forgotten. Options are drawn without replacement so one level never offers the same boon twice. It owns the offer and the application. It does not own when leveling happens — progression.xp_leveling decides that — and it does not own the pool's contents, which are run content declared as data. The card draft after combat is ui.draft_reward_screen's job; the two are siblings on purpose, since combat drafts grow the deck while level-up drafts grow the build, and conflating them makes both screens worse.",
+  "description": "The choose-one-of-three that turns leveling into build-crafting. When progression.leveledUp fires, this component offers a small draw from the run's draft pool \u2014 stat boons, new verbs, synergies \u2014 and applies the pick immediately, because a level-up reward queued for later is a level-up reward forgotten. Options are drawn without replacement so one level never offers the same boon twice. It owns the offer and the application. It does not own when leveling happens \u2014 progression.xp_leveling decides that \u2014 and it does not own the pool's contents, which are run content declared as data. The card draft after combat is ui.draft_reward_screen's job; the two are siblings on purpose, since combat drafts grow the deck while level-up drafts grow the build, and conflating them makes both screens worse.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
@@ -70,7 +66,7 @@
     {
       "name": "draftsTaken",
       "type": "number",
-      "description": "Drafts resolved this run — the build's spine, countable at a glance in ui.death_summary."
+      "description": "Drafts resolved this run \u2014 the build's spine, countable at a glance in ui.death_summary."
     }
   ],
   "events": {

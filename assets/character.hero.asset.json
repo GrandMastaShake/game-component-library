@@ -1,0 +1,65 @@
+{
+  "id": "character.hero",
+  "name": "Hero",
+  "description": "A rigged humanoid: eleven bones, eleven boxes, rigid weights, and two clips — a four-pose walk and a wind-up-strike-recover attack. Built to 1.8 metres so it stands at human height against a one-metre voxel block, and facing +x so it shares the kart's heading convention rather than needing a rotation somewhere to remember. Four sockets, all parented to bones rather than to the body, so a sword in hand_right travels through the swing instead of hovering where the hand started.",
+  "archetype": "biped",
+  "format": "gltf-binary",
+  "units": "metres",
+  "forwardAxis": "+x",
+  "sockets": [
+    {
+      "name": "hand_right",
+      "position": [0.0, -0.34, 0.8],
+      "carries": "weapon",
+      "description": "The striking hand. Parented to forearm.R, so it follows the attack clip through the overhead and down."
+    },
+    {
+      "name": "hand_left",
+      "position": [0.0, 0.34, 0.8],
+      "carries": "shield"
+    },
+    {
+      "name": "head_top",
+      "position": [0.0, 0.0, 1.72],
+      "carries": "hat",
+      "description": "Crown of the head, at the head bone's tail — where a helmet or a crown sits."
+    },
+    {
+      "name": "back",
+      "position": [-0.13, 0.0, 1.28],
+      "carries": "pack",
+      "description": "Between the shoulder blades. -x because the hero faces +x."
+    }
+  ],
+  "animations": [
+    {
+      "name": "walk",
+      "seconds": 1.0416666666666667,
+      "loops": true,
+      "description": "Contact, pass, contact, pass, contact — 25 frames, first and last pose identical so it repeats without snapping. The left foot travels from +0.36m to -0.52m in x, measured on the evaluated rig."
+    },
+    {
+      "name": "attack",
+      "seconds": 0.7083333333333334,
+      "loops": false,
+      "description": "Guard, wind up, strike, recover. The right hand reaches z=1.64 overhead at the top and lands at x=+0.47 forward, and the spine turns into the blow so the arm is not swinging off a still body."
+    }
+  ],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/character.hero/lod0.glb",
+      "triangles": 132,
+      "bytes": 39352
+    }
+  ],
+  "source": {
+    "tool": "blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3",
+    "repository": "game-architect-studio",
+    "script": "tools/blender/build_hero.py",
+    "generatedOn": "2026-09-09"
+  },
+  "provenance": "The second asset through the Blender bridge and the first rigged one, which is why the schema gained an `animations` array with it: the kart never moves, so nothing until now had a clip that could be silently absent. Dungeon Crawler draws its player as five canvas shapes with a stride phase (generator/figure.ts) — deliberately not an asset, because it must work in any build at any tile size in two projections — and this is what a 3D runtime uses instead once there is one. One LOD tier only, on purpose: at 132 triangles for a whole figure there is nothing to reduce, and inventing lod1-3 to look complete would mean three files claiming a saving they do not make. Rigid weights rather than smooth: the joints are meant to read as joints at this poly count, and it removes a weight-painting step that could quietly produce a different figure on the next build."
+}

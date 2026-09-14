@@ -1,0 +1,107 @@
+{
+  "id": "pets.evolution_tree",
+  "name": "Evolution Tree",
+  "category": "pets",
+  "description": "What a creature becomes, and what it had to do to get there. Evolution is a directed graph rather than a level threshold: a node may branch on level, on a held item, on friendship, on time of day, or on any combination, and the same species can therefore have two futures that the player chooses between by how they play rather than by picking from a menu. The tree owns eligibility and commitment only \u2014 it decides that a creature MAY evolve and, once accepted, that it HAS \u2014 while the stat consequences belong to progression.xp_leveling and the registry consequences to pets.monster_dex, which is why the completed event carries both the old and the new species id. Cancellation is first-class: a player who stops an evolution should not be asked again on the same trigger, so a declined branch is recorded and the prompt is not repeated until a different condition is met.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "evolutionGraph",
+      "type": "object",
+      "required": true,
+      "description": "Nodes keyed by species id, each listing branches with their conditions and resulting species. Required and undefaulted: the roster is the game, and a component that invented one would be inventing the creatures too."
+    },
+    {
+      "name": "allowCancel",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the player may decline an offered evolution. False is the no-take-backs stance some designs want; true is the one most players expect."
+    },
+    {
+      "name": "friendshipThreshold",
+      "type": "number",
+      "required": false,
+      "default": 220,
+      "description": "Affinity required by branches that gate on friendship, on the 0-255 scale the genre inherited from its ancestors. Fed by pets.trainingStatGained rather than by a care meter, because training is the interaction a taming game already has."
+    },
+    {
+      "name": "reofferAfterSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Cooldown before a declined branch may be offered again. 0 means never on the same condition, which is what stops a decline becoming a nag."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pendingEvolution",
+      "type": "object",
+      "description": "The offer awaiting a decision, or null."
+    },
+    {
+      "name": "evolutionHistory",
+      "type": "array",
+      "description": "Completed evolutions for this creature, oldest first."
+    },
+    {
+      "name": "eligibleBranches",
+      "type": "array",
+      "description": "Branches whose conditions are currently met."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.evolutionOffered",
+      "pets.evolutionCompleted",
+      "pets.evolutionDeclined"
+    ],
+    "listensTo": [
+      "progression.leveledUp",
+      "pets.trainingStatGained",
+      "world.duskStarted",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "pets.pet_companion",
+    "progression.xp_leveling"
+  ],
+  "tags": [
+    "monster-taming",
+    "evolution",
+    "progression",
+    "branching"
+  ],
+  "provenance": "library-native"
+}

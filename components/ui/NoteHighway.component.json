@@ -4,7 +4,9 @@
   "category": "ui",
   "description": "The scrolling lanes: chart data becomes notes that travel toward a receptor line at a readable approach rate. It owns lane geometry, spawn/despawn bookkeeping, and the approach seconds that convert song time into screen space — the one translation no other component is positioned to do. It deliberately owns no timing truth of its own: every position derives from utility.beat_clock's song position, so pausing, seeking, or latency recalibration moves the whole highway consistently instead of desyncing lanes from audio. It also does not judge — a note crossing the receptor is announced as ui.note_passed_receptor, and utility.judgement_window decides what the crossing meant. Chart parsing is persistence.chart_loader's job; this component consumes loaded chart data, never raw files, so a malformed beatmap fails at load time rather than mid-song.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

@@ -1,0 +1,106 @@
+{
+  "id": "ui.debugger_overlay",
+  "name": "Debugger Overlay",
+  "category": "ui",
+  "description": "Breakpoints, watches, and the current line \u2014 the tools that turn a failing program into a lesson. A breakpoint pauses the command queue rather than the game, so the world stays interactive while the program is stopped and the player can look around at the state that caused the problem. Watched values are sampled at instruction boundaries rather than continuously, which is both cheaper and more honest: a value read mid-instruction is a value no line of the program ever saw. The overlay reads and never writes, so switching it on cannot change a run \u2014 the same rule the force visualiser follows, for the same reason.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxBreakpoints",
+      "type": "number",
+      "required": false,
+      "default": 16,
+      "description": "Breakpoints that may be set at once."
+    },
+    {
+      "name": "sampleAtInstructionBoundary",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether watches are read between instructions rather than continuously. A mid-instruction value is one no line ever saw."
+    },
+    {
+      "name": "pauseWorldOnBreak",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether hitting a breakpoint also freezes the world. False keeps the scene explorable while the program is stopped."
+    },
+    {
+      "name": "enabled",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the overlay is available."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "breakpoints",
+      "type": "array",
+      "description": "Instruction indices that will pause execution."
+    },
+    {
+      "name": "watches",
+      "type": "object",
+      "description": "Watched names and their last sampled values."
+    },
+    {
+      "name": "stoppedAt",
+      "type": "number",
+      "description": "Instruction index currently paused on, or -1."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.breakpointHit",
+      "ui.breakpointSet",
+      "ui.watchSampled"
+    ],
+    "listensTo": [
+      "movement.commandExecuted",
+      "movement.commandFaulted",
+      "input.toggleDebug"
+    ]
+  },
+  "dependencies": [
+    "movement.robot_command_queue"
+  ],
+  "tags": [
+    "programming-game",
+    "debugging",
+    "pedagogy",
+    "ui"
+  ],
+  "provenance": "library-native"
+}

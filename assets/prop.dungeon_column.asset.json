@@ -1,0 +1,28 @@
+{
+  "id": "prop.dungeon_column",
+  "name": "Dungeon Column",
+  "description": "A column, four blocks tall in the crawler's scale.",
+  "archetype": "prop",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/generated/column.glb",
+      "triangles": 28,
+      "bytes": 3288
+    }
+  ],
+  "source": {
+    "kind": "generated",
+    "tool": "tools/mesh — pure-stdlib Python, no Blender in the loop",
+    "repository": "game-architect-studio",
+    "script": "tools/mesh/build_props.py",
+    "generatedOn": "2026-09-12"
+  },
+  "provenance": "The pillar world.room_template stamps, as `cylinder(8, 0.28, 2.6)`. Eight segments and two and a half metres: tall enough to read as structure, cheap enough to put one in every room. Built and audited by tools/mesh/build_props.py: watertight, the Euler characteristic measured rather than asserted, and inside a triangle budget. The file is byte-for-byte reproducible, which is what makes the script the asset and the .glb a compiler output."
+}

@@ -18,7 +18,7 @@
   ],
   "outputs": [{"name": "lastResolution", "type": "object"}],
   "events": {"emits": ["combat.damageResolved", "combat.entityDefeated"], "listensTo": ["combat.hit"]},
-  "eventIntents": {"combat.damageResolved": ["impact"], "combat.entityDefeated": ["impact"]},
+  "eventIntents": {"combat.damageResolved": ["impact"], "combat.entityDefeated": ["impact", "achievement"]},
   "dependencies": [],
   "tags": ["combat", "damage", "armor", "rts"],
   "provenance": "library-native"

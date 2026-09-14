@@ -5,10 +5,6 @@
   "description": "Grid-snapped placement of shelters, furniture, and workbenches as a player verb: ghost preview, validity rules (support, clearance, slope), and material consumption on confirm. It is the survival cousin of presentation.object_placer — object_placer is a level-authoring tool that answers to a designer, while this answers to a player carrying limited wood, so it owns costs, rejection, and refunds that the authoring tool never needs. Materials leave through inventory.core_inventory BEFORE the ghost turns solid, so a placement can never duplicate resources, and removal refunds a fixed fraction through the same door. Structural logic — does this wall hold that roof — is a rules callback the game supplies; this component owns the transaction, not architecture.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -2,15 +2,37 @@
   "id": "ui.pet_needs_panel",
   "name": "Pet Needs Panel",
   "category": "ui",
-  "description": "The care dashboard for the equipped pet: feeding, cleanliness, and play meters with action buttons that request care interactions. It is a projection and a remote control, not a simulation — the meters render pets.pet_companion's authoritative hunger and happiness state, and the buttons emit care-action requests that the training and care systems fulfill. Keeping state out of the panel is deliberate: a UI that caches its own copy of 'hunger' will eventually disagree with the pet, and every disagreement is a bug report. The panel also owns the at-a-glance warning affordance (a meter flashing at critical) but not the consequence of ignoring it — the pet's own systems decide what chronic neglect does. Unlike the human-scale social.needs_decay meters, pet needs here are few, visible, and player-driven: the pet does not feed itself, which is exactly what makes the care loop the player's job.",
+  "description": "The care dashboard for the equipped pet: feeding, cleanliness, and play meters with action buttons that request care interactions. It is a projection and a remote control, not a simulation \u2014 the meters render pets.pet_companion's authoritative hunger and happiness state, and the buttons emit care-action requests that the training and care systems fulfill. Keeping state out of the panel is deliberate: a UI that caches its own copy of 'hunger' will eventually disagree with the pet, and every disagreement is a bug report. The panel also owns the at-a-glance warning affordance (a meter flashing at critical) but not the consequence of ignoring it \u2014 the pet's own systems decide what chronic neglect does. Unlike the human-scale social.needs_decay meters, pet needs here are few, visible, and player-driven: the pet does not feed itself, which is exactly what makes the care loop the player's job.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -61,6 +83,11 @@
   "dependencies": [
     "pets.pet_companion"
   ],
-  "tags": ["pet-sim", "care", "hud", "needs"],
+  "tags": [
+    "pet-sim",
+    "care",
+    "hud",
+    "needs"
+  ],
   "provenance": "library-native"
 }

@@ -5,10 +5,6 @@
   "description": "Heat sources and the warmth field they radiate: campfires, torches, stoves. Owns fuel burn-down, radius falloff, and extinction — out of fuel, drowned by rain, or stamped out. The field is continuous queryable state sampled per tick rather than enter/exit events, because temperature is a negotiation between every source and the weather at once, and threshold events cannot express 'almost warm enough'. Fire being DANGEROUS (spread, burns) is deliberately not here: world.hazard_volume composed at the same location owns that, because one component that is both comfort and threat cannot be tuned — lowering the burn radius would silently shrink the cozy radius too. Visuals are presentation.particle_system's; this component is the physics of cozy.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

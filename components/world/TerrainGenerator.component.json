@@ -2,7 +2,7 @@
   "id": "world.terrain_generator",
   "name": "Terrain Generator",
   "category": "world",
-  "description": "Procedurally generates ground heightmaps from noise, producing voxel/terrain data for a region.",
+  "description": "Procedurally generates ground heightmaps from noise, producing voxel/terrain data for a region. A region is a WINDOW onto a larger field rather than a world of its own: `originX`/`originY` say which window, so adjacent windows share their edges and a player can walk from one to the next without the ground changing its mind. `shape` chooses whether that field is allowed to reach the borders at all.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -51,6 +51,27 @@
       "type": "number",
       "required": false,
       "default": 100
+    },
+    {
+      "name": "originX",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Where this region sits in the noise field, in tiles along X. Two regions whose origins differ by exactly one board width sample ADJACENT ground, so the seam between them is continuous rather than coincidental — which is what makes walking off one edge and onto another look like one world instead of two."
+    },
+    {
+      "name": "originY",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "The same along Y."
+    },
+    {
+      "name": "shape",
+      "type": "string",
+      "required": false,
+      "default": "island",
+      "description": "island | continuous. An island applies a radial falloff, so the region is ringed by sea on all four sides — which is beautiful and, by definition, cannot have matching edges with a neighbour. Continuous drops the falloff and lets the raw field run to the borders, so neighbouring regions agree along their shared seam. The two are mutually exclusive and this input is where that choice is made rather than assumed."
     }
   ],
   "outputs": [

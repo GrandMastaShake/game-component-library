@@ -1,0 +1,119 @@
+{
+  "id": "combat.spawn_director",
+  "name": "Spawn Director",
+  "category": "combat",
+  "description": "Keeps a region populated, and keeps what it puts there worth fighting. Without it a real-time build is a fixed cast list: you kill the four things the level named and the map is empty for the rest of the session, which is the back half of \"fight, loot, build character, bigger fight\" simply not existing. A genre whose loop promises a bigger fight has to have something whose job is the bigger fight.\n\nIt is the caller combat.enemy_tier_scaling was written for and never had. That component publishes multipliersFor(enemyLevel) as a synchronous query, explicitly \"asked at SPAWN time by whoever is spawning\", and nothing in any build was spawning — so a carefully written scaling curve produced a number that was read by no one and enemies stayed level one forever while the player climbed past them. The direction of that is worth stating plainly: unscaled enemies do not stay equally hard, they get easier, and a build can look like it has difficulty progression while having exactly the reverse.\n\nWHAT IT OWNS is the birth and nothing after it: how many hostiles a region should hold, how often one may arrive, how far from the player it may appear, and which archetype it is. The moment a unit exists it belongs to combat.unit_roster — which is why this emits combat.unitSpawned rather than writing a unit anywhere, the same rule that makes movement.moveExecuted the only way a position changes. It does not chase (movement.pursuit_agent), notice (combat.aggro_table), roam (movement.patrol_route), or resolve anything (combat.damage_resolver).\n\nSpawning where the player is looking reads as a bug even when it is a feature, so minDistanceFromPlayer is a floor and not a suggestion: a region with nowhere legal to put something puts nothing there, and says so through its own output rather than by quietly dropping the wave.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "archetypes",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "What may be spawned: [{id, health, movement?, weight?}]. `id` is a prefix — each spawn gets its own numbered unit id, because two units sharing one id is two units the roster cannot tell apart. Empty spawns nothing at all rather than inventing a creature, since a director with no cast is a level that has not been written and should look like one."
+    },
+    {
+      "name": "population",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "How many hostiles the region should hold. The director tops up toward this and never past it, so clearing an area is still an achievement that lasts as long as the cooldown rather than a tap that refills instantly."
+    },
+    {
+      "name": "spawnIntervalSeconds",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "The soonest another arrival may happen. It is the whole difference between pressure and a treadmill: a player who clears a ring of enemies has earned the quiet, and an interval too short means the reward for winning a fight is another fight starting immediately."
+    },
+    {
+      "name": "minDistanceFromPlayer",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "How far from the player a spawn must appear, in tiles. A floor and not a suggestion — something appearing in view reads as a bug even when it is a feature, and it robs the approach of the one thing that makes an encounter an encounter."
+    },
+    {
+      "name": "scaleToPlayer",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a spawn's level is the player's, asked of combat.enemy_tier_scaling for the multipliers. Off pins every spawn at level 1, which is the fixed-difficulty game some designs want — and is what every build did by accident before this existed, since nothing was calling that component at all."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "spawnedCount",
+      "type": "number",
+      "description": "How many units this director has brought into the world. A measurement of zero after a long session is the finding when a region is visibly empty, and it is invisible without this."
+    },
+    {
+      "name": "nextSpawnIn",
+      "type": "number",
+      "description": "Seconds until another arrival is allowed, so a HUD can build tension rather than a player discovering the wave by being bitten."
+    },
+    {
+      "name": "lastRefusal",
+      "type": "string",
+      "description": "Why the most recent spawn did not happen — no legal tile, population full, still cooling down. Published because a director that silently declines and a director that is broken look identical from the outside, and the whole point of the minimum distance is that it sometimes says no."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.unitSpawned",
+      "combat.waveDenied"
+    ],
+    "listensTo": [
+      "combat.rosterChanged"
+    ]
+  },
+  "eventIntents": {
+    "combat.unitSpawned": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster",
+    "combat.enemy_tier_scaling"
+  ],
+  "tags": [
+    "combat",
+    "spawning",
+    "encounters",
+    "difficulty",
+    "realtime",
+    "action"
+  ],
+  "provenance": "Found by playing the Action RPG to the end of its content: four enemies died and the world stayed empty, while combat.enemy_tier_scaling published a multiplier that no component in any build had ever asked for."
+}

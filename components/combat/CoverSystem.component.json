@@ -5,10 +5,6 @@
   "description": "Owns the relationship between a character and cover geometry: snapping to a cover edge, leaning or peeking, and the exposure fraction that everything downstream reads. It does not reduce damage itself — it publishes exposureFraction and combat.damage_resolver applies it, because mitigation math already has one home and a second one guarantees the two drift apart. Cover volumes are level data, not components; this queries them through the character's own spatial context. Moving along cover is still movement.run_control's velocity — this component only constrains which directions are legal while attached, so detaching (or a dash) returns full steering with no state to unwind.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

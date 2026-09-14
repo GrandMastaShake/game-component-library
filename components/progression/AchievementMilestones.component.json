@@ -1,0 +1,98 @@
+{
+  "id": "progression.achievement_milestones",
+  "name": "Achievement Milestones",
+  "category": "progression",
+  "description": "The long tail that gives a number somewhere to go. An achievement watches a declared statistic against a threshold and fires exactly once, and in this genre it usually pays: achievement multipliers are how an idle game rewards breadth rather than depth. Firing once is the contract that matters \u2014 a milestone that re-fires on reload turns a save into a printing press \u2014 so grants are recorded against the profile rather than the session. Hidden achievements are supported and are shown as locked silhouettes rather than omitted, because a player who cannot see that something exists cannot go looking for it.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "achievements",
+      "type": "array",
+      "required": true,
+      "description": "Definitions: id, watched statistic, threshold, reward and whether it is hidden. Required."
+    },
+    {
+      "name": "rewardMultiplierPer",
+      "type": "number",
+      "required": false,
+      "default": 0.01,
+      "description": "Production multiplier granted per achievement earned. Small, because breadth should matter without dwarfing the tier ladder."
+    },
+    {
+      "name": "showHiddenAsLocked",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether hidden achievements appear as silhouettes rather than being omitted."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "earned",
+      "type": "array",
+      "description": "Achievement ids granted, in order."
+    },
+    {
+      "name": "progressById",
+      "type": "object",
+      "description": "Fractional progress toward each unearned achievement."
+    },
+    {
+      "name": "totalMultiplier",
+      "type": "number",
+      "description": "Combined production multiplier from achievements."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.achievementEarned",
+      "progression.achievementProgressed"
+    ],
+    "listensTo": [
+      "economy.earned",
+      "economy.producerPurchased",
+      "progression.prestigeCompleted",
+      "progression.upgradePurchased"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system"
+  ],
+  "tags": [
+    "idle",
+    "incremental",
+    "achievements",
+    "completion"
+  ],
+  "provenance": "library-native"
+}

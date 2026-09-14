@@ -1,0 +1,106 @@
+{
+  "id": "utility.room_escape_timer",
+  "name": "Room Escape Timer",
+  "category": "utility",
+  "description": "Pressure, and the option to have none. An escape room may be timed, and the timer is a separate component precisely so it can be absent: the same room content should be playable as a relaxed exploration and as a sixty-minute panic without being authored twice. Penalties and bonuses adjust the clock rather than ending the room outright, and expiry is an event the room decides how to answer \u2014 some designs end, some unlock a worse ending, some simply stop counting. Pausing is allowed by default, because a single-player puzzle game that punishes answering the door is punishing the wrong thing.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "durationSeconds",
+      "type": "number",
+      "required": false,
+      "default": 3600,
+      "description": "Starting clock. 0 disables the timer entirely."
+    },
+    {
+      "name": "hintPenaltySeconds",
+      "type": "number",
+      "required": false,
+      "default": 120,
+      "description": "Time deducted when a hint is taken."
+    },
+    {
+      "name": "puzzleBonusSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Time granted per lock opened. 0 keeps the clock honest."
+    },
+    {
+      "name": "pausable",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the clock may be paused."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "remainingSeconds",
+      "type": "number",
+      "description": "Time left."
+    },
+    {
+      "name": "expired",
+      "type": "boolean",
+      "description": "Whether the clock has run out."
+    },
+    {
+      "name": "paused",
+      "type": "boolean",
+      "description": "Whether the clock is currently held."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.escapeTimerStarted",
+      "utility.escapeTimerExpired",
+      "utility.escapeTimerAdjusted"
+    ],
+    "listensTo": [
+      "world.lockOpened",
+      "ui.hintGiven",
+      "input.pause"
+    ]
+  },
+  "dependencies": [
+    "utility.timer_system"
+  ],
+  "tags": [
+    "escape-room",
+    "timer",
+    "pressure",
+    "optional"
+  ],
+  "provenance": "library-native"
+}

@@ -19,7 +19,7 @@
     "progression.level_goal",
     "presentation.camera_follow",
     "presentation.audio_system",
-    "world.collectible_scatter"
+    "economy.collectible_scatter"
   ],
   "newComponents": [
     "progression.completion_tracker",
@@ -30,13 +30,13 @@
   ],
   "signatureCompound": {
     "name": "Hundred Percent Run",
-    "description": "The loop-proof compound: the scatter layer (Squad A's world.collectible_scatter) fills regions, completion_tracker counts them per region, hidden_alcove fires one-shot discovery fanfares that also feed the count, guided_hint_system reads the same ledger to rescue stalled hunts without stealing discoveries, and grapple_traversal plus the jump kit make 'reach it' the actual game. A 100% run is complete when progression.runCompleted fires.",
+    "description": "The loop-proof compound: the scatter layer (Squad A's economy.collectible_scatter) fills regions, completion_tracker counts them per region, hidden_alcove fires one-shot discovery fanfares that also feed the count, guided_hint_system reads the same ledger to rescue stalled hunts without stealing discoveries, and grapple_traversal plus the jump kit make 'reach it' the actual game. A 100% run is complete when progression.runCompleted fires.",
     "memberIds": [
       "progression.completion_tracker",
       "world.hidden_alcove",
       "ui.guided_hint_system",
       "movement.grapple_traversal",
-      "world.collectible_scatter"
+      "economy.collectible_scatter"
     ]
   },
   "tags": [

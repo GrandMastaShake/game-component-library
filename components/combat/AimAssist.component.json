@@ -5,10 +5,6 @@
   "description": "A dial, not an aimbot. Two independent mechanisms: friction slows the reticle while it passes over a target, and magnetism nudges the aim vector toward the nearest valid target inside a cone — each tunable down to exactly zero for competitive modes where assist is a rules violation. It operates on the aim vector BEFORE combat.projectile_system consumes it, and it never fires, never selects outside its cone, and never tracks through walls: target validity reuses the same line-of-sight queries the camera and vision systems trust, because a private LOS test here is how aim assist learns to shoot through geometry. The component exists so the assist conversation happens in one config instead of being smeared across input code.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -2,15 +2,37 @@
   "id": "pets.breed_genealogy",
   "name": "Breed Genealogy",
   "category": "pets",
-  "description": "Breeds two parent pets into an egg and records the family tree, with trait inheritance resolved as a weighted draw from both parents plus a mutation chance. Inheritance is per-trait independent draws rather than 'child is a blend of parents', because blends converge every lineage to the same beige average within three generations while independent draws preserve variance — the thing collectors actually chase. The genealogy graph is append-only and survives trades, so a pet's pedigree is a fact about the pet, not about its current owner. This component owns pairing validation, trait resolution, and lineage records; it does not hatch the result — the egg it produces goes to pets.egg_hatchery, which already owns the hatch ceremony and its table resolution, and duplicating that here would give the library two hatch truths. Rarity math on inherited traits defers to the hatch table's weights rather than inventing a parallel rarity system.",
+  "description": "Breeds two parent pets into an egg and records the family tree, with trait inheritance resolved as a weighted draw from both parents plus a mutation chance. Inheritance is per-trait independent draws rather than 'child is a blend of parents', because blends converge every lineage to the same beige average within three generations while independent draws preserve variance \u2014 the thing collectors actually chase. The genealogy graph is append-only and survives trades, so a pet's pedigree is a fact about the pet, not about its current owner. This component owns pairing validation, trait resolution, and lineage records; it does not hatch the result \u2014 the egg it produces goes to pets.egg_hatchery, which already owns the hatch ceremony and its table resolution, and duplicating that here would give the library two hatch truths. Rarity math on inherited traits defers to the hatch table's weights rather than inventing a parallel rarity system.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -45,7 +67,7 @@
     {
       "name": "lineageGraph",
       "type": "object",
-      "description": "Pet id to parents, grandparents, and inherited trait record — the pedigree, append-only and ownership-independent."
+      "description": "Pet id to parents, grandparents, and inherited trait record \u2014 the pedigree, append-only and ownership-independent."
     },
     {
       "name": "lastBredEgg",
@@ -68,6 +90,11 @@
   "dependencies": [
     "pets.egg_hatchery"
   ],
-  "tags": ["pet-sim", "breeding", "inheritance", "collection"],
+  "tags": [
+    "pet-sim",
+    "breeding",
+    "inheritance",
+    "collection"
+  ],
   "provenance": "library-native"
 }

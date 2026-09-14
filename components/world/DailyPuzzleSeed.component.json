@@ -1,0 +1,99 @@
+{
+  "id": "world.daily_puzzle_seed",
+  "name": "Daily Puzzle Seed",
+  "category": "world",
+  "description": "One puzzle a day, the same one for everybody. The seed is derived from the calendar date in a declared timezone rather than from the device clock, which is what makes a shared leaderboard mean anything and what stops a player rerolling by changing their settings. Yesterday's puzzles remain addressable so a missed day can be played without polluting today's board, and a streak is tracked because the streak is the reason the mode retains anyone. The component owns the seed and the calendar; the puzzle itself is whatever utility.logic_grid_engine generates from it.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "timezone",
+      "type": "string",
+      "required": false,
+      "default": "UTC",
+      "description": "Timezone the daily boundary is computed in. A device-local boundary makes the shared leaderboard meaningless."
+    },
+    {
+      "name": "archiveDays",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Past days that remain playable."
+    },
+    {
+      "name": "streakGraceDays",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Missed days forgiven before a streak breaks."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "todaySeed",
+      "type": "number",
+      "description": "Seed for the current day."
+    },
+    {
+      "name": "streak",
+      "type": "number",
+      "description": "Consecutive days completed."
+    },
+    {
+      "name": "archiveAvailable",
+      "type": "array",
+      "description": "Past dates still playable."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.dailySeedRolled",
+      "world.streakExtended",
+      "world.streakBroken"
+    ],
+    "listensTo": [
+      "utility.puzzleSolved",
+      "persistence.profileLoaded"
+    ]
+  },
+  "dependencies": [
+    "world.noise_lib",
+    "persistence.save_system"
+  ],
+  "tags": [
+    "logic-puzzle",
+    "daily",
+    "seed",
+    "retention"
+  ],
+  "provenance": "library-native"
+}

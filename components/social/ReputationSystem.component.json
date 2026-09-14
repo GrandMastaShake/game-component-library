@@ -5,10 +5,6 @@
   "description": "What the world thinks of you, per faction, on a number that only moves for deeds somebody saw. progression.quest_log records what you did; this component interprets it socially \u2014 a completed contract raises the issuing faction, and a betrayal witnessed by one faction ripples to its allies at a fraction of the weight. Tiers (hostile through allied) are thresholds over the number, crossed exactly once per direction, so shops, guards, and quest gates each get one clean event instead of a stream of near-misses. It owns standing only: the discounts, gates, and ambushes standing causes belong to whoever listens, and when a reputation consequence must become permanent geography, world.world_state_flags \u2014 not this component \u2014 is where it lands.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

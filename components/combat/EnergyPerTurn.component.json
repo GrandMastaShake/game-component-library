@@ -2,13 +2,9 @@
   "id": "combat.energy_per_turn",
   "name": "Energy Per Turn",
   "category": "combat",
-  "description": "The per-turn budget that makes a hand of cards a decision instead of a shopping list. Energy refills when the turn rolls over and cards spend from it, so the hand you keep is the hand you can afford. It is deliberately separate from combat.action_point_economy: action points budget a unit's turn on a tactics grid, energy budgets a hand of cards, and merging them would saddle each genre with the other's vocabulary and edge cases. This component owns the balance, the refill, and the refusal. It does not decide what anything costs — costs live in card data, and utility.card_effect_dsl asks this component before resolving, which is why the rejection event exists here rather than there.",
+  "description": "The per-turn budget that makes a hand of cards a decision instead of a shopping list. Energy refills when the turn rolls over and cards spend from it, so the hand you keep is the hand you can afford. It is deliberately separate from combat.action_point_economy: action points budget a unit's turn on a tactics grid, energy budgets a hand of cards, and merging them would saddle each genre with the other's vocabulary and edge cases. This component owns the balance, the refill, and the refusal. It does not decide what anything costs \u2014 costs live in card data, and utility.card_effect_dsl asks this component before resolving, which is why the rejection event exists here rather than there.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -5,10 +5,6 @@
   "description": "The magazine, the reserve, and the reload — the three numbers that turn a shooter from infinite DPS into resource pressure. Split from combat.weapon_loadout on purpose: the loadout is declarative (what is equipped) while this owns mutable state (what is left), and mixing the two makes every swap a state migration bug. Reserve ammunition is an inventory concern, so when reserveSource is 'inventory' every reload draws through inventory.core_inventory and ammo pickups feed the same pool the rest of the game uses. Reload is interruptible by default because an uninterruptible reload in a cover shooter reads as a stun the player did not earn; a weapon swap cancels it and the partial magazine is kept, never rounded up.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

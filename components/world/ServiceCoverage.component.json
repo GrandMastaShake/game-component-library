@@ -2,15 +2,37 @@
   "id": "world.service_coverage",
   "name": "Service Coverage",
   "category": "world",
-  "description": "Maintains per-service radius maps over the tile grid — power, water, police, fire, schools — so that 'is this cell served?' is an O(1) lookup instead of a per-query distance scan against every building. Coverage maps are recomputed incrementally when a service structure is placed or removed, never on read, because in this genre reads (tooltips, growth checks, citizen happiness) outnumber writes (placements) by orders of magnitude. The component owns coverage geometry only: it does not simulate what a service does to its covered cells — utility consumption, crime, and education outcomes belong to whichever system consumes the coverage answer, and world.zone_planner's growth rules and world.citizen_agent_sim's satisfaction are expected consumers. It also does not visualize the radius; that overlay is a presentation concern for the build-mode UI that asks this component for the map.",
+  "description": "Maintains per-service radius maps over the tile grid \u2014 power, water, police, fire, schools \u2014 so that 'is this cell served?' is an O(1) lookup instead of a per-query distance scan against every building. Coverage maps are recomputed incrementally when a service structure is placed or removed, never on read, because in this genre reads (tooltips, growth checks, citizen happiness) outnumber writes (placements) by orders of magnitude. The component owns coverage geometry only: it does not simulate what a service does to its covered cells \u2014 utility consumption, crime, and education outcomes belong to whichever system consumes the coverage answer, and world.zone_planner's growth rules and world.citizen_agent_sim's satisfaction are expected consumers. It also does not visualize the radius; that overlay is a presentation concern for the build-mode UI that asks this component for the map.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -60,6 +82,11 @@
   "dependencies": [
     "world.tile_grid"
   ],
-  "tags": ["city-builder", "services", "coverage-radius", "management-sim"],
+  "tags": [
+    "city-builder",
+    "services",
+    "coverage-radius",
+    "management-sim"
+  ],
   "provenance": "library-native"
 }

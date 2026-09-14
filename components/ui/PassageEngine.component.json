@@ -1,0 +1,108 @@
+{
+  "id": "ui.passage_engine",
+  "name": "Passage Engine",
+  "category": "ui",
+  "description": "A graph of text, and the state that makes the same passage read differently the second time. Passages are nodes; links are edges; and interpolation is what separates interactive fiction from a gamebook \u2014 a passage that can name the character you spared reads as written for you. The engine owns traversal and rendering-of-text only: which links are OFFERED is ui.choice_consequence's decision against its flags, which is why the two are separate contracts rather than one big one. A link to a passage that does not exist is refused at load rather than at reach, because discovering a dead link mid-story costs the player their place.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "passages",
+      "type": "object",
+      "required": true,
+      "description": "Passage nodes keyed by id, each with text and outgoing links. Required \u2014 this is the story."
+    },
+    {
+      "name": "startPassage",
+      "type": "string",
+      "required": false,
+      "default": "start",
+      "description": "Where a new reading begins."
+    },
+    {
+      "name": "interpolationDelimiters",
+      "type": "array",
+      "required": false,
+      "default": [
+        "{{",
+        "}}"
+      ],
+      "description": "Markers around state references inside passage text."
+    },
+    {
+      "name": "rejectDeadLinks",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether links to missing passages are refused on load rather than on arrival."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentPassage",
+      "type": "object",
+      "description": "The passage being read, after interpolation."
+    },
+    {
+      "name": "history",
+      "type": "array",
+      "description": "Passage ids visited, oldest first."
+    },
+    {
+      "name": "availableLinks",
+      "type": "array",
+      "description": "Links offered from here, after conditions."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.passageEntered",
+      "ui.passageLinkFollowed",
+      "ui.storyEnded",
+      "ui.passageGraphRejected"
+    ],
+    "listensTo": [
+      "input.confirm",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "ui.dialogue_box"
+  ],
+  "tags": [
+    "interactive-fiction",
+    "text",
+    "narrative",
+    "graph"
+  ],
+  "provenance": "library-native"
+}

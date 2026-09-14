@@ -1,0 +1,41 @@
+{
+  "id": "genre.pet_sim",
+  "name": "Pet Sim",
+  "description": "Hatch it, care for it, train it, show it off. This is the pack the library grew up around -- the pet compounds predate the genre map -- and it is the reference for what 'done' looks like: every component here has a compound it participates in and an event another component actually consumes. Care is a meter game and training is a skill game, and keeping them separate is the point: a pet that improves purely by being fed teaches nothing, and one that improves purely by minigame is a minigame with a mascot. Breeding closes the loop by making the next generation depend on how the last one was raised.",
+  "version": "0.1.0",
+  "loop": "hatch \u2192 care \u2192 train \u2192 show/trade",
+  "views": [
+    "top-down",
+    "isometric"
+  ],
+  "memberComponents": [
+    "pets.pet_companion",
+    "pets.egg_hatchery",
+    "ui.pet_hatch_presenter",
+    "social.home_trade_stand",
+    "persistence.save_system"
+  ],
+  "newComponents": [
+    "ui.pet_needs_panel",
+    "pets.pet_training_minigame",
+    "pets.breed_genealogy",
+    "pets.pet_show_judge"
+  ],
+  "signatureCompound": {
+    "name": "Raised Well Enough to Win",
+    "description": "The care loop paying off in public: pet_needs_panel keeps feeding, cleanliness and play from decaying, pet_training_minigame converts attention into stats, pet_show_judge scores those stats against a rubric the player can read beforehand, and breed_genealogy passes what was earned to the next generation. A pet that wins is a pet that was raised, and the components make that traceable.",
+    "memberIds": [
+      "ui.pet_needs_panel",
+      "pets.pet_training_minigame",
+      "pets.pet_show_judge",
+      "pets.breed_genealogy",
+      "pets.pet_companion"
+    ]
+  },
+  "tags": [
+    "pet-sim",
+    "care",
+    "collection",
+    "reference-pack"
+  ]
+}

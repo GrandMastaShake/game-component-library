@@ -5,10 +5,6 @@
   "description": "Pop-in with a level conscience. When a chunk activates, this rolls the encounter table for its biome and level band, asks combat.enemy_tier_scaling for the multiplier set, and places the group where the player is not currently looking \u2014 spawning in view reads as a bug even when it is a feature. It owns only the birth: the moment a mob exists it belongs to world.mob_patrol for behaviour and combat.damage_resolver for outcomes. Culling is symmetric \u2014 encounters that outlive their relevance leave through world.streaming_world_loader's lifecycle, never by vanishing, because a mob that blinks out mid-chase teaches the player the world is wallpaper.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -87,7 +87,7 @@
       "config": {}
     }
   ],
-  "wiring": [
+  "connections": [
     {
       "from": "world.terrain_generator",
       "event": "world.terrainGenerated",

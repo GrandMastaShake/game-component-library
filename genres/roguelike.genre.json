@@ -1,10 +1,14 @@
 {
   "id": "genre.roguelike",
   "name": "Roguelike",
-  "description": "The run-based pack: a seeded run starts, procedural floors descend, the build is drafted mid-run, death is permanent, and the account advances anyway. It stands on the Dungeon Crawler kit — world.floor_descent owns the floor stack, inventory.affix_loot_generator owns the drops, progression.permadeath_flag owns the funeral — and adds the run-level contract those pieces assume but never declared: one seed to reproduce everything, a meta pool that outlives the run, drafts at level milestones, and an obituary that converts the loss into visible progress. The stance: a roguelike is not a dungeon crawler with death, it is a loop where death is the product, and every new component here exists to make the death reproducible, educational, and worth something.",
+  "description": "The run-based pack: a seeded run starts, procedural floors descend, the build is drafted mid-run, death is permanent, and the account advances anyway. It stands on the Dungeon Crawler kit \u2014 world.floor_descent owns the floor stack, inventory.affix_loot_generator owns the drops, progression.permadeath_flag owns the funeral \u2014 and adds the run-level contract those pieces assume but never declared: one seed to reproduce everything, a meta pool that outlives the run, drafts at level milestones, and an obituary that converts the loss into visible progress. The stance: a roguelike is not a dungeon crawler with death, it is a loop where death is the product, and every new component here exists to make the death reproducible, educational, and worth something.",
   "version": "0.1.0",
-  "loop": "run starts → procedural floors → build draft → die → meta-progress",
-  "views": ["top-down", "isometric", "side-scroll-2d"],
+  "loop": "run starts \u2192 procedural floors \u2192 build draft \u2192 die \u2192 meta-progress",
+  "views": [
+    "top-down",
+    "isometric",
+    "side-scroll-2d"
+  ],
   "memberComponents": [
     "world.floor_descent",
     "inventory.affix_loot_generator",
@@ -34,5 +38,10 @@
       "ui.death_summary"
     ]
   },
-  "tags": ["roguelike", "procedural", "runs", "meta-progression"]
+  "tags": [
+    "roguelike",
+    "procedural",
+    "runs",
+    "meta-progression"
+  ]
 }

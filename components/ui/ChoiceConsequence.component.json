@@ -1,0 +1,104 @@
+{
+  "id": "ui.choice_consequence",
+  "name": "Choice Consequence",
+  "category": "ui",
+  "description": "The flags a story remembers and the branches they open. A choice sets flags; a link carries a condition over them; and the pair is the entire machinery of a branching narrative. Conditions are declared data rather than embedded code so the same story can be linted \u2014 an unreachable branch is a bug an author wants told about before publication, not discovered by a reader who never sees it. Delayed consequences are first-class: a flag may carry a fire-after so a decision in chapter one can land in chapter six, which is the effect the form exists for and the one hardest to hand-roll.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "flags",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Initial story state."
+    },
+    {
+      "name": "conditions",
+      "type": "object",
+      "required": true,
+      "description": "Named conditions over flags, referenced by passage links. Required."
+    },
+    {
+      "name": "reportUnreachable",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether branches no flag combination can open are reported on load."
+    },
+    {
+      "name": "allowDelayedConsequences",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a flag may declare a passage count after which it takes effect."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "state",
+      "type": "object",
+      "description": "Current flag values."
+    },
+    {
+      "name": "satisfied",
+      "type": "array",
+      "description": "Conditions currently true."
+    },
+    {
+      "name": "pendingConsequences",
+      "type": "array",
+      "description": "Delayed effects not yet due."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.consequenceFlagSet",
+      "ui.branchUnlocked",
+      "ui.branchUnreachable"
+    ],
+    "listensTo": [
+      "ui.passageLinkFollowed",
+      "ui.passageEntered"
+    ]
+  },
+  "dependencies": [
+    "ui.passage_engine"
+  ],
+  "tags": [
+    "interactive-fiction",
+    "branching",
+    "flags",
+    "narrative"
+  ],
+  "provenance": "library-native"
+}

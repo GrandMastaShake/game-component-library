@@ -2,13 +2,9 @@
   "id": "inventory.deck_manager",
   "name": "Deck Manager",
   "category": "inventory",
-  "description": "The three piles and the shuffle. A deckbuilder's deck is not a list — it is a draw pile, a discard pile, and an exhaust pile with strict rules about how cards move between them, and this component owns those rules and nothing else. The shuffle is seeded and the active seed is exposed, because a run where 'the deck was against me' cannot be replayed is a run whose bad beats cannot be audited; seeded shuffles are also what make daily runs and shared replays possible. Exhaust is its own pile, not deletion, because card text and relics care about the difference. This component does not own what a card does — utility.card_effect_dsl interprets effects — and it does not own the collection the deck was built from: inventory.core_inventory holds every card the player owns outside the run, and the decklist arrives from there.",
+  "description": "The three piles and the shuffle. A deckbuilder's deck is not a list \u2014 it is a draw pile, a discard pile, and an exhaust pile with strict rules about how cards move between them, and this component owns those rules and nothing else. The shuffle is seeded and the active seed is exposed, because a run where 'the deck was against me' cannot be replayed is a run whose bad beats cannot be audited; seeded shuffles are also what make daily runs and shared replays possible. Exhaust is its own pile, not deletion, because card text and relics care about the difference. This component does not own what a card does \u2014 utility.card_effect_dsl interprets effects \u2014 and it does not own the collection the deck was built from: inventory.core_inventory holds every card the player owns outside the run, and the decklist arrives from there.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
@@ -51,7 +47,7 @@
       "type": "number",
       "required": false,
       "default": null,
-      "description": "Seed for every pile shuffle. Null means derive one and expose it via lastShuffleSeed — never use unseeded entropy, or replays and daily runs diverge."
+      "description": "Seed for every pile shuffle. Null means derive one and expose it via lastShuffleSeed \u2014 never use unseeded entropy, or replays and daily runs diverge."
     },
     {
       "name": "handSize",

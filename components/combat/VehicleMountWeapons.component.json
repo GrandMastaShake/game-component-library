@@ -5,10 +5,6 @@
   "description": "Hardpoints, turret arcs, and trigger discipline for weapons bolted to a hull. It owns where each weapon sits, the arc it can sweep, its fire rate, and how mounts link into fire groups \u2014 the vehicle-specific questions a generic weapon system should never have to answer. What flies out of the muzzle is deliberately not here: combat.hardpointFired carries the muzzle transform and mount id, and the projectile itself is combat.projectile_system's contract, so hitscan versus ballistic behavior can change without touching the hull. Damage numbers are likewise deferred to combat.damage_resolver downstream. Fixed-forward mounts and free turrets are the same component with different arc widths, which keeps arena pickups and player-built loadouts on one code path.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

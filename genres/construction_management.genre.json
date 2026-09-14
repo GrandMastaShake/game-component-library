@@ -1,0 +1,43 @@
+{
+  "id": "genre.construction_management_sim",
+  "name": "Construction & Management Sim",
+  "description": "Zone it, staff it, and find out what you got wrong three tiers later. The pack's stance is that a city builder is a feedback loop wearing a map: nothing here places buildings for the player, and every structure that appears did so because world.zone_planner's growth rules were satisfied by demand the citizens themselves generated. That is why the agents come before the advisors -- world.citizen_agent_sim produces the home-work-shop traffic that ui.demand_indicators reads, so the RCI bars are a measurement rather than a script. Disasters are deliberately separate and optional: a management sim whose difficulty comes from random destruction is hiding a shallow economy behind an event.",
+  "version": "0.1.0",
+  "loop": "zone/place \u2192 citizens arrive \u2192 balance economy \u2192 unlock tier",
+  "views": [
+    "isometric"
+  ],
+  "memberComponents": [
+    "world.tile_grid",
+    "presentation.iso_projection",
+    "economy.currency",
+    "economy.team_resources",
+    "progression.production_queue",
+    "presentation.object_placer",
+    "world.environment_builder"
+  ],
+  "newComponents": [
+    "world.zone_planner",
+    "world.citizen_agent_sim",
+    "world.service_coverage",
+    "ui.demand_indicators",
+    "world.disaster_event"
+  ],
+  "signatureCompound": {
+    "name": "Demand Builds a Block",
+    "description": "The loop in one block: zone_planner marks a residential parcel, citizen_agent_sim's agents want somewhere to live and generate demand, demand_indicators turns that into an RCI reading and an advisory, service_coverage decides whether power and water actually reach the parcel, and only then does a building appear. Nothing in that chain is scripted, which is why the same four components produce both a boom and a slum.",
+    "memberIds": [
+      "world.zone_planner",
+      "world.citizen_agent_sim",
+      "ui.demand_indicators",
+      "world.service_coverage",
+      "economy.currency"
+    ]
+  },
+  "tags": [
+    "management",
+    "city-builder",
+    "simulation",
+    "economy"
+  ]
+}

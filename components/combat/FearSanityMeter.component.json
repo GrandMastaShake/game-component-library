@@ -5,10 +5,6 @@
   "description": "Accumulating dread as a resource the horror economy spends against the player. Fear rises from witnessing — line of sight to the stalker through world.vision_system — from darkness, and from isolation; it falls in lit, safe, occupied space. Threshold crossings, not the raw value, are what the game acts on: aim sway, audio hallucination, UI distortion are all subscribed effects, so the meter never has to know what 'scary' looks like in any given game. At full break it does NOT kill — it applies control penalties through subscribers, because a sanity spiral that kills directly removes the chance to recover, and the recovery scramble IS the genre. Fear while hidden is special-cased: hiding lowers acquisition but being cornered in a locker with the stalker outside is its own threshold event, fed by world.hidden rather than a guess.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

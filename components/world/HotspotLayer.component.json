@@ -1,0 +1,110 @@
+{
+  "id": "world.hotspot_layer",
+  "name": "Hotspot Layer",
+  "category": "world",
+  "description": "The regions of a scene that answer when you click them, and the cursor that tells you so before you do. A hotspot carries a shape, a set of verbs it accepts and a state, and the cursor is derived from the verbs rather than set by hand \u2014 a scene where the cursor and the accepted verb disagree is a scene that lies about what is possible. Pixel-hunting is the genre's oldest failure, so a highlight-all key is an input rather than an accessibility afterthought. Hotspots go stale: one that has given up everything it holds reports itself exhausted, which is what lets a room tell a stuck player they have already found everything here.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "hotspots",
+      "type": "array",
+      "required": true,
+      "description": "Regions with their shapes, accepted verbs and initial states. Required \u2014 the scene is content."
+    },
+    {
+      "name": "cursorByVerb",
+      "type": "object",
+      "required": false,
+      "default": {
+        "look": "eye",
+        "take": "hand",
+        "use": "gear",
+        "talk": "speech"
+      },
+      "description": "Cursor shown per accepted verb, so the pointer never contradicts what is possible."
+    },
+    {
+      "name": "highlightAllKey",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a key reveals every hotspot at once. The direct answer to pixel-hunting."
+    },
+    {
+      "name": "reportExhausted",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a hotspot that has nothing left to give says so, so a stuck player is not re-searching solved ground."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeHotspot",
+      "type": "object",
+      "description": "The region under the cursor, or null."
+    },
+    {
+      "name": "exhausted",
+      "type": "array",
+      "description": "Hotspot ids with nothing left to give."
+    },
+    {
+      "name": "cursor",
+      "type": "string",
+      "description": "Cursor implied by the active hotspot's verbs."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.hotspotEntered",
+      "world.hotspotUsed",
+      "world.hotspotExhausted",
+      "world.hotspotRefused"
+    ],
+    "listensTo": [
+      "input.interact",
+      "input.look"
+    ]
+  },
+  "dependencies": [
+    "presentation.camera_follow"
+  ],
+  "tags": [
+    "point-and-click",
+    "adventure",
+    "hotspots",
+    "accessibility"
+  ],
+  "provenance": "library-native"
+}

@@ -5,10 +5,6 @@
   "description": "Assigns vehicles to routes and pulls them in for maintenance before they fail on the road. It owns the assignment table \u2014 which vehicle runs which route \u2014 and the maintenance bookkeeping: distance since service, scheduled downtime, and the utility.maintenanceDue warning that arrives early enough to route around. It does not drive anything: once assigned, movement.pathfinding_system and the vehicle's own movement components do the moving, and this component only hears about routes going away (world.routeAdded, world.routeBlocked) and service timers completing. A blocked route with vehicles on it triggers reassignment, not pathological waiting, because an idle fleet in a tycoon game is lost money the player should be told about. It does not own buying or selling vehicles \u2014 fleet growth is an economy decision \u2014 and it does not own what the vehicles carry; manifests and passengers board after assignment, not before.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

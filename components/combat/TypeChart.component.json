@@ -5,10 +5,6 @@
   "description": "The elemental multiplication table: fire beats grass, grass beats water, and the numbers behind 'beats'. It is a pure lookup \u2014 attacker type, defender type, multiplier \u2014 shared verbatim with the Monster Taming pack, which is why it owns the chart and nothing else: no damage (combat.damage_resolver consumes the multiplier it is handed), no statuses (a burn a fire move inflicts is combat.status_effects' row in the ledger), no UI. Being query-driven instead of event-driven is deliberate: the multiplier is needed inside the damage pipeline synchronously, and an event round-trip would deliver the answer a frame late to a resolver that already moved on.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

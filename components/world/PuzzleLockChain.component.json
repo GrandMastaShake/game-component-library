@@ -1,0 +1,99 @@
+{
+  "id": "world.puzzle_lock_chain",
+  "name": "Puzzle Lock Chain",
+  "category": "world",
+  "description": "The dependency graph a room actually is. A lock opens when its declared conditions are met, and conditions may name other locks \u2014 which is what turns five puzzles into an escape room rather than five puzzles. Because it is a graph, it can be asked what is currently solvable, and that single query is the difference between a player who is stuck and a player who is lost: a nudge system, a journal and a difficulty curve all read the same frontier. The chain refuses to load a configuration containing a cycle, since a room where A needs B and B needs A cannot be completed and should fail at author time rather than at play time.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "locks",
+      "type": "array",
+      "required": true,
+      "description": "Locks with their opening conditions, which may reference other locks. Required."
+    },
+    {
+      "name": "rejectCycles",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a circular dependency is refused on load. A cycle is an unwinnable room."
+    },
+    {
+      "name": "announceFrontier",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the set of currently-solvable locks is published, so nudges and journals read the same source."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "openLocks",
+      "type": "array",
+      "description": "Lock ids already opened."
+    },
+    {
+      "name": "frontier",
+      "type": "array",
+      "description": "Locks whose conditions are reachable now."
+    },
+    {
+      "name": "blockedBy",
+      "type": "object",
+      "description": "Per closed lock, the conditions still outstanding."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.lockOpened",
+      "world.frontierChanged",
+      "world.chainCompleted",
+      "world.chainRejected"
+    ],
+    "listensTo": [
+      "inventory.itemsCombined",
+      "world.hotspotUsed",
+      "ui.dialogueEnded"
+    ]
+  },
+  "dependencies": [
+    "world.hotspot_layer"
+  ],
+  "tags": [
+    "escape-room",
+    "point-and-click",
+    "dependency-graph",
+    "puzzle"
+  ],
+  "provenance": "library-native"
+}

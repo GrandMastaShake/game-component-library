@@ -2,13 +2,9 @@
   "id": "progression.run_meta_progression",
   "name": "Run Meta Progression",
   "category": "progression",
-  "description": "What death buys you. Between runs, a persistent unlock pool — new cards, characters, starting items, difficulty tiers — is purchased with meta currency earned from run performance, so even a floor-two faceplant moves the account forward. It owns the pool, the prices, and the balance, written through persistence.save_system immediately on every purchase and grant, because meta progress lost to a crash teaches players to fear the save system instead of the dungeon. It pairs deliberately with progression.permadeath_flag: permadeath makes the run's end matter, this makes the ending matter differently, and neither is a complete roguelike alone. It does not own in-run power — run-scoped modifiers such as relics die with the run and never enter this pool — and it does not judge run performance; the credit grant arrives, this component banks it.",
+  "description": "What death buys you. Between runs, a persistent unlock pool \u2014 new cards, characters, starting items, difficulty tiers \u2014 is purchased with meta currency earned from run performance, so even a floor-two faceplant moves the account forward. It owns the pool, the prices, and the balance, written through persistence.save_system immediately on every purchase and grant, because meta progress lost to a crash teaches players to fear the save system instead of the dungeon. It pairs deliberately with progression.permadeath_flag: permadeath makes the run's end matter, this makes the ending matter differently, and neither is a complete roguelike alone. It does not own in-run power \u2014 run-scoped modifiers such as relics die with the run and never enter this pool \u2014 and it does not judge run performance; the credit grant arrives, this component banks it.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

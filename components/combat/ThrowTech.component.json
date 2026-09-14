@@ -4,7 +4,9 @@
   "category": "combat",
   "description": "The grappler layer: throw initiation, the escape window, and the resolution. Throws exist to beat block, and techs exist so throws cannot be a free answer — the rock-paper-scissors closes only if both halves live in one component, because a throw and its escape are one interaction with two participants and splitting them invites desync between 'you were thrown' and 'you teched'. This component owns the range check, the tech window, and the outcome (landed, teched, whiffed). It deliberately does not own throw damage — combat.damage_resolver computes it from the same fact — and it does not own command grabs, which are just moves in combat.combo_chain's tables that route here for resolution. The tech window listens to its own combat.throw_started event, so the defender's escape deadline is derived from the attacker's initiation rather than a second, racier signal.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

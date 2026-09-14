@@ -5,10 +5,6 @@
   "description": "Hunger, thirst, temperature, and stamina as four drains with consequences, not four progress bars. Each stat depletes on its own clock and crosses a threshold that routes damage through combat.damage_resolver — starvation is damage, freezing is damage, one death pipeline with many causes, so no parallel health system ever forks. Temperature is the odd one out: instead of a pure timer it samples world.weather_system and world.fire_warmth's warmth field every tick, because 'stand near the fire' must beat 'stand in the blizzard' through actual simulation rather than scripted safe zones. What REFILLS a stat — eating, drinking, resting — is the verb of whoever did it; this component owns only the drain and the consequence, which is what keeps food, beds, and campfires composable without VitalStats knowing any of them exist.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

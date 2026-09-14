@@ -4,7 +4,9 @@
   "category": "world",
   "description": "Two pads wired as one passage: step on A, arrive at B. It owns the pairing, the transit cooldown, and the exit offset, because the three failure modes of teleporters — arriving inside geometry, bouncing endlessly between pads, and landing with no idea which way you face — are all solved here and nowhere else. Velocity handling is an explicit choice rather than an accident: preserving momentum makes the pair a traversal tool (launch in, fly out), while zeroing it makes the pair a reset, and a puzzle designer needs both. This component deliberately does not own why the pair exists — routing and gating belong to the level and to world.ability_gate — and it does not reposition bodies by itself; the actual move is movement.character_body's, since only the body can teleport without desyncing its own collision state.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

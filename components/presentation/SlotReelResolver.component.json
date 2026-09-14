@@ -1,0 +1,104 @@
+{
+  "id": "presentation.slot_reel_resolver",
+  "name": "Slot Reel Resolver",
+  "category": "presentation",
+  "description": "Reels, paylines, and a spin whose outcome was decided before it started. The result comes from utility.probability_core FIRST and the reels are then animated to land on it, which is the honest construction: an animation that appears to decide the outcome as it slows is theatre pretending to be chance. Near-misses are therefore an explicit input rather than an emergent property \u2014 a designer choosing to show one is making a decision this component will not make silently on their behalf. VIRTUAL CURRENCY ONLY, and the paytable is published the same way a banner's rates are: return-to-player is an output, because a machine that will not state its odds should not be in a game.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "reelStrips",
+      "type": "array",
+      "required": true,
+      "description": "Symbols on each reel, in order. Required \u2014 the strips are the machine."
+    },
+    {
+      "name": "paylines",
+      "type": "array",
+      "required": true,
+      "description": "Winning lines across the reels, with their payouts."
+    },
+    {
+      "name": "nearMissFrequency",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "How often a losing spin is dressed as a near miss. 0 means never, which is the default because the alternative is a deliberate psychological choice."
+    },
+    {
+      "name": "spinSeconds",
+      "type": "number",
+      "required": false,
+      "default": 2.2,
+      "description": "Reel animation length. Presentation only; the result is already known."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastResult",
+      "type": "object",
+      "description": "Symbols landed and lines paid."
+    },
+    {
+      "name": "returnToPlayer",
+      "type": "number",
+      "description": "Published RTP implied by the strips and paytable."
+    },
+    {
+      "name": "spinning",
+      "type": "boolean",
+      "description": "Whether reels are currently animating a decided result."
+    }
+  ],
+  "events": {
+    "emits": [
+      "presentation.spinStarted",
+      "presentation.spinResolved",
+      "presentation.paylineHit"
+    ],
+    "listensTo": [
+      "utility.drawResolved",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "utility.probability_core",
+    "presentation.audio_system"
+  ],
+  "tags": [
+    "casino",
+    "slots",
+    "disclosure",
+    "presentation"
+  ],
+  "provenance": "library-native"
+}

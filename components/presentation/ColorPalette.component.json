@@ -2,24 +2,106 @@
   "id": "presentation.color_palette",
   "name": "Color Palette",
   "category": "presentation",
-  "description": "Generates and enforces a consistent, harmonious color palette across procedurally generated assets and UI elements.",
+  "description": "Generates and enforces a consistent, harmonious color palette across procedurally generated assets and UI elements. HOW LIGHT the ramp runs was not expressible and should have been. `baseHue` and `paletteSize` say which hues and how many, and the lightness was a pair of constants inside the implementation — so a request could ask for a green world and could not ask for a bright one. A palette whose only adjustable axis is hue is a palette that decides the mood of every game that uses it. The two ends are separate inputs rather than one 'brightness', because the SPREAD between them is what makes an ordinal ramp readable: ends far apart give a landscape with legible elevation bands, ends close together give a flat wash, and one number cannot ask for either.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/ColorPaletteSystem.lua", "note": "Upstream module named; no adapter written."},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/ColorPaletteSystem.lua",
+      "note": "Upstream module named; no adapter written."
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "baseHue", "type": "number", "required": false, "default": 0},
-    {"name": "paletteSize", "type": "number", "required": false, "default": 6}
+    {
+      "name": "baseHue",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Where the analogous arc starts, in degrees. The ramp spans roughly 70 degrees off this rather than the full wheel, because six hues spread across 360 sends terrain through magenta."
+    },
+    {
+      "name": "paletteSize",
+      "type": "number",
+      "required": false,
+      "default": 6,
+      "description": "How many swatches the ramp has, 2 to 12. Fewer bands read as poster art and more as a gradient; it is also the denominator `forIndex` maps an ordinal onto."
+    },
+    {
+      "name": "minLightness",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "description": "Lightness of the ramp's darkest swatch, as a percentage. The ramp is ordered dark to light so consumers can map an ordinal — an elevation band, a tier, a rank — straight onto it, which makes this the colour of the lowest thing in the world."
+    },
+    {
+      "name": "maxLightness",
+      "type": "number",
+      "required": false,
+      "default": 50,
+      "description": "Lightness of the lightest swatch. Kept apart from the minimum rather than expressed as a spread, because the two ends are what a designer actually pictures; a build wanting an overcast world lowers the top, and one wanting sunlit ground raises it."
+    }
   ],
   "outputs": [
-    {"name": "colors", "type": "array"}
+    {
+      "name": "swatches",
+      "type": "array",
+      "description": "The ramp, ordered dark to light, as CSS colour strings. It was declared as `colors` and published as `swatches`, and nothing ever read `colors` — a declared output no implementation publishes is a contract that reads as a promise and behaves as a typo, and the only reason it survived is that the audit checks inputs and reads, not outputs."
+    },
+    {
+      "name": "water",
+      "type": "string",
+      "description": "Sea colour, which is deliberately NOT on the land ramp. Deriving it by a fixed offset from baseHue lands a green world's sea on purple, so it is anchored blue and only nudged by the hue — enough that the whole palette still shifts together."
+    },
+    {
+      "name": "forIndex",
+      "type": "function",
+      "description": "`(i, of) => string`. Maps an ordinal — elevation band, tier, rank — onto the ramp, which is the reason the ramp is ordered rather than a set."
+    },
+    {
+      "name": "baseHue",
+      "type": "number",
+      "description": "Echoed back so a consumer can shift with the palette rather than keeping its own copy of the request."
+    },
+    {
+      "name": "paletteSize",
+      "type": "number",
+      "description": "Echoed back, as baseHue is."
+    }
   ],
-  "events": {"emits": ["presentation.paletteChanged"], "listensTo": []},
+  "events": {
+    "emits": [
+      "presentation.paletteChanged"
+    ],
+    "listensTo": []
+  },
   "dependencies": [],
-  "tags": ["color", "art-direction"],
+  "tags": [
+    "color",
+    "art-direction"
+  ],
   "sourceModule": "roblox-modular-lib/src/ColorPaletteSystem.lua"
 }

@@ -5,10 +5,6 @@
   "description": "Goods typing and supply-and-demand pricing laid over physical capacity. It owns the manifest \u2014 what goods, how much, bound for which station \u2014 and the price quote at each station from local supply and demand curves, because arbitrage between towns is the genre's core read and the quote must come from one place or every station tells a different story. Physical capacity stays in inventory.core_inventory: a hold or wagon is a bag with a manifest attached, and full means full for the same reasons everywhere else in the library, which is why this component listens to inventory.itemAdded and inventory.itemRemoved instead of re-counting. Payment on delivery goes through economy.currency, keeping the money trail auditable. It deliberately does not own spoilage, contraband legality, or passenger comfort \u2014 goods here are honest freight, and each of those is a modifier another component can layer on.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -1,0 +1,115 @@
+{
+  "id": "world.edge_transition",
+  "name": "Edge Transition",
+  "category": "world",
+  "description": "The boundary of the playfield as a door rather than a wall. It owns which edges are exits and what lies beyond each one \u2014 and only that. Walking off the north edge can lead somewhere GENERATED, where the destination is a fresh seed and the world is different every time, or somewhere AUTHORED, where the edge names a destination that is the same on every visit and can be hand-tuned; a route that alternates the two is how an overworld gets a designed spine with wilderness between its vertebrae. It deliberately does not own seeds: world.run_seed_manager issues those, and a build with one should hand this its stream rather than letting two components invent numbers. It does not own room topology either \u2014 world.interconnected_map_graph owns rooms, edges and gates, and an authored destination here is a room id that graph can resolve. And it does not move anybody: it reports that a boundary was crossed and where that leads, and whoever owns the world acts on it.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "exitEdges",
+      "type": "array",
+      "required": false,
+      "default": [
+        "north",
+        "south",
+        "east",
+        "west"
+      ],
+      "description": "Which boundaries are doors. An edge left out is a wall, which is how a level fences one side without fencing all four."
+    },
+    {
+      "name": "destinations",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Authored exits, keyed by edge: {\"north\": {\"id\": \"cave\", \"seed\": 4242}}. An edge named here always leads to the same place; an edge absent from it is generated. Both may be present at once."
+    },
+    {
+      "name": "requireStandingAtEdge",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the crossing must start from a tile on the boundary itself. True means a player walks to the edge and then presses onward, which is the readable gesture; false lets anything that reports a blocked move at the border trigger it."
+    },
+    {
+      "name": "cooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.75,
+      "description": "Quiet period after a crossing. Held movement keys repeat, and without this the first frame of the next region immediately crosses back."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "currentDestination",
+      "type": "object",
+      "description": "Where the last crossing led: {edge, id, seed, generated}. Null before the first."
+    },
+    {
+      "name": "lastExitEdge",
+      "type": "string"
+    },
+    {
+      "name": "crossings",
+      "type": "number"
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.regionExited",
+      "world.regionEntered"
+    ],
+    "listensTo": [
+      "movement.blocked"
+    ]
+  },
+  "eventIntents": {
+    "world.regionEntered": [
+      "persist",
+      "notify"
+    ],
+    "world.regionExited": [
+      "notify"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "world",
+    "traversal",
+    "overworld",
+    "region",
+    "seed"
+  ],
+  "provenance": "Requested from play: walking off a green edge tile should lead somewhere, sometimes generated and sometimes authored."
+}

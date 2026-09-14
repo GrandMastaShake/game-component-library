@@ -5,20 +5,17 @@
   "description": "The per-turn budget: moving costs points, attacking costs points, items cost points, and when the wallet is empty the turn is over. combat.turn_order_queue says whose wallet is active; this component says what is inside it and what each action charges. Keeping the economy separate from the queue matters because games tune them independently \u2014 a boss with two turns is a queue change, a boss whose attacks cost double is an economy change, and neither should require touching the other's code. Unspent points never roll over by default: banking AP turns tactics into hoarding, so rollover is an explicit opt-in, not an accident.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -33,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -83,6 +80,11 @@
       "name": "actionsTaken",
       "type": "array",
       "description": "Actions spent this turn, for undo UI and replays."
+    },
+    {
+      "name": "canAfford",
+      "type": "function",
+      "description": "Whether the active unit can pay for a named action right now. The price list is this component's input, so everyone else asking `pointsRemaining > 0` is guessing at a number they cannot see -- correct while every action costs one and quietly wrong the moment a skill costs two."
     }
   ],
   "events": {
@@ -92,7 +94,10 @@
     ],
     "listensTo": [
       "combat.turnStarted",
-      "combat.turnEnded"
+      "combat.turnEnded",
+      "movement.moveExecuted",
+      "combat.hit",
+      "combat.miss"
     ]
   },
   "dependencies": [

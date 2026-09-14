@@ -1,0 +1,108 @@
+{
+  "id": "pets.gym_challenge",
+  "name": "Gym Challenge",
+  "category": "pets",
+  "description": "The gauntlet that turns a collection into a campaign. A gym is an ordered set of trainers ending in a leader, a type identity that tells the player what to prepare, and a badge that is granted exactly once. Progress through the gauntlet is checkpointed between trainers so a loss costs the current fight rather than the whole run, which is the difference between a difficulty spike and a wall. The badge is the durable product: it is what world gates read to decide whether a route is open, so it is emitted as its own event rather than being inferred from a win. Level caps are declared per gym and enforced on entry \u2014 the genre's oldest anti-grind rule, and one that has to be stated by the gym rather than by the creatures, since it is a property of the challenge.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "gyms",
+      "type": "array",
+      "required": true,
+      "description": "Ordered gym definitions: id, type identity, trainer sequence, leader, badge granted and level cap. Required \u2014 the gauntlet is content, and a default would be a fictional region."
+    },
+    {
+      "name": "enforceLevelCap",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether creatures above a gym's cap are benched for that challenge."
+    },
+    {
+      "name": "checkpointBetweenTrainers",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a loss returns the player to the last trainer rather than the gym door."
+    },
+    {
+      "name": "rematchAfterBadges",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Badges required before leaders offer harder rematches. 0 disables rematches."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeGym",
+      "type": "object",
+      "description": "The gym being challenged, or null."
+    },
+    {
+      "name": "badges",
+      "type": "array",
+      "description": "Badge ids earned, in the order they were granted."
+    },
+    {
+      "name": "trainerIndex",
+      "type": "number",
+      "description": "Position in the current gauntlet."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.gymEntered",
+      "pets.gymTrainerDefeated",
+      "pets.badgeEarned",
+      "pets.gymFailed"
+    ],
+    "listensTo": [
+      "combat.entityDefeated",
+      "pets.partyChanged",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "pets.team_composition",
+    "combat.turn_order_queue",
+    "combat.type_chart"
+  ],
+  "tags": [
+    "monster-taming",
+    "gauntlet",
+    "badges",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

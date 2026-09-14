@@ -2,23 +2,20 @@
   "id": "world.run_seed_manager",
   "name": "Run Seed Manager",
   "category": "world",
-  "description": "One seed to rule the run. Issues the seed every other system derives from — floors, loot, drafts — and guarantees the whole run is reproducible from it, because a roguelike that cannot replay a run cannot verify a death, a speedrun, or a bug report. Daily runs are the same contract with a calendar-derived seed: every player gets the same dungeon on the same day, and the seed is published alongside any leaderboard entry so a record can be checked rather than believed. This component owns seed issuance, daily rotation, and persistence of the active run's seed through persistence.save_system. It does not own what the seed grows: world.floor_descent derives per-floor seeds from it, inventory.affix_loot_generator rolls drops from it, and neither should ever touch a random source this component did not hand them.",
+  "description": "One seed to rule the run. Issues the seed every other system derives from \u2014 floors, loot, drafts \u2014 and guarantees the whole run is reproducible from it, because a roguelike that cannot replay a run cannot verify a death, a speedrun, or a bug report. Daily runs are the same contract with a calendar-derived seed: every player gets the same dungeon on the same day, and the seed is published alongside any leaderboard entry so a record can be checked rather than believed. This component owns seed issuance, daily rotation, and persistence of the active run's seed through persistence.save_system. It does not own what the seed grows: world.floor_descent derives per-floor seeds from it, inventory.affix_loot_generator rolls drops from it, and neither should ever touch a random source this component did not hand them.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -33,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -44,7 +41,7 @@
       "type": "number",
       "required": false,
       "default": null,
-      "description": "Player- or rematch-chosen seed. Null means generate one and expose it via activeRunSeed — the run must always know its seed even when the player does not pick it."
+      "description": "Player- or rematch-chosen seed. Null means generate one and expose it via activeRunSeed \u2014 the run must always know its seed even when the player does not pick it."
     },
     {
       "name": "dailyRunsEnabled",

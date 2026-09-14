@@ -5,10 +5,6 @@
   "description": "The second chance between 'health hit zero' and 'out of the match'. Intercepts the lethal blow into a downed state with a bleed-out timer, and owns the revive channel: range, duration, interruption on damage. It does not heal — a completed revive applies a fixed reviveHealthFraction and hands the entity back to combat.damage_resolver's authority, because two components writing health is how players end up immortal. Solo modes simply never enable it. Its presence in a squad match is what turns 'finish the downed player' into a decision — spend the ammo and exposure, or let the clock do it — instead of an automatic.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

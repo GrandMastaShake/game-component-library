@@ -1,0 +1,59 @@
+{
+  "id": "utility.lifecycle_scope",
+  "name": "Lifecycle Scope",
+  "category": "utility",
+  "description": "Ownership container for every disposable a component creates - signal connections, tweens, instances, threads, and nested scopes - released in one deterministic LIFO call. Exists because the single largest defect class in long-lived Roblox clients is the undisposed connection or infinite tween: a component whose Show() re-registers an InputBegan listener, or whose looping tween (repeatCount -1) is never cancelled on Hide(), leaks a live handler per cycle. Scopes are re-entrant so a parent view can adopt child panel scopes and tear the whole subtree down at once.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "roblox",
+      "status": "scaffold",
+      "module": "roblox-adapters/utility.lifecycle_scope.adapter.lua",
+      "note": "Strict-Luau native module. Deterministic; testable without a DataModel."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "warnOnLeak",
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "maxTrackedWarn",
+      "type": "number",
+      "required": false,
+      "default": 256
+    }
+  ],
+  "outputs": [
+    {
+      "name": "trackedCount",
+      "type": "number"
+    },
+    {
+      "name": "isDisposed",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.scopeDisposed",
+      "utility.scopeLeakWarning"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": [
+    "lifecycle",
+    "memory",
+    "reliability",
+    "foundational"
+  ],
+  "provenance": "Surfaced by a defect pass over a Roblox fashion-game UI, nine interface modules (2026-09-11): a looping tween started in a panel's build path and never cancelled on Hide(), and a UserInputService.InputBegan handler re-registered on every Show() because Show() calls Initialize(). Searched first: utility.timer_system schedules work rather than owning it, utility.command_bus routes intents, persistence.save_system tracks its own writes only; no component in any of the thirteen categories tracks disposables, so the library has no Maid or Trove equivalent. Library-native, written against Roblox signal, Tween and task semantics.",
+  "implementationPath": "roblox-adapters/utility.lifecycle_scope.adapter.lua"
+}

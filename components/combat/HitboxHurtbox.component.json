@@ -4,7 +4,9 @@
   "category": "combat",
   "description": "Frame-data-accurate collision for fighting games: per-move box sets keyed to animation phases (startup, active, recovery), overlap resolution with priority, and trade detection when both sides connect on the same frame. It exists because combat.melee_basic answers 'a swing happened' while a fighting game needs 'this rectangle was live for exactly frames 9 through 14' — the difference between an action game and a genre where whiff punishing is the core skill. This component owns the boxes and the contact facts, and deliberately nothing downstream of contact: damage numbers, scaling, and knockback belong to combat.damage_resolver, cancel timing to combat.combo_chain, and invulnerability display to presentation. Boxes attach to movement.character_body so they track the body through knockback and throws without a second transform pipeline.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

@@ -2,15 +2,37 @@
   "id": "world.zone_planner",
   "name": "Zone Planner",
   "category": "world",
-  "description": "Designates zone types (residential, commercial, industrial, or any configured set) onto regions of an existing tile grid, and owns the growth rules that decide whether a zoned cell develops. Growth is evaluated per cell against demand pressure and service coverage, so a zone designation is a promise of intent, not a building — nothing appears until the rules say the land is worth developing. This component deliberately does not place structures: world.environment_builder and presentation.object_placer own the act of putting geometry in the world, and zone_planner only tells them where development is wanted. It also does not simulate the people who fill the zones — that is world.citizen_agent_sim, which listens for zone designations to decide where citizens can live and work. The planner's boundary is land-use state and growth eligibility; everything visual and everything agentic lives downstream.",
+  "description": "Designates zone types (residential, commercial, industrial, or any configured set) onto regions of an existing tile grid, and owns the growth rules that decide whether a zoned cell develops. Growth is evaluated per cell against demand pressure and service coverage, so a zone designation is a promise of intent, not a building \u2014 nothing appears until the rules say the land is worth developing. This component deliberately does not place structures: world.environment_builder and presentation.object_placer own the act of putting geometry in the world, and zone_planner only tells them where development is wanted. It also does not simulate the people who fill the zones \u2014 that is world.citizen_agent_sim, which listens for zone designations to decide where citizens can live and work. The planner's boundary is land-use state and growth eligibility; everything visual and everything agentic lives downstream.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -69,6 +91,11 @@
   "dependencies": [
     "world.tile_grid"
   ],
-  "tags": ["city-builder", "zoning", "management-sim", "land-use"],
+  "tags": [
+    "city-builder",
+    "zoning",
+    "management-sim",
+    "land-use"
+  ],
   "provenance": "library-native"
 }

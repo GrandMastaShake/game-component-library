@@ -1,0 +1,113 @@
+{
+  "id": "ui.text_parser_fallback",
+  "name": "Text Parser Fallback",
+  "category": "ui",
+  "description": "For the tradition where you type. A verb-noun parser sits alongside the link interface rather than replacing it, so the same story supports both a modern reader and someone who wants to type TAKE LAMP. The parser's honest problem is the unrecognised word, and the response is graded: an unknown verb, a known verb with an unknown noun, and a known pair that is simply not possible here are three different failures and saying which one it was is the difference between a parser that teaches its vocabulary and one that stonewalls. Synonyms are declared, because guessing at them is how a parser becomes a vocabulary quiz.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "verbs",
+      "type": "array",
+      "required": false,
+      "default": [
+        "look",
+        "take",
+        "drop",
+        "use",
+        "open",
+        "talk",
+        "go",
+        "inventory"
+      ],
+      "description": "Verbs the parser recognises."
+    },
+    {
+      "name": "synonyms",
+      "type": "object",
+      "required": false,
+      "default": {
+        "get": "take",
+        "examine": "look",
+        "x": "look"
+      },
+      "description": "Alternate spellings mapped to canonical verbs."
+    },
+    {
+      "name": "gradedFailures",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether unknown-verb, unknown-noun and not-possible-here are reported distinctly."
+    },
+    {
+      "name": "enabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the parser is offered at all. Off by default: link-based reading is the form most readers expect."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastCommand",
+      "type": "object",
+      "description": "Parsed verb and noun, or the failure kind."
+    },
+    {
+      "name": "vocabulary",
+      "type": "array",
+      "description": "Words the parser will currently accept."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.commandParsed",
+      "ui.commandUnknownVerb",
+      "ui.commandUnknownNoun",
+      "ui.commandNotPossible"
+    ],
+    "listensTo": [
+      "input.submitText"
+    ]
+  },
+  "dependencies": [
+    "ui.passage_engine"
+  ],
+  "tags": [
+    "interactive-fiction",
+    "parser",
+    "text",
+    "accessibility"
+  ],
+  "provenance": "library-native"
+}

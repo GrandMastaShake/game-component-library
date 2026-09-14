@@ -1,0 +1,38 @@
+{
+  "id": "item.dungeon_potion",
+  "name": "Dungeon Potion",
+  "description": "A potion bottle.",
+  "archetype": "item",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/kenney.mini-dungeon/potion.glb",
+      "triangles": 120,
+      "bytes": 12860
+    }
+  ],
+  "source": {
+    "kind": "vendored",
+    "tool": "Kenney Mini Dungeon 2.0",
+    "repository": "game-architect-studio",
+    "url": "https://kenney.nl/media/pages/assets/mini-dungeon/6cd72dc849-1785314274/kenney_mini-dungeon.zip",
+    "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8",
+    "downloadedOn": "2026-09-12",
+    "file": "Models/GLB format/potion.glb"
+  },
+  "license": {
+    "spdx": "CC0-1.0",
+    "holder": "Kenney (www.kenney.nl)",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "verifiedOn": "2026-09-12",
+    "file": "public/assets/kenney.mini-dungeon/License.txt",
+    "attributionRequired": false
+  },
+  "provenance": "inventory.potion_belt drinks these and the board draws one. Lying on the floor in 3D it was a small yellow cube."
+}

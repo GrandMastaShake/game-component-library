@@ -2,15 +2,37 @@
   "id": "housing.furnish_mode",
   "name": "Furnish Mode",
   "category": "housing",
-  "description": "The buy-and-decorate editing mode for a home: a modal state where the catalog is open, the grid is visible, and clicks place or move furniture instead of driving the live sim. Mode separation is the point — a click that might buy a sofa must never also tell the sim to walk, so entering furnish mode suspends live-mode input routing and restores it on exit. This component owns mode state, the furniture catalog, and purchase validation; it does not own the placed result. housing.home_system remains the authority on plot state and saved furniture — furnish_mode requests placements and purchases, and home_system accepts or rejects them, which means build-mode exploits funnel through the same authority as every other placement. Economy is similarly delegated: furnishing costs are validated against economy.currency and paid by it, never by this component's own ledger.",
+  "description": "The buy-and-decorate editing mode for a home: a modal state where the catalog is open, the grid is visible, and clicks place or move furniture instead of driving the live sim. Mode separation is the point \u2014 a click that might buy a sofa must never also tell the sim to walk, so entering furnish mode suspends live-mode input routing and restores it on exit. This component owns mode state, the furniture catalog, and purchase validation; it does not own the placed result. housing.home_system remains the authority on plot state and saved furniture \u2014 furnish_mode requests placements and purchases, and home_system accepts or rejects them, which means build-mode exploits funnel through the same authority as every other placement. Economy is similarly delegated: furnishing costs are validated against economy.currency and paid by it, never by this component's own ledger.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -64,6 +86,11 @@
     "housing.home_system",
     "economy.currency"
   ],
-  "tags": ["life-sim", "build-mode", "decoration", "player-housing"],
+  "tags": [
+    "life-sim",
+    "build-mode",
+    "decoration",
+    "player-housing"
+  ],
   "provenance": "library-native"
 }

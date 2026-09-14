@@ -5,10 +5,6 @@
   "description": "Possession as a physical state: who has the ball, what it costs them, and how it leaves. Carrying constrains the carrier — a speed multiplier, no tackling while holding — because possession must cost something or every player on the pitch is always the ball. Passing and shooting hand the ball to movement.physics_core as a free body with intent metadata (target teammate, lead distance); a ball in flight belongs to physics, and possession is only re-adjudicated on contact, never claimed at range. Dribbling is a leash, not a weld: the ball stays within controlRadius while control holds, and hard direction changes test controlRating to see whether it comes loose — which is what makes movement.skill_move_set's committed moves a gamble instead of a combo video.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

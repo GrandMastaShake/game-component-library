@@ -1,0 +1,28 @@
+{
+  "id": "prop.dungeon_barrel",
+  "name": "Dungeon Barrel",
+  "description": "A barrel.",
+  "archetype": "prop",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/generated/barrel.glb",
+      "triangles": 44,
+      "bytes": 4636
+    }
+  ],
+  "source": {
+    "kind": "generated",
+    "tool": "tools/mesh — pure-stdlib Python, no Blender in the loop",
+    "repository": "game-architect-studio",
+    "script": "tools/mesh/build_props.py",
+    "generatedOn": "2026-09-12"
+  },
+  "provenance": "A barrel is `cylinder(12, 0.36, 0.9)`. It was vendored with the rest of a CC0 pack for a coherent visual set, and that was the wrong trade for this one: a binary nobody can diff, carrying a licence and an archive hash, in exchange for four lines. Twelve segments because eight reads as a stop sign and sixteen is spent on a silhouette seen a metre away in torchlight. Built and audited by tools/mesh/build_props.py: watertight, the Euler characteristic measured rather than asserted, and inside a triangle budget. The file is byte-for-byte reproducible, which is what makes the script the asset and the .glb a compiler output."
+}

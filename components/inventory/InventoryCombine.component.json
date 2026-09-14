@@ -1,0 +1,91 @@
+{
+  "id": "inventory.inventory_combine",
+  "name": "Inventory Combine",
+  "category": "inventory",
+  "description": "Item on item, item on world, and a refusal that is worth reading. Combination rules are declared pairs producing a result, and the interesting part is the failure path: a generic 'that doesn't work' teaches nothing and is the reason adventure games acquired a reputation for moon logic, so a rule may carry its own refusal line and the component emits it rather than a shrug. Order-insensitivity is the default because a player who tries the rope on the hook should not have to try the hook on the rope. Consumed inputs are declared per rule, since some combinations spend both halves and some spend neither.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "rules",
+      "type": "array",
+      "required": true,
+      "description": "Combination rules: the two subjects, the result, what is consumed, and an optional refusal line. Required."
+    },
+    {
+      "name": "orderInsensitive",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether A-on-B and B-on-A are the same rule. True saves players from guessing the author's mind."
+    },
+    {
+      "name": "defaultRefusal",
+      "type": "string",
+      "required": false,
+      "default": "That doesn't seem to go together.",
+      "description": "Said when a pair has no rule and no line of its own."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastResult",
+      "type": "object",
+      "description": "What the most recent combination produced, or null."
+    },
+    {
+      "name": "knownRules",
+      "type": "number",
+      "description": "Rules loaded, for a completion display."
+    }
+  ],
+  "events": {
+    "emits": [
+      "inventory.itemsCombined",
+      "inventory.combineRefused"
+    ],
+    "listensTo": [
+      "world.hotspotUsed",
+      "input.useItem"
+    ]
+  },
+  "dependencies": [
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "point-and-click",
+    "adventure",
+    "puzzle",
+    "inventory"
+  ],
+  "provenance": "library-native"
+}

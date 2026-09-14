@@ -5,10 +5,6 @@
   "description": "Hard slot limits with forced triage: when every slot is spoken for, picking something up means choosing what to leave. It wraps inventory.core_inventory rather than replacing it — stacks, item identity, and grants still live there; this owns the cap, the triage prompt, and the drop decision. Item combining to free a slot (herb plus herb) is a recipe concern and stays in inventory.crafting_bench, because a combine button here would re-implement crafting with worse data. The design intent is fixed-inventory horror: the cap must be small enough to force real choices in the first hour, and the triage prompt must show the cost of each choice in one glance — scarcity that requires a spreadsheet reads as tedium, not dread.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

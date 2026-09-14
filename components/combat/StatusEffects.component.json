@@ -51,9 +51,7 @@
       "combat.hit"
     ]
   },
-  "dependencies": [
-    "combat.melee_basic"
-  ],
+  "dependencies": [],
   "tags": [
     "buffs",
     "debuffs"

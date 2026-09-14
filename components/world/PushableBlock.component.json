@@ -4,7 +4,9 @@
   "category": "world",
   "description": "The grid-snapped crate: a body the player relocates one tile at a time. It owns the push rules — the pusher must be grounded, aligned to a face, and pushing into a free tile — and it owns the settle, because 'the block has arrived' is a fact other components build on (pressure plates weigh it, pits swallow it). Snapping to the grid is deliberate: free-physics crates drift off plates and wedge in doorways, and the puzzle stops being about intent. This component does not own what the block is for — world.pressure_plate decides whether a resting block matters. It does not own falling either; gravity stays with movement.physics_core, which is why canFall is a flag here and not a physics reimplementation. Climbability is likewise not its business: movement.ledge_grab decides what is grabbable.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

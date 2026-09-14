@@ -5,10 +5,6 @@
   "description": "The registry of places worth finding, and the state of finding them: unknown, rumoured, discovered, cleared. Discovery is driven by exploration \u2014 walking into the radius, spotting from a vista \u2014 and each state transition is emitted exactly once, because map markers, quest hooks, and fast-travel unlocks all hang off the same transition and a duplicate 'discovered' double-counts all three. This component owns the registry and the discovery state machine. It does not own the marker glyphs (ui.minimap renders what it is told), the travel (world.waypoint_travel moves you once a POI unlocks a node), or what lives at the site \u2014 a POI is a promise of content, and world.dynamic_encounter_spawner or a quest decides whether the promise is kept.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

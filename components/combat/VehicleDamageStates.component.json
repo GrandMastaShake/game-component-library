@@ -5,10 +5,6 @@
   "description": "Discrete damage bands \u2014 pristine, damaged, critical, disabled \u2014 that degrade vehicle performance as hits accumulate. It exists because hit points alone make damage invisible until the kill, and a combat driving game wants every landed shot to change how the target drives. This component owns the band thresholds and the performance multiplier per band. Crucially, it applies degradation by rewriting the active tune through movement.vehicle_tuning rather than touching physics itself, so a crippled engine and a stock engine are the same code path and a repair is just another preset swap. It listens to combat.damageResolved (weapons) and combat.ramDamageDealt (collisions) so both damage sources feed one band ladder. It does not own repair \u2014 parts and currency live with garage and economy systems \u2014 and it does not draw the smoke; presentation subscribes to the band-change event for that.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

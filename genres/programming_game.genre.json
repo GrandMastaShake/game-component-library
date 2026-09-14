@@ -1,0 +1,42 @@
+{
+  "id": "genre.programming_game",
+  "name": "Programming Game",
+  "description": "Write a program, watch it fail, work out why. The pack's centre is a safety contract rather than a mechanic: utility.sandboxed_vm runs player-authored code -- often code other players wrote and shared -- under caps on instructions, memory and wall-clock, with no filesystem, no network and no host clock. Its hostAccess input is present and false so the absence is explicit rather than implied. Everything else is pedagogy. Wires are type-checked as they are drawn so the error arrives while the player is still thinking about the cause; the robot executes at a visible rate because watching it go wrong is the lesson; and the validator reports the first differing case with both values, because 'wrong' teaches nothing.",
+  "version": "0.1.0",
+  "loop": "read spec \u2192 write program \u2192 run against tests \u2192 optimize",
+  "views": [
+    "top-down",
+    "ui-forward"
+  ],
+  "memberComponents": [
+    "utility.behavior_fsm",
+    "utility.command_bus",
+    "ui.hud",
+    "social.leaderboard",
+    "progression.level_goal"
+  ],
+  "newComponents": [
+    "utility.visual_node_script",
+    "progression.code_puzzle_validator",
+    "movement.robot_command_queue",
+    "utility.sandboxed_vm",
+    "ui.debugger_overlay"
+  ],
+  "signatureCompound": {
+    "name": "Compile, Run, Fault, Fix",
+    "description": "The teaching loop, with the safety rail in the middle of it: visual_node_script refuses a mismatched wire as it is drawn and compiles the rest to an instruction list, sandboxed_vm runs that list under hard caps and halts with a named reason rather than freezing, robot_command_queue executes it slowly enough to watch and faults with the instruction index when the robot walks into a wall, and debugger_overlay stops on that index without freezing the world around it.",
+    "memberIds": [
+      "utility.visual_node_script",
+      "utility.sandboxed_vm",
+      "movement.robot_command_queue",
+      "ui.debugger_overlay",
+      "progression.code_puzzle_validator"
+    ]
+  },
+  "tags": [
+    "programming-game",
+    "pedagogy",
+    "sandbox",
+    "puzzle"
+  ]
+}

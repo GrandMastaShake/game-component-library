@@ -1,0 +1,104 @@
+{
+  "id": "utility.visual_node_script",
+  "name": "Visual Node Script",
+  "category": "utility",
+  "description": "A program you assemble instead of type, with wires that refuse to lie. Nodes have typed ports and a connection between mismatched types is rejected at the moment it is attempted rather than at run time \u2014 which is the entire pedagogical argument for visual scripting: the error arrives while the player is still thinking about the thing that caused it. Cycles are permitted only through nodes that declare themselves loop-safe, since an unguarded cycle is an infinite loop the player cannot see. The graph compiles to an instruction list rather than executing itself, which is what lets utility.sandboxed_vm impose limits that a self-executing graph could always escape.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "nodeLibrary",
+      "type": "array",
+      "required": true,
+      "description": "Available node kinds with their typed ports. Required \u2014 the library is the language."
+    },
+    {
+      "name": "strictTypes",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether mismatched wires are refused as they are drawn. Off makes errors arrive late, which is the thing this form exists to prevent."
+    },
+    {
+      "name": "allowCycles",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether cycles are permitted outside loop-safe nodes."
+    },
+    {
+      "name": "maxNodes",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Nodes a single program may contain."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "graph",
+      "type": "object",
+      "description": "Current node graph."
+    },
+    {
+      "name": "compiled",
+      "type": "array",
+      "description": "Instruction list produced from the graph."
+    },
+    {
+      "name": "typeErrors",
+      "type": "array",
+      "description": "Rejected connections with the types that clashed."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.nodeConnected",
+      "utility.connectionRejected",
+      "utility.programCompiled"
+    ],
+    "listensTo": [
+      "input.interact",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "utility.command_bus"
+  ],
+  "tags": [
+    "programming-game",
+    "visual-scripting",
+    "types",
+    "pedagogy"
+  ],
+  "provenance": "library-native"
+}

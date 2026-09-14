@@ -1,0 +1,99 @@
+{
+  "id": "persistence.save_bookmark",
+  "name": "Save Bookmark",
+  "category": "persistence",
+  "description": "Named places to come back to, which in a branching story is a reading tool rather than a convenience. A reader who wants to see the other branch should not have to replay four chapters, so bookmarks are multi-slot, named by the reader, and record the passage together with the whole flag state \u2014 a bookmark that restores position without state lands you in a scene the story no longer believes in. An automatic chapter bookmark is kept separately from named ones so it can never overwrite work the reader deliberately marked.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "slotCount",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Named bookmarks retained."
+    },
+    {
+      "name": "autoBookmarkOnChapter",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether entering a chapter writes an automatic bookmark, kept apart from named ones."
+    },
+    {
+      "name": "captureFullState",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether flags are stored with the position. False restores a scene the story no longer believes in."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "bookmarks",
+      "type": "array",
+      "description": "Saved positions with their names and timestamps."
+    },
+    {
+      "name": "autoBookmark",
+      "type": "object",
+      "description": "The most recent automatic chapter mark."
+    },
+    {
+      "name": "slotsUsed",
+      "type": "number",
+      "description": "Named bookmarks in use."
+    }
+  ],
+  "events": {
+    "emits": [
+      "persistence.bookmarkSaved",
+      "persistence.bookmarkLoaded",
+      "persistence.bookmarkRejected"
+    ],
+    "listensTo": [
+      "ui.passageEntered",
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "persistence.save_system",
+    "ui.choice_consequence"
+  ],
+  "tags": [
+    "interactive-fiction",
+    "bookmarks",
+    "persistence",
+    "branching"
+  ],
+  "provenance": "library-native"
+}

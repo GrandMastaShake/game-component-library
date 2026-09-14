@@ -4,7 +4,9 @@
   "category": "world",
   "description": "The arena contract: walls close when the fight starts and open when it ends. It owns the seal/unseal decision and the door state during the fight, because 'you may not leave' and 'you have earned the right to leave' are facts that must come from one place or every door, warp, and save point near the arena will disagree. It deliberately does not own the boss — behavior belongs to utility.behavior_fsm and whatever combat components drive the fight — and it does not own the reward, which is inventory.loot_table's table and progression.power_up_grant's mutation. Victory is detected by listening for combat.entity_defeated on the named boss entity, trusting combat.damage_resolver's fact rather than watching health bars itself. Entry is detected through the map graph's room event, not a bespoke trigger volume, so the seal stays correct when the room layout moves.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

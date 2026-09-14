@@ -2,13 +2,9 @@
   "id": "ui.death_summary",
   "name": "Death Summary",
   "category": "ui",
-  "description": "The run's obituary. On the killing blow it assembles the record — depth reached, drafts taken, the build snapshot, the cause of death — from the systems that own those facts, and presents the credits progression.run_meta_progression granted so the player watches death convert into progress instead of watching a fade to black. Depth comes from world.floor_descent, credits from run_meta_progression, and this component owns only the assembly and presentation, because a summary that computes its own stats is a second source of truth that will eventually disagree with the first. It does not own the death — combat.damage_resolver decided that — and it does not own the memorial: what the game does with the fallen after the summary is shown is its own design call.",
+  "description": "The run's obituary. On the killing blow it assembles the record \u2014 depth reached, drafts taken, the build snapshot, the cause of death \u2014 from the systems that own those facts, and presents the credits progression.run_meta_progression granted so the player watches death convert into progress instead of watching a fade to black. Depth comes from world.floor_descent, credits from run_meta_progression, and this component owns only the assembly and presentation, because a summary that computes its own stats is a second source of truth that will eventually disagree with the first. It does not own the death \u2014 combat.damage_resolver decided that \u2014 and it does not own the memorial: what the game does with the fallen after the summary is shown is its own design call.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
@@ -44,7 +40,7 @@
       "type": "boolean",
       "required": false,
       "default": true,
-      "description": "Names the killer and the final blow. Off only for tone — the data is collected regardless, because telemetry should not depend on a UI toggle."
+      "description": "Names the killer and the final blow. Off only for tone \u2014 the data is collected regardless, because telemetry should not depend on a UI toggle."
     },
     {
       "name": "includeBuildSnapshot",

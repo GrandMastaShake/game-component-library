@@ -1,0 +1,109 @@
+{
+  "id": "world.multiplier_tile",
+  "name": "Multiplier Tile",
+  "category": "world",
+  "description": "A cell that is worth more, and says so before you match it. A multiplier tile multiplies the score of any match it takes part in, which turns an ordinary board into one with a target on it: the interesting move stops being the biggest match and becomes the match that reaches the x3.\n\nIt is deliberately not the cascade multiplier. progression.cascade_scoring escalates with the DEPTH of a chain, which rewards setting up; this rewards aiming, and a board can have both without either knowing about the other. It is also not economy.combo_multiplier, whose streak is driven by judgement events from a rhythm game's timing window.\n\nMultipliers stack multiplicatively when one match covers two of them, because that coincidence is the shot players go looking for, and the ceiling exists so that looking for it does not become the only strategy.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "placements",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Fixed multiplier cells: position and factor. Empty means multipliers only appear by the spawn rule below."
+    },
+    {
+      "name": "spawnChance",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Chance a refilled cell becomes a multiplier. 0 keeps them authored; above 0 makes them weather rather than level design."
+    },
+    {
+      "name": "factors",
+      "type": "array",
+      "required": false,
+      "default": [
+        2,
+        3
+      ],
+      "description": "Factors a spawned multiplier may take."
+    },
+    {
+      "name": "maxStackedFactor",
+      "type": "number",
+      "required": false,
+      "default": 9,
+      "description": "Ceiling on the combined factor when one match covers several. Without it, hunting coincidences becomes the only strategy worth playing."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tiles",
+      "type": "array",
+      "description": "Multiplier cells and their factors."
+    },
+    {
+      "name": "lastFactor",
+      "type": "number",
+      "description": "Combined factor applied to the most recent match."
+    },
+    {
+      "name": "consumed",
+      "type": "number",
+      "description": "Multiplier tiles used up so far."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.multiplierApplied",
+      "world.multiplierSpawned",
+      "world.multiplierConsumed"
+    ],
+    "listensTo": [
+      "world.matchCleared",
+      "world.cascadeSettled"
+    ]
+  },
+  "dependencies": [
+    "world.match_resolver"
+  ],
+  "tags": [
+    "tile-matching",
+    "match-3",
+    "scoring",
+    "multiplier"
+  ],
+  "provenance": "library-native"
+}

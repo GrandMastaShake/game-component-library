@@ -1,0 +1,41 @@
+{
+  "id": "genre.casino_gacha",
+  "name": "Casino & Gacha",
+  "description": "Chance games, built to be auditable. The pack carries one hard rule in the contracts themselves rather than in a policy document: VIRTUAL CURRENCY ONLY -- no real-money wagering, no cash-out, and no component here has any concept of a payment method. Everything else follows from disclosure. utility.probability_core publishes its rates and refuses a table whose weights contradict them rather than silently normalising; economy.pity_system makes the safety net an output the player can read; and presentation.slot_reel_resolver decides the outcome BEFORE the reels spin, so the animation is theatre that admits it is theatre. Duplicates convert automatically, because a collection game that lets copies pile up unconverted has wasted the pulls that produced them.",
+  "version": "0.1.0",
+  "loop": "earn/pull \u2192 reveal \u2192 convert duplicates \u2192 pity builds \u2192 banner rotates",
+  "views": [
+    "ui-forward"
+  ],
+  "memberComponents": [
+    "economy.currency",
+    "inventory.loot_table",
+    "ui.notification_toast",
+    "persistence.save_system",
+    "presentation.audio_system",
+    "presentation.particle_system"
+  ],
+  "newComponents": [
+    "utility.probability_core",
+    "economy.gacha_banner",
+    "economy.pity_system",
+    "economy.duplicate_converter",
+    "presentation.slot_reel_resolver"
+  ],
+  "signatureCompound": {
+    "name": "Eighty-Nine Pulls and the Ninetieth",
+    "description": "The disclosure chain doing its job: gacha_banner counts pulls since featured and shows the number, pity_system raises the effective rate through soft pity and guarantees the featured outcome at ninety, probability_core takes each draw from a seeded stream and logs it against the boosted rate actually used, and duplicate_converter turns the copies that arrive along the way into shards. Every step is readable by the player, which is the only defensible way to ship this genre.",
+    "memberIds": [
+      "utility.probability_core",
+      "economy.gacha_banner",
+      "economy.pity_system",
+      "economy.duplicate_converter"
+    ]
+  },
+  "tags": [
+    "gacha",
+    "casino",
+    "disclosure",
+    "virtual-currency-only"
+  ]
+}

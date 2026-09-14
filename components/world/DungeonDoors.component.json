@@ -1,0 +1,109 @@
+{
+  "id": "world.dungeon_doors",
+  "name": "Dungeon Doors",
+  "category": "world",
+  "description": "A door in every doorway. world.floor_descent knows where a corridor meets a room's rim and drew the gap darker; world.door_gate is a passage wired to switches and plates, a puzzle piece, not this. Every crawler since Rogue has doors, and a door is the smallest thing that makes a dungeon feel built rather than generated: closed until something walks into it, open after, and the one on the boss's room locked until a key turns.\n\nThis owns the doors: where they are (every doorway of an open corridor, read from the floor), whether each is closed, open or locked, and what style it wears by the room's tag. A unit stepping onto a closed door opens it — any unit, because a goblin that walks through a shut door is a goblin that walks through a wall. A locked door refuses a footstep: the floor's isBlocked asks this, the same way it asks the stamps about a solid prop, so the walker, the pathfinder and the pursuer all get the one answer. The player's unit arriving beside a locked door with the key in the bag unlocks it and the key is spent; without the key the door says so, once per approach. A CLOSED DOOR IS OPAQUE: world.vision_system asks this before it lights a tile or lets a hunter notice anybody, so the room behind a shut door is dark and quiet until it opens. What was opened and unlocked is remembered per floor.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "lockedTags",
+      "type": "array",
+      "required": false,
+      "default": [
+        "boss"
+      ],
+      "description": "Room tags whose doors start locked. The boss's room by default: the fight at the bottom of the floor should be the one you went looking for the key to."
+    },
+    {
+      "name": "keyItem",
+      "type": "string",
+      "required": false,
+      "default": "key",
+      "description": "The carried item a locked door takes, spent on unlocking. Laid on the floor by inventory.ground_items' alwaysLay, or dropped by whatever the request decides."
+    },
+    {
+      "name": "styleByTag",
+      "type": "object",
+      "required": false,
+      "default": {
+        "boss": "iron"
+      },
+      "description": "Which door sheet a room's doors wear, by tag — `wood` or `iron`; anything unnamed is wood. Content, not rule."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "doors",
+      "type": "array",
+      "description": "Every door on the floor as {x, y, room, tag, style, open, locked}."
+    },
+    {
+      "name": "isClosed",
+      "type": "function",
+      "description": "Whether a closed door stands on a tile — opaque to sight. Asked by world.vision_system."
+    },
+    {
+      "name": "blocksAt",
+      "type": "function",
+      "description": "Whether a LOCKED door stands on a tile. Asked by world.floor_descent from its own isBlocked; an unlocked closed door does not block, it opens."
+    },
+    {
+      "name": "revision",
+      "type": "number",
+      "description": "Bumped when a door locks or unlocks, folded into the floor's revision so the pathfinder rebuilds."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.doorOpened",
+      "world.doorUnlocked",
+      "world.doorLocked"
+    ],
+    "listensTo": [
+      "world.floorGenerated",
+      "movement.moveExecuted"
+    ]
+  },
+  "dependencies": [
+    "world.floor_descent",
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "dungeon-crawler",
+    "doors",
+    "keys",
+    "rooms"
+  ],
+  "provenance": "Asked for by the Dungeon Crawler's second level pass (2026-09-11), from the list of what the first playable floor lacked beside Diablo, Baldur's Gate and Brogue: eleven door sprites drawn and a doorway that was a gap in the rim. Searched first: world.door_gate is a passage wired to switches and pressure plates, world.ability_gate its metroidvania sibling; neither is a door you walk into. Library-native, written against the studio's floor generator, walker and vision."
+}

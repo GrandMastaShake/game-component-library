@@ -1,0 +1,108 @@
+{
+  "id": "progression.puzzle_difficulty_rater",
+  "name": "Puzzle Difficulty Rater",
+  "category": "progression",
+  "description": "Grades a puzzle by what solving it requires, not by how many givens it has. Clue count is a famously bad proxy \u2014 a 26-clue sudoku can be easier than a 30-clue one \u2014 so the rater solves the puzzle with a technique ladder and records the hardest technique it had to reach, plus how many times. That produces a grade that means the same thing across generated puzzles, which is what a difficulty selector needs in order not to be a lie. A puzzle the ladder cannot solve at all is reported as unrated rather than as hardest, because unsolvable-by-technique means it needs guessing and this genre does not ask players to guess.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "techniqueLadder",
+      "type": "array",
+      "required": false,
+      "default": [
+        "nakedSingle",
+        "hiddenSingle",
+        "pointingPair",
+        "boxLineReduction",
+        "xWing",
+        "swordfish"
+      ],
+      "description": "Techniques in ascending difficulty. The hardest one required sets the grade."
+    },
+    {
+      "name": "gradeBands",
+      "type": "object",
+      "required": false,
+      "default": {
+        "easy": 1,
+        "medium": 3,
+        "hard": 5,
+        "expert": 6
+      },
+      "description": "Ladder index at which each named grade begins."
+    },
+    {
+      "name": "reportUnratedOnGuess",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a puzzle needing a guess is reported unrated rather than as hardest."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "grade",
+      "type": "string",
+      "description": "Named difficulty band."
+    },
+    {
+      "name": "hardestTechnique",
+      "type": "string",
+      "description": "Deepest technique the solve required."
+    },
+    {
+      "name": "techniqueCounts",
+      "type": "object",
+      "description": "How often each technique was needed."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.puzzleRated",
+      "progression.puzzleUnrated"
+    ],
+    "listensTo": [
+      "utility.puzzleGenerated"
+    ]
+  },
+  "dependencies": [
+    "utility.logic_grid_engine"
+  ],
+  "tags": [
+    "logic-puzzle",
+    "difficulty",
+    "analysis",
+    "progression"
+  ],
+  "provenance": "library-native"
+}

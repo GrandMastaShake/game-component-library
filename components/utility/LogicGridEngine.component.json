@@ -1,0 +1,106 @@
+{
+  "id": "utility.logic_grid_engine",
+  "name": "Logic Grid Engine",
+  "category": "utility",
+  "description": "Generates a puzzle, validates a solution, and refuses to ship either without checking that exactly one answer exists. Uniqueness is the whole contract: a sudoku with two solutions is not a hard sudoku, it is a broken one, and a player who deduces correctly and is marked wrong has been lied to by the generator. So generation runs a solver twice \u2014 once to find a solution, once to prove there is no second \u2014 and a candidate that fails is discarded rather than published. The engine is rule-set agnostic: sudoku, nonogram and kakuro differ in their constraint functions, not in this loop, which is why the constraints are an input and the search is not.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "ruleSet",
+      "type": "string",
+      "required": false,
+      "default": "sudoku",
+      "description": "Constraint family: sudoku, nonogram, kakuro or a declared custom set."
+    },
+    {
+      "name": "gridSize",
+      "type": "number",
+      "required": false,
+      "default": 9,
+      "description": "Cells per side."
+    },
+    {
+      "name": "targetClues",
+      "type": "number",
+      "required": false,
+      "default": 30,
+      "description": "Givens left after carving. Fewer is harder, and the uniqueness check is what stops 'fewer' becoming 'ambiguous'."
+    },
+    {
+      "name": "requireUniqueSolution",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a generated puzzle must be proven to have exactly one answer. Turning this off is how a generator starts lying to players."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "puzzle",
+      "type": "object",
+      "description": "The generated grid with its givens."
+    },
+    {
+      "name": "solution",
+      "type": "object",
+      "description": "The unique answer, held for validation."
+    },
+    {
+      "name": "uniquenessProven",
+      "type": "boolean",
+      "description": "Whether the second solve confirmed no alternative."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.puzzleGenerated",
+      "utility.puzzleRejected",
+      "utility.puzzleSolved",
+      "utility.cellRejected"
+    ],
+    "listensTo": [
+      "input.confirm"
+    ]
+  },
+  "dependencies": [
+    "world.tile_grid",
+    "world.noise_lib"
+  ],
+  "tags": [
+    "logic-puzzle",
+    "constraint-satisfaction",
+    "generator",
+    "uniqueness"
+  ],
+  "provenance": "library-native"
+}

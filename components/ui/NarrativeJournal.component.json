@@ -1,0 +1,100 @@
+{
+  "id": "ui.narrative_journal",
+  "name": "Narrative Journal",
+  "category": "ui",
+  "description": "Everything the player has learned, written down without being asked. Clues are recorded automatically as they are discovered, because an adventure game that expects note-taking is an adventure game that punishes playing in short sessions. Entries are grouped by the thread they belong to rather than chronologically, since the question a returning player has is 'what was I doing about the safe', not 'what happened at 14:32'. The journal is deliberately a reader and not an oracle: it records what was found and never what to do next, which is ui.hint_system's job and a different promise.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "autoRecord",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether discoveries are written without being asked."
+    },
+    {
+      "name": "groupBy",
+      "type": "string",
+      "required": false,
+      "default": "thread",
+      "description": "How entries are organised: 'thread' answers what a returning player is actually asking; 'time' is a log."
+    },
+    {
+      "name": "maxEntries",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Entries retained before the oldest thread is collapsed."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "entries",
+      "type": "array",
+      "description": "Recorded clues, grouped."
+    },
+    {
+      "name": "threads",
+      "type": "array",
+      "description": "Open investigation threads."
+    },
+    {
+      "name": "unread",
+      "type": "number",
+      "description": "Entries added since the journal was last opened."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.journalEntryAdded",
+      "ui.journalOpened",
+      "ui.threadClosed"
+    ],
+    "listensTo": [
+      "world.hotspotUsed",
+      "world.lockOpened",
+      "ui.dialogueEnded",
+      "input.interact"
+    ]
+  },
+  "dependencies": [
+    "ui.dialogue_box"
+  ],
+  "tags": [
+    "point-and-click",
+    "adventure",
+    "journal",
+    "ui"
+  ],
+  "provenance": "library-native"
+}

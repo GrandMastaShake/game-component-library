@@ -2,24 +2,79 @@
   "id": "presentation.audio_system",
   "name": "Audio System",
   "category": "presentation",
-  "description": "Centralized sound effect and music playback manager with volume buckets, 3D spatial sound, and crossfade between tracks.",
+  "description": "Centralized sound effect and music playback manager with volume buckets, 3D spatial sound, and crossfade between tracks.\n\nWHAT IT PLAYS IN A DUNGEON, synthesised rather than sampled so the build ships nothing: a footstep for the player's own steps, a knock for a blow, a lower one for a fall, a creak for a chest, a chime for a pickup, a swing for a door, a rising three for a level. Every cue is a moment the bricks already announce; this adds no rule.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "not-implemented", "module": "roblox-modular-lib/src/AudioSystem.lua", "note": "Upstream module named; no adapter written."},
-    {"target": "unity", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "not-implemented",
+      "module": "roblox-modular-lib/src/AudioSystem.lua",
+      "note": "Upstream module named; no adapter written."
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
-    {"name": "masterVolume", "type": "number", "required": false, "default": 1.0}
+    {
+      "name": "masterVolume",
+      "type": "number",
+      "required": false,
+      "default": 1.0
+    }
   ],
   "outputs": [
-    {"name": "nowPlaying", "type": "string"}
+    {
+      "name": "nowPlaying",
+      "type": "string"
+    }
   ],
-  "events": {"emits": ["presentation.soundPlayed", "presentation.musicChanged"], "listensTo": ["world.weatherChanged"]},
-  "sinkFor": ["impact"],
+  "events": {
+    "emits": [
+      "presentation.soundPlayed",
+      "presentation.musicChanged"
+    ],
+    "listensTo": [
+      "world.weatherChanged",
+      "combat.hit",
+      "combat.miss",
+      "combat.entityDefeated",
+      "movement.moveExecuted",
+      "inventory.containerOpened",
+      "inventory.itemGranted",
+      "world.doorOpened",
+      "progression.leveledUp",
+      "inventory.potionUsed"
+    ]
+  },
+  "sinkFor": [
+    "impact"
+  ],
   "dependencies": [],
-  "tags": ["audio", "sfx", "music"],
+  "tags": [
+    "audio",
+    "sfx",
+    "music"
+  ],
   "sourceModule": "roblox-modular-lib/src/AudioSystem.lua"
 }

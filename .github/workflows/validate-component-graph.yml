@@ -14,6 +14,12 @@ jobs:
         with: {python-version: "3.11"}
       - run: python3 tools/validate_component_graph.py --report reports/component-graph.json
       - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
+      - run: python3 tools/validate_genres.py --report reports/genre-validation.json
+      # An asset descriptor is a claim about files in a consuming repository, so
+      # this half proves only what a descriptor can contradict on its own: ids,
+      # socket names, and levels that actually get cheaper. The app's
+      # check-assets is the half that opens the glTF.
+      - run: python3 tools/validate_asset_contracts.py --report reports/assets.json
       - name: Validate art topology (fails on findings not in the baseline)
         run: python3 tools/validate_topology.py --baseline art/topology-baseline.json --report reports/topology.json
       - name: Validate platform claims (fails on findings not in the baseline)
@@ -22,6 +28,10 @@ jobs:
         run: python3 tools/validate_assembly.py --baseline art/assembly-baseline.json --report reports/assembly.json
       - name: Check implementations match the declared web coverage
         run: python3 tools/declare_implementations.py --check
+      - name: Report how adoptable each compound is per genre (never fails; it is a measurement)
+        run: python3 tools/compound_fit.py --report reports/compound-fit.json --max-rows 6
+      - name: Every NEW component records what it was found by (baselined; the line must not move outward)
+        run: python3 tools/validate_provenance.py --report reports/provenance.json
       - run: python3 tools/compile_build_manifest.py examples/pet-survival-game.request.json --output reports/pet-survival-game.manifest.json
       - run: python3 tools/evaluate_manifest_readiness.py reports/pet-survival-game.manifest.json --mode prototype --report reports/pet-survival-game.prototype-readiness.json
       - run: python3 tools/generate_coverage_roadmap.py reports/pet-survival-game.manifest.json --output reports/pet-survival-game.coverage-roadmap.json

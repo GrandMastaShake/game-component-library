@@ -33,7 +33,7 @@
       "name": "entries",
       "type": "array",
       "required": true,
-      "description": "List of {itemId, weight, minQty, maxQty}"
+      "description": "List of {from, items} — what falls out of a kind of thing. `from` is the `kind` a combat.hit carries for a harvestable prop, or the `kind` inventory.containerOpened carries for a chest; an entry with no `from` answers for everything. A unit's drop is its defeat, which is inventory.affix_loot_generator's business — it asks this table WHAT through `pick`."
     }
   ],
   "outputs": [
@@ -47,7 +47,8 @@
       "inventory.itemGranted"
     ],
     "listensTo": [
-      "combat.hit"
+      "combat.hit",
+      "inventory.containerOpened"
     ]
   },
   "dependencies": [

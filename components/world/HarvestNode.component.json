@@ -5,10 +5,6 @@
   "description": "A choppable, minable, gatherable resource point: a hit-point pool depleted per swing, a loot roll on depletion, and a respawn timer. Yields come from inventory.loot_table rolls so node contents are data shared with every other loot source in the game — a tree and a treasure chest speak the same reward language. The node owns its respawn because 'when does this forest come back' is world pacing, but whether the player is ALLOWED to harvest it is decided from the incoming hit's tool metadata, and the tool itself stays with whoever swung it. It does not place nodes — that is world.terrain_generator or world.world_builder's job; this is the behavior of one node once it exists, and keeping placement out is what lets the same descriptor serve hand-built and procedural maps.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

@@ -1,0 +1,40 @@
+{
+  "id": "genre.logic_puzzle",
+  "name": "Logic Puzzle",
+  "description": "Sudoku, nonogram, kakuro -- deduction with exactly one answer. Uniqueness is the pack's load-bearing promise: utility.logic_grid_engine solves every generated puzzle twice, once to find the answer and once to prove there is no second, and discards anything that fails. A puzzle with two solutions is not a hard puzzle, it is a broken one, and a player who deduces correctly and is marked wrong has been lied to. Difficulty is graded by the techniques a solve requires rather than by clue count, which is a famously bad proxy. Hints escalate rather than answer, because a hint button that solves the cell immediately converts a puzzle game into a clicking game.",
+  "version": "0.1.0",
+  "loop": "given constraints \u2192 deduce \u2192 fill cells \u2192 puzzle complete",
+  "views": [
+    "top-down"
+  ],
+  "memberComponents": [
+    "world.tile_grid",
+    "utility.timer_system",
+    "social.leaderboard",
+    "persistence.save_system",
+    "presentation.audio_system"
+  ],
+  "newComponents": [
+    "utility.logic_grid_engine",
+    "ui.hint_system",
+    "progression.puzzle_difficulty_rater",
+    "ui.pencil_marks",
+    "world.daily_puzzle_seed"
+  ],
+  "signatureCompound": {
+    "name": "One Puzzle, One Answer, Graded Honestly",
+    "description": "What has to be true before a puzzle is worth solving: daily_puzzle_seed derives today's seed from the calendar so everyone gets the same board, logic_grid_engine generates from it and proves the solution unique, puzzle_difficulty_rater solves it again with a technique ladder to earn its difficulty label, and hint_system draws its escalating hints from that same solver's reasoning rather than from a plausible sentence.",
+    "memberIds": [
+      "world.daily_puzzle_seed",
+      "utility.logic_grid_engine",
+      "progression.puzzle_difficulty_rater",
+      "ui.hint_system"
+    ]
+  },
+  "tags": [
+    "logic-puzzle",
+    "deduction",
+    "daily",
+    "uniqueness"
+  ]
+}

@@ -5,10 +5,6 @@
   "description": "The station catchment simulation: who wants to travel, from where to where, and when. It owns demand generation per station from catchment size and time of day \u2014 rush hours ride world.day_night_cycle's dawn and dusk rather than a private clock, so passenger pressure and the visible sky never disagree \u2014 and the queues that build when a route's capacity falls short of its catchment. Schedules changing (world.routeScheduleUpdated) re-aims demand immediately, because a passenger's loyalty is to the timetable, not to the company. Fares are collected on delivery by economy.currency and capacity is the vehicle's manifest; this component only produces the crowd and its patience. Overcrowding is announced as world.stationOvercrowded for the score and advisory layers \u2014 it never penalizes by itself, since a tycoon game teaches through lost revenue, not through fines the player did not choose.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

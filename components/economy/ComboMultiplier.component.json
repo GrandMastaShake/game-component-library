@@ -4,7 +4,9 @@
   "category": "economy",
   "description": "The streak economy of a rhythm game: consecutive good-enough judgements build a streak, thresholds raise a multiplier, and a miss breaks both. It owns the streak, the tier table, and the break rules, and it owns nothing upstream — judgements arrive as facts from utility.judgement_window, so tightening the perfect window never touches scoring and revaluing a perfect never touches timing. The multiplier is the genre's risk engine: a long streak makes the next note worth more, which is exactly when players tighten up, and that tension only works if streak state lives in one auditable place rather than being reconstructed from the judgement log. Score itself is emitted as a value on each event; economy.currency or a session scoreboard decides where it accumulates, because a rhythm score and a shop wallet should not share a ledger by accident.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

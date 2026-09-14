@@ -4,7 +4,9 @@
   "category": "world",
   "description": "The floor-bound sibling of world.switch_mechanism: a switch that reads weight instead of hands. It owns the pressed/released fact on a named channel, the source filter — player, crate, or either — and a release delay, because a plate that flickers as a crate micro-bounces makes every door it feeds stutter. The source filter is the design surface: player-only plates force escort-free solutions, crate-only plates make the crate the key, and any-source plates let the player choose, which is why one component must distinguish all three. It deliberately does not own what the weight triggers; consumers subscribe to the channel exactly as they do for switches. It also does not detect the crate itself — world.pushable_block announces world.block_settled, and this component trusts that fact rather than reimplementing collision.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

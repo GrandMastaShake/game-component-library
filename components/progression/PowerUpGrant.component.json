@@ -4,7 +4,9 @@
   "category": "progression",
   "description": "The acquirable mutation: double jump, wall cling, dash — new verbs delivered as parameter overrides on the movement components the player already has, never as parallel implementations. A double jump is movement.jump_core with maxJumps raised to 2; building a second jump component would split the forgiveness windows, the event stream, and every downstream count in two. This component owns exactly the grant transaction: marking a powerId as held and applying its declared overrides to named sibling inputs. It deliberately does not own the pickup fantasy (presentation handles the fanfare), does not own gating (world.ability_gate checks what this grants), and does not own persistence — persistence.save_system records progression.power_up_granted like any other durable fact. Because overrides are data, a designer can ship a new power by writing one grant entry and one gate requirement, touching no movement code.",
   "version": "0.1.0",
-  "platform": ["roblox", "godot", "unity", "web", "agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
     {"target": "canvas2d", "status": "unmapped", "module": null},
     {"target": "webgl", "status": "unmapped", "module": null},

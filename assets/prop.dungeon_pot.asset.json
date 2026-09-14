@@ -1,0 +1,28 @@
+{
+  "id": "prop.dungeon_pot",
+  "name": "Dungeon Pot",
+  "description": "A clay pot.",
+  "archetype": "prop",
+  "format": "glb",
+  "units": "metres",
+  "forwardAxis": "-z",
+  "sockets": [],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/generated/pot.glb",
+      "triangles": 156,
+      "bytes": 14080
+    }
+  ],
+  "source": {
+    "kind": "generated",
+    "tool": "tools/mesh — pure-stdlib Python, no Blender in the loop",
+    "repository": "game-architect-studio",
+    "script": "tools/mesh/build_props.py",
+    "generatedOn": "2026-09-12"
+  },
+  "provenance": "A tapered vessel with a torus rim. Its Euler characteristic is 2 — a bowl contributes 2 and a ring contributes 0 — which the audit reported on the first run against an expectation of 4. That is the argument for generated geometry in one line: the mesh was right and the arithmetic was not, and nothing about a downloaded binary would have said so. Built and audited by tools/mesh/build_props.py: watertight, the Euler characteristic measured rather than asserted, and inside a triangle budget. The file is byte-for-byte reproducible, which is what makes the script the asset and the .glb a compiler output."
+}

@@ -1,0 +1,39 @@
+{
+  "id": "genre.text_interactive_fiction",
+  "name": "Text / Interactive Fiction",
+  "description": "Words, choices, and a story that remembers. The pack splits traversal from condition on purpose: ui.passage_engine owns the graph of text and the interpolation that makes a passage read as though it were written for this reader, while ui.choice_consequence owns the flags that decide which links are offered at all. Keeping them apart is what lets a story be linted -- an unreachable branch is a bug an author wants told about before publication, not discovered by a reader who never sees it. Delayed consequences are first-class, because a decision in chapter one landing in chapter six is the effect the form exists for and the one hardest to hand-roll.",
+  "version": "0.1.0",
+  "loop": "read passage \u2192 choose \u2192 world state shifts \u2192 next passage",
+  "views": [
+    "ui-forward"
+  ],
+  "memberComponents": [
+    "ui.dialogue_box",
+    "persistence.save_system",
+    "presentation.audio_system",
+    "presentation.atmosphere_system"
+  ],
+  "newComponents": [
+    "ui.passage_engine",
+    "ui.choice_consequence",
+    "ui.text_parser_fallback",
+    "ui.story_stats",
+    "persistence.save_bookmark"
+  ],
+  "signatureCompound": {
+    "name": "A Choice That Lands Six Chapters Later",
+    "description": "The branch the form exists for: passage_engine renders a passage and offers its links, choice_consequence records the flag the reader set and schedules it to take effect after a declared number of passages, story_stats surfaces the resolve it quietly moved, and save_bookmark captures position AND flags together so returning to try the other branch lands in a scene the story still believes in.",
+    "memberIds": [
+      "ui.passage_engine",
+      "ui.choice_consequence",
+      "ui.story_stats",
+      "persistence.save_bookmark"
+    ]
+  },
+  "tags": [
+    "interactive-fiction",
+    "text",
+    "branching",
+    "narrative"
+  ]
+}

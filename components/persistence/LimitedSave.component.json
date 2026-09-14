@@ -5,10 +5,6 @@
   "description": "Ink-ribbon saving: each manual save consumes a finite token held in the inventory, so 'should I save now' becomes the same species of decision as 'should I heal now' — and in this genre, deciding wrong is content. The write itself is delegated to persistence.save_system; durability, slots, and corruption handling are solved there, and this component is a gate on WHEN save_system may fire plus the token bookkeeping. Requiring a save-point location is config, not law, but the default holds it because save-anywhere plus scarce tokens is just a harder difficulty setting, while save-rooms are pacing architecture. Autosaves and setpiece checkpoints may bypass the token, but the bypass is explicit and counted — invisible free saves quietly delete the tension the tokens exist to create.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [

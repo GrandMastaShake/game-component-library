@@ -2,7 +2,7 @@
   "id": "presentation.style_presets",
   "name": "Style Presets",
   "category": "presentation",
-  "description": "Named bundles (e.g. 'cartoon', 'realistic', 'retro') that combine a color palette, mesh style, and material settings into one switchable visual theme.",
+  "description": "Named bundles (e.g. 'cartoon', 'realistic', 'retro') that combine a color palette, mesh style, and material settings into one switchable visual theme. The theme covers the INTERFACE as well as the world, and it did not: the preset decided contrast, scanlines and vignette, while every readout on screen carried its own hard-coded panel colours. Four byte-identical copies of the same panel-drawing helper had grown across the runtime, each brick painting the same near-black plate with the same amber hairline, and none of them switchable. A named look that restyles the world and leaves the HUD alone is half a look, and the alternative — a second component owning interface chrome — would be two components owning one idea, which is the failure this catalogue exists to avoid.\n\nSo `style` carries `hud` now, and whatever draws a panel asks for it. A build with no style_presets gets the default plate, which is what every one of those four copies was drawing anyway.",
   "version": "0.1.0",
   "platform": [
     "roblox",
@@ -39,13 +39,15 @@
       "name": "presetName",
       "type": "string",
       "required": false,
-      "default": "cartoon"
+      "default": "cartoon",
+      "description": "Which named look to use. Ships with `torch` (the warm near-black plate this catalogue's rooms use), `slate` (cool, low-contrast, for a build that wants the interface to recede), `retro` (scanlines and a green phosphor readout) and `cartoon`. An unknown name falls back to the first rather than failing, because a typo in a theme should not stop a game booting."
     }
   ],
   "outputs": [
     {
       "name": "activePreset",
-      "type": "object"
+      "type": "object",
+      "description": "The resolved preset: the world half (contrast, scanlines, vignette) and the interface half (`hud` — plate, border, text, accent, and the muted text a secondary line uses). Both halves in one object because they are one decision: a theme whose interface does not move with its world is a theme somebody will forget to switch."
     }
   ],
   "events": {

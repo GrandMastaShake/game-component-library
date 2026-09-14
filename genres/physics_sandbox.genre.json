@@ -1,0 +1,41 @@
+{
+  "id": "genre.physics_sandbox",
+  "name": "Physics Sandbox",
+  "description": "Bolt things together and find out. The pack has no win condition and no objective component, which is deliberate -- a sandbox that scores you is a puzzle game with extra steps. What it has instead is failure: movement.joint_builder's joints break under declared load, because a contraption that cannot fail has no engineering in it. presentation.force_visualizer is the pedagogy, not the debug output: a player who can see the torque on a joint learns why the arm bends, and the overlay reads without writing so switching it on can never change a result. Builds serialise to parts and joints, never to simulation state, so a shared contraption arrives standing up.",
+  "version": "0.1.0",
+  "loop": "spawn/join parts \u2192 apply forces \u2192 watch behavior \u2192 iterate",
+  "views": [
+    "side-scroll-2d",
+    "voxel"
+  ],
+  "memberComponents": [
+    "movement.physics_core",
+    "utility.behavior_fsm",
+    "utility.command_bus",
+    "presentation.object_placer",
+    "presentation.particle_system"
+  ],
+  "newComponents": [
+    "movement.ragdoll_system",
+    "movement.joint_builder",
+    "world.fluid_buoyancy",
+    "persistence.contraption_save_load",
+    "presentation.force_visualizer"
+  ],
+  "signatureCompound": {
+    "name": "It Floats Until It Doesn't",
+    "description": "Emergence with a failure mode: joint_builder bolts a hull to a powered hinge, fluid_buoyancy computes lift from the submerged fraction so the loaded end sits lower, force_visualizer draws the growing reaction at the joint, and the joint breaks at its declared load. contraption_save_load then hands the whole thing to someone else as parts and joints, so they can find the same limit.",
+    "memberIds": [
+      "movement.joint_builder",
+      "world.fluid_buoyancy",
+      "presentation.force_visualizer",
+      "persistence.contraption_save_load"
+    ]
+  },
+  "tags": [
+    "physics-sandbox",
+    "construction",
+    "emergent",
+    "simulation"
+  ]
+}

@@ -2,13 +2,9 @@
   "id": "progression.relic_passive",
   "name": "Relic Passive",
   "category": "progression",
-  "description": "Run-scoped modifiers that fire off events instead of clicks. A relic is a listener with a rule: when combat.entityDefeated fires, heal two; when combat.turnStarted fires, gain one energy. This component owns the roster of held relics, their trigger conditions, and their stacking policy, and it registers every modification through utility.command_bus rather than editing combat math directly — relics that reach inside combat.damage_resolver are how balance dies. It does not own acquisition: relics arrive from shops, drafts, or boss rewards, all of which simply grant an id. And it does not own persistence: a relic is born and dies with the run, so progression.run_meta_progression never hears about it — that separation is the entire difference between a run and an account.",
+  "description": "Run-scoped modifiers that fire off events instead of clicks. A relic is a listener with a rule: when combat.entityDefeated fires, heal two; when combat.turnStarted fires, gain one energy. This component owns the roster of held relics, their trigger conditions, and their stacking policy, and it registers every modification through utility.command_bus rather than editing combat math directly \u2014 relics that reach inside combat.damage_resolver are how balance dies. It does not own acquisition: relics arrive from shops, drafts, or boss rewards, all of which simply grant an id. And it does not own persistence: a relic is born and dies with the run, so progression.run_meta_progression never hears about it \u2014 that separation is the entire difference between a run and an account.",
   "version": "0.1.0",
   "platform": [
-    "roblox",
-    "godot",
-    "unity",
-    "web",
     "agnostic"
   ],
   "implementations": [
@@ -51,7 +47,7 @@
       "type": "number",
       "required": false,
       "default": 0,
-      "description": "Cap on simultaneously held relics. 0 means unlimited — the genre norm, since relic synergy is the fun. Set a cap only if relic count is itself a balance lever."
+      "description": "Cap on simultaneously held relics. 0 means unlimited \u2014 the genre norm, since relic synergy is the fun. Set a cap only if relic count is itself a balance lever."
     }
   ],
   "outputs": [

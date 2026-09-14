@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
-"""Validate compound recipes against component descriptors and event contracts."""
+"""Validate compound recipes against component descriptors and event contracts.
+
+Two of these checks exist because the wiring loop below reads
+`compound["connections"]` through `.get(..., [])`, and a compound that spells
+that key differently therefore has NO wires rather than bad ones. Two compounds
+were written with a `wiring` key instead. Both validated clean, both were
+reported in the wire total as contributing zero, and one of them reached `main`
+that way -- missing a field `compound.schema.json` marks required, with fifteen
+connections between them that nothing had ever looked at.
+
+So the shape is checked before the contents: a compound must carry every key the
+schema requires, and must not carry keys the schema does not define. The second
+half is the one that catches a rename, and a default of `[]` for a required
+field is exactly the kind of guard that hides the finding worth having.
+"""
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
@@ -27,6 +41,21 @@ def main():
     for path in sorted((ROOT/"compounds").glob("*.compound.json")):
         try: compounds.append((path,load_json(path)))
         except (OSError,json.JSONDecodeError) as exc: errors.append(f"{path.relative_to(ROOT)}: invalid JSON ({exc})")
+    # Shape before contents. The schema is the authority on which keys exist;
+    # reading it here means a key added there is enforced without touching this.
+    try:
+        schema=load_json(ROOT/"compound.schema.json")
+        allowed=set(schema.get("properties",{})); required=list(schema.get("required",[]))
+    except (OSError,json.JSONDecodeError) as exc:
+        errors.append(f"compound.schema.json: unreadable ({exc})"); allowed=set(); required=[]
+    for path,compound in compounds:
+        label=compound.get("id",path.stem)
+        for key in required:
+            if key not in compound: errors.append(f"{label}: missing required key '{key}' (compound.schema.json)")
+        if allowed:
+            for key in sorted(set(compound)-allowed):
+                errors.append(f"{label}: unknown key '{key}' — compound.schema.json defines {sorted(allowed)}")
+
     wires=[]
     for path,compound in compounds:
         label=compound.get("id",path.stem); members={x.get("id") for x in compound.get("components",[]) if isinstance(x,dict)}

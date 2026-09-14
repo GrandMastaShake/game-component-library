@@ -1,0 +1,64 @@
+{
+  "id": "utility.remote_bootstrap",
+  "name": "Remote Bootstrap",
+  "category": "utility",
+  "description": "Non-blocking resolver for a server-owned remote namespace. Client code that calls WaitForChild on a remote folder directly from an initializer stalls its entire thread when the server has not replicated yet - and stalls forever when the server script is absent, producing a frozen interface with no error. This component resolves a dotted remote path on a detached thread with a per-hop timeout, caches the result, and hands the caller either the resolved remote or an explicit miss so it can proceed on defaults. Makes 'server not ready' a normal branch instead of a hang.",
+  "version": "0.1.0",
+  "platform": [
+    "roblox",
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "roblox",
+      "status": "scaffold",
+      "module": "roblox-adapters/utility.remote_bootstrap.adapter.lua",
+      "note": "Resolution is injected, so the resolver is testable against a fake tree with no DataModel."
+    }
+  ],
+  "inputs": [
+    {
+      "name": "rootName",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "hopTimeoutSeconds",
+      "type": "number",
+      "required": false,
+      "default": 10
+    },
+    {
+      "name": "rootTimeoutSeconds",
+      "type": "number",
+      "required": false,
+      "default": 15
+    }
+  ],
+  "outputs": [
+    {
+      "name": "isResolved",
+      "type": "boolean"
+    },
+    {
+      "name": "resolvedPaths",
+      "type": "object"
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.remoteResolved",
+      "utility.remoteTimedOut"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": [
+    "networking",
+    "bootstrap",
+    "reliability",
+    "foundational"
+  ],
+  "provenance": "Surfaced by the same defect pass (2026-09-11): eight of nine UI modules opened with a synchronous ReplicatedStorage WaitForChild on a remote folder whose server script was absent, stalling each thread permanently and leaving a frozen interface with no error raised. Searched first: persistence.datastore_safe retries datastore calls rather than resolving remotes, utility.command_bus assumes its transport already exists, and social.trade_remote_handler owns one remote it is handed; nothing owns the client-side handshake that decides a remote never arrived. Library-native, written against ReplicatedStorage replication timing.",
+  "implementationPath": "roblox-adapters/utility.remote_bootstrap.adapter.lua"
+}
