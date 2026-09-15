@@ -6068,6 +6068,454 @@
       "sprite_key": "vid-keyart-mine-took",
       "generated": "2026-09-14",
       "version": 1
+    },
+    {
+      "key": "map-floor-flag",
+      "file": "images/maps/map-floor-flag.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-flag-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-flag",
+      "prompt": "Cut flagstone slabs of irregular sizes fitted together, dark mortar lines between the slabs, worn walking surfaces, a few hairline cracks. Top-down orthographic battlemap floor texture seen from directly above, perfectly flat, no perspective, no vanishing point. Hand-painted full-colour battlemap in the manner of Czepeku crossed with an old county surveyor's plan: painterly texture with a little r",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-board",
+      "file": "images/maps/map-floor-board.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-board-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-board",
+      "prompt": "Wooden floorboards running horizontally straight across the frame, visible grain and wear along the boards, dark nail heads in rows, thin gaps between planks. Top-down orthographic battlemap floor texture seen from directly above, perfectly flat, no perspective, no vanishing point. Hand-painted full-colour battlemap in the manner of Czepeku crossed with an old county surveyor's plan: painterly tex",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-earth",
+      "file": "images/maps/map-floor-earth.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-earth-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-earth",
+      "prompt": "Packed bare earth, dry trodden dirt with small embedded stones and the faint twin ruts of a cart track crossing once, scuffed. Top-down orthographic battlemap floor texture seen from directly above, perfectly flat, no perspective, no vanishing point. Hand-painted full-colour battlemap in the manner of Czepeku crossed with an old county surveyor's plan: painterly texture with a little restrained in",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-rock",
+      "file": "images/maps/map-floor-rock.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-rock-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-rock",
+      "prompt": "Pick-dressed cut rock, mine-floor stone with parallel tool marks running in one direction, chips and scoring, cold grey. Top-down orthographic battlemap floor texture seen from directly above, perfectly flat, no perspective, no vanishing point. Hand-painted full-colour battlemap in the manner of Czepeku crossed with an old county surveyor's plan: painterly texture with a little restrained ink hatc",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-cinder",
+      "file": "images/maps/map-floor-cinder.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-cinder-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-cinder",
+      "prompt": "Ground covered in settled ash and clinker, grey-warm cinders, fine powdery ash drifts, small fragments of burnt material. Top-down orthographic battlemap floor texture seen from directly above, perfectly flat, no perspective, no vanishing point. Hand-painted full-colour battlemap in the manner of Czepeku crossed with an old county surveyor's plan: painterly texture with a little restrained ink hat",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-water",
+      "file": "images/maps/map-floor-water.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-water-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-water",
+      "prompt": "Dark standing water over a stone floor, the slabs faintly visible beneath the surface, still water with soft ripples and a dull sheen, very dark. Top-down orthographic battlemap floor texture seen from directly above, perfectly flat, no perspective, no vanishing point. Hand-painted full-colour battlemap in the manner of Czepeku crossed with an old county surveyor's plan: painterly texture with a l",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-table",
+      "file": "images/maps/map-dress-table.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-table-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-table",
+      "prompt": "a heavy wooden trestle table with a scarred top A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the object. Isolated ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-bed",
+      "file": "images/maps/map-dress-bed.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-bed-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-bed",
+      "prompt": "a narrow wooden bed frame with a thin straw mattress and a dark wool blanket A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-bench",
+      "file": "images/maps/map-dress-bench.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-bench-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-bench",
+      "prompt": "a plain backless wooden bench A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the object. Isolated object, whole obje",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-pew",
+      "file": "images/maps/map-dress-pew.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-pew-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-pew",
+      "prompt": "a short run of three wooden chapel pews in a row A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the object. Isolated",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-desk",
+      "file": "images/maps/map-dress-desk.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-desk-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-desk",
+      "prompt": "a clerk's wooden writing desk with a sloped top, an inkwell and two stacked ledgers A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-counter",
+      "file": "images/maps/map-dress-counter.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-counter-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-counter",
+      "prompt": "a long wooden serving counter with a worn front A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the object. Isolated ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-shelf",
+      "file": "images/maps/map-dress-shelf.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-shelf-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-shelf",
+      "prompt": "a tall wooden shelf unit stacked with jars, folded cloth and small boxes A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow bene",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-rack",
+      "file": "images/maps/map-dress-rack.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-rack-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-rack",
+      "prompt": "a standing wooden rack holding unlit oil lamps in rows A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the object. Is",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-stair",
+      "file": "images/maps/map-dress-stair.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-stair-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-stair",
+      "prompt": "a short straight flight of stone steps descending away, the far steps darker A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-hearth",
+      "file": "images/maps/map-dress-hearth.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-hearth-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-hearth",
+      "prompt": "a stone hearth with a dark firebox holding faint embers, a simple andiron A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow ben",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-shaft",
+      "file": "images/maps/map-dress-shaft.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-shaft-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-shaft",
+      "prompt": "the square timbered mouth of a mine shaft, black empty pit at the centre, worn plank edging A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-post",
+      "file": "images/maps/map-dress-post.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-post-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-post",
+      "prompt": "a cast-iron lamp post seen from directly above, small lantern head with a dim amber glow, round base plate A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing ne",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-bridge",
+      "file": "images/maps/map-dress-bridge.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-bridge-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-bridge",
+      "prompt": "a short stone bridge span section crossing left to right, low parapet edges, worn cobbles on the deck A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-wh",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-font",
+      "file": "images/maps/map-dress-font.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-font-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-font",
+      "prompt": "an octagonal stone baptismal font holding dark water in its bowl A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-altar",
+      "file": "images/maps/map-dress-altar.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-altar-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-altar",
+      "prompt": "a long stone altar slab with a worn dark cloth runner and two unlit candles A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow b",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-urns",
+      "file": "images/maps/map-dress-urns.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-urns-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-urns",
+      "prompt": "a block of small square wall niches, each niche holding a small clay funerary urn A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact sh",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-pyre",
+      "file": "images/maps/map-dress-pyre.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-pyre-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-pyre",
+      "prompt": "an unlit stacked wood pyre, crisscrossed split logs over kindling A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-barrels",
+      "file": "images/maps/map-dress-barrels.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-barrels-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-barrels",
+      "prompt": "a cluster of three oak barrels with dark iron hoops A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft contact shadow beneath the object. Isola",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-cage",
+      "file": "images/maps/map-dress-cage.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-cage-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-cage",
+      "prompt": "an empty hanging iron cage seen from directly above, circular banded bars, short chain A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft conta",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-grave",
+      "file": "images/maps/map-dress-grave.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-grave-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-grave",
+      "prompt": "a rectangle of cut turf with dark open earth inside, a small mound of dug soil beside it A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Soft con",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-board",
+      "file": "images/maps/map-dress-board.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-board-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-board",
+      "prompt": "a wooden tally board mounted on a single post, rows of small chalked tally marks on the board A single object viewed from directly above, top-down orthographic, no perspective. Hand-painted battlemap token in the manner of Czepeku crossed with a county surveyor's plan: painterly with a little ink linework, muted amber, stone-grey and paper-brown palette, dark low-key tones, nothing near-white. Sof",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-over-water",
+      "file": "images/maps/map-over-water.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-over-water-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-over-water",
+      "prompt": "shallow blue-grey flood water with soft ripple rings and a dull sheen, translucent, the ground faintly visible through it A semi-transparent overlay texture for a top-down battlemap, viewed from directly above, perfectly flat, no perspective. Hand-painted, muted dark palette, nothing near-white, no text, no grid lines, no people, no creatures. Sparse and patchy enough that a painted floor beneath ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-over-ash",
+      "file": "images/maps/map-over-ash.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-over-ash-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-over-ash",
+      "prompt": "drifts of settled grey ash, deeper towards the tile edges, thin and patchy in the middle, translucent A semi-transparent overlay texture for a top-down battlemap, viewed from directly above, perfectly flat, no perspective. Hand-painted, muted dark palette, nothing near-white, no text, no grid lines, no people, no creatures. Sparse and patchy enough that a painted floor beneath remains legible thro",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-over-rubble",
+      "file": "images/maps/map-over-rubble.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-over-rubble-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-over-rubble",
+      "prompt": "scattered small broken stone shards and splintered timber, spread out not piled, each piece small and separate A semi-transparent overlay texture for a top-down battlemap, viewed from directly above, perfectly flat, no perspective. Hand-painted, muted dark palette, nothing near-white, no text, no grid lines, no people, no creatures. Sparse and patchy enough that a painted floor beneath remains leg",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-over-blood",
+      "file": "images/maps/map-over-blood.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-over-blood-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-over-blood",
+      "prompt": "dried dark rust-brown spatter stains and one faint smeared drag mark, matte and dried, restrained and subtle, sparse A semi-transparent overlay texture for a top-down battlemap, viewed from directly above, perfectly flat, no perspective. Hand-painted, muted dark palette, nothing near-white, no text, no grid lines, no people, no creatures. Sparse and patchy enough that a painted floor beneath remai",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-over-frost",
+      "file": "images/maps/map-over-frost.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-over-frost-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-over-frost",
+      "prompt": "pale grey-blue frost crystals and feathery ice ferns creeping inward from the tile edges, thin and patchy in the centre, translucent A semi-transparent overlay texture for a top-down battlemap, viewed from directly above, perfectly flat, no perspective. Hand-painted, muted dark palette, nothing near-white, no text, no grid lines, no people, no creatures. Sparse and patchy enough that a painted flo",
+      "generated": "2026-09-15",
+      "version": 1
     }
   ]
 }
