@@ -6516,6 +6516,1179 @@
       "prompt": "pale grey-blue frost crystals and feathery ice ferns creeping inward from the tile edges, thin and patchy in the centre, translucent A semi-transparent overlay texture for a top-down battlemap, viewed from directly above, perfectly flat, no perspective. Hand-painted, muted dark palette, nothing near-white, no text, no grid lines, no people, no creatures. Sparse and patchy enough that a painted flo",
       "generated": "2026-09-15",
       "version": 1
+    },
+    {
+      "key": "map-floor-flag-v1",
+      "file": "images/maps/map-floor-flag-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-flag-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-flag-v1",
+      "map_layer": "floor",
+      "prompt": "Small cut flagstone slabs of irregular rectangular sizes fitted together, dark mortar lines, worn walking surfaces, each slab about an eighth of the frame. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated pa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-flag-v2",
+      "file": "images/maps/map-floor-flag-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-flag-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-flag-v2",
+      "map_layer": "floor",
+      "prompt": "Small cut flagstone slabs in a coursed pattern, several cracked through, dark mortar lines, damp dark patches between slabs, each slab about an eighth of the frame. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desat",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-flag-v3",
+      "file": "images/maps/map-floor-flag-v3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-flag-v3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-flag-v3",
+      "map_layer": "floor",
+      "prompt": "Small cut flagstone slabs, heavier wear and chips, fine gravel caught in the mortar lines, faint dark water staining, each slab about an eighth of the frame. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-flag-v4",
+      "file": "images/maps/map-floor-flag-v4.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-flag-v4-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-flag-v4",
+      "map_layer": "floor",
+      "prompt": "Small cut flagstone slabs with a few slabs missing showing dark earth beneath, dark mortar lines, worn surfaces, each slab about an eighth of the frame. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palet",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-board-v1",
+      "file": "images/maps/map-floor-board-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-board-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-board-v1",
+      "map_layer": "floor",
+      "prompt": "Many narrow old wooden floorboards running horizontally across the frame, each board about a sixteenth of the frame height, dark gaps between planks, worn grey-brown grain, rows of small dark nail heads. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fan",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-board-v2",
+      "file": "images/maps/map-floor-board-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-board-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-board-v2",
+      "map_layer": "floor",
+      "prompt": "Many narrow old wooden floorboards running horizontally, each about a sixteenth of the frame height, heavier wear, pale splintered patches, dark gaps, a few warped boards. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-board-v3",
+      "file": "images/maps/map-floor-board-v3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-board-v3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-board-v3",
+      "map_layer": "floor",
+      "prompt": "Many narrow old wooden floorboards running horizontally, each about a sixteenth of the frame height, dark damp staining across several boards, worn grain, dark nail heads. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-board-v4",
+      "file": "images/maps/map-floor-board-v4.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-board-v4-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-board-v4",
+      "map_layer": "floor",
+      "prompt": "Many narrow old wooden floorboards running horizontally, each about a sixteenth of the frame height, one or two broken boards showing darkness beneath, worn grey grain. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: d",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-earth-v1",
+      "file": "images/maps/map-floor-earth-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-earth-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-earth-v1",
+      "map_layer": "floor",
+      "prompt": "Packed bare earth seen from above, dry trodden dirt with tiny embedded pebbles, subtle mottling and scuffs, fine small-scale detail, no tracks, no plants. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated pal",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-earth-v2",
+      "file": "images/maps/map-floor-earth-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-earth-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-earth-v2",
+      "map_layer": "floor",
+      "prompt": "Packed bare earth with patches of darker damp soil and small stones, subtle scuffing, fine small-scale detail, no tracks, no plants. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-earth-v3",
+      "file": "images/maps/map-floor-earth-v3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-earth-v3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-earth-v3",
+      "map_layer": "floor",
+      "prompt": "Packed bare earth, drier and paler, dusty patches and fine cracks, tiny stones, fine small-scale detail, no tracks, no plants. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash grey, ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-earth-v4",
+      "file": "images/maps/map-floor-earth-v4.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-earth-v4-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-earth-v4",
+      "map_layer": "floor",
+      "prompt": "Packed bare earth with scattered small rubble fragments and trampled scuffed patches, fine small-scale detail, no tracks, no plants. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-rock-v1",
+      "file": "images/maps/map-floor-rock-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-rock-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-rock-v1",
+      "map_layer": "floor",
+      "prompt": "Pick-dressed cut rock, mine-floor stone with fine parallel tool marks in one direction, small chips and scoring, cold dark grey, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated pale",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-rock-v2",
+      "file": "images/maps/map-floor-rock-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-rock-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-rock-v2",
+      "map_layer": "floor",
+      "prompt": "Pick-dressed cut rock with heavier chipping, small loose stone fragments scattered, fine tool marks, cold dark grey, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charc",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-rock-v3",
+      "file": "images/maps/map-floor-rock-v3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-rock-v3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-rock-v3",
+      "map_layer": "floor",
+      "prompt": "Pick-dressed cut rock with dark damp patches and fine mineral veining, tool marks in one direction, cold dark grey, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charco",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-rock-v4",
+      "file": "images/maps/map-floor-rock-v4.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-rock-v4-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-rock-v4",
+      "map_layer": "floor",
+      "prompt": "Pick-dressed cut rock crossed by a few thin dark cracks, fine tool marks, small chips, cold dark grey, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash grey,",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-cinder-v1",
+      "file": "images/maps/map-floor-cinder-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-cinder-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-cinder-v1",
+      "map_layer": "floor",
+      "prompt": "Ground covered in settled ash and clinker, grey-warm cinders, fine powdery drifts, tiny fragments of burnt material, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charc",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-cinder-v2",
+      "file": "images/maps/map-floor-cinder-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-cinder-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-cinder-v2",
+      "map_layer": "floor",
+      "prompt": "Settled ash and clinker with darker scorched patches, fine powdery drifts, tiny burnt fragments, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash grey, dark ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-cinder-v3",
+      "file": "images/maps/map-floor-cinder-v3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-cinder-v3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-cinder-v3",
+      "map_layer": "floor",
+      "prompt": "Settled pale grey ash over darker ground, wind-shaped fine ripples in the ash, tiny clinker fragments, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash grey,",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-cinder-v4",
+      "file": "images/maps/map-floor-cinder-v4.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-cinder-v4-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-cinder-v4",
+      "map_layer": "floor",
+      "prompt": "Settled ash and clinker with a few faint dark scuffed crossings, fine powdery texture, tiny burnt fragments, fine small-scale detail. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-water-v1",
+      "file": "images/maps/map-floor-water-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-water-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-water-v1",
+      "map_layer": "floor",
+      "prompt": "Dark standing water over a stone floor seen from above, the slabs faintly visible beneath the surface, still water with fine soft ripples and a dull dim sheen, very dark. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered:",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-water-v2",
+      "file": "images/maps/map-floor-water-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-water-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-water-v2",
+      "map_layer": "floor",
+      "prompt": "Dark standing water over stone, faint slabs beneath, a few soft ripple rings, dull dim sheen, very dark. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash grey, dark umber and cold st",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-water-v3",
+      "file": "images/maps/map-floor-water-v3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-water-v3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-water-v3",
+      "map_layer": "floor",
+      "prompt": "Dark standing water over stone, faint slabs beneath, fine wind-rippled texture across the surface, very dark. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash grey, dark umber and co",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-water-v4",
+      "file": "images/maps/map-floor-water-v4.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-water-v4-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-water-v4",
+      "map_layer": "floor",
+      "prompt": "Dark standing water over stone, faint slabs beneath, patches of perfectly still black water and patches of fine ripples, very dark. Top-down orthographic battlemap floor texture seen from high above, perfectly flat, no perspective, no vanishing point, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated palette of charcoal, ash g",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-bones",
+      "file": "images/maps/map-clut-bones.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-bones-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-bones",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small scatter of old dry bones, two or three pieces A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow dir",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-candle",
+      "file": "images/maps/map-clut-candle.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-candle-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-candle",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a short stubby candle in a small puddle of cold wax, unlit A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shado",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-ledger",
+      "file": "images/maps/map-clut-ledger.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-ledger-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-ledger",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small stack of two worn ledgers with dark cloth covers A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-rope",
+      "file": "images/maps/map-clut-rope.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-rope-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-rope",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a coiled length of old hemp rope A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITIC",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-sack",
+      "file": "images/maps/map-clut-sack.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-sack-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-sack",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a slumped grain sack, loosely tied A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRIT",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-crate",
+      "file": "images/maps/map-clut-crate.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-crate-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-crate",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small rough wooden crate A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITICAL: th",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-tools",
+      "file": "images/maps/map-clut-tools.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-tools-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-tools",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small scatter of mining hand tools, a hammer and two chisels A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact s",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-pot",
+      "file": "images/maps/map-clut-pot.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-pot-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-pot",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a squat blackened iron cooking pot A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRIT",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-papers",
+      "file": "images/maps/map-clut-papers.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-papers-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-papers",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a scatter of a few loose curled paper sheets, blank and yellowed A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-chain",
+      "file": "images/maps/map-clut-chain.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-chain-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-chain",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a short length of heavy iron chain in a loose coil A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow direct",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-mushrooms",
+      "file": "images/maps/map-clut-mushrooms.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-mushrooms-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-mushrooms",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small patch of pale shelf fungus and toadstools A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directl",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-bottle",
+      "file": "images/maps/map-clut-bottle.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-bottle-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-bottle",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a dark green glass bottle lying on its side A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly bene",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-coins",
+      "file": "images/maps/map-clut-coins.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-coins-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-coins",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a tiny spill of dull copper coins A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITI",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-cart-wheel",
+      "file": "images/maps/map-clut-cart-wheel.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-cart-wheel-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-cart-wheel",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a broken wooden cart wheel lying flat A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. C",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-herbs",
+      "file": "images/maps/map-clut-herbs.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-herbs-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-herbs",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small bundle of dried herbs tied with twine A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly be",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-footprints",
+      "file": "images/maps/map-clut-footprints.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-footprints-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-footprints",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a short trail of faint dark footprints in ash, three or four prints A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated charcoal/ash/umber palette, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint cont",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-strip",
+      "file": "images/maps/map-wall-stone-strip.png",
+      "size": [
+        512,
+        128
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-strip-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-strip",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of wall-top made of cut grey stone blocks, running straight across the full width of the frame, the wall seen from directly above showing its flat top surface and slight inner and outer edges, uniform at left and right edges for seamless horizontal tiling Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-corner",
+      "file": "images/maps/map-wall-stone-corner.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-corner-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-corner",
+      "map_layer": "wall",
+      "prompt": "an L-shaped corner of wall-top made of cut grey stone blocks, the corner in the centre of the frame, arms running to the left edge and bottom edge Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-end",
+      "file": "images/maps/map-wall-stone-end.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-end-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-end",
+      "map_layer": "wall",
+      "prompt": "a short stub end of a cut grey stone block wall-top, running horizontally from the left edge and ending bluntly at the centre of the frame Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transpa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-door",
+      "file": "images/maps/map-wall-stone-door.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-door-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-door",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of cut grey stone block wall-top across the full width of the frame, broken at the centre by a dark open doorway with a worn stone threshold Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. O",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-arch",
+      "file": "images/maps/map-wall-stone-arch.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-arch-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-arch",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of cut grey stone block wall-top across the full width of the frame, broken at the centre by a rounded stone archway opening, dark within Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-window",
+      "file": "images/maps/map-wall-stone-window.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-window-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-window",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of cut grey stone block wall-top across the full width of the frame, with a narrow dark slit window at the centre Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transp",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-timber-strip",
+      "file": "images/maps/map-wall-timber-strip.png",
+      "size": [
+        512,
+        128
+      ],
+      "source_fullres": "images/fullres/map-wall-timber-strip-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-timber-strip",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of wall-top made of dark timber framing with pale daub infill, running straight across the full width of the frame, seen from directly above showing its top surface, uniform at left and right edges for seamless horizontal tiling Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber,",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-timber-corner",
+      "file": "images/maps/map-wall-timber-corner.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-timber-corner-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-timber-corner",
+      "map_layer": "wall",
+      "prompt": "an L-shaped corner of dark timber and pale daub wall-top, corner in the centre of the frame, arms running to the left edge and bottom edge Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transpa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-timber-end",
+      "file": "images/maps/map-wall-timber-end.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-timber-end-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-timber-end",
+      "map_layer": "wall",
+      "prompt": "a short stub end of a dark timber and daub wall-top, running horizontally from the left edge and ending bluntly at the centre of the frame Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transpa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-timber-door",
+      "file": "images/maps/map-wall-timber-door.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-timber-door-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-timber-door",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark timber and daub wall-top across the full width of the frame, broken at the centre by a dark open doorway with a wooden lintel Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a com",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-timber-arch",
+      "file": "images/maps/map-wall-timber-arch.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-timber-arch-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-timber-arch",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark timber and daub wall-top across the full width of the frame, broken at the centre by a rough arched opening, dark within Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a complete",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-timber-window",
+      "file": "images/maps/map-wall-timber-window.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-timber-window-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-timber-window",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark timber and daub wall-top across the full width of the frame, with a small dark shuttered window at the centre Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty tr",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-strip",
+      "file": "images/maps/map-wall-brick-strip.png",
+      "size": [
+        512,
+        128
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-strip-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-strip",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of wall-top made of dark sooty engineering brick, running straight across the full width of the frame, seen from directly above showing its top surface, uniform at left and right edges for seamless horizontal tiling Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathe",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-corner",
+      "file": "images/maps/map-wall-brick-corner.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-corner-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-corner",
+      "map_layer": "wall",
+      "prompt": "an L-shaped corner of dark sooty brick wall-top, corner in the centre of the frame, arms running to the left edge and bottom edge Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transparent back",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-end",
+      "file": "images/maps/map-wall-brick-end.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-end-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-end",
+      "map_layer": "wall",
+      "prompt": "a short stub end of a dark sooty brick wall-top, running horizontally from the left edge and ending bluntly at the centre of the frame Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transparent",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-door",
+      "file": "images/maps/map-wall-brick-door.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-door-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-door",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark sooty brick wall-top across the full width of the frame, broken at the centre by a dark open doorway with a stone lintel Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a complete",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-arch",
+      "file": "images/maps/map-wall-brick-arch.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-arch-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-arch",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark sooty brick wall-top across the full width of the frame, broken at the centre by a rounded brick archway, dark within Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-window",
+      "file": "images/maps/map-wall-brick-window.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-window-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-window",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark sooty brick wall-top across the full width of the frame, with a narrow dark vent slit at the centre Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines. On a completely empty transparent ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-stone-breach",
+      "file": "images/maps/map-wall-stone-breach.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-stone-breach-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-stone-breach",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of cut grey stone block wall-top across the full width of the frame, collapsed and broken at the centre into a rough gap with scattered rubble Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoon outlines.",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-wall-brick-portcullis",
+      "file": "images/maps/map-wall-brick-portcullis.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-wall-brick-portcullis-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-wall-brick-portcullis",
+      "map_layer": "wall",
+      "prompt": "a straight horizontal run of dark sooty brick wall-top across the full width of the frame, broken at the centre by a gate opening closed by a dark iron portcullis of vertical bars Viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism: desaturated charcoal, ash grey and dark umber, grimy weathered surfaces, no bright colours, nothing near-white, no cartoo",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-lamp",
+      "file": "images/maps/map-light-lamp.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-lamp-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-lamp",
+      "map_layer": "light-under-overlay",
+      "prompt": "a warm amber lamplight pool, soft golden-amber centre fading smoothly to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light itself, brightest at the cen",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-hearth",
+      "file": "images/maps/map-light-hearth.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-hearth-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-hearth",
+      "map_layer": "light-under-overlay",
+      "prompt": "a warm orange hearth-fire pool, slightly irregular flickering shape, deep orange centre fading to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light its",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-ember",
+      "file": "images/maps/map-light-ember.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-ember-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-ember",
+      "map_layer": "light-under-overlay",
+      "prompt": "a small dim ember glow pool, faint dull red-orange, fading quickly to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light itself, brightest at the centre",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-moon",
+      "file": "images/maps/map-light-moon.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-moon-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-moon",
+      "map_layer": "light-under-overlay",
+      "prompt": "a cold pale blue-grey moonlight pool, soft and wide, fading smoothly to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light itself, brightest at the cent",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-font",
+      "file": "images/maps/map-light-font.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-font-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-font",
+      "map_layer": "light-under-overlay",
+      "prompt": "a faint cold shimmer pool with the slightest pale green-grey tint, dim and wide, fading to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light itself, br",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-shaft-dark",
+      "file": "images/maps/map-light-shaft-dark.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-shaft-dark-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-shaft-dark",
+      "map_layer": "light-under-overlay",
+      "prompt": "a pool of darkness, a soft circular pool of pure shadow, darker than any room, opaque near-black centre fading smoothly to transparency, neutral grey-black only, no blue or violet tint A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. N",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-candle",
+      "file": "images/maps/map-light-candle.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-candle-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-candle",
+      "map_layer": "light-under-overlay",
+      "prompt": "a very small warm candlelight pool, tight amber centre fading quickly to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light itself, brightest at the cen",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-light-brazier",
+      "file": "images/maps/map-light-brazier.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-light-brazier-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-light-brazier",
+      "map_layer": "light-under-overlay",
+      "prompt": "a strong warm brazier glow pool, bright amber-orange centre with slight uneven edge, fading to transparency A soft radial pool of light seen from directly above, painted as a smooth circular glow fading to fully transparent at the edges, on a completely empty transparent background. Painterly, subtle, dark-fantasy mood. No objects, no source visible, no text, just the pool of coloured light itself",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-trans-flag-earth",
+      "file": "images/maps/map-trans-flag-earth.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-trans-flag-earth-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-trans-flag-earth",
+      "map_layer": "floor-transition",
+      "prompt": "the left half is small cut flagstone slabs with dark mortar lines, the right half is packed bare earth with tiny pebbles, blending through a rough broken boundary where slabs give way to dirt Top-down orthographic battlemap texture seen from high above, perfectly flat, no perspective. Painterly dark-fantasy realism, desaturated charcoal/ash/umber palette, grimy, no bright colours, nothing near-whi",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-trans-rock-cinder",
+      "file": "images/maps/map-trans-rock-cinder.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-trans-rock-cinder-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-trans-rock-cinder",
+      "map_layer": "floor-transition",
+      "prompt": "the left half is pick-dressed dark cut rock, the right half is settled grey-warm ash and clinker, blending through a rough boundary of scattered ash over broken stone Top-down orthographic battlemap texture seen from high above, perfectly flat, no perspective. Painterly dark-fantasy realism, desaturated charcoal/ash/umber palette, grimy, no bright colours, nothing near-white, no text, no grid. The",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-trans-earth-cinder",
+      "file": "images/maps/map-trans-earth-cinder.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-trans-earth-cinder-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-trans-earth-cinder",
+      "map_layer": "floor-transition",
+      "prompt": "the left half is packed bare earth, the right half is settled grey ash and clinker, blending through a rough dusty boundary Top-down orthographic battlemap texture seen from high above, perfectly flat, no perspective. Painterly dark-fantasy realism, desaturated charcoal/ash/umber palette, grimy, no bright colours, nothing near-white, no text, no grid. The LEFT half of the frame is the first floor ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-trans-board-flag",
+      "file": "images/maps/map-trans-board-flag.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-trans-board-flag-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-trans-board-flag",
+      "map_layer": "floor-transition",
+      "prompt": "the left half is many narrow old wooden floorboards, the right half is small cut flagstone slabs, blending through a boundary where broken boards end over stone Top-down orthographic battlemap texture seen from high above, perfectly flat, no perspective. Painterly dark-fantasy realism, desaturated charcoal/ash/umber palette, grimy, no bright colours, nothing near-white, no text, no grid. The LEFT ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-trans-rock-flag",
+      "file": "images/maps/map-trans-rock-flag.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-trans-rock-flag-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-trans-rock-flag",
+      "map_layer": "floor-transition",
+      "prompt": "the left half is pick-dressed dark cut rock, the right half is small cut flagstone slabs, blending through a rough worked-stone boundary Top-down orthographic battlemap texture seen from high above, perfectly flat, no perspective. Painterly dark-fantasy realism, desaturated charcoal/ash/umber palette, grimy, no bright colours, nothing near-white, no text, no grid. The LEFT half of the frame is the",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-trans-water-rock",
+      "file": "images/maps/map-trans-water-rock.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-trans-water-rock-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-trans-water-rock",
+      "map_layer": "floor-transition",
+      "prompt": "the left half is dark standing water with faint stone beneath, the right half is pick-dressed cut rock, blending through a wet waterline boundary of damp dark stone Top-down orthographic battlemap texture seen from high above, perfectly flat, no perspective. Painterly dark-fantasy realism, desaturated charcoal/ash/umber palette, grimy, no bright colours, nothing near-white, no text, no grid. The L",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "vid-amb-falling-ash",
+      "type": "video",
+      "file": "video/vid-amb-falling-ash.mp4",
+      "file_webm": "video/vid-amb-falling-ash.webm",
+      "poster": "video/vid-amb-falling-ash-poster.png",
+      "size": [
+        960,
+        960
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "map_layer": "fx-topmost",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-amb-falling-ash",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "vid-amb-dust-motes",
+      "type": "video",
+      "file": "video/vid-amb-dust-motes.mp4",
+      "file_webm": "video/vid-amb-dust-motes.webm",
+      "poster": "video/vid-amb-dust-motes-poster.png",
+      "size": [
+        960,
+        960
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "map_layer": "fx-topmost",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-amb-dust-motes",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "vid-amb-water-drip",
+      "type": "video",
+      "file": "video/vid-amb-water-drip.mp4",
+      "file_webm": "video/vid-amb-water-drip.webm",
+      "poster": "video/vid-amb-water-drip-poster.png",
+      "size": [
+        960,
+        960
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "map_layer": "fx-topmost",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-amb-water-drip",
+      "generated": "2026-09-15",
+      "version": 1
     }
   ]
 }
