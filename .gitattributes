@@ -1,0 +1,22 @@
+# MEDIA GOES THROUGH GIT LFS FROM HERE ON. art/media holds generated plates,
+# key art, audio and video for Infinite Dungeons — 176 MB across ~460 files as
+# of 2026-09-14, growing by a batch a day — and none of it is read by a
+# validator or by CI. Every clone and every CI checkout was paying for all of
+# it, forever. As LFS pointers the repository stays a catalogue of descriptors
+# with the media beside it rather than inside it. The manifest stays text.
+#
+# This file makes NEW media go through LFS. The files already committed are
+# still plain blobs in history; to convert them in place without rewriting
+# history, run once from the repository root and push:
+#
+#   git lfs migrate import --no-rewrite --yes \
+#     --include="art/media/**/*.png,art/media/**/*.jpg,art/media/**/*.mp3,art/media/**/*.ogg,art/media/**/*.mp4,art/media/**/*.webm"
+#
+art/media/**/*.png  filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.jpg  filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.webp filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.mp3  filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.ogg  filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.mp4  filter=lfs diff=lfs merge=lfs -text
+art/media/**/*.webm filter=lfs diff=lfs merge=lfs -text
