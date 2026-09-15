@@ -4954,210 +4954,16 @@
       "version": 1
     },
     {
-      "key": "mob-role-bruiser-1",
-      "file": "images/monsters/mob-role-bruiser-1.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-bruiser-1.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-bruiser-1",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-bruiser-2",
-      "file": "images/monsters/mob-role-bruiser-2.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-bruiser-2.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-bruiser-2",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-bruiser-3",
-      "file": "images/monsters/mob-role-bruiser-3.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-bruiser-3.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-bruiser-3",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-skirmisher-1",
-      "file": "images/monsters/mob-role-skirmisher-1.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-skirmisher-1.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-skirmisher-1",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-skirmisher-2",
-      "file": "images/monsters/mob-role-skirmisher-2.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-skirmisher-2.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-skirmisher-2",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-skirmisher-3",
-      "file": "images/monsters/mob-role-skirmisher-3.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-skirmisher-3.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-skirmisher-3",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-controller-1",
-      "file": "images/monsters/mob-role-controller-1.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-controller-1.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-controller-1",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-controller-2",
-      "file": "images/monsters/mob-role-controller-2.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-controller-2.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-controller-2",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-controller-3",
-      "file": "images/monsters/mob-role-controller-3.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-controller-3.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-controller-3",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-warden-1",
-      "file": "images/monsters/mob-role-warden-1.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-warden-1.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-warden-1",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-warden-2",
-      "file": "images/monsters/mob-role-warden-2.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-warden-2.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-warden-2",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-warden-3",
-      "file": "images/monsters/mob-role-warden-3.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-warden-3.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-warden-3",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-burner-1",
-      "file": "images/monsters/mob-role-burner-1.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-burner-1.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-burner-1",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-burner-2",
-      "file": "images/monsters/mob-role-burner-2.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-burner-2.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-burner-2",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "mob-role-burner-3",
-      "file": "images/monsters/mob-role-burner-3.png",
-      "size": [
-        512,
-        512
-      ],
-      "source_fullres": "images/monsters/mob-role-burner-3.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "mob-role-burner-3",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
       "key": "boss-role-boss-1",
       "file": "images/monsters/boss-role-boss-1.png",
       "size": [
         512,
         512
       ],
-      "source_fullres": "images/monsters/boss-role-boss-1.png",
+      "source_fullres": "images/fullres/boss-role-boss-1-1024.png",
       "app": "infinite-dungeons",
       "sprite_key": "boss-role-boss-1",
+      "prompt": "A severe middle-aged magistrate man, upright and composed in layered dark judicial robes with a high collar, holding an open ledger in one hand and a quill poised above it in the other, clean-shaven face calm and unhurried, weight balanced, the stillness of absolute authority, wax seal and inkpot at his belt. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5168,9 +4974,10 @@
         512,
         512
       ],
-      "source_fullres": "images/monsters/boss-role-boss-2.png",
+      "source_fullres": "images/fullres/boss-role-boss-2-1024.png",
       "app": "infinite-dungeons",
       "sprite_key": "boss-role-boss-2",
+      "prompt": "An elderly abbess, tall and erect in heavy undyed wool habits, a great iron ring of keys hanging at her belt which one hand rests upon deliberately, the other hand folded still, lined face serene and immovable, unhurried posture of total command, a wooden rule and sealed letters tucked in her sash. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and c",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5181,9 +4988,10 @@
         512,
         512
       ],
-      "source_fullres": "images/monsters/boss-role-boss-3.png",
+      "source_fullres": "images/fullres/boss-role-boss-3-1024.png",
       "app": "infinite-dungeons",
       "sprite_key": "boss-role-boss-3",
+      "prompt": "A heavyset pit-owner man in good dark broadcloth, fine but coal-dusted at the cuffs, standing upright and unhurried with both hands resting on a silver-knobbed cane, a watch chain across his waistcoat and a tally-book under one arm, jowled face composed with patient proprietorial calm, faint coal smoke in the darkness behind him. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated ",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5194,74 +5002,10 @@
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-dark-approach.png",
+      "source_fullres": "images/fullres/env-bio-dark-approach-1088x608.png",
       "app": "infinite-dungeons",
       "sprite_key": "env-bio-dark-approach",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-dark-settlement",
-      "file": "images/environment/env-bio-dark-settlement.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-dark-settlement.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-dark-settlement",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-dark-interior",
-      "file": "images/environment/env-bio-dark-interior.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-dark-interior.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-dark-interior",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-dark-workplace",
-      "file": "images/environment/env-bio-dark-workplace.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-dark-workplace.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-dark-workplace",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-dark-underground",
-      "file": "images/environment/env-bio-dark-underground.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-dark-underground.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-dark-underground",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-dark-water",
-      "file": "images/environment/env-bio-dark-water.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-dark-water.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-dark-water",
+      "prompt": "Arriving at a hardscrabble moor-edge parish town at dusk: a rutted peat track descending through driving rain toward a huddle of wet slate rooftops, a leaning granite waymarker cross beside the track, low ash-grey cloud, peat smoke hanging over the roofs, glistening black mud, distant tallow-light glimmering in a few small windows. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturate",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5272,9 +5016,24 @@
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-dark-high.png",
+      "source_fullres": "images/fullres/env-bio-dark-high-1088x608.png",
       "app": "infinite-dungeons",
       "sprite_key": "env-bio-dark-high",
+      "prompt": "The wet slate roofscape and squat church tower of a moor-edge parish town seen from the tower parapet: rain-slick slate ridges, mossy lead flashing, a rusted iron weathercock, chimneys trailing peat smoke flattened by wind, the grey moor and black peat cuttings stretching to a near-black horizon under a torn ash-grey sky, one amber window far below. Painterly dark-fantasy oil painting, heavy chiar",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-dark-interior",
+      "file": "images/environment/env-bio-dark-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-dark-interior-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-dark-interior",
+      "prompt": "The tithe room of a moor-edge parish church: a low rough-granite room with a long scarred oak table set with an open ledger, an iron strongbox, a quill and a stack of worn tally sticks, tallow candles guttering in iron holders, wet slate floor, an ash-choked hearth with faint embers, damp stains on limewashed walls, bundles of dried herbs hanging from a blackened beam. Painterly dark-fantasy oil p",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5285,217 +5044,66 @@
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-dark-sanctum.png",
+      "source_fullres": "images/fullres/env-bio-dark-sanctum-1088x608.png",
       "app": "infinite-dungeons",
       "sprite_key": "env-bio-dark-sanctum",
+      "prompt": "A small side chapel of a moor-edge parish church, the kept heart of the place: a rough stone niche behind a plain altar holding an iron-bound reliquary casket on folded sackcloth, a single thick tallow candle burning before it, wax cascades frozen on the stone, damp granite walls, a thin smoke of old incense, everything beyond the candlelight drowned in near-black shadow. Painterly dark-fantasy oi",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "env-bio-gothic-approach",
-      "file": "images/environment/env-bio-gothic-approach.png",
+      "key": "env-bio-dark-settlement",
+      "file": "images/environment/env-bio-dark-settlement.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-gothic-approach.png",
+      "source_fullres": "images/fullres/env-bio-dark-settlement-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-approach",
+      "sprite_key": "env-bio-dark-settlement",
+      "prompt": "The muddy square of a hardscrabble moor-edge parish town: cramped slate-roofed cottages of rough granite leaning together around a stone well, stacked peat turfs, ash heaps against walls, tarred timber doors, sodden thatch eaves dripping, a thin wash line, smoke and drizzle under a flat ash-grey sky, one cottage window glowing tallow-amber. Painterly dark-fantasy oil painting, heavy chiaroscuro, d",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "env-bio-gothic-settlement",
-      "file": "images/environment/env-bio-gothic-settlement.png",
+      "key": "env-bio-dark-underground",
+      "file": "images/environment/env-bio-dark-underground.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-gothic-settlement.png",
+      "source_fullres": "images/fullres/env-bio-dark-underground-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-settlement",
+      "sprite_key": "env-bio-dark-underground",
+      "prompt": "A root cellar cut into bedrock beneath a moor-edge parish church: rough-hewn granite steps descending past a sweating stone wall, low vaulted chamber with stacked barrels, root vegetables in straw, salted fish hanging from hooks, dripping water, a tallow lantern on a barrel casting one small pool of amber light, deep black shadow beyond. Painterly dark-fantasy oil painting, heavy chiaroscuro, desa",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "env-bio-gothic-interior",
-      "file": "images/environment/env-bio-gothic-interior.png",
+      "key": "env-bio-dark-water",
+      "file": "images/environment/env-bio-dark-water.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-gothic-interior.png",
+      "source_fullres": "images/fullres/env-bio-dark-water-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-interior",
+      "sprite_key": "env-bio-dark-water",
+      "prompt": "A flooded cellar crossing in a moor-edge parish town: knee-deep black rainwater filling a low stone undercroft, a line of slippery stepping stones and a sagging plank leading between two doorways, a floating candle stub in a tin dish, reflections of one tallow lantern trembling on the water, wet granite pillars, debris of straw and ash on the surface. Painterly dark-fantasy oil painting, heavy chi",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "env-bio-gothic-workplace",
-      "file": "images/environment/env-bio-gothic-workplace.png",
+      "key": "env-bio-dark-workplace",
+      "file": "images/environment/env-bio-dark-workplace.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-gothic-workplace.png",
+      "source_fullres": "images/fullres/env-bio-dark-workplace-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-workplace",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-gothic-underground",
-      "file": "images/environment/env-bio-gothic-underground.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-gothic-underground.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-underground",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-gothic-water",
-      "file": "images/environment/env-bio-gothic-water.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-gothic-water.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-water",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-gothic-high",
-      "file": "images/environment/env-bio-gothic-high.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-gothic-high.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-high",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-gothic-sanctum",
-      "file": "images/environment/env-bio-gothic-sanctum.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-gothic-sanctum.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-gothic-sanctum",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-approach",
-      "file": "images/environment/env-bio-high-approach.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-approach.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-approach",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-settlement",
-      "file": "images/environment/env-bio-high-settlement.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-settlement.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-settlement",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-interior",
-      "file": "images/environment/env-bio-high-interior.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-interior.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-interior",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-workplace",
-      "file": "images/environment/env-bio-high-workplace.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-workplace.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-workplace",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-underground",
-      "file": "images/environment/env-bio-high-underground.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-underground.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-underground",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-water",
-      "file": "images/environment/env-bio-high-water.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-water.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-water",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-high",
-      "file": "images/environment/env-bio-high-high.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-high.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-high",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-high-sanctum",
-      "file": "images/environment/env-bio-high-sanctum.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-high-sanctum.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-high-sanctum",
+      "sprite_key": "env-bio-dark-workplace",
+      "prompt": "A tallow chandlery workshop in a moor-edge parish town: a soot-blackened stone shed with a great iron rendering pot over a banked peat fire, wooden racks hung with rows of hand-dipped grey candles, greasy workbench with moulds and wicking twine, puddled slate floor, smoke stains up the walls, a single candle flame and the dim fire giving the only light. Painterly dark-fantasy oil painting, heavy c",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5506,74 +5114,10 @@
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-eldritch-approach.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-approach-1088x608.png",
       "app": "infinite-dungeons",
       "sprite_key": "env-bio-eldritch-approach",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-eldritch-settlement",
-      "file": "images/environment/env-bio-eldritch-settlement.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-eldritch-settlement.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-eldritch-settlement",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-eldritch-interior",
-      "file": "images/environment/env-bio-eldritch-interior.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-eldritch-interior.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-eldritch-interior",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-eldritch-workplace",
-      "file": "images/environment/env-bio-eldritch-workplace.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-eldritch-workplace.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-eldritch-workplace",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-eldritch-underground",
-      "file": "images/environment/env-bio-eldritch-underground.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-eldritch-underground.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-eldritch-underground",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "env-bio-eldritch-water",
-      "file": "images/environment/env-bio-eldritch-water.png",
-      "size": [
-        1024,
-        576
-      ],
-      "source_fullres": "images/environment/env-bio-eldritch-water.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "env-bio-eldritch-water",
+      "prompt": "Approach to a quiet scholar's town at grey-violet dusk: a pale stone gatehouse whose arch is slightly too tall and narrow, a covered colonnade along the road repeating one bay too many into the fog, lamps already lit though the street is empty, shuttered windows, fog lying in unnaturally straight lines between the buildings, cobbles worn smooth. Painterly oil painting, restrained desaturated palet",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5584,9 +5128,24 @@
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-eldritch-high.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-high-1088x608.png",
       "app": "infinite-dungeons",
       "sprite_key": "env-bio-eldritch-high",
+      "prompt": "Rooftop ridge of a scholar's town observatory tower at dusk: pale stone parapet, a brass measuring instrument whose rings intersect at angles that do not resolve, chimneys repeating across the rooftops with one chimney too many, a low wall whose corner meets slightly wrong, grey-violet sky with clouds arranged in unnaturally even rows, a cold lamp burning. Painterly oil painting, restrained desatu",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-eldritch-interior",
+      "file": "images/environment/env-bio-eldritch-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-eldritch-interior-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-eldritch-interior",
+      "prompt": "A reading room in a scholar's town: a long pale oak table with open books and cold snuffed candles, tall shelves of identical volumes, the far wall meeting the side wall at an angle slightly less than square, a doorway at the end opening into another identical room beyond, windows slightly too narrow for their height, pale dusk light falling in shafts that do not quite reach the floor. Painterly o",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5597,165 +5156,542 @@
         1024,
         576
       ],
-      "source_fullres": "images/environment/env-bio-eldritch-sanctum.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-sanctum-1088x608.png",
       "app": "infinite-dungeons",
       "sprite_key": "env-bio-eldritch-sanctum",
+      "prompt": "A sealed study at the top of a scholar's tower: a single desk with an open manuscript of diagrams whose angles do not resolve, a chair pushed back exactly square to the desk, pale stone walls meeting at slightly wrong corners, shelves of identical volumes, a window showing dusk light that seems earlier than it should be, a cold candle unlit yet casting a faint shadow, heavy stillness. Painterly oi",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-victory",
-      "file": "images/ui/ui-victory.png",
+      "key": "env-bio-eldritch-settlement",
+      "file": "images/environment/env-bio-eldritch-settlement.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-victory.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-settlement-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-victory",
+      "sprite_key": "env-bio-eldritch-settlement",
+      "prompt": "A quiet square in a scholar's town at dusk: pale stone buildings whose identical windows repeat with one window too many per floor, a dry fountain basin shaped as a polygon with one side too many, street corners meeting at slightly wrong angles, a book left open on a bench, papers resting unruffled despite the wind, lamps lit in the emptiness, grey-violet dusk. Painterly oil painting, restrained d",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-long-rest",
-      "file": "images/ui/ui-long-rest.png",
+      "key": "env-bio-eldritch-underground",
+      "file": "images/environment/env-bio-eldritch-underground.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-long-rest.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-underground-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-long-rest",
+      "sprite_key": "env-bio-eldritch-underground",
+      "prompt": "A sub-basement archive cut into pale stone beneath a scholar's town: shelves of identical bound volumes receding into dark, a stair that descends but seems to return to the same landing, columns repeating one bay too many into darkness, corners meeting at slightly wrong angles, a single hooded lamp burning with a pale flame, cold still air, no dust disturbed. Painterly oil painting, restrained des",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-chapter-card",
-      "file": "images/ui/ui-chapter-card.png",
+      "key": "env-bio-eldritch-water",
+      "file": "images/environment/env-bio-eldritch-water.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-chapter-card.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-water-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-chapter-card",
+      "sprite_key": "env-bio-eldritch-water",
+      "prompt": "A canal crossing in a quiet scholar's town at dusk: pale stone quays, water so still it reflects a colonnade with one arch more than stands on land, a narrow footbridge whose far end does not quite line up with the street beyond, mooring posts in perfectly even spacing, dusk fog resting in flat layers on the water, no ripples. Painterly oil painting, restrained desaturated palette of grey-violet d",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-skill-check",
-      "file": "images/ui/ui-skill-check.png",
+      "key": "env-bio-eldritch-workplace",
+      "file": "images/environment/env-bio-eldritch-workplace.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-skill-check.png",
+      "source_fullres": "images/fullres/env-bio-eldritch-workplace-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-skill-check",
+      "sprite_key": "env-bio-eldritch-workplace",
+      "prompt": "A bookbinder's workshop in a quiet scholar's town: wooden presses, stacked signatures of paper, awls and waxed thread laid out on a bench in perfectly even rows, pale stone walls, a row of identical windows with one window more than the room should hold, dust motes hanging unmoving in grey-violet light, floorboards laid in a pattern that never quite repeats. Painterly oil painting, restrained desa",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-ending-mercy",
-      "file": "images/ui/ui-ending-mercy.png",
+      "key": "env-bio-gothic-approach",
+      "file": "images/environment/env-bio-gothic-approach.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-ending-mercy.png",
+      "source_fullres": "images/fullres/env-bio-gothic-approach-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-ending-mercy",
+      "sprite_key": "env-bio-gothic-approach",
+      "prompt": "Arriving at a once-grand hilltop manse-town in fog: a long carriage drive climbing through an avenue of leafless elms toward tall wrought-iron gates half open, beyond them the pale shuttered facade of a hilltop manse and the rooftops of its town, wet gravel, a toppled stone urn, cold colourless light, mist pooling between the tree trunks. Painterly gothic oil painting, cold desaturated palette of ",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-ending-steel",
-      "file": "images/ui/ui-ending-steel.png",
+      "key": "env-bio-gothic-high",
+      "file": "images/environment/env-bio-gothic-high.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-ending-steel.png",
+      "source_fullres": "images/fullres/env-bio-gothic-high-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-ending-steel",
+      "sprite_key": "env-bio-gothic-high",
+      "prompt": "The rooftop belvedere of a hilltop manse above its shuttered town: a wrought-iron railed walkway along wet lead roofing, forest of tall chimneys and a cracked cupola, below the pale slate rooftops of the draped town sinking into fog, distant grey hills, cold flat light, a tattered black awning snapping in the wind, a raven's empty nest in a gutter. Painterly gothic oil painting, cold desaturated p",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-ending-strange",
-      "file": "images/ui/ui-ending-strange.png",
+      "key": "env-bio-gothic-interior",
+      "file": "images/environment/env-bio-gothic-interior.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-ending-strange.png",
+      "source_fullres": "images/fullres/env-bio-gothic-interior-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-ending-strange",
+      "sprite_key": "env-bio-gothic-interior",
+      "prompt": "A drawing room of a shuttered hilltop manse: a long table laid with tarnished silver and dusty crystal for guests who never come, chairs and sofas shrouded in bone-white dust sheets like pale dunes, black crape draped over a gilt mirror, one tall window admitting a shaft of cold light onto the table, marble fireplace cold, portraits turned to the wall. Painterly gothic oil painting, cold desaturat",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-journal-empty",
-      "file": "images/ui/ui-journal-empty.png",
+      "key": "env-bio-gothic-sanctum",
+      "file": "images/environment/env-bio-gothic-sanctum.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-journal-empty.png",
+      "source_fullres": "images/fullres/env-bio-gothic-sanctum-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-journal-empty",
+      "sprite_key": "env-bio-gothic-sanctum",
+      "prompt": "The draped family chapel at the heart of a hilltop manse: pews under bone-white dust sheets, an altar shrouded in black crape with a small silver reliquary casket left uncovered at its centre, a tall lancet window of pale glass casting one cold shaft of light onto the casket, a veiled marble memorial angel, dust motes hanging in the beam, all else in deep blue-grey shadow. Painterly gothic oil pai",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-pack-empty",
-      "file": "images/ui/ui-pack-empty.png",
+      "key": "env-bio-gothic-settlement",
+      "file": "images/environment/env-bio-gothic-settlement.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-pack-empty.png",
+      "source_fullres": "images/fullres/env-bio-gothic-settlement-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-pack-empty",
+      "sprite_key": "env-bio-gothic-settlement",
+      "prompt": "The empty square of a once-grand hilltop manse-town: shuttered Georgian facades of pale stone around a dry marble fountain, black crape tied to door knockers, tall sash windows blind behind drapery, weeds between the cobbles, a carriage lamp gone dark, cold overcast light and long soft shadows, everything elegant and unmaintained. Painterly gothic oil painting, cold desaturated palette of bone whi",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-settings",
-      "file": "images/ui/ui-settings.png",
+      "key": "env-bio-gothic-underground",
+      "file": "images/environment/env-bio-gothic-underground.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-settings.png",
+      "source_fullres": "images/fullres/env-bio-gothic-underground-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-settings",
+      "sprite_key": "env-bio-gothic-underground",
+      "prompt": "The vaulted family crypt beneath a hilltop manse: a stone stair descending to a columned vault of pale marble, rows of carved stone sarcophagi draped with black crape thick with dust, an extinguished silver candelabrum, one narrow shaft of cold light from a grate high above falling on a carved crest, deep blue-grey shadow swallowing the far arches. Painterly gothic oil painting, cold desaturated p",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-scar",
-      "file": "images/ui/ui-scar.png",
+      "key": "env-bio-gothic-water",
+      "file": "images/environment/env-bio-gothic-water.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-scar.png",
+      "source_fullres": "images/fullres/env-bio-gothic-water-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-scar",
+      "sprite_key": "env-bio-gothic-water",
+      "prompt": "The flooded orangery of a once-grand hilltop manse: black still water covering a marble floor between rows of potted dead orange trees, a broken glass dome overhead dripping, reflections of tall arched windows trembling on the water, a fallen stone nymph statue half submerged, pale cold light, black crape caught on a rusted iron bench. Painterly gothic oil painting, cold desaturated palette of bon",
       "generated": "2026-09-14",
       "version": 1
     },
     {
-      "key": "ui-bond",
-      "file": "images/ui/ui-bond.png",
+      "key": "env-bio-gothic-workplace",
+      "file": "images/environment/env-bio-gothic-workplace.png",
       "size": [
         1024,
         576
       ],
-      "source_fullres": "images/ui/ui-bond.png",
+      "source_fullres": "images/fullres/env-bio-gothic-workplace-1088x608.png",
       "app": "infinite-dungeons",
-      "sprite_key": "ui-bond",
+      "sprite_key": "env-bio-gothic-workplace",
+      "prompt": "A shuttered silk-weaving workshop in a once-grand hilltop manse-town: rows of wooden looms standing idle under thin dust sheets, skeins of grey silk hanging from a rack, a long worktable with shears and pattern cards furred with dust, tall north windows with pale cold light, cobwebs between the loom frames, bolts of faded cloth on shelves. Painterly gothic oil painting, cold desaturated palette of",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-approach",
+      "file": "images/environment/env-bio-high-approach.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-approach-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-approach",
+      "prompt": "Approach to a prosperous county market town at dusk, seen from a rutted trade road: a dressed-stone gatehouse with a raised portcullis, well-kept walls with fresh mortar in the joints, deep blue and dull gold banners hanging over the arch, a lord's keep on a rise beyond the rooftops, torches lit in the gatehouse windows, muddy wheel ruts, overcast sky. Painterly fantasy oil painting, muted but ric",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-high",
+      "file": "images/environment/env-bio-high-high.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-high-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-high",
+      "prompt": "Tower roof of a lord's keep above a prosperous county market town: crenellated dressed-stone parapet, a great deep blue and dull gold banner straining in the wind on its pole, chimney smoke from town rooftops below, patchwork farmland and a river in the distance, a worn iron weather vane, storm light breaking through cloud, puddles on the flagstones. Painterly fantasy oil painting, muted but riche",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-interior",
+      "file": "images/environment/env-bio-high-interior.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-interior-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-interior",
+      "prompt": "Interior of a market town guildhall: a long oak table scarred by use, set with ledgers, an inkwell and wax seal, benches of dark wood, dressed-stone walls hung with a faded deep blue and dull gold banner, iron candle brackets with burning candles, a hearth with low fire, mullioned window with shutters half open, worn floorboards, dust in a shaft of light. Painterly fantasy oil painting, muted but ",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-sanctum",
+      "file": "images/environment/env-bio-high-sanctum.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-sanctum-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-sanctum",
+      "prompt": "Small private chapel chamber high in a lord's keep: a single stone altar table bearing a wax-sealed letter, a worn simple crown and an open ledger, tall candles in iron stands, a narrow window of pale leaded glass casting a shaft of light, a faded worn crimson banner on dressed-stone walls with centuries of patina, dust in the light, a kneeling cushion threadbare. Painterly fantasy oil painting, m",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-settlement",
+      "file": "images/environment/env-bio-high-settlement.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-settlement-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-settlement",
+      "prompt": "Market square of a prosperous county market town in high fantasy: well-kept dressed-stone buildings with timber upper floors, market stalls with canvas awnings of worn crimson, a stone well at the center, deep blue and dull gold banners strung between poles, swept cobbles with moss in the seams, the lord's keep rising above the rooftops, torchlight spilling from a tavern door, late afternoon light",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-underground",
+      "file": "images/environment/env-bio-high-underground.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-underground-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-underground",
+      "prompt": "Vaulted undercroft beneath a prosperous county market town: dressed-stone rib vaults, older rougher foundation courses below the newer work, wine barrels and grain sacks, a single torch in an iron bracket, worn steps descending into darkness, water trickling down one wall, a disused side passage blocked by an iron grate, damp gleam on stone. Painterly fantasy oil painting, muted but richer palette",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-water",
+      "file": "images/environment/env-bio-high-water.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-water-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-water",
+      "prompt": "Stone bridge crossing a slow river at the edge of a prosperous county market town at dawn: dressed-stone arches reflected in the water, a small gatehouse on the bridge hung with worn deep blue banners, a mill wheel turning on the far bank, mist over the river, worn stone steps down to a washing place at the waterline, the lord's keep beyond the rooftops. Painterly fantasy oil painting, muted but r",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "env-bio-high-workplace",
+      "file": "images/environment/env-bio-high-workplace.png",
+      "size": [
+        1024,
+        576
+      ],
+      "source_fullres": "images/fullres/env-bio-high-workplace-1088x608.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bio-high-workplace",
+      "prompt": "Stonemason's yard of a prosperous county market town: half-dressed stone blocks and a carved keystone with chalk lines, wooden scaffolding against a repaired wall, iron chisels and mallets on a workbench, sacks of lime mortar, a small glowing forge in the corner, a worn deep blue banner on the yard wall, dressed-stone surroundings, morning light and stone dust in the air. Painterly fantasy oil pai",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "hire-fisk",
+      "file": "images/characters/hire-fisk.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hire-fisk-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hire-fisk",
+      "prompt": "Idony Fisk, a Tidewrack diver: salt-worn salvage coat with mismatched buttons, damp hair, a coiled harpoon line over one shoulder, tall waders, confident half-smile of someone prosecuted by two insurers. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single warm ember-amber light source from below-left, near-black featureless background",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "hire-rooke",
+      "file": "images/characters/hire-rooke.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/hire-rooke-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "hire-rooke",
+      "prompt": "Tobias Rooke, a Longmark stonecutter: tall, long-boned, grey-toned skin, stone dust in knuckle creases, a dressing hammer and plumb bob at his belt, a satchel of numbered wedges, the tired dignity of a man who stopped signing condemnation forms. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single warm ember-amber light source from bel",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-bruiser-1",
+      "file": "images/monsters/mob-role-bruiser-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-bruiser-1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-bruiser-1",
+      "prompt": "An elderly quarryman bruiser, massively built with slab shoulders and a barrel chest, bare arms wrapped in stained old bandages, knuckles split and scarred, holding a heavy quarry maul low at his side, standing flat-footed and unhurried, fresh cuts on his forearm ignored, grey stubble and a flattened nose, worn canvas trousers and a sweat-darkened vest. Painterly dark-fantasy oil painting, heavy c",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-bruiser-2",
+      "file": "images/monsters/mob-role-bruiser-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-bruiser-2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-bruiser-2",
+      "prompt": "A middle-aged slaughterwoman bruiser, broad and thickset, wearing a blood-stiffened leather apron over rolled sleeves, a heavy cleaver hanging loose from one hand, forearms corded and scarred, jaw set and eyes level, advancing with a slight limp she clearly does not care about, hair tied back with a rag, old bruises yellowing on her cheek. Painterly dark-fantasy oil painting, heavy chiaroscuro, de",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-bruiser-3",
+      "file": "images/monsters/mob-role-bruiser-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-bruiser-3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-bruiser-3",
+      "prompt": "A young barge hauler bruiser, dense compact build shaped by towing ropes, shirt torn off and rope-scars ridged across his back and shoulders, a heavy iron towing chain slung over one shoulder and dragging like a flail, stance low and forward, bare feet planted on stone, split lip freshly bleeding and ignored, expression dull with exhausted patience. Painterly dark-fantasy oil painting, heavy chiar",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-burner-1",
+      "file": "images/monsters/mob-role-burner-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-burner-1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-burner-1",
+      "prompt": "A young pitch-carrier man, lean and sinewy, a wooden bucket of black pitch slung from a yoke and leaking dark trails down his leg, holding a lit rush torch low and outward in his other hand, pitch-spattered boots and apron, hair tied back, expression of careful concentration near the flame. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal,",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-burner-2",
+      "file": "images/monsters/mob-role-burner-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-burner-2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-burner-2",
+      "prompt": "An older lamp-oil douser woman, stooped but sure-footed, tipping a dented brass oil can so lamp oil sloshes in a thin stream, a small burning wick-lighter held ready in her other hand, oil-stained skirts and a leather spill-apron, spectacles pushed up into grey hair, calm professional focus, dark oil pooling at her feet. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette o",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-burner-3",
+      "file": "images/monsters/mob-role-burner-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-burner-3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-burner-3",
+      "prompt": "A middle-aged slow-match runner, compact and wiry, caught mid-run, a long coil of smoldering slow-match fuse unwinding from a spool in one hand trailing thin smoke and a crawling ember, a flint box and powder horn bouncing at his belt, scorched sleeve cuffs, scarf against the smoke, urgent but practiced motion. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone gr",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-controller-1",
+      "file": "images/monsters/mob-role-controller-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-controller-1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-controller-1",
+      "prompt": "A bent old woman censer-bearer, wrapped in layered ash-grey mourning veils, both hands working the chains of a heavy swinging thurible that leaks grey ash and thin smoke in a wide arc, her posture deliberate and ritual-slow, lips moving in a chant, ash dusting her shoulders and the stones at her feet, unarmed. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone gre",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-controller-2",
+      "file": "images/monsters/mob-role-controller-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-controller-2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-controller-2",
+      "prompt": "A lean middle-aged bell-ringer man, tall and hollow-cheeked in a threadbare verger's robe, one hand swinging a heavy iron hand bell at full reach, the other hand raised flat-palmed in a warding gesture, head cocked as if listening to the toll, bare feet on cold stone, calm and deliberate, unarmed. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and ch",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-controller-3",
+      "file": "images/monsters/mob-role-controller-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-controller-3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-controller-3",
+      "prompt": "A young chalk-marker woman, sharp-faced and intent, crouched low on one knee dragging a fat stub of white chalk in a wide circle across the flagstones, a satchel of chalk pieces and knotted cords at her hip, her free hand holding the circle's starting mark, sleeves chalk-dusted to the elbow, concentration absolute, unarmed. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palett",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-skirmisher-1",
+      "file": "images/monsters/mob-role-skirmisher-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-skirmisher-1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-skirmisher-1",
+      "prompt": "A gaunt elderly poacher woman skirmisher, lean as wire, grey hair in a thin braid, leaning far forward mid-stride, a skinning knife in one hand and a short stabbing spear in the other, patched hide jerkin, eyes fixed on one chosen target, mud-stained gaiters, posture taut and hungry. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-skirmisher-2",
+      "file": "images/monsters/mob-role-skirmisher-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-skirmisher-2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-skirmisher-2",
+      "prompt": "A wiry young rat-catcher man skirmisher, crouched low and forward-leaning, a barbed iron catching-pole in one hand and a rusty dirk in the other, patched oilcloth coat too big for him, scarf over his nose against the sewer stink, quick darting posture, knees bent ready to spring, a string of dried rat tails at his belt. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-skirmisher-3",
+      "file": "images/monsters/mob-role-skirmisher-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-skirmisher-3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-skirmisher-3",
+      "prompt": "A weathered middle-aged marsh fisherman, wiry and sun-leathered, light and quick on his feet, stepping forward with a three-pronged eel spear in one hand and a curved fish gaff in the other, reed-woven kilt and a loose fish-oil cloak over a rough linen shirt, water dripping from his hem, attention fixed intently on one chosen mark. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturate",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-warden-1",
+      "file": "images/monsters/mob-role-warden-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-warden-1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-warden-1",
+      "prompt": "A broad older door-warden man, grey-bearded and heavyset, braced shoulder-first in a narrow stone doorway, holding a massive rectangular hatch-cover shield of iron-banded oak that fills the passage, a short cudgel ready behind it, feet planted wide, expression settled and immovable, wearing a porter's leather harness and wool coat. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturate",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-warden-2",
+      "file": "images/monsters/mob-role-warden-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-warden-2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-warden-2",
+      "prompt": "A stout middle-aged tollkeeper woman planted squarely before a toll gate, an iron-tipped toll staff held crosswise in both hands like a barrier, broad stance occupying the whole roadway, coin purse and brass tally-tags at her belt, heavy wool cloak, chin raised, expression flat and final, the wooden gate bar visible behind her. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated pa",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "mob-role-warden-3",
+      "file": "images/monsters/mob-role-warden-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/mob-role-warden-3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-role-warden-3",
+      "prompt": "An elderly gaunt sexton man, tall and stooped but planted firmly before an iron cemetery gate, a long grave shovel held crosswise in both hands blocking the way, earth-stained black coat and leather gaiters, keys and a lantern horn at his belt, thin white hair, grave-dirt under his nails, gaze steady and uninviting. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of sto",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "npc-odell",
+      "file": "images/characters/npc-odell.png",
+      "size": [
+        512,
+        640
+      ],
+      "source_fullres": "images/fullres/npc-odell-768x960.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "npc-odell",
+      "prompt": "Odell Crane, a tavern landlord, fifties, broad forearms, wiping a mug with a cloth, a thick ledger chained at his belt, shrewd eyes that have opinions, the posture of a man who was something else before this. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single warm ember-amber light source from below-left, near-black featureless backg",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5766,61 +5702,10 @@
         64,
         64
       ],
-      "source_fullres": "images/ui/status-blessed.png",
+      "source_fullres": "images/fullres/status-blessed-1024.png",
       "app": "infinite-dungeons",
       "sprite_key": "status-blessed",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "status-shielded",
-      "file": "images/ui/status-shielded.png",
-      "size": [
-        64,
-        64
-      ],
-      "source_fullres": "images/ui/status-shielded.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "status-shielded",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "status-hexed",
-      "file": "images/ui/status-hexed.png",
-      "size": [
-        64,
-        64
-      ],
-      "source_fullres": "images/ui/status-hexed.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "status-hexed",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "status-marked",
-      "file": "images/ui/status-marked.png",
-      "size": [
-        64,
-        64
-      ],
-      "source_fullres": "images/ui/status-marked.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "status-marked",
-      "generated": "2026-09-14",
-      "version": 1
-    },
-    {
-      "key": "status-held",
-      "file": "images/ui/status-held.png",
-      "size": [
-        64,
-        64
-      ],
-      "source_fullres": "images/ui/status-held.png",
-      "app": "infinite-dungeons",
-      "sprite_key": "status-held",
+      "prompt": "a small radiant halo ring above a vertical flame. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5831,9 +5716,10 @@
         64,
         64
       ],
-      "source_fullres": "images/ui/status-burning.png",
+      "source_fullres": "images/fullres/status-burning-1024.png",
       "app": "infinite-dungeons",
       "sprite_key": "status-burning",
+      "prompt": "a single teardrop flame. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
       "generated": "2026-09-14",
       "version": 1
     },
@@ -5844,9 +5730,342 @@
         64,
         64
       ],
-      "source_fullres": "images/ui/status-guarded.png",
+      "source_fullres": "images/fullres/status-guarded-1024.png",
       "app": "infinite-dungeons",
       "sprite_key": "status-guarded",
+      "prompt": "two crossed short spears behind a small shield. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-held",
+      "file": "images/ui/status-held.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/fullres/status-held-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-held",
+      "prompt": "a shackle link or open manacle. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-hexed",
+      "file": "images/ui/status-hexed.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/fullres/status-hexed-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-hexed",
+      "prompt": "a knotted cord loop. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-marked",
+      "file": "images/ui/status-marked.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/fullres/status-marked-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-marked",
+      "prompt": "an eye shape with a slash pupil. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "status-shielded",
+      "file": "images/ui/status-shielded.png",
+      "size": [
+        64,
+        64
+      ],
+      "source_fullres": "images/fullres/status-shielded-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "status-shielded",
+      "prompt": "a plain heater shield. Flat minimal icon glyph, single solid ember-amber color (#E8A33D) on transparent background, no shading, no gradients, no outline text, bold simple shape legible at 16 pixels, centered, generous margins.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-bond",
+      "file": "images/ui/ui-bond.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-bond-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-bond",
+      "prompt": "Two cups set close together by a small fire, steam rising, two chairs angled toward each other, warmth shared. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-chapter-card",
+      "file": "images/ui/ui-chapter-card.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-chapter-card-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-chapter-card",
+      "prompt": "A stone milestone on a dark road at dusk, one carved chapter mark catching lantern light, the road continuing into dark. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-ending-mercy",
+      "file": "images/ui/ui-ending-mercy.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-ending-mercy-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-ending-mercy",
+      "prompt": "An open door in a dark wall with pale morning beyond it, a lamp set down and left burning, something spared. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-ending-steel",
+      "file": "images/ui/ui-ending-steel.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-ending-steel-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-ending-steel",
+      "prompt": "A single blade laid flat on a stone slab, work done, one candle, absolute quiet. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-ending-strange",
+      "file": "images/ui/ui-ending-strange.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-ending-strange-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-ending-strange",
+      "prompt": "A figureless scene: a ledger open with one line added in fresh ink, a quill still wet, the ink slightly wrong-coloured (pale amber), something taken on oneself. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no cle",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-journal-empty",
+      "file": "images/ui/ui-journal-empty.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-journal-empty-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-journal-empty",
+      "prompt": "A blank commonplace book open to empty pages, a pencil and pins waiting, lamplight, potential. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-long-rest",
+      "file": "images/ui/ui-long-rest.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-long-rest-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-long-rest",
+      "prompt": "A sheltered alcove at grey dawn, banked fire coals low, sleeping shapes suggested only by bedrolls, stillness and recovery. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-pack-empty",
+      "file": "images/ui/ui-pack-empty.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-pack-empty-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-pack-empty",
+      "prompt": "An open empty traveller's pack laid flat, bare straps, nothing inside, dark table. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-scar",
+      "file": "images/ui/ui-scar.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-scar-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-scar",
+      "prompt": "A rolled bandage, a small stained cloth, and a healing salve jar on dark wood, aftermath of a wound taken, no gore. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-settings",
+      "file": "images/ui/ui-settings.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-settings-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-settings",
+      "prompt": "A workbench of small mechanisms: brass gears, a key, a screwdriver, a lamp, tidy and neutral. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-skill-check",
+      "file": "images/ui/ui-skill-check.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-skill-check-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-skill-check",
+      "prompt": "Polyhedral bone dice mid-tumble above a dark oak table, frozen motion, single candle light. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-tile-commons",
+      "file": "images/ui/ui-tile-commons.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/ui-tile-commons-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-tile-commons",
+      "prompt": "A heavy dark door, shut, with a note nailed to it (illegible), lantern to one side, seen straight on. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-tile-tavern",
+      "file": "images/ui/ui-tile-tavern.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/ui-tile-tavern-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-tile-tavern",
+      "prompt": "Overhead texture plate of a tavern counter: shelves of working goods behind, a dice cup on the counter, a hiring board with pinned cards by the door. Nobody in frame. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, ",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "ui-victory",
+      "file": "images/ui/ui-victory.png",
+      "size": [
+        1236,
+        800
+      ],
+      "source_fullres": "images/fullres/ui-victory-1232x800.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "ui-victory",
+      "prompt": "Quiet aftermath of a won fight: dropped weapons gathered in a neat pile, a lantern set on top, dust settling, nobody present. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, a single ember-amber light source, near-black shadows, visible brushwork, somber cinematic composition. No people, no text, no clean surfaces.",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "vid-title-infinite-dungeons",
+      "type": "video",
+      "file": "video/vid-title-infinite-dungeons.mp4",
+      "file_webm": "video/vid-title-infinite-dungeons.webm",
+      "size": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "poster_key": "keyart-hearth",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-title-infinite-dungeons",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "vid-keyart-ashen-crown",
+      "type": "video",
+      "file": "video/vid-keyart-ashen-crown.mp4",
+      "file_webm": "video/vid-keyart-ashen-crown.webm",
+      "size": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "poster_key": "keyart-ashen-crown",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-keyart-ashen-crown",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "vid-keyart-lamplighters",
+      "type": "video",
+      "file": "video/vid-keyart-lamplighters.mp4",
+      "file_webm": "video/vid-keyart-lamplighters.webm",
+      "size": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "poster_key": "keyart-lamplighters",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-keyart-lamplighters",
+      "generated": "2026-09-14",
+      "version": 1
+    },
+    {
+      "key": "vid-keyart-mine-took",
+      "type": "video",
+      "file": "video/vid-keyart-mine-took.mp4",
+      "file_webm": "video/vid-keyart-mine-took.webm",
+      "size": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 7.04,
+      "fps": 24,
+      "loop": true,
+      "watermark": false,
+      "audio": false,
+      "poster_key": "keyart-mine-took",
+      "app": "infinite-dungeons",
+      "sprite_key": "vid-keyart-mine-took",
       "generated": "2026-09-14",
       "version": 1
     }
