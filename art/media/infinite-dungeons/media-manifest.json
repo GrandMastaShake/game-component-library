@@ -7689,6 +7689,606 @@
       "sprite_key": "vid-amb-water-drip",
       "generated": "2026-09-15",
       "version": 1
+    },
+    {
+      "key": "map-floor-grass-v1",
+      "file": "images/maps/map-floor-grass-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-grass-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-grass-v1",
+      "map_layer": "floor",
+      "prompt": "close-cropped moor grass, muted grey-green turf with worn pale patches, fine small blades, overcast. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim light",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-grass-v2",
+      "file": "images/maps/map-floor-grass-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-grass-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-grass-v2",
+      "map_layer": "floor",
+      "prompt": "close-cropped moor grass, muted grey-green turf with patches of darker trampled grass and a few tiny stones, overcast. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-grass-dry-v1",
+      "file": "images/maps/map-floor-grass-dry-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-grass-dry-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-grass-dry-v1",
+      "map_layer": "floor",
+      "prompt": "dry pale sward, grey-straw coloured parched grass with dusty soil showing between tufts, overcast. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim light a",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-grass-dry-v2",
+      "file": "images/maps/map-floor-grass-dry-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-grass-dry-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-grass-dry-v2",
+      "map_layer": "floor",
+      "prompt": "dry pale sward, grey-straw coloured parched grass, patchy with small bare earth spots, overcast. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim light as ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-mud-v1",
+      "file": "images/maps/map-floor-mud-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-mud-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-mud-v1",
+      "map_layer": "floor",
+      "prompt": "wet dark mud, trampled and pitted with small puddles of dark water, fine small-scale detail. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim light as at d",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-mud-v2",
+      "file": "images/maps/map-floor-mud-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-mud-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-mud-v2",
+      "map_layer": "floor",
+      "prompt": "wet dark mud with shallow overlapping footprints and small puddles, trampled, fine small-scale detail. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim lig",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-road-v1",
+      "file": "images/maps/map-floor-road-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-road-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-road-v1",
+      "map_layer": "floor",
+      "prompt": "a packed dirt road surface, pale dry dust in the centre and darker trodden edges, fine small pebbles, no ruts crossing the whole frame. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-road-v2",
+      "file": "images/maps/map-floor-road-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-road-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-road-v2",
+      "map_layer": "floor",
+      "prompt": "a packed dirt road surface, dusty pale centre with scattered small stones and scuffed darker patches. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim ligh",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-gravel-v1",
+      "file": "images/maps/map-floor-gravel-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-gravel-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-gravel-v1",
+      "map_layer": "floor",
+      "prompt": "small mixed gravel and grit, grey and brown stones no larger than a fingertip, densely packed. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim light as at",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-gravel-v2",
+      "file": "images/maps/map-floor-gravel-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-gravel-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-gravel-v2",
+      "map_layer": "floor",
+      "prompt": "small mixed gravel and grit with a few slightly larger stones and dusty patches, densely packed. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim light as ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-marsh-v1",
+      "file": "images/maps/map-floor-marsh-v1.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-marsh-v1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-marsh-v1",
+      "map_layer": "floor",
+      "prompt": "waterlogged marsh ground, dark saturated earth with standing black water pooling in the low spots and sparse dead sedge, very dark. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal an",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-floor-marsh-v2",
+      "file": "images/maps/map-floor-marsh-v2.png",
+      "size": [
+        512,
+        512
+      ],
+      "source_fullres": "images/fullres/map-floor-marsh-v2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-floor-marsh-v2",
+      "map_layer": "floor",
+      "prompt": "waterlogged marsh ground, patches of black standing water between hummocks of dark mossy earth, very dark. Top-down orthographic battlemap ground texture seen from high above, perfectly flat, no perspective, fine small-scale detail as though viewed from a distance. Painterly dark-fantasy realism, grim and weathered: desaturated muted palette, grey-green, brown, charcoal and ash tones, overcast dim",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-grass-tuft-1",
+      "file": "images/maps/map-clut-grass-tuft-1.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-grass-tuft-1-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-grass-tuft-1",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a single small tuft of wild moor grass, muted grey-green A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow dir",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-grass-tuft-2",
+      "file": "images/maps/map-clut-grass-tuft-2.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-grass-tuft-2-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-grass-tuft-2",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small tuft of wild moor grass leaning one way, muted grey-green A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact s",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-grass-tuft-3",
+      "file": "images/maps/map-clut-grass-tuft-3.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-grass-tuft-3-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-grass-tuft-3",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small dense clump of sedge grass, muted grey-green A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directl",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-weeds",
+      "file": "images/maps/map-clut-weeds.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-weeds-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-weeds",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small sprawl of ragged weeds with a few seed heads, muted A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-ferns",
+      "file": "images/maps/map-clut-ferns.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-ferns-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-ferns",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small cluster of dark green bracken fronds A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneat",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-thistles",
+      "file": "images/maps/map-clut-thistles.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-thistles-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-thistles",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "two or three spiny thistles with dull purple-grey heads, muted A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shad",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-rocks-small",
+      "file": "images/maps/map-clut-rocks-small.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-rocks-small-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-rocks-small",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small scatter of three or four fist-sized grey stones A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow dire",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-boulder",
+      "file": "images/maps/map-clut-boulder.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-boulder-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-boulder",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a single weathered grey boulder, knee-high, moss-dark on one side A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact s",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-stump",
+      "file": "images/maps/map-clut-stump.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-stump-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-stump",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "an old weathered tree stump, grey wood, sawn top A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly be",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-log",
+      "file": "images/maps/map-clut-log.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-log-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-log",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a short fallen log, grey weathered wood with dark moss A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow direc",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-bones-buried",
+      "file": "images/maps/map-clut-bones-buried.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-bones-buried-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-bones-buried",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a few old pale bones half-buried, just the ends showing A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow dire",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-wildflowers",
+      "file": "images/maps/map-clut-wildflowers.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-wildflowers-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-wildflowers",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a tiny scatter of pale muted wildflowers, grey-white and dull yellow A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contac",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-book-open",
+      "file": "images/maps/map-clut-book-open.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-book-open-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-book-open",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "an open book lying flat, yellowed blank pages, dark cloth cover A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact sha",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-mug",
+      "file": "images/maps/map-clut-mug.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-mug-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-mug",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small wooden mug A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITICAL: the item floa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-plate",
+      "file": "images/maps/map-clut-plate.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-plate-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-plate",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a plain wooden trencher plate A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITICAL: th",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-lantern-unlit",
+      "file": "images/maps/map-clut-lantern-unlit.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-lantern-unlit-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-lantern-unlit",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small dark iron lantern, unlit, lying on its side A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-keyring",
+      "file": "images/maps/map-clut-keyring.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-keyring-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-keyring",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small iron ring holding three old keys A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. C",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-knife",
+      "file": "images/maps/map-clut-knife.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-knife-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-knife",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small work knife with a dark wooden handle A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneat",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-cloth-pile",
+      "file": "images/maps/map-clut-cloth-pile.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-cloth-pile-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-cloth-pile",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small crumpled pile of dark grey cloth A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. C",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-bucket",
+      "file": "images/maps/map-clut-bucket.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-bucket-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-bucket",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a wooden bucket with iron bands A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITICAL: ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-broom",
+      "file": "images/maps/map-clut-broom.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-broom-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-broom",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a rough twig broom A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITICAL: the item floa",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-clut-woodpile",
+      "file": "images/maps/map-clut-woodpile.png",
+      "size": [
+        128,
+        128
+      ],
+      "source_fullres": "images/fullres/map-clut-woodpile-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-clut-woodpile",
+      "map_layer": "clutter-above-overlay",
+      "prompt": "a small neat stack of split firewood A single small clutter item viewed from directly above, top-down orthographic, no perspective, small in the frame with generous empty margin around it. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright or saturated colours, nothing near-white, no cartoon outlines. Soft faint contact shadow directly beneath. CRITI",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-well",
+      "file": "images/maps/map-dress-well.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-well-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-well",
+      "map_layer": "dressing",
+      "prompt": "a round stone well with a low wall, a wooden windlass across the top and a dark shaft in the centre A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object floats ",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-cart",
+      "file": "images/maps/map-dress-cart.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-cart-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-cart",
+      "map_layer": "dressing",
+      "prompt": "a two-wheeled wooden hand cart, empty, shafts resting down A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object floats on a completely empty transparent backgro",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-fence",
+      "file": "images/maps/map-dress-fence.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-fence-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-fence",
+      "map_layer": "dressing",
+      "prompt": "a straight run of rough post-and-rail wooden fence crossing the full width of the frame A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object floats on a complet",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-trough",
+      "file": "images/maps/map-dress-trough.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-trough-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-trough",
+      "map_layer": "dressing",
+      "prompt": "a long wooden water trough with dark water inside A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object floats on a completely empty transparent background \u2014 abs",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-haypile",
+      "file": "images/maps/map-dress-haypile.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-haypile-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-haypile",
+      "map_layer": "dressing",
+      "prompt": "a slumped pile of pale hay with a wooden pitchfork stuck in it A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object floats on a completely empty transparent bac",
+      "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-dress-wayside-shrine",
+      "file": "images/maps/map-dress-wayside-shrine.png",
+      "size": [
+        256,
+        256
+      ],
+      "source_fullres": "images/fullres/map-dress-wayside-shrine-1024.png",
+      "app": "infinite-dungeons",
+      "sprite_key": "map-dress-wayside-shrine",
+      "map_layer": "dressing",
+      "prompt": "a small stone wayside shrine: a waist-high niche pillar with a tiny unlit candle inside and a slab roof A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object flo",
+      "generated": "2026-09-15",
+      "version": 1
     }
   ]
 }

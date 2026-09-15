@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "units": "dx/dy in pixels at a 512px room reference size, from the stamp anchor; scale is relative to the tile's natural delivery size; rot in degrees clockwise",
+  "render_order": ["floor", "light", "overlay", "walls", "dressing", "clutter", "fx"],
+  "stamps": [
+    {
+      "id": "stamp-shrine-corner", "tags": ["sacred", "indoor"],
+      "light": {"key": "map-light-candle", "dx": 0, "dy": 0, "scale": 1.6},
+      "items": [
+        {"key": "map-dress-altar", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-candle", "dx": -70, "dy": 42, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-candle", "dx": 74, "dy": 38, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-bones", "dx": 60, "dy": 78, "rot": 25, "scale": 0.9}
+      ]
+    },
+    {
+      "id": "stamp-shaft-head", "tags": ["mine", "indoor"],
+      "light": {"key": "map-light-lamp", "dx": 70, "dy": -60, "scale": 1.4},
+      "items": [
+        {"key": "map-dress-shaft", "dx": 0, "dy": 0, "rot": 0, "scale": 1.2},
+        {"key": "map-dress-board", "dx": -120, "dy": -40, "rot": 0, "scale": 0.9},
+        {"key": "map-dress-cage", "dx": 110, "dy": 90, "rot": 0, "scale": 0.9},
+        {"key": "map-clut-tools", "dx": -70, "dy": 90, "rot": 15, "scale": 1.0},
+        {"key": "map-clut-chain", "dx": 60, "dy": 110, "rot": 0, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-camp-hearth", "tags": ["rest", "indoor", "outdoor"],
+      "light": {"key": "map-light-hearth", "dx": 0, "dy": 0, "scale": 1.5},
+      "items": [
+        {"key": "map-dress-hearth", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-dress-bench", "dx": -90, "dy": 80, "rot": 10, "scale": 0.9},
+        {"key": "map-clut-woodpile", "dx": 100, "dy": 60, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-pot", "dx": 40, "dy": 70, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-mug", "dx": -60, "dy": 110, "rot": 0, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-storehouse", "tags": ["trade", "indoor"],
+      "light": null,
+      "items": [
+        {"key": "map-dress-barrels", "dx": -60, "dy": -50, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-crate", "dx": 70, "dy": -60, "rot": 8, "scale": 1.1},
+        {"key": "map-clut-sack", "dx": 20, "dy": 40, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-rope", "dx": -90, "dy": 60, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-woodpile", "dx": 90, "dy": 80, "rot": 90, "scale": 0.8}
+      ]
+    },
+    {
+      "id": "stamp-grave-plot", "tags": ["outdoor", "sacred"],
+      "light": {"key": "map-light-moon", "dx": 0, "dy": 0, "scale": 1.8},
+      "items": [
+        {"key": "map-dress-grave", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-bones-buried", "dx": 80, "dy": 50, "rot": 30, "scale": 1.0},
+        {"key": "map-clut-weeds", "dx": -70, "dy": 60, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-wildflowers", "dx": -50, "dy": -60, "rot": 0, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-toll-post", "tags": ["trade", "bridge"],
+      "light": {"key": "map-light-lamp", "dx": 90, "dy": -50, "scale": 1.3},
+      "items": [
+        {"key": "map-dress-counter", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-dress-post", "dx": 90, "dy": -50, "rot": 0, "scale": 1.0},
+        {"key": "map-dress-board", "dx": -90, "dy": -60, "rot": 0, "scale": 0.85},
+        {"key": "map-clut-ledger", "dx": 10, "dy": 10, "rot": 5, "scale": 0.9},
+        {"key": "map-clut-coins", "dx": -20, "dy": 15, "rot": 0, "scale": 0.9}
+      ]
+    },
+    {
+      "id": "stamp-clerk-desk", "tags": ["indoor", "study"],
+      "light": {"key": "map-light-candle", "dx": 20, "dy": -10, "scale": 1.2},
+      "items": [
+        {"key": "map-dress-desk", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-ledger", "dx": -60, "dy": 60, "rot": -10, "scale": 1.0},
+        {"key": "map-clut-papers", "dx": 60, "dy": 50, "rot": 15, "scale": 1.0},
+        {"key": "map-clut-candle", "dx": 20, "dy": -10, "rot": 0, "scale": 0.9},
+        {"key": "map-clut-book-open", "dx": -10, "dy": 90, "rot": -5, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-bed-cell", "tags": ["indoor", "rest"],
+      "light": null,
+      "items": [
+        {"key": "map-dress-bed", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-cloth-pile", "dx": 60, "dy": 50, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-mug", "dx": -50, "dy": 40, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-bucket", "dx": -60, "dy": -50, "rot": 0, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-lamp-station", "tags": ["lamplighters", "indoor"],
+      "light": {"key": "map-light-lamp", "dx": 0, "dy": -30, "scale": 1.5},
+      "items": [
+        {"key": "map-dress-rack", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-dress-post", "dx": -90, "dy": 50, "rot": 0, "scale": 0.9},
+        {"key": "map-clut-lantern-unlit", "dx": 60, "dy": 70, "rot": 20, "scale": 1.0},
+        {"key": "map-clut-bucket", "dx": -40, "dy": 90, "rot": 0, "scale": 0.9}
+      ]
+    },
+    {
+      "id": "stamp-pyre-site", "tags": ["ashen-crown", "outdoor"],
+      "light": {"key": "map-light-ember", "dx": 0, "dy": 0, "scale": 1.3},
+      "items": [
+        {"key": "map-dress-pyre", "dx": 0, "dy": 0, "rot": 0, "scale": 1.1},
+        {"key": "map-clut-woodpile", "dx": -90, "dy": 70, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-bones", "dx": 80, "dy": 70, "rot": -20, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-well-square", "tags": ["outdoor", "town"],
+      "light": null,
+      "items": [
+        {"key": "map-dress-well", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-bucket", "dx": 70, "dy": 40, "rot": 0, "scale": 1.0},
+        {"key": "map-dress-trough", "dx": -100, "dy": 80, "rot": 10, "scale": 0.9},
+        {"key": "map-clut-rope", "dx": 50, "dy": -60, "rot": 0, "scale": 0.9}
+      ]
+    },
+    {
+      "id": "stamp-wayside-rest", "tags": ["outdoor", "sacred", "road"],
+      "light": null,
+      "items": [
+        {"key": "map-dress-wayside-shrine", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-dress-bench", "dx": 90, "dy": 60, "rot": -15, "scale": 0.85},
+        {"key": "map-clut-wildflowers", "dx": -60, "dy": 50, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-grass-tuft-2", "dx": -80, "dy": -50, "rot": 0, "scale": 1.0}
+      ]
+    },
+    {
+      "id": "stamp-guard-post", "tags": ["indoor", "guard"],
+      "light": {"key": "map-light-lamp", "dx": -60, "dy": -50, "scale": 1.3},
+      "items": [
+        {"key": "map-dress-table", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-mug", "dx": 20, "dy": -10, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-plate", "dx": -25, "dy": 12, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-knife", "dx": 35, "dy": 18, "rot": 40, "scale": 1.0},
+        {"key": "map-clut-bones", "dx": 70, "dy": 70, "rot": 0, "scale": 0.8}
+      ]
+    },
+    {
+      "id": "stamp-market-stall", "tags": ["trade", "outdoor", "town"],
+      "light": null,
+      "items": [
+        {"key": "map-dress-counter", "dx": 0, "dy": 0, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-crate", "dx": -70, "dy": 60, "rot": -8, "scale": 1.0},
+        {"key": "map-clut-sack", "dx": 60, "dy": 65, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-bottle", "dx": 15, "dy": -5, "rot": 0, "scale": 1.0},
+        {"key": "map-clut-coins", "dx": -15, "dy": 8, "rot": 0, "scale": 0.9}
+      ]
+    }
+  ]
+}
