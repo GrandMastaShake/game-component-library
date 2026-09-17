@@ -1,0 +1,50 @@
+{
+  "ck-mon-siege-beast": {
+    "path": "monsters/ck-mon-siege-beast.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A massive siege beast of the Ugan war-bands, low and armoured like a moving stockade wall, hide thick as hull-plate layered with bark and scar tissue, small eyes set deep under iron-capped brows, tusk-fences of dark horn, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-ash-hound": {
+    "path": "monsters/ck-mon-ash-hound.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A lean ash-grey hound of the burned ridges, hide dusted pale as cold charcoal, eyes a low ember-orange, ribs like barrel staves, paws wide and silent, built to run prey into the wind, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-echo-wraith": {
+    "path": "monsters/ck-mon-echo-wraith.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "An echo-wraith of a canyon echo chamber, a tall thing of looped residue and battlefield memory, half-remembered faces drifting under its surface like silt stirred in deep water, hands that end in unfinished gestures, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-storm-lynx": {
+    "path": "monsters/ck-mon-storm-lynx.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A storm-lynx, a predator formed where resonance storms ground themselves, muscled like a cougar, fur standing with pale static, arcs of thin lightning read as texture across the shoulders, eyes the colour of rain-light, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-ley-leech": {
+    "path": "monsters/ck-mon-ley-leech.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A ley leech of the deep lines, a pale segmented slug the length of a horse, its mouth a ring of tuning-fork spines that drinks frequencies, translucent skin showing stored glow beneath, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-dust-wyrm": {
+    "path": "monsters/ck-mon-dust-wyrm.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A dust-wyrm of the deep badlands, a long plated burrower surfaced mid-shake, hide ridged like arroyo walls, dust-membranes drawn across its eyes, a maw wide enough to take a pony, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-glassjaw": {
+    "path": "monsters/ck-mon-glassjaw.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A glassjaw crawler of the Cane Spring desert, chitin of translucent mineral over a furnace-dark maw, legs of smoked glass, inner workings dimly visible like coals under ash, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-mon-dissonant": {
+    "path": "monsters/ck-mon-dissonant.png",
+    "size": "1024x1280",
+    "transparent": false,
+    "prompt": "A dissonant thing of a dead magic rift, wrong geometry held together by hunger, the one break in the grey palette at its seams where the colour goes bruise-violet and bile-green, too many angles and not one mercy, three-quarter view. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and bruised umber, a single warm ember-amber light source from below-left, near-black featureless background fading to void, visible brushwork, sombre mood, creature study, three-quarter view. No cartoon outlines. No text of any kind: no letters, labels, numbers, signatures or watermarks. Opaque, fills the frame."
+  }
+}
