@@ -1,0 +1,74 @@
+{
+  "ck-hw-six-harmony": {
+    "path": "items/ck-hw-six-harmony.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A frontier resonance revolver called a six-harmony, its cylinder chambers tuned to cycle distinct munitions, blued steel gone grey, a micro-pronged tuning-fork rear sight, walnut grips polished dark by a holster, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-lever-carbine": {
+    "path": "items/ck-hw-lever-carbine.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A lever-action frontier carbine of rugged grey steel and oil-dark walnut, trail dust in the action, a canvas sling worn soft, the lever ring polished bright by ten thousand cycles, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-wall-buster": {
+    "path": "items/ck-hw-wall-buster.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A single-shot heavy rolling-block wall-buster rifle of massive bore, garrison iron darkened with age, a brass tuning sight on a tall block, a recoil pad of layered leather, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-canister-cannon": {
+    "path": "items/ck-hw-canister-cannon.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A small fixed canister cannon of a frontier stockade, smoothbore iron on a powder-black wooden truck carriage, a bundle of canister shot of iron shards and gravel beside the muzzle, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-tuning-sights": {
+    "path": "items/ck-hw-tuning-sights.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A set of tuning-fork iron sights for a frontier long gun, micro-prongs of brass that tremble when aligned to a target's resonance, laid out on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-grounding-gauntlets": {
+    "path": "items/ck-hw-grounding-gauntlets.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A pair of grounding braces and leather gauntlets lined with woven copper and lead filament to absorb arcane blowback, cuffs scorched dull, laid out on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-null-bandolier": {
+    "path": "items/ck-hw-null-bandolier.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A null-shielded cartridge bandolier of specially treated leather, loops of tuned cartridges jacketed in dull lead, insulated clasps of cold iron, laid out on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-breaker-slug": {
+    "path": "items/ck-hw-breaker-slug.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A dissonant breaker slug cartridge engineered with chaotic jarring frequency, the slug body hand-chiselled with runic grooves that read as texture, a casing of dark brass, macro detail, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-harmonic-incendiary": {
+    "path": "items/ck-hw-harmonic-incendiary.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A harmonic incendiary cartridge primed with fire-aspected crystalline flakes visible in the mouth of the casing, its rifling contact plate bright, macro detail, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-null-jacket": {
+    "path": "items/ck-hw-null-jacket.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A null-jacket cartridge of cold iron and heavy lead alloy that drinks ambient light, its jacket matte and light-swallowing, macro detail, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-resonance-engine": {
+    "path": "items/ck-hw-resonance-engine.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "A frontier resonance engine core that converts ambient frequencies to torque, a crystalline processing matrix cradled in iron and copper coils, its pressure gauge cracked, resting on dark ground Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  },
+  "ck-hw-iron-king": {
+    "path": "items/ck-hw-iron-king.png",
+    "size": "1024x1024",
+    "transparent": false,
+    "prompt": "An Iron King locomotive of heavy-plated steel built to run a ley corridor, a resonance boiler with a crystalline feed, a cowcatcher scarred by range stock, steam held low, three-quarter plate view Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and oxblood leather, near-black background fading to void, visible brushwork, game item icon, object centered, three-quarter view, dark neutral ground, no drop shadow, no frame, no text. No clean surfaces. Bold simple silhouette readable at small size."
+  }
+}

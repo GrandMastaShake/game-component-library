@@ -1,0 +1,50 @@
+{
+  "ck-env-hollisdale": {
+    "path": "environment/ck-env-hollisdale.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "The frontier port town of Hollisdale at dusk, leaning wharfs and low warehouses, corn-whiskey distilleries breathing thin smoke, iron-hulled traders at anchor, lanterns just lit, mud and glory along the tidewater. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-split-rock": {
+    "path": "environment/ck-env-split-rock.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "The Split-Rock River at dusk, surveyed homesteads and cattle ranches on the near bank, split-rail fence lines, horses small in the foreground, and on the far bank the dark unbroken wall of hostile timber. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-clearkeep": {
+    "path": "environment/ck-env-clearkeep.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "Fort Clearkeep in the Northern Crags, stockade walls and blockhouses on a granite shelf, wall-guns silhouetted along the parapet, dwarven excavation scaffolds descending into the mountain's wound, cold high light. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-shattered-marches": {
+    "path": "environment/ck-env-shattered-marches.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "The Shattered Marches at dusk, ley-scarred badlands where stones hang a hand's breadth above the ground and lightning crawls along the ridges without a storm, a broken road crossing the frame. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-dead-rift": {
+    "path": "environment/ck-env-dead-rift.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "A dead magic rift, a barren bowl of grey ash and salt-crack where the ley network was severed, a dropped wizard's staff gone inert and ordinary in the foreground, the sky starved of colour. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-ley-rail": {
+    "path": "environment/ck-env-ley-rail.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "A railroad laid along a ley corridor, iron tracks beside a river of faint luminous current, a heavy engine idling at a water tower, survey poles humming, wild timberland pressing in on both sides. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-forbidden-forest": {
+    "path": "environment/ck-env-forbidden-forest.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "The Forbidden Forests, old-growth timberland of black trunks shrouded in lingering echoes, faint lights between the trees that are not lanterns, a game trail crossing the foreground into the dark. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  },
+  "ck-env-cane-spring": {
+    "path": "environment/ck-env-cane-spring.png",
+    "size": "1088x608",
+    "transparent": false,
+    "prompt": "The Cane Spring Desert of the Barren Coast, glass dunes and clay-brick kilns, an oil seep burning low with a column of black smoke, a spice caravan small against the heat-haze. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of dust, stone, ash and worn oxblood leather under a bruised dusk sky, a single warm ember-amber light source low on the horizon, near-black vignette fading to void at the edges, visible brushwork, sombre mood, wide establishing vista, no people in frame. No cartoon outlines. No text of any kind: no letters, labels, numbers, signs, signatures or watermarks. Opaque, fills the frame."
+  }
+}
