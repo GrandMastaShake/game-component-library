@@ -5447,29 +5447,31 @@
       "key": "hire-fisk",
       "file": "images/characters/hire-fisk.png",
       "size": [
-        512,
-        640
+        1024,
+        1280
       ],
       "source_fullres": "images/fullres/hire-fisk-768x960.png",
       "app": "infinite-dungeons",
       "sprite_key": "hire-fisk",
       "prompt": "Idony Fisk, a Tidewrack diver: salt-worn salvage coat with mismatched buttons, damp hair, a coiled harpoon line over one shoulder, tall waders, confident half-smile of someone prosecuted by two insurers. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single warm ember-amber light source from below-left, near-black featureless background",
-      "generated": "2026-09-14",
-      "version": 1
+      "generated": "2026-09-16",
+      "version": 2,
+      "batch": "batch9-ashen-crown-plates"
     },
     {
       "key": "hire-rooke",
       "file": "images/characters/hire-rooke.png",
       "size": [
-        512,
-        640
+        1024,
+        1280
       ],
       "source_fullres": "images/fullres/hire-rooke-768x960.png",
       "app": "infinite-dungeons",
       "sprite_key": "hire-rooke",
       "prompt": "Tobias Rooke, a Longmark stonecutter: tall, long-boned, grey-toned skin, stone dust in knuckle creases, a dressing hammer and plumb bob at his belt, a satchel of numbered wedges, the tired dignity of a man who stopped signing condemnation forms. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single warm ember-amber light source from bel",
-      "generated": "2026-09-14",
-      "version": 1
+      "generated": "2026-09-16",
+      "version": 2,
+      "batch": "batch9-ashen-crown-plates"
     },
     {
       "key": "mob-role-bruiser-1",
@@ -5685,15 +5687,16 @@
       "key": "npc-odell",
       "file": "images/characters/npc-odell.png",
       "size": [
-        512,
-        640
+        1024,
+        1280
       ],
       "source_fullres": "images/fullres/npc-odell-768x960.png",
       "app": "infinite-dungeons",
       "sprite_key": "npc-odell",
       "prompt": "Odell Crane, a tavern landlord, fifties, broad forearms, wiping a mug with a cloth, a thick ledger chained at his belt, shrewd eyes that have opinions, the posture of a man who was something else before this. Painterly dark-fantasy oil painting, heavy chiaroscuro, desaturated palette of stone grey, ash and charcoal, single warm ember-amber light source from below-left, near-black featureless backg",
-      "generated": "2026-09-14",
-      "version": 1
+      "generated": "2026-09-16",
+      "version": 2,
+      "batch": "batch9-ashen-crown-plates"
     },
     {
       "key": "status-blessed",
@@ -8288,6 +8291,1221 @@
       "map_layer": "dressing",
       "prompt": "a small stone wayside shrine: a waist-high niche pillar with a tiny unlit candle inside and a slab roof A single object viewed from directly above, top-down orthographic, no perspective. Painterly dark-fantasy realism, grim and weathered, desaturated muted palette, dusk-dim, no bright colours, nothing near-white, no cartoon outlines. Soft contact shadow beneath the object. CRITICAL: the object flo",
       "generated": "2026-09-15",
+      "version": 1
+    },
+    {
+      "key": "map-chapter-ashen-1",
+      "file": "images/maps/map-chapter-ashen-1.png",
+      "size": [
+        1536,
+        1152
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-chapter-ashen-1",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "Ash Falls Upward. A survey plan of Duskhollow, a small mountain town: the square with its pyre at the centre, a row of cottages off it with one cottage dark, a trail leaving the town uphill, and a black cinder road with nine small roadside shrines climbing in switchbacks to the gate of a ruined keep at the top edge. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umbe",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-chapter-ashen-2",
+      "file": "images/maps/map-chapter-ashen-2.png",
+      "size": [
+        1536,
+        1152
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-chapter-ashen-2",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The Guard Hall. A floor plan of a ruined mountain keep's lower level: the inner gate full of drifted ash, a corridor bending right to a long guard hall with a table, benches and stores, and on the left a long stair descending to the edge of a great underground cistern of black water. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light sou",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-chapter-ashen-3",
+      "file": "images/maps/map-chapter-ashen-3.png",
+      "size": [
+        1536,
+        1152
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-chapter-ashen-3",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The Warded Door. A floor plan of rock-cut passages below a keep: a passage and short stair to a great warded door, and beyond it a round reliquary chamber lined with niches. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is th",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-chapter-ashen-4",
+      "file": "images/maps/map-chapter-ashen-4.png",
+      "size": [
+        1536,
+        1152
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-chapter-ashen-4",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The Cistern. A floor plan of a drowned chapel inside a cistern: pews in rows under black water, a font at the far end, a stair going down on one side toward a round reliquary, and behind the font a narrow older stair leading further down. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-chapter-ashen-5",
+      "file": "images/maps/map-chapter-ashen-5.png",
+      "size": [
+        1536,
+        1152
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-chapter-ashen-5",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The Reliquary. A survey sheet of three connected places: a round reliquary chamber of niches; far below it a buried street of nine small houses with a well and a chapel at its end; and a cinder road climbing a mountainside to a shrine at the turning. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visib",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-chapter-ashen-6",
+      "file": "images/maps/map-chapter-ashen-6.png",
+      "size": [
+        1536,
+        1152
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-chapter-ashen-6",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The Last Verse. A floor plan of the original chapel deep underground, dry and intact: pews, an altar and a round font full of water at its heart, three steps up to a door, rough rock all around. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-overview-ashen",
+      "file": "images/maps/map-overview-ashen.png",
+      "size": [
+        1920,
+        1440
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-overview-ashen",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A painted cutaway cross-section of a mountain, drawn like a county surveyor's section: the town of Duskhollow at the foot with a small pyre glowing in its square, a black cinder road with nine tiny shrines climbing the slope to a ruined keep near the top, and inside the mountain beneath the keep, stacked downward: a great cistern holding a drowned chapel, a round reliquary of niches, a buried stre",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-ash-gate",
+      "file": "images/maps/map-room-ashen-ash-gate.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-ash-gate",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The inner gate of a ruined mountain keep: a stone gate passage opening into a vaulted entry where cold grey ash lies ankle-deep, a corridor bending away to the right toward torchlight, and on the left a stone stair dropping down into darkness. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brus",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-ash-road",
+      "file": "images/maps/map-room-ashen-ash-road.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-ash-road",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A long road paved in black cinders climbing a mountainside in one switchback, a steep drop along one edge, small stone roadside shrines set at intervals along it with every shrine's open face turned downhill away from the mountain, a fresh loaf of bread left on one shrine. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-b",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-cistern-head",
+      "file": "images/maps/map-room-ashen-cistern-head.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-cistern-head",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The bottom of a long straight stone stair where it ends at the edge of a great cistern cut into the rock under a keep: a stone landing, then black still water filling the rest of the chamber, rough-cut rock walls. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothi",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-drowned-chapel",
+      "file": "images/maps/map-room-ashen-drowned-chapel.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-drowned-chapel",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A drowned underground chapel: rows of wooden pews standing in a foot of black water, a bell rope hanging down from above and vanishing into the water, a stone font at the far end, a stair going down on one side, and behind the font an older narrow stair cut into the floor. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-b",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-dry-chapel",
+      "file": "images/maps/map-room-ashen-dry-chapel.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-dry-chapel",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "An old dry underground chapel, perfect and undisturbed: wooden pews in rows, an altar, a stone font at the centre filled to the brim with still water, a verger's ring of keys on a hook, three stone steps up to a door with a cracked lintel. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwor",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-duskhollow-square",
+      "file": "images/maps/map-room-ashen-duskhollow-square.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-duskhollow-square",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The town square of Duskhollow, a mountain town: worn cobbles under a skin of grey ash, a large funeral pyre of stacked split timber at the centre, unlit, a shrouded body on top, three burnt-out torches thrown into the stack. House fronts and doorsteps along two edges, a lantern post, a stone step where the mayor stands, drifts of ash against the walls. Painterly dark-fantasy realism, heavy chiaros",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-guard-hall",
+      "file": "images/maps/map-room-ashen-guard-hall.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-guard-hall",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A keep's guard hall: a long trestle table with scattered dice and a pair of good boots on it, benches, a weapon rack, a desk with an open ledger, barrels of grain and lamp oil and sacks of lime stacked against a wall, two wall torches, ash drifted in at the door. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backg",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-ninth-house",
+      "file": "images/maps/map-room-ashen-ninth-house.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-ninth-house",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The inside of one small stone house underground: a hearth, a small child's bed with the covers turned back, a mantel with a memorial card and one child's shoe on it, a spotless swept floor, and a line of grey silt stopping exactly at the threshold. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-ninth-shrine",
+      "file": "images/maps/map-room-ashen-ninth-shrine.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-ninth-shrine",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A narrow stretch of cinder road at the ninth roadside shrine: a small stone shrine with a low altar stone, a kneeling stone worn smooth in front of it, a dropped grey robe, a coil of fine wire and curved needles spilled on the cinders. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-reliquary",
+      "file": "images/maps/map-room-ashen-reliquary.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-reliquary",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A round stone chamber whose whole wall is honeycombed with a hundred small niches, each niche holding a clay funerary urn, grey ash spilled and settling across the floor, a clear space at the centre, one niche standing empty and open. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-road-top",
+      "file": "images/maps/map-room-ashen-road-top.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-road-top",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The top of the cinder road at a mountain saddle at night: open ground of black cinders, a stone cairn, the road arriving from below at one edge, a long drop on the other, a thin frost, no fire. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the b",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-tallow-house",
+      "file": "images/maps/map-room-ashen-tallow-house.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-tallow-house",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The inside of a small one-room cottage that belonged to a chandler: a plain table, a narrow bed, a cold hearth with no fire, tallow vats and a candle dipping frame hung with half-made candles, a door with the key in the lock on the inside. Dim, no lamp lit. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-three-tongue-door",
+      "file": "images/maps/map-room-ashen-three-tongue-door.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-three-tongue-door",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A narrow rock-cut passage ending at a massive iron-bound door set in stone, the door carved with three bands of different sigils, dozens of wax candles melted down across the carvings and pooled on the floor, a short stair leading up to the door. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible b",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-town-below",
+      "file": "images/maps/map-room-ashen-town-below.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-town-below",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "A buried street deep underground under a rock ceiling: cobbles, gutters, doorsteps worn in the middle, nine small stone houses in a row with a different mark cut into each door, a well, a small chapel at the end of the street, grey silt in the gutters, a fallen roof beam across the fifth doorway. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-am",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-turning-shrine",
+      "file": "images/maps/map-room-ashen-turning-shrine.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-turning-shrine",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The turning of a mountain cinder road at the last shrine: a stone shrine facing away from the peak, a stone bench beside it, and four lit lamps standing in a line across the road, their warm pools of light on the cinders, darkness beyond. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "map-room-ashen-uphill-trail",
+      "file": "images/maps/map-room-ashen-uphill-trail.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "map-room-ashen-uphill-trail",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "maps",
+      "prompt": "The edge of town where a cinder path leaves the last cottages and climbs uphill through scrub and rocks. Footprints in the ash along the path: two adults with a small child between them, the child's prints stopping partway, and a scuffed patch where somebody knelt. The path runs off the top edge. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-am",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-ashfallen-cleric-f",
+      "file": "images/characters/hero-ashfallen-cleric-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-ashfallen-cleric-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of an Ashfallen woman priest in her thirties, born downwind of a pyre: ash settled permanently into her skin as a grey dusting, not scars, and eyes a shade too pale. Three-quarter view, looking off-frame. Scale armour over a vestment, a mace, a shield. Grave and unafraid of fire. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash an",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-barbarian-f",
+      "file": "images/characters/hero-barbarian-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-barbarian-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a big, broad-shouldered woman from the hollows in her thirties, three-quarter view, looking off-frame. No armour: heavy wool and a sheepskin over bare scarred forearms, a greataxe with a haft rewrapped many times. Hair shaved at the sides and bound on top. Hard to stop and harder to lie to. Not sexualised, not a costume: working clothes. Plain near-black ground. Painterly dark",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-cleric-f",
+      "file": "images/characters/hero-cleric-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-cleric-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a woman priest in her fifties, three-quarter view, looking off-frame with the steadiness of someone who knows the rite cold. Scale armour over a faded vestment, a shield with a sun worn nearly smooth, a flanged mace, a prayer book tied shut with string. Lined face, calm hands. The light on her is only the ember light, no holy glow. Plain near-black ground. Painterly dark-fanta",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-county-paladin-f",
+      "file": "images/characters/hero-county-paladin-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-county-paladin-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a County-born woman paladin in her thirties, parish-registered and plain, three-quarter view, looking off-frame. Chain mail over a plain wool surcoat, a parish token on a cord at her throat, a heater shield and a warhammer. Unremarkable face, remarkable stillness. This is the book's heroine, Seraphine Vale, who takes a vow in the ash. Plain near-black ground. Painterly dark-fa",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-fenborn-ranger-f",
+      "file": "images/characters/hero-fenborn-ranger-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-fenborn-ranger-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a Fenborn woman warden from the marshes in her thirties, three-quarter view, looking off-frame over water. Oiled canvas over hide, a buckler, a longbow wrapped against the wet, webbing visible between the first two fingers of the hand on the bow. Cold-reddened cheeks, completely at ease. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated st",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-fighter-f",
+      "file": "images/characters/hero-fighter-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-fighter-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a woman soldier in her forties, a veteran, three-quarter view, looking off-frame the way someone reads ground. Splint armour with two replaced lames that do not match, a round-topped shield with its paint mostly gone, a longsword's plain cross-guard at her hip. Grey at the temples, a broken nose that set crooked. No illusions. Plain near-black ground. Painterly dark-fantasy re",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-hollow-rogue-f",
+      "file": "images/characters/hero-hollow-rogue-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-hollow-rogue-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a Hollow-folk woman thief in her twenties, off the register, three-quarter view, looking off-frame. Layered salvage clothing over studded leather, hair bound back hard, salt-cracked hands, a shortsword and a heel of salt bread wrapped in cloth at her belt. Nobody has ever written her name down. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desatur",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-longmark-fighter-f",
+      "file": "images/characters/hero-longmark-fighter-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-longmark-fighter-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a Longmark woman soldier in her forties: long-boned, grey-toned skin, very tall, from the old people who cut the county's stone. Three-quarter view, looking off-frame. Splint armour worn over a stonemason's leather apron, a longsword, a mason's mark cut into her shield. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-paladin-f",
+      "file": "images/characters/hero-paladin-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-paladin-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a woman paladin in her thirties, three-quarter view, looking off-frame. Dented chain mail over a padded coat, a heater shield on her back, a warhammer's haft resting on her shoulder. An ash-grey vow cord knotted at her wrist. Tired, certain, a healed cut through one eyebrow. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-ranger-f",
+      "file": "images/characters/hero-ranger-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-ranger-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a woman warden of the hollows in her thirties, three-quarter view, looking off-frame into distance. Hide coat patched with other hide, a small buckler strapped to the forearm, a longbow unstrung over the shoulder, a quiver of mismatched fletching. Weathered skin, hair braided back tight, mud to the elbow. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscu",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-ridgekin-barbarian-f",
+      "file": "images/characters/hero-ridgekin-barbarian-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-ridgekin-barbarian-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a Ridgekin woman from the north ridge in her thirties: short, deep-chested, a snow-glare squint. Three-quarter view, looking off-frame. No armour: a sheepskin worn shiny at the shoulder, heavy wool, a greataxe. Wind-cut cheeks and an unimpressed mouth. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-a",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-roadgot-wizard-f",
+      "file": "images/characters/hero-roadgot-wizard-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-roadgot-wizard-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a Parishless woman diviner in her forties, born at a waystation between two registers and claimed by neither. Three-quarter view, looking off-frame. Road-worn travelling coat, no parish token, a quarterstaff, a leather wallet of her own papers held shut with a strap. Thin, clever, self-made. No magic effects. Plain near-black ground. Painterly dark-fantasy realism, heavy chiar",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-rogue-f",
+      "file": "images/characters/hero-rogue-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-rogue-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a woman thief in her late twenties, three-quarter view, looking off-frame as if listening at a door. Studded leather jerkin gone soft at the seams, a hood pushed back, a shortsword worn low and reversed at the hip, a ring of picks on a thong. Hair cropped short and uneven. Watchful rather than sly. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, des",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-tidewrack-rogue-f",
+      "file": "images/characters/hero-tidewrack-rogue-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-tidewrack-rogue-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a Tidewrack woman thief from a coastal salvage family in her twenties, three-quarter view, looking off-frame. A coat that came off a wreck with mismatched buttons, studded leather beneath, a shortsword with a sea-pitted guard, a coil of tarred line over one shoulder. Salt in her hair. Plain near-black ground. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "hero-wizard-f",
+      "file": "images/characters/hero-wizard-f.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "hero-wizard-f",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "heroes",
+      "prompt": "Waist-up portrait of a woman diviner in her forties, thin and clever, three-quarter view, looking off-frame at something written she is reading. A plain dark scholar's coat with ink on the cuffs, a quarterstaff notched with tally marks, a folded chart tucked into her belt. Spectacles pushed up into grey-streaked hair. No glowing hands, no magic effects. Plain near-black ground. Painterly dark-fant",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "boss-bellwether",
+      "file": "images/monsters/boss-bellwether.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-bellwether",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "The Bellwether. A giant ram-horned creature twice a man's height standing on its hind legs, shaggy grey fleece, a bronze church bell hung inside its open ribcage where the heart should be, the clapper swinging.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "boss-census",
+      "file": "images/monsters/boss-census.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-census",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "The Census-Taker. A towering gaunt figure folded out of parish registers and ledger pages layered like a long coat, a face of written entries, a quill of bone behind one ear, holding an open register and a pen striking out a name. All writing is texture, never readable.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-bla",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "boss-hob",
+      "file": "images/monsters/boss-hob.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-hob",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "The Hollow Hob. A hunched giant made of hedge brambles, thorns and roots, wearing a patchwork coat of stolen washing, a small child's shoe caught in its thorns, long twiggy arms reaching forward, a lane at night behind it.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark ar",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "boss-limewidow",
+      "file": "images/monsters/boss-limewidow.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-limewidow",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "The Lime Widow. A woman calcified in white quicklime standing waist-deep in a lime pit in a mine, a widow's mourning veil stiff as plaster, her face cracked white stone, tears of caustic lye running and smoking.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothin",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "boss-wickmother",
+      "file": "images/monsters/boss-wickmother.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-wickmother",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "The Wick Mother. A colossal queen moth nesting inside the smashed lantern room of a dead lighthouse, wings spread across the whole room, her nest woven from hundreds of broken oil lamps and street lanterns.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing nea",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-ashhound",
+      "file": "images/monsters/mob-ashhound.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-ashhound",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Ash Hound. A large hound made entirely of packed grey pyre ash, cracks glowing orange where its ribs are embers, ash smoking off its back, paw prints behind it still smouldering.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-bats",
+      "file": "images/monsters/mob-bats.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-bats",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Belfry Bats. A swirling cloud of small brown bats bursting out from behind a cracked bronze church bell, wings everywhere, one bat large and close with its mouth open.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is the emb",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-bear",
+      "file": "images/monsters/mob-bear.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-bear",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Ridge Bear. An old scarred brown bear rising onto its hind legs at the mouth of a mountain cave, grey muzzle, one torn ear, a broken arrow shaft healed into its shoulder.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is the ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-centipede",
+      "file": "images/monsters/mob-centipede.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-centipede",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Drift Centipede. A giant pale centipede as long as a mine pit prop coiled around a timber prop in a coal seam, many legs gripping the wood, mandibles glistening with a hot orange venom.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightes",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-crows",
+      "file": "images/monsters/mob-crows.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-crows",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Gibbet Crows. A flock of black crows on an iron gibbet post and crossbeam at a crossroads, one diving toward the viewer with claws out, feathers scattering.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is the ember light. F",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-deedbox",
+      "file": "images/monsters/mob-deedbox.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-deedbox",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Deed Box. An iron-bound wooden strongbox with its lid open like a jaw, rows of iron nail teeth, a tongue of folded yellowed parchment deeds, a snapped padlock, sitting on a counting-house floor. Writing on the deeds is texture, never readable.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible bru",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-eel",
+      "file": "images/monsters/mob-eel.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-eel",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Cistern Eel. A giant pale blind eel rising from black cistern water, milky skin, no eyes, mouth open in a ring of small teeth, the long body looping back into the dark water.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-ghoul",
+      "file": "images/monsters/mob-ghoul.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-ghoul",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "A wiry grey burrowing beast the size of a large dog, long muzzle full of small teeth, earth-caked claws, crouched at the mouth of a collapsed mine tunnel, a dropped shovel and a tattered sack beside it.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-wh",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-gibbet",
+      "file": "images/monsters/mob-gibbet.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-gibbet",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Gibbet Knight. A hanged knight still inside a rusted iron gibbet cage that hangs from his shoulders like armour, noose rope trailing from the neck, corroded plate armour beneath, walking forward with the cage swinging.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas.",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-hound",
+      "file": "images/monsters/mob-hound.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-hound",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Kennel Hound. A huge bailiff's mastiff in a studded leather collar with a brass tally tag, heavy jowls, straining forward against a broken chain, drool and teeth.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is the ember li",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-rats",
+      "file": "images/monsters/mob-rats.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-rats",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Pit Rats. A seething mass of big brown pit rats, dozens of them moving as one body over a spilled miner's snap tin and a dropped lamp, one huge scarred rat at the front looking straight out.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the bri",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-robber",
+      "file": "images/monsters/mob-robber.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-robber",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Toll Robber. A highway robber in a battered tricorn and long greatcoat with a scarf over his face, a flintlock pistol raised, a toll ledger tucked under his arm, standing by a milestone.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brighte",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-sexton",
+      "file": "images/monsters/mob-sexton.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-sexton",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Sexton Worm. A huge pale segmented grave worm the size of a cart bursting up through the turf of a churchyard between headstones, round mouth ringed with digging teeth, soil pouring off it.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brig",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-skeleton",
+      "file": "images/monsters/mob-skeleton.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-skeleton",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Charnel Walker. A human skeleton from an ossuary, the bones wired together with rusted copper wire and numbered in faded ink, a sexton's tag still tied at the wrist, holding a length of the wire like a garrotte. Numbers and ink marks are texture, never readable.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backg",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-slurry",
+      "file": "images/monsters/mob-slurry.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-slurry",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Lime Slurry. A creeping mass of wet grey-white quicklime slurry rising from a mine drift floor like a slow wave, steaming and hissing, dissolving a dropped boot and a pick handle, bubbles bursting on its skin.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-spider",
+      "file": "images/monsters/mob-spider.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-spider",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Lych-gate Spider. A dog-sized grey spider crouched on the timber of a church lych-gate, legs folded like a gate's hinges, old web strung between the posts heavy with ash and one caught sparrow.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-staithe",
+      "file": "images/monsters/mob-staithe.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-staithe",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Staithe Horse. A drowned grey barge horse standing in shallow fen water beside a wooden landing stage, rope bridle and harness hanging, water weeds in its mane, dead white eyes, reeds around its legs.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-whit",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-tallowman",
+      "file": "images/monsters/mob-tallowman.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-tallowman",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Tallow Man. A man-shaped figure made of dripping yellowed tallow candle wax, a burning wick standing up out of its skull, wax running down its face and hands, a chandler's dipping frame hanging from its shoulders.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Noth",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-watcher",
+      "file": "images/monsters/mob-watcher.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-watcher",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Lintel Watcher. A grotesque carved stone head and shoulders from over a doorway, climbing down out of the lintel, moss in its cracks, mason's marks cut into its brow, stone fingers gripping the door frame. Marks are texture, never readable.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushw",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-wickmoth",
+      "file": "images/monsters/mob-wickmoth.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-wickmoth",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Wickmoth. A gigantic grey-brown moth with a two-yard wingspan clinging to a broken street lamp, wings patterned like eyes, drinking the flame from the lamp wick with a long curled tongue, oil dripping.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-whi",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-wolves",
+      "file": "images/monsters/mob-wolves.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-wolves",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Ridge Wolves. Two thin grey mountain wolves on a snowy ridge path, ribs showing, heads low, one snarling, the other watching past the viewer toward the road.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-white: the brightest value is the ember light. ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-wrackcrab",
+      "file": "images/monsters/mob-wrackcrab.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-wrackcrab",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Wrack Crab. A crab as big as a cart with a shell made of salvaged ship planking and copper sheathing, barnacles and weed, one claw shaped like an anchor fluke, crawling out of shallow surf over shingle.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Nothing near-wh",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-wraith",
+      "file": "images/monsters/mob-wraith.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-wraith",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "Unregistered Dead. A tall thin wraith in a burial shroud that trails into smoke at the hem, where the face should be only a grey smudge like a wet ink entry wiped by a thumb, long hands out as if reading something.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. Not",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-zombie",
+      "file": "images/monsters/mob-zombie.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-zombie",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "bestiary",
+      "prompt": "A scorched humanoid figure covered head to foot in pale grey ash, wrapped in singed grey cloth, charred timber marks on the cloth, walking forward stiffly with one arm raised, glowing embers in the darkness behind it.\n\nPainterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgrounds, visible brushwork in the dark areas. ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "boss-tenor",
+      "file": "images/forged/founders-hand/boss-tenor.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "boss-tenor",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "The eleventh bell upright and mouth down, its crown staple bolted, a crack running from the soundbow to the shoulder, filling the frame, one place on the soundbow wiped clean of dust about the size of a cheek. A bell painted as a boss: no eyes, no mouth, nothing human added. Tooled relief on the inscription band suggested and never legible. Painterly dark-fantasy realism, heavy chiaroscuro, desatu",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "env-bell-loft",
+      "file": "images/forged/founders-hand/env-bell-loft.png",
+      "size": [
+        1024,
+        640
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "env-bell-loft",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A church tower's bell loft: a heavy oak frame, ten bells hanging mouth down in the gloom, tail ends of the ropes hitched to pegs on the wall, one rope visibly shorter than the other nine with its sally above where hands would reach, forty-one days of dust on everything, light coming through a louvre rather than from a lamp. No people. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "env-casting-floor",
+      "file": "images/forged/founders-hand/env-casting-floor.png",
+      "size": [
+        1024,
+        640
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "env-casting-floor",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "Wide view of a bell foundry's casting floor before a pour: a loam mould strapped and chocked at the head of a waist-deep pit, a smooth clay runner from the furnace tap, the furnace door white-hot along its seam and the only light. Barrow tracks in the sand, a rake laid down, a bank of sand along the low side. Everything cast, forged or cut by hand; no modern ironwork. No people. Painterly dark-fan",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "env-tuning-pit",
+      "file": "images/forged/founders-hand/env-tuning-pit.png",
+      "size": [
+        1024,
+        640
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "env-tuning-pit",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A brick pit below a foundry floor, lit by one lamp, a column of chalk marks down the wall suggested and never readable, the last three struck over each other into a groove, a bell on its side under a chipping stool, bright metal filings on the brick. No people. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, near-black backgro",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "item-indenture",
+      "file": "images/forged/founders-hand/item-indenture.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "item-indenture",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A single object: a folded indenture of seven years opened out once, two signatures at opposite ends of the sheet as texture and never as text, a broken wax seal pressed flat again, the creases opened so often they have gone soft. No hands, no desk, no scenery. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, visible brushwork i",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "keyart-founders-hand",
+      "file": "images/forged/founders-hand/keyart-founders-hand.png",
+      "size": [
+        1248,
+        2688
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-founders-hand",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A bell the height of a man standing mouth down on four oak blocks on a foundry's casting floor, seen from low and slightly off-axis, with the open furnace mouth behind it as the only light. The bell is unhung: no headstock, no wheel, no rope. Tooled relief on the inscription band suggested and never legible. The upper third of the frame dark and quiet, with room for a title. Loam dust on the floor",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "keyart-hearth-lamplighters",
+      "file": "images/keyart/keyart-hearth-lamplighters.png",
+      "size": [
+        1248,
+        800
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-hearth-lamplighters",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A night camp between campaigns, wide: a small fire as the only light, three bedrolls around it with nobody in frame, a lamplighter's long brass-hooked pole leaning against a milestone, two oil lamps set down unlit beside the fire, a dark road running off toward a far town whose street lamps are half out. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "keyart-hearth-mine",
+      "file": "images/keyart/keyart-hearth-mine.png",
+      "size": [
+        1248,
+        800
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "keyart-hearth-mine",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A night camp between campaigns, wide: a small fire as the only light near a pithead at the top of a valley, three bedrolls with nobody in frame, a miner's safety lamp and a canary cage set down by the fire, the pithead winding wheel silhouetted against the sky behind, a flooded drift entrance dark in the hillside. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber,",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-pour-hand",
+      "file": "images/forged/founders-hand/mob-pour-hand.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-pour-hand",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A hand and forearm's worth of bell metal still at working heat, standing upright on its fingers, dragging a thread of its own molten metal behind it, the heat coming from inside the metal and being the only light. No face, no body implied above the wrist. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and umber, a single ember-amber light source, visible brushwork in the",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "mob-tuner",
+      "file": "images/forged/founders-hand/mob-tuner.png",
+      "size": [
+        1024,
+        1280
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "mob-tuner",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "Three-quarter view, chest up, looking past the viewer: a lean figure in a tuning pit holding a long tuning chisel across the body, the chisel the whole silhouette, face in shadow under a leather hood, bright metal filings on the leather apron, the hands wrong before anything else is. A tradesman first, a monster second. Painterly dark-fantasy realism, heavy chiaroscuro, desaturated stone, ash and ",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "status-frightened",
+      "file": "images/ui/status-frightened.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "status-frightened",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A single wide-open staring eye. A single flat glyph in one colour, warm amber, on a completely transparent background, bold and simple, no shading, no texture, no frame, readable at 16 pixels. CRITICAL: the glyph floats on a completely empty transparent background \u2014 no backdrop, no vignette, no painted square behind it. No text.",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "status-hidden",
+      "file": "images/ui/status-hidden.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "status-hidden",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "An eye with a diagonal line struck through it. A single flat glyph in one colour, warm amber, on a completely transparent background, bold and simple, no shading, no texture, no frame, readable at 16 pixels. CRITICAL: the glyph floats on a completely empty transparent background \u2014 no backdrop, no vignette, no painted square behind it. No text.",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "status-prone",
+      "file": "images/ui/status-prone.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "status-prone",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A simple figure lying flat on the ground. A single flat glyph in one colour, warm amber, on a completely transparent background, bold and simple, no shading, no texture, no frame, readable at 16 pixels. CRITICAL: the glyph floats on a completely empty transparent background \u2014 no backdrop, no vignette, no painted square behind it. No text.",
+      "generated": "2026-09-16",
+      "version": 1
+    },
+    {
+      "key": "status-reckless",
+      "file": "images/ui/status-reckless.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "app": "infinite-dungeons",
+      "sprite_key": "status-reckless",
+      "batch": "batch9-ashen-crown-plates",
+      "group": "extras",
+      "prompt": "A sword raised high mid-swing with a shield dropped low beneath it. A single flat glyph in one colour, warm amber, on a completely transparent background, bold and simple, no shading, no texture, no frame, readable at 16 pixels. CRITICAL: the glyph floats on a completely empty transparent background \u2014 no backdrop, no vignette, no painted square behind it. No text.",
+      "generated": "2026-09-16",
       "version": 1
     }
   ]
