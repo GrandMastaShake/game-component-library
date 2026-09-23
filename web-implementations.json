@@ -1,7 +1,7 @@
 {
   "note": "What the consuming web application implements, per target. The library cannot see that repository, so `implementations` entries for web targets are status `external` by definition — this file is the declaration that makes them reviewable rather than assumed. Before it existed, 39 of 71 descriptors named a canvas2d implementation while the app registered all 71: the undercount was invisible because nothing compared the two.",
   "source": "game-architect-studio — generator/bricks/*.ts (canvas2d), generator/voxel/*.ts and generator/iso/*.ts (webgl and isometric)",
-  "verifiedOn": "2026-09-09",
+  "verifiedOn": "2026-09-23",
   "howToRefresh": "In the app: grep the register() calls in generator/bricks/*.ts for the canvas2d list. Then: python3 tools/declare_implementations.py",
   "targets": {
     "canvas2d": [
@@ -145,8 +145,10 @@
       "presentation.atmosphere_system",
       "presentation.camera_follow",
       "presentation.first_person_camera",
+      "presentation.object_placer",
       "presentation.submersion_view",
       "presentation.voxel_mesher",
+      "world.biome_system",
       "world.cave_system",
       "world.chunk_manager",
       "world.floor_descent",

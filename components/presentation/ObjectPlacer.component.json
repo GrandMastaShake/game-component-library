@@ -32,6 +32,12 @@
       "target": "unity",
       "status": "unmapped",
       "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     }
   ],
   "inputs": [
