@@ -153,6 +153,7 @@
       "world.chunk_manager",
       "world.floor_descent",
       "world.noise_lib",
+      "world.surface_approach",
       "world.terrain_generator",
       "world.track_circuit",
       "world.voxel_volume",
