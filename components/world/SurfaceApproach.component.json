@@ -2,17 +2,38 @@
   "id": "world.surface_approach",
   "name": "Surface Approach",
   "category": "world",
-  "description": "The world above floor one: open ground you walk across to reach the way down, and come back out onto. world.floor_descent owns the stack of floors and the stairs between them, and it starts at depth one — a descent with nowhere to descend FROM, so a crawler began in its entrance room with no idea why it was there, and a quest giver, a camp or a shop had nowhere to stand. This component owns depth zero. It owns the approach — how wide the open ground around the mouth is and how much of the terrain's relief is pressed flat there, so the walk in reads as a clearing rather than a climb — the mouth itself (where it stands, which way it faces, what it looks like), and the passage through it in both directions: walking into the mouth arrives in floor one's entrance room, and walking out of that room, when `returnFromEntrance` allows it, arrives back outside the mouth facing away from it. The crossing is a door, not a tunnel: the two sides are different worlds and the passage between them is a cut, which is the readable convention and the only one that keeps floor one's plan independent of the hill it sits under.\n\nIt deliberately owns nothing about what stands on the approach, though it requires that something can: open ground with nothing on it reads as a stage rather than a place, so presentation.object_placer comes with it, and its trees and rocks are its own. The ground is world.terrain_generator's, and a camp, a quest giver or a merchant is whatever component places them — this only promises that there is somewhere to stand. It does not own depth either: arriving through the mouth puts the player at depth one exactly as starting the descent would, and world.floor_descent carries on from there. What crosses with the player is everything the player is: the same health, the same bag, the same run — the approach is a place in the run, not a new one.",
+  "description": "The world above floor one: open ground you walk across to reach the way down, and come back out onto. world.floor_descent owns the stack of floors and the stairs between them, and it starts at depth one \u2014 a descent with nowhere to descend FROM, so a crawler began in its entrance room with no idea why it was there, and a quest giver, a camp or a shop had nowhere to stand. This component owns depth zero. It owns the approach \u2014 how wide the open ground around the mouth is and how much of the terrain's relief is pressed flat there, so the walk in reads as a clearing rather than a climb \u2014 the mouth itself (where it stands, which way it faces, what it looks like), and the passage through it in both directions: walking into the mouth arrives in floor one's entrance room, and walking out of that room, when `returnFromEntrance` allows it, arrives back outside the mouth facing away from it. The crossing is a door, not a tunnel: the two sides are different worlds and the passage between them is a cut, which is the readable convention and the only one that keeps floor one's plan independent of the hill it sits under.\n\nIt deliberately owns nothing about what stands on the approach, though it requires that something can: open ground with nothing on it reads as a stage rather than a place, so presentation.object_placer comes with it, and its trees and rocks are its own. The ground is world.terrain_generator's, and a camp, a quest giver or a merchant is whatever component places them \u2014 this only promises that there is somewhere to stand. It does not own depth either: arriving through the mouth puts the player at depth one exactly as starting the descent would, and world.floor_descent carries on from there. What crosses with the player is everything the player is: the same health, the same bag, the same run \u2014 the approach is a place in the run, not a new one.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
   ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    }
   ],
   "inputs": [
     {
@@ -48,19 +69,48 @@
       "type": "number",
       "required": false,
       "default": 0.6,
-      "description": "How long the cut between outside and inside takes — a fade out and back in. Also the dead time after arriving before the passage can be taken again, so a player who arrives still holding forward does not bounce straight back through."
+      "description": "How long the cut between outside and inside takes \u2014 a fade out and back in. Also the dead time after arriving before the passage can be taken again, so a player who arrives still holding forward does not bounce straight back through."
     }
   ],
   "outputs": [
-    {"name": "onSurface", "type": "boolean"},
-    {"name": "mouthAt", "type": "object"},
-    {"name": "crossings", "type": "number"}
+    {
+      "name": "onSurface",
+      "type": "boolean"
+    },
+    {
+      "name": "mouthAt",
+      "type": "object"
+    },
+    {
+      "name": "crossings",
+      "type": "number"
+    }
   ],
   "events": {
-    "emits": ["world.enteredDescent", "world.surfaced"],
-    "listensTo": ["input.ascend", "world.floorDescended"]
+    "emits": [
+      "world.enteredDescent",
+      "world.surfaced"
+    ],
+    "listensTo": [
+      "input.ascend",
+      "world.floorDescended"
+    ]
   },
-  "dependencies": ["world.floor_descent", "world.terrain_generator", "presentation.object_placer"],
-  "tags": ["overworld", "surface", "approach", "outdoor", "outdoors", "outside", "meadow", "clearing", "hub"],
+  "dependencies": [
+    "world.floor_descent",
+    "world.terrain_generator",
+    "presentation.object_placer"
+  ],
+  "tags": [
+    "overworld",
+    "surface",
+    "approach",
+    "outdoor",
+    "outdoors",
+    "outside",
+    "meadow",
+    "clearing",
+    "hub"
+  ],
   "provenance": "Requested from play: a relatively flat outdoor area leading to a cave dungeon, as the place a real game with quests and an inventory starts."
 }
