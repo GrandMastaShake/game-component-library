@@ -86,6 +86,7 @@
       "progression.reward_schedule",
       "progression.skills_tree",
       "progression.xp_leveling",
+      "social.giver",
       "social.home_trade_stand",
       "social.leaderboard",
       "social.party_credit_guard",

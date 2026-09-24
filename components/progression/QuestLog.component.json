@@ -3,7 +3,7 @@
   "name": "Quest Log",
   "category": "progression",
   "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit. The QUESTS themselves are the level's, not this component's. Without an input for them every game that picked up a quest log got the same four — gather six things, collect four wood, collect three stone — so an Action RPG shipped with a forager's errands and a player was asked to fetch lumber in a genre about killing things. A log that invents its own content is a log that has an opinion about what game it is in, which is exactly the opinion a component is not allowed to have.",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "platform": [
     "roblox",
     "godot",
@@ -33,36 +33,69 @@
       "name": "maxActiveQuests",
       "type": "number",
       "required": false,
-      "default": 5
+      "default": 5,
+      "description": "Quests in hand at once, taken or done and waiting to be handed back. It trims the level's own list at boot, and an offered quest is taken only into a free hand."
     },
     {
       "name": "quests",
       "type": "array",
       "required": false,
       "default": [],
-      "description": "The level's quests: [{id, text, kind, target, reward, item?}]. `kind` is what counts toward it — 'hit' for a blow the player landed, 'collect' for an item named by `item`. Empty falls back to a small generic set so a build that forgets to configure it still runs and still shows something, which is the honest failure: a visibly generic quest is a prompt to write real ones, an empty panel is a bug report."
+      "description": "The level's quests, and the shape a giver offers them in: [{id, text, kind, target, reward, xp?, items?, item?, creature?, after?}]. `kind` is what counts toward it: 'hit' for a blow the player landed; 'collect' for each `item` arriving in the bag; 'slay' for a defeat the player dealt to a unit on another side whose `archetype` is `creature` (any, when omitted), counted only once taken; 'reach' for the deepest floor stood on since the quest was taken, `target` being the floor; 'fetch' for how many of `item` the bag holds now, where one word in front still counts ('magic charm' is a charm), taken from the bag when handed back. Naming a key, a potion or a piece of gear makes the quest compete with that thing's own use. `reward` is currency, `xp` experience and `items` [{itemId, amount}], all paid as one grant list on progression.questRewarded. `after` names a quest that must be complete first. Quests written here start themselves and pay the moment they are done, as they always have. Empty falls back to a small generic set so a build that forgets to configure it still runs and still shows something, which is the honest failure, unless something has offered this log work by then: a log somebody else is feeding is not empty."
     }
   ],
   "outputs": [
     {
       "name": "activeQuests",
-      "type": "array"
+      "type": "array",
+      "description": "Quests in hand, in the order taken: {id, text, kind, item, progress, target, state, giver}; state is active, or ready when done and waiting to be handed back."
     },
     {
       "name": "completedCount",
       "type": "number"
+    },
+    {
+      "name": "quests",
+      "type": "array",
+      "description": "Every quest this log holds, with its state: locked, offered, active, ready or completed."
+    },
+    {
+      "name": "stateOf",
+      "type": "function",
+      "description": "stateOf(id): that quest's state, or null for one never held."
+    },
+    {
+      "name": "offer",
+      "type": "function",
+      "description": "offer(quest, from?): puts a quest of the `quests` shape on offer, locked until its `after` is complete. With `from`, it is READY when done and pays only when handed back to that giver; without, it pays the moment it is done. False for a duplicate or missing id, missing text, or a kind this log does not count."
+    },
+    {
+      "name": "accept",
+      "type": "function",
+      "description": "accept(id): an offered quest is taken if a hand is free; counting starts now. Returns whether it was."
+    },
+    {
+      "name": "turnIn",
+      "type": "function",
+      "description": "turnIn(id): a READY quest is handed back (a fetch counts the bag again and takes its items), completes and pays once. Returns whether it did."
     }
   ],
   "events": {
     "emits": [
       "progression.questStarted",
       "progression.questCompleted",
-      "progression.objectiveUpdated"
+      "progression.objectiveUpdated",
+      "progression.questOffered",
+      "progression.questReady",
+      "progression.questRewarded"
     ],
     "listensTo": [
       "combat.hit",
       "inventory.itemAdded",
-      "progression.sharedQuestCreditSafe"
+      "progression.sharedQuestCreditSafe",
+      "combat.entityDefeated",
+      "world.floorGenerated",
+      "inventory.itemRemoved"
     ]
   },
   "eventIntents": {
@@ -70,6 +103,15 @@
       "persist",
       "notify",
       "achievement"
+    ],
+    "progression.questRewarded": [
+      "reward"
+    ],
+    "progression.questReady": [
+      "notify"
+    ],
+    "progression.questOffered": [
+      "notify"
     ]
   },
   "dependencies": [

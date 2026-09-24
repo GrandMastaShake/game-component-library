@@ -1,0 +1,79 @@
+{
+  "id": "social.giver",
+  "name": "Quest Giver",
+  "category": "social",
+  "description": "Someone standing somewhere who gives the player a reason to go: they hand out the level's jobs one at a time, ask after the one you are on, take it back when it is done and see you paid. It owns the person: who they are, which jobs are theirs to give, where the conversation opens at each stage of each job, and the mark over their head, `!` with work to give and `?` with work waiting to be handed back. It owns none of the work: the jobs, their counting and their payout belong to progression.quest_log, which this offers into and hands back to. It owns none of the words on screen: the box it depends on holds the lines and draws them, and an answer that takes a job or hands one back says so with `act`, which the box passes through and this acts on. Where the person stands belongs to the runtime, which also decides who is close enough to speak to.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "givers",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Who gives work here: [{id, name, greeting, quests}]. `greeting` names the node in ui.dialogue_box's tree a conversation opens at when this giver has nothing on offer, nothing waiting and nothing out. Each entry in `quests` is a progression.quest_log quest plus `talk: {offer, active, ready}`, the nodes a conversation opens at while that quest is on offer, taken, or done and waiting. Quests are offered in the order written; `after` holds one back until the quest it names is complete. An answer whose `act` is {accept: id} takes one of this giver's quests, {turnIn: id} hands one back, {next: giverId} asks what else there is; an act that does not go through re-opens the conversation where things now stand."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "givers",
+      "type": "array",
+      "description": "Every giver as {id, name, marker}: '!' with work to give, '?' with work waiting to be handed back, null otherwise."
+    },
+    {
+      "name": "markerOf",
+      "type": "function",
+      "description": "markerOf(id): that mark for one giver."
+    },
+    {
+      "name": "talkTo",
+      "type": "function",
+      "description": "talkTo(id): opens the conversation where that giver's work stands: the first quest waiting to be handed back, else the first on offer, else the first taken, else the greeting. False for an unknown giver or a box with no tree."
+    }
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": [
+      "ui.dialogueChoiceMade"
+    ]
+  },
+  "dependencies": [
+    "progression.quest_log",
+    "ui.dialogue_box"
+  ],
+  "tags": [
+    "giver",
+    "questgiver"
+  ],
+  "provenance": "Requested from play, 2026-09-23: someone standing in the clearing above the dungeon crawler who gives you a reason to go down: talk to them, take the job, do it, come back and get paid. Searched first: nothing in the catalogue hands work out or takes it back."
+}

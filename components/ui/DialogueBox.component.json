@@ -2,8 +2,8 @@
   "id": "ui.dialogue_box",
   "name": "Dialogue Box",
   "category": "ui",
-  "description": "Branching NPC dialogue renderer with typed-text effect and choice buttons.",
-  "version": "0.1.0",
+  "description": "Branching NPC dialogue renderer with typed-text effect and choice buttons. It opens at the tree's start or at a node the caller names, passes a choice's `act` through untouched for whichever component acts on it, and lets a listener that answers a choice by opening another node have the last word.",
+  "version": "0.2.0",
   "platform": ["roblox", "unity", "web", "agnostic"],
   "implementations": [
     {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
@@ -11,12 +11,18 @@
     {"target": "unity", "status": "unmapped", "module": null}
   ],
   "inputs": [
-    {"name": "tree", "type": "object", "required": true, "description": "Dialogue tree with nodes and choices"},
+    {"name": "tree", "type": "object", "required": true, "description": "Dialogue tree {start, nodes: {id: {speaker?, text, choices: [{label, to, act?}]}}}. `to` null ends the conversation. `act` is any object, passed through on ui.dialogueChoiceMade unread. Every node a conversation can reach needs at least one choice, because a node with none can only be closed."},
     {"name": "typeSpeed", "type": "number", "required": false, "default": 0.03}
   ],
   "outputs": [
     {"name": "isOpen", "type": "boolean"},
-    {"name": "currentNodeId", "type": "string"}
+    {"name": "currentNodeId", "type": "string"},
+    {"name": "node", "type": "object", "description": "The node showing, or null."},
+    {"name": "choices", "type": "array", "description": "Its choices, or [] when closed."},
+    {"name": "hasTree", "type": "boolean"},
+    {"name": "start", "type": "function", "description": "start(at?): opens at `at`, or at the tree's start. False, with ui.dialogueEnded, when there is no tree or no such node."},
+    {"name": "choose", "type": "function", "description": "choose(i): announces ui.dialogueChoiceMade {from, label, to, act}, then moves to `to`, unless a listener opened another node while hearing it, in which case that node stands. A null `to` ends the conversation."},
+    {"name": "close", "type": "function", "description": "close(): ends the conversation where it stands, with ui.dialogueEnded {reason: 'closed'}."}
   ],
   "events": {
     "emits": ["ui.dialogueStarted", "ui.dialogueChoiceMade", "ui.dialogueEnded"],

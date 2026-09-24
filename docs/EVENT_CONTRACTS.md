@@ -40,6 +40,8 @@ written down, and a class not on it is a typo until it is added here with its si
 | `achievement` | the player accomplished something worth rewarding | `progression.reward_schedule` |
 | `reward` | the player is being GIVEN something | `economy.currency`, `inventory.core_inventory`, `progression.xp_leveling` |
 
+Emitters of `reward` today: `economy.collectibleCollected`, `progression.rewardGranted`, and `progression.questRewarded`.
+
 ### `reward` carries a payload contract, and it is the only class that does
 
 The other four classes are pure notifications: a sink reacts to the fact of the event and
@@ -63,6 +65,35 @@ An event may carry its own fields alongside `grants`; `economy.collectibleCollec
 reports the pickup it was, and `grants` is how the wallet understands it.
 
 The compound validator reports each accepted wire as `exact` or `intent:<labels>` in `validatedWires.acceptedBy`.
+
+## Quests
+
+`progression.quest_log` is the one emitter of all six.
+
+| Event | Payload | Intents |
+|---|---|---|
+| `progression.questOffered` | `{id, text, giver}` | notify |
+| `progression.questStarted` | `{id, text}` | none |
+| `progression.objectiveUpdated` | `{id, progress, target}` | none |
+| `progression.questReady` | `{id, text, giver}` | notify |
+| `progression.questRewarded` | `{id, grants}` | reward |
+| `progression.questCompleted` | `{id, reward}` | persist, notify, achievement |
+
+- `questRewarded` is the only payout. It is emitted before `questCompleted`, and only when `grants` is non-empty.
+- Never tag `questCompleted` with `reward`. `progression.xp_leveling` hears it exactly and adds a flat 10; the wallet would pay the quest twice.
+- A quest's total experience is therefore its `xp` plus 10.
+
+## What fell
+
+- `combat.unitSpawned` carries `archetype`, the kind of thing that was placed (`rat` for `rat_3`).
+- A roster `combat.entityDefeated` carries `unitId`, `team`, `archetype` (null for a placed unit that named none) and `attacker` (the unit whose blow landed, or null).
+- Anything that counts kills matches on `archetype`, never on the id's stem: ids are reused on every floor, and a companion or an area attack breaks the stem rule.
+
+## Dialogue
+
+- `ui.dialogueChoiceMade {from, label, to, act}`. `act` is whatever the tree put on the choice, passed through unread.
+- A listener that calls the box's `start()` while hearing a choice has the last word: the box stays on the node the listener opened instead of moving to `to`. That is how an act that did not go through re-opens the conversation where things now stand.
+- `ui.dialogueEnded` reasons: `no tree configured`, `no such node`, `end of branch`, `closed`.
 
 ## Which form to use when authoring
 
