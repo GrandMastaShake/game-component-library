@@ -3,7 +3,7 @@
   "name": "XP Leveling",
   "category": "progression",
   "description": "Tracks experience points and level, computing level-up thresholds from a curve.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "platform": [
     "roblox",
     "godot",
@@ -60,6 +60,27 @@
       "required": false,
       "default": {},
       "description": "What each level past the first is worth, as named bonuses per level — {meleeDamage: 0.5} is one more damage every two levels. Published summed and floored as `bonuses`, in the shape progression.skills_tree and combat.equipment_slots publish theirs, so combat.melee_basic reads a level the way it reads a sword. Empty, a level is a number on a panel."
+    },
+    {
+      "name": "xpPerHit",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "Experience for every blow the player lands. The only source there was: fine for a board where a blow is a turn, wrong for a real-time fight where a quick blade earns more than a killing one and a boss can be farmed for as long as it stands. 0 turns it off."
+    },
+    {
+      "name": "xpPerKill",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Experience for every enemy the player defeats — read off combat.entityDefeated, and only a defeat whose `attacker` is the player's unit (a rat killed by a trap, or the hero's own fall, pays nothing). 0, the default, keeps a build paid by the hit as it always was."
+    },
+    {
+      "name": "xpByArchetype",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Kill experience by what was killed, keyed by the defeat's `archetype` — {rat: 8, boss: 150}. An archetype not named here pays `xpPerKill`."
     }
   ],
   "outputs": [
@@ -88,6 +109,7 @@
     ],
     "listensTo": [
       "combat.hit",
+      "combat.entityDefeated",
       "progression.questCompleted"
     ]
   },
