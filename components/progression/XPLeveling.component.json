@@ -3,7 +3,7 @@
   "name": "XP Leveling",
   "category": "progression",
   "description": "Tracks experience points and level, computing level-up thresholds from a curve.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "platform": [
     "roblox",
     "godot",
@@ -73,7 +73,7 @@
       "type": "number",
       "required": false,
       "default": 0,
-      "description": "Experience for every enemy the player defeats — read off combat.entityDefeated, and only a defeat whose `attacker` is the player's unit (a rat killed by a trap, or the hero's own fall, pays nothing). 0, the default, keeps a build paid by the hit as it always was."
+      "description": "Experience for every enemy the player defeats — read off combat.entityDefeated. A defeat is the player's when a roster unit fell that is not on the player's side, to a blow whose `attacker` is on the player's side or that names no attacker at all (the convention a hit already keeps: a hotbar spell names nobody). A rat killed by a trap or by another monster, and the hero's own fall, pay nothing. 0, the default, keeps a build paid by the hit as it always was."
     },
     {
       "name": "xpByArchetype",
@@ -81,6 +81,13 @@
       "required": false,
       "default": {},
       "description": "Kill experience by what was killed, keyed by the defeat's `archetype` — {rat: 8, boss: 150}. An archetype not named here pays `xpPerKill`."
+    },
+    {
+      "name": "killDepthBonus",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "What a kill's pay grows by for each floor below the first, as a fraction of its price: 0.25 pays a quarter more on floor two and half again on floor three. The floor is world.floor_descent's current depth where the build has one, asked rather than depended on; a build with no floors is always on the first. It exists because pay by the kill, unlike pay by the blow, does not rise on its own when deeper monsters take more felling. 0, the default, pays the same everywhere."
     }
   ],
   "outputs": [

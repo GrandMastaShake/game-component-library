@@ -3,7 +3,7 @@
   "name": "Damage Resolver",
   "category": "combat",
   "description": "Resolves a landed attack into final damage: armor mitigation, armor penetration, critical multiplier, and bounded variance. Armor penetration reduces the effective armor of the defender before mitigation is applied and never adds damage, and mitigation is clamped so a fully armored target still takes minDamageFraction of base damage.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
   "implementations": [
     {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
@@ -14,7 +14,9 @@
   "inputs": [
     {"name": "armorCoefficient", "type": "number", "required": false, "default": 0.05},
     {"name": "minDamageFraction", "type": "number", "required": false, "default": 0.2},
-    {"name": "varianceFraction", "type": "number", "required": false, "default": 0.1}
+    {"name": "varianceFraction", "type": "number", "required": false, "default": 0.1},
+    {"name": "critChance", "type": "number", "required": false, "default": 0, "description": "The chance, 0 to 1, that a blow from the player's side on a unit of another side lands as a critical. The description has always promised a critical multiplier and no input ever asked for one. Whose blow it is follows the convention every reader of combat.hit keeps: an `attacker` on the roster's first team, or none named. 0, the default, rolls nothing, so a build that never asked keeps its numbers exactly."},
+    {"name": "critMultiplier", "type": "number", "required": false, "default": 2, "description": "What a critical multiplies the blow by, before armour and variance. Never below 1. Read only when `critChance` is above 0."}
   ],
   "outputs": [{"name": "lastResolution", "type": "object"}],
   "events": {"emits": ["combat.damageResolved", "combat.entityDefeated"], "listensTo": ["combat.hit"]},
