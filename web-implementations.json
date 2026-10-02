@@ -27,6 +27,7 @@
       "economy.duplicate_converter",
       "economy.gacha_banner",
       "economy.pity_system",
+      "economy.shop",
       "economy.team_resources",
       "housing.home_system",
       "inventory.affix_loot_generator",
