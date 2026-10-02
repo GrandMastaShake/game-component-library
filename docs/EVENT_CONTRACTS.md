@@ -87,7 +87,8 @@ The compound validator reports each accepted wire as `exact` or `intent:<labels>
 
 - `combat.unitSpawned` carries `archetype`, the kind of thing that was placed (`rat` for `rat_3`).
 - A roster `combat.entityDefeated` carries `unitId`, `team`, `archetype` (null for a placed unit that named none) and `attacker` (the unit whose blow landed, or null).
-- `progression.xp_leveling` pays for a defeat only when its `attacker` is the player's unit: `xpByArchetype[archetype]`, else `xpPerKill` (0 by default, so a build paid by the hit is unchanged).
+- `progression.xp_leveling` pays for the player's defeats: a roster unit not on the player's side, felled by a blow whose `attacker` is on the player's side or that names none (a hit keeps the same convention; a hotbar spell names nobody). It pays `xpByArchetype[archetype]`, else `xpPerKill` (0 by default, so a build paid by the hit is unchanged), grown by `killDepthBonus` for each floor below the first.
+- `combat.damageResolved` carries `attacker` (the hit's, or null), `target` (the unit struck, or null when the blow found none) and `crit` (true for a critical). `damage` is what landed and `raw` what was thrown; `ui.event_log` narrates the first.
 - Anything that counts kills matches on `archetype`, never on the id's stem: ids are reused on every floor, and a companion or an area attack breaks the stem rule.
 
 ## Dialogue

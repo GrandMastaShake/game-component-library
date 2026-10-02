@@ -2,8 +2,8 @@
   "id": "ui.event_log",
   "name": "Event Log",
   "category": "ui",
-  "description": "What just happened, in words, where the eye can find it. A crawler is full of moments a player has to read off the picture -- a blow landed, a blow missed, something fell, a trap found underfoot, a wall that turned out to be a door, a floor descended, a rare thing dropped -- and a picture at sixteen pixels a tile cannot say all of them. Every crawler since Rogue has kept a line of text for exactly this. This component listens to the events those moments already emit, turns each into one short line, keeps the last few and lets them fade. It adds no rule and changes no number: it is the game's own events, narrated. Placement is a corner asked of the HUD's slot system, so it stacks with whatever else the corner holds.",
-  "version": "0.2.0",
+  "description": "What just happened, in words, where the eye can find it. A crawler is full of moments a player has to read off the picture -- a blow landed, a blow missed, something fell, a trap found underfoot, a wall that turned out to be a door, a floor descended, a rare thing dropped -- and a picture at sixteen pixels a tile cannot say all of them. Every crawler since Rogue has kept a line of text for exactly this. This component listens to the events those moments already emit, turns each into one short line, keeps the last few and lets them fade. It adds no rule and changes no number: it is the game's own events, narrated. Where a build resolves damage, a blow on a unit is said as it landed -- the number combat.damage_resolver arrived at, and whether it was a critical -- rather than as it was thrown, so the number in the log is the number that came off the target. A build with no resolver is narrated from combat.hit as before. Placement is a corner asked of the HUD's slot system, so it stacks with whatever else the corner holds.",
+  "version": "0.3.0",
   "platform": [
     "agnostic"
   ],
@@ -61,7 +61,7 @@
   "events": {
     "emits": [],
     "listensTo": [
-      "combat.hit",
+      "combat.hit", "combat.damageResolved",
       "combat.miss",
       "combat.entityDefeated",
       "combat.encounterStarted",
