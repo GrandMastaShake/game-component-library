@@ -1,0 +1,132 @@
+{
+  "id": "economy.shop",
+  "name": "Shop",
+  "category": "economy",
+  "description": "A keeper with a price list: things to buy for the currency, and prices paid for things out of the bag. It owns the list: what each shop sells, for how much and how many, and what it will take off the player and for what. It owns the moment of the trade: it takes the money through economy.currency and announces the purchase, or takes the thing out of inventory.core_inventory and announces the sale. It puts nothing in the bag or the purse itself: a purchase and a sale are each announced as a `reward` carrying `grants`, and the bag and the purse take what is theirs the way they take a quest's pay. It owns no words and no place: a dialogue answer whose `act` is {shop: id} opens it, a runtime may open it directly, and who stands close enough to trade is the runtime's to say. It draws nothing; it publishes what a panel needs.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "shops",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Who sells here: [{id, name, says?, sells, buys}]. `sells` is [{item, price, stock?}]: `stock` is how many there are to buy, and a ware without one never runs out. `buys` is [{item, price}]: what the keeper pays for one of that kind out of the bag. `says` is a line for whatever shows the shop. A kind carried with one word in front of its name (a `magic dagger`) is bought as that kind, for more; see `rarityWorth`. The last copy of a thing the player is wearing is not for sale, asked of combat.equipment_slots where the build has one. A purchase the bag has no slot for is refused before the money is taken, asked of inventory.slotted_bag where the build has one. An answer in ui.dialogue_box whose `act` is {shop: id} opens that shop."
+    },
+    {
+      "name": "rarityWorth",
+      "type": "object",
+      "required": false,
+      "default": {
+        "magic": 1.5,
+        "rare": 2,
+        "legendary": 3
+      },
+      "description": "What a kind is worth to a keeper with that word in front of its name, as a multiple of the price it buys the plain kind for, rounded. A word not named here is worth the plain price."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "shops",
+      "type": "array",
+      "description": "Every shop as {id, name, says, open}."
+    },
+    {
+      "name": "open",
+      "type": "string",
+      "description": "The id of the shop that is open, or null. One at a time."
+    },
+    {
+      "name": "wares",
+      "type": "function",
+      "description": "wares(id): what that shop sells now, as [{item, price, left, affordable}]. `left` is null for a ware that never runs out."
+    },
+    {
+      "name": "offers",
+      "type": "function",
+      "description": "offers(id): what the player carries that the shop will buy, as [{item, count, price}], one row a carried kind. The last copy of a worn thing is left out."
+    },
+    {
+      "name": "openShop",
+      "type": "function",
+      "description": "openShop(id): opens that shop, announced as economy.shopOpened; false for an unknown one."
+    },
+    {
+      "name": "close",
+      "type": "function",
+      "description": "close(): shuts the open shop, announced as economy.shopClosed; false when none is open."
+    },
+    {
+      "name": "buy",
+      "type": "function",
+      "description": "buy(id, item): takes the price and announces economy.itemBought, or refuses with economy.tradeRefused; true when it went through."
+    },
+    {
+      "name": "sell",
+      "type": "function",
+      "description": "sell(id, item): takes one of that carried kind out of the bag and announces economy.itemSold, or refuses with economy.tradeRefused; true when it went through."
+    }
+  ],
+  "events": {
+    "emits": [
+      "economy.shopOpened",
+      "economy.shopClosed",
+      "economy.itemBought",
+      "economy.itemSold",
+      "economy.tradeRefused"
+    ],
+    "listensTo": [
+      "ui.dialogueChoiceMade"
+    ]
+  },
+  "eventIntents": {
+    "economy.itemBought": [
+      "reward"
+    ],
+    "economy.itemSold": [
+      "reward"
+    ]
+  },
+  "dependencies": [
+    "economy.currency",
+    "inventory.core_inventory"
+  ],
+  "tags": [
+    "shop",
+    "merchant",
+    "vendor",
+    "store",
+    "wares"
+  ],
+  "provenance": "Requested from play, 2026-10-02: quests in the dungeon crawler pay gold and nothing took it. Searched first (shop, vendor, merchant, buy, sell): the catalogue trades between players (social.trade_window, social.trade_coordinator, social.home_trade_stand), sells furniture back (housing.furnish_mode) and buys producers (economy.auto_producer); nothing sells a thing for the currency or buys one out of the bag. This is NOT social.trade_window: there is no second player and no offer to agree."
+}

@@ -40,7 +40,7 @@ written down, and a class not on it is a typo until it is added here with its si
 | `achievement` | the player accomplished something worth rewarding | `progression.reward_schedule` |
 | `reward` | the player is being GIVEN something | `economy.currency`, `inventory.core_inventory`, `progression.xp_leveling` |
 
-Emitters of `reward` today: `economy.collectibleCollected`, `progression.rewardGranted`, and `progression.questRewarded`.
+Emitters of `reward` today: `economy.collectibleCollected`, `progression.rewardGranted`, `progression.questRewarded`, `economy.itemBought` and `economy.itemSold`.
 
 ### `reward` carries a payload contract, and it is the only class that does
 
@@ -96,6 +96,14 @@ The compound validator reports each accepted wire as `exact` or `intent:<labels>
 - `ui.dialogueChoiceMade {from, label, to, act}`. `act` is whatever the tree put on the choice, passed through unread.
 - A listener that calls the box's `start()` while hearing a choice has the last word: the box stays on the node the listener opened instead of moving to `to`. That is how an act that did not go through re-opens the conversation where things now stand.
 - `ui.dialogueEnded` reasons: `no tree configured`, `no such node`, `end of branch`, `closed`.
+
+## Shops
+
+- A dialogue answer whose `act` is `{shop: id}` opens that `economy.shop`. The box moves on by the answer's own `to`; with `to` null it closes, and the shop is what is left on screen.
+- `economy.shopOpened {shop}` and `economy.shopClosed {shop}`. One shop is open at a time.
+- `economy.itemBought {shop, item, price, grants}`. The money has already left through `economy.currency`'s `spend`, announced as `economy.spent`; `grants` is the one item, and the event is tagged `reward`, so the bag takes it.
+- `economy.itemSold {shop, item, price, grants}`. The thing has already left the bag, announced as `inventory.itemRemoved`; `grants` is the currency, and the purse takes it. `item` is the kind as carried (`magic dagger`).
+- `economy.tradeRefused {shop, item, side, reason}`. `side` is `buy` or `sell`. Reasons: `closed`, `unknown`, `sold out`, `full`, `funds`, `unwanted`, `none`, `worn`. A refusal changes nothing.
 
 ## Which form to use when authoring
 

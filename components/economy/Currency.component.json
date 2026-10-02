@@ -3,7 +3,7 @@
   "name": "Currency",
   "category": "economy",
   "description": "A single spendable currency balance with earn/spend transactions and persistence hooks.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "platform": ["roblox", "godot", "unity", "web", "agnostic"],
   "implementations": [
     {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
@@ -17,7 +17,9 @@
   ],
   "outputs": [
     {"name": "balance", "type": "number"},
-    {"name": "currencyName", "type": "string", "description": "What the money is called, for anything that shows an amount."}
+    {"name": "currencyName", "type": "string", "description": "What the money is called, for anything that shows an amount."},
+    {"name": "spend", "type": "function", "description": "spend(n): takes n and announces economy.spent, or refuses with economy.insufficientFunds; true when it was paid."},
+    {"name": "earn", "type": "function", "description": "earn(n): adds n, announced as economy.earned."}
   ],
   "events": {
     "emits": ["economy.earned", "economy.spent", "economy.insufficientFunds"],
