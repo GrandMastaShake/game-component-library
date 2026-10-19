@@ -105,6 +105,17 @@ The compound validator reports each accepted wire as `exact` or `intent:<labels>
 - `economy.itemSold {shop, item, price, grants}`. The thing has already left the bag, announced as `inventory.itemRemoved`; `grants` is the currency, and the purse takes it. `item` is the kind as carried (`magic dagger`).
 - `economy.tradeRefused {shop, item, side, reason}`. `side` is `buy` or `sell`. Reasons: `closed`, `unknown`, `sold out`, `full`, `funds`, `unwanted`, `none`, `worn`. A refusal changes nothing.
 
+## Boss arenas
+
+- `combat.bossEngaged {phase, reason, arenaLocked, arena}`. `reason` is `arena entered` or `trigger volume`. `arena` is `{x, y, w, h}` or null. Every floor is its own encounter: arriving on a floor starts it unengaged, and a floor whose boss is dead (`initialBeaten`, or killed this run) does not engage.
+- `combat.bossDefeated {phase, seconds}`, once per floor's boss.
+- `world.arenaSealed {room, doors}`. `world.dungeon_doors` held the arena's doors shut: the encounter locked the arena and the player is inside. `doors` is how many it held.
+- `world.arenaReleased {room, reason}`. Reasons: `defeated` (the held doors swing open, each also announced as `world.doorOpened`), `let out` (`letOut()`; shut, opening to a push), `left` (the lock ended another way, such as a new floor).
+
+## Saved runs
+
+A dungeon remembers what the player did to it, per floor, and each component that remembers publishes its memory and takes it back as a starting input: `combat.room_encounters` `dead`/`initialDead` (`depth:id`), `inventory.ground_items` `opened`/`initialOpened` and `taken`/`initialTaken` (`depth:x,y`), `world.dungeon_doors` `opened`/`initialOpened` and `unlocked`/`initialUnlocked` (`depth:x,y`), `world.floor_descent` `found`/`initialFound` (`depth:index`), and `combat.boss_encounter_script` `beaten`/`initialBeaten` (depths). Hand back all of them or none: a boss remembered dead with its floor's `beaten` forgotten is an arena that locks on nobody.
+
 ## Which form to use when authoring
 
 The two forms are not interchangeable. The test is *why* the listener cares.

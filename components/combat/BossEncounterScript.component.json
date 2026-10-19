@@ -3,7 +3,7 @@
   "name": "Boss Encounter Script",
   "category": "combat",
   "description": "The contract a boss fight fulfils: engage on arena entry, phase changes on health thresholds, arena lock while engaged, clean resolution either way. utility.behavior_fsm owns the generic state machine and could express any one boss; this component owns the encounter semantics every boss shares, so 'seal the doors at engage, drop the reward at defeat' is written once and varied by data, not re-scripted per fight. It does not own the boss's attacks \u2014 those are combat.melee_basic or combat.hotbar_abilities on the boss entity \u2014 and it does not own the loot, which inventory.loot_table and inventory.affix_loot_generator roll after combat.entityDefeated like any other kill, only louder.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -59,6 +59,13 @@
       "required": false,
       "default": 0,
       "description": "Soft enrage after which the fight gets lethal. Zero disables it; without an enrage, patient builds turn every boss into a timer test of the player's bladder, not skill."
+    },
+    {
+      "name": "initialBeaten",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Floors whose boss is already dead, as depths. Arriving on one is not a fight: the encounter reads defeated there and does not engage. Written for a saved run: a build that saves reads the matching output and hands it back here, and the dungeon is as the player left it."
     }
   ],
   "outputs": [
@@ -70,7 +77,27 @@
     {
       "name": "engaged",
       "type": "boolean",
-      "description": "True from arena entry until defeat or party wipe."
+      "description": "True from arena entry until defeat. Every floor is its own encounter: arriving on another floor ends it, and that floor starts unengaged."
+    },
+    {
+      "name": "defeated",
+      "type": "boolean",
+      "description": "Whether this floor's boss is dead."
+    },
+    {
+      "name": "arenaLocked",
+      "type": "boolean",
+      "description": "Engaged with lockArenaOnEngage on: the arena is locked. Reported, not enforced; a build's doors enforce it (world.dungeon_doors does)."
+    },
+    {
+      "name": "arena",
+      "type": "object",
+      "description": "This floor's arena room as {id, x, y, w, h}, or null when the floor has none."
+    },
+    {
+      "name": "beaten",
+      "type": "array",
+      "description": "Every floor whose boss is dead, as depths: what initialBeaten takes back."
     }
   ],
   "events": {

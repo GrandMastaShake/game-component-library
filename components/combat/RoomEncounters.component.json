@@ -3,7 +3,7 @@
   "name": "Room Encounters",
   "category": "combat",
   "description": "What stands in a room when you get there. world.room_template lays spawn sockets and says nothing about who fills them; combat.boss_encounter_script scripts a fight and never places the boss; combat.spawn_director tops a region up on a clock from random tiles, which is a real-time answer to a different question. A crawler needs its cast laid with the floor: a rat in the storeroom, skeletons in the crypt, a mimic beside the chest, the boss at the far end — the same guards in the same rooms every time the same floor is entered, because a floor is a place and a place has occupants.\n\nThis claims the spawn sockets. When a floor is generated it reads the placed stamps, and for each socket picks a unit from the cast keyed by the stamp's template name, or failing that by the room's tag — so a template called `crypt` can carry the dead while every other empty room draws from the general pool. The pick is seeded from the floor's seed, so revisiting a floor finds the same guards. Each unit is announced to combat.unit_roster through combat.unitSpawned, exactly as combat.spawn_director announces its arrivals, with its own health, damage, movement and dexterity; the roster stays the only author of who is on the board. Ids are numbered (`goblin_2`) unless the archetype is `unique`, which is how the boss keeps the one id combat.boss_encounter_script reads.\n\nWhat it remembers: the dead. A unit the player killed on floor three is not standing there again when they come back up, because a cleared floor that refills on the stairs is a floor that was never cleared. What it does not own: noticing, chasing, striking or turns, which are combat.aggro_table, movement.pursuit_agent, combat.contact_attack and combat.turn_order_queue's, unchanged.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -55,6 +55,13 @@
       "required": false,
       "default": true,
       "description": "Whether a unit killed on a floor stays dead when that floor is revisited. Off, every visit is a fresh floor, which is the roguelike answer and the wrong one for a dungeon you go back up through."
+    },
+    {
+      "name": "initialDead",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Spawns already killed, as `depth:id` keys (`3:goblin_2`, `3:boss`), remembered as if the player had killed them this run. Written for a saved run: a build that saves reads the matching output and hands it back here, and the dungeon is as the player left it. Ignored when rememberCleared is off."
     }
   ],
   "outputs": [
@@ -67,6 +74,11 @@
       "name": "cleared",
       "type": "number",
       "description": "How many of the current floor's spawns are remembered dead."
+    },
+    {
+      "name": "dead",
+      "type": "array",
+      "description": "Every spawn remembered dead, on every floor, as `depth:id` keys: what initialDead takes back."
     }
   ],
   "events": {
