@@ -109,6 +109,7 @@ The compound validator reports each accepted wire as `exact` or `intent:<labels>
 
 - `combat.bossEngaged {phase, reason, arenaLocked, arena}`. `reason` is `arena entered` or `trigger volume`. `arena` is `{x, y, w, h}` or null. Every floor is its own encounter: arriving on a floor starts it unengaged, and a floor whose boss is dead (`initialBeaten`, or killed this run) does not engage.
 - `combat.bossDefeated {phase, seconds}`, once per floor's boss.
+- A player who goes down and gets up does not leave the fight half fought: the build calls `combat.room_encounters`' `regroup()` (the cast back at its posts, whole) and `combat.boss_encounter_script`'s `reset()` (not engaged, the arena unlocked). No event: the encounter simply reads unengaged, and the doors let go as `left`.
 - `world.arenaSealed {room, doors}`. `world.dungeon_doors` held the arena's doors shut: the encounter locked the arena and the player is inside. `doors` is how many it held.
 - `world.arenaReleased {room, reason}`. Reasons: `defeated` (the held doors swing open, each also announced as `world.doorOpened`), `let out` (`letOut()`; shut, opening to a push), `left` (the lock ended another way, such as a new floor).
 

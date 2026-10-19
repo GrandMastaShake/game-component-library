@@ -3,7 +3,7 @@
   "name": "Room Encounters",
   "category": "combat",
   "description": "What stands in a room when you get there. world.room_template lays spawn sockets and says nothing about who fills them; combat.boss_encounter_script scripts a fight and never places the boss; combat.spawn_director tops a region up on a clock from random tiles, which is a real-time answer to a different question. A crawler needs its cast laid with the floor: a rat in the storeroom, skeletons in the crypt, a mimic beside the chest, the boss at the far end — the same guards in the same rooms every time the same floor is entered, because a floor is a place and a place has occupants.\n\nThis claims the spawn sockets. When a floor is generated it reads the placed stamps, and for each socket picks a unit from the cast keyed by the stamp's template name, or failing that by the room's tag — so a template called `crypt` can carry the dead while every other empty room draws from the general pool. The pick is seeded from the floor's seed, so revisiting a floor finds the same guards. Each unit is announced to combat.unit_roster through combat.unitSpawned, exactly as combat.spawn_director announces its arrivals, with its own health, damage, movement and dexterity; the roster stays the only author of who is on the board. Ids are numbered (`goblin_2`) unless the archetype is `unique`, which is how the boss keeps the one id combat.boss_encounter_script reads.\n\nWhat it remembers: the dead. A unit the player killed on floor three is not standing there again when they come back up, because a cleared floor that refills on the stairs is a floor that was never cleared. What it does not own: noticing, chasing, striking or turns, which are combat.aggro_table, movement.pursuit_agent, combat.contact_attack and combat.turn_order_queue's, unchanged.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "platform": [
     "agnostic"
   ],
@@ -79,6 +79,11 @@
       "name": "dead",
       "type": "array",
       "description": "Every spawn remembered dead, on every floor, as `depth:id` keys: what initialDead takes back."
+    },
+    {
+      "name": "regroup",
+      "type": "function",
+      "description": "regroup(): the current floor's living cast goes back where the floor laid it, whole, exactly as a revisit would place it; the dead stay dead. For a build whose player goes down and gets up rather than dying: getting up carries them to a floor, and on any floor but the one they woke on that floor is laid again when they come back to it. On the one they woke on, this is the same reset."
     }
   ],
   "events": {
