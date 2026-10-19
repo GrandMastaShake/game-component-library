@@ -2,8 +2,8 @@
   "id": "world.dungeon_doors",
   "name": "Dungeon Doors",
   "category": "world",
-  "description": "A door in every doorway. world.floor_descent knows where a corridor meets a room's rim and drew the gap darker; world.door_gate is a passage wired to switches and plates, a puzzle piece, not this. Every crawler since Rogue has doors, and a door is the smallest thing that makes a dungeon feel built rather than generated: closed until something walks into it, open after, and the one on the boss's room locked until a key turns.\n\nThis owns the doors: where they are (every doorway of an open corridor, read from the floor), whether each is closed, open or locked, and what style it wears by the room's tag. A unit stepping onto a closed door opens it — any unit, because a goblin that walks through a shut door is a goblin that walks through a wall. A locked door refuses a footstep: the floor's isBlocked asks this, the same way it asks the stamps about a solid prop, so the walker, the pathfinder and the pursuer all get the one answer. The player's unit arriving beside a locked door with the key in the bag unlocks it and the key is spent; without the key the door says so, once per approach. A CLOSED DOOR IS OPAQUE: world.vision_system asks this before it lights a tile or lets a hunter notice anybody, so the room behind a shut door is dark and quiet until it opens. What was opened and unlocked is remembered per floor.",
-  "version": "0.1.0",
+  "description": "A door in every doorway. world.floor_descent knows where a corridor meets a room's rim and drew the gap darker; world.door_gate is a passage wired to switches and plates, a puzzle piece, not this. Every crawler since Rogue has doors, and a door is the smallest thing that makes a dungeon feel built rather than generated: closed until something walks into it, open after, and the one on the boss's room locked until a key turns.\n\nThis owns the doors: where they are (every doorway of an open corridor, read from the floor), whether each is closed, open or locked, and what style it wears by the room's tag. A unit stepping onto a closed door opens it — any unit, because a goblin that walks through a shut door is a goblin that walks through a wall. A locked door refuses a footstep: the floor's isBlocked asks this, the same way it asks the stamps about a solid prop, so the walker, the pathfinder and the pursuer all get the one answer. The player's unit arriving beside a locked door with the key in the bag unlocks it and the key is spent; without the key the door says so, once per approach. A CLOSED DOOR IS OPAQUE: world.vision_system asks this before it lights a tile or lets a hunter notice anybody, so the room behind a shut door is dark and quiet until it opens. What was opened and unlocked is remembered per floor.\n\nAnd it holds a boss's arena. combat.boss_encounter_script reports the arena locked (`arenaLocked`) and leaves enforcing it to the build, and a door is the thing that stops a player, so this reads the encounter and holds the arena's doors while the arena is locked and the player is inside it: shut, blocking, and opened by no key. A door is never shut on someone standing in it, and the player in a doorway is not yet inside. When the boss dies the held doors swing open; a door that still wants its key stays locked. A player who must leave the arena another way (downed, and got up at the entrance) is let out through `letOut`, and the arena holds again only after they have left and come back.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -60,13 +60,27 @@
         "boss": "iron"
       },
       "description": "Which door sheet a room's doors wear, by tag — `wood` or `iron`; anything unnamed is wood. Content, not rule."
+    },
+    {
+      "name": "initialOpened",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Doors already opened, as `depth:x,y` keys. Written for a saved run: a build that saves reads the matching output and hands it back here, and the dungeon is as the player left it."
+    },
+    {
+      "name": "initialUnlocked",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Locked doors already unlocked, as `depth:x,y` keys. The key was spent when it turned, so a saved run that came back with these doors locked again would have no key for them. Written for a saved run: a build that saves reads the matching output and hands it back here, and the dungeon is as the player left it."
     }
   ],
   "outputs": [
     {
       "name": "doors",
       "type": "array",
-      "description": "Every door on the floor as {x, y, room, tag, style, open, locked}."
+      "description": "Every door on the floor as {x, y, room, tag, style, open, locked, sealed}. `sealed` is a door held by the boss's arena; it is also reported `locked`, because to anything else both mean the door does not open."
     },
     {
       "name": "isClosed",
@@ -76,19 +90,36 @@
     {
       "name": "blocksAt",
       "type": "function",
-      "description": "Whether a LOCKED door stands on a tile. Asked by world.floor_descent from its own isBlocked; an unlocked closed door does not block, it opens."
+      "description": "Whether a locked or held door stands on a tile. Asked by world.floor_descent from its own isBlocked; an unlocked closed door does not block, it opens."
     },
     {
       "name": "revision",
       "type": "number",
-      "description": "Bumped when a door locks or unlocks, folded into the floor's revision so the pathfinder rebuilds."
+      "description": "Bumped when a door opens, locks, unlocks, is held or is let go, folded into the floor's revision so the pathfinder rebuilds and a view redraws."
+    },
+    {
+      "name": "letOut",
+      "type": "function",
+      "description": "letOut(): lets the player out of a held arena. Its doors stay shut and open to a push, and hold again only after the player has left the arena and come back."
+    },
+    {
+      "name": "opened",
+      "type": "array",
+      "description": "Every door opened, on every floor, as `depth:x,y` keys: what initialOpened takes back."
+    },
+    {
+      "name": "unlocked",
+      "type": "array",
+      "description": "Every door unlocked, on every floor, as `depth:x,y` keys: what initialUnlocked takes back."
     }
   ],
   "events": {
     "emits": [
       "world.doorOpened",
       "world.doorUnlocked",
-      "world.doorLocked"
+      "world.doorLocked",
+      "world.arenaSealed",
+      "world.arenaReleased"
     ],
     "listensTo": [
       "world.floorGenerated",
