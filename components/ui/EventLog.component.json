@@ -88,7 +88,7 @@
       "progression.questOffered",
       "progression.questStarted",
       "progression.questReady",
-      "progression.questRewarded", "economy.itemBought", "economy.itemSold", "economy.tradeRefused", "world.arenaSealed", "combat.bossDefeated"
+      "progression.questRewarded", "economy.itemBought", "economy.itemSold", "economy.tradeRefused", "world.arenaSealed"
     ]
   },
   "dependencies": [],
