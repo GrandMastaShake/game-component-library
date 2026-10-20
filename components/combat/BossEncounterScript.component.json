@@ -3,7 +3,7 @@
   "name": "Boss Encounter Script",
   "category": "combat",
   "description": "The contract a boss fight fulfils: engage on arena entry, phase changes on health thresholds, arena lock while engaged, clean resolution either way. utility.behavior_fsm owns the generic state machine and could express any one boss; this component owns the encounter semantics every boss shares, so 'seal the doors at engage, drop the reward at defeat' is written once and varied by data, not re-scripted per fight. It does not own the boss's attacks \u2014 those are combat.melee_basic or combat.hotbar_abilities on the boss entity \u2014 and it does not own the loot, which inventory.loot_table and inventory.affix_loot_generator roll after combat.entityDefeated like any other kill, only louder.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "platform": [
     "agnostic"
   ],
@@ -77,7 +77,7 @@
     {
       "name": "engaged",
       "type": "boolean",
-      "description": "True from arena entry until defeat. Every floor is its own encounter: arriving on another floor ends it, and that floor starts unengaged."
+      "description": "True from arena entry until defeat or reset. Every floor is its own encounter: arriving on another floor ends it, and that floor starts unengaged."
     },
     {
       "name": "defeated",
@@ -98,6 +98,11 @@
       "name": "beaten",
       "type": "array",
       "description": "Every floor whose boss is dead, as depths: what initialBeaten takes back."
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "description": "reset(): ends this floor's fight unwon. Not engaged, no phase, no enrage, the arena unlocked; a dead boss stays defeated. The party-wipe path for a build whose player goes down and gets up rather than dying, alongside combat.room_encounters' regroup, which puts the boss back whole."
     }
   ],
   "events": {
