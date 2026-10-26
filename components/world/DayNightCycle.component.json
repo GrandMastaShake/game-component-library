@@ -2,8 +2,8 @@
   "id": "world.day_night_cycle",
   "name": "Day/Night Cycle",
   "category": "world",
-  "description": "Time-of-day simulation driving lighting, spawn tables, and ambient events.",
-  "version": "0.1.0",
+  "description": "Time-of-day simulation driving lighting, spawn tables, and ambient events. One clock, an hour from 0 to 24 turning once every dayLengthMinutes; night from 18:00 to 06:00, its two edges announced as world.duskStarted and world.dawnStarted. It owns the hour and nothing it lights: a runtime reads `currentTime` and draws its own sky, sun and shadow from it, and a saved run hands the hour back as startTime.",
+  "version": "0.2.0",
   "platform": [
     "roblox",
     "godot",
@@ -13,6 +13,12 @@
   "implementations": [
     {
       "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
       "status": "external",
       "module": null,
       "note": "Implemented in the consuming application; not verifiable from this repository."
@@ -38,23 +44,27 @@
       "name": "dayLengthMinutes",
       "type": "number",
       "required": false,
-      "default": 20
+      "default": 20,
+      "description": "Real minutes for one turn of the clock."
     },
     {
       "name": "startTime",
       "type": "number",
       "required": false,
-      "default": 6
+      "default": 6,
+      "description": "The hour the clock starts at, 0 to 24. A saved run hands back the hour it was saved at."
     }
   ],
   "outputs": [
     {
       "name": "currentTime",
-      "type": "number"
+      "type": "number",
+      "description": "The hour, 0 to 24, fractional. What a runtime lights from, and what a saved run hands back as startTime."
     },
     {
       "name": "isNight",
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Whether it is between 18:00 and 06:00."
     }
   ],
   "events": {
