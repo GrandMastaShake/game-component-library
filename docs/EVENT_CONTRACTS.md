@@ -113,9 +113,14 @@ The compound validator reports each accepted wire as `exact` or `intent:<labels>
 - `world.arenaSealed {room, doors}`. `world.dungeon_doors` held the arena's doors shut: the encounter locked the arena and the player is inside. `doors` is how many it held.
 - `world.arenaReleased {room, reason}`. Reasons: `defeated` (the held doors swing open, each also announced as `world.doorOpened`), `let out` (`letOut()`; shut, opening to a push), `left` (the lock ended another way, such as a new floor).
 
+## A full bag
+
+- `inventory.full {slotCount, refused}` is the bag's refusal. A pickup refused stays where it lay, unannounced.
+- `inventory.itemSetDown {item, x, y, depth}`: anything else refused (a quest's pay, a chest's contents, a monster's drop) was set down by `inventory.ground_items` at the player's tile or the nearest free one. Picked up by a step onto it like any find.
+
 ## Saved runs
 
-A dungeon remembers what the player did to it, per floor, and each component that remembers publishes its memory and takes it back as a starting input: `combat.room_encounters` `dead`/`initialDead` (`depth:id`), `inventory.ground_items` `opened`/`initialOpened` and `taken`/`initialTaken` (`depth:x,y`), `world.dungeon_doors` `opened`/`initialOpened` and `unlocked`/`initialUnlocked` (`depth:x,y`), `world.floor_descent` `found`/`initialFound` (`depth:index`), and `combat.boss_encounter_script` `beaten`/`initialBeaten` (depths). Hand back all of them or none: a boss remembered dead with its floor's `beaten` forgotten is an arena that locks on nobody.
+A dungeon remembers what the player did to it, per floor, and each component that remembers publishes its memory and takes it back as a starting input: `combat.room_encounters` `dead`/`initialDead` (`depth:id`), `inventory.ground_items` `opened`/`initialOpened` and `taken`/`initialTaken` (`depth:x,y`), `world.dungeon_doors` `opened`/`initialOpened` and `unlocked`/`initialUnlocked` (`depth:x,y`), `world.floor_descent` `found`/`initialFound` (`depth:index`), and `combat.boss_encounter_script` `beaten`/`initialBeaten` (depths). A job's count rides with the run too: `progression.quest_log` publishes each quest's `progress` in `quests` and takes it back as `initialProgress` (by id); a fetch counts the bag instead. Hand back all of them or none: a boss remembered dead with its floor's `beaten` forgotten is an arena that locks on nobody.
 
 ## Which form to use when authoring
 

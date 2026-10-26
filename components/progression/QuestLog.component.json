@@ -3,7 +3,7 @@
   "name": "Quest Log",
   "category": "progression",
   "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit. The QUESTS themselves are the level's, not this component's. Without an input for them every game that picked up a quest log got the same four — gather six things, collect four wood, collect three stone — so an Action RPG shipped with a forager's errands and a player was asked to fetch lumber in a genre about killing things. A log that invents its own content is a log that has an opinion about what game it is in, which is exactly the opinion a component is not allowed to have.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "platform": [
     "roblox",
     "godot",
@@ -42,6 +42,13 @@
       "required": false,
       "default": [],
       "description": "The level's quests, and the shape a giver offers them in: [{id, text, kind, target, reward, xp?, items?, item?, creature?, after?}]. `kind` is what counts toward it: 'hit' for a blow the player landed; 'collect' for each `item` arriving in the bag; 'slay' for a defeat the player dealt to a unit on another side whose `archetype` is `creature` (any, when omitted), counted only once taken; 'reach' for the deepest floor stood on since the quest was taken, `target` being the floor; 'fetch' for how many of `item` the bag holds now, where one word in front still counts ('magic charm' is a charm), taken from the bag when handed back. Naming a key, a potion or a piece of gear makes the quest compete with that thing's own use. `reward` is currency, `xp` experience and `items` [{itemId, amount}], all paid as one grant list on progression.questRewarded. `after` names a quest that must be complete first. Quests written here start themselves and pay the moment they are done, as they always have. Empty falls back to a small generic set so a build that forgets to configure it still runs and still shows something, which is the honest failure, unless something has offered this log work by then: a log somebody else is feeding is not empty."
+    },
+    {
+      "name": "initialProgress",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Counts already made, by quest id ({q_three: 2}), for a saved run. A quest taken, or started, counts on from here rather than from nothing: kills, hits and collections kept, and a reach quest keeps the deepest floor it was counted at. A fetch quest is not counted from here: it counts the bag, which a saved run restores itself."
     }
   ],
   "outputs": [
@@ -57,7 +64,7 @@
     {
       "name": "quests",
       "type": "array",
-      "description": "Every quest this log holds, with its state: locked, offered, active, ready or completed."
+      "description": "Every quest this log holds, with its state (locked, offered, active, ready or completed) and its progress against its target: what initialProgress takes back."
     },
     {
       "name": "stateOf",
