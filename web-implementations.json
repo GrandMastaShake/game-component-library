@@ -153,6 +153,7 @@
       "world.biome_system",
       "world.cave_system",
       "world.chunk_manager",
+      "world.day_night_cycle",
       "world.floor_descent",
       "world.noise_lib",
       "world.surface_approach",
