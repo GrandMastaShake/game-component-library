@@ -2,8 +2,8 @@
   "id": "inventory.ground_items",
   "name": "Ground Items",
   "category": "inventory",
-  "description": "Things lying on the floor, and what happens when you walk over them. A dungeon's loot used to fall only out of monsters: the chests the stamps laid were drawn and never opened, and there was no way to leave a sword in a room for a player to find. This owns the floor's items. When a floor is generated it reads world.room_template's gear sockets and lays one piece of equipment on each, chosen from a pool by the floor's seed so the same floor offers the same finds; when the player's unit steps onto one, the item is granted through inventory.itemGranted and leaves the floor — unless the bag refuses it, in which case it stays where it was. A reward socket is a chest: stepping onto it opens it once, announced as inventory.containerOpened with the kind 'chest', and inventory.loot_table decides what was inside exactly as it decides what a rock yields. It remembers what was taken and what was opened per floor, so coming back up does not restock the vault.\n\nIt draws the items where they lie, through the painter, so a sword on a lattice is on its diamond. It does not draw the chest — the stamp that laid it does — but it publishes which are open so the stamp can draw the lid up. It does not decide what a chest holds, whether an item fits, or what wearing it does: those are the loot table's, the bag's and combat.equipment_slots'.\n\nAND WHAT IS DROPPED. inventory.itemDropped from the panel lays the thing at the tile it names — the player's — or the nearest free tile beside it, where the next footstep can take it back.\n\nAND IT SAYS WHAT IS THERE. Anything lit and within `labelRadius` wears its name on a plate over the tile, drawn at the far end of the depth pass so the wall it lies beside never covers the label. Separately, the moment the light first reaches a thing on this floor it announces inventory.itemSighted — once per thing per floor, and only where a world.vision_system exists to have a moment: a build that sees the whole floor at once has no find to report and reports none. What that becomes in words is ui.event_log's business, not this component's.\n\nAnd what the bag refuses is not lost. A refused pickup stays where it lay; anything else the bag will not take (a quest's pay, a chest's contents, a monster's drop) is set down at the player's tile or the nearest free one, never in a pile, announced as inventory.itemSetDown, and taken by the next step onto it like any find.",
-  "version": "0.3.0",
+  "description": "Things lying on the floor, and what happens when you walk over them. A dungeon's loot used to fall only out of monsters: the chests the stamps laid were drawn and never opened, and there was no way to leave a sword in a room for a player to find. This owns the floor's items. When a floor is generated it reads world.room_template's gear sockets and lays one piece of equipment on each, chosen from a pool by the floor's seed so the same floor offers the same finds; when the player's unit steps onto one, the item is granted through inventory.itemGranted and leaves the floor — unless the bag refuses it, in which case it stays where it was. A reward socket is a chest: stepping onto it opens it once, announced as inventory.containerOpened with the kind 'chest', and inventory.loot_table decides what was inside exactly as it decides what a rock yields. It remembers what was taken and what was opened per floor, so coming back up does not restock the vault.\n\nIt draws the items where they lie, through the painter, so a sword on a lattice is on its diamond. It does not draw the chest — the stamp that laid it does — but it publishes which are open so the stamp can draw the lid up. It does not decide what a chest holds, whether an item fits, or what wearing it does: those are the loot table's, the bag's and combat.equipment_slots'.\n\nAND WHAT IS DROPPED. inventory.itemDropped from the panel lays the thing at the tile it names — the player's — or the nearest free tile beside it, where the next footstep can take it back.\n\nAND IT SAYS WHAT IS THERE. Anything lit and within `labelRadius` wears its name on a plate over the tile, drawn at the far end of the depth pass so the wall it lies beside never covers the label. Separately, the moment the light first reaches a thing on this floor it announces inventory.itemSighted — once per thing per floor, and only where a world.vision_system exists to have a moment: a build that sees the whole floor at once has no find to report and reports none. What that becomes in words is ui.event_log's business, not this component's.\n\nAnd what the bag refuses is not lost. A refused pickup stays where it lay; anything else the bag will not take (a quest's pay, a chest's contents, a monster's drop) is set down at the player's tile or the nearest free one, never in a pile, announced as inventory.itemSetDown, and taken by the next step onto it like any find.\n\nAnd what is put down stays down. A thing dropped from the bag (inventory.itemDropped) or set down for a full bag lies on its floor until it is picked up, including after the player has left that floor and come back, and across a saved run (`dropped` / `initialDropped`). Before, a floor laid again laid only what its stamps put there, and a dropped sword was gone.",
+  "version": "0.4.0",
   "platform": [
     "agnostic"
   ],
@@ -94,6 +94,13 @@
       "required": false,
       "default": [],
       "description": "Finds already picked up, as `depth:x,y` keys of the tile they lay on. A taken find is not laid again, so a saved run cannot be reloaded for a second sword. Written for a saved run: a build that saves reads the matching output and hands it back here, and the dungeon is as the player left it."
+    },
+    {
+      "name": "initialDropped",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Things lying where they were put down, as {depth, x, y, item}: dropped from the bag, or set down for a full bag, and not picked up again. Written for a saved run: a build that saves reads `dropped` and hands it back here."
     }
   ],
   "outputs": [
@@ -121,6 +128,11 @@
       "name": "taken",
       "type": "array",
       "description": "Every find picked up, on every floor, as `depth:x,y` keys: what initialTaken takes back."
+    },
+    {
+      "name": "dropped",
+      "type": "array",
+      "description": "Every thing put down and still lying there, on every floor, as {depth, x, y, item}: what initialDropped takes back."
     }
   ],
   "events": {
