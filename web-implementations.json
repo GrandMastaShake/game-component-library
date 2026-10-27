@@ -20,6 +20,7 @@
       "combat.spawn_director",
       "combat.status_effects",
       "combat.tactical_attack",
+      "combat.turn_meter",
       "combat.turn_order_queue",
       "combat.unit_roster",
       "economy.collectible_scatter",

@@ -1,0 +1,111 @@
+{
+  "id": "combat.turn_meter",
+  "name": "Turn Meter",
+  "category": "combat",
+  "description": "Who acts next, by speed. Every combatant has a meter that fills at its own pace, and whoever fills first takes the turn. The meter is DISCRETE: between turns every meter is advanced by exactly the time the soonest one needs, so a unit twice as fast acts twice as often, and the order is a function of the stats — replayable from the same roster, with no die in it. Asked for after the turn meter in RAID-style squad battlers, and written as a component for any turn-based pack rather than as one game's screen.\n\nIT REPLACES INITIATIVE, NOT THE QUEUE. combat.turn_order_queue still announces whose turn it is, counts the rounds, takes input.endTurn and input.delayTurn and ends an exhausted turn; where this component is in the build the queue asks it for the order instead of rolling a die, re-asked after every turn, and a round is as many turns as there are combatants. A second component that announced turns of its own would be the two-answers problem the queue exists to end, so this one never says whose turn it is — only who is full and who is next.\n\nACTING EMPTIES THE METER. Delaying keeps `delayKeeps` of it, which is what makes delay a bet rather than a skip: a unit that yields comes back sooner than one that acted. A unit that joins the fight late (combat.aggroGained) starts empty, and a dead one leaves the meter the way it leaves the board — the roster owns who is alive, so this asks rather than deciding.\n\nIt publishes `meters`, each combatant's fill as a fraction, which is the readout players plan against in every game with a meter, and `order`, the next `previewLength` turns as the simulation says they fall. The prediction is honest because the simulation IS the rule: there is no other order for it to differ from. Status effects are not read yet; a slowed unit fills at its stat until something owns slowing as a number rather than as a count.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "fillAt",
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "The meter is full at this, and a unit's speed is what it gains per unit of time. The scale is cosmetic — a stat of 10 against 100 fills in ten units of time, and time here is only a count — but every meter players have ever read goes to 100, so 100."
+    },
+    {
+      "name": "speedStat",
+      "type": "string",
+      "required": false,
+      "default": "dexterity",
+      "enum": [
+        "dexterity",
+        "movement"
+      ],
+      "description": "Which roster stat is speed. Dexterity is the tactics default and the queue's tie-break; movement makes the far-walking units the often-acting ones, which some games want. A stat of zero is read as one, so nobody is seated who can never act."
+    },
+    {
+      "name": "previewLength",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "How many turns ahead `order` predicts. The rail along the top of a battle screen shows about this many; the simulation is cheap, but a prediction nobody can see is a cost without a reader."
+    },
+    {
+      "name": "delayKeeps",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "The fraction of a full meter a unit keeps when it delays rather than acts. Zero makes delay cost a whole turn, which makes it a skip; one would let a unit sit at the front of the line forever, so it is clamped below that."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "meters",
+      "type": "array",
+      "description": "Each combatant in the fight: `id`, `fill` as a fraction of full (0..1), and `speed`. Fullest first. Exactly one is full at the start of a turn — the one whose turn it is."
+    },
+    {
+      "name": "order",
+      "type": "array",
+      "description": "Unit ids, the next `previewLength` turns in the order the meter says they fall, the full one first. The queue reads this as its order; the rail draws it."
+    },
+    {
+      "name": "speedOf",
+      "type": "function",
+      "description": "A unit's speed as this component counts it, for a readout that wants to say why one unit acts more often than another."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.meterFilled"
+    ],
+    "listensTo": [
+      "combat.encounterStarted",
+      "combat.encounterEnded",
+      "combat.turnEnded",
+      "combat.entityDefeated",
+      "combat.aggroGained"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster"
+  ],
+  "tags": [
+    "tactics",
+    "turns",
+    "speed",
+    "meter"
+  ],
+  "provenance": "Asked for after RAID-style squad battlers, where the turn meter is the fight's whole tempo. Nothing in the catalogue ordered turns by a stat over time (searched 2026-10-27: combat.turn_order_queue rolls initiative once a round and fixes it; combat.energy_per_turn and combat.action_point_economy budget a turn, not its timing; combat.super_meter fills from blows and spends on a move). Library-native, written to feed the queue's order rather than to announce turns of its own."
+}
