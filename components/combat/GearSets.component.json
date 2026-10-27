@@ -1,0 +1,84 @@
+{
+  "id": "combat.gear_sets",
+  "name": "Gear Sets",
+  "category": "combat",
+  "description": "Wearing enough of a set is worth more than the pieces. combat.equipment_slots says what each piece does on its own; this says what wearing two or four of a kind does together, which is the squad battler's whole gear game — the pieces are the drops, the set is the plan. Asked for after the set bonuses in RAID-style squad battlers, and written as a component for any build with equipment slots rather than as one game's loot screen.\n\nIT COUNTS; IT DOES NOT EQUIP. The pieces worn are read off what the slots publish, so a set never decides what is on — the slots and the player do. A set is its pieces and its thresholds: `{ items, pieces, bonuses }` is one threshold and that bonus STACKS, so three pairs of a two-piece set are three of its bonus, as in RAID; `{ items, tiers: [{ pieces, bonuses }, ...] }` is a ladder and each rung reached applies once, as in Diablo. A rolled piece — `rare sword` — is a sword, and counts for the set whatever it rolled.\n\nTHE BONUS GOES OUT IN THE SHAPE EVERYTHING ELSE USES. `totalStatBonus` is named keys summed, the same shape combat.equipment_slots and progression.skills_tree publish, so whoever already sums a bonus by name — combat.melee_basic for meleeDamage, combat.damage_resolver for armor, combat.turn_meter for the speed stat — sums this one with no new code and no idea where it came from. That is what makes a speed set a speed set: `dexterity` is the stat the meter fills by, and a set that adds to it is a unit that acts more often.\n\nIt publishes `sets`, each set's worn count against its next threshold, which is the readout a player plans a build against, and says when a threshold is crossed either way. The wearer is whoever the build's gear is on; a squad whose gear belongs to no one unit wears a set on no one until something says who.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "sets",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "The sets, as {setId: {items, pieces, bonuses}} or {setId: {items, tiers: [{pieces, bonuses}, ...]}}. `items` are the base item ids that belong to the set — the same ids the slots' `gear` names — and a rolled copy counts by its base. `pieces` with `bonuses` is one threshold whose bonus stacks by floor(worn / pieces); `tiers` is a ladder whose rungs each apply once. `bonuses` are named modifiers in the shape the slots and the skill tree publish, so `dexterity` reaches the meter and `meleeDamage` reaches the swing. Empty, nothing can complete, and the component says so once."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sets",
+      "type": "array",
+      "description": "Each configured set: `id`, `worn` (pieces on), `pieces` (the next threshold, or the last once past it), `stacks` (how many times its bonus applies now) and `bonuses` (what it is adding now). The readout a player builds against: swift 1/2."
+    },
+    {
+      "name": "totalStatBonus",
+      "type": "object",
+      "description": "Every active set bonus, summed by name — {dexterity: 4}. The same shape combat.equipment_slots and progression.skills_tree publish, so one reader handles all three."
+    },
+    {
+      "name": "setOf",
+      "type": "function",
+      "description": "Which set a carried kind belongs to, or null. The inventory panel asks, so a drop can say which set it would advance."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.setBonusGained",
+      "combat.setBonusLost"
+    ],
+    "listensTo": [
+      "combat.itemEquipped",
+      "combat.itemUnequipped"
+    ]
+  },
+  "dependencies": [
+    "combat.equipment_slots"
+  ],
+  "tags": [
+    "gear",
+    "equipment",
+    "set-bonus",
+    "build"
+  ],
+  "provenance": "Asked for after RAID-style squad battlers, where a build is the sets it wears and the speed set is the first one anybody chases. Nothing in the catalogue rewarded wearing pieces together (searched 2026-10-27: combat.equipment_slots sums each worn piece's own bonuses; inventory.affix_loot_generator rolls a copy's quality; inventory.style_presets groups cosmetics, not stats). Library-native, written to read the slots and publish in their shape so the existing readers of a bonus need no change."
+}
