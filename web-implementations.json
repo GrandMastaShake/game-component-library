@@ -14,6 +14,7 @@
       "combat.enemy_tier_scaling",
       "combat.engage_target",
       "combat.equipment_slots",
+      "combat.gear_sets",
       "combat.hotbar_abilities",
       "combat.melee_basic",
       "combat.room_encounters",
