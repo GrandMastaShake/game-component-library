@@ -2,8 +2,8 @@
   "id": "presentation.audio_system",
   "name": "Audio System",
   "category": "presentation",
-  "description": "Centralized sound effect and music playback manager with volume buckets, 3D spatial sound, and crossfade between tracks.\n\nWHAT IT PLAYS IN A DUNGEON, synthesised rather than sampled so the build ships nothing: a footstep for the player's own steps, a knock for a blow, a lower one for a fall, a creak for a chest, a chime for a pickup, a swing for a door, a rising three for a level. Every cue is a moment the bricks already announce; this adds no rule.",
-  "version": "0.1.0",
+  "description": "Centralized sound effect and music playback manager with volume buckets, 3D spatial sound, and crossfade between tracks.\n\nWHAT IT PLAYS IN A DUNGEON, synthesised rather than sampled so the build ships nothing: a footstep for the player's own steps, a knock for a blow, a lower one for a fall, a creak for a chest, a chime for a pickup, a swing for a door, a rising three for a level. Every cue is a moment the bricks already announce; this adds no rule. WHERE THE BUILD HAS utility.beat_clock it clicks on the ticks, higher on the downbeat, so a phrase can be kept by ear; the clock reads the position and this is the sound of it.",
+  "version": "0.1.1",
   "platform": [
     "roblox",
     "godot",
@@ -64,7 +64,8 @@
       "inventory.itemGranted",
       "world.doorOpened",
       "progression.leveledUp",
-      "inventory.potionUsed"
+      "inventory.potionUsed",
+      "utility.beatTicked"
     ]
   },
   "sinkFor": [
