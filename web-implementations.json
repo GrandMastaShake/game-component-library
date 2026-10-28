@@ -17,6 +17,7 @@
       "combat.gear_sets",
       "combat.hotbar_abilities",
       "combat.melee_basic",
+      "combat.phrase_resolver",
       "combat.room_encounters",
       "combat.spawn_director",
       "combat.status_effects",

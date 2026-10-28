@@ -1,0 +1,170 @@
+{
+  "id": "combat.phrase_resolver",
+  "name": "Phrase Resolver",
+  "category": "combat",
+  "description": "How well did the phrase land. Battle Hymn's judgement as a component: a blow is a phrase of n notes played against a need, and the count of close notes reads as the face of a d20 — 20c/n — so a need of k on the die asks for ceil(k·n/20) close, all close is a critical, under the fumble line (the need 2 read on the count) is a fumble, and the tier says what the blow does: Falter (under the need; lands for `falterLands`, Failure Bends), Clear (the need met), Flourish (every accent struck, or past the middle of the headroom above the need where a phrase has no accents), Virtuoso (a critical with every accent struck and no hazard touched). Advantage takes 3 off the need and disadvantage puts 3 on, before the need is clamped to 2 through the die's top and read on the count.\n\nTHE DIE READS THE SAME TIERS FROM ITS FACE, so Dice and Rhythm are one resolver and there is no hybrid: the notes give the tier in Rhythm, the face gives it in Dice (a critical face is Virtuoso, under the need Falter, `flourishMargin` over it Flourish). With no phrase pending for a blow and `rollWhenNoPhrase` on, the die is rolled, which is what makes a build without a highway a dice fight by the same rule. THE PHRASE DECIDES WHETHER YOU HIT; THE DICE DECIDE HOW HARD. combat.damage_resolver asks this for the verdict on a blow and keeps its own damage, armour and variance; this never deals damage and never plays a phrase. A highway reports a performance, counted, as input.phrasePlayed; a guard against a foe's blow as input.guardPlayed, judged against the guard need (the die's top plus two, less what the foe needs), and a blocked blow lands for nothing.\n\nOnly the player's side plays: a blow from the first team (or one that names no attacker) is judged, a foe's blow on the player is guarded, and everything else — a foe's blow on a foe, a trap, a prop — is not this component's. Phrases landed in one engaged turn scale down the route (`routeScaling`), as Battle Hymn's do, and the turn's start resets it; a board with no turns scales nothing. Accents, hazards and chords are the highway's to count; this reads the counts. Statuses that move the need, Cadence and the fork are not here yet.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "need",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "What the player's blow needs on the die, before the edge: the target's armour less the attacker's to-hit, as a sheet works it out. 8 is Battle Hymn's anchor (+5 against AC 13), a 65% hit. A phrase may carry its own `need` and it overrides this."
+    },
+    {
+      "name": "foeNeed",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "What a foe's blow on the player needs on the die. The guard need is the die's top plus two, less this: the foe misses on one face fewer than its need, and the guard has to land that many faces' worth from the top. 10 is the Grade Dog against the anchor: a guard of 12 of 20. A guard may carry its own `foeNeed`."
+    },
+    {
+      "name": "dieSides",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "The die the count reads as. Twenty because the need, the edge, the crit and the fumble are all written on a d20 and the printed book plays it; a smaller die reads a coarser count."
+    },
+    {
+      "name": "critOn",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "The lowest face that is a critical, and on the count one note fewer than all for each face under the top: 19 (Keen) is n−1 close. A face is worth a whole note rather than its share, because its share of ten notes is half a note and Keen would then do nothing on Easy."
+    },
+    {
+      "name": "flourishMargin",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "On the die, a face this far over the need is a Flourish. Five is Battle Hymn's; on the count a phrase with no accents flourishes past the middle of the headroom above the need instead, which is the same idea read on notes."
+    },
+    {
+      "name": "falterLands",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "What a Falter lands for, as a fraction of the blow. Half is Failure Bends: most imperfect performances weaken the outcome rather than delete the turn. Zero is the book's die, where under the need is a miss."
+    },
+    {
+      "name": "critMultiplier",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "What a critical multiplies the blow by. A critical that dropped an accent or touched a hazard reads as a Flourish and is still a critical on the dice, so it still doubles."
+    },
+    {
+      "name": "rollWhenNoPhrase",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "With no phrase pending for a blow, roll the die and judge the face by the same tiers. On, a build with no highway is a dice fight; off, a blow nobody played a phrase for lands as the striking component said, untouched — the way to keep a board's old numbers while a highway is wired in."
+    },
+    {
+      "name": "routeScaling",
+      "type": "array",
+      "required": false,
+      "default": [
+        1,
+        0.8,
+        0.6,
+        0.45,
+        0.35
+      ],
+      "description": "What each phrase landed in one turn is scaled by, in order, the last entry holding; the turn's start resets it. Battle Hymn's route, so playing one strong skill again and again does not start at full each time. Applies only while a turn queue is engaged; a board with no turns scales nothing."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastVerdict",
+      "type": "object",
+      "description": "The last judgement: `kind` (attack or guard), `mode` (phrase or dice), `attacker`, `target`, `need` (on the die, after the edge and the clamp), `needOnCount`, `notes`, `close`, `value` (the face the count read as), `ok`, `crit`, `fumble`, `tier`, `multiplier`, `blocked`. The readout a fight screen shows: Clear · 11 of 20 · need 8."
+    },
+    {
+      "name": "tiers",
+      "type": "object",
+      "description": "How many of each tier so far — {Falter, Clear, Flourish, Virtuoso} — attacks and guards together, for a style rank or a grade to read."
+    },
+    {
+      "name": "pending",
+      "type": "array",
+      "description": "Who has a phrase or a guard judged and waiting for its blow, by id. A highway can show that the performance is banked."
+    },
+    {
+      "name": "judgePhrase",
+      "type": "function",
+      "description": "The judgement as a pure function of a performance — {notes, close, need?, edge?, accents?, accentsHit?, hazards?, critOn?} — returning a verdict without banking it. A balance tool asks this ten thousand times."
+    },
+    {
+      "name": "judgeDie",
+      "type": "function",
+      "description": "The same verdict from a face — (face, need?, edge?) — by the die's reading of the tiers. The dice mode, and the proof that both modes are one rule."
+    },
+    {
+      "name": "needOnCount",
+      "type": "function",
+      "description": "The die's need read on a count — (need, notes, edge?) — never under the fumble line and never over the count: 8 on the die is 4 of 10, 6 of 15, 8 of 20."
+    },
+    {
+      "name": "guardNeedFor",
+      "type": "function",
+      "description": "The guard's need on the die from what the foe needs — (foeNeed, edge?) — the top plus two, less the foe's need, the foe's advantage raising it."
+    },
+    {
+      "name": "judgeBlow",
+      "type": "function",
+      "description": "What combat.damage_resolver asks as a blow lands — ({attacker, target, mine, onPlayer}) — returning the banked verdict for that attacker (or the player's guard against it), rolling the die if none is banked and rollWhenNoPhrase is on, or null for a blow that is not the player's side's to play. Consumes the banked verdict."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.phraseResolved"
+    ],
+    "listensTo": [
+      "input.phrasePlayed",
+      "input.guardPlayed",
+      "combat.turnStarted"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "rhythm",
+    "judgement",
+    "dice",
+    "resolver",
+    "tiers"
+  ],
+  "provenance": "Battle Hymn's rule (docs/LAB-ORIGIN.md, \"The need is the die's number\", \"Critical and fumble\", \"Defending: the guard combo\"; tools/balance/lab.mjs phraseTier, dieTier), designed by Alexander on 26 September 2026 and refined through October, lifted into a component so the studio and any other build can resolve a blow by the same judgement in either mode. Nothing in the catalogue graded a performance into an outcome (searched 2026-10-28: utility.judgement_window grades one note; economy.combo_multiplier scores a streak; combat.damage_resolver rolls variance and a critical chance and has no need). Library-native, written to be asked by the damage resolver rather than to deal damage of its own."
+}
