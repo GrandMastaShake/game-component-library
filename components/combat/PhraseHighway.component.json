@@ -1,0 +1,133 @@
+{
+  "id": "combat.phrase_highway",
+  "name": "Phrase Highway",
+  "category": "combat",
+  "description": "The phrase, played. combat.phrase_resolver judges a performance; this is where one happens. On input.playPhrase it lays a short pattern of notes on utility.beat_clock's grid — `notes` of them over `beats` beats, starting on the first bar line at least `rideBeats` ahead so the first note comes from the far end — across `lanes` lanes, in Battle Hymn's Basic figures: mostly quarters with a few pairs of eighths, the lanes stepping to a neighbour and rarely further, never two notes in one lane closer than a dotted eighth, every lane used. Seeded, so a pattern replays exactly. Each note is struck by input.hitNote in its lane as it reaches the line.\n\nTHE JUDGING IS BATTLE HYMN'S. A strike goes to the nearest unstruck note in its own lane inside the window (`windowMs` at 138 BPM, scaled to the tempo so it keeps its share of the beat); inside half the window it is on, otherwise early or late, and all three are close. A strike that finds none is a stray — the wrong lane, outside the window, an extra strike on a note already struck — and a stray spoils the note nearest it in time, which then does not count even if it was struck close; mashing every lane spoils every note. A note with no strike is missed. When the last note's window has passed the count is reported as input.phrasePlayed, counted, for the resolver to judge, and with `swingOnEnd` the blow follows: input.attack, so the striking component swings and the banked verdict lands on it. The phrase decides whether you hit; this is only the playing of it.\n\nOnly on the player's turn where the board has turns, and one phrase at a time. It draws its own strip: the lanes, the notes riding to the line, the plates at the foot pulsing on the beat, and the live count. Accents, hazards, chords and the guard phrase are not laid yet; the counts it reports for them are zero.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "lanes",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "How many lanes. Four is Battle Hymn's first design and four keys under one hand; two is a child's game and six is a piano."
+    },
+    {
+      "name": "notes",
+      "type": "number",
+      "required": false,
+      "default": 10,
+      "description": "How many notes a phrase has, which is the difficulty: Easy is ten, Normal fifteen, Hard twenty, over the same span. Never more than two a beat here (no sixteenths in the Basic figures), so it is clamped to twice the beats."
+    },
+    {
+      "name": "beats",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "The span of a phrase in beats. Eight is two bars: enough for the pattern to breathe at Easy and still ask for a strike a beat most of the way through."
+    },
+    {
+      "name": "windowMs",
+      "type": "number",
+      "required": false,
+      "default": 130,
+      "description": "A note is close within this either side, at 138 BPM; at another tempo it is multiplied by 138 / bpm so it keeps its share of the beat. 130 is Easy, 100 Normal, 70 Hard. It never passes half a dotted eighth, so a strike can reach only one note in its lane."
+    },
+    {
+      "name": "rideBeats",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "How far ahead a note is shown before it reaches the line, and the least distance to the first bar line a phrase may start on, so the first note always comes from the far end."
+    },
+    {
+      "name": "swingOnEnd",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When the phrase ends, send input.attack, so the blow follows the performance and the banked verdict lands on it. Off, the player swings when they choose and the verdict waits."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "description": "Whether a phrase is being played. The board's keys read this: while it is, the lane keys strike lanes."
+    },
+    {
+      "name": "notes",
+      "type": "array",
+      "description": "The phrase as laid and as judged so far: each note's `lane`, `beat` (on the clock), and `word` — empty, on, early, late, wide or missed."
+    },
+    {
+      "name": "close",
+      "type": "number",
+      "description": "Notes close so far, the count that will be reported. Shown as it climbs."
+    },
+    {
+      "name": "total",
+      "type": "number",
+      "description": "Notes in the phrase being played, or in the last one."
+    },
+    {
+      "name": "phrasesPlayed",
+      "type": "number",
+      "description": "How many phrases have ended, for a tally."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.phraseStarted",
+      "combat.noteJudged",
+      "combat.phraseEnded",
+      "input.phrasePlayed",
+      "input.attack"
+    ],
+    "listensTo": [
+      "input.playPhrase",
+      "input.hitNote"
+    ]
+  },
+  "dependencies": [
+    "utility.beat_clock",
+    "combat.phrase_resolver"
+  ],
+  "tags": [
+    "rhythm",
+    "highway",
+    "phrase",
+    "notes"
+  ],
+  "provenance": "Battle Hymn's highway as its lab-origin design note lays it (the pattern tiers, the window, the stray and the spoil, the ride from the far end), designed by Alexander on 26 September 2026, reduced to the Basic tier and the attack phrase so the studio can play what combat.phrase_resolver judges. Distinct from ui.note_highway on purpose (searched 2026-10-28): that scrolls a song's chart from persistence.chart_loader and judgement_window grades one note against a song; a phrase is laid per blow on the beat clock's grid, has no chart, and is judged as a count with strays and spoils, which is Battle Hymn's rule and not a rhythm game's. Library-native."
+}

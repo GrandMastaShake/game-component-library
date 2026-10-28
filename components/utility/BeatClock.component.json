@@ -8,7 +8,7 @@
     "agnostic"
   ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
     {"target": "webgl", "status": "unmapped", "module": null},
     {"target": "roblox", "status": "unmapped", "module": null},
     {"target": "unity", "status": "unmapped", "module": null},
