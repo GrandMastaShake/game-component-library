@@ -2,8 +2,8 @@
   "id": "combat.phrase_highway",
   "name": "Phrase Highway",
   "category": "combat",
-  "description": "The phrase, played. combat.phrase_resolver judges a performance; this is where one happens. On input.playPhrase it lays a short pattern of notes on utility.beat_clock's grid — `notes` of them over `beats` beats, starting on the first bar line at least `rideBeats` ahead so the first note comes from the far end — across `lanes` lanes, in Battle Hymn's Basic figures: mostly quarters with a few pairs of eighths, the lanes stepping to a neighbour and rarely further, never two notes in one lane closer than a dotted eighth, every lane used. Seeded, so a pattern replays exactly. Each note is struck by input.hitNote in its lane as it reaches the line.\n\nTHE JUDGING IS BATTLE HYMN'S. A strike goes to the nearest unstruck note in its own lane inside the window (`windowMs` at 138 BPM, scaled to the tempo so it keeps its share of the beat); inside half the window it is on, otherwise early or late, and all three are close. A strike that finds none is a stray — the wrong lane, outside the window, an extra strike on a note already struck — and a stray spoils the note nearest it in time, which then does not count even if it was struck close; mashing every lane spoils every note. A note with no strike is missed. When the last note's window has passed the count is reported as input.phrasePlayed, counted, for the resolver to judge, and with `swingOnEnd` the blow follows: input.attack, so the striking component swings and the banked verdict lands on it. The phrase decides whether you hit; this is only the playing of it.\n\nOnly on the player's turn where the board has turns, and one phrase at a time. It draws its own strip: the lanes, the notes riding to the line, the plates at the foot pulsing on the beat, and the live count.\n\nTHE GOLD AND THE RED. One note in `accentsEvery` is an accent, downbeats first and never two within a beat: every accent struck makes a hit a Flourish, and a critical with every accent and no hazard is a Virtuoso, as the resolver reads them. `hazards` red notes sit in the gaps, on an eighth no note holds and a beat clear of every note in their lane, so a note's window and a hazard's never meet; a stray in reach of one strikes it instead of spoiling a note, and each hazard struck takes one close note off the count. Chords and the guard phrase are not laid yet.",
-  "version": "0.1.1",
+  "description": "The phrase, played. combat.phrase_resolver judges a performance; this is where one happens. On input.playPhrase it lays a short pattern of notes on utility.beat_clock's grid — `notes` of them over `beats` beats, starting on the first bar line at least `rideBeats` ahead so the first note comes from the far end — across `lanes` lanes, in Battle Hymn's Basic figures: mostly quarters with a few pairs of eighths, the lanes stepping to a neighbour and rarely further, never two notes in one lane closer than a dotted eighth, every lane used. Seeded, so a pattern replays exactly. Each note is struck by input.hitNote in its lane as it reaches the line.\n\nTHE JUDGING IS BATTLE HYMN'S. A strike goes to the nearest unstruck note in its own lane inside the window (`windowMs` at 138 BPM, scaled to the tempo so it keeps its share of the beat); inside half the window it is on, otherwise early or late, and all three are close. A strike that finds none is a stray — the wrong lane, outside the window, an extra strike on a note already struck — and a stray spoils the note nearest it in time, which then does not count even if it was struck close; mashing every lane spoils every note. A note with no strike is missed. When the last note's window has passed the count is reported as input.phrasePlayed, counted, for the resolver to judge, and with `swingOnEnd` the blow follows: input.attack, so the striking component swings and the banked verdict lands on it. The phrase decides whether you hit; this is only the playing of it.\n\nOnly on the player's turn where the board has turns, and one phrase at a time. It draws its own strip: the lanes, the notes riding to the line, the plates at the foot pulsing on the beat, and the live count.\n\nTHE GOLD AND THE RED. One note in `accentsEvery` is an accent, downbeats first and never two within a beat: every accent struck makes a hit a Flourish, and a critical with every accent and no hazard is a Virtuoso, as the resolver reads them. `hazards` red notes sit in the gaps, on an eighth no note holds and a beat clear of every note in their lane, so a note's window and a hazard's never meet; a stray in reach of one strikes it instead of spoiling a note, and each hazard struck takes one close note off the count. THE GUARD: input.playGuard lays the same phrase and reports it as input.guardPlayed, which the resolver judges against the guard need and banks for the foe's next blow on the player; it swings nothing. Battle Hymn plays the guard on the foe's turn against the foe's own notes; a board whose foes have no notes plays it on the player's turn and banks it, Brace rather than Parry. Chords are not laid yet.",
+  "version": "0.1.2",
   "platform": [
     "agnostic"
   ],
@@ -100,6 +100,11 @@
       "description": "Whether a phrase is being played. The board's keys read this: while it is, the lane keys strike lanes."
     },
     {
+      "name": "kind",
+      "type": "string",
+      "description": "What is being played, or was last: attack or guard; empty before any. A guard is drawn in steel."
+    },
+    {
       "name": "notes",
       "type": "array",
       "description": "The phrase as laid and as judged so far: each note's `lane`, `beat` (on the clock), `word` — empty, on, early, late, wide or missed — and `gold`, whether it is an accent."
@@ -131,10 +136,12 @@
       "combat.noteJudged",
       "combat.phraseEnded",
       "input.phrasePlayed",
+      "input.guardPlayed",
       "input.attack"
     ],
     "listensTo": [
       "input.playPhrase",
+      "input.playGuard",
       "input.hitNote"
     ]
   },
