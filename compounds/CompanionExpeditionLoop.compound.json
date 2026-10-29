@@ -1,0 +1,50 @@
+{
+  "id": "compound.companion_expedition_loop",
+  "name": "Companion Expedition Loop",
+  "version": "0.1.0",
+  "description": "A companion-led exploration recipe: an equipped pet selects an undiscovered POI, a bounded scent trail communicates its bearing, arrival discovers the place, and the discovery builds bond and an idempotent collection log. The POI network remains authoritative for discovery; the trail never reveals content or supplies navigation.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {"id": "pets.pet_companion", "role": "equipped companion and exploration partner", "config": {"followDistance": 6}},
+    {"id": "pets.pet_bond", "role": "persistent trust and tracking-range tier", "config": {"fullCreditRepeatsPerDay": 3}},
+    {"id": "world.point_of_interest_network", "role": "authoritative POI registry and discovery state", "config": {"defaultDiscoveryRadius": 30}},
+    {"id": "pets.scent_tracker", "role": "deterministic species-aware target selection", "config": {"acquireCooldownSeconds": 8}},
+    {"id": "presentation.scent_trail_renderer", "role": "bounded, non-navigational target-bearing presentation", "config": {"maxMotes": 24, "reducedMotion": false}},
+    {"id": "progression.discovery_log", "role": "per-profile discovery history and set completion", "config": {"discoverySets": []}},
+    {"id": "ui.notification_toast", "role": "tracking and discovery feedback", "config": {"maxVisible": 3}},
+    {"id": "persistence.save_system", "role": "durable bond and expedition progress", "config": {"autosaveIntervalSeconds": 120}}
+  ],
+  "connections": [
+    {"from": "pets.pet_companion", "event": "pets.equipped", "to": "pets.scent_tracker", "note": "The equipped pet supplies species tracking tags."},
+    {"from": "pets.pet_companion", "event": "pets.unequipped", "to": "pets.scent_tracker", "note": "Unequipping ends tracking."},
+    {"from": "pets.pet_companion", "event": "pets.unequipped", "to": "presentation.scent_trail_renderer", "note": "Unequipping clears the trail immediately."},
+    {"from": "pets.pet_bond", "event": "pets.bondTierChanged", "to": "pets.scent_tracker", "note": "Bond tier changes update the valid search radius."},
+    {"from": "pets.pet_bond", "event": "pets.bondTierChanged", "to": "persistence.save_system", "note": "Relationship progression is durable."},
+    {"from": "pets.scent_tracker", "event": "pets.scentAcquired", "to": "presentation.scent_trail_renderer", "note": "Only an acquired target produces a trail."},
+    {"from": "pets.scent_tracker", "event": "pets.scentLost", "to": "presentation.scent_trail_renderer", "note": "A lost target clears the presentation."},
+    {"from": "pets.scent_tracker", "event": "pets.scentTargetReached", "to": "presentation.scent_trail_renderer", "note": "Reaching the target ends the hint without granting discovery itself."},
+    {"from": "world.point_of_interest_network", "event": "world.poiDiscovered", "to": "pets.scent_tracker", "note": "Discovered POIs leave the candidate pool."},
+    {"from": "world.point_of_interest_network", "event": "world.poiDiscovered", "to": "presentation.scent_trail_renderer", "note": "Authoritative discovery clears any matching trail."},
+    {"from": "world.point_of_interest_network", "event": "world.poiDiscovered", "to": "pets.pet_bond", "note": "Shared discovery strengthens the equipped companion bond."},
+    {"from": "world.point_of_interest_network", "event": "world.poiDiscovered", "to": "progression.discovery_log", "note": "Only the POI network can advance expedition history."},
+    {"from": "progression.discovery_log", "event": "progression.discoveryRecorded", "to": "persistence.save_system", "note": "The idempotent discovery record is saved."},
+    {"from": "progression.discovery_log", "event": "progression.discoverySetCompleted", "to": "persistence.save_system", "note": "One-time set completion is saved."}
+  ],
+  "criticalComponents": [
+    "pets.pet_companion",
+    "pets.pet_bond",
+    "world.point_of_interest_network",
+    "pets.scent_tracker",
+    "presentation.scent_trail_renderer",
+    "progression.discovery_log",
+    "persistence.save_system"
+  ],
+  "acceptanceCriteria": [
+    "An equipped pet selects only an undiscovered, tag-compatible POI within its bond-tier range, with distance and POI-id tie-breaking.",
+    "Scent presentation follows the selected target but never reveals the POI or claims a walkable navigation path.",
+    "Only world.point_of_interest_network can transition a POI to discovered and thereby advance the expedition loop.",
+    "A discovery strengthens the equipped pet's bond and is recorded exactly once per profile, including across duplicate events and reloads.",
+    "Unequipping the pet, losing the target, or discovering the target clears its trail.",
+    "Bond tiers and discovery progress are included in persistence state."
+  ]
+}
