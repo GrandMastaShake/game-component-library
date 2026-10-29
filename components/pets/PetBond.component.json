@@ -56,5 +56,5 @@
   },
   "dependencies": ["pets.pet_companion", "persistence.save_system"],
   "tags": ["pet-sim", "bond", "relationship", "companion", "progression"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the companion-led exploration components (a0f792a). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: social.relationship_graph, which keeps decaying pairwise affinity between sims; this is one player-to-pet value that does not decay and is not a need meter. Library-native."
 }

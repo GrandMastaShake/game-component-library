@@ -57,5 +57,5 @@
   },
   "dependencies": ["utility.photo_composition_scorer", "persistence.save_system"],
   "tags": ["photo", "collection", "personal-best", "completion", "persistence"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Field Photography gameplay components (49ad258). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: presentation.photo_mode, which owns the camera and the capture; this keeps per-subject records from scored captures only. Library-native."
 }

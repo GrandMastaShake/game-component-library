@@ -34,5 +34,5 @@
   },
   "dependencies": ["ui.safe_area_layout"],
   "tags": ["ui", "settings", "accessibility", "audio", "controls"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Adventure Interface Shell UI pack (84ece01). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". A catalogue search found no settings or options component; the audio, display and input components stay the authorities, and this edits a draft of their values. Library-native."
 }

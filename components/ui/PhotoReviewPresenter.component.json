@@ -48,5 +48,5 @@
   },
   "dependencies": ["utility.photo_composition_scorer", "progression.photo_collection", "progression.photo_contracts"],
   "tags": ["photo", "review", "presentation-intent", "ui", "accessibility"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Field Photography gameplay components (49ad258). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: presentation.photo_mode, which takes the picture; this turns a scored capture and its collection changes into one review request and scores nothing. Library-native."
 }

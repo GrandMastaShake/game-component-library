@@ -61,5 +61,5 @@
   },
   "dependencies": ["pets.scent_tracker"],
   "tags": ["presentation", "pet-sim", "exploration", "vfx", "accessibility", "pooling"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the companion-led exploration components (a0f792a). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: world.waypoint_travel, which owns a travel graph between unlocked nodes; this only draws a bearing toward the target pets.scent_tracker chose, and claims no path. Library-native."
 }
