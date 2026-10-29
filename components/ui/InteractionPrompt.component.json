@@ -1,0 +1,32 @@
+{
+  "id": "ui.interaction_prompt",
+  "name": "Interaction Prompt",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "A contextual action prompt showing the current target, verb, input glyph, availability, and optional hold progress. It can consume world.hotspot_layer focus or a host-supplied interaction focus event, but it only communicates what is available and never executes the interaction.",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "placement", "type": "string", "required": false, "default": "bottomCenter", "description": "Named safe-area placement; targetAnchored requires the host to supply a projected screen point."},
+    {"name": "showUnavailableReason", "type": "boolean", "required": false, "default": true},
+    {"name": "hideWhenNoTarget", "type": "boolean", "required": false, "default": true}
+  ],
+  "outputs": [
+    {"name": "currentPrompt", "type": "object", "description": "Normalized prompt as {targetId, verb, label, glyph, enabled, unavailableReason, holdProgress}; holdProgress is clamped from 0 to 1."},
+    {"name": "hitRegion", "type": "object", "description": "Touch activation region; activation is still routed to the interaction owner."},
+    {"name": "visible", "type": "boolean"}
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": ["world.hotspotEntered", "world.hotspotExhausted", "world.hotspotRefused", "input.interactionFocusChanged", "input.interactionProgress", "ui.routeChanged", "ui.layoutChanged", "presentation.styleApplied"]
+  },
+  "dependencies": ["ui.safe_area_layout"],
+  "tags": ["ui", "interaction", "prompt", "input-glyph", "touch"],
+  "provenance": "library-native"
+}

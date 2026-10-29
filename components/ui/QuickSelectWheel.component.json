@@ -1,0 +1,35 @@
+{
+  "id": "ui.quick_select_wheel",
+  "name": "Quick Select Wheel",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "A radial quick-select section for items, abilities, emotes, or tools. It owns slot geometry, directional focus, hold-versus-toggle behavior, and selection requests; it does not grant items, trigger abilities, or change a loadout without the responsible gameplay component accepting the request.",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "slots", "type": "array", "required": true, "description": "Host-supplied slots as {id, label, icon, enabled, count, cooldownFraction}; empty slots remain addressable and visibly empty."},
+    {"name": "selectionMode", "type": "string", "required": false, "default": "hold", "description": "hold confirms on release; toggle keeps the wheel open until explicit confirmation or close."},
+    {"name": "directionDeadzone", "type": "number", "required": false, "default": 0.25},
+    {"name": "wrapNavigation", "type": "boolean", "required": false, "default": true},
+    {"name": "reducedMotion", "type": "boolean", "required": false, "default": false}
+  ],
+  "outputs": [
+    {"name": "open", "type": "boolean"},
+    {"name": "slotRegions", "type": "array", "description": "Radial hit regions in stable slot order, including disabled and empty slots."},
+    {"name": "selectedSlotId", "type": "string"},
+    {"name": "centerLabel", "type": "string"}
+  ],
+  "events": {
+    "emits": ["ui.quickSelectOpened", "ui.quickSelectClosed", "ui.quickSelectionRequested"],
+    "listensTo": ["input.quickSelectOpen", "input.quickSelectClose", "input.quickSelectMove", "input.quickSelectConfirm", "ui.routeChanged", "ui.layoutChanged", "presentation.styleApplied"]
+  },
+  "dependencies": ["ui.safe_area_layout"],
+  "tags": ["ui", "radial-menu", "quick-select", "gamepad", "touch"],
+  "provenance": "library-native"
+}

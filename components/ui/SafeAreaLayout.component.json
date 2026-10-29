@@ -1,0 +1,36 @@
+{
+  "id": "ui.safe_area_layout",
+  "name": "Safe Area Layout",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "Responsive screen-space layout authority for game interfaces. Converts viewport bounds, device safe-area insets, and a spacing scale into named regions for HUD rails, center prompts, footer actions, and modal content. It owns geometry only: visual styling belongs to presentation.style_presets, navigation belongs to ui.interface_router, and no region receives gameplay authority.",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "viewport", "type": "object", "required": true, "description": "Current CSS or logical viewport as {width, height}."},
+    {"name": "safeAreaInsets", "type": "object", "required": false, "default": {"top": 0, "right": 0, "bottom": 0, "left": 0}, "description": "Device insets in logical pixels. Interactive content stays inside these bounds."},
+    {"name": "compactBreakpointPx", "type": "number", "required": false, "default": 640},
+    {"name": "minimumTouchTargetPx", "type": "number", "required": false, "default": 44},
+    {"name": "spacingScale", "type": "number", "required": false, "default": 1},
+    {"name": "regions", "type": "array", "required": false, "default": ["header", "leftRail", "center", "rightRail", "footer", "modal"]}
+  ],
+  "outputs": [
+    {"name": "computedRegions", "type": "array", "description": "Named rectangles as {id, x, y, width, height, anchor}; compact layouts collapse rails without moving modal content outside the safe area."},
+    {"name": "compact", "type": "boolean"},
+    {"name": "touchTargetPx", "type": "number"},
+    {"name": "contentBounds", "type": "object", "description": "Viewport rectangle after safe-area insets."}
+  ],
+  "events": {
+    "emits": ["ui.layoutChanged"],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": ["ui", "responsive", "safe-area", "layout", "accessibility"],
+  "provenance": "library-native"
+}

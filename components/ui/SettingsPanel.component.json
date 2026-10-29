@@ -1,0 +1,38 @@
+{
+  "id": "ui.settings_panel",
+  "name": "Settings Panel",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "A tabbed settings section for audio, display, controls, and accessibility preferences. It edits a draft and emits normalized change, apply, and reset requests; audio devices, renderers, input maps, and save systems remain the authorities for applying and storing those values.",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "sections", "type": "array", "required": false, "default": ["audio", "display", "controls", "accessibility"]},
+    {"name": "values", "type": "object", "required": false, "default": {}, "description": "Current host-supplied settings keyed by stable setting id."},
+    {"name": "applyMode", "type": "string", "required": false, "default": "explicit", "description": "explicit requires Apply; immediate emits a change request after each committed control interaction."},
+    {"name": "allowReset", "type": "boolean", "required": false, "default": true}
+  ],
+  "outputs": [
+    {"name": "visible", "type": "boolean"},
+    {"name": "activeSection", "type": "string"},
+    {"name": "draftValues", "type": "object"},
+    {"name": "controls", "type": "array", "description": "Normalized controls as {settingId, kind, label, value, min, max, options, disabled, description}."},
+    {"name": "dirty", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["ui.settingChanged", "ui.settingsApplied", "ui.settingsReset"],
+    "listensTo": ["ui.routeChanged", "ui.layoutChanged", "presentation.styleApplied"]
+  },
+  "eventIntents": {
+    "ui.settingsApplied": ["persist"]
+  },
+  "dependencies": ["ui.safe_area_layout"],
+  "tags": ["ui", "settings", "accessibility", "audio", "controls"],
+  "provenance": "library-native"
+}

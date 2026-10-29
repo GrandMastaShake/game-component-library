@@ -1,0 +1,34 @@
+{
+  "id": "ui.tooltip_layer",
+  "name": "Tooltip Layer",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "A viewport-aware tooltip presenter for items, abilities, resources, and controls. It normalizes rich text sections, pins or dismisses one tooltip at a time, and flips placement to remain inside safe bounds. It displays supplied metadata and never inspects or mutates the underlying inventory, ability, or economy state.",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "hoverDelayMs", "type": "number", "required": false, "default": 350},
+    {"name": "maxWidthPx", "type": "number", "required": false, "default": 320},
+    {"name": "allowPinning", "type": "boolean", "required": false, "default": true},
+    {"name": "viewportPaddingPx", "type": "number", "required": false, "default": 12},
+    {"name": "reducedMotion", "type": "boolean", "required": false, "default": false}
+  ],
+  "outputs": [
+    {"name": "visibleTooltip", "type": "object", "description": "Current model as {sourceId, title, subtitle, sections, rarity, pinned}; section content is host-supplied display data."},
+    {"name": "placement", "type": "object", "description": "Resolved rectangle and anchor side after viewport collision handling."},
+    {"name": "visible", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["ui.tooltipShown", "ui.tooltipDismissed"],
+    "listensTo": ["input.tooltipRequested", "input.tooltipDismissed", "ui.routeChanged", "ui.layoutChanged", "presentation.styleApplied"]
+  },
+  "dependencies": ["ui.safe_area_layout"],
+  "tags": ["ui", "tooltip", "overlay", "responsive", "accessibility"],
+  "provenance": "library-native"
+}

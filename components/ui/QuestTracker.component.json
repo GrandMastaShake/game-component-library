@@ -1,0 +1,34 @@
+{
+  "id": "ui.quest_tracker",
+  "name": "Quest Tracker",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "A compact pinned-objective section projected from progression.quest_log. It orders tracked quests, exposes objective progress and ready-to-turn-in state, and briefly acknowledges completion. The quest log remains the sole authority for acceptance, progress, completion, and rewards.",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "maxTrackedQuests", "type": "number", "required": false, "default": 3},
+    {"name": "allowPinning", "type": "boolean", "required": false, "default": true},
+    {"name": "completedDisplaySeconds", "type": "number", "required": false, "default": 3},
+    {"name": "collapsed", "type": "boolean", "required": false, "default": false}
+  ],
+  "outputs": [
+    {"name": "trackedQuests", "type": "array", "description": "Read-only projections as {questId, title, objectives, state, pinned}; objective progress includes current, target, and optional display text."},
+    {"name": "pinnedQuestIds", "type": "array"},
+    {"name": "overflowCount", "type": "number"},
+    {"name": "visible", "type": "boolean"}
+  ],
+  "events": {
+    "emits": ["ui.questPinChanged"],
+    "listensTo": ["progression.questStarted", "progression.objectiveUpdated", "progression.questReady", "progression.questCompleted", "ui.routeChanged", "ui.layoutChanged", "presentation.styleApplied"]
+  },
+  "dependencies": ["progression.quest_log", "ui.safe_area_layout"],
+  "tags": ["ui", "quests", "objectives", "hud", "read-model"],
+  "provenance": "library-native"
+}
