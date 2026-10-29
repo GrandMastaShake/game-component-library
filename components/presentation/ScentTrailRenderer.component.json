@@ -1,0 +1,65 @@
+{
+  "id": "presentation.scent_trail_renderer",
+  "name": "Scent Trail Renderer",
+  "category": "presentation",
+  "description": "Draws a short-lived ribbon of scent motes from the player toward the target selected by pets.scent_tracker. The trail is a bearing aid, not a navigation path: it never claims that terrain is walkable and never chooses or reveals a target. Motes are pooled and capped so leaving tracking active cannot grow the scene without bound. The renderer consumes tracker state and discovery events, clears immediately when the target is reached or the pet is unequipped, and exposes a reduced-motion mode that replaces travel animation with a static fading trail.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "maxMotes",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "description": "Hard cap on live trail motes. Also fixes the pool size, making the effect's worst-case draw and memory cost explicit."
+    },
+    {
+      "name": "moteSpacing",
+      "type": "number",
+      "required": false,
+      "default": 2.5,
+      "description": "World-space spacing between motes along the target bearing."
+    },
+    {
+      "name": "groundOffset",
+      "type": "number",
+      "required": false,
+      "default": 0.35,
+      "description": "Height above the sampled ground for each mote. Presentation samples terrain but does not modify collision or movement."
+    },
+    {
+      "name": "moteLifetimeSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.8,
+      "description": "Fade lifetime per mote. Short lifetimes keep the hint near the player instead of painting a permanent line across the world."
+    },
+    {
+      "name": "reducedMotion",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "When true, disable travelling pulses and show a static fading trail with the same target information."
+    }
+  ],
+  "outputs": [
+    {"name": "visible", "type": "boolean", "description": "Whether a valid trail is currently rendered."},
+    {"name": "activeMotes", "type": "number", "description": "Live mote count, always less than or equal to maxMotes."},
+    {"name": "targetBearing", "type": "number", "description": "Last tracker bearing used for rendering, exposed for accessibility indicators."},
+    {"name": "targetDistance", "type": "number", "description": "Last tracker distance used for rendering, exposed for non-visual equivalents."}
+  ],
+  "events": {
+    "emits": [],
+    "listensTo": ["pets.scentAcquired", "pets.scentLost", "pets.scentTargetReached", "pets.unequipped", "world.poiDiscovered"]
+  },
+  "dependencies": ["pets.scent_tracker"],
+  "tags": ["presentation", "pet-sim", "exploration", "vfx", "accessibility", "pooling"],
+  "provenance": "library-native"
+}

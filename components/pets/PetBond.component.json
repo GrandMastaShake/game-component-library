@@ -1,0 +1,60 @@
+{
+  "id": "pets.pet_bond",
+  "name": "Pet Bond",
+  "category": "pets",
+  "description": "Per-pet trust earned through care, training, and shared discovery. Bond is a persistent relationship value rather than another need meter: it does not decay while the player is away, it does not replace hunger or happiness, and it does not directly train stats. Repeated copies of one interaction receive diminishing credit so holding down the feed button cannot max a relationship. The component owns the bond curve and per-action repeat accounting; other systems consume bondTier to unlock behavior without each inventing a separate friendship number.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "bondTiers",
+      "type": "array",
+      "required": true,
+      "description": "Ordered definitions: id, minimum bondScore, and optional display label. Thresholds are data so a short mobile game and a long-running collection game can use different relationship pacing."
+    },
+    {
+      "name": "interactionValues",
+      "type": "object",
+      "required": false,
+      "default": {"care": 4, "training": 8, "discovery": 12},
+      "description": "Base bond awarded per accepted interaction type. The source system decides whether an interaction was valid; Pet Bond only values the resulting event."
+    },
+    {
+      "name": "fullCreditRepeatsPerDay",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Number of same-type interactions per pet and day that receive full value before diminishing credit begins."
+    },
+    {
+      "name": "repeatCreditFloor",
+      "type": "number",
+      "required": false,
+      "default": 0.2,
+      "description": "Minimum multiplier for repeated interactions. Above zero so continued play still counts, below one so varied care remains optimal."
+    }
+  ],
+  "outputs": [
+    {"name": "bondScore", "type": "number", "description": "Lifetime bond for the equipped pet after repeat adjustment."},
+    {"name": "bondTier", "type": "string", "description": "Current tier id from bondTiers."},
+    {"name": "tierProgress", "type": "number", "description": "Normalized progress from the current tier to the next, clamped to [0, 1]."},
+    {"name": "dailyInteractionCounts", "type": "object", "description": "Per-action repeat counts used for diminishing credit and UI explanations."}
+  ],
+  "events": {
+    "emits": ["pets.bondChanged", "pets.bondTierChanged"],
+    "listensTo": ["ui.petCareActionRequested", "pets.trainingSessionCompleted", "world.poiDiscovered"]
+  },
+  "eventIntents": {
+    "pets.bondTierChanged": ["persist", "notify"]
+  },
+  "dependencies": ["pets.pet_companion", "persistence.save_system"],
+  "tags": ["pet-sim", "bond", "relationship", "companion", "progression"],
+  "provenance": "library-native"
+}

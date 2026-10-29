@@ -1,0 +1,61 @@
+{
+  "id": "pets.scent_tracker",
+  "name": "Scent Tracker",
+  "category": "pets",
+  "description": "An equipped companion ability that selects an undiscovered point of interest matching the pet's tracking tags. Selection is deterministic: candidates are filtered by world.point_of_interest_network state, ranked by distance, and ties break by POI id, so the renderer and tests never disagree about what the pet found. Bond tier expands the search radius without replacing exploration. Scent Tracker owns target selection and tracking lifetime only; it does not reveal the POI, draw the trail, move the companion, or award discovery. Those remain with the POI network, presentation, movement, and progression components respectively.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "trackingTagsBySpecies",
+      "type": "object",
+      "required": true,
+      "description": "Species id to POI tags it can track. A water pet and a cave pet can offer different exploration utility without subclassing the tracker."
+    },
+    {
+      "name": "rangeByBondTier",
+      "type": "object",
+      "required": true,
+      "description": "Bond tier id to maximum target distance. Every configured bond tier must have an entry so a tier change cannot silently disable tracking."
+    },
+    {
+      "name": "acquireCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Delay after losing or reaching a target before another may be acquired. Prevents input spam and gives each hint time to be read."
+    },
+    {
+      "name": "includeRumoured",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether rumoured POIs are valid targets. Discovered and cleared POIs are always excluded."
+    }
+  ],
+  "outputs": [
+    {"name": "trackedPetId", "type": "string", "description": "The equipped pet supplying the tracking tags and bond tier."},
+    {"name": "trackedPoiId", "type": "string", "description": "Current POI target, or an empty string while idle."},
+    {"name": "targetBearing", "type": "number", "description": "Bearing from the player to the target in radians; this is a direction, not a promised path."},
+    {"name": "targetDistance", "type": "number", "description": "Current straight-line distance to the target."},
+    {"name": "isTracking", "type": "boolean", "description": "Whether a valid target is currently acquired."}
+  ],
+  "events": {
+    "emits": ["pets.scentAcquired", "pets.scentLost", "pets.scentTargetReached"],
+    "listensTo": ["input.interact", "world.poiDiscovered", "pets.equipped", "pets.unequipped", "pets.bondTierChanged"]
+  },
+  "eventIntents": {
+    "pets.scentAcquired": ["notify"],
+    "pets.scentTargetReached": ["notify"]
+  },
+  "dependencies": ["pets.pet_companion", "pets.pet_bond", "world.point_of_interest_network"],
+  "tags": ["pet-sim", "exploration", "tracking", "companion-ability", "discovery"],
+  "provenance": "library-native"
+}

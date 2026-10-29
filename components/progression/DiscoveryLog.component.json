@@ -1,0 +1,48 @@
+{
+  "id": "progression.discovery_log",
+  "name": "Discovery Log",
+  "category": "progression",
+  "description": "A per-profile, idempotent record of discovered places and optional themed collection sets. world.point_of_interest_network remains authoritative for POI state; this component records the resulting transition exactly once and computes completion, so revisiting a place or replaying a duplicated network event cannot advance a set twice. It owns history and set progress, not map markers, rewards, or POI discovery itself. Reward listeners can consume progression.discoverySetCompleted knowing it fires once per profile and set, including after save restoration.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "discoverySets",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Optional themed sets: id, ordered POI ids, and display metadata. Sets may overlap; each set tracks completion independently."
+    },
+    {
+      "name": "recordFirstDiscoveryAt",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Store the profile timestamp or run tick of the first discovery for journals and chronological sorting."
+    }
+  ],
+  "outputs": [
+    {"name": "discoveredIds", "type": "array", "description": "Unique POI ids recorded for this profile, in first-discovery order."},
+    {"name": "firstDiscoveryAt", "type": "object", "description": "POI id to its first recorded timestamp or tick when recordFirstDiscoveryAt is enabled."},
+    {"name": "setProgress", "type": "object", "description": "Set id to {found, total, complete}; overlapping sets do not share mutable progress."},
+    {"name": "completionFraction", "type": "number", "description": "Recorded POIs divided by eligible registered POIs, or 0 when the registry is empty."}
+  ],
+  "events": {
+    "emits": ["progression.discoveryRecorded", "progression.discoverySetCompleted"],
+    "listensTo": ["world.poiDiscovered"]
+  },
+  "eventIntents": {
+    "progression.discoveryRecorded": ["persist", "notify"],
+    "progression.discoverySetCompleted": ["persist", "notify"]
+  },
+  "dependencies": ["world.point_of_interest_network", "persistence.save_system"],
+  "tags": ["exploration", "discovery", "collection", "completion", "persistence"],
+  "provenance": "library-native"
+}
