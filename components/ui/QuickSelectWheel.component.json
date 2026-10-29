@@ -31,5 +31,5 @@
   },
   "dependencies": ["ui.safe_area_layout"],
   "tags": ["ui", "radial-menu", "quick-select", "gamepad", "touch"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Adventure Interface Shell UI pack (84ece01). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: combat.hotbar_abilities and combat.weapon_loadout, which own slots and what firing means; this is the radial selector that sends them requests. Library-native."
 }

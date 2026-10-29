@@ -53,5 +53,5 @@
   },
   "dependencies": ["presentation.photo_mode"],
   "tags": ["photo", "scoring", "composition", "deterministic", "collectathon"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Field Photography gameplay components (49ad258). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: presentation.photo_mode, which owns the capture; this scores framing, visibility, distance and pose from samples the renderer supplies. Library-native."
 }
