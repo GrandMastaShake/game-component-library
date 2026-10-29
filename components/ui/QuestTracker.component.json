@@ -30,5 +30,5 @@
   },
   "dependencies": ["progression.quest_log", "ui.safe_area_layout"],
   "tags": ["ui", "quests", "objectives", "hud", "read-model"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Adventure Interface Shell UI pack (84ece01). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: progression.quest_log, the authority this projects from, and progression.level_objective_set; it owns only which objectives are pinned and how they are shown. Library-native."
 }

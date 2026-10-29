@@ -2,12 +2,13 @@
   "id": "presentation.low_poly_generator",
   "name": "Low-Poly Generator",
   "category": "presentation",
-  "description": "Procedurally generates simplified low-polygon meshes for props, rocks, trees, and terrain features to keep part counts and rendering cost low.",
-  "version": "0.1.0",
+  "description": "Generates deterministic low-poly meshes from parameters or natural-language prompts, inspects quad-dominant topology, and replays vertex, edge, and face edits. The native WebGL brick is UI-independent and requires no hosted AI provider.",
+  "version": "0.2.0",
   "platform": [
     "roblox",
     "godot",
     "unity",
+    "web",
     "agnostic"
   ],
   "implementations": [
@@ -16,6 +17,12 @@
       "status": "external",
       "module": null,
       "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "running",
+      "module": "web-adapters/native/polyforge/index.js",
+      "note": "Library-native POLYFORGE brick with deterministic Node tests for all nine prompt families and component-edit operations."
     },
     {
       "target": "godot",
@@ -46,12 +53,67 @@
       "type": "string",
       "required": false,
       "default": "rock"
+    },
+    {
+      "name": "primitive",
+      "type": "string",
+      "required": false,
+      "default": "monolith"
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "seed",
+      "type": "number",
+      "required": false,
+      "default": 1847
+    },
+    {
+      "name": "detail",
+      "type": "number",
+      "required": false,
+      "default": 2
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "required": false,
+      "default": 2.9
+    },
+    {
+      "name": "radius",
+      "type": "number",
+      "required": false,
+      "default": 1.15
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "default": "#C7F36B"
+    },
+    {
+      "name": "meshEdits",
+      "type": "array",
+      "required": false,
+      "default": []
     }
   ],
   "outputs": [
     {
       "name": "meshData",
       "type": "object"
+    },
+    {
+      "name": "topology",
+      "type": "object"
+    },
+    {
+      "name": "quadFaces",
+      "type": "array"
     }
   ],
   "events": {
@@ -64,7 +126,14 @@
   "tags": [
     "mesh",
     "procedural",
-    "performance"
+    "performance",
+    "webgl",
+    "topology",
+    "quad-dominant",
+    "prompt-generation",
+    "mesh-editing"
   ],
-  "sourceModule": "roblox-modular-lib/src/LowPolyGenerator.lua"
+  "sourceModule": "roblox-modular-lib/src/LowPolyGenerator.lua",
+  "provenance": "Adapted from POLYFORGE v0.3 as the native WebGL implementation of this existing contract; not a voxel mesher, scene editor UI, or hosted AI service.",
+  "implementationPath": "web-adapters/native/polyforge/index.js"
 }

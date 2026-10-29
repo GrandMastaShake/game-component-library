@@ -32,5 +32,5 @@
   },
   "dependencies": [],
   "tags": ["ui", "responsive", "safe-area", "layout", "accessibility"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Adventure Interface Shell UI pack (84ece01). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: ui.hud, which renders widgets; this owns screen regions and safe-area geometry only, with styling left to presentation.style_presets. Library-native."
 }

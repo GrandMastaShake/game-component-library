@@ -51,5 +51,5 @@
   },
   "dependencies": ["progression.photo_collection", "persistence.save_system"],
   "tags": ["photo", "contracts", "commissions", "objectives", "collection"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the Field Photography gameplay components (49ad258). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: progression.quest_log and progression.level_objective_set; this judges photographic evidence and leaves generic objectives to the quest log rather than restating them. Library-native."
 }

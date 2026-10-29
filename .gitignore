@@ -4,3 +4,6 @@ reports/
 # Python bytecode caches are a tool's scratch, not source. One was committed once.
 __pycache__/
 *.pyc
+
+# Native web adapter dependencies are installed by CI, not committed.
+node_modules/

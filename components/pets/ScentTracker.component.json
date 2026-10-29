@@ -57,5 +57,5 @@
   },
   "dependencies": ["pets.pet_companion", "pets.pet_bond", "world.point_of_interest_network"],
   "tags": ["pet-sim", "exploration", "tracking", "companion-ability", "discovery"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the companion-led exploration components (a0f792a). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: ui.guided_hint_system, which escalates hot/cold hints for a stalled hunt on a cooldown; this is a companion ability that picks one undiscovered POI by tag from world.point_of_interest_network. Close enough that a reader should check the two together. Library-native."
 }

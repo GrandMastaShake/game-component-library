@@ -44,5 +44,5 @@
   },
   "dependencies": ["world.point_of_interest_network", "persistence.save_system"],
   "tags": ["exploration", "discovery", "collection", "completion", "persistence"],
-  "provenance": "library-native"
+  "provenance": "Added 2026-10-29 with the companion-led exploration components (a0f792a). Provenance written after the fact on 2026-10-29: it landed recording only \"library-native\". Nearest in a catalogue search: progression.completion_tracker (per-region completion percentages) and ui.narrative_journal (clues written down for the player); this records POI discoveries once and themed set progress. Its set math is close to completion_tracker, and a reader should check the two together. Library-native."
 }

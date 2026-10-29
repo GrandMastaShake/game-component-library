@@ -13,6 +13,7 @@ A schema-driven, AI-assemblable library of modular game systems—**elements** a
 - A platform-aware build-manifest compiler, readiness evaluator, and coverage-roadmap generator.
 - A dependency-injection adapter runtime for integrating `roblox-modular-lib` without hard-coded cross-repository paths.
 - Two library-native strict-Luau runtime modules with deterministic TestEZ-style tests: `EggHatchery.lua` and `PetHatchPresenter.lua`.
+- A library-native POLYFORGE WebGL brick with 15 procedural object forms, prompt-driven generation, quad-dominant topology analysis, and replayable vertex/edge/face edits, backed by deterministic Node tests.
 
 ## Mental model
 
