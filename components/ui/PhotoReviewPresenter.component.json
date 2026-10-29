@@ -1,0 +1,52 @@
+{
+  "id": "ui.photo_review_presenter",
+  "name": "Photo Review Presenter",
+  "category": "ui",
+  "description": "Converts a scored capture and its resulting collection or commission changes into one normalized photo-review request. The model contains the capture reference, subject names, criterion breakdown, personal-best marker, and newly ready contracts, letting a renderer explain the result without recomputing gameplay rules. The presenter owns presentation intent only: it does not score, mutate collection records, store images, or render a platform-specific panel. Requests are deduplicated by capture id so duplicate collection events cannot stack duplicate review cards for the same shutter press.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "maxSubjectChips",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Maximum subject labels in the compact review model. Additional subjects remain available in subjectCount without crowding small screens."
+    },
+    {
+      "name": "showUnscoredCaptures",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a capture with no eligible subjects produces an explanatory review request. Off keeps free photo mode free of gameplay interruptions."
+    },
+    {
+      "name": "requestDedupeCacheSize",
+      "type": "number",
+      "required": false,
+      "default": 64,
+      "description": "Bounded recent-capture id cache used to emit at most one review request per capture within a session."
+    }
+  ],
+  "outputs": [
+    {"name": "reviewModel", "type": "object", "description": "Normalized capture reference, subjects, score breakdown, personal-best marker, contract-ready ids, and optional reason code."},
+    {"name": "lastPresentedCaptureId", "type": "string", "description": "Most recent capture converted into review intent."}
+  ],
+  "events": {
+    "emits": ["ui.photoReviewRequested"],
+    "listensTo": ["presentation.photoScored", "progression.photoPersonalBest", "progression.photoContractReady", "input.dismissPhotoReview"]
+  },
+  "eventIntents": {
+    "ui.photoReviewRequested": ["notify"]
+  },
+  "dependencies": ["utility.photo_composition_scorer", "progression.photo_collection", "progression.photo_contracts"],
+  "tags": ["photo", "review", "presentation-intent", "ui", "accessibility"],
+  "provenance": "library-native"
+}

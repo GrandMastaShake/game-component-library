@@ -1,0 +1,55 @@
+{
+  "id": "progression.photo_contracts",
+  "name": "Photo Contracts",
+  "category": "progression",
+  "description": "Photography-specific commissions driven by collection records: capture unique subjects with required tags, meet a score threshold, and optionally require a pose. The component evaluates photographic evidence rather than generic kill, fetch, or reach objectives, so it complements progression.quest_log instead of encoding a parallel quest DSL. Contracts move from offered to active, ready, and completed; submission is explicit and completion is guarded once per profile and contract. It owns commission progress and claim state only. It does not score captures, store photographs, or pay rewards itself; completion events carry the configured reward payload for the owning economy or inventory system.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "contracts",
+      "type": "array",
+      "required": true,
+      "description": "Definitions: id, required subject tags, minimum score, unique-subject target, optional pose tag, display text, prerequisites, and reward payload."
+    },
+    {
+      "name": "maxActiveContracts",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Maximum simultaneously active commissions. New offers remain available without silently exceeding the player's tracking budget."
+    },
+    {
+      "name": "allowBestRecordEvidence",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether an improved personal best can satisfy a commission after the subject's first recording. First-subject and best-score evidence remain distinct events either way."
+    }
+  ],
+  "outputs": [
+    {"name": "contracts", "type": "array", "description": "Configured contracts with locked, offered, active, ready, or completed state and current unique-subject progress."},
+    {"name": "activeContracts", "type": "array", "description": "Active contract ids in acceptance order."},
+    {"name": "completedCount", "type": "number", "description": "Contracts completed by this profile."},
+    {"name": "stateOf", "type": "function", "description": "stateOf(id): the contract state, or null for an unknown id."}
+  ],
+  "events": {
+    "emits": ["progression.photoContractProgressed", "progression.photoContractReady", "progression.photoContractCompleted"],
+    "listensTo": ["progression.photoSubjectRecorded", "progression.photoPersonalBest", "input.submitPhotoContract"]
+  },
+  "eventIntents": {
+    "progression.photoContractProgressed": ["persist"],
+    "progression.photoContractReady": ["persist", "notify"],
+    "progression.photoContractCompleted": ["persist", "notify", "reward"]
+  },
+  "dependencies": ["progression.photo_collection", "persistence.save_system"],
+  "tags": ["photo", "contracts", "commissions", "objectives", "collection"],
+  "provenance": "library-native"
+}

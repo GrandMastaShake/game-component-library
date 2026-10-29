@@ -1,0 +1,57 @@
+{
+  "id": "utility.photo_composition_scorer",
+  "name": "Photo Composition Scorer",
+  "category": "utility",
+  "description": "Deterministic, inspectable scoring for a captured photography frame. presentation.photo_mode owns the camera and capture; the renderer supplies subject samples with the capture; this component turns those samples into framing, visibility, distance, and pose scores. It performs no raycasts, reads no image bytes, and invents no subjects, which keeps platform rendering separate from gameplay scoring. Identical capture samples and configuration produce identical scores and criterion breakdowns. A photo may contain several subjects, each scored independently so a crowded frame cannot quietly overwrite a rare subject with the largest one.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "criterionWeights",
+      "type": "object",
+      "required": false,
+      "default": {"framing": 0.35, "visibility": 0.3, "distance": 0.2, "pose": 0.15},
+      "description": "Normalized weights for the four score criteria. Weights are renormalized at validation so a content table cannot create an impossible score range."
+    },
+    {
+      "name": "idealSubjectFrameFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.22,
+      "description": "Preferred apparent subject size as a fraction of frame height. Distance scoring peaks here rather than rewarding dangerously close shots by default."
+    },
+    {
+      "name": "minimumVisibleFraction",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Subject visibility required for an eligible score. Below this threshold the subject is reported as occluded rather than silently receiving a competitive score."
+    },
+    {
+      "name": "maximumSubjectsPerCapture",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Hard cap on scored subject samples per capture. Bounds work per frame and prevents malformed capture payloads from creating unbounded scoring work."
+    }
+  ],
+  "outputs": [
+    {"name": "lastCaptureId", "type": "string", "description": "The capture identifier supplied by photo mode, preserved for downstream deduplication."},
+    {"name": "subjectScores", "type": "array", "description": "One entry per eligible subject: subjectId, captureId, totalScore, tags, poseTag, and per-criterion breakdown."},
+    {"name": "rejectedSubjects", "type": "array", "description": "Subjects rejected for occlusion or invalid samples, with stable reason codes for review UI."}
+  ],
+  "events": {
+    "emits": ["presentation.photoScored"],
+    "listensTo": ["presentation.photoCaptured"]
+  },
+  "dependencies": ["presentation.photo_mode"],
+  "tags": ["photo", "scoring", "composition", "deterministic", "collectathon"],
+  "provenance": "library-native"
+}

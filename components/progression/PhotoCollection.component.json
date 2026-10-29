@@ -1,0 +1,61 @@
+{
+  "id": "progression.photo_collection",
+  "name": "Photo Collection",
+  "category": "progression",
+  "description": "Per-profile photographic records keyed by subject id: first capture, personal-best score, best capture reference, and themed collection sets. It listens only to scored captures, so an arbitrary screenshot cannot advance gameplay. Replaying the same capture id is idempotent, and a lower-scoring repeat never replaces a personal best. The collection stores metadata and capture references, not image blobs; file storage belongs to the host platform. This is not a species dex: one subject may have many photographs, quality matters, and a subject can remain in the collection without being seen, caught, or owned by any other system.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "subjectCatalog",
+      "type": "array",
+      "required": true,
+      "description": "Photographable subject definitions: id, display metadata, and collection tags. Runtime samples may reference only configured subjects, making completion mean 'of this configured catalog'."
+    },
+    {
+      "name": "photoSets",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Optional themed sets: id, ordered subject ids, and display metadata. Sets may overlap; completion is evaluated independently for each set."
+    },
+    {
+      "name": "personalBestMinimumDelta",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Minimum score improvement required to replace a best record and emit a personal-best event. Prevents floating-point noise from producing repeated notifications."
+    },
+    {
+      "name": "processedCaptureCacheSize",
+      "type": "number",
+      "required": false,
+      "default": 128,
+      "description": "Bounded recent-capture id cache used to suppress duplicate deliveries within a session. Persisted subject and best records remain authoritative across reloads."
+    }
+  ],
+  "outputs": [
+    {"name": "entries", "type": "object", "description": "Subject id to first-capture metadata, best score, best capture reference, and capture count."},
+    {"name": "setProgress", "type": "object", "description": "Set id to {captured, total, complete}, computed from unique subjects rather than total shutter presses."},
+    {"name": "completionFraction", "type": "number", "description": "Unique photographed subjects divided by configured catalog size, or 0 for an empty catalog."}
+  ],
+  "events": {
+    "emits": ["progression.photoSubjectRecorded", "progression.photoPersonalBest", "progression.photoSetCompleted"],
+    "listensTo": ["presentation.photoScored"]
+  },
+  "eventIntents": {
+    "progression.photoSubjectRecorded": ["persist", "notify"],
+    "progression.photoPersonalBest": ["persist", "notify"],
+    "progression.photoSetCompleted": ["persist", "notify"]
+  },
+  "dependencies": ["utility.photo_composition_scorer", "persistence.save_system"],
+  "tags": ["photo", "collection", "personal-best", "completion", "persistence"],
+  "provenance": "library-native"
+}
