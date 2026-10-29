@@ -1,0 +1,45 @@
+{
+  "id": "compound.field_photography_loop",
+  "name": "Field Photography Loop",
+  "version": "0.1.0",
+  "description": "A complete photography composition: photo mode supplies captures, deterministic composition scoring produces evidence, the collection records unique subjects and personal bests, commissions convert that evidence into claimable objectives, and one review request explains the result. Images and their storage remain outside the gameplay graph.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {"id": "presentation.photo_mode", "role": "camera authority and capture source", "config": {"maxCameraDistance": 12, "hideUI": true}},
+    {"id": "utility.photo_composition_scorer", "role": "deterministic per-subject scoring", "config": {"maximumSubjectsPerCapture": 8, "minimumVisibleFraction": 0.5}},
+    {"id": "progression.photo_collection", "role": "unique-subject records, personal bests, and photo sets", "config": {"personalBestMinimumDelta": 1, "processedCaptureCacheSize": 128}},
+    {"id": "progression.photo_contracts", "role": "photographic commissions and guarded submission", "config": {"maxActiveContracts": 3}},
+    {"id": "ui.photo_review_presenter", "role": "one deduplicated review request per capture", "config": {"showUnscoredCaptures": false, "maxSubjectChips": 3}},
+    {"id": "persistence.save_system", "role": "durable collection and commission progress", "config": {"autosaveIntervalSeconds": 120}}
+  ],
+  "connections": [
+    {"from": "presentation.photo_mode", "event": "presentation.photoCaptured", "to": "utility.photo_composition_scorer", "note": "The capture supplies renderer-produced subject samples."},
+    {"from": "utility.photo_composition_scorer", "event": "presentation.photoScored", "to": "progression.photo_collection", "note": "Only scored evidence can advance photographic collection state."},
+    {"from": "utility.photo_composition_scorer", "event": "presentation.photoScored", "to": "ui.photo_review_presenter", "note": "Review starts from the capture's deterministic score model."},
+    {"from": "progression.photo_collection", "event": "progression.photoPersonalBest", "to": "progression.photo_contracts", "note": "Improved best records may satisfy active commission requirements."},
+    {"from": "progression.photo_collection", "event": "progression.photoPersonalBest", "to": "ui.photo_review_presenter", "note": "The review marks a personal best without recalculating it."},
+    {"from": "progression.photo_collection", "event": "progression.photoSubjectRecorded", "to": "persistence.save_system", "note": "First-subject records are durable."},
+    {"from": "progression.photo_collection", "event": "progression.photoPersonalBest", "to": "persistence.save_system", "note": "Best-score improvements are durable."},
+    {"from": "progression.photo_collection", "event": "progression.photoSetCompleted", "to": "persistence.save_system", "note": "One-time set completion is durable."},
+    {"from": "progression.photo_contracts", "event": "progression.photoContractProgressed", "to": "persistence.save_system", "note": "Commission progress is durable."},
+    {"from": "progression.photo_contracts", "event": "progression.photoContractReady", "to": "persistence.save_system", "note": "Ready-to-claim state is durable."},
+    {"from": "progression.photo_contracts", "event": "progression.photoContractReady", "to": "ui.photo_review_presenter", "note": "The capture review explains newly ready commissions."},
+    {"from": "progression.photo_contracts", "event": "progression.photoContractCompleted", "to": "persistence.save_system", "note": "Claimed completion cannot be paid again after reload."}
+  ],
+  "criticalComponents": [
+    "presentation.photo_mode",
+    "utility.photo_composition_scorer",
+    "progression.photo_collection",
+    "progression.photo_contracts",
+    "ui.photo_review_presenter",
+    "persistence.save_system"
+  ],
+  "acceptanceCriteria": [
+    "A capture produces deterministic, inspectable per-subject scores from renderer-supplied samples without the scorer reading image bytes.",
+    "A capture id can advance the collection and generate at most one review request, regardless of duplicate event delivery.",
+    "A lower-scoring repeat never replaces a personal best; improvements below personalBestMinimumDelta do not emit another best event.",
+    "Only active commissions consume eligible photographic evidence, and ready commissions require explicit submission before completion.",
+    "A commission completes and emits its reward intent at most once per profile, including after save restoration.",
+    "Collection and commission progress persist, while image blobs and platform image storage remain outside this compound."
+  ]
+}
