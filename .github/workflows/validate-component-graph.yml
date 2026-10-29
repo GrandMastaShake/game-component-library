@@ -1,9 +1,9 @@
 name: Validate Component Library
 on:
   push:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
   pull_request:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
 permissions: {contents: read}
 jobs:
   validate:
@@ -12,6 +12,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.11"}
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - name: Test native POLYFORGE WebGL brick
+        working-directory: web-adapters/native/polyforge
+        run: |
+          npm ci
+          npm test
       - run: python3 tools/validate_component_graph.py --report reports/component-graph.json
       - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
       - run: python3 tools/validate_genres.py --report reports/genre-validation.json

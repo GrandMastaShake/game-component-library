@@ -23,7 +23,6 @@
     "presentation.first_person_camera",
     "presentation.iso_projection",
     "presentation.lod_system",
-    "presentation.low_poly_generator",
     "presentation.object_placer",
     "presentation.style_presets",
     "presentation.submersion_view",
