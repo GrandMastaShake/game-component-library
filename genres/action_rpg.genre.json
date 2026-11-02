@@ -1,8 +1,8 @@
 {
   "id": "genre.action_rpg",
   "name": "Action RPG",
-  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery.",
-  "version": "0.1.0",
+  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision.",
+  "version": "0.2.0",
   "loop": "fight in real time → loot → build character → bigger fight",
   "views": [
     "isometric",
@@ -42,7 +42,10 @@
     "combat.contact_attack",
     "combat.aggro_table",
     "movement.patrol_route",
-    "combat.spawn_director"
+    "combat.spawn_director",
+    "inventory.drop_director",
+    "inventory.gear_comparison",
+    "inventory.salvage_system"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",

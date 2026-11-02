@@ -19,6 +19,7 @@ compound rather than a section in a README.
 | `compound.first_person_voxel_world` | 17 | 11 | A voxel world you stand inside |
 | `compound.home_showcase_loop` | 4 | 3 | Home displays, layout saving, visitation |
 | `compound.isometric_tile_world` | 10 | 7 | A stepped isometric board with elevation |
+| `compound.loot_to_build_loop` | 12 | 15 | Drop decisions, affix loot, equipment comparison, set bonuses and salvage |
 | `compound.monster_battle_capture` | 12 | 20 | Command rounds, weakening, capture, party storage and dex registration |
 | `compound.party_quest_sharing_loop` | 4 | 3 | Quest credit shared across a party |
 | `compound.pet_hatching_loop` | 6 | 4 | Eggs, hatching, and what comes out |
