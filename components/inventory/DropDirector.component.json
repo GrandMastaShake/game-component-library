@@ -4,27 +4,58 @@
   "category": "inventory",
   "description": "Whether a defeated enemy earns a loot roll, and how many rolls that drop is worth. inventory.loot_table answers which base item appears and inventory.affix_loot_generator decides the quality of that copy; this owns the upstream drop-rate decision so a normal kill need not manufacture gear every time while an elite or boss can guarantee a larger haul. Decisions are seeded from the encounter and defeat id, making dry streaks and replays auditable rather than dependent on frame timing. Optional dry-streak protection can force a roll after a configured number of eligible kills, but is off by default. It emits a roll request and deliberately does not choose an item, roll affixes, place a drop or modify player luck.",
   "version": "0.1.0",
-  "platform": ["agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
       "name": "dropChanceByArchetype",
       "type": "object",
       "required": false,
-      "default": {"normal": 0.25, "elite": 1, "boss": 1},
+      "default": {
+        "normal": 0.25,
+        "elite": 1,
+        "boss": 1
+      },
       "description": "Probability that a defeat produces a loot request, keyed by enemy archetype or tier. Missing archetypes use the normal rate."
     },
     {
       "name": "rollsPerDrop",
       "type": "object",
       "required": false,
-      "default": {"normal": 1, "elite": 2, "boss": 3},
+      "default": {
+        "normal": 1,
+        "elite": 2,
+        "boss": 3
+      },
       "description": "Number of independent base-item and affix rolls requested after a successful drop decision."
     },
     {
@@ -55,10 +86,22 @@
     }
   ],
   "events": {
-    "emits": ["inventory.lootRollRequested", "inventory.lootRollSkipped"],
-    "listensTo": ["combat.entityDefeated"]
+    "emits": [
+      "inventory.lootRollRequested",
+      "inventory.lootRollSkipped"
+    ],
+    "listensTo": [
+      "combat.entityDefeated"
+    ]
   },
-  "dependencies": ["combat.enemy_tier_scaling"],
-  "tags": ["arpg", "loot", "drop-rate", "deterministic"],
+  "dependencies": [
+    "combat.enemy_tier_scaling"
+  ],
+  "tags": [
+    "arpg",
+    "loot",
+    "drop-rate",
+    "deterministic"
+  ],
   "provenance": "Added 2026-11-02 for the Diablo loot-and-inventory extraction. Searched the loot catalog first: inventory.loot_table selects a base reward, inventory.affix_loot_generator currently reacts to every defeat and rolls item quality, and combat.enemy_tier_scaling owns enemy level curves. None owns drop chance, roll quantity or dry-streak state. Library-native; this decides whether to request a roll, not what the roll contains or where it goes."
 }
