@@ -1,0 +1,99 @@
+{
+  "id": "combat.command_round",
+  "name": "Command Round",
+  "category": "combat",
+  "description": "A round in which every side chooses one command before anything resolves, then the chosen commands execute in a deterministic order. This is the seam between classic creature battles and combat.turn_order_queue: that queue gives one combatant a turn at a time, while this collects fight, capture and switch intents first and orders them by command class, move priority and active-creature speed, with seeded ties for replayability. It translates an executed move into combat.hit or combat.miss, commits its PP, routes capture and switch commands to their owners, and emits one combat.turnEnded heartbeat after resolution. It owns sequencing only — move data belongs to combat.move_set, active creatures to pets.battle_party, effectiveness to combat.type_chart, damage to combat.damage_resolver and capture probability to pets.capture_mechanic.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "sides",
+      "type": "array",
+      "required": false,
+      "default": ["player", "enemy"],
+      "description": "Sides that must each supply a command before resolution begins."
+    },
+    {
+      "name": "commandPrecedence",
+      "type": "array",
+      "required": false,
+      "default": ["switch", "capture", "move"],
+      "description": "Command-class order applied before move priority and speed. Data-driven so a game can make capture or switching slower without rewriting the sequencer."
+    },
+    {
+      "name": "tieBreak",
+      "type": "string",
+      "required": false,
+      "default": "seeded",
+      "description": "How equal-priority, equal-speed commands are ordered. Seeded ties preserve deterministic replays; side-order ties remove RNG entirely."
+    },
+    {
+      "name": "endOnCapture",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a successful wild-creature capture ends the encounter immediately."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "phase",
+      "type": "string",
+      "description": "collecting, resolving, awaitingReplacement or ended — the single legality signal for battle commands."
+    },
+    {
+      "name": "roundNumber",
+      "type": "number",
+      "description": "One-based count of fully resolved command rounds."
+    },
+    {
+      "name": "pendingCommands",
+      "type": "object",
+      "description": "Commands collected so far, keyed by side, without exposing another side's hidden choice before submission."
+    },
+    {
+      "name": "lastResolutionOrder",
+      "type": "array",
+      "description": "The executed command order and its priority, speed and tie-break inputs for logs and replay debugging."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.roundStarted",
+      "combat.turnEnded",
+      "combat.hit",
+      "combat.miss",
+      "combat.moveCommitted",
+      "combat.captureCommanded",
+      "combat.switchCommanded",
+      "combat.encounterEnded"
+    ],
+    "listensTo": [
+      "combat.moveSelected",
+      "input.selectCaptureDevice",
+      "input.chooseSwitch",
+      "input.submitCommands",
+      "combat.activeCreatureChanged",
+      "pets.captureSucceeded",
+      "pets.captureFailed",
+      "combat.entityDefeated",
+      "pets.partyDefeated"
+    ]
+  },
+  "dependencies": [
+    "combat.move_set",
+    "pets.battle_party",
+    "combat.type_chart",
+    "combat.damage_resolver",
+    "combat.unit_roster"
+  ],
+  "tags": ["monster-taming", "turn-based", "commands", "priority", "core"],
+  "provenance": "Added 2026-11-02 for the Pokémon battle-and-capture extraction. Searched turn and combat sequencing first: combat.turn_order_queue activates one combatant at a time from initiative or a meter, combat.round_manager owns fighting-match rounds, and utility.command_bus transports commands without ordering them. None collects both sides' fight, capture and switch choices before priority/speed resolution. Library-native; this complements rather than replaces the initiative queue."
+}

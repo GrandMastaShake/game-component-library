@@ -1,0 +1,61 @@
+{
+  "id": "combat.move_set",
+  "name": "Move Set",
+  "category": "combat",
+  "description": "The moves a creature knows and the uses each move has left. A move is data — element, power, accuracy, priority, targeting and optional effect payload — while the set is per-creature state: which of those moves are known and their remaining power points. This component validates a selection and spends a use only when combat.command_round commits it, so a cancelled or still-collecting round cannot drain PP. It deliberately owns neither turn order nor damage: command_round compares priority and speed, combat.type_chart answers effectiveness, and combat.damage_resolver owns the final number. Keeping those seams separate lets the same move catalog serve creature battles, tactical RPGs and cooldown-free ability systems.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "moveCatalog",
+      "type": "array",
+      "required": true,
+      "description": "Move definitions keyed by id: element, power, accuracy, priority, target rule, maximum PP and optional status-effect payload."
+    },
+    {
+      "name": "knownMoves",
+      "type": "array",
+      "required": true,
+      "description": "Per-creature move ids and current PP. This is state supplied by the host or restored save, not a second species catalog."
+    },
+    {
+      "name": "maxMovesPerCreature",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Known-move cap. Four matches the reference genre's compact decision set; other games can raise or remove the pressure."
+    },
+    {
+      "name": "fallbackMoveId",
+      "type": "string",
+      "required": false,
+      "description": "Optional move available when every known move is exhausted. Omit it to reject actions until the creature switches or uses an item."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "availableMoves",
+      "type": "array",
+      "description": "Known moves with current and maximum PP, including whether each can presently be selected."
+    },
+    {
+      "name": "lastSelection",
+      "type": "object",
+      "description": "The validated creature, move and selection metadata handed to the command round."
+    }
+  ],
+  "events": {
+    "emits": ["combat.moveSelected", "combat.moveRejected"],
+    "listensTo": ["input.selectMove", "combat.moveCommitted"]
+  },
+  "dependencies": [],
+  "tags": ["monster-taming", "moves", "power-points", "turn-based"],
+  "provenance": "Added 2026-11-02 for the Pokémon battle-and-capture extraction. Searched the combat catalog first: combat.hotbar_abilities owns cooldown-based activation, combat.tactical_attack resolves a grid shot, and combat.action_point_economy budgets a whole turn; none owns a creature's known moves or per-move PP. Library-native; this is move data and PP state, not a second attack resolver or turn queue."
+}

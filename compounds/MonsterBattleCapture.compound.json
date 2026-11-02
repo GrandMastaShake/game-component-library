@@ -1,0 +1,111 @@
+{
+  "id": "compound.monster_battle_capture",
+  "name": "Monster Battle Capture Loop",
+  "version": "0.1.0",
+  "description": "A Pokémon-inspired, single-encounter command loop: each side chooses a move, capture or switch; commands resolve by class, priority and speed; damage and status change capture odds; a successful throw routes the creature into party or box storage and registers it in the dex. Type effectiveness is a synchronous query rather than an event wire. Persistence, evolution, trainer battles and multi-creature battles are intentionally outside this first recipe.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "combat.move_set",
+      "role": "known moves, move metadata and PP spending",
+      "config": {"maxMovesPerCreature": 4}
+    },
+    {
+      "id": "combat.command_round",
+      "role": "simultaneous command collection and deterministic resolution order",
+      "config": {"sides": ["player", "enemy"], "commandPrecedence": ["switch", "capture", "move"], "tieBreak": "seeded", "endOnCapture": true}
+    },
+    {
+      "id": "pets.battle_party",
+      "role": "active creature, voluntary switching and forced knockout replacement",
+      "config": {"activeSlotsPerSide": 1, "allowVoluntarySwitch": true, "automaticReplacement": false}
+    },
+    {
+      "id": "pets.team_composition",
+      "role": "durable party order and overflow box storage",
+      "config": {"partySize": 6, "allowEmptyParty": false}
+    },
+    {
+      "id": "combat.unit_roster",
+      "role": "encounter sides, creature stats and remaining health",
+      "config": {"teams": ["player", "enemy"], "removeOnDefeat": true, "drawTokens": false}
+    },
+    {
+      "id": "combat.type_chart",
+      "role": "synchronous elemental effectiveness and same-type bonus lookup",
+      "config": {"chart": {}, "stabBonus": 1.5}
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "the single owner of final damage and defeat events",
+      "config": {"varianceFraction": 0.1}
+    },
+    {
+      "id": "combat.status_effects",
+      "role": "status application and the effects that alter capture odds",
+      "config": {"maxActiveEffects": 6}
+    },
+    {
+      "id": "inventory.slotted_bag",
+      "role": "capture-device ownership, stacking and consumption boundary",
+      "config": {"slotCount": 20, "maxStackSize": 99, "initialItems": []}
+    },
+    {
+      "id": "pets.capture_mechanic",
+      "role": "one deterministic capture decision from current health, status, rarity and device",
+      "config": {"baseCatchRate": 0.3, "healthBonusCurve": "inverse-linear", "shakeCount": 3}
+    },
+    {
+      "id": "pets.monster_dex",
+      "role": "permanent caught registration and collection milestones",
+      "config": {"speciesCatalog": [], "trackSeen": true}
+    },
+    {
+      "id": "progression.xp_leveling",
+      "role": "experience awarded for a defeating blow or knockout",
+      "config": {"xpPerHit": 0, "xpPerKill": 10}
+    }
+  ],
+  "connections": [
+    {"from": "combat.move_set", "event": "combat.moveSelected", "to": "combat.command_round", "note": "A validated move becomes one side's pending command."},
+    {"from": "combat.command_round", "event": "combat.moveCommitted", "to": "combat.move_set", "note": "PP is spent only when the command actually executes."},
+    {"from": "combat.command_round", "event": "combat.switchCommanded", "to": "pets.battle_party", "note": "The round routes switching without owning party state."},
+    {"from": "pets.battle_party", "event": "combat.activeCreatureChanged", "to": "combat.command_round", "note": "The active creature and its speed are refreshed after a switch."},
+    {"from": "combat.command_round", "event": "combat.captureCommanded", "to": "pets.capture_mechanic", "note": "A capture command enters the same resolver as a direct throw input."},
+    {"from": "combat.command_round", "event": "combat.hit", "to": "combat.damage_resolver", "note": "Final damage is computed in exactly one place."},
+    {"from": "combat.command_round", "event": "combat.hit", "to": "combat.status_effects", "note": "Move effect payloads are applied independently of damage math."},
+    {"from": "combat.command_round", "event": "combat.hit", "to": "combat.unit_roster", "note": "The roster applies consequences to the authoritative unit state."},
+    {"from": "combat.damage_resolver", "event": "combat.damageResolved", "to": "pets.capture_mechanic", "note": "Capture odds read the latest remaining health."},
+    {"from": "combat.damage_resolver", "event": "combat.entityDefeated", "to": "combat.unit_roster", "note": "A defeated creature leaves the active encounter roster."},
+    {"from": "combat.damage_resolver", "event": "combat.entityDefeated", "to": "pets.battle_party", "note": "A knockout triggers replacement or party defeat."},
+    {"from": "combat.damage_resolver", "event": "combat.entityDefeated", "to": "progression.xp_leveling", "note": "Eligible enemy knockouts award configured experience."},
+    {"from": "combat.damage_resolver", "event": "combat.entityDefeated", "to": "combat.command_round", "note": "The round suspends further commands while replacement is pending."},
+    {"from": "combat.status_effects", "event": "combat.effectApplied", "to": "pets.capture_mechanic", "note": "Capture odds reflect the current status ledger."},
+    {"from": "combat.command_round", "event": "combat.turnEnded", "to": "pets.capture_mechanic", "note": "One round heartbeat refreshes time-sensitive capture modifiers."},
+    {"from": "pets.capture_mechanic", "event": "pets.captureSucceeded", "to": "pets.team_composition", "note": "A caught creature enters the party or overflow storage exactly once."},
+    {"from": "pets.capture_mechanic", "event": "pets.captureSucceeded", "to": "pets.monster_dex", "note": "The same successful result permanently registers the species."},
+    {"from": "pets.capture_mechanic", "event": "pets.captureSucceeded", "to": "combat.command_round", "note": "A successful wild capture ends the encounter when configured."},
+    {"from": "pets.capture_mechanic", "event": "pets.captureFailed", "to": "combat.command_round", "note": "A failed throw completes the command without granting ownership."},
+    {"from": "pets.battle_party", "event": "pets.partyDefeated", "to": "combat.command_round", "note": "No healthy replacements means the encounter is lost."}
+  ],
+  "criticalComponents": [
+    "combat.move_set",
+    "combat.command_round",
+    "pets.battle_party",
+    "combat.damage_resolver",
+    "pets.capture_mechanic",
+    "pets.team_composition"
+  ],
+  "acceptanceCriteria": [
+    "No command resolves until every required side has submitted one, and a side cannot submit twice for the same round.",
+    "Commands resolve by configured class, then move priority, then active-creature speed; equal commands use the configured deterministic tie-break.",
+    "A rejected or unexecuted move spends no PP, while an executed move spends exactly one PP regardless of whether it hits.",
+    "Type effectiveness is obtained synchronously from combat.type_chart and final damage is emitted only by combat.damage_resolver.",
+    "A capture attempt consumes one owned device and resolves once against current health, status, rarity and device modifiers; shake presentation never rolls additional outcomes.",
+    "A successful capture adds one creature to party or box storage, registers one caught dex entry and emits no defeat reward for the captured target.",
+    "A failed capture grants no creature or dex entry and allows the configured round flow to continue.",
+    "A knockout requires a healthy replacement; if none exists, pets.battle_party emits pets.partyDefeated and the command round ends the encounter.",
+    "Removing pets.monster_dex does not prevent capture or party storage, and removing progression.xp_leveling does not prevent damage, capture or switching.",
+    "Replaying the same initial state, commands and seed produces the same command order, capture result and final ownership state."
+  ]
+}
