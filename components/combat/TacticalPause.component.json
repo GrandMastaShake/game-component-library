@@ -1,1 +1,108 @@
-{"id":"combat.tactical_pause","name":"Tactical Pause","category":"combat","version":"0.1.0","description":"Owns whether a continuous-time encounter is advancing or paused, and why. Manual pause and configurable auto-pause are edges into that one state, not separate pause systems. It never rolls initiative, emits turns, advances cooldowns, queues orders, or resolves combat: combat.turn_order_queue remains the discrete-turn owner, combat.party_command_queue holds intentions, and the ordinary combat components resolve released actions. Auto-pause emits only on a running-to-paused transition so repeated damage or status events cannot produce a pause storm.","platform":["agnostic"],"implementations":[{"target":"canvas2d","status":"unmapped","module":null},{"target":"webgl","status":"unmapped","module":null},{"target":"roblox","status":"unmapped","module":null},{"target":"unity","status":"unmapped","module":null},{"target":"godot","status":"unmapped","module":null}],"inputs":[{"name":"allowManualPause","type":"boolean","required":false,"default":true,"description":"Whether input.pause may toggle the simulation clock. When false, only configured automatic reasons may pause."},{"name":"autoPauseOnEnemySpotted","type":"boolean","required":false,"default":true,"description":"Pause when combat.aggroGained reports a new hostile engagement."},{"name":"autoPauseOnPartyMemberDefeated","type":"boolean","required":false,"default":true,"description":"Pause when a living party member is defeated; unrelated enemy defeats do not trigger this reason."},{"name":"autoPauseOnEffectApplied","type":"boolean","required":false,"default":false,"description":"Pause on combat.effectApplied. Off by default because routine damage-over-time refreshes would make combat unreadably stop-start."}],"outputs":[{"name":"paused","type":"boolean","description":"The authoritative pause state consumed by the simulation scheduler."},{"name":"pauseReason","type":"string","description":"manual | enemySpotted | partyMemberDefeated | effectApplied, or null while running."},{"name":"simulationTimeScale","type":"number","description":"0 while paused and 1 while running; presentation time is deliberately not owned here."}],"events":{"emits":["combat.tacticalPauseChanged","combat.autoPauseTriggered"],"listensTo":["input.pause","combat.aggroGained","combat.entityDefeated","combat.effectApplied"]},"dependencies":["combat.aggro_table","social.party_system"],"tags":["crpg","rtwp","pause","real-time","core"],"provenance":"BG2-inspired extraction pass on 2026-11-02 searched turn_order_queue, round_manager, game_speed, beat_clock, timer_system and aggro_table. The turn queue pauses for discrete initiative turns, game_speed changes rate rather than tactical state, timers execute scheduled work, and aggro owns detection only. No contract owned continuous-time pause policy or one-shot auto-pause reasons, so this adds that boundary without changing turn-based behavior."}
+{
+  "id": "combat.tactical_pause",
+  "name": "Tactical Pause",
+  "category": "combat",
+  "version": "0.1.0",
+  "description": "Owns whether a continuous-time encounter is advancing or paused, and why. Manual pause and configurable auto-pause are edges into that one state, not separate pause systems. It never rolls initiative, emits turns, advances cooldowns, queues orders, or resolves combat: combat.turn_order_queue remains the discrete-turn owner, combat.party_command_queue holds intentions, and the ordinary combat components resolve released actions. Auto-pause emits only on a running-to-paused transition so repeated damage or status events cannot produce a pause storm.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "allowManualPause",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether input.pause may toggle the simulation clock. When false, only configured automatic reasons may pause."
+    },
+    {
+      "name": "autoPauseOnEnemySpotted",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Pause when combat.aggroGained reports a new hostile engagement."
+    },
+    {
+      "name": "autoPauseOnPartyMemberDefeated",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Pause when a living party member is defeated; unrelated enemy defeats do not trigger this reason."
+    },
+    {
+      "name": "autoPauseOnEffectApplied",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Pause on combat.effectApplied. Off by default because routine damage-over-time refreshes would make combat unreadably stop-start."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "paused",
+      "type": "boolean",
+      "description": "The authoritative pause state consumed by the simulation scheduler."
+    },
+    {
+      "name": "pauseReason",
+      "type": "string",
+      "description": "manual | enemySpotted | partyMemberDefeated | effectApplied, or null while running."
+    },
+    {
+      "name": "simulationTimeScale",
+      "type": "number",
+      "description": "0 while paused and 1 while running; presentation time is deliberately not owned here."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.tacticalPauseChanged",
+      "combat.autoPauseTriggered"
+    ],
+    "listensTo": [
+      "input.pause",
+      "combat.aggroGained",
+      "combat.entityDefeated",
+      "combat.effectApplied"
+    ]
+  },
+  "dependencies": [
+    "combat.aggro_table",
+    "social.party_system"
+  ],
+  "tags": [
+    "crpg",
+    "rtwp",
+    "pause",
+    "real-time",
+    "core"
+  ],
+  "provenance": "BG2-inspired extraction pass on 2026-11-02 searched turn_order_queue, round_manager, game_speed, beat_clock, timer_system and aggro_table. The turn queue pauses for discrete initiative turns, game_speed changes rate rather than tactical state, timers execute scheduled work, and aggro owns detection only. No contract owned continuous-time pause policy or one-shot auto-pause reasons, so this adds that boundary without changing turn-based behavior."
+}

@@ -1,1 +1,353 @@
-{"id":"compound.party_rtwp_combat","name":"Party Real-Time-with-Pause Combat Loop","version":"0.1.0","description":"A Baldur's Gate 2-inspired tactical party loop built from generic contracts: enemies notice and pursue in continuous time; manual or automatic pause stops simulation without creating turns; the player queues per-member movement and prepared-spell orders; resume releases them through one Command Bus; existing casting, damage, status and roster owners resolve them; completed rest restores prepared casts. Commercial spells, characters, assets and exact rule tables are deliberately excluded.","targetPlatform":"agnostic","components":[{"id":"social.party_system","role":"durable party membership and leader identity","config":{"maxMembers":6}},{"id":"social.party_formation","role":"active control handoff and march formation outside combat resolution","config":{"formationTemplates":["line","column","wedge","ring"]}},{"id":"combat.unit_roster","role":"live encounter sides, positions, health and defeat consequences","config":{"units":[],"teams":["player","enemy"],"removeOnDefeat":true,"drawTokens":false}},{"id":"combat.aggro_table","role":"hostile detection, target memory and threat","config":{"requiresLineOfSight":true,"forgetSeconds":6}},{"id":"combat.tactical_pause","role":"continuous-time pause state and one-shot auto-pause policy","config":{"allowManualPause":true,"autoPauseOnEnemySpotted":true,"autoPauseOnPartyMemberDefeated":true,"autoPauseOnEffectApplied":false}},{"id":"combat.party_command_queue","role":"per-member FIFO intentions held across pause and released on resume","config":{"maxOrdersPerMember":4,"allowOrdersWhileRunning":true,"releaseOn":"resume","clearOrdersOnDefeat":true}},{"id":"utility.command_bus","role":"single ordered dispatch channel for released player orders and AI requests","config":{"maxQueueDepth":256,"dispatchesPerTick":32}},{"id":"utility.behavior_fsm","role":"autonomous AI intentions, never direct entity mutation","config":{"initialBehavior":"idle","actionCooldownSeconds":1.0}},{"id":"movement.pathfinding_system","role":"walkable routes for dispatched move orders","config":{"maxPathLength":200}},{"id":"movement.pursuit_agent","role":"continuous-time chase execution and movement events","config":{"tilesPerSecond":2,"stopAtRange":1,"repathSeconds":0.5}},{"id":"combat.contact_attack","role":"real-time enemy melee cadence after pursuit arrival","config":{"reach":1,"cooldownSeconds":1.2,"playerTeamAttacks":false}},{"id":"combat.prepared_spellbook","role":"known and prepared spells, cast eligibility, slot spending and rest recovery","config":{"spellCatalog":[],"knownSpellsByMember":{},"initialPreparation":{},"slotCapacityByTier":{},"recoverOnRest":true}},{"id":"combat.hotbar_abilities","role":"authorized cast execution, range, cooldown, resources and hit emission","config":{"castAuthorizationMode":"authorizedOnly","abilities":[],"resourceRefundOnInterrupt":false}},{"id":"combat.damage_resolver","role":"single owner of mitigation, final damage and defeat events","config":{"varianceFraction":0.1}},{"id":"combat.status_effects","role":"timed effects from the same hit stream","config":{"maxActiveEffects":6}},{"id":"world.rest_camp","role":"completed or interrupted rest transaction and ambush risk","config":{"requiresSafeZone":false,"restoresPerRestAbilities":true}}],"connections":[{"from":"social.party_system","event":"social.partyMemberJoined","to":"social.party_formation","note":"Membership changes update formation without making formation the party owner."},{"from":"combat.aggro_table","event":"combat.aggroGained","to":"combat.tactical_pause","note":"A new hostile engagement may trigger enemy-spotted auto-pause."},{"from":"combat.damage_resolver","event":"combat.entityDefeated","to":"combat.tactical_pause","note":"Party-member defeat is an optional auto-pause reason."},{"from":"combat.status_effects","event":"combat.effectApplied","to":"combat.tactical_pause","note":"Effect pause is available but disabled by default."},{"from":"combat.tactical_pause","event":"combat.tacticalPauseChanged","to":"combat.party_command_queue","note":"The running edge releases queued orders in resume mode."},{"from":"combat.damage_resolver","event":"combat.entityDefeated","to":"combat.party_command_queue","note":"Defeat cancels orders owned by or explicitly targeting the defeated unit."},{"from":"combat.party_command_queue","event":"utility.commandRequested","to":"utility.command_bus","note":"Released player intentions enter the common dispatch channel."},{"from":"utility.behavior_fsm","event":"utility.commandRequested","to":"utility.command_bus","note":"AI uses the same bus rather than a private mutation path."},{"from":"utility.command_bus","event":"utility.commandDispatched","to":"utility.behavior_fsm","note":"Dispatch acknowledges and advances autonomous behavior."},{"from":"utility.command_bus","event":"utility.commandDispatched","to":"movement.pathfinding_system","note":"Move-kind orders request walkable paths; unrelated commands are ignored."},{"from":"utility.command_bus","event":"utility.commandDispatched","to":"movement.pursuit_agent","note":"Pursue-kind orders execute continuous-time movement."},{"from":"utility.command_bus","event":"utility.commandDispatched","to":"combat.prepared_spellbook","note":"Spell orders must pass preparation and remaining-cast checks before execution."},{"from":"combat.prepared_spellbook","event":"combat.spellCastAuthorized","to":"combat.hotbar_abilities","note":"Authorization enters the ordinary cast executor without paying a slot yet."},{"from":"combat.hotbar_abilities","event":"combat.abilityCast","to":"combat.prepared_spellbook","note":"Only a successful correlated cast spends one prepared cast."},{"from":"combat.hotbar_abilities","event":"combat.hit","to":"combat.damage_resolver","note":"Spell damage uses the single damage pipeline."},{"from":"combat.hotbar_abilities","event":"combat.hit","to":"combat.status_effects","note":"Spell effect payloads use the ordinary status ledger."},{"from":"combat.hotbar_abilities","event":"combat.hit","to":"combat.unit_roster","note":"The roster receives the same hit stream for unit-state consequences."},{"from":"movement.pursuit_agent","event":"movement.moveExecuted","to":"combat.unit_roster","note":"Continuous movement updates authoritative positions."},{"from":"movement.pursuit_agent","event":"movement.pursuitArrived","to":"combat.contact_attack","note":"Arrival permits the real-time melee cadence to strike in reach."},{"from":"combat.contact_attack","event":"combat.hit","to":"combat.damage_resolver","note":"Enemy melee and spells share final damage resolution."},{"from":"combat.contact_attack","event":"combat.hit","to":"combat.status_effects","note":"Melee payloads may apply status without a second effect owner."},{"from":"combat.contact_attack","event":"combat.hit","to":"combat.unit_roster","note":"Melee consequences reach the same authoritative roster."},{"from":"combat.damage_resolver","event":"combat.damageResolved","to":"combat.aggro_table","note":"Damage updates threat and target memory."},{"from":"combat.damage_resolver","event":"combat.damageResolved","to":"utility.behavior_fsm","note":"AI reacts to resolved outcomes rather than raw damage requests."},{"from":"combat.damage_resolver","event":"combat.entityDefeated","to":"combat.unit_roster","note":"Defeated units leave the live roster."},{"from":"combat.damage_resolver","event":"combat.entityDefeated","to":"utility.behavior_fsm","note":"AI clears behavior associated with defeated entities."},{"from":"combat.unit_roster","event":"combat.rosterChanged","to":"combat.aggro_table","note":"Target selection reads current living units."},{"from":"movement.pathfinding_system","event":"movement.pathFailed","to":"utility.behavior_fsm","note":"Failed routes return to AI planning instead of fabricating movement."},{"from":"world.rest_camp","event":"world.restCompleted","to":"combat.prepared_spellbook","note":"Only completed rest restores prepared casts; interrupted rest has no recovery wire."}],"criticalComponents":["combat.tactical_pause","combat.party_command_queue","utility.command_bus","combat.prepared_spellbook","combat.hotbar_abilities","combat.damage_resolver","combat.unit_roster","world.rest_camp"],"acceptanceCriteria":["Manual pause and every enabled auto-pause reason drive one authoritative simulation clock: time scale is 0 while paused and 1 while running, with no initiative or turn events introduced.","An auto-pause reason emits combat.autoPauseTriggered only on a running-to-paused transition; repeated events while already paused do not create a pause storm, and disabled reasons never pause.","While paused, each party member can hold up to the configured FIFO cap without movement, cooldown, status-duration, spell-slot or damage advancement.","Resume mode releases pending orders in deterministic party order and per-member FIFO order; submit mode releases only on input.submitCommands, and no order dispatches twice.","Defeat removes pending orders owned by the defeated member and orders explicitly targeting it before release; rejected orders never reach the Command Bus.","Released player orders and Behavior FSM requests both pass through utility.command_bus, whose ordering, depth cap and dispatch acknowledgement remain the only dispatch policy.","Unknown, unprepared or exhausted spell orders are rejected before Hotbar execution and emit no combat.hit, cooldown, resource payment or slot spend.","An authorized spell still obeys Hotbar range, cooldown and resource validation; only a successful correlated combat.abilityCast spends exactly one prepared cast, while a rejected cast spends none.","A completed rest restores remaining casts to the configured capacities without changing preparation, and an interrupted rest restores nothing; duplicate completion transaction ids cannot restore or spend twice.","Hotbar and Contact Attack both emit combat.hit into the same Damage Resolver, Status Effects and Unit Roster paths; no component computes a private final damage total.","Aggro owns target choice, Pursuit Agent owns continuous movement, Contact Attack owns enemy melee cadence, and Tactical Pause introduces no combat.turnStarted dependency or turn-order requirement.","Removing Party Formation does not prevent direct per-member combat orders; removing Behavior FSM, Pursuit Agent and Contact Attack leaves a valid player-controlled spell loop without enemy AI.","Replaying identical initial state, timed inputs, command payloads and seed produces the same pause transitions, release order, cast spending, damage outcomes and remaining prepared casts."]}
+{
+  "id": "compound.party_rtwp_combat",
+  "name": "Party Real-Time-with-Pause Combat Loop",
+  "version": "0.1.0",
+  "description": "A Baldur's Gate 2-inspired tactical party loop built from generic contracts: enemies notice and pursue in continuous time; manual or automatic pause stops simulation without creating turns; the player queues per-member movement and prepared-spell orders; resume releases them through one Command Bus; existing casting, damage, status and roster owners resolve them; completed rest restores prepared casts. Commercial spells, characters, assets and exact rule tables are deliberately excluded.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "social.party_system",
+      "role": "durable party membership and leader identity",
+      "config": {
+        "maxMembers": 6
+      }
+    },
+    {
+      "id": "social.party_formation",
+      "role": "active control handoff and march formation outside combat resolution",
+      "config": {
+        "formationTemplates": [
+          "line",
+          "column",
+          "wedge",
+          "ring"
+        ]
+      }
+    },
+    {
+      "id": "combat.unit_roster",
+      "role": "live encounter sides, positions, health and defeat consequences",
+      "config": {
+        "units": [],
+        "teams": [
+          "player",
+          "enemy"
+        ],
+        "removeOnDefeat": true,
+        "drawTokens": false
+      }
+    },
+    {
+      "id": "combat.aggro_table",
+      "role": "hostile detection, target memory and threat",
+      "config": {
+        "requiresLineOfSight": true,
+        "forgetSeconds": 6
+      }
+    },
+    {
+      "id": "combat.tactical_pause",
+      "role": "continuous-time pause state and one-shot auto-pause policy",
+      "config": {
+        "allowManualPause": true,
+        "autoPauseOnEnemySpotted": true,
+        "autoPauseOnPartyMemberDefeated": true,
+        "autoPauseOnEffectApplied": false
+      }
+    },
+    {
+      "id": "combat.party_command_queue",
+      "role": "per-member FIFO intentions held across pause and released on resume",
+      "config": {
+        "maxOrdersPerMember": 4,
+        "allowOrdersWhileRunning": true,
+        "releaseOn": "resume",
+        "clearOrdersOnDefeat": true
+      }
+    },
+    {
+      "id": "utility.command_bus",
+      "role": "single ordered dispatch channel for released player orders and AI requests",
+      "config": {
+        "maxQueueDepth": 256,
+        "dispatchesPerTick": 32
+      }
+    },
+    {
+      "id": "utility.behavior_fsm",
+      "role": "autonomous AI intentions, never direct entity mutation",
+      "config": {
+        "initialBehavior": "idle",
+        "actionCooldownSeconds": 1.0
+      }
+    },
+    {
+      "id": "movement.pathfinding_system",
+      "role": "walkable routes for dispatched move orders",
+      "config": {
+        "maxPathLength": 200
+      }
+    },
+    {
+      "id": "movement.pursuit_agent",
+      "role": "continuous-time chase execution and movement events",
+      "config": {
+        "tilesPerSecond": 2,
+        "stopAtRange": 1,
+        "repathSeconds": 0.5
+      }
+    },
+    {
+      "id": "combat.contact_attack",
+      "role": "real-time enemy melee cadence after pursuit arrival",
+      "config": {
+        "reach": 1,
+        "cooldownSeconds": 1.2,
+        "playerTeamAttacks": false
+      }
+    },
+    {
+      "id": "combat.prepared_spellbook",
+      "role": "known and prepared spells, cast eligibility, slot spending and rest recovery",
+      "config": {
+        "spellCatalog": [],
+        "knownSpellsByMember": {},
+        "initialPreparation": {},
+        "slotCapacityByTier": {},
+        "recoverOnRest": true
+      }
+    },
+    {
+      "id": "combat.hotbar_abilities",
+      "role": "authorized cast execution, range, cooldown, resources and hit emission",
+      "config": {
+        "castAuthorizationMode": "authorizedOnly",
+        "abilities": [],
+        "resourceRefundOnInterrupt": false
+      }
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "single owner of mitigation, final damage and defeat events",
+      "config": {
+        "varianceFraction": 0.1
+      }
+    },
+    {
+      "id": "combat.status_effects",
+      "role": "timed effects from the same hit stream",
+      "config": {
+        "maxActiveEffects": 6
+      }
+    },
+    {
+      "id": "world.rest_camp",
+      "role": "completed or interrupted rest transaction and ambush risk",
+      "config": {
+        "requiresSafeZone": false,
+        "restoresPerRestAbilities": true
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "social.party_system",
+      "event": "social.partyMemberJoined",
+      "to": "social.party_formation",
+      "note": "Membership changes update formation without making formation the party owner."
+    },
+    {
+      "from": "combat.aggro_table",
+      "event": "combat.aggroGained",
+      "to": "combat.tactical_pause",
+      "note": "A new hostile engagement may trigger enemy-spotted auto-pause."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.tactical_pause",
+      "note": "Party-member defeat is an optional auto-pause reason."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "combat.tactical_pause",
+      "note": "Effect pause is available but disabled by default."
+    },
+    {
+      "from": "combat.tactical_pause",
+      "event": "combat.tacticalPauseChanged",
+      "to": "combat.party_command_queue",
+      "note": "The running edge releases queued orders in resume mode."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.party_command_queue",
+      "note": "Defeat cancels orders owned by or explicitly targeting the defeated unit."
+    },
+    {
+      "from": "combat.party_command_queue",
+      "event": "utility.commandRequested",
+      "to": "utility.command_bus",
+      "note": "Released player intentions enter the common dispatch channel."
+    },
+    {
+      "from": "utility.behavior_fsm",
+      "event": "utility.commandRequested",
+      "to": "utility.command_bus",
+      "note": "AI uses the same bus rather than a private mutation path."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "utility.behavior_fsm",
+      "note": "Dispatch acknowledges and advances autonomous behavior."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "movement.pathfinding_system",
+      "note": "Move-kind orders request walkable paths; unrelated commands are ignored."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "movement.pursuit_agent",
+      "note": "Pursue-kind orders execute continuous-time movement."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "combat.prepared_spellbook",
+      "note": "Spell orders must pass preparation and remaining-cast checks before execution."
+    },
+    {
+      "from": "combat.prepared_spellbook",
+      "event": "combat.spellCastAuthorized",
+      "to": "combat.hotbar_abilities",
+      "note": "Authorization enters the ordinary cast executor without paying a slot yet."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.abilityCast",
+      "to": "combat.prepared_spellbook",
+      "note": "Only a successful correlated cast spends one prepared cast."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Spell damage uses the single damage pipeline."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Spell effect payloads use the ordinary status ledger."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.unit_roster",
+      "note": "The roster receives the same hit stream for unit-state consequences."
+    },
+    {
+      "from": "movement.pursuit_agent",
+      "event": "movement.moveExecuted",
+      "to": "combat.unit_roster",
+      "note": "Continuous movement updates authoritative positions."
+    },
+    {
+      "from": "movement.pursuit_agent",
+      "event": "movement.pursuitArrived",
+      "to": "combat.contact_attack",
+      "note": "Arrival permits the real-time melee cadence to strike in reach."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Enemy melee and spells share final damage resolution."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Melee payloads may apply status without a second effect owner."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.unit_roster",
+      "note": "Melee consequences reach the same authoritative roster."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.damageResolved",
+      "to": "combat.aggro_table",
+      "note": "Damage updates threat and target memory."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.damageResolved",
+      "to": "utility.behavior_fsm",
+      "note": "AI reacts to resolved outcomes rather than raw damage requests."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.unit_roster",
+      "note": "Defeated units leave the live roster."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "utility.behavior_fsm",
+      "note": "AI clears behavior associated with defeated entities."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.rosterChanged",
+      "to": "combat.aggro_table",
+      "note": "Target selection reads current living units."
+    },
+    {
+      "from": "movement.pathfinding_system",
+      "event": "movement.pathFailed",
+      "to": "utility.behavior_fsm",
+      "note": "Failed routes return to AI planning instead of fabricating movement."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restCompleted",
+      "to": "combat.prepared_spellbook",
+      "note": "Only completed rest restores prepared casts; interrupted rest has no recovery wire."
+    }
+  ],
+  "criticalComponents": [
+    "combat.tactical_pause",
+    "combat.party_command_queue",
+    "utility.command_bus",
+    "combat.prepared_spellbook",
+    "combat.hotbar_abilities",
+    "combat.damage_resolver",
+    "combat.unit_roster",
+    "world.rest_camp"
+  ],
+  "acceptanceCriteria": [
+    "Manual pause and every enabled auto-pause reason drive one authoritative simulation clock: time scale is 0 while paused and 1 while running, with no initiative or turn events introduced.",
+    "An auto-pause reason emits combat.autoPauseTriggered only on a running-to-paused transition; repeated events while already paused do not create a pause storm, and disabled reasons never pause.",
+    "While paused, each party member can hold up to the configured FIFO cap without movement, cooldown, status-duration, spell-slot or damage advancement.",
+    "Resume mode releases pending orders in deterministic party order and per-member FIFO order; submit mode releases only on input.submitCommands, and no order dispatches twice.",
+    "Defeat removes pending orders owned by the defeated member and orders explicitly targeting it before release; rejected orders never reach the Command Bus.",
+    "Released player orders and Behavior FSM requests both pass through utility.command_bus, whose ordering, depth cap and dispatch acknowledgement remain the only dispatch policy.",
+    "Unknown, unprepared or exhausted spell orders are rejected before Hotbar execution and emit no combat.hit, cooldown, resource payment or slot spend.",
+    "An authorized spell still obeys Hotbar range, cooldown and resource validation; only a successful correlated combat.abilityCast spends exactly one prepared cast, while a rejected cast spends none.",
+    "A completed rest restores remaining casts to the configured capacities without changing preparation, and an interrupted rest restores nothing; duplicate completion transaction ids cannot restore or spend twice.",
+    "Hotbar and Contact Attack both emit combat.hit into the same Damage Resolver, Status Effects and Unit Roster paths; no component computes a private final damage total.",
+    "Aggro owns target choice, Pursuit Agent owns continuous movement, Contact Attack owns enemy melee cadence, and Tactical Pause introduces no combat.turnStarted dependency or turn-order requirement.",
+    "Removing Party Formation does not prevent direct per-member combat orders; removing Behavior FSM, Pursuit Agent and Contact Attack leaves a valid player-controlled spell loop without enemy AI.",
+    "Replaying identical initial state, timed inputs, command payloads and seed produces the same pause transitions, release order, cast spending, damage outcomes and remaining prepared casts."
+  ]
+}
