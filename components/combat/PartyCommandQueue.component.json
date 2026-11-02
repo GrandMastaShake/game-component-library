@@ -1,1 +1,118 @@
-{"id":"combat.party_command_queue","name":"Party Command Queue","category":"combat","version":"0.1.0","description":"Holds a short FIFO of intended orders for each party member while continuous time is paused, then releases them in a deterministic party order. It owns intention lifetime — append, reject, clear, and cancellation on defeat — not movement, casting, cooldowns, or AI. Every released order becomes utility.commandRequested on the existing Command Bus; there is no private path into a caster or walker. Resume is the default release edge, while explicit-submit mode supports games that pause and release as separate decisions.","platform":["agnostic"],"implementations":[{"target":"canvas2d","status":"unmapped","module":null},{"target":"webgl","status":"unmapped","module":null},{"target":"roblox","status":"unmapped","module":null},{"target":"unity","status":"unmapped","module":null},{"target":"godot","status":"unmapped","module":null}],"inputs":[{"name":"maxOrdersPerMember","type":"number","required":false,"default":4,"description":"Maximum pending orders for one member. Zero disables queuing; the cap prevents an unbounded pause from becoming an unbounded burst."},{"name":"allowOrdersWhileRunning","type":"boolean","required":false,"default":true,"description":"Whether new intentions may be appended without pausing. Release still follows releaseOn."},{"name":"releaseOn","type":"string","required":false,"default":"resume","enum":["resume","submit"],"description":"resume releases when tactical pause changes to running; submit releases only on input.submitCommands."},{"name":"clearOrdersOnDefeat","type":"boolean","required":false,"default":true,"description":"Remove orders owned by a defeated member and orders whose explicit target was defeated before either can dispatch."}],"outputs":[{"name":"pendingByMember","type":"object","description":"FIFO orders keyed by party-member id, including stable order ids and payload data."},{"name":"pendingCount","type":"number","description":"Total queued orders across all members."},{"name":"nextOrderFor","type":"function","description":"Read the next pending order for one member without releasing it."}],"events":{"emits":["utility.commandRequested","combat.partyOrderQueued","combat.partyOrderRejected","combat.partyOrdersCleared","combat.partyOrdersReleased"],"listensTo":["input.queuePartyCommand","input.clearPartyOrders","input.submitCommands","combat.tacticalPauseChanged","combat.entityDefeated"]},"dependencies":["social.party_system","combat.unit_roster","combat.tactical_pause","utility.command_bus"],"tags":["crpg","rtwp","party","commands","queue"],"provenance":"BG2-inspired extraction pass on 2026-11-02 searched Command Bus, Behavior FSM, Robot Command Queue, Command Round, Hotbar Abilities and Party Formation. Command Bus orders already-emitted requests, Behavior FSM produces AI intentions, robot commands are actuator-specific, and Command Round locks simultaneous turn commands. None owned per-party-member FIFO intentions across a continuous-time pause, so this fills that gap while preserving Command Bus as the only dispatch channel."}
+{
+  "id": "combat.party_command_queue",
+  "name": "Party Command Queue",
+  "category": "combat",
+  "version": "0.1.0",
+  "description": "Holds a short FIFO of intended orders for each party member while continuous time is paused, then releases them in a deterministic party order. It owns intention lifetime \u2014 append, reject, clear, and cancellation on defeat \u2014 not movement, casting, cooldowns, or AI. Every released order becomes utility.commandRequested on the existing Command Bus; there is no private path into a caster or walker. Resume is the default release edge, while explicit-submit mode supports games that pause and release as separate decisions.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxOrdersPerMember",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Maximum pending orders for one member. Zero disables queuing; the cap prevents an unbounded pause from becoming an unbounded burst."
+    },
+    {
+      "name": "allowOrdersWhileRunning",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether new intentions may be appended without pausing. Release still follows releaseOn."
+    },
+    {
+      "name": "releaseOn",
+      "type": "string",
+      "required": false,
+      "default": "resume",
+      "enum": [
+        "resume",
+        "submit"
+      ],
+      "description": "resume releases when tactical pause changes to running; submit releases only on input.submitCommands."
+    },
+    {
+      "name": "clearOrdersOnDefeat",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Remove orders owned by a defeated member and orders whose explicit target was defeated before either can dispatch."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pendingByMember",
+      "type": "object",
+      "description": "FIFO orders keyed by party-member id, including stable order ids and payload data."
+    },
+    {
+      "name": "pendingCount",
+      "type": "number",
+      "description": "Total queued orders across all members."
+    },
+    {
+      "name": "nextOrderFor",
+      "type": "function",
+      "description": "Read the next pending order for one member without releasing it."
+    }
+  ],
+  "events": {
+    "emits": [
+      "utility.commandRequested",
+      "combat.partyOrderQueued",
+      "combat.partyOrderRejected",
+      "combat.partyOrdersCleared",
+      "combat.partyOrdersReleased"
+    ],
+    "listensTo": [
+      "input.queuePartyCommand",
+      "input.clearPartyOrders",
+      "input.submitCommands",
+      "combat.tacticalPauseChanged",
+      "combat.entityDefeated"
+    ]
+  },
+  "dependencies": [
+    "social.party_system",
+    "combat.unit_roster",
+    "combat.tactical_pause",
+    "utility.command_bus"
+  ],
+  "tags": [
+    "crpg",
+    "rtwp",
+    "party",
+    "commands",
+    "queue"
+  ],
+  "provenance": "BG2-inspired extraction pass on 2026-11-02 searched Command Bus, Behavior FSM, Robot Command Queue, Command Round, Hotbar Abilities and Party Formation. Command Bus orders already-emitted requests, Behavior FSM produces AI intentions, robot commands are actuator-specific, and Command Round locks simultaneous turn commands. None owned per-party-member FIFO intentions across a continuous-time pause, so this fills that gap while preserving Command Bus as the only dispatch channel."
+}
