@@ -1,0 +1,330 @@
+{
+  "id": "compound.quest_dialogue_loop",
+  "name": "Quest Dialogue Loop",
+  "version": "0.1.0",
+  "description": "A reusable RPG narrative loop: branching dialogue offers and advances staged quests; combat, inventory, world flags, and explicit objective credits advance only Quest Log; completion enters an exactly-once mixed-reward coordinator; XP, currency, and inventory own their own grants; HUD and journal projections update without gaining authority; completed narrative changes trigger persistence. Attribute checks and condition reads are synchronous queries, not event round trips. Legacy flat quests and inline rewards remain available outside coordinated mode.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "ui.dialogue_box",
+      "role": "conversation rendering and raw choice intentions",
+      "config": {
+        "tree": {
+          "start": "intro",
+          "nodes": {}
+        }
+      }
+    },
+    {
+      "id": "ui.dialogue_tree_engine",
+      "role": "conditional traversal, once-only choices, synchronous checks, and consequence requests",
+      "config": {
+        "dialogueGraphs": {},
+        "initialDialogueStates": {},
+        "allowRevisitResolvedNodes": false
+      }
+    },
+    {
+      "id": "progression.attribute_sheet",
+      "role": "synchronous deterministic attribute checks and restorable roll cursor",
+      "config": {
+        "checkSeed": 0,
+        "initialCheckCount": 0,
+        "baseAttributes": {},
+        "initialAttributes": {}
+      }
+    },
+    {
+      "id": "world.world_state_flags",
+      "role": "persistent world consequences and synchronous flag-condition reads",
+      "config": {
+        "flagDefinitions": {},
+        "initialFlags": {}
+      }
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "eligible enemy-defeat facts for staged objectives",
+      "config": {}
+    },
+    {
+      "id": "inventory.core_inventory",
+      "role": "item-reward ownership and item-added objective facts",
+      "config": {
+        "initialItems": []
+      }
+    },
+    {
+      "id": "progression.quest_log",
+      "role": "sole authority for quest acceptance, staged objectives, transitions, completion, and failure",
+      "config": {
+        "quests": [],
+        "questGraphs": [],
+        "initialQuestStates": {},
+        "rewardMode": "coordinated",
+        "maxActiveQuests": 10
+      }
+    },
+    {
+      "id": "progression.quest_reward_coordinator",
+      "role": "stable grant ids, restored deduplication, and one mixed-reward emission per completion",
+      "config": {
+        "completedGrantIds": [],
+        "requireCompletionId": true,
+        "allowEmptyRewards": true
+      }
+    },
+    {
+      "id": "progression.xp_leveling",
+      "role": "XP grant ownership and level growth",
+      "config": {
+        "xpPerHit": 0,
+        "xpPerKill": 0,
+        "startingLevel": 1,
+        "startingXp": 0
+      }
+    },
+    {
+      "id": "economy.currency",
+      "role": "currency grant ownership and balance",
+      "config": {
+        "currencyName": "Coins",
+        "startingBalance": 0
+      }
+    },
+    {
+      "id": "ui.quest_tracker",
+      "role": "compact pinned objective HUD projection",
+      "config": {
+        "maxTrackedQuests": 3,
+        "allowPinning": true
+      }
+    },
+    {
+      "id": "ui.safe_area_layout",
+      "role": "safe layout metrics for the removable tracker",
+      "config": {}
+    },
+    {
+      "id": "ui.quest_journal",
+      "role": "filterable active, completed, and failed quest read model",
+      "config": {
+        "defaultFilter": "active",
+        "showOptionalObjectives": true,
+        "sortOrder": "recent"
+      }
+    },
+    {
+      "id": "ui.narrative_journal",
+      "role": "clue and lore entries requested by dialogue consequences",
+      "config": {
+        "autoRecord": true,
+        "groupBy": "thread"
+      }
+    },
+    {
+      "id": "persistence.save_system",
+      "role": "durable snapshots after completed quest, dialogue, flag, journal, and reward changes",
+      "config": {
+        "autosaveIntervalSeconds": 120
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "progression.quest_log",
+      "note": "Defeats are objective facts; combat never completes a quest directly."
+    },
+    {
+      "from": "inventory.core_inventory",
+      "event": "inventory.itemAdded",
+      "to": "progression.quest_log",
+      "note": "Collection objectives observe the existing inventory owner."
+    },
+    {
+      "from": "world.world_state_flags",
+      "event": "world.worldFlagChanged",
+      "to": "progression.quest_log",
+      "note": "Ordered failure or branch conditions reevaluate on relevant world changes."
+    },
+    {
+      "from": "ui.dialogue_box",
+      "event": "ui.dialogueChoiceMade",
+      "to": "ui.dialogue_tree_engine",
+      "note": "The renderer reports a choice; the engine interprets it."
+    },
+    {
+      "from": "ui.dialogue_tree_engine",
+      "event": "ui.consequenceFlagSet",
+      "to": "world.world_state_flags",
+      "note": "Dialogue requests a world consequence without owning flag state."
+    },
+    {
+      "from": "ui.dialogue_tree_engine",
+      "event": "ui.dialogueQuestActionRequested",
+      "to": "progression.quest_log",
+      "note": "Offers, acceptance, objective credits, advances, failures, and turn-ins enter only Quest Log."
+    },
+    {
+      "from": "ui.dialogue_tree_engine",
+      "event": "ui.dialogueJournalEntryRequested",
+      "to": "ui.narrative_journal",
+      "note": "Narrative Journal records clues, not quest completion."
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questStarted",
+      "to": "ui.quest_tracker"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questStarted",
+      "to": "ui.quest_journal"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questStarted",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.objectiveUpdated",
+      "to": "ui.quest_tracker"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.objectiveUpdated",
+      "to": "ui.quest_journal"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questStageChanged",
+      "to": "ui.quest_tracker"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questStageChanged",
+      "to": "ui.quest_journal"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questStageChanged",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questReady",
+      "to": "ui.quest_tracker"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questReady",
+      "to": "ui.quest_journal"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questCompleted",
+      "to": "progression.quest_reward_coordinator",
+      "note": "Coordinated mode carries a stable completionId and rewards bundle with no inline payout."
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questCompleted",
+      "to": "ui.quest_journal"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questCompleted",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questFailed",
+      "to": "ui.quest_journal"
+    },
+    {
+      "from": "progression.quest_log",
+      "event": "progression.questFailed",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "progression.quest_reward_coordinator",
+      "event": "progression.rewardGranted",
+      "to": "progression.xp_leveling",
+      "note": "XP consumes only xp entries from the mixed grant."
+    },
+    {
+      "from": "progression.quest_reward_coordinator",
+      "event": "progression.rewardGranted",
+      "to": "economy.currency",
+      "note": "Currency consumes only currency entries from the mixed grant."
+    },
+    {
+      "from": "progression.quest_reward_coordinator",
+      "event": "progression.rewardGranted",
+      "to": "inventory.core_inventory",
+      "note": "Inventory consumes only item entries from the mixed grant."
+    },
+    {
+      "from": "progression.quest_reward_coordinator",
+      "event": "progression.rewardGranted",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "world.world_state_flags",
+      "event": "world.worldFlagChanged",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "ui.dialogue_tree_engine",
+      "event": "ui.dialogueNodeAdvanced",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "ui.narrative_journal",
+      "event": "ui.journalEntryAdded",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "persistence.save_system"
+    },
+    {
+      "from": "ui.safe_area_layout",
+      "event": "ui.layoutChanged",
+      "to": "ui.quest_tracker"
+    }
+  ],
+  "criticalComponents": [
+    "ui.dialogue_tree_engine",
+    "progression.quest_log",
+    "progression.quest_reward_coordinator",
+    "progression.xp_leveling",
+    "economy.currency",
+    "inventory.core_inventory",
+    "world.world_state_flags",
+    "persistence.save_system"
+  ],
+  "acceptanceCriteria": [
+    "Legacy flat quests retain inlineLegacy payout by default, and legacy dialogue choices without extended fields retain their existing traversal behavior.",
+    "Staged quests enforce prerequisites and ordered transitions; required objectives advance stages while optional objectives never block them.",
+    "Objective dedupe keys and stable completion ids prevent repeated combat, inventory, or dialogue facts from producing duplicate progress or completion.",
+    "Failure and completion terminals settle exactly once, and no terminal stage can continue transitioning afterward.",
+    "Dialogue conditions query quest, flag, and attribute owners; unavailable choices neither traverse nor emit consequences.",
+    "Attribute checks execute synchronously through Attribute Sheet, and the same seed, restored check cursor, attributes, difficulties, and choice sequence reproduce their results.",
+    "A once-only dialogue choice restored in resolvedChoiceIds cannot emit its quest, flag, or journal consequences again.",
+    "Dialogue Tree Engine emits consequence requests but never directly changes quest state, world flags, journal entries, XP, currency, or inventory.",
+    "Quest Tracker, Quest Journal, and Narrative Journal are read-only projections; removing any or all of them does not change quest progression or rewards.",
+    "Coordinated quest completion suppresses inline questRewarded and emits one stable completion bundle to Quest Reward Coordinator.",
+    "A duplicate or restored completionId produces no second rewardGranted event, while malformed bundles are rejected before entering the ledger.",
+    "A mixed reward reaches XP, Currency, and Core Inventory through their existing reward sinks, with each owner consuming only its declared grant kinds.",
+    "Quest state, dialogue positions, world flags, objective dedupe keys, reward ledger ids, and attribute check cursor restore through their respective owners without replaying completed side effects.",
+    "Rejected dialogue choices, unavailable quest actions, duplicate completions, and malformed rewards do not trigger successful-change persistence events.",
+    "Safe Area Layout and Quest Tracker can be removed without affecting the dialogue-to-quest-to-reward core; combat and inventory objective sources are optional when a quest does not use them.",
+    "Content validation rejects unknown quest actions, bad credit targets, dangling dialogue destinations, quest-stage cycles, unreachable quest stages, and missing completion terminals before runtime.",
+    "The pack contains original generic contracts and examples only; it supplies no commercial writing, characters, quests, items, or exact balance tables and implies no runtime adapter implementation."
+  ]
+}
