@@ -1,0 +1,62 @@
+{
+  "id": "inventory.gear_comparison",
+  "name": "Gear Comparison",
+  "category": "inventory",
+  "description": "The stat-by-stat difference between a rolled candidate and what is currently equipped in its slot. combat.equipment_slots owns the worn items and their actual bonuses; this reads that state and the candidate's rolled affixes, then publishes named-key deltas, a configurable build-weighted score and which side of the comparison wins each stat. It never equips the candidate and never treats a single item-power number as the decision: a player may value a utility affix or set threshold above raw score. It owns comparison only — no item generation, inventory mutation, tooltip rendering or combat-stat application — so the same result can feed a tooltip, pickup policy or build-analysis screen.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "statWeights",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Optional build-specific value per named stat, used only for the advisory score. Missing stats use neutral weight and remain visible as deltas."
+    },
+    {
+      "name": "lowerIsBetterStats",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Named stats for which a reduction is an upgrade, such as cooldown or resource cost. Every other stat treats a positive delta as improvement."
+    },
+    {
+      "name": "includeSetThresholdDeltas",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether the comparison reports set pieces gained or lost if the candidate replaces the equipped item. It reads set state and never applies the change."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "lastComparison",
+      "type": "object",
+      "description": "Candidate, equipped item, slot, per-stat deltas, set-threshold changes and advisory scores."
+    },
+    {
+      "name": "scoreDelta",
+      "type": "number",
+      "description": "Candidate score minus equipped score under the configured weights. Advisory only, never an automatic equip decision."
+    },
+    {
+      "name": "statDeltas",
+      "type": "object",
+      "description": "Candidate minus equipped value for every stat present on either item."
+    }
+  ],
+  "events": {
+    "emits": ["inventory.gearCompared"],
+    "listensTo": ["inventory.itemGenerated", "combat.itemEquipped", "combat.itemUnequipped"]
+  },
+  "dependencies": ["combat.equipment_slots", "combat.gear_sets"],
+  "tags": ["arpg", "gear", "comparison", "build"],
+  "provenance": "Added 2026-11-02 for the Diablo loot-and-inventory extraction. Searched equipment and UI ownership first: combat.equipment_slots publishes actual worn bonuses and a single-item bonusesOf query, combat.gear_sets owns set thresholds, and ui.hud renders rather than calculates build deltas. Nothing compares a rolled candidate against the equipped item across all named stats without mutating gear. Library-native; this is an advisory calculation, not an auto-equip rule or tooltip view."
+}
