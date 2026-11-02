@@ -21,6 +21,7 @@ compound rather than a section in a README.
 | `compound.isometric_tile_world` | 10 | 7 | A stepped isometric board with elevation |
 | `compound.loot_to_build_loop` | 12 | 15 | Drop decisions, affix loot, equipment comparison, set bonuses and salvage |
 | `compound.monster_battle_capture` | 12 | 20 | Command rounds, weakening, capture, party storage and dex registration |
+| `compound.party_rtwp_combat` | 16 | 29 | Tactical pause, queued party orders, prepared spells, real-time AI and rest recovery |
 | `compound.party_quest_sharing_loop` | 4 | 3 | Quest credit shared across a party |
 | `compound.pet_hatching_loop` | 6 | 4 | Eggs, hatching, and what comes out |
 | `compound.pet_persistence_loop` | 6 | 2 | Persistent pet ownership state |
