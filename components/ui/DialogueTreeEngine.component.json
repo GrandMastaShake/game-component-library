@@ -2,8 +2,8 @@
   "id": "ui.dialogue_tree_engine",
   "name": "Dialogue Tree Engine",
   "category": "ui",
-  "description": "The brain behind ui.dialogue_box. The box renders lines and reports which button was pressed; this engine owns what those presses mean \u2014 node-graph traversal, conditional branches gated on progression.attribute_sheet checks, and consequence flags that outlive the conversation. Checks are resolved by asking the attribute sheet, never by reading stats directly, so dice rules live in exactly one place. It does not own what a consequence flag does to the world: world.world_state_flags and social.reputation_system listen for ui.consequenceFlagSet and decide. It also refuses to persist itself \u2014 save and load of conversation position is persistence.save_system's job, driven by the same events everything else hears.",
-  "version": "0.1.0",
+  "description": "The brain behind ui.dialogue_box. The box renders lines and reports which button was pressed; this engine owns what those presses mean — node-graph traversal, conditional branches, synchronous checks through progression.attribute_sheet, once-only choice history, and restorable conversation positions. Legacy {label, to, act} choices remain valid. Extended choices may declare stable ids, conditions, once, checks, and consequences; nodes may declare onEnter consequences. Flag writes go to world.world_state_flags, quest actions to progression.quest_log, and journal requests to ui.narrative_journal through explicit events. This engine never applies those world changes itself and never persists itself.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -40,14 +40,14 @@
       "type": "object",
       "required": false,
       "default": {},
-      "description": "Node tables keyed by conversation id: text ref, choices, conditions, consequences. Content lives in data so writers never touch engine code."
+      "description": "Node tables keyed by conversation id: {start, nodes: {id: {speaker?, text, choices, onEnter?}}}. Legacy choices remain {label, to, act?}. Extended choices add a stable id plus optional conditions, once, consequences, and check {attribute, difficulty?, onPass, onFail}; a checked choice uses those two destinations instead of to. Null destinations end the conversation. Conditions support world flags, quest states and attributes with all/any/not. Consequences are setFlag, quest, or journal actions. Every reachable node retains at least one choice so Dialogue Box can always close it."
     },
     {
       "name": "defaultSkillCheckDifficulty",
       "type": "number",
       "required": false,
       "default": 10,
-      "description": "Difficulty used when a check omits its own. 10 is a coin-flip for an average build \u2014 the right baseline for checks that exist to flavor, not to gate."
+      "description": "Difficulty used when a check omits its own. 10 is a coin-flip for an average build — the right baseline for checks that exist to flavor, not to gate."
     },
     {
       "name": "allowRevisitResolvedNodes",
@@ -55,6 +55,13 @@
       "required": false,
       "default": false,
       "description": "Whether the player can re-ask resolved branches. False keeps choices weighty; true is the accessibility-friendly codex mode."
+    },
+    {
+      "name": "initialDialogueStates",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restorable state keyed by conversation id: currentNodeId and resolvedChoiceIds. Once-only choices restored here cannot emit consequences again. World flags, quest state, journal entries, and attribute check history restore through their own owners, not through this input."
     }
   ],
   "outputs": [
@@ -67,6 +74,21 @@
       "name": "activeConsequenceFlags",
       "type": "array",
       "description": "Flags set so far by the active conversation."
+    },
+    {
+      "name": "availableChoices",
+      "type": "array",
+      "description": "Choices whose conditions currently pass, with resolved-check metadata but without exposing hidden future branches."
+    },
+    {
+      "name": "resolvedChoiceIds",
+      "type": "array",
+      "description": "Stable choice ids already resolved in the active conversation; the once-only dedupe boundary."
+    },
+    {
+      "name": "dialogueStates",
+      "type": "object",
+      "description": "Restorable current positions and resolved-choice history keyed by conversation id."
     }
   ],
   "events": {
@@ -74,7 +96,9 @@
       "ui.dialogueNodeAdvanced",
       "ui.skillCheckPassed",
       "ui.skillCheckFailed",
-      "ui.consequenceFlagSet"
+      "ui.consequenceFlagSet",
+      "ui.dialogueQuestActionRequested",
+      "ui.dialogueJournalEntryRequested"
     ],
     "listensTo": [
       "ui.dialogueChoiceMade"
