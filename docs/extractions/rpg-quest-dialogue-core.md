@@ -1,7 +1,7 @@
 # RPG Quest & Dialogue Core
 
-Status: **validated library pack**  
-Reusable output: `compound.quest_dialogue_loop`  
+Status: **validated library pack**
+Reusable output: `compound.quest_dialogue_loop`
 Content gate: `tools/validate_narrative_graphs.py`
 
 ## Purpose
