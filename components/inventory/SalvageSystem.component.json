@@ -2,15 +2,38 @@
   "id": "inventory.salvage_system",
   "name": "Salvage System",
   "category": "inventory",
-  "description": "Turns an unwanted gear instance into configured crafting materials instead of selling or deleting it. A salvage rule reads the base item, rarity and rolled affixes to determine the material grant, so a rare item can return more than a common without the bag knowing anything about gear quality. The operation is atomic at the contract level: emit inventory.itemSalvaged to remove exactly one eligible carried instance, then inventory.itemGranted for the resulting materials; rejection emits neither. Equipped, locked, quest-marked or unknown items are refused by default, preventing an inventory cleanup from silently destroying a build or objective. This component owns the conversion recipe only — the bag owns removal and storage, crafting owns later material use, and presentation owns confirmation UI.",
+  "description": "Turns an unwanted gear instance into configured crafting materials instead of selling or deleting it. A salvage rule reads the base item, rarity and rolled affixes to determine the material grant, so a rare item can return more than a common without the bag knowing anything about gear quality. The operation is atomic at the contract level: emit inventory.itemSalvaged to remove exactly one eligible carried instance, then inventory.itemGranted for the resulting materials; rejection emits neither. Equipped, locked, quest-marked or unknown items are refused by default, preventing an inventory cleanup from silently destroying a build or objective. This component owns the conversion recipe only \u2014 the bag owns removal and storage, crafting owns later material use, and presentation owns confirmation UI.",
   "version": "0.1.0",
-  "platform": ["agnostic"],
+  "platform": [
+    "agnostic"
+  ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -54,10 +77,23 @@
     }
   ],
   "events": {
-    "emits": ["inventory.itemSalvaged", "inventory.itemGranted", "inventory.salvageRejected"],
-    "listensTo": ["input.salvageItem"]
+    "emits": [
+      "inventory.itemSalvaged",
+      "inventory.itemGranted",
+      "inventory.salvageRejected"
+    ],
+    "listensTo": [
+      "input.salvageItem"
+    ]
   },
-  "dependencies": ["inventory.slotted_bag"],
-  "tags": ["arpg", "salvage", "materials", "inventory"],
+  "dependencies": [
+    "inventory.slotted_bag"
+  ],
+  "tags": [
+    "arpg",
+    "salvage",
+    "materials",
+    "inventory"
+  ],
   "provenance": "Added 2026-11-02 for the Diablo loot-and-inventory extraction. Searched item sinks first: inventory.inventory_combine combines carried inputs into another item, economy.shop buys and sells for currency, inventory.crafting_bench spends materials on recipes, and inventory.slotted_bag only stores or drops items. None converts one rolled gear instance back into rarity-sensitive materials. Library-native; this is an item sink, not a crafting bench, shop or inventory owner."
 }
