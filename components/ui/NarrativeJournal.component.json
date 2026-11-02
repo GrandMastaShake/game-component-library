@@ -2,8 +2,8 @@
   "id": "ui.narrative_journal",
   "name": "Narrative Journal",
   "category": "ui",
-  "description": "Everything the player has learned, written down without being asked. Clues are recorded automatically as they are discovered, because an adventure game that expects note-taking is an adventure game that punishes playing in short sessions. Entries are grouped by the thread they belong to rather than chronologically, since the question a returning player has is 'what was I doing about the safe', not 'what happened at 14:32'. The journal is deliberately a reader and not an oracle: it records what was found and never what to do next, which is ui.hint_system's job and a different promise.",
-  "version": "0.1.0",
+  "description": "Everything the player has learned, written down without being asked. Clues are recorded automatically as they are discovered, because an adventure game that expects note-taking is an adventure game that punishes playing in short sessions. Entries are grouped by the thread they belong to rather than chronologically, since the question a returning player has is 'what was I doing about the safe', not 'what happened at 14:32'. The journal is deliberately a reader and not an oracle: it records what was found and never what to do next, which is ui.hint_system's job and a different promise. Dialogue Tree Engine can request an entry through ui.dialogueJournalEntryRequested; the journal owns its presentation and unread state, while the engine owns the choice that caused it.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -84,7 +84,8 @@
       "world.hotspotUsed",
       "world.lockOpened",
       "ui.dialogueEnded",
-      "input.interact"
+      "input.interact",
+      "ui.dialogueJournalEntryRequested"
     ]
   },
   "dependencies": [

@@ -1,0 +1,134 @@
+{
+  "id": "ui.quest_journal",
+  "name": "Quest Journal",
+  "category": "ui",
+  "version": "0.1.0",
+  "description": "A player-facing read model of active, ready, completed, and failed quests with current-stage and per-objective progress. Quest Log remains the sole authority for acceptance, transitions, completion, failure, and rewards; Quest Tracker remains the compact pinned HUD; Narrative Journal remains the home for clues and learned lore. This component owns journal filtering, selection, ordering, and unread presentation only. Removing it changes no quest or reward state.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxQuests",
+      "type": "number",
+      "required": false,
+      "default": 200,
+      "description": "Maximum projected quest entries retained for display. This is a presentation window, not deletion from Quest Log."
+    },
+    {
+      "name": "defaultFilter",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "all",
+        "active",
+        "ready",
+        "completed",
+        "failed"
+      ],
+      "description": "Initial player-facing filter."
+    },
+    {
+      "name": "showOptionalObjectives",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether optional objectives appear alongside required stage progress."
+    },
+    {
+      "name": "sortOrder",
+      "type": "string",
+      "required": false,
+      "default": "recent",
+      "enum": [
+        "recent",
+        "title",
+        "state"
+      ],
+      "description": "Display ordering only; it never changes quest transition priority."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "quests",
+      "type": "array",
+      "description": "Filtered read-only entries as {questId, title, state, stageId, objectives, completionId}."
+    },
+    {
+      "name": "activeQuests",
+      "type": "array",
+      "description": "Active and ready entries, including their current-stage progress."
+    },
+    {
+      "name": "completedQuests",
+      "type": "array"
+    },
+    {
+      "name": "failedQuests",
+      "type": "array"
+    },
+    {
+      "name": "selectedQuest",
+      "type": "object",
+      "description": "The currently expanded read-only entry, or null."
+    },
+    {
+      "name": "unreadCount",
+      "type": "number",
+      "description": "Changed entries not yet seen since the journal was last opened."
+    }
+  ],
+  "events": {
+    "emits": [
+      "ui.questJournalOpened",
+      "ui.questJournalFilterChanged"
+    ],
+    "listensTo": [
+      "progression.questStarted",
+      "progression.objectiveUpdated",
+      "progression.questStageChanged",
+      "progression.questReady",
+      "progression.questCompleted",
+      "progression.questFailed"
+    ]
+  },
+  "dependencies": [
+    "progression.quest_log"
+  ],
+  "tags": [
+    "ui",
+    "quests",
+    "journal",
+    "objectives",
+    "read-model"
+  ],
+  "provenance": "Added for the RPG Quest & Dialogue Core pack after searching progression.quest_log, ui.quest_tracker, ui.narrative_journal, and ui.dialogue_box. Quest Log owns the underlying state, Quest Tracker owns a small pinned HUD, and Narrative Journal owns discovered clues rather than quest history. The distinct boundary is a removable active/completed/failed quest-browser projection with filtering, selection, and unread presentation; it duplicates no progression or narrative authority."
+}
