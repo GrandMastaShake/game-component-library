@@ -28,6 +28,7 @@ compound rather than a section in a README.
 | `compound.pet_progression_loop` | 6 | 4 | Companion XP, feedback, skills, saving |
 | `compound.procedural_world_bootstrap` | 14 | 10 | Seeded terrain, biomes, caves, water, props |
 | `compound.quest_reward_loop` | 5 | 5 | Completion, reward state, feedback, saving |
+| `compound.quest_dialogue_loop` | 15 | 31 | Staged quests, branching dialogue, exactly-once rewards and journals |
 | **`compound.real_time_encounter`** | 6 | 7 | **A place with hostiles in it, no turn structure** |
 | `compound.rpg_buildcraft_loop` | 10 | 14 | Ranked skills, attributes, ability loadouts, safe respecs and persistence |
 | `compound.server_authoritative_trade_flow` | 5 | 6 | Server-authoritative trade topology |
