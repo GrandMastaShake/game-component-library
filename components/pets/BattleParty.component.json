@@ -1,0 +1,62 @@
+{
+  "id": "pets.battle_party",
+  "name": "Battle Party",
+  "category": "pets",
+  "description": "Which owned creatures are active in the current battle, and which healthy party member must replace a defeated one. pets.team_composition owns the durable party and storage boxes; this owns only encounter-scoped active slots and switching. A voluntary switch is a battle command, while a knockout replacement is a forced decision that does not get silently auto-picked unless the host configures that policy. When no usable replacement remains it emits pets.partyDefeated, giving combat.command_round one authoritative loss signal. It owns no party membership, capture odds, damage or turn ordering, which keeps storage, combat math and sequencing in their existing components.",
+  "version": "0.1.0",
+  "platform": ["agnostic"],
+  "implementations": [
+    {"target": "canvas2d", "status": "unmapped", "module": null},
+    {"target": "webgl", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null},
+    {"target": "godot", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {
+      "name": "activeSlotsPerSide",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Active creatures per side. One gives the classic single encounter; two enables double battles without changing party storage."
+    },
+    {
+      "name": "allowVoluntarySwitch",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a player may spend a command replacing an active creature with a healthy party member."
+    },
+    {
+      "name": "automaticReplacement",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether the first healthy replacement is selected after a knockout. False emits the replacement requirement and waits for input."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeBySide",
+      "type": "object",
+      "description": "Encounter side to active creature ids. Membership remains owned by Team Composition."
+    },
+    {
+      "name": "availableReplacements",
+      "type": "array",
+      "description": "Healthy, non-active party creatures eligible for a voluntary or forced switch."
+    },
+    {
+      "name": "replacementRequiredFor",
+      "type": "string",
+      "description": "Side that must choose a replacement, or empty when no forced decision is pending."
+    }
+  ],
+  "events": {
+    "emits": ["combat.activeCreatureChanged", "combat.switchRejected", "pets.partyDefeated"],
+    "listensTo": ["input.selectActiveCreature", "combat.switchCommanded", "combat.entityDefeated"]
+  },
+  "dependencies": ["pets.team_composition", "combat.unit_roster"],
+  "tags": ["monster-taming", "party", "switching", "knockout"],
+  "provenance": "Added 2026-11-02 for the Pokémon battle-and-capture extraction. Searched party and roster ownership first: pets.team_composition stores the durable party and boxes, social.party_formation positions player characters, and combat.unit_roster tracks units already on an encounter board. None maps owned creatures to active battle slots or handles voluntary switching and forced knockout replacement. Library-native; this is encounter-scoped active-party state, not another ownership roster."
+}
