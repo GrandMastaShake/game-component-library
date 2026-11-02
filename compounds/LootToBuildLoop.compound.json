@@ -1,0 +1,106 @@
+{
+  "id": "compound.loot_to_build_loop",
+  "name": "Loot to Build Loop",
+  "version": "0.1.0",
+  "description": "A Diablo-inspired loot loop: a defeat passes a separate drop-rate decision, a base item and affixes are rolled, the copy enters the bag or remains on the ground, the player compares and equips it, set bonuses react, and unwanted gear becomes crafting materials. Gear comparison and enemy-tier scaling are synchronous queries rather than event steps. Crafting, shops, item upgrades and persistence are deliberately outside this first recipe.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "combat.damage_resolver",
+      "role": "single source of eligible enemy defeat events",
+      "config": {"varianceFraction": 0.1}
+    },
+    {
+      "id": "combat.enemy_tier_scaling",
+      "role": "enemy level and reward-tier context for drop decisions",
+      "config": {"scalingCurve": "banded", "scaleRewards": true}
+    },
+    {
+      "id": "inventory.drop_director",
+      "role": "drop chance, roll quantity and optional dry-streak protection",
+      "config": {"dropChanceByArchetype": {"normal": 0.25, "elite": 1, "boss": 1}, "rollsPerDrop": {"normal": 1, "elite": 2, "boss": 3}, "luckInfluence": 0, "guaranteeAfterDryKills": 0}
+    },
+    {
+      "id": "inventory.loot_table",
+      "role": "weighted base-item selection for the requested drop",
+      "config": {"entries": []}
+    },
+    {
+      "id": "inventory.affix_loot_generator",
+      "role": "rarity, affix count and rolled values for each requested item",
+      "config": {"triggerMode": "onRequest", "rarityWeights": {"common": 60, "magic": 25, "rare": 12, "legendary": 3}, "affixCountByTier": {"common": 0, "magic": 2, "rare": 4, "legendary": 6}}
+    },
+    {
+      "id": "inventory.slotted_bag",
+      "role": "authoritative carried-item storage, stacking and capacity pressure",
+      "config": {"slotCount": 20, "maxStackSize": 99, "initialItems": []}
+    },
+    {
+      "id": "inventory.core_inventory",
+      "role": "low-level item addition events consumed by equipment",
+      "config": {"initialItems": []}
+    },
+    {
+      "id": "inventory.ground_items",
+      "role": "visible floor loot and non-destructive overflow when the bag is full",
+      "config": {"pickupOnStep": true, "labelRadius": 2, "initialDropped": []}
+    },
+    {
+      "id": "combat.equipment_slots",
+      "role": "actual worn items and their applied named-stat bonuses",
+      "config": {"slotTypes": ["weapon", "armor", "accessory"], "initialEquipped": {}, "gear": {}}
+    },
+    {
+      "id": "combat.gear_sets",
+      "role": "set-piece counts and threshold bonuses after equipment changes",
+      "config": {"sets": {}}
+    },
+    {
+      "id": "inventory.gear_comparison",
+      "role": "candidate-versus-equipped stat deltas and advisory build score",
+      "config": {"statWeights": {}, "lowerIsBetterStats": [], "includeSetThresholdDeltas": true}
+    },
+    {
+      "id": "inventory.salvage_system",
+      "role": "atomic conversion of eligible unwanted gear into materials",
+      "config": {"salvageRules": {}, "allowEquipped": false, "allowLocked": false, "allowQuestItems": false}
+    }
+  ],
+  "connections": [
+    {"from": "combat.damage_resolver", "event": "combat.entityDefeated", "to": "inventory.drop_director", "note": "A defeat asks whether loot should roll; it does not create gear directly."},
+    {"from": "inventory.drop_director", "event": "inventory.lootRollRequested", "to": "inventory.affix_loot_generator", "note": "Only accepted drop decisions enter the item generator in request-driven mode."},
+    {"from": "inventory.affix_loot_generator", "event": "inventory.itemGenerated", "to": "inventory.slotted_bag", "note": "The completed rolled instance is offered to carried storage."},
+    {"from": "inventory.affix_loot_generator", "event": "inventory.itemGenerated", "to": "inventory.gear_comparison", "note": "A new candidate is compared without changing equipment."},
+    {"from": "inventory.slotted_bag", "event": "inventory.full", "to": "inventory.ground_items", "note": "Overflow is set down rather than silently destroyed."},
+    {"from": "inventory.ground_items", "event": "inventory.itemGranted", "to": "inventory.slotted_bag", "note": "Picking up floor loot offers the same item instance back to the bag."},
+    {"from": "inventory.ground_items", "event": "inventory.containerOpened", "to": "inventory.loot_table", "note": "Chest contents use the same base-item table as other container rewards."},
+    {"from": "inventory.loot_table", "event": "inventory.itemGranted", "to": "inventory.slotted_bag", "note": "Base-table rewards enter carried storage without receiving duplicate affix rolls."},
+    {"from": "inventory.core_inventory", "event": "inventory.itemAdded", "to": "combat.equipment_slots", "note": "Equipment evaluates carried gear through its existing pickup contract."},
+    {"from": "combat.equipment_slots", "event": "combat.itemEquipped", "to": "combat.gear_sets", "note": "Wearing an item can advance one or more set thresholds."},
+    {"from": "combat.equipment_slots", "event": "combat.itemUnequipped", "to": "combat.gear_sets", "note": "Removing an item can revoke the corresponding set bonus."},
+    {"from": "combat.equipment_slots", "event": "combat.itemEquipped", "to": "inventory.gear_comparison", "note": "Comparison is refreshed against the newly equipped baseline."},
+    {"from": "combat.equipment_slots", "event": "combat.itemUnequipped", "to": "inventory.gear_comparison", "note": "An empty slot becomes the new comparison baseline."},
+    {"from": "inventory.salvage_system", "event": "inventory.itemSalvaged", "to": "inventory.slotted_bag", "note": "The bag removes exactly one eligible source instance before materials are granted."},
+    {"from": "inventory.salvage_system", "event": "inventory.itemGranted", "to": "inventory.slotted_bag", "note": "Salvaged materials enter the same storage boundary as other rewards."}
+  ],
+  "criticalComponents": [
+    "inventory.drop_director",
+    "inventory.affix_loot_generator",
+    "inventory.slotted_bag",
+    "combat.equipment_slots",
+    "inventory.salvage_system"
+  ],
+  "acceptanceCriteria": [
+    "A normal defeat can produce no loot, while configured elite and boss defeats guarantee their specified number of independent roll requests.",
+    "inventory.loot_table chooses base content and inventory.affix_loot_generator chooses copy quality; neither performs the other's roll.",
+    "The same seed, defeat sequence and configuration reproduce drop decisions, base items, affixes and rolled values.",
+    "A rolled item's base id, rarity, affixes and rolled values remain attached through bag storage, ground overflow, pickup, comparison and equipment.",
+    "A full bag never destroys a generated or picked-up item; inventory.ground_items retains it until a later successful pickup.",
+    "Gear comparison reports candidate-minus-equipped deltas for every named stat and never equips the candidate or changes combat stats itself.",
+    "Equipping or unequipping set pieces updates threshold bonuses while leaving each item's own affix bonuses under combat.equipment_slots.",
+    "A successful salvage removes exactly one eligible source instance and grants its material bundle exactly once; a rejected salvage does neither.",
+    "Equipped, locked and quest-marked items are protected from salvage by default, and materials cannot be salvaged unless a rule explicitly allows them.",
+    "Removing inventory.gear_comparison does not change drops or equipment, and removing combat.gear_sets leaves individual equipment bonuses intact.",
+    "A base-table chest reward enters storage without receiving a second affix roll, while request-driven combat loot receives exactly one affix roll per requested item."
+  ]
+}
