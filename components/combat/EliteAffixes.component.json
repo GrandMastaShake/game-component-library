@@ -1,0 +1,103 @@
+{
+  "id": "combat.elite_affixes",
+  "name": "Elite Affixes",
+  "category": "combat",
+  "version": "0.1.0",
+  "description": "Deterministic per-enemy elite modifiers, rolled from stable encounter, wave, and unit ids rather than frame timing. The catalog owns affix prerequisites, exclusions, threat bands, stat multipliers, behavior modifiers, and declared special attacks. assign returns one complete spawn-metadata record and restores by eliteInstanceId without rerolling. Elite Encounter Director composes those multipliers with Enemy Tier Scaling at spawn; Damage Resolver still owns final hit damage, AI owners still execute behavior, and Elite Telegraph Scheduler owns attack windup and commit. This component does not spawn a unit, choose a target, roll equipment affixes, or decide loot eligibility.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "affixes",
+      "type": "array",
+      "required": true,
+      "description": "Catalog: [{id, weight, minThreat?, maxThreat?, requires?, excludes?, statMultipliers?, behaviorModifiers?, attacks?}]. requires and excludes name other affixes. Stat multipliers apply once at spawn; behavior modifiers are consumed by their existing AI or attack owners."
+    },
+    {
+      "name": "seed",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Seed combined with stable encounter, wave, and unit ids. The same content, seed, and ids reproduce the same legal affix set on replay and restore."
+    },
+    {
+      "name": "maxAffixes",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Maximum affixes per elite, including prerequisite closure. Zero disables random affix assignment; explicit curated assignments must still fit this cap."
+    },
+    {
+      "name": "initialAssignments",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored assignments by eliteInstanceId. A restored id returns its original complete record without a new roll or eliteAffixesAssigned event."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "assign",
+      "type": "function",
+      "description": "assign({encounterId, waveId, unitId, threat, affixCount?, affixIds?}) synchronously returns {eliteInstanceId, tier:'elite', affixIds, statMultipliers, behaviorModifiers, attacks}. Explicit affixIds support curated encounters and are validated against the same legality rules as rolled sets."
+    },
+    {
+      "name": "assignments",
+      "type": "object",
+      "description": "Current complete assignments by eliteInstanceId, suitable for initialAssignments restoration."
+    },
+    {
+      "name": "lastAssignment",
+      "type": "object",
+      "description": "The newest assignment, including its stable ids and resolved modifiers for telemetry and replay debugging."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Why an explicit or random assignment could not satisfy threat, prerequisite, exclusion, count, or catalog rules; rejected assignments emit no spawn-ready result."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.eliteAffixesAssigned"
+    ],
+    "listensTo": []
+  },
+  "dependencies": [],
+  "tags": [
+    "rpg-family",
+    "elite",
+    "affixes",
+    "deterministic",
+    "encounters"
+  ],
+  "provenance": "Elite encounter pass searched elite, affix, Enemy Tier Scaling, Affix Loot Generator, Spawn Director, Dynamic Encounter Spawner, Room Encounters, and Boss Encounter Script. Enemy Tier Scaling owns level curves, Affix Loot Generator owns item rarity and item affixes, and the spawners own ambient or room placement. No contract owned deterministic enemy-only affix sets with prerequisite, exclusion, and threat rules. This is not item generation, level scaling, encounter composition, damage resolution, or a boss phase script."
+}
