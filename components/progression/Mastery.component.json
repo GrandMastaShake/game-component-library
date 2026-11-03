@@ -1,0 +1,121 @@
+{
+  "id": "progression.mastery",
+  "name": "Mastery",
+  "category": "progression",
+  "version": "0.1.0",
+  "description": "Earned proficiency that grows from completed play rather than level-up points or currency. Each track declares XP thresholds, optional specialization gating, named per-rank modifiers, and event sources with scalar payload matches and a stable dedupe key. It listens to completed abilities, defeats, quests, and elite encounters; rejected or duplicate facts grant nothing. One fact may credit multiple matching tracks, but never the same track twice. Ranks derive from restored XP rather than a second authoritative rank table, while initialCreditIds prevents reload farming. Mastery publishes bonuses and rank state for loadout gates and stat owners; it does not grant character XP, choose loot, purchase skills, or reset through an ordinary Build Respec.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tracks",
+      "type": "array",
+      "required": true,
+      "description": "Definitions: [{id, name, specialization?, thresholds, effectByRank?, sources}]. thresholds are strictly increasing XP values. effectByRank contains one named-modifier object per threshold. A specialization-gated track credits only while that identity is active."
+    },
+    {
+      "name": "sources",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Optional shared source definitions inherited by tracks that do not declare their own. Each source is {event, match?, amount?, amountFrom?, dedupeBy}; amount defaults to 1 when neither amount field is present, and dedupeBy names a stable payload field such as castId, defeatId, completionId, or questCompletionId."
+    },
+    {
+      "name": "initialXp",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored XP by track id. Current ranks and bonuses derive from these values and current thresholds; restoration emits neither XP nor rank-up events."
+    },
+    {
+      "name": "initialCreditIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Restored credit keys in track:sourceEvent:stableId form. A restored or subsequently repeated key is a no-op, preventing duplicate event delivery and reload from granting mastery twice."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "xpByTrack",
+      "type": "object",
+      "description": "Current earned mastery XP per track; the state initialXp restores."
+    },
+    {
+      "name": "ranks",
+      "type": "object",
+      "description": "Derived rank per track. Zero means the first threshold has not been reached."
+    },
+    {
+      "name": "progress",
+      "type": "object",
+      "description": "Per-track current rank, XP, next threshold, and normalized progress toward it for UI projections."
+    },
+    {
+      "name": "bonuses",
+      "type": "object",
+      "description": "Named effect modifiers from every achieved rank, summed by key. Applying a modifier remains with the component that owns the affected stat."
+    },
+    {
+      "name": "creditIds",
+      "type": "array",
+      "description": "Durable dedupe ledger in the same form initialCreditIds accepts."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "The last malformed, inactive-track, unmatched, or duplicate credit and its reason, without changing XP."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.masteryXpGained",
+      "progression.masteryRankUp",
+      "progression.masteryCreditRejected"
+    ],
+    "listensTo": [
+      "combat.abilityCast",
+      "combat.entityDefeated",
+      "progression.questCompleted",
+      "combat.eliteEncounterCompleted",
+      "progression.specializationSelected"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "rpg-family",
+    "mastery",
+    "proficiency",
+    "buildcraft",
+    "persistent"
+  ],
+  "provenance": "Specialization and mastery pass searched mastery, proficiency, Skills Tree, Upgrade Tree, Achievement Milestones, Run Meta Progression, XP Leveling, and Prestige Reset. Skills Tree spends level-earned points, Upgrade Tree spends currency, Achievement Milestones fires once-only achievements, Run Meta Progression owns between-run unlock pools, and XP Leveling owns character levels. None owns multiple restorable proficiency tracks driven by deduplicated gameplay facts. This is not character XP, a skill-point tree, an achievement ledger, loot, or a prestige reset."
+}
