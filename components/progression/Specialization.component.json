@@ -1,0 +1,114 @@
+{
+  "id": "progression.specialization",
+  "name": "Specialization",
+  "category": "progression",
+  "version": "0.1.0",
+  "description": "Owns a character's selected build identities, separate from the ranks purchased inside them. A specialization is a durable selection with level, skill-rank, prerequisite, and exclusivity gates; it publishes named modifiers and availability but never buys a skill, assigns a hotbar slot, or rolls a mastery reward. Selection is additive up to maxActive and locked by default, so an ordinary Build Respec can rebuild ranks without silently erasing the identity those ranks belong to. initialSelected restores prior choices without revalidating edited content or emitting a fresh selection side effect. New selections validate against the current definitions. Skills Tree and Ability Loadout may synchronously ask isActive when content declares a specialization gate; legacy content without that field never needs this component.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "specializations",
+      "type": "array",
+      "required": true,
+      "description": "Definitions: [{id, name, requiredLevel?, requiredSkills?, requiresSpecializations?, exclusiveGroup?, effect?}]. requiredSkills entries are {id, rank?}; requiresSpecializations names other selected identities; effect is an object of named modifiers granted once while selected. Empty content offers no identities rather than inventing a class."
+    },
+    {
+      "name": "maxActive",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Maximum simultaneous selections. One is the conventional single-path choice; higher values support hybrid builds without moving exclusivity rules into UI."
+    },
+    {
+      "name": "selectionLocked",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "When true, selections cannot be replaced through input.chooseSpecialization after maxActive is reached. Build Respec preserves them. When false, a replacement request names replace and still validates the resulting complete selection atomically."
+    },
+    {
+      "name": "initialSelected",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Restored specialization ids in selection order. Restore is not a new choice: prerequisites and edited gates are not revalidated and no specializationSelected event is emitted."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "selected",
+      "type": "array",
+      "description": "Active specialization ids in selection order; this is the snapshot initialSelected restores."
+    },
+    {
+      "name": "available",
+      "type": "array",
+      "description": "Definitions whose current level, skill ranks, prerequisites, exclusivity, and capacity rules permit selection."
+    },
+    {
+      "name": "lockedBy",
+      "type": "object",
+      "description": "Concrete unmet level, skill, specialization, exclusivity, replacement, or capacity reasons per unavailable definition."
+    },
+    {
+      "name": "bonuses",
+      "type": "object",
+      "description": "Selected definitions' named effect modifiers summed by key. Combat, movement, and other stat owners apply their own keys; this component never edits their calculations."
+    },
+    {
+      "name": "isActive",
+      "type": "function",
+      "description": "isActive(id) synchronously answers whether an identity is selected. Skills Tree, Mastery, and Ability Loadout use this only for content that declares a specialization gate."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.specializationSelected",
+      "progression.specializationSelectionRejected"
+    ],
+    "listensTo": [
+      "input.chooseSpecialization",
+      "progression.leveledUp",
+      "progression.skillRankChanged"
+    ]
+  },
+  "dependencies": [
+    "progression.skills_tree"
+  ],
+  "tags": [
+    "rpg-family",
+    "specialization",
+    "buildcraft",
+    "identity"
+  ],
+  "provenance": "Specialization and mastery pass searched specialization, class, mastery, Skills Tree, Upgrade Tree, Driver Progression, Build Respec, and Ability Loadout. Skills Tree owns purchased ranks, Upgrade Tree owns currency purchases, Driver Progression owns driving-only style and focus, and Build Respec owns rebuild transactions. No generic contract owned a durable, gated build identity that other progression content can query without becoming a second skill tree. This is not a rank tree, loadout, respec coordinator, or usage-based mastery ledger."
+}
