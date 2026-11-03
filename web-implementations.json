@@ -92,6 +92,7 @@
       "progression.level_objective_set",
       "progression.production_queue",
       "progression.quest_log",
+      "progression.quest_reward_coordinator",
       "progression.reward_schedule",
       "progression.skills_tree",
       "progression.xp_leveling",
