@@ -1,0 +1,155 @@
+{
+  "id": "example.crossing_elites",
+  "seed": 41,
+  "maxAffixes": 2,
+  "affixes": [
+    {
+      "id": "fortified",
+      "weight": 4,
+      "statMultipliers": {
+        "health": 1.4
+      }
+    },
+    {
+      "id": "frenzied",
+      "weight": 3,
+      "behaviorModifiers": {
+        "movement": 1.15,
+        "cooldown": 0.85
+      }
+    },
+    {
+      "id": "voltaic",
+      "weight": 2,
+      "minThreat": 2,
+      "excludes": [
+        "warded"
+      ],
+      "attacks": [
+        {
+          "id": "arc_burst",
+          "windupSeconds": 1,
+          "cooldownSeconds": 6,
+          "damage": 4,
+          "shape": {
+            "kind": "circle",
+            "radius": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "warded",
+      "weight": 1,
+      "minThreat": 3,
+      "requires": [
+        "fortified"
+      ],
+      "excludes": [
+        "voltaic",
+        "volatile"
+      ],
+      "statMultipliers": {
+        "health": 1.2,
+        "armor": 1.25
+      }
+    },
+    {
+      "id": "volatile",
+      "weight": 2,
+      "excludes": [
+        "warded"
+      ],
+      "attacks": [
+        {
+          "id": "line_blast",
+          "windupSeconds": 1.2,
+          "cooldownSeconds": 7,
+          "damage": 5,
+          "shape": {
+            "kind": "line",
+            "length": 4,
+            "width": 1
+          }
+        }
+      ]
+    }
+  ],
+  "encounters": [
+    {
+      "id": "old_crossing",
+      "arenaId": "crossing",
+      "level": 3,
+      "threat": 3,
+      "waves": [
+        {
+          "id": "approach",
+          "units": [
+            {
+              "archetype": "raider",
+              "count": 2,
+              "elite": false
+            },
+            {
+              "archetype": "raider_captain",
+              "count": 1,
+              "elite": true,
+              "affixCount": 1,
+              "affixIds": [
+                "voltaic"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "last_stand",
+          "units": [
+            {
+              "archetype": "raider",
+              "count": 2,
+              "elite": false
+            },
+            {
+              "archetype": "crossing_champion",
+              "count": 1,
+              "elite": true,
+              "affixCount": 2,
+              "affixIds": [
+                "fortified",
+                "warded"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collapsed_gate",
+      "arenaId": "gate",
+      "level": 5,
+      "threat": 4,
+      "waves": [
+        {
+          "id": "ambush",
+          "units": [
+            {
+              "archetype": "gate_stalker",
+              "count": 2,
+              "elite": true,
+              "affixCount": 2
+            },
+            {
+              "archetype": "gate_sapper",
+              "count": 1,
+              "elite": true,
+              "affixCount": 1,
+              "affixIds": [
+                "volatile"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
