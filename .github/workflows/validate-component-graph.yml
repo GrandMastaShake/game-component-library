@@ -1,9 +1,9 @@
 name: Validate Component Library
 on:
   push:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
   pull_request:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "examples/**/*.request.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
 permissions: {contents: read}
 jobs:
   validate:
@@ -22,6 +22,15 @@ jobs:
       - run: python3 tools/validate_component_graph.py --report reports/component-graph.json
       - run: python3 tools/validate_compounds.py --report reports/compound-validation.json
       - run: python3 tools/validate_genres.py --report reports/genre-validation.json
+      # Content validators: a tree or a quest can be wired correctly and still be
+      # unplayable. These read the example content under examples/, so a change
+      # to the validator or the content runs them.
+      - name: Validate skill-tree content (ranks, costs, prerequisites, exclusive branches)
+        run: python3 tools/validate_skill_trees.py --report reports/skill-trees.json
+      - name: Validate quest and dialogue content (stages reachable, terminals present, no dangling actions)
+        run: python3 tools/validate_narrative_graphs.py --report reports/narrative-graphs.json
+      - name: Unit tests for the content validators
+        run: python3 -m unittest discover -s tools/tests -p 'test_*.py'
       # An asset descriptor is a claim about files in a consuming repository, so
       # this half proves only what a descriptor can contradict on its own: ids,
       # socket names, and levels that actually get cheaper. The app's
