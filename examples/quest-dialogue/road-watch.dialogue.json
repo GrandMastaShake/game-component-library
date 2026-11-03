@@ -1,0 +1,120 @@
+{
+  "dialogueGraphs": {
+    "warden": {
+      "start": "intro",
+      "nodes": {
+        "intro": {
+          "speaker": "Road Warden",
+          "text": "The old road needs another pair of eyes. Will you take the watch?",
+          "choices": [
+            {
+              "id": "accept_watch",
+              "label": "I will take the watch.",
+              "to": "accepted",
+              "once": true,
+              "consequences": [
+                {
+                  "type": "quest",
+                  "action": "offer",
+                  "quest": "road_watch"
+                },
+                {
+                  "type": "quest",
+                  "action": "accept",
+                  "quest": "road_watch"
+                },
+                {
+                  "type": "journal",
+                  "entry": "The warden asked me to make the old road safe.",
+                  "thread": "road_watch"
+                }
+              ]
+            },
+            {
+              "id": "read_the_road",
+              "label": "Look for signs of what passed through.",
+              "once": true,
+              "check": {
+                "attribute": "WIS",
+                "difficulty": 10,
+                "onPass": "secret",
+                "onFail": "no_secret"
+              }
+            },
+            {
+              "id": "leave_intro",
+              "label": "Not now.",
+              "to": null
+            }
+          ]
+        },
+        "accepted": {
+          "speaker": "Road Warden",
+          "text": "Return when the road is clear. I will keep a light burning for you.",
+          "choices": [
+            {
+              "id": "report_watch",
+              "label": "The road is clear.",
+              "to": null,
+              "conditions": [
+                {
+                  "quest": "road_watch",
+                  "state": "active"
+                }
+              ],
+              "consequences": [
+                {
+                  "type": "quest",
+                  "action": "credit",
+                  "quest": "road_watch",
+                  "stage": "report",
+                  "objective": "reported",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "id": "leave_accepted",
+              "label": "I will return.",
+              "to": null
+            }
+          ]
+        },
+        "secret": {
+          "speaker": "Road Warden",
+          "text": "You noticed the covered tracks too. Good. The raiders are watching the verges.",
+          "onEnter": [
+            {
+              "type": "setFlag",
+              "flag": "warden_secret_known",
+              "value": true
+            },
+            {
+              "type": "journal",
+              "entry": "Covered tracks suggest the raiders are watching the road verges.",
+              "thread": "road_watch"
+            }
+          ],
+          "choices": [
+            {
+              "id": "secret_back",
+              "label": "Back to the watch.",
+              "to": "intro"
+            }
+          ]
+        },
+        "no_secret": {
+          "speaker": "Road Warden",
+          "text": "The road looks quiet from here, but quiet is not the same as safe.",
+          "choices": [
+            {
+              "id": "no_secret_back",
+              "label": "Back to the watch.",
+              "to": "intro"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

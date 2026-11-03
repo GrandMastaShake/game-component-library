@@ -1,1 +1,70 @@
-{"id":"genre.crpg","name":"CRPG","description":"A party of interlocking builds fighting real-time-with-pause tactical encounters, talking through branching dialogue where stats open doors, and living with consequences factions remember. Dialogue and consequence remain the genre spine; tactical pause, queued party orders and prepared spells now give its combat the same explicit ownership boundaries.","version":"0.3.0","loop":"party of builds → real-time-with-pause encounters → dialogue choices → branching story","views":["isometric"],"memberComponents":["social.party_system","ui.dialogue_box","progression.quest_log","progression.skills_tree","combat.status_effects","persistence.save_system","combat.unit_roster","combat.aggro_table","utility.command_bus","utility.behavior_fsm","movement.pathfinding_system","movement.pursuit_agent","combat.contact_attack","combat.hotbar_abilities","combat.damage_resolver","progression.xp_leveling","economy.currency"],"newComponents":["social.party_formation","ui.dialogue_tree_engine","progression.attribute_sheet","social.reputation_system","world.rest_camp","combat.tactical_pause","combat.party_command_queue","combat.prepared_spellbook","progression.ability_loadout","progression.build_respec"],"signatureCompound":{"name":"Branching Encounter","description":"Walk the party in under party_formation, talk through dialogue_tree_engine with attribute_sheet rolling the checks, and let reputation_system plus the quest log turn the outcome into standing the next quest gate reads. Combat is optional; consequence is not.","memberIds":["social.party_formation","ui.dialogue_tree_engine","progression.attribute_sheet","social.reputation_system","progression.quest_log"]},"tags":["rpg-family","party","dialogue","branching","rtwp","tactical-combat","buildcraft"]}
+{
+  "id": "genre.crpg",
+  "name": "CRPG",
+  "description": "A party of interlocking builds fighting real-time-with-pause tactical encounters, talking through branching dialogue where stats open doors, and living with consequences factions remember. Dialogue and consequence remain the genre spine; tactical pause, queued party orders and prepared spells now give its combat the same explicit ownership boundaries. The quest and dialogue core now adds staged objectives, restorable once-only choices, deterministic checks, exactly-once mixed rewards, and dedicated quest and narrative journals.",
+  "version": "0.4.0",
+  "loop": "party of builds → real-time-with-pause encounters → dialogue choices → branching story",
+  "views": [
+    "isometric"
+  ],
+  "memberComponents": [
+    "social.party_system",
+    "ui.dialogue_box",
+    "progression.quest_log",
+    "progression.skills_tree",
+    "combat.status_effects",
+    "persistence.save_system",
+    "combat.unit_roster",
+    "combat.aggro_table",
+    "utility.command_bus",
+    "utility.behavior_fsm",
+    "movement.pathfinding_system",
+    "movement.pursuit_agent",
+    "combat.contact_attack",
+    "combat.hotbar_abilities",
+    "combat.damage_resolver",
+    "progression.xp_leveling",
+    "economy.currency",
+    "world.world_state_flags",
+    "inventory.core_inventory",
+    "ui.quest_tracker",
+    "ui.safe_area_layout",
+    "ui.narrative_journal"
+  ],
+  "newComponents": [
+    "social.party_formation",
+    "ui.dialogue_tree_engine",
+    "progression.attribute_sheet",
+    "social.reputation_system",
+    "world.rest_camp",
+    "combat.tactical_pause",
+    "combat.party_command_queue",
+    "combat.prepared_spellbook",
+    "progression.ability_loadout",
+    "progression.build_respec",
+    "progression.quest_reward_coordinator",
+    "ui.quest_journal"
+  ],
+  "signatureCompound": {
+    "name": "Branching Encounter",
+    "description": "Walk the party in under party_formation, talk through dialogue_tree_engine with attribute_sheet rolling the checks, and let reputation_system plus the quest log turn the outcome into standing the next quest gate reads. Combat is optional; consequence is not.",
+    "memberIds": [
+      "social.party_formation",
+      "ui.dialogue_tree_engine",
+      "progression.attribute_sheet",
+      "social.reputation_system",
+      "progression.quest_log"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "party",
+    "dialogue",
+    "branching",
+    "rtwp",
+    "tactical-combat",
+    "buildcraft",
+    "quests",
+    "narrative"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "quests": [
+    {
+      "id": "road_watch",
+      "title": "The Road Watch",
+      "start": "patrol",
+      "stages": [
+        {
+          "id": "patrol",
+          "objectives": [
+            {
+              "id": "defeat_raiders",
+              "event": "combat.entityDefeated",
+              "match": {
+                "archetype": "raider"
+              },
+              "target": 2,
+              "dedupeBy": "entityId"
+            },
+            {
+              "id": "recover_supplies",
+              "event": "inventory.itemAdded",
+              "match": {
+                "kind": "supply_cache"
+              },
+              "target": 1,
+              "optional": true,
+              "dedupeBy": "instanceId"
+            }
+          ],
+          "transitions": [
+            {
+              "to": "lost",
+              "conditions": [
+                {
+                  "flag": "road_watch_abandoned",
+                  "equals": true
+                }
+              ]
+            },
+            {
+              "to": "report"
+            }
+          ]
+        },
+        {
+          "id": "report",
+          "objectives": [
+            {
+              "id": "reported",
+              "event": "input.questObjectiveCredited",
+              "match": {
+                "questId": "road_watch",
+                "objectiveId": "reported"
+              },
+              "target": 1
+            }
+          ],
+          "terminal": "completed"
+        },
+        {
+          "id": "lost",
+          "terminal": "failed"
+        }
+      ],
+      "rewards": [
+        {
+          "kind": "currency",
+          "amount": 25
+        },
+        {
+          "kind": "xp",
+          "amount": 40
+        },
+        {
+          "kind": "item",
+          "itemId": "wayfarer_charm",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "road_warden",
+      "title": "The Road Warden",
+      "start": "speak",
+      "prerequisites": [
+        {
+          "quest": "road_watch",
+          "state": "completed"
+        }
+      ],
+      "stages": [
+        {
+          "id": "speak",
+          "objectives": [
+            {
+              "id": "warden_spoken",
+              "event": "input.questObjectiveCredited",
+              "match": {
+                "questId": "road_warden",
+                "objectiveId": "warden_spoken"
+              },
+              "target": 1
+            }
+          ],
+          "terminal": "completed"
+        }
+      ],
+      "rewards": [
+        {
+          "kind": "xp",
+          "amount": 60
+        }
+      ]
+    }
+  ]
+}

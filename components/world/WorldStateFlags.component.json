@@ -2,8 +2,8 @@
   "id": "world.world_state_flags",
   "name": "World State Flags",
   "category": "world",
-  "description": "The world's memory of what you changed: the bridge stays repaired, the warlord stays dead, the gate stays open. A flag is a named boolean-or-value with a settable or set-once policy and a query interface everything else reads \u2014 doors, spawners, dialogue conditions. ui.dialogue_tree_engine writes consequence flags here rather than keeping them, because a consequence that dies with the conversation is a consequence the world forgot. persistence.save_system owns the bytes; this component owns the semantics \u2014 namespacing, defaults, and the rule that clearing a story flag is an explicit act, never a side effect of some other system's cleanup.",
-  "version": "0.1.0",
+  "description": "The world's memory of what you changed: the bridge stays repaired, the warlord stays dead, the gate stays open. A flag is a named boolean-or-value with a settable or set-once policy and a query interface everything else reads — doors, spawners, dialogue conditions. ui.dialogue_tree_engine writes consequence flags here rather than keeping them, because a consequence that dies with the conversation is a consequence the world forgot. persistence.save_system owns the bytes; this component owns the semantics — namespacing, defaults, and the rule that clearing a story flag is an explicit act, never a side effect of some other system's cleanup.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -43,6 +43,13 @@
       "description": "Known flags with defaults and set-once policies. Declaring flags up front turns typo'd flag names from silent quest-breakers into load-time errors."
     },
     {
+      "name": "initialFlags",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored namespaced flag values. Values are applied before new listeners arrive; restoring does not emit a fresh worldFlagChanged side effect for every flag."
+    },
+    {
       "name": "namespaceBy",
       "type": "string",
       "required": false,
@@ -54,14 +61,24 @@
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether reading an undeclared flag throws instead of returning null. Strict in development, lenient in production \u2014 a shipped game should degrade, not crash."
+      "description": "Whether reading an undeclared flag throws instead of returning null. Strict in development, lenient in production — a shipped game should degrade, not crash."
     }
   ],
   "outputs": [
     {
       "name": "flagCount",
       "type": "number",
-      "description": "How many flags diverge from defaults \u2014 a save-size proxy."
+      "description": "How many flags diverge from defaults — a save-size proxy."
+    },
+    {
+      "name": "valueOf",
+      "type": "function",
+      "description": "valueOf(name, namespace?): synchronous current value used by dialogue and quest conditions, honoring strictUnknownFlagReads."
+    },
+    {
+      "name": "snapshot",
+      "type": "object",
+      "description": "Restorable namespaced values, separate from dialogue positions and quest progress."
     }
   ],
   "events": {

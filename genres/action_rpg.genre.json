@@ -1,1 +1,84 @@
-{"id":"genre.action_rpg","name":"Action RPG","description":"Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision.","version":"0.3.0","loop":"fight in real time → loot → build character → bigger fight","views":["isometric","top-down"],"memberComponents":["combat.melee_basic","combat.damage_resolver","combat.status_effects","combat.equipment_slots","progression.xp_leveling","progression.skills_tree","inventory.loot_table","progression.quest_log","inventory.slotted_bag","movement.basic_walk","combat.unit_roster","utility.behavior_fsm","world.terrain_generator","world.biome_system","presentation.color_palette","presentation.object_placer","world.edge_transition","ui.minimap","world.vision_system","world.fog_of_war_reveal","world.tile_grid","presentation.style_presets","progression.attribute_sheet","economy.currency","persistence.save_system"],"newComponents":["combat.hotbar_abilities","inventory.affix_loot_generator","combat.enemy_tier_scaling","inventory.potion_belt","world.waypoint_travel","movement.pursuit_agent","combat.contact_attack","combat.aggro_table","movement.patrol_route","combat.spawn_director","inventory.drop_director","inventory.gear_comparison","inventory.salvage_system","progression.ability_loadout","progression.build_respec"],"signatureCompound":{"name":"Dungeon Run Loop","description":"Kill a pack with hotbar abilities resolved through damage_resolver, roll the drop through loot_table into affix_loot_generator, wear what rolled well, and let xp_leveling plus enemy_tier_scaling raise both sides for the next pull. If this loop runs headless, the genre exists.","memberIds":["combat.hotbar_abilities","combat.damage_resolver","inventory.loot_table","inventory.affix_loot_generator","progression.xp_leveling","combat.enemy_tier_scaling"]},"tags":["rpg-family","real-time","loot","buildcraft"]}
+{
+  "id": "genre.action_rpg",
+  "name": "Action RPG",
+  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression.",
+  "version": "0.4.0",
+  "loop": "fight in real time → loot → build character → bigger fight",
+  "views": [
+    "isometric",
+    "top-down"
+  ],
+  "memberComponents": [
+    "combat.melee_basic",
+    "combat.damage_resolver",
+    "combat.status_effects",
+    "combat.equipment_slots",
+    "progression.xp_leveling",
+    "progression.skills_tree",
+    "inventory.loot_table",
+    "progression.quest_log",
+    "inventory.slotted_bag",
+    "movement.basic_walk",
+    "combat.unit_roster",
+    "utility.behavior_fsm",
+    "world.terrain_generator",
+    "world.biome_system",
+    "presentation.color_palette",
+    "presentation.object_placer",
+    "world.edge_transition",
+    "ui.minimap",
+    "world.vision_system",
+    "world.fog_of_war_reveal",
+    "world.tile_grid",
+    "presentation.style_presets",
+    "progression.attribute_sheet",
+    "economy.currency",
+    "persistence.save_system",
+    "world.world_state_flags",
+    "inventory.core_inventory",
+    "ui.quest_tracker",
+    "ui.safe_area_layout",
+    "ui.narrative_journal",
+    "ui.dialogue_box",
+    "ui.dialogue_tree_engine"
+  ],
+  "newComponents": [
+    "combat.hotbar_abilities",
+    "inventory.affix_loot_generator",
+    "combat.enemy_tier_scaling",
+    "inventory.potion_belt",
+    "world.waypoint_travel",
+    "movement.pursuit_agent",
+    "combat.contact_attack",
+    "combat.aggro_table",
+    "movement.patrol_route",
+    "combat.spawn_director",
+    "inventory.drop_director",
+    "inventory.gear_comparison",
+    "inventory.salvage_system",
+    "progression.ability_loadout",
+    "progression.build_respec",
+    "progression.quest_reward_coordinator",
+    "ui.quest_journal"
+  ],
+  "signatureCompound": {
+    "name": "Dungeon Run Loop",
+    "description": "Kill a pack with hotbar abilities resolved through damage_resolver, roll the drop through loot_table into affix_loot_generator, wear what rolled well, and let xp_leveling plus enemy_tier_scaling raise both sides for the next pull. If this loop runs headless, the genre exists.",
+    "memberIds": [
+      "combat.hotbar_abilities",
+      "combat.damage_resolver",
+      "inventory.loot_table",
+      "inventory.affix_loot_generator",
+      "progression.xp_leveling",
+      "combat.enemy_tier_scaling"
+    ]
+  },
+  "tags": [
+    "rpg-family",
+    "real-time",
+    "loot",
+    "buildcraft",
+    "quests",
+    "narrative"
+  ]
+}

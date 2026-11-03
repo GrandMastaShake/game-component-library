@@ -2,8 +2,8 @@
   "id": "progression.quest_log",
   "name": "Quest Log",
   "category": "progression",
-  "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit. The QUESTS themselves are the level's, not this component's. Without an input for them every game that picked up a quest log got the same four — gather six things, collect four wood, collect three stone — so an Action RPG shipped with a forager's errands and a player was asked to fetch lumber in a genre about killing things. A log that invents its own content is a log that has an opinion about what game it is in, which is exactly the opinion a component is not allowed to have.",
-  "version": "0.5.0",
+  "description": "Tracks active and completed quests with objective progress, reward payout, and guarded shared party credit. The QUESTS themselves are the level's, not this component's. Without an input for them every game that picked up a quest log got the same four — gather six things, collect four wood, collect three stone — so an Action RPG shipped with a forager's errands and a player was asked to fetch lumber in a genre about killing things. A log that invents its own content is a log that has an opinion about what game it is in, which is exactly the opinion a component is not allowed to have. Staged quest graphs are an opt-in extension of this same owner: prerequisites, ordered stage transitions, required and optional objectives, failure terminals, stable completion ids, and restored progress remain here rather than in a second quest-state component. Legacy flat quests keep their existing behavior. Coordinated reward mode suppresses inline payout for staged completions so Quest Reward Coordinator can deliver one mixed grant exactly once.",
+  "version": "0.6.0",
   "platform": [
     "roblox",
     "godot",
@@ -49,6 +49,31 @@
       "required": false,
       "default": {},
       "description": "Counts already made, by quest id ({q_three: 2}), for a saved run. A quest taken, or started, counts on from here rather than from nothing: kills, hits and collections kept, and a reach quest keeps the deepest floor it was counted at. A fetch quest is not counted from here: it counts the bag, which a saved run restores itself."
+    },
+    {
+      "name": "questGraphs",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Optional staged definitions: [{id, title, start, prerequisites?, stages, rewards?}]. A prerequisite is {quest, state}. A stage is {id, objectives?, transitions?, terminal?}; terminal is completed or failed. An objective is {id, event, match?, target?, optional?, amountFrom?, dedupeBy?}: event names a completed gameplay fact, match requires scalar payload equality, target defaults to 1, amountFrom optionally reads progress from the payload, and dedupeBy names a payload key whose value can count only once. A conditioned transition is evaluated whenever its conditions change and may fail or branch before required objectives finish; the unconditional default transition requires all required objectives. Optional objectives never block the default. Transitions are evaluated in declaration order on objective or relevant flag changes. Conditions support flag, quest, current-stage objective and attribute comparisons plus all/any/not. A terminal settles when its required objectives complete, immediately when it has none. Stage graphs must be acyclic and every stage reachable. Dialogue advance requests must follow a declared transition from the current stage rather than jumping to an arbitrary stage."
+    },
+    {
+      "name": "initialQuestStates",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored graph snapshots keyed by quest id: state, stageId, objective counts, seen credit keys, and completionId. Restore is not a new acceptance or completion and never emits a reward. Saved state is not revalidated against edited content; later objective credits and transitions use the current definitions."
+    },
+    {
+      "name": "rewardMode",
+      "type": "string",
+      "required": false,
+      "default": "inlineLegacy",
+      "enum": [
+        "inlineLegacy",
+        "coordinated"
+      ],
+      "description": "inlineLegacy preserves direct progression.questRewarded payout and is the default. coordinated applies to staged graphs: questCompleted carries {questId, completionId, rewards}, no inline questRewarded is emitted, and progression.quest_reward_coordinator becomes the sole grant boundary. Never wire the same completion through both modes."
     }
   ],
   "outputs": [
@@ -85,6 +110,21 @@
       "name": "turnIn",
       "type": "function",
       "description": "turnIn(id): a READY quest is handed back (a fetch counts the bag again and takes its items), completes and pays once. Returns whether it did."
+    },
+    {
+      "name": "questStates",
+      "type": "array",
+      "description": "Read-only staged snapshots with current stage, per-objective progress, optional-objective status, terminal state, and stable completionId."
+    },
+    {
+      "name": "stageOf",
+      "type": "function",
+      "description": "stageOf(id): current stage id for a staged quest, or null when not held or not staged."
+    },
+    {
+      "name": "snapshot",
+      "type": "object",
+      "description": "Restorable quest state, including objective dedupe keys and completed grant ids; projections and reward ledgers do not own this state."
     }
   ],
   "events": {
@@ -94,7 +134,9 @@
       "progression.objectiveUpdated",
       "progression.questOffered",
       "progression.questReady",
-      "progression.questRewarded"
+      "progression.questRewarded",
+      "progression.questStageChanged",
+      "progression.questFailed"
     ],
     "listensTo": [
       "combat.hit",
@@ -102,7 +144,10 @@
       "progression.sharedQuestCreditSafe",
       "combat.entityDefeated",
       "world.floorGenerated",
-      "inventory.itemRemoved"
+      "inventory.itemRemoved",
+      "ui.dialogueQuestActionRequested",
+      "world.worldFlagChanged",
+      "input.questObjectiveCredited"
     ]
   },
   "eventIntents": {

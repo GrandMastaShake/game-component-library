@@ -1,0 +1,118 @@
+{
+  "id": "progression.quest_reward_coordinator",
+  "name": "Quest Reward Coordinator",
+  "category": "progression",
+  "version": "0.1.0",
+  "description": "Turns one coordinated quest completion into one durable mixed-grant delivery. Quest Log owns whether and when a quest completes; this coordinator owns the stable grant id, the restored idempotency ledger, validation of the grant bundle, and one progression.rewardGranted emission. Currency, XP, and Core Inventory accept that event through their existing reward intent and each consume only the grant kinds they own. It is not an ambient reward schedule and it must never be wired to an inlineLegacy completion, which Quest Log has already paid. A duplicate or restored completion id emits nothing and cannot print currency, experience, or items twice.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "completedGrantIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Restored stable completion ids already delivered. Restore the ledger before accepting new completions; replaying those completions is then a no-op."
+    },
+    {
+      "name": "maxRememberedGrants",
+      "type": "number",
+      "required": false,
+      "default": 1000,
+      "description": "Maximum retained grant ids. Terminal quest completion ids are never legitimately reused; trimming only bounds memory for very long profiles."
+    },
+    {
+      "name": "requireCompletionId",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Reject a coordinated completion without a stable completionId rather than guessing an id from mutable reward content."
+    },
+    {
+      "name": "allowEmptyRewards",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether a completed quest with no grants produces rewardSkipped instead of a rejection. Completion itself remains valid either way."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "processedGrantIds",
+      "type": "array",
+      "description": "Restorable exactly-once ledger in delivery order."
+    },
+    {
+      "name": "lastGrant",
+      "type": "object",
+      "description": "The last accepted {completionId, questId, grants} bundle."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "The last malformed completion and its stable rejection reason; duplicate no-ops are not errors."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.rewardGranted",
+      "progression.rewardSkipped",
+      "progression.rewardRejected"
+    ],
+    "listensTo": [
+      "progression.questCompleted"
+    ]
+  },
+  "eventIntents": {
+    "progression.rewardGranted": [
+      "reward",
+      "persist",
+      "notify"
+    ],
+    "progression.rewardSkipped": [
+      "persist"
+    ],
+    "progression.rewardRejected": [
+      "notify"
+    ]
+  },
+  "dependencies": [
+    "progression.quest_log"
+  ],
+  "tags": [
+    "quests",
+    "rewards",
+    "transactions",
+    "idempotency",
+    "progression"
+  ],
+  "provenance": "Added for the RPG Quest & Dialogue Core pack after inspecting progression.quest_log and its inline questRewarded payout, progression.reward_schedule and its time/ratio-based ambient payouts, progression.achievement_milestones and its once-only achievement ledger, plus the existing currency, XP, and inventory reward sinks. The distinct missing boundary is durable deduplication and fan-out of one completed quest's mixed grant list, not quest completion, reward timing, achievement progress, or ownership of any granted balance."
+}
