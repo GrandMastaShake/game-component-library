@@ -2,8 +2,8 @@
   "id": "pets.capture_mechanic",
   "name": "Capture Mechanic",
   "category": "pets",
-  "description": "The weaken-then-capture loop: throw a capture device at a wild monster, run the shake sequence, and resolve catch probability against the target's remaining health, status, and rarity. Probability is computed server-authoritative style from a published formula — catch rate scales down with rarity and up with missing health and applied status effects — because capture odds the player cannot reason about feel like pure luck, and the genre's core skill expression is engineering favorable odds before the throw. The shake count is presentation of an already-decided result, never an independent RNG per shake, so replays and seeds stay deterministic. This component owns the capture attempt and its resolution only: the weakening is combat's job (combat.damage_resolver and combat.status_effects produce the state this formula reads), the device is inventory's job (inventory.slotted_bag supplies and consumes it), and where a caught monster goes is pets.team_composition's decision. It listens for damage and status events rather than polling, so capture odds always reflect the current battle.",
-  "version": "0.1.1",
+  "description": "The weaken-then-capture loop: throw a capture device at a wild monster, run the shake sequence, and resolve catch probability against the target's remaining health, status, and rarity. Probability is computed server-authoritative style from a published formula — catch rate scales down with rarity and up with missing health and applied status effects — because capture odds the player cannot reason about feel like pure luck, and the genre's core skill expression is engineering favorable odds before the throw. The shake count is presentation of an already-decided result, never an independent RNG per shake, so replays and seeds stay deterministic. This component owns the capture attempt and its resolution only: the weakening is combat's job (combat.damage_resolver and combat.status_effects produce the state this formula reads), the device is inventory's job (inventory.slotted_bag supplies and consumes it), and where a caught monster goes is pets.team_composition's decision. It listens for damage and status events rather than polling, so capture odds always reflect the current battle. Status refreshes, stack changes, and generic removal now refresh the same published odds, while replayed applications and restoration emit no historical status events and therefore cannot reroll an attempt. Capture Mechanic still owns probability and resolution; Status Effects owns only the underlying effect facts.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -86,17 +86,22 @@
       "combat.captureCommanded",
       "combat.damageResolved",
       "combat.effectApplied",
+      "combat.effectRefreshed",
+      "combat.effectStacked",
+      "combat.effectRemoved",
       "combat.turnEnded"
     ]
   },
   "dependencies": [
-    "inventory.slotted_bag"
+    "inventory.slotted_bag",
+    "combat.status_effects"
   ],
   "tags": [
-    "monster-taming",
     "capture",
+    "collection",
+    "monster-taming",
     "probability",
-    "collection"
+    "status-synergy"
   ],
   "provenance": "library-native"
 }
