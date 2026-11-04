@@ -2,8 +2,8 @@
   "id": "persistence.save_system",
   "name": "Save System",
   "category": "persistence",
-  "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed build, specialization, mastery, quest, dialogue, elite-assignment, encounter, telegraph, world-flag, inventory, and journal changes.",
-  "version": "0.2.4",
+  "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed build, specialization, mastery, quest, dialogue, elite-assignment, encounter, telegraph, boss, arena-hazard, status-stack, cleanse, control-removal, world-flag, inventory, and journal changes.",
+  "version": "0.2.5",
   "platform": [
     "roblox",
     "godot",
@@ -88,7 +88,11 @@
       "world.arenaPhaseChanged",
       "world.arenaHazardTelegraphed",
       "world.arenaHazardTriggered",
-      "world.arenaHazardsReset"
+      "world.arenaHazardsReset",
+      "combat.effectApplied",
+      "combat.effectRefreshed",
+      "combat.effectStacked",
+      "combat.effectRemoved"
     ]
   },
   "sinkFor": [
@@ -96,9 +100,10 @@
   ],
   "dependencies": [],
   "tags": [
-    "save",
     "persistence",
-    "state"
+    "save",
+    "state",
+    "status-effects"
   ],
   "sourceModule": "roblox-modular-lib/src/SaveSystem.lua",
   "provenance": "upstream-mapped"
