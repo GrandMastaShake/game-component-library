@@ -32,6 +32,7 @@ compound rather than a section in a README.
 | **`compound.real_time_encounter`** | 6 | 7 | **A place with hostiles in it, no turn structure** |
 | `compound.rpg_buildcraft_loop` | 10 | 14 | Ranked skills, attributes, ability loadouts, safe respecs and persistence |
 | `compound.server_authoritative_trade_flow` | 5 | 6 | Server-authoritative trade topology |
+| `compound.specialization_elite_loop` | 25 | 58 | Durable specializations, earned masteries, deterministic elite waves and interruptible telegraphs |
 | `compound.stepped_grid_movement` | 8 | 8 | Tile-to-tile movement with elevation rules |
 
 Run `python3 tools/validate_compounds.py --report reports/compound-validation.json`

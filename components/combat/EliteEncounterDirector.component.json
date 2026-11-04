@@ -1,0 +1,118 @@
+{
+  "id": "combat.elite_encounter_director",
+  "name": "Elite Encounter Director",
+  "category": "combat",
+  "version": "0.1.0",
+  "description": "Owns finite, wave-based elite challenge encounters from request through completion, failure, or reset. Stable unit and completion ids make replay and restoration auditable. At spawn it asks Enemy Tier Scaling for base stats and Elite Affixes for elite metadata, then announces unitSpawned; Unit Roster alone admits and removes board units. Defeats advance only units belonging to the active encounter, the next wave starts only after the current spawned wave is defeated, and the final wave completes exactly once. Player-team elimination fails the encounter. Reset silently removes its living units without loot or mastery and cancels their telegraphs. This is not Spawn Director's ambient population, Dynamic Encounter Spawner's chunk lifecycle, Room Encounters' floor cast, or Boss Encounter Script's arena and phase ownership.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "encounters",
+      "type": "array",
+      "required": true,
+      "description": "Definitions: [{id, arenaId, level, threat, waves:[{id, units:[{archetype, count, elite?, affixCount?, affixIds?}]}]}]. Non-elite support units are allowed. Every encounter must contain at least one elite; explicit affixIds create curated elites while affixCount requests a deterministic roll."
+    },
+    {
+      "name": "playerTeam",
+      "type": "string",
+      "required": false,
+      "default": "player",
+      "description": "Roster team whose elimination fails the active encounter. Enemy-team elimination alone does not complete a wave until every spawned unit in that wave has a defeat record."
+    },
+    {
+      "name": "allowReplay",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a completed encounter may start again. False keeps completion ids and encounter-level mastery rewards once-only; failed or reset encounters may be retried."
+    },
+    {
+      "name": "initialStates",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored per-encounter state: status, current wave, living unit ids, defeated unit ids, and completion id. Restore emits no start, wave, spawn, completion, failure, or reward event; Unit Roster restores the corresponding units and health independently."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "states",
+      "type": "object",
+      "description": "Per-encounter idle, active, completed, or failed status plus current wave and unit ledgers; the snapshot initialStates accepts."
+    },
+    {
+      "name": "currentWave",
+      "type": "object",
+      "description": "Active encounter and wave ids, or null while no encounter is active."
+    },
+    {
+      "name": "activeUnits",
+      "type": "array",
+      "description": "Living unit records belonging to the active encounter, including encounterId, waveId, spawnId, tier, archetype, and affixIds."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Why a start, defeat, reset, or wave transition was ignored, including stale completion and unrelated-unit rejections."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.unitSpawned",
+      "combat.unitRemoved",
+      "combat.eliteEncounterStarted",
+      "combat.eliteWaveStarted",
+      "combat.eliteEncounterCompleted",
+      "combat.eliteEncounterFailed",
+      "combat.eliteEncounterReset"
+    ],
+    "listensTo": [
+      "input.startEliteEncounter",
+      "input.resetEliteEncounter",
+      "combat.entityDefeated",
+      "combat.teamEliminated"
+    ]
+  },
+  "dependencies": [
+    "combat.unit_roster",
+    "combat.enemy_tier_scaling",
+    "combat.elite_affixes"
+  ],
+  "tags": [
+    "rpg-family",
+    "elite",
+    "encounters",
+    "waves",
+    "deterministic"
+  ],
+  "provenance": "Elite encounter pass searched encounter, elite, Spawn Director, Dynamic Encounter Spawner, Room Encounters, Boss Encounter Script, and Unit Roster. Existing owners cover ambient refill, chunk rolls, fixed floor casts, boss phases, and board state respectively. None owns a finite multi-wave elite challenge with stable per-wave unit ledgers and once-only completion. This is not another population spawner, roster, boss arena script, affix roller, mastery ledger, or loot director."
+}

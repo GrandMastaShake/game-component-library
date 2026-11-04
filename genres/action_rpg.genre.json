@@ -1,8 +1,8 @@
 {
   "id": "genre.action_rpg",
   "name": "Action RPG",
-  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression.",
-  "version": "0.4.0",
+  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression. Durable specializations and deduplicated mastery tracks now gate ranked actives, while deterministic elite affixes, finite waves, and interruptible telegraphs turn the combat-loot loop into a readable challenge ladder.",
+  "version": "0.5.0",
   "loop": "fight in real time → loot → build character → bigger fight",
   "views": [
     "isometric",
@@ -40,7 +40,9 @@
     "ui.safe_area_layout",
     "ui.narrative_journal",
     "ui.dialogue_box",
-    "ui.dialogue_tree_engine"
+    "ui.dialogue_tree_engine",
+    "utility.timer_system",
+    "presentation.intent_marks"
   ],
   "newComponents": [
     "combat.hotbar_abilities",
@@ -59,7 +61,12 @@
     "progression.ability_loadout",
     "progression.build_respec",
     "progression.quest_reward_coordinator",
-    "ui.quest_journal"
+    "ui.quest_journal",
+    "progression.specialization",
+    "progression.mastery",
+    "combat.elite_affixes",
+    "combat.elite_encounter_director",
+    "combat.elite_telegraph_scheduler"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",
@@ -79,6 +86,9 @@
     "loot",
     "buildcraft",
     "quests",
-    "narrative"
+    "narrative",
+    "specialization",
+    "mastery",
+    "elite-encounters"
   ]
 }

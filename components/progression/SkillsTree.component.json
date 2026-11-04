@@ -2,8 +2,8 @@
   "id": "progression.skills_tree",
   "name": "Skills Tree",
   "category": "progression",
-  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember. A node that unlocks and changes NOTHING is a list of words on a panel, which is what this was: it published names, and no component in any build read one. The fix is not for this component to reach into combat and movement and apply effects — that is the second place a number gets computed, and it would make a progression component a combat component. It publishes `bonuses`, a summed table of the modifiers its unlocked nodes declare, and the components that own those numbers read it. So the CONTENT of a skill lives in the request's treeDefinition where a designer can change it, the summing lives here, and applying it stays with whoever owns the thing being modified. Ranked trees remain the same owner: maxRank defaults to 1 and costByRank defaults to one point per rank, so legacy boolean nodes behave exactly as before. `effect` is a per-rank modifier, which is identical to the old unlock-once result at rank 1. Prerequisites may require a minimum rank in another node, and exclusiveGroup prevents two competing nodes from holding ranks simultaneously. New purchases validate every rule; restored ranks deliberately do not. The tree publishes available and lockedBy for UI and planRespec for dependency-safe refunds, but Build Respec owns cross-system transactions and Ability Loadout owns active-slot selection. Ordinary purchases emit skillRankChanged. A respec instead emits one skillRespecCompleted summary for its transaction id, not another per-rank event storm, so downstream loadout pruning and persistence cannot apply the same rebuild twice.",
-  "version": "0.2.0",
+  "description": "Branching skill tree that unlocks nodes with earned skill points, gated by level requirements. A run that crosses between regions tears the whole build down and rebuilds it, so anything a player earned has to be handed to the next build through a DECLARED input or it is silently lost — which is how an RPG hands back a fresh character every time you walk off the edge of the map. That is what the initial-state input below is for: it is the same rule economy.currency's startingBalance follows, and it is a request's business to supply, never this component's to remember. A node that unlocks and changes NOTHING is a list of words on a panel, which is what this was: it published names, and no component in any build read one. The fix is not for this component to reach into combat and movement and apply effects — that is the second place a number gets computed, and it would make a progression component a combat component. It publishes `bonuses`, a summed table of the modifiers its unlocked nodes declare, and the components that own those numbers read it. So the CONTENT of a skill lives in the request's treeDefinition where a designer can change it, the summing lives here, and applying it stays with whoever owns the thing being modified. Ranked trees remain the same owner: maxRank defaults to 1 and costByRank defaults to one point per rank, so legacy boolean nodes behave exactly as before. `effect` is a per-rank modifier, which is identical to the old unlock-once result at rank 1. Prerequisites may require a minimum rank in another node, and exclusiveGroup prevents two competing nodes from holding ranks simultaneously. New purchases validate every rule; restored ranks deliberately do not. The tree publishes available and lockedBy for UI and planRespec for dependency-safe refunds, but Build Respec owns cross-system transactions and Ability Loadout owns active-slot selection. Ordinary purchases emit skillRankChanged. A respec instead emits one skillRespecCompleted summary for its transaction id, not another per-rank event storm, so downstream loadout pruning and persistence cannot apply the same rebuild twice. Optional specialization gating extends the same purchase rules without changing legacy trees: a node may declare `specialization`, and specializationGateMode 'whenDeclared' then requires the matching active identity for NEW purchases while restored ranks remain untouched. Selection changes refresh availability and lockedBy only; they never erase ranks or emit a respec. Nodes without the field behave exactly as before, and Build Respec still owns rank refunds.",
+  "version": "0.3.0",
   "platform": [
     "roblox",
     "godot",
@@ -61,6 +61,17 @@
       "required": false,
       "default": null,
       "description": "Unspent points at the start. Null means the tree's own starting allowance, which is what a fresh character gets."
+    },
+    {
+      "name": "specializationGateMode",
+      "type": "string",
+      "required": false,
+      "default": "whenDeclared",
+      "enum": [
+        "whenDeclared",
+        "disabled"
+      ],
+      "description": "whenDeclared enforces a node's optional specialization field through progression.specialization.isActive for new purchases; disabled ignores that field for hosts deliberately using tree content without specialization selection. Legacy nodes have no field and are unaffected."
     }
   ],
   "outputs": [
@@ -85,12 +96,12 @@
     {
       "name": "available",
       "type": "array",
-      "description": "Nodes whose next rank currently satisfies level, prerequisite, exclusivity, and point-cost rules."
+      "description": "Nodes whose next rank currently satisfies level, prerequisite, exclusivity, declared specialization, and point-cost rules."
     },
     {
       "name": "lockedBy",
       "type": "object",
-      "description": "Per unavailable next rank, the concrete missing level, prerequisite ranks, exclusive conflict, or points."
+      "description": "Per unavailable next rank, the concrete missing level, prerequisite ranks, exclusive conflict, inactive specialization, or points."
     },
     {
       "name": "spentPoints",
@@ -112,7 +123,8 @@
     "listensTo": [
       "progression.leveledUp",
       "input.unlockSkillRank",
-      "progression.buildRespecRequested"
+      "progression.buildRespecRequested",
+      "progression.specializationSelected"
     ]
   },
   "dependencies": [
@@ -122,7 +134,8 @@
     "skills",
     "unlocks",
     "ranks",
-    "buildcraft"
+    "buildcraft",
+    "specialization"
   ],
   "sourceModule": "roblox-modular-lib/src/Skills.lua"
 }

@@ -2,8 +2,8 @@
   "id": "persistence.save_system",
   "name": "Save System",
   "category": "persistence",
-  "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed skill-rank, loadout, build-respec, quest-stage, dialogue, world-flag, and journal changes.",
-  "version": "0.2.2",
+  "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed build, specialization, mastery, quest, dialogue, elite-assignment, encounter, telegraph, world-flag, inventory, and journal changes.",
+  "version": "0.2.3",
   "platform": [
     "roblox",
     "godot",
@@ -66,7 +66,19 @@
       "progression.questFailed",
       "world.worldFlagChanged",
       "ui.dialogueNodeAdvanced",
-      "ui.journalEntryAdded"
+      "ui.journalEntryAdded",
+      "progression.specializationSelected",
+      "progression.masteryXpGained",
+      "progression.masteryRankUp",
+      "combat.eliteAffixesAssigned",
+      "combat.eliteEncounterStarted",
+      "combat.eliteWaveStarted",
+      "combat.eliteEncounterCompleted",
+      "combat.eliteEncounterFailed",
+      "combat.eliteEncounterReset",
+      "combat.attackTelegraphed",
+      "combat.attackCommitted",
+      "combat.attackTelegraphCancelled"
     ]
   },
   "sinkFor": [

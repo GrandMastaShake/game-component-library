@@ -1,0 +1,132 @@
+{
+  "id": "combat.elite_telegraph_scheduler",
+  "name": "Elite Telegraph Scheduler",
+  "category": "combat",
+  "version": "0.1.0",
+  "description": "Turns assigned elite special attacks into readable cooldown, windup, cancellation, and commit timing. Registered attacks come from Elite Affixes; the current target comes from Aggro Table when windup begins and remains locked for that telegraph. Timer System supplies time. A committed attack emits attackCommitted for presentation and one ordinary combat.hit with declared base damage for Damage Resolver, so final mitigation, crit, variance, defeat, and status processing never move into this scheduler. Stun-like effects, caster or target defeat, and encounter reset cancel rather than commit. Restored timers do not emit a catch-up hit storm. Intent Marks renders the published telegraph but owns no timing.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "defaultWindupSeconds",
+      "type": "number",
+      "required": false,
+      "default": 0.8,
+      "description": "Windup used when an attack omits its own value. Must be positive so an elite special is readable before it can commit."
+    },
+    {
+      "name": "defaultCooldownSeconds",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "description": "Delay before the first use and between committed uses when an attack omits cooldownSeconds. Zero is allowed only on the attack definition for explicitly continuous patterns."
+    },
+    {
+      "name": "maxConcurrent",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Maximum simultaneous windups. Excess attacks remain cooling down rather than becoming invisible instant hits."
+    },
+    {
+      "name": "interruptEffects",
+      "type": "array",
+      "required": false,
+      "default": [
+        "stun"
+      ],
+      "description": "Effect ids applied to a caster that cancel its active telegraph. Cancellation emits no hit and restarts the attack cooldown."
+    },
+    {
+      "name": "cancelOnTargetDefeat",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Cancel when the locked target dies before commit. Caster defeat and encounter reset always cancel registered active windups."
+    },
+    {
+      "name": "initialState",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored cooldowns and active telegraphs with stable timer and attack ids. Restoration resumes timing without emitting historical telegraph, commit, cancellation, or hit events."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "activeTelegraphs",
+      "type": "array",
+      "description": "Current windups: attackId, casterId, targetId, affixId, shape, remainingSeconds, and stable timer id."
+    },
+    {
+      "name": "cooldowns",
+      "type": "object",
+      "description": "Remaining cooldown per registered caster and attack id; together with activeTelegraphs this is the restorable scheduler state."
+    },
+    {
+      "name": "lastCommitted",
+      "type": "object",
+      "description": "The latest committed attack and its locked target, base payload, and commit id."
+    },
+    {
+      "name": "lastCancelled",
+      "type": "object",
+      "description": "The latest cancelled attack and concrete reason: interrupt, caster defeat, target defeat, reset, or missing target."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.attackTelegraphed",
+      "combat.attackCommitted",
+      "combat.attackTelegraphCancelled",
+      "combat.hit"
+    ],
+    "listensTo": [
+      "combat.eliteAffixesAssigned",
+      "utility.timerCompleted",
+      "combat.effectApplied",
+      "combat.entityDefeated",
+      "combat.eliteEncounterReset"
+    ]
+  },
+  "dependencies": [
+    "utility.timer_system",
+    "combat.aggro_table"
+  ],
+  "tags": [
+    "rpg-family",
+    "elite",
+    "telegraphs",
+    "timing",
+    "readability"
+  ],
+  "provenance": "Elite encounter pass searched telegraph, windup, Intent Marks, Timer System, Hotbar Abilities, Contact Attack, Boss Encounter Script, and Damage Resolver. Intent Marks draws basic strike/close intent, Timer System counts down, Hotbar owns player casts, Contact Attack owns basic strike cadence, Boss Encounter Script owns phases, and Damage Resolver owns final damage. None owns elite special-attack cooldown, locked-target windup, interruption, and commit. This is not a renderer, generic player hotbar, damage calculator, aggro owner, or boss phase script."
+}

@@ -1,0 +1,620 @@
+{
+  "id": "compound.specialization_elite_loop",
+  "name": "Specialization & Elite Mastery Loop",
+  "version": "0.1.0",
+  "description": "An end-to-end RPG build-and-challenge loop: level growth and durable specialization selections unlock gated skill ranks and active abilities; ordinary respecs rebuild ranks without erasing identity or earned mastery. Finite elite encounters combine level scaling with deterministic enemy affixes, timed and interruptible telegraphs, ordinary damage resolution, and stable defeat metadata. The same defeat can advance the encounter, character XP, mastery, and existing loot owners without any one of them owning another's state. Encounter completion can grant deduplicated mastery, while completed changes restore through their owners. All identities, skills, affixes, attacks, encounters, items, UI, and balance tables remain host supplied.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "progression.xp_leveling",
+      "role": "character XP, level thresholds, and growth events",
+      "config": {
+        "curve": "linear",
+        "xpPerHit": 0,
+        "xpPerKill": 10,
+        "perLevel": {}
+      }
+    },
+    {
+      "id": "progression.skills_tree",
+      "role": "ranked skill purchases with optional specialization gates and respec plans",
+      "config": {
+        "treeDefinition": {
+          "startingPoints": 1,
+          "skills": []
+        },
+        "initialUnlocked": [],
+        "initialRanks": {},
+        "specializationGateMode": "whenDeclared"
+      }
+    },
+    {
+      "id": "progression.attribute_sheet",
+      "role": "attributes, derived stats, checks, and attribute respec ownership",
+      "config": {
+        "pointsPerLevel": 1,
+        "baseAttributes": {},
+        "initialAttributes": {},
+        "derivedStatTable": {}
+      }
+    },
+    {
+      "id": "progression.specialization",
+      "role": "durable gated build identity selection and named specialization modifiers",
+      "config": {
+        "specializations": [],
+        "maxActive": 1,
+        "selectionLocked": true,
+        "initialSelected": []
+      }
+    },
+    {
+      "id": "progression.mastery",
+      "role": "deduplicated gameplay-driven proficiency XP, derived ranks, and mastery modifiers",
+      "config": {
+        "tracks": [],
+        "sources": [],
+        "initialXp": {},
+        "initialCreditIds": []
+      }
+    },
+    {
+      "id": "progression.ability_loadout",
+      "role": "active assignment across skill, specialization, and mastery gates",
+      "config": {
+        "slots": 6,
+        "abilityCatalog": [],
+        "initialLoadout": [],
+        "presets": {},
+        "allowDuplicateAbilities": false
+      }
+    },
+    {
+      "id": "progression.build_respec",
+      "role": "confirmed skill and attribute rebuilds that preserve specialization and mastery",
+      "config": {
+        "baseCost": 0,
+        "costPerRefundedPoint": 0,
+        "refundFraction": 1,
+        "allowPartial": true,
+        "partialPolicy": "rejectDependents",
+        "requireConfirmation": true
+      }
+    },
+    {
+      "id": "economy.currency",
+      "role": "synchronous respec affordability and payment",
+      "config": {
+        "currencyName": "Coins",
+        "startingBalance": 0
+      }
+    },
+    {
+      "id": "combat.hotbar_abilities",
+      "role": "loadout-bound player ability execution and ability-cast facts",
+      "config": {
+        "abilityBindingMode": "loadoutOnly",
+        "castAuthorizationMode": "directOrAuthorized",
+        "abilities": []
+      }
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "single final-damage pipeline and metadata-rich completed defeats",
+      "config": {
+        "varianceFraction": 0.1
+      }
+    },
+    {
+      "id": "combat.status_effects",
+      "role": "timed effects from player and elite hits, including interrupt sources",
+      "config": {
+        "maxActiveEffects": 6
+      }
+    },
+    {
+      "id": "combat.unit_roster",
+      "role": "board units, health, positions, and preserved spawn metadata",
+      "config": {
+        "units": [],
+        "defaultHealth": 12,
+        "drawTokens": false
+      }
+    },
+    {
+      "id": "combat.aggro_table",
+      "role": "current targets for elite special-attack windups",
+      "config": {
+        "leashMultiple": 1.6,
+        "forgetSeconds": 6
+      }
+    },
+    {
+      "id": "combat.enemy_tier_scaling",
+      "role": "base level scaling queried once at elite and support-unit spawn",
+      "config": {
+        "scalingCurve": "linear",
+        "scaleRewards": true
+      }
+    },
+    {
+      "id": "combat.elite_affixes",
+      "role": "deterministic legal enemy affix sets and declared special attacks",
+      "config": {
+        "affixes": [],
+        "seed": 0,
+        "maxAffixes": 2,
+        "initialAssignments": {}
+      }
+    },
+    {
+      "id": "combat.elite_encounter_director",
+      "role": "finite elite waves, stable unit ledgers, completion, failure, and reset",
+      "config": {
+        "encounters": [],
+        "playerTeam": "player",
+        "allowReplay": false,
+        "initialStates": {}
+      }
+    },
+    {
+      "id": "combat.elite_telegraph_scheduler",
+      "role": "elite special cooldowns, locked-target windups, interruption, and ordinary hit commit",
+      "config": {
+        "defaultWindupSeconds": 0.8,
+        "defaultCooldownSeconds": 5,
+        "maxConcurrent": 8,
+        "interruptEffects": [
+          "stun"
+        ],
+        "initialState": {}
+      }
+    },
+    {
+      "id": "utility.timer_system",
+      "role": "shared countdown source for elite cooldowns and windups",
+      "config": {
+        "durationSeconds": 1,
+        "repeats": false
+      }
+    },
+    {
+      "id": "presentation.intent_marks",
+      "role": "removable rendering projection for basic intent and elite telegraphs",
+      "config": {
+        "onlyWhenEngaged": false
+      }
+    },
+    {
+      "id": "inventory.drop_director",
+      "role": "elite-aware drop eligibility and roll counts",
+      "config": {
+        "dropChanceByArchetype": {
+          "normal": 0.25,
+          "elite": 1,
+          "boss": 1
+        },
+        "rollsPerDrop": {
+          "normal": 1,
+          "elite": 2,
+          "boss": 3
+        }
+      }
+    },
+    {
+      "id": "inventory.loot_table",
+      "role": "host-supplied base-item tables",
+      "config": {
+        "entries": []
+      }
+    },
+    {
+      "id": "inventory.affix_loot_generator",
+      "role": "request-driven item rarity and item-affix rolls, separate from enemy affixes",
+      "config": {
+        "triggerMode": "onRequest"
+      }
+    },
+    {
+      "id": "inventory.slotted_bag",
+      "role": "carried-item capacity and generated-item intake",
+      "config": {
+        "slotCount": 20,
+        "initialItems": []
+      }
+    },
+    {
+      "id": "inventory.core_inventory",
+      "role": "underlying carried-item ownership and completed item additions",
+      "config": {
+        "initialItems": []
+      }
+    },
+    {
+      "id": "persistence.save_system",
+      "role": "snapshots after completed build, mastery, assignment, encounter, telegraph, and inventory changes",
+      "config": {
+        "autosaveIntervalSeconds": 120
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "progression.skills_tree",
+      "note": "Level growth grants skill points and level gates."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "progression.attribute_sheet",
+      "note": "The same growth grants attribute allowance."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "progression.specialization",
+      "note": "Level-gated identities refresh availability without auto-selecting."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "persistence.save_system",
+      "note": "Completed level growth is saveable."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRankChanged",
+      "to": "progression.specialization",
+      "note": "Skill-gated identities reevaluate against current ranks."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRankChanged",
+      "to": "progression.ability_loadout",
+      "note": "Source-rank changes expose or prune actives."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRankChanged",
+      "to": "persistence.save_system",
+      "note": "Successful rank changes are persisted."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRespecCompleted",
+      "to": "progression.ability_loadout",
+      "note": "A completed rebuild prunes stale source-rank actives."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRespecCompleted",
+      "to": "progression.build_respec",
+      "note": "The skill owner acknowledges its own refund."
+    },
+    {
+      "from": "progression.attribute_sheet",
+      "event": "progression.attributeRespecCompleted",
+      "to": "progression.build_respec",
+      "note": "The attribute owner independently acknowledges its reset."
+    },
+    {
+      "from": "progression.build_respec",
+      "event": "progression.buildRespecRequested",
+      "to": "progression.skills_tree",
+      "note": "Only Skills Tree resets ranks after confirmation and payment."
+    },
+    {
+      "from": "progression.build_respec",
+      "event": "progression.buildRespecRequested",
+      "to": "progression.attribute_sheet",
+      "note": "Only Attribute Sheet resets allocations."
+    },
+    {
+      "from": "progression.build_respec",
+      "event": "progression.buildRespecCompleted",
+      "to": "persistence.save_system",
+      "note": "Only the fully acknowledged rebuild triggers completion save."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "progression.skills_tree",
+      "note": "A completed identity choice refreshes declared skill gates without changing ranks."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "progression.ability_loadout",
+      "note": "Identity-gated actives refresh against the new selection."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "progression.mastery",
+      "note": "Specialization-gated tracks begin or stop accepting new credit."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "persistence.save_system",
+      "note": "Durable identity selection is persisted; rejected choices are not."
+    },
+    {
+      "from": "progression.mastery",
+      "event": "progression.masteryRankUp",
+      "to": "progression.ability_loadout",
+      "note": "Mastery-gated actives unlock as derived ranks increase."
+    },
+    {
+      "from": "progression.mastery",
+      "event": "progression.masteryXpGained",
+      "to": "persistence.save_system",
+      "note": "Accepted mastery credit is durable; duplicate facts emit nothing."
+    },
+    {
+      "from": "progression.mastery",
+      "event": "progression.masteryRankUp",
+      "to": "persistence.save_system",
+      "note": "Derived rank milestones trigger a completed-change snapshot."
+    },
+    {
+      "from": "progression.ability_loadout",
+      "event": "progression.abilityLoadoutChanged",
+      "to": "combat.hotbar_abilities",
+      "note": "One complete kit replaces executable actives."
+    },
+    {
+      "from": "progression.ability_loadout",
+      "event": "progression.abilityLoadoutChanged",
+      "to": "persistence.save_system",
+      "note": "Completed assignment and pruning are persisted."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.abilityCast",
+      "to": "progression.mastery",
+      "note": "Stable cast ids can credit matching usage tracks once."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Player actives use the ordinary final-damage owner."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Player actives use the ordinary status ledger."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitSpawned",
+      "to": "combat.unit_roster",
+      "note": "The director announces fully scaled and affixed units; only the roster admits them."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitRemoved",
+      "to": "combat.unit_roster",
+      "note": "Reset removes living encounter units silently, without defeat rewards."
+    },
+    {
+      "from": "combat.elite_affixes",
+      "event": "combat.eliteAffixesAssigned",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Assigned special attacks register for cooldown and windup timing."
+    },
+    {
+      "from": "combat.elite_affixes",
+      "event": "combat.eliteAffixesAssigned",
+      "to": "persistence.save_system",
+      "note": "New deterministic assignments are saveable; restored assignments do not re-emit."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Stable timer ids advance cooldown and windup state."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Declared interrupt effects cancel active elite windups."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphed",
+      "to": "presentation.intent_marks",
+      "note": "A locked-target windup becomes visible before it can hit."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackCommitted",
+      "to": "presentation.intent_marks",
+      "note": "Commit clears the warning projection."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphCancelled",
+      "to": "presentation.intent_marks",
+      "note": "Cancellation clears the warning without a hit."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "A committed elite special emits ordinary base-damage input."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Committed elite specials use the same status owner."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphed",
+      "to": "persistence.save_system",
+      "note": "Active windups can restore without becoming instant attacks."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackCommitted",
+      "to": "persistence.save_system",
+      "note": "Committed timing is a completed change."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphCancelled",
+      "to": "persistence.save_system",
+      "note": "Cancelled timing and restarted cooldown are persisted."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.damageResolved",
+      "to": "combat.aggro_table",
+      "note": "Damage changes threat without moving targeting into the resolver."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.rosterChanged",
+      "to": "combat.aggro_table",
+      "note": "Spawns, removals, and defeats refresh available targets."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.unit_roster",
+      "note": "Only completed defeats remove units through the death path."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Caster or target defeat cancels applicable windups."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.elite_encounter_director",
+      "note": "Stable encounter and spawn ids advance only the owning wave."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.teamEliminated",
+      "to": "combat.elite_encounter_director",
+      "note": "Player-team elimination fails the active encounter."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "progression.mastery",
+      "note": "Stable defeat ids credit matching mastery tracks exactly once."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "progression.xp_leveling",
+      "note": "The existing character-XP owner consumes the same defeat independently."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "inventory.drop_director",
+      "note": "Elite tier reaches the existing drop-eligibility owner."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterCompleted",
+      "to": "progression.mastery",
+      "note": "Stable completion ids can grant encounter-level mastery once."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Reset cancels every windup belonging to the reset encounter."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterStarted",
+      "to": "persistence.save_system",
+      "note": "Started encounter state is restorable."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteWaveStarted",
+      "to": "persistence.save_system",
+      "note": "Current-wave and spawn ledgers are restorable."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterCompleted",
+      "to": "persistence.save_system",
+      "note": "Once-only completion is persisted."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterFailed",
+      "to": "persistence.save_system",
+      "note": "Failure is persisted without completion credit."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "persistence.save_system",
+      "note": "Reset state is persisted without replaying defeat rewards."
+    },
+    {
+      "from": "inventory.drop_director",
+      "event": "inventory.lootRollRequested",
+      "to": "inventory.affix_loot_generator",
+      "note": "Only accepted drop decisions enter request-driven item generation."
+    },
+    {
+      "from": "inventory.affix_loot_generator",
+      "event": "inventory.itemGenerated",
+      "to": "inventory.slotted_bag",
+      "note": "Finished items are offered to carried storage."
+    },
+    {
+      "from": "inventory.core_inventory",
+      "event": "inventory.itemAdded",
+      "to": "persistence.save_system",
+      "note": "Completed item additions are persisted; overflow is not a grant."
+    }
+  ],
+  "criticalComponents": [
+    "progression.specialization",
+    "progression.mastery",
+    "combat.elite_affixes",
+    "combat.elite_encounter_director",
+    "combat.elite_telegraph_scheduler",
+    "combat.damage_resolver"
+  ],
+  "acceptanceCriteria": [
+    "Legacy skill nodes and ability catalog entries without specialization or mastery fields retain their previous purchase, assignment, restore, and respec behavior.",
+    "A new specialization selection succeeds only when level, required skill ranks, specialization prerequisites, exclusivity, capacity, and replacement rules all pass; rejection changes no selection or bonus state.",
+    "Restored specializations, mastery XP, credit ids, affix assignments, encounter ledgers, and telegraph timers do not emit historical selection, rank, spawn, completion, or hit events.",
+    "A specialization-gated skill checks the active identity only for new purchases; restored ranks are not deleted by edited gates, and an ordinary Build Respec preserves both specialization and mastery.",
+    "Mastery credits only matching completed facts from active tracks, derives ranks from strictly increasing thresholds, and never credits the same track twice for one stable cast, defeat, quest, or encounter completion id.",
+    "Ability Loadout requires every declared source-rank, specialization, mastery, slot, and duplicate rule before assignment, and publishes one complete kit after any gate changes.",
+    "Elite Affixes reproduces the same legal set from the same seed and stable ids, includes prerequisite closure, enforces exclusions and threat bands, and returns restored assignments without rerolling.",
+    "Elite Encounter Director combines level scaling and affix multipliers once at spawn, uses stable unit ids, and preserves encounter, wave, tier, and affix metadata through Damage Resolver's entityDefeated event.",
+    "A wave advances only after every unit spawned for that wave has a matching defeat; the final wave emits one completion id, and allowReplay=false rejects another start or encounter-level mastery credit.",
+    "Player-team elimination fails rather than completes the encounter, and reset removes living units through unitRemoved without XP, loot, mastery, or a false defeat.",
+    "Elite Telegraph Scheduler reads the current Aggro Table target at windup, locks it for that telegraph, waits a positive readable windup, and emits at most one attackCommitted plus one ordinary combat.hit.",
+    "Declared interrupt effects, caster defeat, locked-target defeat, missing targets, and encounter reset cancel the windup and emit no hit; cancellation never becomes damage or loot.",
+    "Intent Marks can be removed without changing aggro, cooldowns, windups, hits, encounters, mastery, or rewards; with it present, every committed or cancelled telegraph leaves the projection.",
+    "Damage Resolver remains the only final-damage owner for player and elite attacks, and Status Effects remains the only timed-effect ledger.",
+    "Drop Director alone decides drop eligibility and quantity, Affix Loot Generator rolls only accepted requests in onRequest mode, and Slotted Bag or Core Inventory retains item-capacity authority.",
+    "One elite defeat may independently advance its encounter, character XP, mastery, and loot, but none of those consumers may duplicate or synthesize another consumer's completed event.",
+    "Rejected specialization choices, duplicate mastery facts, invalid affix assignments, stale defeats, and cancelled telegraphs emit no completed-change save trigger.",
+    "Removing Specialization, Mastery, and all content gated by them leaves legacy buildcraft and elite combat functional; removing the elite slice leaves build planning and usage-based mastery from other declared sources functional.",
+    "Identical content, seeds, restored state, target selections, timer inputs, and stable event ids reproduce selections, ranks, affixes, waves, telegraphs, hits, rewards, and saves deterministically."
+  ]
+}

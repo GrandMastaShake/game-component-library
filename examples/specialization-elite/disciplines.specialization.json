@@ -1,0 +1,187 @@
+{
+  "id": "example.disciplines",
+  "specializations": [
+    {
+      "id": "warden",
+      "name": "Warden",
+      "requiredLevel": 2,
+      "requiredSkills": [
+        {
+          "id": "bulwark",
+          "rank": 1
+        }
+      ],
+      "exclusiveGroup": "discipline",
+      "effect": {
+        "maxHealth": 2,
+        "guardPower": 1
+      }
+    },
+    {
+      "id": "arcanist",
+      "name": "Arcanist",
+      "requiredLevel": 2,
+      "requiredSkills": [
+        {
+          "id": "arcane_focus",
+          "rank": 1
+        }
+      ],
+      "exclusiveGroup": "discipline",
+      "effect": {
+        "spellPower": 2
+      }
+    },
+    {
+      "id": "ranger",
+      "name": "Ranger",
+      "requiredLevel": 2,
+      "requiredSkills": [
+        {
+          "id": "power_strike",
+          "rank": 1
+        }
+      ],
+      "exclusiveGroup": "discipline",
+      "effect": {
+        "rangedPower": 2
+      }
+    }
+  ],
+  "masteryTracks": [
+    {
+      "id": "elite_hunter",
+      "name": "Elite Hunter",
+      "thresholds": [
+        20,
+        50
+      ],
+      "effectByRank": [
+        {
+          "eliteDamage": 0.03
+        },
+        {
+          "eliteDamage": 0.04
+        }
+      ],
+      "sources": [
+        {
+          "event": "combat.entityDefeated",
+          "match": {
+            "tier": "elite"
+          },
+          "amount": 10,
+          "dedupeBy": "defeatId"
+        },
+        {
+          "event": "combat.eliteEncounterCompleted",
+          "amount": 15,
+          "dedupeBy": "completionId"
+        }
+      ]
+    },
+    {
+      "id": "warden_drill",
+      "name": "Warden Drill",
+      "specialization": "warden",
+      "thresholds": [
+        15,
+        40
+      ],
+      "effectByRank": [
+        {
+          "guardPower": 1
+        },
+        {
+          "guardPower": 2
+        }
+      ],
+      "sources": [
+        {
+          "event": "combat.abilityCast",
+          "match": {
+            "discipline": "warden"
+          },
+          "amount": 5,
+          "dedupeBy": "castId"
+        }
+      ]
+    },
+    {
+      "id": "ranger_drill",
+      "name": "Ranger Drill",
+      "specialization": "ranger",
+      "thresholds": [
+        15,
+        40
+      ],
+      "effectByRank": [
+        {
+          "rangedPower": 1
+        },
+        {
+          "rangedPower": 2
+        }
+      ],
+      "sources": [
+        {
+          "event": "combat.abilityCast",
+          "match": {
+            "discipline": "ranger"
+          },
+          "amount": 5,
+          "dedupeBy": "castId"
+        }
+      ]
+    }
+  ],
+  "abilityCatalog": [
+    {
+      "id": "shield_wall",
+      "sourceNodeId": "bulwark",
+      "minRank": 1,
+      "specialization": "warden",
+      "ability": {
+        "cooldown": 8,
+        "damage": 2,
+        "effect": "shield",
+        "discipline": "warden"
+      }
+    },
+    {
+      "id": "arcane_bolt",
+      "sourceNodeId": "arcane_focus",
+      "minRank": 1,
+      "specialization": "arcanist",
+      "ability": {
+        "cooldown": 3,
+        "damage": 4,
+        "discipline": "arcanist"
+      }
+    },
+    {
+      "id": "power_shot",
+      "sourceNodeId": "power_strike",
+      "minRank": 1,
+      "specialization": "ranger",
+      "masteryTrack": "ranger_drill",
+      "minMasteryRank": 1,
+      "ability": {
+        "cooldown": 4,
+        "damage": 5,
+        "discipline": "ranger"
+      }
+    },
+    {
+      "id": "elite_execution",
+      "sourceNodeId": "power_strike",
+      "minRank": 2,
+      "masteryTrack": "elite_hunter",
+      "minMasteryRank": 2,
+      "ability": {
+        "cooldown": 12,
+        "damage": 8
+      }
+    }
+  ]
+}

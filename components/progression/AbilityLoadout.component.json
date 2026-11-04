@@ -2,8 +2,8 @@
   "id": "progression.ability_loadout",
   "name": "Ability Loadout",
   "category": "progression",
-  "version": "0.1.0",
-  "description": "Selects which unlocked active abilities occupy a character's limited hotbar slots. The skill tree owns ranks and Hotbar Abilities owns execution; this owns only assignment, named presets, and pruning when a source rank disappears. Catalog entries point back to a source node and minimum rank rather than duplicating progression rules. Assignment publishes one complete loadout snapshot so Hotbar never combines a stale manual kit with the new selection.",
+  "version": "0.2.0",
+  "description": "Selects which unlocked active abilities occupy a character's limited hotbar slots. The skill tree owns ranks and Hotbar Abilities owns execution; this owns only assignment, named presets, and pruning when a source rank disappears. Catalog entries point back to a source node and minimum rank rather than duplicating progression rules. Assignment publishes one complete loadout snapshot so Hotbar never combines a stale manual kit with the new selection. Catalog actives may additionally declare specialization, masteryTrack, and minMasteryRank. The loadout asks those owners synchronously for current state and refreshes on their completed selection/rank events, so an active can express build identity and earned proficiency without either owner assigning slots. Legacy entries with only sourceNodeId and minRank retain their original behavior.",
   "platform": [
     "agnostic"
   ],
@@ -48,7 +48,7 @@
       "type": "array",
       "required": false,
       "default": [],
-      "description": "Active definitions: [{id, sourceNodeId, minRank?, allowedSlots?, ability?}]. minRank defaults to 1; ability is the execution data forwarded to Hotbar. Empty means the host has supplied no actives."
+      "description": "Active definitions: [{id, sourceNodeId, minRank?, specialization?, masteryTrack?, minMasteryRank?, allowedSlots?, ability?}]. minRank defaults to 1 and minMasteryRank defaults to 1 when masteryTrack is present. Optional gates are checked against their owners; ability is the execution data forwarded to Hotbar. Empty means the host has supplied no actives."
     },
     {
       "name": "initialLoadout",
@@ -92,6 +92,11 @@
       "name": "presetNames",
       "type": "array",
       "description": "Named presets available to the host UI."
+    },
+    {
+      "name": "lockedAbilities",
+      "type": "object",
+      "description": "Per unavailable catalog active, the concrete missing source rank, inactive specialization, insufficient mastery rank, slot restriction, or duplicate conflict."
     }
   ],
   "events": {
@@ -106,7 +111,9 @@
       "input.clearAbilitySlot",
       "input.applyAbilityPreset",
       "progression.skillRankChanged",
-      "progression.skillRespecCompleted"
+      "progression.skillRespecCompleted",
+      "progression.specializationSelected",
+      "progression.masteryRankUp"
     ]
   },
   "dependencies": [
@@ -116,7 +123,9 @@
     "rpg-family",
     "abilities",
     "loadout",
-    "buildcraft"
+    "buildcraft",
+    "specialization",
+    "mastery"
   ],
   "provenance": "RPG buildcraft pass on 2026-11-02 searched Skills Tree, Hotbar Abilities, Weapon Loadout, Style Presets, Prepared Spellbook and Equipment Slots. Skills Tree owns passive unlocks, Hotbar owns cast execution, Weapon Loadout owns weapons, and the other systems own unrelated preparation or presentation state. No contract owned assigning unlocked active abilities to limited slots or pruning them after respec, so this adds that boundary without moving cooldowns or damage into progression."
 }
