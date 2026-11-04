@@ -2,8 +2,8 @@
   "id": "combat.prepared_spellbook",
   "name": "Prepared Spellbook",
   "category": "combat",
-  "version": "0.1.0",
-  "description": "Owns which spells each party member knows and prepares, plus the remaining prepared casts per slot tier. A dispatched cast order is checked before Hotbar Abilities sees it: unknown, unprepared, or exhausted requests are rejected without cooldown, damage, or resource payment. A successful combat.abilityCast then spends exactly one matching prepared cast by correlation id; a Hotbar rejection spends nothing. Completed rest replenishes those casts without changing the preparation list, and an interrupted rest emits no recovery event.",
+  "version": "0.2.0",
+  "description": "Owns which spells each party member knows and prepares, plus the remaining prepared casts per slot tier. A dispatched cast order is checked before Hotbar Abilities sees it: unknown, unprepared, or exhausted requests are rejected without cooldown, damage, or resource payment. A successful combat.abilityCast then spends exactly one matching prepared cast by correlation id; a Hotbar rejection spends nothing. Completed rest replenishes those casts without changing the preparation list, and an interrupted rest emits no recovery event. A completed rest must carry a stable restId: processedRestIds makes replayed completion silent, and initialProcessedRestIds restores that ledger without replaying restoration events.",
   "platform": [
     "agnostic"
   ],
@@ -69,6 +69,13 @@
       "required": false,
       "default": true,
       "description": "Whether world.restCompleted restores prepared casts. False supports cooldown-only or survival variants."
+    },
+    {
+      "name": "initialProcessedRestIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Completed rest ids already consumed by this spellbook; prevents a restored or redelivered world.restCompleted from replenishing casts twice."
     }
   ],
   "outputs": [
@@ -86,6 +93,11 @@
       "name": "canCast",
       "type": "function",
       "description": "Synchronous check for known, prepared, and remaining-cast eligibility; it does not replace Hotbar range or cooldown checks."
+    },
+    {
+      "name": "processedRestIds",
+      "type": "array",
+      "description": "Durable completed-rest dedupe ledger for per-rest cast recovery."
     }
   ],
   "events": {
@@ -112,10 +124,12 @@
   ],
   "tags": [
     "crpg",
-    "spells",
+    "party",
     "preparation",
+    "recovery",
+    "replay-safe",
     "rest",
-    "party"
+    "spells"
   ],
   "provenance": "BG2-inspired extraction pass on 2026-11-02 searched Hotbar Abilities, Cooldown, Energy Per Turn, Rest Camp, Skills Tree and Spell-related descriptors. Hotbar owns cast execution and cooldowns, Rest Camp owns the completed-versus-interrupted rest transaction, and the other systems own unrelated resource or progression rules. No component owned known-versus-prepared spell state or rest-recovered cast counts, so this adds that state and authorizes rather than executes casts."
 }
