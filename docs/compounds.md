@@ -15,6 +15,7 @@ compound rather than a section in a README.
 
 | Compound | Pieces | Wires | What it makes |
 |---|---|---|---|
+| `compound.boss_arena_mastery_loop` | 44 | 102 | Build identity, masteries, elite waves, multi-phase bosses, readable arena hazards and exactly-once rewards |
 | `compound.crafting_loop` | 5 | 3 | Ingredients, a crafted result, feedback, and saving |
 | `compound.first_person_voxel_world` | 17 | 11 | A voxel world you stand inside |
 | `compound.home_showcase_loop` | 4 | 3 | Home displays, layout saving, visitation |
