@@ -1,9 +1,9 @@
 {
   "id": "genre.turn_based_tactics",
   "name": "Turn-Based Tactics",
-  "description": "Grid combat where the turn is a budget and position is the argument: initiative orders the units, action points price their verbs, the grid prices their steps, and cover prices their mistakes. TypeChart ships here and is shared forward with the Monster Taming pack.",
-  "version": "0.1.0",
-  "loop": "scout \u2192 position units \u2192 action economy per turn \u2192 objective",
+  "description": "Grid combat where the turn is a budget and position is the argument: initiative orders the units, action points price their verbs, the grid prices their steps, and cover prices their mistakes. TypeChart ships here and is shared forward with the Monster Taming pack. Status Effects now adds restore-safe refresh, stacking, cleanse, and immunities; Grid Movement Range can optionally apply movement multipliers, roots, and attack restrictions without acquiring AP, turn, pathfinding, or roster ownership.",
+  "version": "0.2.0",
+  "loop": "scout → position units → action economy per turn → objective",
   "views": [
     "isometric",
     "top-down"
@@ -24,7 +24,9 @@
     "combat.cover_bonus_grid",
     "combat.type_chart",
     "progression.permadeath_flag",
-    "combat.tactical_attack"
+    "combat.tactical_attack",
+    "utility.timer_system",
+    "persistence.save_system"
   ],
   "signatureCompound": {
     "name": "The Turn Loop",
@@ -40,6 +42,8 @@
     "rpg-family",
     "tactics",
     "grid",
-    "turn-based"
+    "turn-based",
+    "status-effects",
+    "crowd-control"
   ]
 }
