@@ -1,0 +1,1070 @@
+{
+  "id": "compound.boss_arena_mastery_loop",
+  "name": "Boss Arena Mastery Loop",
+  "version": "0.1.0",
+  "description": "An end-to-end RPG build-and-encounter spine: level growth, durable specialization, gated actives, deduplicated mastery, deterministic elite waves, and scripted multi-phase bosses. Boss health, time, and condition transitions own stable phase ledgers and once-only adds; existing telegraph, timer, roster, damage, status, hazard-volume, room-seal, XP, loot, storage, and save owners retain their boundaries. Arena Hazards follows boss phase ids with readable warnings and armed volumes. A real boss defeat feeds ordinary XP, mastery, and loot, while one stable boss completion id can separately credit mastery. Failure, reset, restoration, and post-boss add cleanup cannot replay spawns, attacks, hazards, or rewards. All builds, enemies, arenas, attacks, conditions, items, UI, and balance remain host supplied.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "progression.xp_leveling",
+      "role": "character XP, level thresholds, and growth events",
+      "config": {
+        "curve": "linear",
+        "xpPerHit": 0,
+        "xpPerKill": 10,
+        "perLevel": {}
+      }
+    },
+    {
+      "id": "progression.skills_tree",
+      "role": "ranked skill purchases with optional specialization gates and respec plans",
+      "config": {
+        "treeDefinition": {
+          "startingPoints": 1,
+          "skills": []
+        },
+        "initialUnlocked": [],
+        "initialRanks": {},
+        "specializationGateMode": "whenDeclared"
+      }
+    },
+    {
+      "id": "progression.attribute_sheet",
+      "role": "attributes, derived stats, checks, and attribute respec ownership",
+      "config": {
+        "pointsPerLevel": 1,
+        "baseAttributes": {},
+        "initialAttributes": {},
+        "derivedStatTable": {}
+      }
+    },
+    {
+      "id": "progression.specialization",
+      "role": "durable gated build identity selection and named specialization modifiers",
+      "config": {
+        "specializations": [],
+        "maxActive": 1,
+        "selectionLocked": true,
+        "initialSelected": []
+      }
+    },
+    {
+      "id": "progression.mastery",
+      "role": "deduplicated gameplay-driven proficiency XP from casts, defeats, quests, elite completions, and boss completions",
+      "config": {
+        "tracks": [],
+        "sources": [],
+        "initialXp": {},
+        "initialCreditIds": []
+      }
+    },
+    {
+      "id": "progression.ability_loadout",
+      "role": "active assignment across skill, specialization, and mastery gates",
+      "config": {
+        "slots": 6,
+        "abilityCatalog": [],
+        "initialLoadout": [],
+        "presets": {},
+        "allowDuplicateAbilities": false
+      }
+    },
+    {
+      "id": "progression.build_respec",
+      "role": "confirmed skill and attribute rebuilds that preserve specialization and mastery",
+      "config": {
+        "baseCost": 0,
+        "costPerRefundedPoint": 0,
+        "refundFraction": 1,
+        "allowPartial": true,
+        "partialPolicy": "rejectDependents",
+        "requireConfirmation": true
+      }
+    },
+    {
+      "id": "economy.currency",
+      "role": "synchronous respec affordability and payment",
+      "config": {
+        "currencyName": "Coins",
+        "startingBalance": 0
+      }
+    },
+    {
+      "id": "combat.hotbar_abilities",
+      "role": "loadout-bound player ability execution and ability-cast facts",
+      "config": {
+        "abilityBindingMode": "loadoutOnly",
+        "castAuthorizationMode": "directOrAuthorized",
+        "abilities": []
+      }
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "single final-damage pipeline for ordinary hits and opt-in nonlethal hazard contacts, plus metadata-rich defeats",
+      "config": {
+        "varianceFraction": 0.1,
+        "hazardDamageMode": "contactDamage",
+        "initialHazardContactIds": []
+      }
+    },
+    {
+      "id": "combat.status_effects",
+      "role": "timed effects from player and elite hits, including interrupt sources",
+      "config": {
+        "maxActiveEffects": 6
+      }
+    },
+    {
+      "id": "combat.unit_roster",
+      "role": "board units, health, positions, and preserved elite/boss spawn and phase metadata",
+      "config": {
+        "units": [],
+        "defaultHealth": 12,
+        "drawTokens": false
+      }
+    },
+    {
+      "id": "combat.aggro_table",
+      "role": "current targets for elite special-attack windups",
+      "config": {
+        "leashMultiple": 1.6,
+        "forgetSeconds": 6
+      }
+    },
+    {
+      "id": "combat.enemy_tier_scaling",
+      "role": "base level scaling queried once at elite and support-unit spawn",
+      "config": {
+        "scalingCurve": "linear",
+        "scaleRewards": true
+      }
+    },
+    {
+      "id": "combat.elite_affixes",
+      "role": "deterministic legal enemy affix sets and declared special attacks",
+      "config": {
+        "affixes": [],
+        "seed": 0,
+        "maxAffixes": 2,
+        "initialAssignments": {}
+      }
+    },
+    {
+      "id": "combat.elite_encounter_director",
+      "role": "finite elite waves, stable unit ledgers, completion, failure, and reset",
+      "config": {
+        "encounters": [],
+        "playerTeam": "player",
+        "allowReplay": false,
+        "initialStates": {}
+      }
+    },
+    {
+      "id": "combat.elite_telegraph_scheduler",
+      "role": "elite and boss cooldowns, locked-target windups, interruption, phase replacement, and ordinary hit commit",
+      "config": {
+        "defaultWindupSeconds": 0.8,
+        "defaultCooldownSeconds": 5,
+        "maxConcurrent": 8,
+        "interruptEffects": [
+          "stun"
+        ],
+        "initialState": {}
+      }
+    },
+    {
+      "id": "utility.timer_system",
+      "role": "shared countdown and tick source for elite windups, boss phases/enrage, and hazard warnings",
+      "config": {
+        "durationSeconds": 1,
+        "repeats": false
+      }
+    },
+    {
+      "id": "presentation.intent_marks",
+      "role": "removable rendering projection for basic intent, elite/boss telegraphs, and arena hazard warnings",
+      "config": {
+        "onlyWhenEngaged": false
+      }
+    },
+    {
+      "id": "inventory.drop_director",
+      "role": "elite-aware drop eligibility and roll counts",
+      "config": {
+        "dropChanceByArchetype": {
+          "normal": 0.25,
+          "elite": 1,
+          "boss": 1
+        },
+        "rollsPerDrop": {
+          "normal": 1,
+          "elite": 2,
+          "boss": 3
+        }
+      }
+    },
+    {
+      "id": "inventory.loot_table",
+      "role": "host-supplied base-item tables",
+      "config": {
+        "entries": []
+      }
+    },
+    {
+      "id": "inventory.affix_loot_generator",
+      "role": "request-driven item rarity and item-affix rolls, separate from enemy affixes",
+      "config": {
+        "triggerMode": "onRequest"
+      }
+    },
+    {
+      "id": "inventory.slotted_bag",
+      "role": "carried-item capacity and generated-item intake",
+      "config": {
+        "slotCount": 20,
+        "initialItems": []
+      }
+    },
+    {
+      "id": "inventory.core_inventory",
+      "role": "underlying carried-item ownership and completed item additions",
+      "config": {
+        "initialItems": []
+      }
+    },
+    {
+      "id": "persistence.save_system",
+      "role": "snapshots after completed build, mastery, elite, boss, arena, telegraph, and inventory changes",
+      "config": {
+        "autosaveIntervalSeconds": 120
+      }
+    },
+    {
+      "id": "combat.boss_encounter_script",
+      "role": "scripted boss engagement, stable health/time/condition phases, adds, enrage, completion, failure, and reset",
+      "config": {
+        "phaseThresholds": [
+          0.66,
+          0.33
+        ],
+        "encounters": [],
+        "playerTeam": "player",
+        "allowReplay": false,
+        "initialBeaten": [],
+        "initialStates": {}
+      }
+    },
+    {
+      "id": "utility.behavior_fsm",
+      "role": "existing boss entity behavior state, separate from encounter phase ownership",
+      "config": {
+        "initialBehavior": "idle",
+        "actionCooldownSeconds": 1.0
+      }
+    },
+    {
+      "id": "utility.command_bus",
+      "role": "queued commands required by the existing behavior owner",
+      "config": {
+        "maxQueueDepth": 256,
+        "dispatchesPerTick": 32
+      }
+    },
+    {
+      "id": "movement.pathfinding_system",
+      "role": "existing behavior navigation dependency, not boss phase logic",
+      "config": {
+        "maxPathLength": 200
+      }
+    },
+    {
+      "id": "world.terrain_generator",
+      "role": "terrain data required by pathfinding",
+      "config": {
+        "maxHeight": 38
+      }
+    },
+    {
+      "id": "world.noise_lib",
+      "role": "seeded noise required by terrain generation",
+      "config": {
+        "seed": 7,
+        "octaves": 4
+      }
+    },
+    {
+      "id": "world.arena_hazards",
+      "role": "boss-driven arena phase selection, hazard warnings, arming, disarming, and restoration",
+      "config": {
+        "phaseScript": [],
+        "activationMode": "bossDriven",
+        "arenas": [],
+        "phaseIntervalSeconds": 30,
+        "escalate": true,
+        "initialState": {}
+      }
+    },
+    {
+      "id": "world.hazard_volume",
+      "role": "stable per-volume contact reports and damage intent, never health writes",
+      "config": {
+        "hazardId": "hazard",
+        "regions": [
+          {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "damage": 1,
+        "retriggerSeconds": 0.75,
+        "instantlyLethal": false,
+        "initialContactCount": 0
+      }
+    },
+    {
+      "id": "movement.character_body",
+      "role": "moving body and independent hazard-position policy",
+      "config": {
+        "width": 0.6,
+        "height": 1.8,
+        "respawnOnHazard": false
+      }
+    },
+    {
+      "id": "movement.physics_core",
+      "role": "integration required by Character Body",
+      "config": {}
+    },
+    {
+      "id": "world.boss_room_seal",
+      "role": "room seal, retry reopening, and durable boss-clear fact",
+      "config": {
+        "roomId": "arena",
+        "bossEntityId": "boss",
+        "sealOnFirstEntry": true,
+        "reopenOnDefeat": true,
+        "reopenOnFailure": true,
+        "reopenOnReset": true,
+        "initialSealed": false,
+        "initialBossDefeated": false
+      }
+    },
+    {
+      "id": "world.interconnected_map_graph",
+      "role": "room-entry facts used to engage bosses and seal rooms",
+      "config": {
+        "rooms": [],
+        "connections": [],
+        "startRoomId": "arena"
+      }
+    },
+    {
+      "id": "world.ability_gate",
+      "role": "existing map-gate dependency, separate from boss completion",
+      "config": {
+        "requiredPowerIds": []
+      }
+    },
+    {
+      "id": "progression.power_up_grant",
+      "role": "existing ability-gate power grant dependency",
+      "config": {
+        "powerId": "arena-access",
+        "targetOverrides": {}
+      }
+    },
+    {
+      "id": "movement.jump_core",
+      "role": "existing power-up movement dependency",
+      "config": {
+        "jumpVelocity": 8,
+        "coyoteTimeSeconds": 0.1,
+        "jumpBufferSeconds": 0.1
+      }
+    },
+    {
+      "id": "movement.ground_sensor",
+      "role": "ground contact required by existing movement dependencies",
+      "config": {
+        "probeDistance": 0.08
+      }
+    },
+    {
+      "id": "movement.dash_ability",
+      "role": "existing power-up movement dependency",
+      "config": {}
+    },
+    {
+      "id": "movement.wall_interaction",
+      "role": "existing power-up movement dependency",
+      "config": {}
+    },
+    {
+      "id": "world.world_state_flags",
+      "role": "durable world-condition facts that can satisfy declared boss phases",
+      "config": {
+        "flagDefinitions": {},
+        "initialFlags": {},
+        "namespaceBy": "zone",
+        "strictUnknownFlagReads": false
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "progression.skills_tree",
+      "note": "Level growth grants skill points and level gates."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "progression.attribute_sheet",
+      "note": "The same growth grants attribute allowance."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "progression.specialization",
+      "note": "Level-gated identities refresh availability without auto-selecting."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "persistence.save_system",
+      "note": "Completed level growth is saveable."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRankChanged",
+      "to": "progression.specialization",
+      "note": "Skill-gated identities reevaluate against current ranks."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRankChanged",
+      "to": "progression.ability_loadout",
+      "note": "Source-rank changes expose or prune actives."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRankChanged",
+      "to": "persistence.save_system",
+      "note": "Successful rank changes are persisted."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRespecCompleted",
+      "to": "progression.ability_loadout",
+      "note": "A completed rebuild prunes stale source-rank actives."
+    },
+    {
+      "from": "progression.skills_tree",
+      "event": "progression.skillRespecCompleted",
+      "to": "progression.build_respec",
+      "note": "The skill owner acknowledges its own refund."
+    },
+    {
+      "from": "progression.attribute_sheet",
+      "event": "progression.attributeRespecCompleted",
+      "to": "progression.build_respec",
+      "note": "The attribute owner independently acknowledges its reset."
+    },
+    {
+      "from": "progression.build_respec",
+      "event": "progression.buildRespecRequested",
+      "to": "progression.skills_tree",
+      "note": "Only Skills Tree resets ranks after confirmation and payment."
+    },
+    {
+      "from": "progression.build_respec",
+      "event": "progression.buildRespecRequested",
+      "to": "progression.attribute_sheet",
+      "note": "Only Attribute Sheet resets allocations."
+    },
+    {
+      "from": "progression.build_respec",
+      "event": "progression.buildRespecCompleted",
+      "to": "persistence.save_system",
+      "note": "Only the fully acknowledged rebuild triggers completion save."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "progression.skills_tree",
+      "note": "A completed identity choice refreshes declared skill gates without changing ranks."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "progression.ability_loadout",
+      "note": "Identity-gated actives refresh against the new selection."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "progression.mastery",
+      "note": "Specialization-gated tracks begin or stop accepting new credit."
+    },
+    {
+      "from": "progression.specialization",
+      "event": "progression.specializationSelected",
+      "to": "persistence.save_system",
+      "note": "Durable identity selection is persisted; rejected choices are not."
+    },
+    {
+      "from": "progression.mastery",
+      "event": "progression.masteryRankUp",
+      "to": "progression.ability_loadout",
+      "note": "Mastery-gated actives unlock as derived ranks increase."
+    },
+    {
+      "from": "progression.mastery",
+      "event": "progression.masteryXpGained",
+      "to": "persistence.save_system",
+      "note": "Accepted mastery credit is durable; duplicate facts emit nothing."
+    },
+    {
+      "from": "progression.mastery",
+      "event": "progression.masteryRankUp",
+      "to": "persistence.save_system",
+      "note": "Derived rank milestones trigger a completed-change snapshot."
+    },
+    {
+      "from": "progression.ability_loadout",
+      "event": "progression.abilityLoadoutChanged",
+      "to": "combat.hotbar_abilities",
+      "note": "One complete kit replaces executable actives."
+    },
+    {
+      "from": "progression.ability_loadout",
+      "event": "progression.abilityLoadoutChanged",
+      "to": "persistence.save_system",
+      "note": "Completed assignment and pruning are persisted."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.abilityCast",
+      "to": "progression.mastery",
+      "note": "Stable cast ids can credit matching usage tracks once."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Player actives use the ordinary final-damage owner."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Player actives use the ordinary status ledger."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitSpawned",
+      "to": "combat.unit_roster",
+      "note": "The director announces fully scaled and affixed units; only the roster admits them."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitRemoved",
+      "to": "combat.unit_roster",
+      "note": "Reset removes living encounter units silently, without defeat rewards."
+    },
+    {
+      "from": "combat.elite_affixes",
+      "event": "combat.eliteAffixesAssigned",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Assigned special attacks register for cooldown and windup timing."
+    },
+    {
+      "from": "combat.elite_affixes",
+      "event": "combat.eliteAffixesAssigned",
+      "to": "persistence.save_system",
+      "note": "New deterministic assignments are saveable; restored assignments do not re-emit."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Stable timer ids advance cooldown and windup state."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Declared interrupt effects cancel active elite windups."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphed",
+      "to": "presentation.intent_marks",
+      "note": "A locked-target windup becomes visible before it can hit."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackCommitted",
+      "to": "presentation.intent_marks",
+      "note": "Commit clears the warning projection."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphCancelled",
+      "to": "presentation.intent_marks",
+      "note": "Cancellation clears the warning without a hit."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "A committed elite special emits ordinary base-damage input."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Committed elite specials use the same status owner."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphed",
+      "to": "persistence.save_system",
+      "note": "Active windups can restore without becoming instant attacks."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackCommitted",
+      "to": "persistence.save_system",
+      "note": "Committed timing is a completed change."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphCancelled",
+      "to": "persistence.save_system",
+      "note": "Cancelled timing and restarted cooldown are persisted."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.damageResolved",
+      "to": "combat.aggro_table",
+      "note": "Damage changes threat without moving targeting into the resolver."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.rosterChanged",
+      "to": "combat.aggro_table",
+      "note": "Spawns, removals, and defeats refresh available targets."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.unit_roster",
+      "note": "Only completed defeats remove units through the death path."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Caster or target defeat cancels applicable windups."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.elite_encounter_director",
+      "note": "Stable encounter and spawn ids advance only the owning wave."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.teamEliminated",
+      "to": "combat.elite_encounter_director",
+      "note": "Player-team elimination fails the active encounter."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "progression.mastery",
+      "note": "Stable defeat ids credit matching mastery tracks exactly once."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "progression.xp_leveling",
+      "note": "The existing character-XP owner consumes the same defeat independently."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "inventory.drop_director",
+      "note": "Elite tier reaches the existing drop-eligibility owner."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterCompleted",
+      "to": "progression.mastery",
+      "note": "Stable completion ids can grant encounter-level mastery once."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Reset cancels every windup belonging to the reset encounter."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterStarted",
+      "to": "persistence.save_system",
+      "note": "Started encounter state is restorable."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteWaveStarted",
+      "to": "persistence.save_system",
+      "note": "Current-wave and spawn ledgers are restorable."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterCompleted",
+      "to": "persistence.save_system",
+      "note": "Once-only completion is persisted."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterFailed",
+      "to": "persistence.save_system",
+      "note": "Failure is persisted without completion credit."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "persistence.save_system",
+      "note": "Reset state is persisted without replaying defeat rewards."
+    },
+    {
+      "from": "inventory.drop_director",
+      "event": "inventory.lootRollRequested",
+      "to": "inventory.affix_loot_generator",
+      "note": "Only accepted drop decisions enter request-driven item generation."
+    },
+    {
+      "from": "inventory.affix_loot_generator",
+      "event": "inventory.itemGenerated",
+      "to": "inventory.slotted_bag",
+      "note": "Finished items are offered to carried storage."
+    },
+    {
+      "from": "inventory.core_inventory",
+      "event": "inventory.itemAdded",
+      "to": "persistence.save_system",
+      "note": "Completed item additions are persisted; overflow is not a grant."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.unitSpawned",
+      "to": "combat.unit_roster",
+      "note": "Boss and once-only phase adds enter the sole board roster."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.unitRemoved",
+      "to": "combat.unit_roster",
+      "note": "Failure, reset, and post-completion cleanup remove owned units without defeat rewards."
+    },
+    {
+      "from": "world.interconnected_map_graph",
+      "event": "world.roomEntered",
+      "to": "combat.boss_encounter_script",
+      "note": "Entering a matching arena can engage its scripted boss."
+    },
+    {
+      "from": "world.interconnected_map_graph",
+      "event": "world.roomEntered",
+      "to": "world.boss_room_seal",
+      "note": "The room owner seals on entry according to its own policy."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerTicked",
+      "to": "combat.boss_encounter_script",
+      "note": "The shared clock supplies elapsed-time phase conditions."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.boss_encounter_script",
+      "note": "The shared clock completes the stable enrage timer."
+    },
+    {
+      "from": "world.world_state_flags",
+      "event": "world.worldFlagChanged",
+      "to": "combat.boss_encounter_script",
+      "note": "A declared world fact can satisfy the next condition-driven phase."
+    },
+    {
+      "from": "world.world_state_flags",
+      "event": "world.worldFlagChanged",
+      "to": "persistence.save_system",
+      "note": "Condition facts are durable across restoration."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.boss_encounter_script",
+      "note": "Only a completed boss defeat resolves the encounter."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "world.boss_room_seal",
+      "note": "Legacy and scripted boss deaths can clear the matching room."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.teamEliminated",
+      "to": "combat.boss_encounter_script",
+      "note": "Player-team elimination fails rather than completes the fight."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEngaged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Initial phase attacks register with the existing scheduler."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossPhaseChanged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "A new phase replaces the boss attack set and old windups."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEnraged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Optional enrage attacks use the same readable scheduler."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Completion cancels remaining boss windups."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Failure cancels remaining boss windups."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Reset cancels remaining boss windups."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEngaged",
+      "to": "world.arena_hazards",
+      "note": "The initial boss phase selects its declared hazard phase."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossPhaseChanged",
+      "to": "world.arena_hazards",
+      "note": "Stable boss phase ids drive matching arena hazard phases."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEnraged",
+      "to": "world.arena_hazards",
+      "note": "Enrage can select a declared escalation hazard phase."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "world.arena_hazards",
+      "note": "Completion disarms the boss arena."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "world.arena_hazards",
+      "note": "Failure disarms the boss arena."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "world.arena_hazards",
+      "note": "Reset disarms the boss arena."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "world.arena_hazards",
+      "note": "Shared timers turn readable warnings into armed phases."
+    },
+    {
+      "from": "world.hazard_volume",
+      "event": "world.hazardEntered",
+      "to": "world.arena_hazards",
+      "note": "The script observes contact without owning its response."
+    },
+    {
+      "from": "world.hazard_volume",
+      "event": "world.hazardEntered",
+      "to": "combat.damage_resolver",
+      "note": "Opt-in contactDamage routes nonlethal contacts through the sole final-damage owner."
+    },
+    {
+      "from": "world.hazard_volume",
+      "event": "world.hazardEntered",
+      "to": "movement.character_body",
+      "note": "Character Body retains independent position/respawn policy."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaHazardTelegraphed",
+      "to": "presentation.intent_marks",
+      "note": "Hazard warnings join the removable presentation projection."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaHazardTriggered",
+      "to": "presentation.intent_marks",
+      "note": "Armed hazards leave the pending-warning projection."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaHazardsReset",
+      "to": "presentation.intent_marks",
+      "note": "Completion, failure, or reset clears the projection."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "progression.mastery",
+      "note": "A stable completionId optionally credits matching mastery tracks once."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "world.boss_room_seal",
+      "note": "Scripted completion clears the room idempotently."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "world.boss_room_seal",
+      "note": "Failure can reopen for retry without setting the clear fact."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "world.boss_room_seal",
+      "note": "Reset can reopen for retry without setting the clear fact."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEngaged",
+      "to": "persistence.save_system",
+      "note": "Active boss state is saveable after engagement."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossPhaseChanged",
+      "to": "persistence.save_system",
+      "note": "Entered phase and once-only add ledgers are saveable."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEnraged",
+      "to": "persistence.save_system",
+      "note": "The once-only enrage transition is saveable."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "persistence.save_system",
+      "note": "The stable completion ledger is saveable."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "persistence.save_system",
+      "note": "Failed retry state is saveable without completion."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "persistence.save_system",
+      "note": "Reset state is saveable without a false defeat."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaPhaseChanged",
+      "to": "persistence.save_system",
+      "note": "The active arena phase is saveable."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaHazardTelegraphed",
+      "to": "persistence.save_system",
+      "note": "Pending hazard warning timers are saveable."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaHazardTriggered",
+      "to": "persistence.save_system",
+      "note": "Armed hazard state is saveable."
+    },
+    {
+      "from": "world.arena_hazards",
+      "event": "world.arenaHazardsReset",
+      "to": "persistence.save_system",
+      "note": "Disarmed arena state is saveable."
+    }
+  ],
+  "criticalComponents": [
+    "progression.xp_leveling",
+    "progression.skills_tree",
+    "progression.specialization",
+    "progression.mastery",
+    "progression.ability_loadout",
+    "combat.unit_roster",
+    "combat.damage_resolver",
+    "combat.elite_encounter_director",
+    "combat.elite_telegraph_scheduler",
+    "combat.boss_encounter_script",
+    "utility.timer_system",
+    "world.arena_hazards",
+    "world.hazard_volume",
+    "world.boss_room_seal",
+    "inventory.drop_director",
+    "inventory.affix_loot_generator",
+    "inventory.slotted_bag",
+    "persistence.save_system"
+  ],
+  "acceptanceCriteria": [
+    "Legacy phaseThresholds bosses and automatic interval-driven Arena Hazards retain their behavior when scripted encounters and bossDriven activation are absent.",
+    "The first scripted boss phase enters on engagement; later phases enter in declared order only when their health, elapsed-time, or matched condition trigger is satisfied, with stable phase and condition ids recorded once.",
+    "A condition for another encounter, a repeated condition, a stale timer, or an unrelated defeat changes no boss phase, add, enrage, completion, or reward state.",
+    "Each phase add spawns at most once with stable encounterId, phaseId, spawnId, tier, archetype, and masteryTags; Unit Roster alone owns its position and health, and Enemy Tier Scaling applies base level stats once.",
+    "Elite and boss attacks share cooldown, locked-target windup, interrupt, commit, and cancellation rules; every commit emits at most one attackCommitted and one ordinary combat.hit for Damage Resolver.",
+    "A boss phase replacement, declared interrupt, caster or target defeat, encounter failure, completion, or reset cancels the old windup without damage, loot, or mastery.",
+    "Boss-driven Arena Hazards selects only declared hazardPhase ids, waits a positive warning before arming, and leaves Hazard Volume as the only contact reporter and Timer System as the only countdown source.",
+    "Default hazardDamageMode=ignore preserves legacy hazard responses; opt-in contactDamage resolves only nonlethal positive-damage contacts through Damage Resolver and deduplicates stable contact ids without re-emitting combat.hit.",
+    "Enrage fires once from its stable timer, publishes replacement attacks and behavior modifiers plus an optional hazard phase, and does not become a timed Status Effect or a second damage pipeline.",
+    "A matching boss entityDefeated emits bossDefeated and exactly one bossEncounterCompleted with a stable completionId; that ordinary defeat independently feeds XP, defeat-based mastery, and Drop Director, while completion-based mastery deduplicates completionId.",
+    "allowReplay=false rejects another completed-encounter start; failure and reset are retryable but never complete the boss or grant completion mastery.",
+    "Failure, reset, and post-completion add cleanup remove living owned units through unitRemoved, never entityDefeated, so they cannot grant XP, mastery, loot, or a room-clear fact.",
+    "Boss Room Seal alone owns doors and its durable clear fact; failure or reset may reopen for retry without marking the boss defeated, and duplicate completion does not emit another clear transition.",
+    "Restored specialization, mastery, elite state, boss phases and conditions, spawn ledgers, telegraphs, hazard phases, contact ids, and room state emit no historical selections, spawns, hits, hazards, completions, or rewards.",
+    "Intent Marks and its hazard projection can be removed without changing targets, timers, phase transitions, contact, damage, encounters, mastery, loot, or persistence.",
+    "Damage Resolver remains the only final-damage owner, Status Effects the only timed-effect ledger, Drop Director the only drop eligibility and roll-count owner, and Slotted Bag or Core Inventory the only item-capacity owner.",
+    "Removing the boss and arena slice leaves specialization, mastery from other declared sources, elite waves, ordinary damage, and loot functional; removing Arena Hazards leaves boss phases, attacks, completion, and rewards functional.",
+    "Malformed arenas, dangling hazard phases, impossible transition ordering, duplicate phase/attack/condition ids, unreadable arming phases, invalid adds, and invalid enrages fail content validation before runtime.",
+    "Identical content, seeds, restored state, condition deliveries, target selections, timer inputs, and stable event ids reproduce phases, adds, telegraphs, hazards, defeats, rewards, and saves deterministically."
+  ]
+}
