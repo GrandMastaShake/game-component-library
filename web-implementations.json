@@ -89,6 +89,7 @@
       "presentation.style_presets",
       "presentation.tile_cursor",
       "progression.ability_loadout",
+      "progression.attribute_sheet",
       "progression.cascade_scoring",
       "progression.drift_scoring",
       "progression.level_goal",
@@ -110,10 +111,12 @@
       "social.trade_remote_handler",
       "social.trade_window",
       "ui.dialogue_box",
+      "ui.dialogue_tree_engine",
       "ui.event_log",
       "ui.hud",
       "ui.inventory_panel",
       "ui.minimap",
+      "ui.narrative_journal",
       "ui.notification_toast",
       "ui.pet_hatch_presenter",
       "utility.beat_clock",
@@ -148,7 +151,8 @@
       "world.vision_system",
       "world.water_system",
       "world.weather_system",
-      "world.world_builder"
+      "world.world_builder",
+      "world.world_state_flags"
     ],
     "webgl": [
       "movement.ai_driver",

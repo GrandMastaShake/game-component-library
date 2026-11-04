@@ -2,7 +2,7 @@
   "id": "progression.attribute_sheet",
   "name": "Attribute Sheet",
   "category": "progression",
-  "description": "STR/DEX/INT and everything derived from them. progression.xp_leveling owns the moment of growth — the level-up event and the points it grants; this sheet owns where those points land and what they mean: the raw attributes, the derived stats (carry weight, crit chance, check modifiers), and the check roll itself. Owning the roll here matters because dialogue, traps, and combat all ask the same question — does 14 DEX beat difficulty 12? — and the answer must come from one implementation of the dice or the game lies to somebody. It does not own what a passed check unlocks; the asker decides, which is what keeps the sheet usable by every system that checks. Attribute allocation now has explicit restored and unspent state. Build Respec may request a full or selected allocation reset; the sheet returns attribute points separately from skill points and acknowledges its transaction id. It still owns derived stats and checks, never skill ranks or respec pricing. The sheet now exposes that check as a synchronous query with a restorable deterministic roll cursor, allowing dialogue and other callers to replay the same seed and request sequence without moving dice rules into the caller.",
+  "description": "STR/DEX/INT and everything derived from them. progression.xp_leveling owns the moment of growth \u2014 the level-up event and the points it grants; this sheet owns where those points land and what they mean: the raw attributes, the derived stats (carry weight, crit chance, check modifiers), and the check roll itself. Owning the roll here matters because dialogue, traps, and combat all ask the same question \u2014 does 14 DEX beat difficulty 12? \u2014 and the answer must come from one implementation of the dice or the game lies to somebody. It does not own what a passed check unlocks; the asker decides, which is what keeps the sheet usable by every system that checks. Attribute allocation now has explicit restored and unspent state. Build Respec may request a full or selected allocation reset; the sheet returns attribute points separately from skill points and acknowledges its transaction id. It still owns derived stats and checks, never skill ranks or respec pricing. The sheet now exposes that check as a synchronous query with a restorable deterministic roll cursor, allowing dialogue and other callers to replay the same seed and request sequence without moving dice rules into the caller.",
   "version": "0.3.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
