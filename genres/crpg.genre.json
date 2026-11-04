@@ -1,8 +1,8 @@
 {
   "id": "genre.crpg",
   "name": "CRPG",
-  "description": "A party of interlocking builds fighting real-time-with-pause tactical encounters, talking through branching dialogue where stats open doors, and living with consequences factions remember. Dialogue and consequence remain the genre spine; tactical pause, queued party orders and prepared spells now give its combat the same explicit ownership boundaries. The quest and dialogue core now adds staged objectives, restorable once-only choices, deterministic checks, exactly-once mixed rewards, and dedicated quest and narrative journals. Durable specializations, gameplay-earned mastery ranks, deterministic elite affixes, multi-wave challenges, and interruptible telegraphs now connect build identity to readable endgame encounters and their existing XP and loot outcomes. Multi-phase bosses now add stable health, time, and condition transitions, once-only adds, readable enrages, boss-driven arena hazards, retry-safe room seals, and exactly-once completion feeding the same mastery, XP, and loot spine.",
-  "version": "0.6.0",
+  "description": "A party of interlocking builds fighting real-time-with-pause tactical encounters, talking through branching dialogue where stats open doors, and living with consequences factions remember. Dialogue and consequence remain the genre spine; tactical pause, queued party orders and prepared spells now give its combat the same explicit ownership boundaries. The quest and dialogue core now adds staged objectives, restorable once-only choices, deterministic checks, exactly-once mixed rewards, and dedicated quest and narrative journals. Durable specializations, gameplay-earned mastery ranks, deterministic elite affixes, multi-wave challenges, and interruptible telegraphs now connect build identity to readable endgame encounters and their existing XP and loot outcomes. Multi-phase bosses now add stable health, time, and condition transitions, once-only adds, readable enrages, boss-driven arena hazards, retry-safe room seals, and exactly-once completion feeding the same mastery, XP, and loot spine. Status Effects now adds stable refresh and stacking, tagged cleanse and immunities, restore-safe crowd control, opt-in cast and movement restrictions, and refresh-safe telegraph interruption without changing pause, damage, or encounter ownership.",
+  "version": "0.7.0",
   "loop": "party of builds → real-time-with-pause encounters → dialogue choices → branching story",
   "views": [
     "isometric"
@@ -97,6 +97,8 @@
     "mastery",
     "elite-encounters",
     "boss-encounters",
-    "arena-hazards"
+    "arena-hazards",
+    "status-effects",
+    "crowd-control"
   ]
 }

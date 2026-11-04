@@ -34,6 +34,7 @@ compound rather than a section in a README.
 | `compound.rpg_buildcraft_loop` | 10 | 14 | Ranked skills, attributes, ability loadouts, safe respecs and persistence |
 | `compound.server_authoritative_trade_flow` | 5 | 6 | Server-authoritative trade topology |
 | `compound.specialization_elite_loop` | 25 | 58 | Durable specializations, earned masteries, deterministic elite waves and interruptible telegraphs |
+| `compound.status_control_loop` | 28 | 90 | Stacking, cleanse, immunities, crowd control, interruption, capture odds and restoration |
 | `compound.stepped_grid_movement` | 8 | 8 | Tile-to-tile movement with elevation rules |
 
 Run `python3 tools/validate_compounds.py --report reports/compound-validation.json`

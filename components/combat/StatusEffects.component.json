@@ -2,8 +2,8 @@
   "id": "combat.status_effects",
   "name": "Status Effects",
   "category": "combat",
-  "description": "Buff/debuff manager: applies timed stat modifiers (poison, haste, stun, shield) to an entity.",
-  "version": "0.1.0",
+  "description": "Owns timed status and crowd-control state for each target: stable application identity, authored definitions, refresh and stacking, independent instances, tagged immunities and cleanse, control restrictions, expiry, defeat or encounter cleanup, and restoration. Legacy combat.hit payloads carrying effect and optional effectSeconds still apply ad-hoc refreshing effects, so existing Hotbar Abilities, Elite Telegraph Scheduler, Capture Mechanic, and Tactical Pause consumers keep their pipeline. A new application emits combat.effectApplied only when an instance enters; refreshes and stack increments have separate events, and an exact replayed applicationId or cleanseId is a silent no-op. Timer System owns countdowns. Every finite instance has a stable timer id and generation so completion from before a refresh cannot expire the refreshed state. The published controlState is a fact for consumers: Status Effects never rejects a cast, moves a body, spends action points, computes damage, or rolls capture odds. Movement, ability, attack, telegraph, and capture owners opt into or read those facts without taking over effect state. Restored active instances, timer generations, and dedupe ledgers emit no historical application, cleanse, removal, control, or pause events.",
+  "version": "0.2.0",
   "platform": [
     "roblox",
     "godot",
@@ -33,28 +33,142 @@
       "name": "maxActiveEffects",
       "type": "number",
       "required": false,
-      "default": 6
+      "default": 6,
+      "description": "Maximum active instances per target. At capacity a new instance is rejected as capacity; refresh or stack updates to an existing group remain legal. No active effect is silently evicted."
+    },
+    {
+      "name": "definitions",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Authored effects: {id, durationSeconds (positive or null), stackPolicy refresh|stack|independent, durationPolicy reset|extend|max|ignore, maxStacks, grouping targetEffect|targetEffectSource, tags, dispellable, cleansePriority, removeOnDefeat, modifiers?, control?}. modifiers are {stat, operation add|multiply, value, perStack}; control contains unique restrictions move|cast|attack and optional moveMultiplier in [0,1]."
+    },
+    {
+      "name": "immunities",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Stable target rules: {id, targetIds, effectIds, tags}. A target is immune when its id matches and the incoming effect matches either selector. Rejection emits effectRejected and creates no timer or control state."
+    },
+    {
+      "name": "cleanseRules",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Reusable cleanse queries: {id, effectIds, tags, maxEffects, order highestPriority|lowestPriority|oldest|newest}. Only dispellable matching instances are candidates; selectors are unioned and stable cleanseId values dedupe requests."
+    },
+    {
+      "name": "unknownEffectPolicy",
+      "type": "string",
+      "required": false,
+      "default": "legacyAdHoc",
+      "enum": [
+        "legacyAdHoc",
+        "reject"
+      ],
+      "description": "legacyAdHoc preserves hit-driven effects absent from definitions as one-instance refresh effects. reject requires an authored definition and rejects unknown effectIds."
+    },
+    {
+      "name": "defaultLegacyEffectSeconds",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Duration for a legacy combat.hit effect that omits effectSeconds. Must be positive."
+    },
+    {
+      "name": "initialState",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored activeEffects, timer ids and generations, processedApplicationIds, processedCleanseIds, processedRemovalIds, and controlState. Restoration resumes state without replaying events or accepting stale timer completions."
     }
   ],
   "outputs": [
     {
       "name": "activeEffects",
-      "type": "array"
+      "type": "array",
+      "description": "Live instances: applicationId, effectId, targetId, sourceId, encounterId, stacks, remainingSeconds, timerId, generation, tags, restrictions, and insertion order. This array plus dedupe ledgers is the restorable snapshot."
+    },
+    {
+      "name": "controlState",
+      "type": "object",
+      "description": "Per-target aggregate: sorted unique restrictions and moveMultiplier. Restrictions union across instances; multipliers combine multiplicatively, with stacks applying the multiplier once per stack. Zero means movement is unavailable."
+    },
+    {
+      "name": "controlFor",
+      "type": "function",
+      "description": "controlFor(unitId) synchronously returns that unit's current restrictions and moveMultiplier, or an unrestricted default. Consumers may query instead of maintaining a second status ledger."
+    },
+    {
+      "name": "processedApplicationIds",
+      "type": "array",
+      "description": "Durable application dedupe ledger, including accepted refreshes and rejected requests so reload/replay cannot change the prior decision."
+    },
+    {
+      "name": "processedCleanseIds",
+      "type": "array",
+      "description": "Durable cleanse dedupe ledger; a replayed cleanse cannot remove a later application."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Latest rejected application with applicationId, targetId, effectId, and reason unknownEffect|immunity|capacity|invalidRequest."
+    },
+    {
+      "name": "statModifiers",
+      "type": "object",
+      "description": "Per-target aggregate of authored non-control modifiers. add operations sum and multiply operations compose in stable application order; perStack=false contributes once per instance. This is a published modifier fact, not final damage or stat ownership."
+    },
+    {
+      "name": "modifiersFor",
+      "type": "function",
+      "description": "modifiersFor(unitId) synchronously returns the same aggregate as statModifiers for initiative, capture, attribute, or host consumers. Unit Roster, Damage Resolver, and Attribute Sheet retain their own state and final calculations."
+    },
+    {
+      "name": "processedRemovalIds",
+      "type": "array",
+      "description": "Durable manual-removal dedupe ledger. A replayed removal cannot remove a later instance that happens to match the same target or effect."
     }
   ],
   "events": {
     "emits": [
       "combat.effectApplied",
-      "combat.effectExpired"
+      "combat.effectRefreshed",
+      "combat.effectStacked",
+      "combat.effectRejected",
+      "combat.effectExpired",
+      "combat.effectCleansed",
+      "combat.effectRemoved",
+      "combat.controlRestrictionsChanged"
     ],
     "listensTo": [
-      "combat.hit"
+      "combat.hit",
+      "input.effectApplicationRequested",
+      "input.effectCleanseRequested",
+      "input.effectRemovalRequested",
+      "utility.timerCompleted",
+      "combat.entityDefeated",
+      "combat.unitRemoved",
+      "combat.eliteEncounterFailed",
+      "combat.eliteEncounterReset",
+      "combat.bossEncounterCompleted",
+      "combat.bossEncounterFailed",
+      "combat.bossEncounterReset"
     ]
   },
-  "dependencies": [],
+  "dependencies": [
+    "utility.timer_system"
+  ],
   "tags": [
     "buffs",
-    "debuffs"
+    "cleanse",
+    "crowd-control",
+    "debuffs",
+    "immunities",
+    "restoration",
+    "rpg-family",
+    "stacking"
   ],
-  "sourceModule": "roblox-modular-lib/src/StatusEffectSystem.lua"
+  "sourceModule": "roblox-modular-lib/src/StatusEffectSystem.lua",
+  "provenance": "hybrid"
 }

@@ -1,0 +1,1052 @@
+{
+  "schemaVersion": 1,
+  "id": "status.mirelight_control",
+  "description": "Original Mirelight status set: slows, roots, silence, stun, stacking defense pressure, independent marks, and a beneficial stacking focus. All names, values, targets, and encounters are library-original.",
+  "effects": [
+    {
+      "id": "mire_slick",
+      "description": "A brief bog slick that reduces movement without removing control.",
+      "durationSeconds": 6,
+      "stackPolicy": "refresh",
+      "durationPolicy": "reset",
+      "maxStacks": 1,
+      "grouping": "targetEffect",
+      "tags": [
+        "harmful",
+        "control",
+        "slow"
+      ],
+      "dispellable": true,
+      "cleansePriority": 20,
+      "removeOnDefeat": true,
+      "modifiers": [],
+      "control": {
+        "restrictions": [],
+        "moveMultiplier": 0.65
+      }
+    },
+    {
+      "id": "bound_steps",
+      "description": "Tethered footing that prevents movement and interrupts attack windups.",
+      "durationSeconds": 3.5,
+      "stackPolicy": "refresh",
+      "durationPolicy": "max",
+      "maxStacks": 1,
+      "grouping": "targetEffect",
+      "tags": [
+        "harmful",
+        "control",
+        "root"
+      ],
+      "dispellable": true,
+      "cleansePriority": 60,
+      "removeOnDefeat": true,
+      "modifiers": [],
+      "control": {
+        "restrictions": [
+          "move"
+        ],
+        "moveMultiplier": 0
+      }
+    },
+    {
+      "id": "hushed",
+      "description": "A muffling ward that prevents active ability use.",
+      "durationSeconds": 4,
+      "stackPolicy": "refresh",
+      "durationPolicy": "reset",
+      "maxStacks": 1,
+      "grouping": "targetEffect",
+      "tags": [
+        "harmful",
+        "control",
+        "silence",
+        "mind"
+      ],
+      "dispellable": true,
+      "cleansePriority": 50,
+      "removeOnDefeat": true,
+      "modifiers": [],
+      "control": {
+        "restrictions": [
+          "cast"
+        ],
+        "moveMultiplier": 1
+      }
+    },
+    {
+      "id": "staggered",
+      "description": "A short full stagger that prevents movement, abilities, and basic attacks.",
+      "durationSeconds": 1.75,
+      "stackPolicy": "refresh",
+      "durationPolicy": "max",
+      "maxStacks": 1,
+      "grouping": "targetEffect",
+      "tags": [
+        "harmful",
+        "control",
+        "stun"
+      ],
+      "dispellable": true,
+      "cleansePriority": 90,
+      "removeOnDefeat": true,
+      "modifiers": [],
+      "control": {
+        "restrictions": [
+          "move",
+          "cast",
+          "attack"
+        ],
+        "moveMultiplier": 0
+      }
+    },
+    {
+      "id": "frayed_guard",
+      "description": "Stacking defensive pressure; each stack removes one armor.",
+      "durationSeconds": 5,
+      "stackPolicy": "stack",
+      "durationPolicy": "extend",
+      "maxStacks": 3,
+      "grouping": "targetEffect",
+      "tags": [
+        "harmful",
+        "hex"
+      ],
+      "dispellable": true,
+      "cleansePriority": 30,
+      "removeOnDefeat": true,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "operation": "add",
+          "value": -1,
+          "perStack": true
+        }
+      ]
+    },
+    {
+      "id": "ember_mark",
+      "description": "Independent ember sigils from separate applications.",
+      "durationSeconds": 2.5,
+      "stackPolicy": "independent",
+      "durationPolicy": "reset",
+      "maxStacks": 1,
+      "grouping": "targetEffectSource",
+      "tags": [
+        "harmful",
+        "mark"
+      ],
+      "dispellable": true,
+      "cleansePriority": 10,
+      "removeOnDefeat": true,
+      "modifiers": []
+    },
+    {
+      "id": "clinging_ash",
+      "description": "Up to two ash layers multiply remaining movement speed.",
+      "durationSeconds": 4,
+      "stackPolicy": "stack",
+      "durationPolicy": "reset",
+      "maxStacks": 2,
+      "grouping": "targetEffect",
+      "tags": [
+        "harmful",
+        "control",
+        "slow"
+      ],
+      "dispellable": true,
+      "cleansePriority": 15,
+      "removeOnDefeat": true,
+      "modifiers": [],
+      "control": {
+        "restrictions": [],
+        "moveMultiplier": 0.8
+      }
+    },
+    {
+      "id": "battle_focus",
+      "description": "A beneficial two-stack focus that adds attack power.",
+      "durationSeconds": 5,
+      "stackPolicy": "stack",
+      "durationPolicy": "max",
+      "maxStacks": 2,
+      "grouping": "targetEffectSource",
+      "tags": [
+        "beneficial",
+        "buff"
+      ],
+      "dispellable": false,
+      "cleansePriority": 0,
+      "removeOnDefeat": true,
+      "modifiers": [
+        {
+          "stat": "attack",
+          "operation": "add",
+          "value": 1,
+          "perStack": true
+        }
+      ]
+    }
+  ],
+  "immunities": [
+    {
+      "id": "construct_mind_seal",
+      "targetIds": [
+        "glass_construct"
+      ],
+      "effectIds": [],
+      "tags": [
+        "mind"
+      ]
+    },
+    {
+      "id": "custodian_stun_brace",
+      "targetIds": [
+        "archive_custodian"
+      ],
+      "effectIds": [
+        "staggered"
+      ],
+      "tags": []
+    }
+  ],
+  "cleanseRules": [
+    {
+      "id": "purge_control",
+      "effectIds": [],
+      "tags": [
+        "control"
+      ],
+      "maxEffects": 1,
+      "order": "highestPriority"
+    },
+    {
+      "id": "restore_guard",
+      "effectIds": [
+        "mire_slick",
+        "frayed_guard"
+      ],
+      "tags": [],
+      "maxEffects": 2,
+      "order": "lowestPriority"
+    },
+    {
+      "id": "sweep_harmful",
+      "effectIds": [],
+      "tags": [
+        "harmful"
+      ],
+      "maxEffects": 9,
+      "order": "oldest"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "refresh_resets_without_second_application",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "slow_a",
+          "effectId": "mire_slick",
+          "targetId": "scout",
+          "durationSeconds": 2,
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "slow_a",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 2
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "slow_a"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "slow_b",
+          "effectId": "mire_slick",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "slow_a",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 2,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [
+              {
+                "event": "refreshed",
+                "applicationId": "slow_a",
+                "requestedApplicationId": "slow_b",
+                "stacks": 1
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "expire",
+          "applicationId": "slow_a",
+          "generation": 1,
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "slow_a",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 2,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "expire",
+          "applicationId": "slow_a",
+          "generation": 2,
+          "expect": {
+            "targetId": "scout",
+            "active": [],
+            "events": [
+              {
+                "event": "expired",
+                "applicationId": "slow_a"
+              },
+              {
+                "event": "removed",
+                "applicationId": "slow_a",
+                "reason": "expired"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "stack_cap_refreshes_but_never_exceeds_three",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "fray_a",
+          "effectId": "frayed_guard",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "fray_a",
+                "effectId": "frayed_guard",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 5
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "fray_a"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "advance",
+          "seconds": 2
+        },
+        {
+          "op": "apply",
+          "applicationId": "fray_b",
+          "effectId": "frayed_guard",
+          "targetId": "scout",
+          "durationSeconds": 2,
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "fray_a",
+                "effectId": "frayed_guard",
+                "stacks": 2,
+                "generation": 2,
+                "remainingSeconds": 5
+              }
+            ],
+            "events": [
+              {
+                "event": "stacked",
+                "applicationId": "fray_a",
+                "requestedApplicationId": "fray_b",
+                "stacks": 2
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "fray_c",
+          "effectId": "frayed_guard",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "fray_a",
+                "effectId": "frayed_guard",
+                "stacks": 3,
+                "generation": 3,
+                "remainingSeconds": 10
+              }
+            ],
+            "events": [
+              {
+                "event": "stacked",
+                "applicationId": "fray_a",
+                "requestedApplicationId": "fray_c",
+                "stacks": 3
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "fray_d",
+          "effectId": "frayed_guard",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "fray_a",
+                "effectId": "frayed_guard",
+                "stacks": 3,
+                "generation": 4,
+                "remainingSeconds": 15
+              }
+            ],
+            "events": [
+              {
+                "event": "refreshed",
+                "applicationId": "fray_a",
+                "requestedApplicationId": "fray_d",
+                "stacks": 3
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "independent_marks_keep_separate_identities",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "mark_a",
+          "effectId": "ember_mark",
+          "targetId": "scout",
+          "sourceId": "player",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "mark_a",
+                "effectId": "ember_mark",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 2.5
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "mark_a"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "mark_b",
+          "effectId": "ember_mark",
+          "targetId": "scout",
+          "sourceId": "player",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "mark_a",
+                "effectId": "ember_mark",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 2.5
+              },
+              {
+                "applicationId": "mark_b",
+                "effectId": "ember_mark",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 2.5
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "mark_b"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "expire",
+          "applicationId": "mark_a",
+          "generation": 1,
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "mark_b",
+                "effectId": "ember_mark",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 2.5
+              }
+            ],
+            "events": [
+              {
+                "event": "expired",
+                "applicationId": "mark_a"
+              },
+              {
+                "event": "removed",
+                "applicationId": "mark_a",
+                "reason": "expired"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "tagged_immunity_rejects_before_state_change",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "hush_construct",
+          "effectId": "hushed",
+          "targetId": "glass_construct",
+          "expect": {
+            "targetId": "glass_construct",
+            "active": [],
+            "events": [
+              {
+                "event": "rejected",
+                "applicationId": "hush_construct",
+                "reason": "immunity"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1,
+            "lastRejected": {
+              "applicationId": "hush_construct",
+              "reason": "immunity"
+            }
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "hush_scout",
+          "effectId": "hushed",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "hush_scout",
+                "effectId": "hushed",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 4
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "hush_scout"
+              }
+            ],
+            "restrictions": [
+              "cast"
+            ],
+            "moveMultiplier": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "cleanse_selects_priority_and_replay_is_silent",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "slow_cleanse",
+          "effectId": "mire_slick",
+          "targetId": "scout"
+        },
+        {
+          "op": "apply",
+          "applicationId": "root_cleanse",
+          "effectId": "bound_steps",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "slow_cleanse",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              },
+              {
+                "applicationId": "root_cleanse",
+                "effectId": "bound_steps",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 3.5
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "root_cleanse"
+              }
+            ],
+            "restrictions": [
+              "move"
+            ],
+            "moveMultiplier": 0
+          }
+        },
+        {
+          "op": "cleanse",
+          "cleanseId": "cleanse_a",
+          "targetId": "scout",
+          "ruleId": "purge_control",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "slow_cleanse",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [
+              {
+                "event": "cleansed",
+                "applicationId": "root_cleanse",
+                "cleanseId": "cleanse_a"
+              },
+              {
+                "event": "removed",
+                "applicationId": "root_cleanse",
+                "reason": "cleansed"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "cleanse",
+          "cleanseId": "cleanse_a",
+          "targetId": "scout",
+          "ruleId": "purge_control",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "slow_cleanse",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        }
+      ]
+    },
+    {
+      "id": "stacked_slow_multipliers_and_control_union",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "ash_a",
+          "effectId": "clinging_ash",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "ash_a",
+                "effectId": "clinging_ash",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 4
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "ash_a"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.8
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "ash_b",
+          "effectId": "clinging_ash",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "ash_a",
+                "effectId": "clinging_ash",
+                "stacks": 2,
+                "generation": 2,
+                "remainingSeconds": 4
+              }
+            ],
+            "events": [
+              {
+                "event": "stacked",
+                "applicationId": "ash_a",
+                "requestedApplicationId": "ash_b",
+                "stacks": 2
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.64
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "stun_a",
+          "effectId": "staggered",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "ash_a",
+                "effectId": "clinging_ash",
+                "stacks": 2,
+                "generation": 2,
+                "remainingSeconds": 4
+              },
+              {
+                "applicationId": "stun_a",
+                "effectId": "staggered",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 1.75
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "stun_a"
+              }
+            ],
+            "restrictions": [
+              "attack",
+              "cast",
+              "move"
+            ],
+            "moveMultiplier": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "defeat_and_encounter_reset_remove_without_expiry",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "defeat_focus",
+          "effectId": "battle_focus",
+          "targetId": "fallen_scout",
+          "sourceId": "fallen_scout",
+          "encounterId": "mire_1"
+        },
+        {
+          "op": "defeat",
+          "targetId": "fallen_scout",
+          "expect": {
+            "targetId": "fallen_scout",
+            "active": [],
+            "events": [
+              {
+                "event": "removed",
+                "applicationId": "defeat_focus",
+                "reason": "defeat"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "reset_slow",
+          "effectId": "mire_slick",
+          "targetId": "scout",
+          "encounterId": "mire_2"
+        },
+        {
+          "op": "reset",
+          "encounterId": "mire_1",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "reset_slow",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "reset",
+          "encounterId": "mire_2",
+          "expect": {
+            "targetId": "scout",
+            "active": [],
+            "events": [
+              {
+                "event": "removed",
+                "applicationId": "reset_slow",
+                "reason": "encounterReset"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "snapshot_restore_replays_no_historical_events",
+      "steps": [
+        {
+          "op": "apply",
+          "applicationId": "restore_slow",
+          "effectId": "mire_slick",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "restore_slow",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "restore_slow"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "snapshot"
+        },
+        {
+          "op": "restore",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "restore_slow",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "restore_slow",
+          "effectId": "mire_slick",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "restore_slow",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "cleanse",
+          "cleanseId": "restore_cleanse",
+          "targetId": "scout",
+          "ruleId": "purge_control",
+          "expect": {
+            "targetId": "scout",
+            "active": [],
+            "events": [
+              {
+                "event": "cleansed",
+                "applicationId": "restore_slow",
+                "cleanseId": "restore_cleanse"
+              },
+              {
+                "event": "removed",
+                "applicationId": "restore_slow",
+                "reason": "cleansed"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 1
+          }
+        },
+        {
+          "op": "apply",
+          "applicationId": "restore_slow_later",
+          "effectId": "mire_slick",
+          "targetId": "scout",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "restore_slow_later",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [
+              {
+                "event": "applied",
+                "applicationId": "restore_slow_later"
+              }
+            ],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "snapshot"
+        },
+        {
+          "op": "restore",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "restore_slow_later",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        },
+        {
+          "op": "cleanse",
+          "cleanseId": "restore_cleanse",
+          "targetId": "scout",
+          "ruleId": "purge_control",
+          "expect": {
+            "targetId": "scout",
+            "active": [
+              {
+                "applicationId": "restore_slow_later",
+                "effectId": "mire_slick",
+                "stacks": 1,
+                "generation": 1,
+                "remainingSeconds": 6
+              }
+            ],
+            "events": [],
+            "restrictions": [],
+            "moveMultiplier": 0.65
+          }
+        }
+      ]
+    }
+  ]
+}

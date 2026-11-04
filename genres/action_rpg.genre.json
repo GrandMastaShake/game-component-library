@@ -1,8 +1,8 @@
 {
   "id": "genre.action_rpg",
   "name": "Action RPG",
-  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression. Durable specializations and deduplicated mastery tracks now gate ranked actives, while deterministic elite affixes, finite waves, and interruptible telegraphs turn the combat-loot loop into a readable challenge ladder. Multi-phase bosses now add stable health, time, and condition transitions, once-only adds, readable enrages, boss-driven arena hazards, retry-safe room seals, and exactly-once completion feeding the same mastery, XP, and loot spine.",
-  "version": "0.6.0",
+  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression. Durable specializations and deduplicated mastery tracks now gate ranked actives, while deterministic elite affixes, finite waves, and interruptible telegraphs turn the combat-loot loop into a readable challenge ladder. Multi-phase bosses now add stable health, time, and condition transitions, once-only adds, readable enrages, boss-driven arena hazards, retry-safe room seals, and exactly-once completion feeding the same mastery, XP, and loot spine. Status Effects now adds stable refresh and stacking, tagged cleanse and immunities, restore-safe crowd control, and opt-in cast, movement, basic-attack, and telegraph restrictions while preserving the single hit and damage pipelines.",
+  "version": "0.7.0",
   "loop": "fight in real time → loot → build character → bigger fight",
   "views": [
     "isometric",
@@ -107,6 +107,8 @@
     "mastery",
     "elite-encounters",
     "boss-encounters",
-    "arena-hazards"
+    "arena-hazards",
+    "status-effects",
+    "crowd-control"
   ]
 }
