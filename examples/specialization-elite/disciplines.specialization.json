@@ -77,6 +77,14 @@
           "event": "combat.eliteEncounterCompleted",
           "amount": 15,
           "dedupeBy": "completionId"
+        },
+        {
+          "event": "combat.bossEncounterCompleted",
+          "match": {
+            "arenaId": "glassworks"
+          },
+          "amount": 25,
+          "dedupeBy": "completionId"
         }
       ]
     },
