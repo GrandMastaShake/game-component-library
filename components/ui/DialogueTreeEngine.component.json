@@ -2,7 +2,7 @@
   "id": "ui.dialogue_tree_engine",
   "name": "Dialogue Tree Engine",
   "category": "ui",
-  "description": "The brain behind ui.dialogue_box. The box renders lines and reports which button was pressed; this engine owns what those presses mean — node-graph traversal, conditional branches, synchronous checks through progression.attribute_sheet, once-only choice history, and restorable conversation positions. Legacy {label, to, act} choices remain valid. Extended choices may declare stable ids, conditions, once, checks, and consequences; nodes may declare onEnter consequences. Flag writes go to world.world_state_flags, quest actions to progression.quest_log, and journal requests to ui.narrative_journal through explicit events. This engine never applies those world changes itself and never persists itself.",
+  "description": "The brain behind ui.dialogue_box. The box renders lines and reports which button was pressed; this engine owns what those presses mean \u2014 node-graph traversal, conditional branches, synchronous checks through progression.attribute_sheet, once-only choice history, and restorable conversation positions. Legacy {label, to, act} choices remain valid. Extended choices may declare stable ids, conditions, once, checks, and consequences; nodes may declare onEnter consequences. Flag writes go to world.world_state_flags, quest actions to progression.quest_log, and journal requests to ui.narrative_journal through explicit events. This engine never applies those world changes itself and never persists itself.",
   "version": "0.2.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -47,7 +48,7 @@
       "type": "number",
       "required": false,
       "default": 10,
-      "description": "Difficulty used when a check omits its own. 10 is a coin-flip for an average build — the right baseline for checks that exist to flavor, not to gate."
+      "description": "Difficulty used when a check omits its own. 10 is a coin-flip for an average build \u2014 the right baseline for checks that exist to flavor, not to gate."
     },
     {
       "name": "allowRevisitResolvedNodes",

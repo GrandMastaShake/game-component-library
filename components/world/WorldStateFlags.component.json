@@ -2,7 +2,7 @@
   "id": "world.world_state_flags",
   "name": "World State Flags",
   "category": "world",
-  "description": "The world's memory of what you changed: the bridge stays repaired, the warlord stays dead, the gate stays open. A flag is a named boolean-or-value with a settable or set-once policy and a query interface everything else reads — doors, spawners, dialogue conditions. ui.dialogue_tree_engine writes consequence flags here rather than keeping them, because a consequence that dies with the conversation is a consequence the world forgot. persistence.save_system owns the bytes; this component owns the semantics — namespacing, defaults, and the rule that clearing a story flag is an explicit act, never a side effect of some other system's cleanup.",
+  "description": "The world's memory of what you changed: the bridge stays repaired, the warlord stays dead, the gate stays open. A flag is a named boolean-or-value with a settable or set-once policy and a query interface everything else reads \u2014 doors, spawners, dialogue conditions. ui.dialogue_tree_engine writes consequence flags here rather than keeping them, because a consequence that dies with the conversation is a consequence the world forgot. persistence.save_system owns the bytes; this component owns the semantics \u2014 namespacing, defaults, and the rule that clearing a story flag is an explicit act, never a side effect of some other system's cleanup.",
   "version": "0.2.0",
   "platform": [
     "agnostic"
@@ -10,11 +10,12 @@
   "implementations": [
     {
       "target": "canvas2d",
-      "status": "unmapped",
-      "module": null
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
     },
     {
-      "target": "webgl",
+      "target": "godot",
       "status": "unmapped",
       "module": null
     },
@@ -29,7 +30,7 @@
       "module": null
     },
     {
-      "target": "godot",
+      "target": "webgl",
       "status": "unmapped",
       "module": null
     }
@@ -61,14 +62,14 @@
       "type": "boolean",
       "required": false,
       "default": false,
-      "description": "Whether reading an undeclared flag throws instead of returning null. Strict in development, lenient in production — a shipped game should degrade, not crash."
+      "description": "Whether reading an undeclared flag throws instead of returning null. Strict in development, lenient in production \u2014 a shipped game should degrade, not crash."
     }
   ],
   "outputs": [
     {
       "name": "flagCount",
       "type": "number",
-      "description": "How many flags diverge from defaults — a save-size proxy."
+      "description": "How many flags diverge from defaults \u2014 a save-size proxy."
     },
     {
       "name": "valueOf",
