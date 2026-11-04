@@ -2,8 +2,8 @@
   "id": "combat.elite_telegraph_scheduler",
   "name": "Elite Telegraph Scheduler",
   "category": "combat",
-  "version": "0.2.0",
-  "description": "Turns registered elite affix attacks or scripted boss phase attacks into readable cooldown, windup, cancellation, and commit timing. Elite attacks register from Elite Affixes; boss attacks register from bossEngaged, bossPhaseChanged, and optionally bossEnraged. A later boss phase replaces that boss's prior attack set and cancels its old windups without a hit. The current target comes from Aggro Table when windup begins and remains locked. Timer System supplies time. A committed attack emits attackCommitted for presentation and one ordinary combat.hit with declared base damage for Damage Resolver, so final mitigation, crit, variance, defeat, and status processing never move into this scheduler. Stun-like effects, caster or target defeat, boss/elite failure or reset, and boss completion cancel rather than commit. Restored timers do not emit a catch-up hit storm. Intent Marks renders warnings but owns no timing.",
+  "version": "0.3.0",
+  "description": "Turns registered elite affix attacks or scripted boss phase attacks into readable cooldown, windup, cancellation, and commit timing. Elite attacks register from Elite Affixes; boss attacks register from bossEngaged, bossPhaseChanged, and optionally bossEnraged. A later boss phase replaces that boss's prior attack set and cancels its old windups without a hit. The current target comes from Aggro Table when windup begins and remains locked. Timer System supplies time. A committed attack emits attackCommitted for presentation and one ordinary combat.hit with declared base damage for Damage Resolver, so final mitigation, crit, variance, defeat, and status processing never move into this scheduler. Stun-like effects, caster or target defeat, boss/elite failure or reset, and boss completion cancel rather than commit. Restored timers do not emit a catch-up hit storm. Intent Marks renders warnings but owns no timing. Status Effects emits effectApplied only for a newly entered instance, so configured interruptEffects still cancel the matching caster windup without refresh-driven cancellation storms. A controlRestrictionsChanged event that newly adds attack to a caster also cancels its active windup with reason interrupt; removing control never commits or restarts an attack by itself.",
   "platform": [
     "agnostic"
   ],
@@ -113,6 +113,7 @@
       "combat.eliteAffixesAssigned",
       "utility.timerCompleted",
       "combat.effectApplied",
+      "combat.controlRestrictionsChanged",
       "combat.entityDefeated",
       "combat.eliteEncounterReset",
       "combat.bossEngaged",
@@ -126,10 +127,12 @@
   },
   "dependencies": [
     "utility.timer_system",
-    "combat.aggro_table"
+    "combat.aggro_table",
+    "combat.status_effects"
   ],
   "tags": [
     "boss",
+    "crowd-control",
     "elite",
     "phases",
     "readability",
