@@ -2,8 +2,8 @@
   "id": "combat.hotbar_abilities",
   "name": "Hotbar Abilities",
   "category": "combat",
-  "description": "The active-skill layer that turns a basic attack into a build. Each slot binds an ability definition — cooldown, resource cost, targeting mode — and this component owns only the slot lifecycle: is it off cooldown, can the resource be paid, and when does it fire. The moment an ability connects it hands a damage packet to combat.damage_resolver by emitting combat.hit — the same event a basic swing emits, so there is one damage pipeline rather than a second private one, because a second place where damage numbers are computed is a place where balance patches land twice. Ongoing effects an ability leaves behind are combat.status_effects' problem — a burn that ticks for five seconds is status, not hotbar — and passive gear bonuses never pass through here either, since combat.equipment_slots applies those directly. What this component pointedly refuses to own is the UI: ui.hud renders the slots off the same cooldown events, so the hotbar runs headless in tests. Two things it could not previously be told. `range` is how far a slot can be aimed: with no such number an ability lands wherever the caller names, which means anywhere on the map, and the caller ends up inventing a reach the contract never granted. `abilities` is the kit itself — `slots` is a COUNT, and a count with no list means every game that binds a hotbar binds the same six, so two different genres shipped the same spellbook. Both are the request's to supply and neither is this component's to guess. `castAuthorizationMode` is backward compatible: directOrAuthorized retains direct input and also accepts combat.spellCastAuthorized, while authorizedOnly ignores direct ability-slot input so a prepared-spell queue cannot be bypassed. Authorization supplies eligibility, not a free cast; this component still owns range, cooldown, resource payment and combat.hit. `abilityBindingMode` adds the same opt-in separation for the kit itself: manualOrLoadout preserves the existing abilities input while accepting a complete Ability Loadout snapshot, and loadoutOnly requires that snapshot so removed or respecced actives cannot linger in a private manual kit. Loadout binding changes available abilities only; slot lifecycle, cooldowns, resources, and hits remain here.",
-  "version": "0.3.0",
+  "description": "The active-skill layer that turns a basic attack into a build. Each slot binds an ability definition — cooldown, resource cost, targeting mode — and this component owns only the slot lifecycle: is it off cooldown, can the resource be paid, and when does it fire. The moment an ability connects it hands a damage packet to combat.damage_resolver by emitting combat.hit — the same event a basic swing emits, so there is one damage pipeline rather than a second private one, because a second place where damage numbers are computed is a place where balance patches land twice. Ongoing effects an ability leaves behind are combat.status_effects' problem — a burn that ticks for five seconds is status, not hotbar — and passive gear bonuses never pass through here either, since combat.equipment_slots applies those directly. What this component pointedly refuses to own is the UI: ui.hud renders the slots off the same cooldown events, so the hotbar runs headless in tests. Two things it could not previously be told. `range` is how far a slot can be aimed: with no such number an ability lands wherever the caller names, which means anywhere on the map, and the caller ends up inventing a reach the contract never granted. `abilities` is the kit itself — `slots` is a COUNT, and a count with no list means every game that binds a hotbar binds the same six, so two different genres shipped the same spellbook. Both are the request's to supply and neither is this component's to guess. `castAuthorizationMode` is backward compatible: directOrAuthorized retains direct input and also accepts combat.spellCastAuthorized, while authorizedOnly ignores direct ability-slot input so a prepared-spell queue cannot be bypassed. Authorization supplies eligibility, not a free cast; this component still owns range, cooldown, resource payment and combat.hit. `abilityBindingMode` adds the same opt-in separation for the kit itself: manualOrLoadout preserves the existing abilities input while accepting a complete Ability Loadout snapshot, and loadoutOnly requires that snapshot so removed or respecced actives cannot linger in a private manual kit. Loadout binding changes available abilities only; slot lifecycle, cooldowns, resources, and hits remain here. Optional controlRestrictionMode=statusGate reads Status Effects controlFor(casterId) before a cast. A cast restriction emits the existing abilityRejected with reason controlRestricted and pays no resource, starts no cooldown, and emits no hit; ignore preserves legacy casting. Status Effects still owns restrictions while this component remains the only cast-legality, payment, cooldown, and emitted-hit owner.",
+  "version": "0.4.0",
   "platform": [
     "agnostic"
   ],
@@ -99,6 +99,17 @@
         "loadoutOnly"
       ],
       "description": "manualOrLoadout preserves legacy abilities configuration and accepts loadout snapshots; loadoutOnly requires progression.abilityLoadoutChanged to supply the complete kit."
+    },
+    {
+      "name": "controlRestrictionMode",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "enum": [
+        "ignore",
+        "statusGate"
+      ],
+      "description": "ignore preserves legacy casts. statusGate rejects a caster whose current Status Effects controlState contains cast, before resource payment or cooldown; the rejection reason is controlRestricted."
     }
   ],
   "outputs": [
@@ -128,7 +139,8 @@
     "listensTo": [
       "input.abilitySlot",
       "combat.spellCastAuthorized",
-      "progression.abilityLoadoutChanged"
+      "progression.abilityLoadoutChanged",
+      "combat.controlRestrictionsChanged"
     ]
   },
   "dependencies": [
@@ -136,10 +148,11 @@
     "combat.status_effects"
   ],
   "tags": [
-    "arpg",
     "abilities",
+    "arpg",
     "cooldowns",
-    "core"
+    "core",
+    "crowd-control"
   ],
   "provenance": "library-native"
 }
