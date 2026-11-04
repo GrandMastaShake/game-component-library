@@ -2,8 +2,8 @@
   "id": "combat.boss_encounter_script",
   "name": "Boss Encounter Script",
   "category": "combat",
-  "description": "The contract a boss fight fulfils: engage on arena entry, phase changes on health thresholds, arena lock while engaged, clean resolution either way. utility.behavior_fsm owns the generic state machine and could express any one boss; this component owns the encounter semantics every boss shares, so 'seal the doors at engage, drop the reward at defeat' is written once and varied by data, not re-scripted per fight. It does not own the boss's attacks \u2014 those are combat.melee_basic or combat.hotbar_abilities on the boss entity \u2014 and it does not own the loot, which inventory.loot_table and inventory.affix_loot_generator roll after combat.entityDefeated like any other kill, only louder.",
-  "version": "0.3.0",
+  "description": "Owns boss engagement, ordered phase transitions, enrage, scripted adds, resolution, failure, and reset. Legacy floor encounters may still use phaseThresholds, initialBeaten, and the original outputs. The optional encounters input adds stable phase ids and three explicit transition kinds: health fraction, elapsed fight time, or a matched condition event. Only the next declared phase can enter, every entered phase and spawned add is recorded once, and restoration resumes the ledger without replaying attacks, spawns, hazards, or rewards. The director announces boss and add unitSpawned records but Unit Roster alone owns board units and health; Enemy Tier Scaling supplies base level multipliers once. Boss and phase attacks are data for Elite Telegraph Scheduler, arena hazardPhase ids are data for Arena Hazards, and neither timing nor contact is implemented here. A matching boss entityDefeated produces bossDefeated and one bossEncounterCompleted with a stable completionId; that same ordinary defeat feeds existing XP, mastery, and loot consumers. Failure, reset, replay rejection, and post-completion cleanup use unitRemoved and cannot synthesize defeats or rewards. Boss Room Seal remains the door owner, Status Effects remains the timed-effect owner, and enrage publishes encounter state and replacement attacks rather than applying a status or final damage. Engagement, phase, and enrage payloads carry encounterId, arenaId, bossSpawnId, stable phaseId, attacks, and hazardPhase; completion carries encounterId, arenaId, bossSpawnId, defeatId, and completionId so arena, scheduler, room, mastery, and save consumers match facts without inferring ownership.",
+  "version": "0.4.0",
   "platform": [
     "agnostic"
   ],
@@ -66,13 +66,41 @@
       "required": false,
       "default": [],
       "description": "Floors whose boss is already dead, as depths. Arriving on one is not a fight: the encounter reads defeated there and does not engage. Written for a saved run: a build that saves reads the matching output and hands it back here, and the dungeon is as the player left it."
+    },
+    {
+      "name": "encounters",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Optional scripted encounters: [{id, arenaId, level, boss:{archetype, maxHealth, socket?, masteryTags?}, phases, enrage?}]. The first phase enters on engagement. Later phases declare stable id, exactly one enterWhen condition, optional attacks, adds, and hazardPhase. Empty preserves the legacy floor/threshold contract."
+    },
+    {
+      "name": "playerTeam",
+      "type": "string",
+      "required": false,
+      "default": "player",
+      "description": "Roster team whose elimination fails rather than completes an active scripted encounter."
+    },
+    {
+      "name": "allowReplay",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether a completed scripted encounter may start again. Failed and reset encounters may retry; completion ids remain in the durable ledger."
+    },
+    {
+      "name": "initialStates",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored per-encounter status, phase and condition ledgers, elapsed time, enrage, living and defeated unit ids, and completion id. Restore emits no engagement, phase, spawn, attack, hazard, failure, completion, or reward events; Unit Roster restores units independently."
     }
   ],
   "outputs": [
     {
       "name": "currentPhase",
       "type": "number",
-      "description": "Zero-based phase index, for AI and arena consumers."
+      "description": "Zero-based legacy phase index, or the active scripted phase's zero-based index, for AI and arena consumers. Stable scripted consumers use states[current].phaseId rather than inferring identity from this number."
     },
     {
       "name": "engaged",
@@ -102,28 +130,66 @@
     {
       "name": "reset",
       "type": "function",
-      "description": "reset(): ends this floor's fight unwon. Not engaged, no phase, no enrage, the arena unlocked; a dead boss stays defeated. The party-wipe path for a build whose player goes down and gets up rather than dying, alongside combat.room_encounters' regroup, which puts the boss back whole."
+      "description": "reset(): ends this floor's legacy fight unwon, preserving a dead boss as defeated. For a scripted encounter, resetEncounter(encounterId) performs the equivalent ledger transition, silently removes living owned units, and emits combat.bossEncounterReset without completion or rewards."
+    },
+    {
+      "name": "states",
+      "type": "object",
+      "description": "Per-scripted-encounter idle, active, completed, or failed state, current stable phase id, entered phases, satisfied conditions, spawned and defeated units, enrage, and completion id; the snapshot initialStates accepts."
+    },
+    {
+      "name": "activeUnits",
+      "type": "array",
+      "description": "Living boss and add records owned by the active scripted encounter, including encounterId, phaseId, spawnId, tier, archetype, and masteryTags."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Why a start, condition, phase transition, defeat, or replay was ignored, including stale conditions, unrelated units, and completed encounters."
     }
   ],
   "events": {
     "emits": [
       "combat.bossEngaged",
       "combat.bossPhaseChanged",
-      "combat.bossDefeated"
+      "combat.bossEnraged",
+      "combat.bossDefeated",
+      "combat.bossEncounterCompleted",
+      "combat.bossEncounterFailed",
+      "combat.bossEncounterReset",
+      "combat.unitSpawned",
+      "combat.unitRemoved"
     ],
     "listensTo": [
+      "world.roomEntered",
+      "input.startBossEncounter",
+      "input.resetBossEncounter",
+      "input.bossConditionSatisfied",
+      "world.worldFlagChanged",
+      "progression.questStageChanged",
       "world.hazardEntered",
       "utility.behaviorChanged",
-      "combat.entityDefeated"
+      "utility.timerTicked",
+      "utility.timerCompleted",
+      "combat.entityDefeated",
+      "combat.teamEliminated"
     ]
   },
   "dependencies": [
-    "utility.behavior_fsm"
+    "utility.behavior_fsm",
+    "utility.timer_system",
+    "combat.unit_roster",
+    "combat.enemy_tier_scaling"
   ],
   "tags": [
-    "dungeon-crawler",
+    "adds",
     "boss",
-    "encounter"
+    "deterministic",
+    "dungeon-crawler",
+    "encounter",
+    "enrage",
+    "phases",
+    "rpg-family"
   ],
   "provenance": "library-native"
 }
