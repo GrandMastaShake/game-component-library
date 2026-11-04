@@ -22,6 +22,7 @@ MASTERY_EVENTS = {
     "combat.entityDefeated",
     "progression.questCompleted",
     "combat.eliteEncounterCompleted",
+    "combat.bossEncounterCompleted",
 }
 SHAPE_DIMENSIONS = {
     "circle": ("radius",),

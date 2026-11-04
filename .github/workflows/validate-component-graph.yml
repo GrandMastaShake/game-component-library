@@ -1,9 +1,9 @@
 name: Validate Component Library
 on:
   push:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "examples/**/*.boss.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
   pull_request:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "examples/**/*.boss.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
 permissions: {contents: read}
 jobs:
   validate:
@@ -31,6 +31,8 @@ jobs:
         run: python3 tools/validate_narrative_graphs.py --report reports/narrative-graphs.json
       - name: Validate specialization and elite content (gated identities, legal affix sets, finite waves)
         run: python3 tools/validate_specialization_elites.py --report reports/specialization-elites.json
+      - name: Validate boss arena content (reachable phases, warned hazards, finite adds, enrage)
+        run: python3 tools/validate_boss_arenas.py --report reports/boss-arenas.json
       - name: Unit tests for the content validators
         run: python3 -m unittest discover -s tools/tests -p 'test_*.py'
       # An asset descriptor is a claim about files in a consuming repository, so

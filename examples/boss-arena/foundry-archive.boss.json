@@ -1,0 +1,298 @@
+{
+  "arenas": [
+    {
+      "id": "glassworks",
+      "hazards": [
+        {
+          "id": "steam_vents",
+          "regions": [
+            {"x": 3, "y": 2, "width": 2, "height": 5},
+            {"x": 9, "y": 2, "width": 2, "height": 5}
+          ],
+          "damage": 4,
+          "retriggerSeconds": 1.2,
+          "instantlyLethal": false
+        },
+        {
+          "id": "slag_channel",
+          "regions": [
+            {"x": 5, "y": 4, "width": 4, "height": 1}
+          ],
+          "damage": 6,
+          "retriggerSeconds": 1,
+          "instantlyLethal": false
+        }
+      ],
+      "phases": [
+        {
+          "id": "dormant",
+          "disarm": ["steam_vents", "slag_channel"]
+        },
+        {
+          "id": "venting",
+          "warningSeconds": 1.4,
+          "arm": ["steam_vents"],
+          "disarm": ["slag_channel"]
+        },
+        {
+          "id": "channeling",
+          "warningSeconds": 1.1,
+          "arm": ["slag_channel"],
+          "disarm": ["steam_vents"]
+        },
+        {
+          "id": "overpressure",
+          "warningSeconds": 0.9,
+          "arm": ["steam_vents", "slag_channel"]
+        }
+      ]
+    },
+    {
+      "id": "flooded_archive",
+      "hazards": [
+        {
+          "id": "charged_pools",
+          "regions": [
+            {"x": 1, "y": 1, "width": 3, "height": 3},
+            {"x": 8, "y": 1, "width": 3, "height": 3}
+          ],
+          "damage": 3,
+          "retriggerSeconds": 1.5,
+          "instantlyLethal": false
+        },
+        {
+          "id": "falling_shelves",
+          "regions": [
+            {"x": 5, "y": 1, "width": 2, "height": 6}
+          ],
+          "damage": 7,
+          "retriggerSeconds": 2,
+          "instantlyLethal": false
+        }
+      ],
+      "phases": [
+        {
+          "id": "dry_floor",
+          "disarm": ["charged_pools", "falling_shelves"]
+        },
+        {
+          "id": "live_water",
+          "warningSeconds": 1.6,
+          "arm": ["charged_pools"]
+        },
+        {
+          "id": "collapsing_rows",
+          "warningSeconds": 1.3,
+          "arm": ["falling_shelves"],
+          "disarm": ["charged_pools"]
+        },
+        {
+          "id": "total_collapse",
+          "warningSeconds": 1,
+          "arm": ["charged_pools", "falling_shelves"]
+        }
+      ]
+    }
+  ],
+  "encounters": [
+    {
+      "id": "foundry_heart",
+      "arenaId": "glassworks",
+      "level": 8,
+      "boss": {
+        "archetype": "boiler_warden",
+        "maxHealth": 180,
+        "socket": "center",
+        "masteryTags": ["boss", "construct"]
+      },
+      "phases": [
+        {
+          "id": "measured_heat",
+          "hazardPhase": "dormant",
+          "attacks": [
+            {
+              "id": "warden_hammer_line",
+              "windupSeconds": 1.1,
+              "cooldownSeconds": 5,
+              "damage": 8,
+              "shape": {"kind": "line", "length": 5, "width": 1}
+            }
+          ]
+        },
+        {
+          "id": "pressure_cracks",
+          "enterWhen": {"healthAtOrBelow": 0.66},
+          "hazardPhase": "venting",
+          "adds": [
+            {
+              "archetype": "cinder_drone",
+              "count": 2,
+              "baseHealth": 18,
+              "socket": "perimeter",
+              "masteryTags": ["construct"]
+            }
+          ],
+          "attacks": [
+            {
+              "id": "warden_arc_sweep",
+              "windupSeconds": 1,
+              "cooldownSeconds": 4.5,
+              "damage": 9,
+              "shape": {"kind": "cone", "radius": 4, "angle": 100}
+            }
+          ]
+        },
+        {
+          "id": "coolant_release",
+          "enterWhen": {
+            "conditionEvent": "world.worldFlagChanged",
+            "conditionMatch": {"flag": "foundry.coolantReleased", "value": true},
+            "conditionId": "coolant-released"
+          },
+          "hazardPhase": "channeling",
+          "attacks": [
+            {
+              "id": "warden_pressure_ring",
+              "windupSeconds": 1.3,
+              "cooldownSeconds": 6,
+              "damage": 10,
+              "shape": {"kind": "circle", "radius": 3}
+            }
+          ]
+        },
+        {
+          "id": "final_stoke",
+          "enterWhen": {"elapsedSecondsAtLeast": 75},
+          "hazardPhase": "venting",
+          "adds": [
+            {
+              "archetype": "cinder_drone",
+              "count": 1,
+              "baseHealth": 22,
+              "socket": "vent",
+              "masteryTags": ["construct"]
+            }
+          ],
+          "attacks": [
+            {
+              "id": "warden_final_line",
+              "windupSeconds": 0.9,
+              "cooldownSeconds": 4,
+              "damage": 11,
+              "shape": {"kind": "line", "length": 6, "width": 1}
+            }
+          ]
+        }
+      ],
+      "enrage": {
+        "afterSeconds": 120,
+        "hazardPhase": "overpressure",
+        "behaviorModifiers": {"moveSpeed": 1.15},
+        "attacks": [
+          {
+            "id": "warden_overpressure_ring",
+            "windupSeconds": 0.8,
+            "cooldownSeconds": 3.5,
+            "damage": 13,
+            "shape": {"kind": "circle", "radius": 4}
+          }
+        ]
+      }
+    },
+    {
+      "id": "archive_custodian",
+      "arenaId": "flooded_archive",
+      "level": 10,
+      "boss": {
+        "archetype": "index_golem",
+        "maxHealth": 230,
+        "socket": "reading_dais",
+        "masteryTags": ["boss", "construct"]
+      },
+      "phases": [
+        {
+          "id": "quiet_catalogue",
+          "hazardPhase": "dry_floor",
+          "attacks": [
+            {
+              "id": "custodian_single_mark",
+              "windupSeconds": 1.2,
+              "cooldownSeconds": 5.5,
+              "damage": 10,
+              "shape": {"kind": "single"}
+            }
+          ]
+        },
+        {
+          "id": "loose_pages",
+          "enterWhen": {"healthAtOrBelow": 0.5},
+          "hazardPhase": "live_water",
+          "adds": [
+            {
+              "archetype": "page_swarm",
+              "count": 3,
+              "baseHealth": 12,
+              "socket": "shelves",
+              "masteryTags": ["animated"]
+            }
+          ],
+          "attacks": [
+            {
+              "id": "custodian_page_cone",
+              "windupSeconds": 1,
+              "cooldownSeconds": 4.5,
+              "damage": 11,
+              "shape": {"kind": "cone", "radius": 5, "angle": 80}
+            }
+          ]
+        },
+        {
+          "id": "falling_index",
+          "enterWhen": {"elapsedSecondsAtLeast": 60},
+          "hazardPhase": "collapsing_rows",
+          "attacks": [
+            {
+              "id": "custodian_shelf_line",
+              "windupSeconds": 1.4,
+              "cooldownSeconds": 6,
+              "damage": 13,
+              "shape": {"kind": "line", "length": 7, "width": 2}
+            }
+          ]
+        },
+        {
+          "id": "open_stack",
+          "enterWhen": {
+            "conditionEvent": "input.bossConditionSatisfied",
+            "conditionMatch": {"conditionId": "index-open"},
+            "conditionId": "index-open"
+          },
+          "hazardPhase": "live_water",
+          "attacks": [
+            {
+              "id": "custodian_open_ring",
+              "windupSeconds": 1.1,
+              "cooldownSeconds": 5,
+              "damage": 14,
+              "shape": {"kind": "circle", "radius": 4}
+            }
+          ]
+        }
+      ],
+      "enrage": {
+        "afterSeconds": 105,
+        "hazardPhase": "total_collapse",
+        "behaviorModifiers": {"cooldownRate": 1.2},
+        "attacks": [
+          {
+            "id": "custodian_collapse_ring",
+            "windupSeconds": 0.9,
+            "cooldownSeconds": 4,
+            "damage": 15,
+            "shape": {"kind": "circle", "radius": 5}
+          }
+        ]
+      }
+    }
+  ]
+}

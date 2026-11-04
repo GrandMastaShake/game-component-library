@@ -2,8 +2,8 @@
   "id": "world.arena_hazards",
   "name": "Arena Hazards",
   "category": "world",
-  "description": "The arena's hostile set dressing on a schedule: crushers that sweep, floor sections that drop, lava that rises. It owns the phase script \u2014 which hazard volumes arm when, and how the pressure escalates as the match runs long, because an arena that never changes rewards parking in the safest corner. The hazards themselves are world.hazard_volume instances armed and disarmed by this component rather than reimplemented here, and world.hazardEntered coming back from those volumes is how the script knows it is actually biting. It does not own match rules or win conditions \u2014 a shrinking floor forces an endgame, but deciding the winner is the mode's job. Timing comes from utility.timer_system so hazard phases and race clocks share one source of truth.",
-  "version": "0.1.0",
+  "description": "The arena's hostile set dressing on a schedule: crushers that sweep, floor sections that drop, lava that rises. It owns hazard scripts—which hazard volumes warn, arm, disarm, or mutate, and how pressure escalates—but never boss win rules, contact, damage, or timed status effects. Legacy phaseScript, automatic intervals, and escalation remain unchanged by default. Optional arenas add boss-driven activation: bossEngaged selects the initial hazardPhase, bossPhaseChanged and bossEnraged select declared later phases, and completion, failure, or reset disarms the script. Warning and arm timing come from Timer System. Hazard Volume instances alone report contact; Arena Hazards does not convert contact into a hit. Restored arena state resumes current phase, warnings, armed volumes, and timers without emitting historical warning, trigger, or reset events.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -38,9 +38,9 @@
     {
       "name": "phaseScript",
       "type": "array",
-      "required": true,
-      "default": null,
-      "description": "Ordered phases: which hazard ids arm, disarm, or mutate per phase. Authored per arena; the component only executes and escalates it."
+      "required": false,
+      "default": [],
+      "description": "Legacy ordered phases: which hazard ids arm, disarm, or mutate per phase. Used with automatic activation; empty when arenas supplies boss-driven arena scripts."
     },
     {
       "name": "phaseIntervalSeconds",
@@ -55,6 +55,27 @@
       "required": false,
       "default": true,
       "description": "When true, later phases tighten intervals and widen hazard coverage. The escalation curve is what guarantees a match cannot stall forever."
+    },
+    {
+      "name": "activationMode",
+      "type": "string",
+      "required": false,
+      "default": "automatic",
+      "description": "automatic preserves the legacy interval script. bossDriven waits for bossEngaged and follows matching boss phase/enrage hazardPhase ids until completion, failure, or reset."
+    },
+    {
+      "name": "arenas",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Boss-driven definitions: [{id, hazards:[{id, regions, damage, retriggerSeconds, instantlyLethal}], phases:[{id, warningSeconds?, arm?, disarm?, mutate?}]}]. Hazard and phase ids are stable within an arena; boss encounters reference them rather than embedding volume behavior."
+    },
+    {
+      "name": "initialState",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored active arena, phase, pending warnings, armed volumes, mutations, and timer ids. Restoration emits no historical arena events."
     }
   ],
   "outputs": [
@@ -66,16 +87,39 @@
       "name": "activeHazardCount",
       "type": "number",
       "description": "Armed hazard volumes right now. HUD warning lights and audio tension both read this rather than tracking volumes themselves."
+    },
+    {
+      "name": "currentPhaseId",
+      "type": "string",
+      "description": "Stable active hazard phase id, or null while disarmed. Numeric currentPhase remains for legacy consumers."
+    },
+    {
+      "name": "activeHazards",
+      "type": "array",
+      "description": "Currently armed hazard records and pending warnings with stable hazard and timer ids; together with currentPhaseId this is the boss-driven restorable state."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Why a boss phase, warning, or timer completion was ignored, including stale encounter ids and unknown hazard phases."
     }
   ],
   "events": {
     "emits": [
       "world.arenaPhaseChanged",
-      "world.arenaHazardTriggered"
+      "world.arenaHazardTriggered",
+      "world.arenaHazardTelegraphed",
+      "world.arenaHazardsReset"
     ],
     "listensTo": [
       "world.hazardEntered",
-      "utility.timerCompleted"
+      "utility.timerCompleted",
+      "combat.bossEngaged",
+      "combat.bossPhaseChanged",
+      "combat.bossEnraged",
+      "combat.bossEncounterCompleted",
+      "combat.bossEncounterFailed",
+      "combat.bossEncounterReset"
     ]
   },
   "dependencies": [
@@ -84,9 +128,13 @@
   ],
   "tags": [
     "arena",
+    "boss",
+    "escalation",
     "hazards",
-    "vehicular-combat",
-    "escalation"
+    "restoration",
+    "rpg-family",
+    "telegraphs",
+    "vehicular-combat"
   ],
   "provenance": "library-native"
 }

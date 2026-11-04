@@ -3,7 +3,7 @@
   "name": "Save System",
   "category": "persistence",
   "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed build, specialization, mastery, quest, dialogue, elite-assignment, encounter, telegraph, world-flag, inventory, and journal changes.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "platform": [
     "roblox",
     "godot",
@@ -78,7 +78,17 @@
       "combat.eliteEncounterReset",
       "combat.attackTelegraphed",
       "combat.attackCommitted",
-      "combat.attackTelegraphCancelled"
+      "combat.attackTelegraphCancelled",
+      "combat.bossEngaged",
+      "combat.bossPhaseChanged",
+      "combat.bossEnraged",
+      "combat.bossEncounterCompleted",
+      "combat.bossEncounterFailed",
+      "combat.bossEncounterReset",
+      "world.arenaPhaseChanged",
+      "world.arenaHazardTelegraphed",
+      "world.arenaHazardTriggered",
+      "world.arenaHazardsReset"
     ]
   },
   "sinkFor": [

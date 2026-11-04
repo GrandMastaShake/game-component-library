@@ -2,8 +2,8 @@
   "id": "progression.mastery",
   "name": "Mastery",
   "category": "progression",
-  "version": "0.1.0",
-  "description": "Earned proficiency that grows from completed play rather than level-up points or currency. Each track declares XP thresholds, optional specialization gating, named per-rank modifiers, and event sources with scalar payload matches and a stable dedupe key. It listens to completed abilities, defeats, quests, and elite encounters; rejected or duplicate facts grant nothing. One fact may credit multiple matching tracks, but never the same track twice. Ranks derive from restored XP rather than a second authoritative rank table, while initialCreditIds prevents reload farming. Mastery publishes bonuses and rank state for loadout gates and stat owners; it does not grant character XP, choose loot, purchase skills, or reset through an ordinary Build Respec.",
+  "version": "0.2.0",
+  "description": "Earned proficiency that grows from completed play rather than level-up points or currency. Each track declares XP thresholds, optional specialization gating, named per-rank modifiers, and event sources with scalar payload matches and a stable dedupe key. It listens to completed abilities, defeats, quests, and elite encounters; rejected or duplicate facts grant nothing. One fact may credit multiple matching tracks, but never the same track twice. Ranks derive from restored XP rather than a second authoritative rank table, while initialCreditIds prevents reload farming. Mastery publishes bonuses and rank state for loadout gates and stat owners; it does not grant character XP, choose loot, purchase skills, or reset through an ordinary Build Respec. combat.bossEncounterCompleted is also a supported source, using its stable completionId for once-only encounter mastery. Boss XP and drops still consume the ordinary entityDefeated independently; this completion source is optional and cannot synthesize either.",
   "platform": [
     "agnostic"
   ],
@@ -107,6 +107,7 @@
       "combat.entityDefeated",
       "progression.questCompleted",
       "combat.eliteEncounterCompleted",
+      "combat.bossEncounterCompleted",
       "progression.specializationSelected"
     ]
   },

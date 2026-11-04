@@ -1,8 +1,8 @@
 {
   "id": "genre.action_rpg",
   "name": "Action RPG",
-  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression. Durable specializations and deduplicated mastery tracks now gate ranked actives, while deterministic elite affixes, finite waves, and interruptible telegraphs turn the combat-loot loop into a readable challenge ladder.",
-  "version": "0.5.0",
+  "description": "Real-time combat, loot with rolled stats, and a character build that snowballs into the next, bigger fight. The pack's spine is the hotbar plus the affix generator: one makes combat a build expression, the other makes every kill a small lottery. inventory.drop_director now separates drop eligibility from item quality, while gear_comparison and salvage_system turn each find into a compare, equip, overflow or materials decision. Staged quests, conditional dialogue, exactly-once mixed rewards, and removable journal projections now connect encounters and loot to durable narrative progression. Durable specializations and deduplicated mastery tracks now gate ranked actives, while deterministic elite affixes, finite waves, and interruptible telegraphs turn the combat-loot loop into a readable challenge ladder. Multi-phase bosses now add stable health, time, and condition transitions, once-only adds, readable enrages, boss-driven arena hazards, retry-safe room seals, and exactly-once completion feeding the same mastery, XP, and loot spine.",
+  "version": "0.6.0",
   "loop": "fight in real time → loot → build character → bigger fight",
   "views": [
     "isometric",
@@ -66,7 +66,23 @@
     "progression.mastery",
     "combat.elite_affixes",
     "combat.elite_encounter_director",
-    "combat.elite_telegraph_scheduler"
+    "combat.elite_telegraph_scheduler",
+    "combat.boss_encounter_script",
+    "movement.character_body",
+    "movement.dash_ability",
+    "movement.ground_sensor",
+    "movement.jump_core",
+    "movement.pathfinding_system",
+    "movement.physics_core",
+    "movement.wall_interaction",
+    "progression.power_up_grant",
+    "utility.command_bus",
+    "world.ability_gate",
+    "world.arena_hazards",
+    "world.boss_room_seal",
+    "world.hazard_volume",
+    "world.interconnected_map_graph",
+    "world.noise_lib"
   ],
   "signatureCompound": {
     "name": "Dungeon Run Loop",
@@ -89,6 +105,8 @@
     "narrative",
     "specialization",
     "mastery",
-    "elite-encounters"
+    "elite-encounters",
+    "boss-encounters",
+    "arena-hazards"
   ]
 }

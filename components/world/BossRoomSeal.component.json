@@ -2,17 +2,37 @@
   "id": "world.boss_room_seal",
   "name": "Boss Room Seal",
   "category": "world",
-  "description": "The arena contract: walls close when the fight starts and open when it ends. It owns the seal/unseal decision and the door state during the fight, because 'you may not leave' and 'you have earned the right to leave' are facts that must come from one place or every door, warp, and save point near the arena will disagree. It deliberately does not own the boss — behavior belongs to utility.behavior_fsm and whatever combat components drive the fight — and it does not own the reward, which is inventory.loot_table's table and progression.power_up_grant's mutation. Victory is detected by listening for combat.entity_defeated on the named boss entity, trusting combat.damage_resolver's fact rather than watching health bars itself. Entry is detected through the map graph's room event, not a bespoke trigger volume, so the seal stays correct when the room layout moves.",
-  "version": "0.1.0",
+  "description": "The arena contract: walls close when the fight starts and open when it ends. It owns the seal/unseal decision and the door state during the fight, because 'you may not leave' and 'you have earned the right to leave' are facts that must come from one place or every door, warp, and save point near the arena will disagree. It deliberately does not own the boss — behavior belongs to utility.behavior_fsm and whatever combat components drive the fight — and it does not own the reward, which is inventory.loot_table's table and progression.power_up_grant's mutation. Victory is detected by listening for combat.entity_defeated on the named boss entity, trusting combat.damage_resolver's fact rather than watching health bars itself. Entry is detected through the map graph's room event, not a bespoke trigger volume, so the seal stays correct when the room layout moves. Scripted boss completion is an additional idempotent clear source. Optional failure/reset reopening supports retries without making the boss director a door owner, and initial seal/defeat state restores without re-emitting room events.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
   "implementations": [
-    {"target": "canvas2d", "status": "unmapped", "module": null},
-    {"target": "webgl", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null},
-    {"target": "godot", "status": "unmapped", "module": null}
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
   ],
   "inputs": [
     {
@@ -42,10 +62,41 @@
       "required": false,
       "default": true,
       "description": "Whether victory immediately unseals. Set false for arenas that stay closed until a scripted beat fires — the script then opens the doors by other means."
+    },
+    {
+      "name": "reopenOnFailure",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Unseal on a matching combat.bossEncounterFailed so a wiped party can leave and retry; completion remains the only clear fact."
+    },
+    {
+      "name": "reopenOnReset",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Unseal on a matching combat.bossEncounterReset without marking the boss defeated."
+    },
+    {
+      "name": "initialSealed",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Restored door state; emits no seal event."
+    },
+    {
+      "name": "initialBossDefeated",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Restored durable clear fact; emits no room-cleared event."
     }
   ],
   "outputs": [
-    {"name": "isSealed", "type": "boolean"},
+    {
+      "name": "isSealed",
+      "type": "boolean"
+    },
     {
       "name": "bossDefeated",
       "type": "boolean",
@@ -59,13 +110,21 @@
     ],
     "listensTo": [
       "world.roomEntered",
-      "combat.entityDefeated"
+      "combat.entityDefeated",
+      "combat.bossEncounterCompleted",
+      "combat.bossEncounterFailed",
+      "combat.bossEncounterReset"
     ]
   },
   "dependencies": [
     "world.interconnected_map_graph",
     "combat.damage_resolver"
   ],
-  "tags": ["metroidvania", "boss", "arena", "seal"],
+  "tags": [
+    "metroidvania",
+    "boss",
+    "arena",
+    "seal"
+  ],
   "provenance": "library-native"
 }
