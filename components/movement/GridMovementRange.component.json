@@ -2,8 +2,8 @@
   "id": "movement.grid_movement_range",
   "name": "Grid Movement Range",
   "category": "movement",
-  "description": "The blue tiles. Given a unit's position and movement budget this computes the reachable set \u2014 flood fill over world.tile_grid with per-terrain costs and obstacle blocking \u2014 plus the attack overlay derived from it, because move-then-shoot range is a union of tiles, not a circle. world.tile_grid owns the board and movement.pathfinding_system can find A path; this component owns the budget question \u2014 ALL paths within N points \u2014 which is why it sits on top of both instead of replacing either. It deliberately knows nothing about whose turn it is: combat.turn_order_queue announces the active unit, and this answers for whoever that is, player or AI alike.",
-  "version": "0.1.0",
+  "description": "The blue tiles. Given a unit's position and movement budget this computes the reachable set — flood fill over world.tile_grid with per-terrain costs and obstacle blocking — plus the attack overlay derived from it, because move-then-shoot range is a union of tiles, not a circle. world.tile_grid owns the board and movement.pathfinding_system can find A path; this component owns the budget question — ALL paths within N points — which is why it sits on top of both instead of replacing either. It deliberately knows nothing about whose turn it is: combat.turn_order_queue announces the active unit, and this answers for whoever that is, player or AI alike. Optional controlRestrictionMode=statusGate reads Status Effects controlFor(activeUnitId). A move restriction reduces reachableTiles to the current tile, moveMultiplier scales the movement budget before flood fill, and an attack restriction makes attackableTiles empty. It still owns tile legality and never emits a restricted move; ignore preserves legacy ranges.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -68,6 +68,17 @@
       "required": false,
       "default": true,
       "description": "Whether the attackable set is computed alongside the reachable set. Off only for games where attacks are strictly adjacent."
+    },
+    {
+      "name": "controlRestrictionMode",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "enum": [
+        "ignore",
+        "statusGate"
+      ],
+      "description": "ignore preserves legacy ranges. statusGate applies move and attack restrictions and the aggregate moveMultiplier to the active unit without changing AP, pathfinding, roster, or turn ownership."
     }
   ],
   "outputs": [
@@ -79,7 +90,7 @@
     {
       "name": "attackableTiles",
       "type": "array",
-      "description": "Tiles targetable after any legal move \u2014 the red tiles."
+      "description": "Tiles targetable after any legal move — the red tiles."
     }
   ],
   "events": {
@@ -90,20 +101,23 @@
     "listensTo": [
       "combat.turnStarted",
       "presentation.tileSelected",
-      "utility.commandDispatched"
+      "utility.commandDispatched",
+      "combat.controlRestrictionsChanged"
     ]
   },
   "dependencies": [
     "world.tile_grid",
     "movement.pathfinding_system",
     "combat.unit_roster",
-    "combat.action_point_economy"
+    "combat.action_point_economy",
+    "combat.status_effects"
   ],
   "tags": [
-    "tactics",
+    "core",
+    "crowd-control",
     "grid",
     "movement",
-    "core"
+    "tactics"
   ],
   "provenance": "library-native"
 }
