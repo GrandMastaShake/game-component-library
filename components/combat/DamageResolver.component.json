@@ -2,8 +2,8 @@
   "id": "combat.damage_resolver",
   "name": "Damage Resolver",
   "category": "combat",
-  "description": "Resolves a landed attack into final damage: armor mitigation, armor penetration, critical multiplier, and bounded variance. Armor penetration reduces the effective armor of the defender before mitigation is applied and never adds damage, and mitigation is clamped so a fully armored target still takes minDamageFraction of base damage. On defeat it preserves the defender's stable spawn metadata from Unit Roster: defeatId (spawnId when supplied, otherwise unitId), spawnId, encounterId, waveId, tier, affixIds, and masteryTags join the existing archetype and attacker information. These additive fields let Elite Encounter Director, Drop Director, XP Leveling, and Mastery consume the same completed defeat. Silent unitRemoved never becomes entityDefeated, and this component still owns only final damage and the completed defeat announcement.",
-  "version": "0.2.1",
+  "description": "Resolves a landed attack into final damage: armor mitigation, armor penetration, critical multiplier, and bounded variance. Armor penetration reduces the effective armor of the defender before mitigation is applied and never adds damage, and mitigation is clamped so a fully armored target still takes minDamageFraction of base damage. On defeat it preserves the defender's stable spawn metadata from Unit Roster: defeatId (spawnId when supplied, otherwise unitId), spawnId, encounterId, waveId, tier, affixIds, and masteryTags join the existing archetype and attacker information. These additive fields let Elite Encounter Director, Drop Director, XP Leveling, and Mastery consume the same completed defeat. Silent unitRemoved never becomes entityDefeated, and this component still owns only final damage and the completed defeat announcement. Boss and elite telegraphs still enter only as ordinary combat.hit payloads. Optional hazardDamageMode=contactDamage translates a nonlethal world.hazardEntered carrying hazardId, bodyId, contactId, and positive damage into this same final-damage pipeline; the default ignore mode preserves legacy hazard policy. Resolved contact ids are deduplicated and restorable, instantly lethal contacts remain host policy, and Hazard Volume still never applies damage.",
+  "version": "0.3.0",
   "platform": [
     "roblox",
     "godot",
@@ -66,6 +66,20 @@
       "required": false,
       "default": 2,
       "description": "What a critical multiplies the blow by, before armour and variance. Never below 1. Read only when `critChance` is above 0."
+    },
+    {
+      "name": "hazardDamageMode",
+      "type": "string",
+      "required": false,
+      "default": "ignore",
+      "description": "ignore preserves legacy hazard handling. contactDamage resolves nonlethal hazard contacts with a target roster unit and positive damage through the ordinary mitigation pipeline; no combat.hit is re-emitted."
+    },
+    {
+      "name": "initialHazardContactIds",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Restored contact ids already resolved in contactDamage mode. Restoration emits neither damage nor defeat events."
     }
   ],
   "outputs": [
@@ -73,6 +87,11 @@
       "name": "lastResolution",
       "type": "object",
       "description": "The latest final-damage result; on defeat includes stable defeatId and any preserved spawn, encounter, tier, affix, and mastery metadata."
+    },
+    {
+      "name": "resolvedHazardContactIds",
+      "type": "array",
+      "description": "Durable dedupe ledger for resolved hazard contacts in contactDamage mode; the snapshot initialHazardContactIds accepts."
     }
   ],
   "events": {
@@ -81,7 +100,8 @@
       "combat.entityDefeated"
     ],
     "listensTo": [
-      "combat.hit"
+      "combat.hit",
+      "world.hazardEntered"
     ]
   },
   "eventIntents": {
