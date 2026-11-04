@@ -1,0 +1,1136 @@
+{
+  "id": "compound.status_control_loop",
+  "name": "Status Effects & Crowd Control Loop",
+  "version": "0.1.0",
+  "description": "An end-to-end RPG status and crowd-control loop: ordinary effect-bearing hits enter one Status Effects owner with stable application ids, refresh and stacking, tagged immunities and cleanse, timer-generation expiry, defeat and encounter cleanup, and restore-safe ledgers. Existing hotbar, continuous movement, tactical range, contact attack, elite/boss telegraph, tactical pause, capture, roster, damage, AP, timer, and save owners consume status facts without taking over effect state. Opt-in statusGate behavior rejects or suppresses only the consumer's verb; ignore preserves every legacy pipeline. Original Mirelight effects and scenarios are host-replaceable content, not commercial data.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "combat.status_effects",
+      "role": "sole owner of status instances, stacking, cleanse, immunity, control facts, status timer identity, cleanup, and restore ledgers",
+      "config": {
+        "maxActiveEffects": 8,
+        "definitions": [
+          {
+            "id": "mire_slick",
+            "description": "A brief bog slick that reduces movement without removing control.",
+            "durationSeconds": 6,
+            "stackPolicy": "refresh",
+            "durationPolicy": "reset",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "slow"
+            ],
+            "dispellable": true,
+            "cleansePriority": 20,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [],
+              "moveMultiplier": 0.65
+            }
+          },
+          {
+            "id": "bound_steps",
+            "description": "Tethered footing that prevents movement and interrupts attack windups.",
+            "durationSeconds": 3.5,
+            "stackPolicy": "refresh",
+            "durationPolicy": "max",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "root"
+            ],
+            "dispellable": true,
+            "cleansePriority": 60,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [
+                "move"
+              ],
+              "moveMultiplier": 0
+            }
+          },
+          {
+            "id": "hushed",
+            "description": "A muffling ward that prevents active ability use.",
+            "durationSeconds": 4,
+            "stackPolicy": "refresh",
+            "durationPolicy": "reset",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "silence",
+              "mind"
+            ],
+            "dispellable": true,
+            "cleansePriority": 50,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [
+                "cast"
+              ],
+              "moveMultiplier": 1
+            }
+          },
+          {
+            "id": "staggered",
+            "description": "A short full stagger that prevents movement, abilities, and basic attacks.",
+            "durationSeconds": 1.75,
+            "stackPolicy": "refresh",
+            "durationPolicy": "max",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "stun"
+            ],
+            "dispellable": true,
+            "cleansePriority": 90,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [
+                "move",
+                "cast",
+                "attack"
+              ],
+              "moveMultiplier": 0
+            }
+          },
+          {
+            "id": "frayed_guard",
+            "description": "Stacking defensive pressure; each stack removes one armor.",
+            "durationSeconds": 5,
+            "stackPolicy": "stack",
+            "durationPolicy": "extend",
+            "maxStacks": 3,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "hex"
+            ],
+            "dispellable": true,
+            "cleansePriority": 30,
+            "removeOnDefeat": true,
+            "modifiers": [
+              {
+                "stat": "armor",
+                "operation": "add",
+                "value": -1,
+                "perStack": true
+              }
+            ]
+          },
+          {
+            "id": "ember_mark",
+            "description": "Independent ember sigils from separate applications.",
+            "durationSeconds": 2.5,
+            "stackPolicy": "independent",
+            "durationPolicy": "reset",
+            "maxStacks": 1,
+            "grouping": "targetEffectSource",
+            "tags": [
+              "harmful",
+              "mark"
+            ],
+            "dispellable": true,
+            "cleansePriority": 10,
+            "removeOnDefeat": true,
+            "modifiers": []
+          },
+          {
+            "id": "clinging_ash",
+            "description": "Up to two ash layers multiply remaining movement speed.",
+            "durationSeconds": 4,
+            "stackPolicy": "stack",
+            "durationPolicy": "reset",
+            "maxStacks": 2,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "slow"
+            ],
+            "dispellable": true,
+            "cleansePriority": 15,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [],
+              "moveMultiplier": 0.8
+            }
+          },
+          {
+            "id": "battle_focus",
+            "description": "A beneficial two-stack focus that adds attack power.",
+            "durationSeconds": 5,
+            "stackPolicy": "stack",
+            "durationPolicy": "max",
+            "maxStacks": 2,
+            "grouping": "targetEffectSource",
+            "tags": [
+              "beneficial",
+              "buff"
+            ],
+            "dispellable": false,
+            "cleansePriority": 0,
+            "removeOnDefeat": true,
+            "modifiers": [
+              {
+                "stat": "attack",
+                "operation": "add",
+                "value": 1,
+                "perStack": true
+              }
+            ]
+          }
+        ],
+        "immunities": [
+          {
+            "id": "construct_mind_seal",
+            "targetIds": [
+              "glass_construct"
+            ],
+            "effectIds": [],
+            "tags": [
+              "mind"
+            ]
+          },
+          {
+            "id": "custodian_stun_brace",
+            "targetIds": [
+              "archive_custodian"
+            ],
+            "effectIds": [
+              "staggered"
+            ],
+            "tags": []
+          }
+        ],
+        "cleanseRules": [
+          {
+            "id": "purge_control",
+            "effectIds": [],
+            "tags": [
+              "control"
+            ],
+            "maxEffects": 1,
+            "order": "highestPriority"
+          },
+          {
+            "id": "restore_guard",
+            "effectIds": [
+              "mire_slick",
+              "frayed_guard"
+            ],
+            "tags": [],
+            "maxEffects": 2,
+            "order": "lowestPriority"
+          },
+          {
+            "id": "sweep_harmful",
+            "effectIds": [],
+            "tags": [
+              "harmful"
+            ],
+            "maxEffects": 9,
+            "order": "oldest"
+          }
+        ],
+        "unknownEffectPolicy": "reject",
+        "initialState": {}
+      }
+    },
+    {
+      "id": "utility.timer_system",
+      "role": "sole countdown and timer-completion source",
+      "config": {
+        "durationSeconds": 1,
+        "repeats": false
+      }
+    },
+    {
+      "id": "combat.unit_roster",
+      "role": "unit identity, team, health, position, and spawn metadata",
+      "config": {
+        "units": [
+          {
+            "id": "scout",
+            "team": "player",
+            "x": 1,
+            "y": 1,
+            "stats": {
+              "health": 12,
+              "armor": 1,
+              "movement": 4,
+              "dexterity": 12
+            }
+          },
+          {
+            "id": "glass_construct",
+            "team": "enemy",
+            "x": 4,
+            "y": 1,
+            "stats": {
+              "health": 16,
+              "armor": 2,
+              "movement": 3,
+              "dexterity": 7
+            },
+            "archetype": "glass_construct"
+          },
+          {
+            "id": "archive_custodian",
+            "team": "enemy",
+            "x": 5,
+            "y": 2,
+            "stats": {
+              "health": 24,
+              "armor": 3,
+              "movement": 3,
+              "dexterity": 8
+            },
+            "archetype": "archive_custodian"
+          }
+        ],
+        "teams": [
+          "player",
+          "enemy"
+        ]
+      }
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "final mitigation, damage resolution, and completed defeats",
+      "config": {
+        "hazardDamageMode": "ignore"
+      }
+    },
+    {
+      "id": "combat.hotbar_abilities",
+      "role": "active cast legality, costs, cooldowns, and ordinary effect-bearing hits",
+      "config": {
+        "slots": 3,
+        "controlRestrictionMode": "statusGate",
+        "abilities": [
+          {
+            "id": "cinder_thread",
+            "cooldown": 2,
+            "damage": 2,
+            "cost": 1,
+            "effect": "ember_mark",
+            "effectSeconds": 2.5
+          },
+          {
+            "id": "mire_burst",
+            "cooldown": 4,
+            "damage": 1,
+            "cost": 2,
+            "effect": "mire_slick",
+            "effectSeconds": 6
+          },
+          {
+            "id": "binding_pulse",
+            "cooldown": 7,
+            "damage": 1,
+            "cost": 3,
+            "effect": "bound_steps",
+            "effectSeconds": 3.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "movement.basic_walk",
+      "role": "continuous locomotion and optional status-gated movement",
+      "config": {
+        "unitId": "scout",
+        "walkSpeed": 5,
+        "controlRestrictionMode": "statusGate"
+      }
+    },
+    {
+      "id": "movement.grid_movement_range",
+      "role": "tactical reachable and attackable tiles under optional status restrictions",
+      "config": {
+        "controlRestrictionMode": "statusGate",
+        "showAttackOverlay": true
+      }
+    },
+    {
+      "id": "combat.contact_attack",
+      "role": "real-time basic attack cadence with optional attack control checks",
+      "config": {
+        "controlRestrictionMode": "statusGate",
+        "cooldownSeconds": 1.5,
+        "damage": 2
+      }
+    },
+    {
+      "id": "combat.elite_telegraph_scheduler",
+      "role": "elite and boss windups, interruption, cooldowns, and committed hits",
+      "config": {
+        "interruptEffects": [
+          "staggered",
+          "bound_steps"
+        ],
+        "defaultWindupSeconds": 0.9
+      }
+    },
+    {
+      "id": "combat.tactical_pause",
+      "role": "one continuous-time pause state and edge-triggered auto-pause",
+      "config": {
+        "autoPauseOnEffectApplied": false
+      }
+    },
+    {
+      "id": "pets.capture_mechanic",
+      "role": "capture odds and resolution using live health and status facts",
+      "config": {
+        "captureDevices": [
+          {
+            "id": "mire_snare",
+            "catchMultiplier": 1.1
+          }
+        ],
+        "baseCatchRate": 0.3
+      }
+    },
+    {
+      "id": "persistence.save_system",
+      "role": "snapshot triggers for completed status, control, encounter, and progression changes",
+      "config": {}
+    },
+    {
+      "id": "world.tile_grid",
+      "role": "tactical board and terrain cells",
+      "config": {}
+    },
+    {
+      "id": "movement.pathfinding_system",
+      "role": "path queries beneath the tactical range owner",
+      "config": {}
+    },
+    {
+      "id": "combat.action_point_economy",
+      "role": "turn action budgets and spending",
+      "config": {}
+    },
+    {
+      "id": "combat.turn_order_queue",
+      "role": "turn sequencing and round heartbeat",
+      "config": {}
+    },
+    {
+      "id": "world.terrain_generator",
+      "role": "host terrain source for the tactical board",
+      "config": {}
+    },
+    {
+      "id": "world.noise_lib",
+      "role": "seeded noise used by terrain generation",
+      "config": {}
+    },
+    {
+      "id": "utility.command_bus",
+      "role": "serialized tactical commands",
+      "config": {}
+    },
+    {
+      "id": "combat.aggro_table",
+      "role": "target and threat ownership for telegraphs and turn engagement",
+      "config": {
+        "requiresLineOfSight": false
+      }
+    },
+    {
+      "id": "social.party_system",
+      "role": "party membership used by tactical pause",
+      "config": {}
+    },
+    {
+      "id": "inventory.slotted_bag",
+      "role": "capture-device storage boundary",
+      "config": {
+        "initialItems": [
+          {
+            "itemId": "mire_snare",
+            "quantity": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "inventory.core_inventory",
+      "role": "base item ownership beneath the slotted bag",
+      "config": {}
+    },
+    {
+      "id": "combat.elite_affixes",
+      "role": "deterministic elite modifiers and special attack registration",
+      "config": {
+        "affixes": [
+          {
+            "id": "resonant",
+            "weight": 1,
+            "statMultipliers": {
+              "health": 1.2
+            },
+            "attacks": [
+              {
+                "id": "ring_pulse",
+                "windupSeconds": 1.1,
+                "cooldownSeconds": 6,
+                "damage": 3,
+                "shape": {
+                  "kind": "circle",
+                  "radius": 2
+                }
+              }
+            ]
+          }
+        ],
+        "seed": 17,
+        "maxAffixes": 1
+      }
+    },
+    {
+      "id": "combat.elite_encounter_director",
+      "role": "finite elite waves, failure/reset, unit removal, and completion",
+      "config": {
+        "encounters": [
+          {
+            "id": "mire_ring",
+            "arenaId": "mirelight_ring",
+            "level": 2,
+            "threat": 1,
+            "waves": [
+              {
+                "id": "first_ring",
+                "units": [
+                  {
+                    "archetype": "glass_construct",
+                    "count": 1,
+                    "elite": true,
+                    "affixCount": 1,
+                    "affixIds": [
+                      "resonant"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "combat.enemy_tier_scaling",
+      "role": "host level scaling for elite and boss units",
+      "config": {}
+    },
+    {
+      "id": "combat.boss_encounter_script",
+      "role": "boss phase, failure/reset, completion, and reward-safe add cleanup",
+      "config": {
+        "phaseThresholds": [
+          0.5
+        ],
+        "enrageTimerSeconds": 0,
+        "encounters": []
+      }
+    },
+    {
+      "id": "utility.behavior_fsm",
+      "role": "AI behavior state and utility events beneath encounter directors",
+      "config": {}
+    }
+  ],
+  "connections": [
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Every landed attack uses the one final-damage owner."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Legacy effect/effectSeconds hit fields apply through the extended status owner."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.unit_roster",
+      "note": "The roster observes ordinary combat consequences."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.action_point_economy",
+      "note": "Turn-based hits spend through the existing AP owner."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Every landed attack uses the one final-damage owner."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Legacy effect/effectSeconds hit fields apply through the extended status owner."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.unit_roster",
+      "note": "The roster observes ordinary combat consequences."
+    },
+    {
+      "from": "combat.contact_attack",
+      "event": "combat.hit",
+      "to": "combat.action_point_economy",
+      "note": "Turn-based hits spend through the existing AP owner."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Every landed attack uses the one final-damage owner."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Legacy effect/effectSeconds hit fields apply through the extended status owner."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.unit_roster",
+      "note": "The roster observes ordinary combat consequences."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.hit",
+      "to": "combat.action_point_economy",
+      "note": "Turn-based hits spend through the existing AP owner."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.damageResolved",
+      "to": "pets.capture_mechanic",
+      "note": "Capture odds react to remaining health without another damage calculation."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.status_effects",
+      "note": "Completed defeat reaches cleanup and encounter owners without becoming a silent unit removal."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.unit_roster",
+      "note": "Completed defeat reaches cleanup and encounter owners without becoming a silent unit removal."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.elite_encounter_director",
+      "note": "Completed defeat reaches cleanup and encounter owners without becoming a silent unit removal."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.boss_encounter_script",
+      "note": "Completed defeat reaches cleanup and encounter owners without becoming a silent unit removal."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.turn_order_queue",
+      "note": "Completed defeat reaches cleanup and encounter owners without becoming a silent unit removal."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.tactical_pause",
+      "note": "Completed defeat reaches cleanup and encounter owners without becoming a silent unit removal."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "A newly entered effect reaches existing interruption, pause, capture, and save consumers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "combat.tactical_pause",
+      "note": "A newly entered effect reaches existing interruption, pause, capture, and save consumers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "pets.capture_mechanic",
+      "note": "A newly entered effect reaches existing interruption, pause, capture, and save consumers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "persistence.save_system",
+      "note": "A newly entered effect reaches existing interruption, pause, capture, and save consumers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectRefreshed",
+      "to": "pets.capture_mechanic",
+      "note": "Refresh and stack changes update odds and save snapshots without masquerading as new applications."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectRefreshed",
+      "to": "persistence.save_system",
+      "note": "Refresh and stack changes update odds and save snapshots without masquerading as new applications."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectStacked",
+      "to": "pets.capture_mechanic",
+      "note": "Refresh and stack changes update odds and save snapshots without masquerading as new applications."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectStacked",
+      "to": "persistence.save_system",
+      "note": "Refresh and stack changes update odds and save snapshots without masquerading as new applications."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectRemoved",
+      "to": "pets.capture_mechanic",
+      "note": "Expiry, cleanse, manual removal, defeat, and reset all update the same consumers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectRemoved",
+      "to": "persistence.save_system",
+      "note": "Expiry, cleanse, manual removal, defeat, and reset all update the same consumers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.controlRestrictionsChanged",
+      "to": "combat.hotbar_abilities",
+      "note": "Only the consumer decides how its cast, movement, range, attack, or windup responds."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.controlRestrictionsChanged",
+      "to": "movement.basic_walk",
+      "note": "Only the consumer decides how its cast, movement, range, attack, or windup responds."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.controlRestrictionsChanged",
+      "to": "movement.grid_movement_range",
+      "note": "Only the consumer decides how its cast, movement, range, attack, or windup responds."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.controlRestrictionsChanged",
+      "to": "combat.contact_attack",
+      "note": "Only the consumer decides how its cast, movement, range, attack, or windup responds."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.controlRestrictionsChanged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Only the consumer decides how its cast, movement, range, attack, or windup responds."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.status_effects",
+      "note": "Stable timer ids and generations expire only current finite instances."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Telegraph cooldown and windup completions remain timer-driven."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.boss_encounter_script",
+      "note": "Scripted boss time transitions reuse Timer System."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerTicked",
+      "to": "combat.boss_encounter_script",
+      "note": "Boss elapsed-time transitions use the shared heartbeat."
+    },
+    {
+      "from": "movement.basic_walk",
+      "event": "movement.moveExecuted",
+      "to": "combat.unit_roster",
+      "note": "Only a legal executed move changes position and spends through existing owners."
+    },
+    {
+      "from": "movement.basic_walk",
+      "event": "movement.moveExecuted",
+      "to": "combat.action_point_economy",
+      "note": "Only a legal executed move changes position and spends through existing owners."
+    },
+    {
+      "from": "movement.grid_movement_range",
+      "event": "movement.moveExecuted",
+      "to": "combat.unit_roster",
+      "note": "Only a legal executed move changes position and spends through existing owners."
+    },
+    {
+      "from": "movement.grid_movement_range",
+      "event": "movement.moveExecuted",
+      "to": "combat.action_point_economy",
+      "note": "Only a legal executed move changes position and spends through existing owners."
+    },
+    {
+      "from": "combat.turn_order_queue",
+      "event": "combat.turnStarted",
+      "to": "movement.grid_movement_range",
+      "note": "Turn start recomputes range and refreshes AP for the same active unit."
+    },
+    {
+      "from": "combat.turn_order_queue",
+      "event": "combat.turnStarted",
+      "to": "combat.action_point_economy",
+      "note": "Turn start recomputes range and refreshes AP for the same active unit."
+    },
+    {
+      "from": "combat.turn_order_queue",
+      "event": "combat.turnEnded",
+      "to": "combat.action_point_economy",
+      "note": "Turn end reaches existing AP and capture consumers."
+    },
+    {
+      "from": "combat.turn_order_queue",
+      "event": "combat.turnEnded",
+      "to": "pets.capture_mechanic",
+      "note": "Turn end reaches existing AP and capture consumers."
+    },
+    {
+      "from": "combat.action_point_economy",
+      "event": "combat.actionPointsExhausted",
+      "to": "combat.turn_order_queue",
+      "note": "Exhausting AP ends the turn through the queue owner."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "combat.turn_order_queue",
+      "note": "Commands remain serialized by the existing command bus."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "movement.grid_movement_range",
+      "note": "Commands remain serialized by the existing command bus."
+    },
+    {
+      "from": "utility.command_bus",
+      "event": "utility.commandDispatched",
+      "to": "movement.pathfinding_system",
+      "note": "Commands remain serialized by the existing command bus."
+    },
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "movement.pathfinding_system",
+      "note": "Generated terrain feeds pathfinding and the tile grid."
+    },
+    {
+      "from": "world.terrain_generator",
+      "event": "world.terrainGenerated",
+      "to": "world.tile_grid",
+      "note": "Generated terrain feeds pathfinding and the tile grid."
+    },
+    {
+      "from": "combat.aggro_table",
+      "event": "combat.aggroGained",
+      "to": "combat.turn_order_queue",
+      "note": "Aggro can engage or disengage on-demand turns."
+    },
+    {
+      "from": "combat.aggro_table",
+      "event": "combat.aggroLost",
+      "to": "combat.turn_order_queue",
+      "note": "Aggro can engage or disengage on-demand turns."
+    },
+    {
+      "from": "combat.aggro_table",
+      "event": "combat.aggroGained",
+      "to": "combat.tactical_pause",
+      "note": "A new hostile engagement can trigger the existing pause policy."
+    },
+    {
+      "from": "combat.elite_affixes",
+      "event": "combat.eliteAffixesAssigned",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Elite special attacks register with the one telegraph scheduler."
+    },
+    {
+      "from": "combat.elite_affixes",
+      "event": "combat.eliteAffixesAssigned",
+      "to": "persistence.save_system",
+      "note": "Deterministic assignments are saveable."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEngaged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Boss phase attacks reuse the elite telegraph owner."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEngaged",
+      "to": "persistence.save_system",
+      "note": "Boss transitions are saveable through their existing owner."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossPhaseChanged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Boss phase attacks reuse the elite telegraph owner."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossPhaseChanged",
+      "to": "persistence.save_system",
+      "note": "Boss transitions are saveable through their existing owner."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEnraged",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Boss phase attacks reuse the elite telegraph owner."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEnraged",
+      "to": "persistence.save_system",
+      "note": "Boss transitions are saveable through their existing owner."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterFailed",
+      "to": "combat.status_effects",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterFailed",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterFailed",
+      "to": "persistence.save_system",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "combat.status_effects",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterReset",
+      "to": "persistence.save_system",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "combat.status_effects",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterCompleted",
+      "to": "persistence.save_system",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "combat.status_effects",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterFailed",
+      "to": "persistence.save_system",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "combat.status_effects",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "combat.elite_telegraph_scheduler",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.bossEncounterReset",
+      "to": "persistence.save_system",
+      "note": "Encounter completion, failure, or reset clears only matching transient state and never grants a defeat reward."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitRemoved",
+      "to": "combat.status_effects",
+      "note": "Silent add cleanup removes roster and status state without creating entityDefeated or loot."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitRemoved",
+      "to": "combat.unit_roster",
+      "note": "Silent add cleanup removes roster and status state without creating entityDefeated or loot."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.unitSpawned",
+      "to": "combat.unit_roster",
+      "note": "Encounter adds enter the one roster."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.unitRemoved",
+      "to": "combat.status_effects",
+      "note": "Silent add cleanup removes roster and status state without creating entityDefeated or loot."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.unitRemoved",
+      "to": "combat.unit_roster",
+      "note": "Silent add cleanup removes roster and status state without creating entityDefeated or loot."
+    },
+    {
+      "from": "combat.boss_encounter_script",
+      "event": "combat.unitSpawned",
+      "to": "combat.unit_roster",
+      "note": "Encounter adds enter the one roster."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterStarted",
+      "to": "persistence.save_system",
+      "note": "Elite encounter progress remains saveable."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteWaveStarted",
+      "to": "persistence.save_system",
+      "note": "Elite encounter progress remains saveable."
+    },
+    {
+      "from": "combat.elite_encounter_director",
+      "event": "combat.eliteEncounterCompleted",
+      "to": "persistence.save_system",
+      "note": "Elite encounter progress remains saveable."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphed",
+      "to": "persistence.save_system",
+      "note": "Telegraph transitions and cancellations restore without hit replay."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackCommitted",
+      "to": "persistence.save_system",
+      "note": "Telegraph transitions and cancellations restore without hit replay."
+    },
+    {
+      "from": "combat.elite_telegraph_scheduler",
+      "event": "combat.attackTelegraphCancelled",
+      "to": "persistence.save_system",
+      "note": "Telegraph transitions and cancellations restore without hit replay."
+    }
+  ],
+  "criticalComponents": [
+    "combat.status_effects",
+    "utility.timer_system",
+    "combat.unit_roster",
+    "combat.damage_resolver",
+    "combat.hotbar_abilities",
+    "movement.basic_walk",
+    "movement.grid_movement_range",
+    "combat.contact_attack",
+    "combat.elite_telegraph_scheduler",
+    "pets.capture_mechanic",
+    "persistence.save_system"
+  ],
+  "acceptanceCriteria": [
+    "Legacy combat.hit effect and effectSeconds payloads still apply with unknownEffectPolicy=legacyAdHoc; existing damage, roster, capture, pause, and telegraph consumers keep their event paths.",
+    "A newly entered instance emits effectApplied once; a refresh emits effectRefreshed and a stack increment emits effectStacked, so refreshes cannot create pause or interruption storms.",
+    "Refresh keeps the active applicationId while recording the requestedApplicationId; independent effects retain separate application ids and timers.",
+    "Stack count never exceeds maxStacks, durationPolicy reset/extend/max/ignore is deterministic, and a capped stack application can refresh duration without adding a stack.",
+    "A duplicate applicationId, cleanseId, or removalId is a silent no-op; rejected immunity and capacity requests create no timer, modifier, restriction, or active instance.",
+    "Tagged and effect-id immunities reject before state changes; cleanse selects only dispellable matching instances in declared priority or age order.",
+    "A timer completion carrying an old generation cannot expire a refreshed or stacked instance; current expiry emits effectExpired and the generic effectRemoved.",
+    "With controlRestrictionMode=ignore, hotbar casts, walking, tactical ranges, and automatic contact attacks retain legacy behavior.",
+    "With statusGate enabled, a cast restriction produces abilityRejected reason controlRestricted with no resource payment, cooldown, abilityCast, or hit.",
+    "A move restriction blocks continuous moveExecuted and reduces tactical reachableTiles to the current tile; moveMultiplier scales speed or movement budget without transferring movement ownership.",
+    "An attack restriction empties tactical attackableTiles and suppresses automatic contactMade and hit without spending a ready contact cooldown.",
+    "A configured interrupt effect or newly added attack restriction cancels an active elite or boss windup with no committed hit; removing control never commits an attack.",
+    "Capture odds refresh on application, refresh, stack, and generic removal, while replayed or restored status events cannot reroll a decided capture attempt.",
+    "Defeat, unit removal, and matching elite/boss failure, reset, or completion clear declared transient effects without emitting entityDefeated, loot, XP, or mastery rewards.",
+    "Restored active instances, timer generations, and application/cleanse/removal ledgers emit no historical status, control, pause, hit, or capture events.",
+    "Save System hears new applications, refreshes, stacks, and generic removals; rejected requests and duplicate replays do not create save-worthy changes.",
+    "Removing Status Effects or leaving consumers in ignore mode degrades to the prior combat and movement pack rather than creating a second private restriction ledger.",
+    "All effect names, targets, abilities, encounters, values, and scenarios in the Mirelight example are original and replaceable host content."
+  ]
+}
