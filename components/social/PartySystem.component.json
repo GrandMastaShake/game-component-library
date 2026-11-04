@@ -1,11 +1,79 @@
 {
-  "id":"social.party_system","name":"Party System","category":"social","description":"Creates a small player party, tracks members, and emits shared-credit events that eligible quest/progression systems can consume.","version":"0.1.0","platform":["roblox","godot","unity","web","agnostic"],
-  "implementations": [
-    {"target": "canvas2d", "status": "external", "module": null, "note": "Implemented in the consuming application; not verifiable from this repository."},
-    {"target": "godot", "status": "unmapped", "module": null},
-    {"target": "roblox", "status": "unmapped", "module": null},
-    {"target": "unity", "status": "unmapped", "module": null}
+  "id": "social.party_system",
+  "name": "Party System",
+  "category": "social",
+  "description": "Creates a small player party, tracks members, and emits shared-credit events that eligible quest/progression systems can consume. The members are the request's to name: `members` lists them in march order, the leader first, and a host that names none keeps its own bench. Naming them is what lets the party's names and the board's units agree — a formation that drives a member nobody placed drives nobody.",
+  "version": "0.2.0",
+  "platform": [
+    "roblox",
+    "godot",
+    "unity",
+    "web",
+    "agnostic"
   ],
-  "inputs":[{"name":"maxMembers","type":"number","required":false,"default":4}],"outputs":[{"name":"members","type":"array"},{"name":"isLeader","type":"boolean"}],
-  "events":{"emits":["social.partyCreated","social.partyMemberJoined","social.sharedQuestCredit"],"listensTo":["progression.questCompleted"]},"dependencies":[],"tags":["multiplayer","cooperative","social"],"provenance":"library-native"
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "maxMembers",
+      "type": "number",
+      "required": false,
+      "default": 4
+    },
+    {
+      "name": "members",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Named members in march order, the leader first, up to maxMembers; a name the party announces as it joins. Empty keeps the host's default bench, drawn at random, which is how a party with no request gets a fixed group per seed."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "members",
+      "type": "array"
+    },
+    {
+      "name": "isLeader",
+      "type": "boolean"
+    }
+  ],
+  "events": {
+    "emits": [
+      "social.partyCreated",
+      "social.partyMemberJoined",
+      "social.sharedQuestCredit"
+    ],
+    "listensTo": [
+      "progression.questCompleted"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "multiplayer",
+    "cooperative",
+    "social"
+  ],
+  "provenance": "library-native"
 }
