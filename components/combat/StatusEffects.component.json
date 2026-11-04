@@ -2,8 +2,8 @@
   "id": "combat.status_effects",
   "name": "Status Effects",
   "category": "combat",
-  "description": "Owns timed status and crowd-control state for each target: stable application identity, authored definitions, refresh and stacking, independent instances, tagged immunities and cleanse, control restrictions, expiry, defeat or encounter cleanup, and restoration. Legacy combat.hit payloads carrying effect and optional effectSeconds still apply ad-hoc refreshing effects, so existing Hotbar Abilities, Elite Telegraph Scheduler, Capture Mechanic, and Tactical Pause consumers keep their pipeline. A new application emits combat.effectApplied only when an instance enters; refreshes and stack increments have separate events, and an exact replayed applicationId or cleanseId is a silent no-op. Timer System owns countdowns. Every finite instance has a stable timer id and generation so completion from before a refresh cannot expire the refreshed state. The published controlState is a fact for consumers: Status Effects never rejects a cast, moves a body, spends action points, computes damage, or rolls capture odds. Movement, ability, attack, telegraph, and capture owners opt into or read those facts without taking over effect state. Restored active instances, timer generations, and dedupe ledgers emit no historical application, cleanse, removal, control, or pause events.",
-  "version": "0.2.0",
+  "description": "Owns timed status and crowd-control state for each target: stable application identity, authored definitions, refresh and stacking, independent instances, tagged immunities and cleanse, control restrictions, expiry, defeat or encounter cleanup, and restoration. Legacy combat.hit payloads carrying effect and optional effectSeconds still apply ad-hoc refreshing effects, so existing Hotbar Abilities, Elite Telegraph Scheduler, Capture Mechanic, and Tactical Pause consumers keep their pipeline. A new application emits combat.effectApplied only when an instance enters; refreshes and stack increments have separate events, and an exact replayed applicationId or cleanseId is a silent no-op. Timer System owns countdowns. Every finite instance has a stable timer id and generation so completion from before a refresh cannot expire the refreshed state. The published controlState is a fact for consumers: Status Effects never rejects a cast, moves a body, spends action points, computes damage, or rolls capture odds. Movement, ability, attack, telegraph, and capture owners opt into or read those facts without taking over effect state. Restored active instances, timer generations, and dedupe ledgers emit no historical application, cleanse, removal, control, or pause events. Potion Belt may emit inventory.effectApplicationRequested and inventory.cleanseRequested with stable ids derived from its useId; these are additional input paths into this same owner, not a second status pipeline. Their replay, immunity, capacity, stacking, and restoration behavior is identical to host input requests.",
+  "version": "0.2.1",
   "platform": [
     "roblox",
     "godot",
@@ -153,7 +153,9 @@
       "combat.eliteEncounterReset",
       "combat.bossEncounterCompleted",
       "combat.bossEncounterFailed",
-      "combat.bossEncounterReset"
+      "combat.bossEncounterReset",
+      "inventory.effectApplicationRequested",
+      "inventory.cleanseRequested"
     ]
   },
   "dependencies": [
@@ -162,6 +164,7 @@
   "tags": [
     "buffs",
     "cleanse",
+    "consumables",
     "crowd-control",
     "debuffs",
     "immunities",
