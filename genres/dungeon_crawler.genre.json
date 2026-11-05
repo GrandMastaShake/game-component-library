@@ -1,8 +1,8 @@
 {
   "id": "genre.dungeon_crawler",
   "name": "Dungeon Crawler",
-  "description": "Descend a seeded stack of procedural floors where authored rooms, traps, fog, and a boss at the bottom turn 'one more floor' into a session. The app's dd-* TypeScript generators already prove this loop; this pack declares the library-native contract they map onto.",
-  "version": "0.1.0",
+  "description": "Descend a seeded stack of procedural floors where authored rooms, traps, fog, and a boss at the bottom turn 'one more floor' into a session. The app's dd-* TypeScript generators already prove this loop; this pack declares the library-native contract they map onto. Consumables, Rest & Recovery now gives dungeon runs replay-safe quick use, shared cooldowns, health and focus recovery, interruptible camps, and save-visible rest outcomes.",
+  "version": "0.2.0",
   "loop": "enter floor → rooms/corridors → traps/treasure/boss → descend",
   "views": [
     "top-down",
@@ -49,7 +49,12 @@
     "world.room_template",
     "world.trap_system",
     "world.fog_of_war_reveal",
-    "combat.boss_encounter_script"
+    "combat.boss_encounter_script",
+    "inventory.core_inventory",
+    "combat.resource_pools",
+    "world.rest_camp",
+    "utility.timer_system",
+    "persistence.save_system"
   ],
   "signatureCompound": {
     "name": "Floor Descent Loop",
@@ -63,8 +68,11 @@
     ]
   },
   "tags": [
-    "rpg-family",
+    "consumables",
+    "dungeon",
     "procedural",
-    "dungeon"
+    "recovery",
+    "rest",
+    "rpg-family"
   ]
 }
