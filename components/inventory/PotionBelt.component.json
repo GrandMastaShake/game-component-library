@@ -2,8 +2,8 @@
   "id": "inventory.potion_belt",
   "name": "Potion Belt",
   "category": "inventory",
-  "description": "The small bandolier that keeps healing out of backpack tetris. inventory.slotted_bag owns storage truth; the belt is a bounded window onto consumable stacks, so drinking here decrements the same stack the bag counts — a belt holding its own copies of items is a dupe bug waiting to ship. It owns only the use verb: pick the slot, check the stack, apply the effect (through combat.status_effects when the potion leaves a buff rather than a flat heal), and report empty when the stack runs dry. It does not decide what a potion does — that is item data — and it does not auto-pick which potion you meant; ambiguity is the player's problem by design.\n\nThe belt is a WINDOW: its slots are the first few consumable kinds the bag holds, in the bag's order, and drinking one removes one from inventory.core_inventory's store — the same store the bag counts, which is why the primitive is declared here beside the bag.",
-  "version": "0.1.0",
+  "description": "The quick-use owner for consumables, not a second inventory. Core Inventory and Slotted Bag own storage and quantities; the belt validates a use, removes exactly one accepted item, starts its shared cooldown, and emits typed recovery, status, and cleanse requests. It never applies healing, changes a resource pool, or mutates status itself. Authored definitions support self or explicit-unit targeting, always or out-of-combat use, shared cooldown groups, flat/percent-max/full recovery, status applications, and cleanse rules. Every explicit inventory.useRequested carries a stable useId; accepted and rejected ids are remembered and exact replays are silent no-ops. Rejection for an unknown item, empty stack, wrong target, combat policy, or active cooldown consumes nothing and starts nothing. Derived recovery, application, and cleanse ids are stable functions of useId and operation index, so downstream owners can dedupe independently. Cooldown timers have per-user/group generations, and stale completion cannot clear a newer cooldown. Legacy input.potionSlot and the effects map retain their prior immediate heal behavior; id-less legacy calls do not gain a fabricated cross-save dedupe guarantee. Restoring quantities, cooldowns, generations, and processedUseIds emits no historical use, recovery, status, cleanse, or cooldown events.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -63,6 +63,20 @@
       "required": false,
       "default": {},
       "description": "What each consumable does, as {itemId: {heal?}} — item data, which the descriptor says this component does not decide, handed in by the request. An item absent from the map is not a potion and never reaches the belt. `heal` is applied to the player's unit through combat.unit_roster's heal."
+    },
+    {
+      "name": "definitions",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Authored consumables: {id, targetMode self|unit, usePolicy always|outOfCombat, cooldownGroupId, cooldownSeconds, consume, recovery?, statusApplications?, cleanseRequests?}. Recovery operations are {resourceId, mode flat|percentMax|full, amount?}; health goes to Unit Roster and other named pools go to Resource Pools. Status and cleanse entries reference Status Effects definitions and rules."
+    },
+    {
+      "name": "initialState",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored active cooldowns, timer generations, processedUseIds, and last rejection. Inventory quantity is restored by its storage owner, not copied into the belt."
     }
   ],
   "outputs": [
@@ -80,26 +94,53 @@
       "name": "effectOf",
       "type": "function",
       "description": "What drinking a carried kind would do — {heal} — or null for a thing that is not a consumable here. The inventory panel asks."
+    },
+    {
+      "name": "activeCooldowns",
+      "type": "array",
+      "description": "Live per-source cooldown groups with remainingSeconds, timerId, and generation."
+    },
+    {
+      "name": "processedUseIds",
+      "type": "array",
+      "description": "Durable accepted and rejected explicit-use dedupe ledger."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Latest rejected use with useId, itemId, targetId, and reason unknownItem|empty|invalidTarget|inCombat|cooldown|invalidRequest."
     }
   ],
   "events": {
     "emits": [
       "inventory.potionUsed",
-      "inventory.potionEmpty"
+      "inventory.potionEmpty",
+      "inventory.useRejected",
+      "inventory.recoveryRequested",
+      "inventory.effectApplicationRequested",
+      "inventory.cleanseRequested",
+      "inventory.consumableCooldownStarted",
+      "inventory.consumableCooldownCompleted"
     ],
     "listensTo": [
       "input.potionSlot",
-      "inventory.useRequested"
+      "inventory.useRequested",
+      "utility.timerCompleted"
     ]
   },
   "dependencies": [
     "inventory.core_inventory",
-    "inventory.slotted_bag"
+    "inventory.slotted_bag",
+    "utility.timer_system"
   ],
   "tags": [
     "arpg",
     "consumables",
-    "quick-use"
+    "quick-use",
+    "recovery",
+    "replay-safe",
+    "restoration",
+    "shared-cooldowns"
   ],
   "provenance": "library-native"
 }
