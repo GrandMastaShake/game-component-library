@@ -2,8 +2,8 @@
   "id": "world.rest_camp",
   "name": "Rest Camp",
   "category": "world",
-  "description": "The long exhale between fights \u2014 a full party resource reset, priced in risk. Resting restores health and per-rest abilities in one shot, because a rest that half-works teaches players to rest twice, and per-rest abilities then collapse into per-fight abilities with extra clicks. The price is the ambush roll: biome, recent noise, and whether a watch was posted feed a probability that world.mob_patrol or a dynamic spawner converts into an actual interruption. This component owns the rest transaction and the risk roll. It does not own the ambush itself, and it never touches inventory \u2014 rations spent while camping go through inventory.slotted_bag like anywhere else.",
-  "version": "0.1.0",
+  "description": "The long exhale between fights, now with a replay-safe transaction boundary. Rest Camp owns rest eligibility, one active rest, its timer identity and generation, the persisted ambush roll, and completed-versus-interrupted outcome. It does not own health, named resources, prepared casts, inventory, or the ambush spawn. Authored profiles declare duration, safe-zone and combat policy, ambush chance, and a recovery plan. A stable restId dedupes accepted and rejected requests. Starting emits world.restStarted and no recovery; timer completion either emits world.restCompleted with the plan or world.restInterrupted plus world.restAmbushRequested. Explicit interruption, a hit against a resting member, or member defeat interrupts without recovery. A stale timer after interruption cannot complete the rest. Unit Roster, Resource Pools, and Prepared Spellbook consume only world.restCompleted and dedupe that restId independently. Dynamic Encounter Spawner may convert an ambush request into ordinary spawns. Legacy input.restRequested without a profile uses the original duration, safe-zone, ambush, and per-rest settings; id-less legacy calls retain legacy behavior rather than inventing a durable identity. Restoring active state, rolls, generations, and processedRestIds emits no historical rest or recovery events.",
+  "version": "0.2.0",
   "platform": [
     "agnostic"
   ],
@@ -62,36 +62,76 @@
       "required": false,
       "default": true,
       "description": "Whether per-rest ability charges come back. The whole point of the component; exposed so a survival variant can say no."
+    },
+    {
+      "name": "profiles",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Authored rest profiles: {id, durationSeconds, requiresSafeZone, allowInCombat, ambushChance, recovery}. Recovery entries are {resourceId, mode flat|percentMax|full, amount?}; completion expands them across the requested memberIds, while health, named-resource, and prepared-cast owners apply their own parts."
+    },
+    {
+      "name": "initialState",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored activeRest, persisted ambushRoll, timer generation, processedRestIds, last outcome, and last rejection."
     }
   ],
   "outputs": [
     {
       "name": "lastRestOutcome",
       "type": "string",
-      "description": "completed | interrupted \u2014 for camp UI and analytics."
+      "description": "completed | interrupted — for camp UI and analytics."
     },
     {
       "name": "ambushChance",
       "type": "number",
       "description": "The computed probability for the pending rest, shown to the player before committing."
+    },
+    {
+      "name": "activeRest",
+      "type": "object",
+      "description": "Pending restId, profileId, memberIds, remainingSeconds, timerId, generation, and persisted ambushRoll; null when no rest is active."
+    },
+    {
+      "name": "processedRestIds",
+      "type": "array",
+      "description": "Durable accepted and rejected rest-request dedupe ledger."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Latest rejected rest request with restId and reason unknownProfile|unsafe|inCombat|alreadyResting|invalidRequest."
     }
   ],
   "events": {
     "emits": [
       "world.restCompleted",
-      "world.restInterrupted"
+      "world.restInterrupted",
+      "world.restStarted",
+      "world.restRejected",
+      "world.restAmbushRequested"
     ],
     "listensTo": [
-      "input.restRequested"
+      "input.restRequested",
+      "input.restInterruptRequested",
+      "utility.timerCompleted",
+      "combat.hit",
+      "combat.entityDefeated"
     ]
   },
   "dependencies": [
-    "social.party_system"
+    "social.party_system",
+    "utility.timer_system"
   ],
   "tags": [
     "crpg",
-    "rest",
-    "resource-reset"
+    "interruption",
+    "recovery",
+    "replay-safe",
+    "resource-reset",
+    "rest"
   ],
   "provenance": "library-native"
 }

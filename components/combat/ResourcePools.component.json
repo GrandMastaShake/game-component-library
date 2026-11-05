@@ -1,0 +1,100 @@
+{
+  "id": "combat.resource_pools",
+  "name": "Resource Pools",
+  "category": "combat",
+  "version": "0.1.0",
+  "description": "Owns current and maximum values for generic named combat resources such as focus or resolve, scoped by owner id. It fills the gap between Unit Roster health, Action Point Economy, Energy Per Turn's card budget, Vital Stats survival meters, and Prepared Spellbook casts: those owners keep their own resources and are explicitly not duplicated here. Potion Belt and Rest Camp declare recovery operations; this component validates the target pool, computes flat, percent-maximum, or full restoration, caps at maximum, and emits the resulting change. Direct recoveryId and completed-rest restId ledgers make exact replays silent, including rejected direct requests. Unknown pools, owner mismatches, malformed amounts, and already-full direct requests change nothing. Rest completion is idempotent across all member operations and emits changes only where recovery actually occurs. Restoration of pools and ledgers emits no historical recovery events.",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "definitions",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Pools as {id, ownerId, initial, maximum}. The (ownerId,id) pair is unique, so several party members can each own focus. Reserved ids health, action_points, card_energy, prepared_casts, hunger, thirst, temperature, and stamina are rejected because existing components own them."
+    },
+    {
+      "name": "initialState",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Restored pool values, processedRecoveryIds, processedRestIds, and last rejection."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "pools",
+      "type": "array",
+      "description": "Live {id, ownerId, current, maximum} records."
+    },
+    {
+      "name": "resourceOf",
+      "type": "function",
+      "description": "resourceOf(ownerId, resourceId) synchronously returns current and maximum, or null when that owner has no such pool."
+    },
+    {
+      "name": "processedRecoveryIds",
+      "type": "array",
+      "description": "Durable direct recovery dedupe ledger, including accepted and rejected requests."
+    },
+    {
+      "name": "processedRestIds",
+      "type": "array",
+      "description": "Durable completed-rest dedupe ledger across all member/resource operations."
+    },
+    {
+      "name": "lastRejected",
+      "type": "object",
+      "description": "Latest rejected direct recovery with recoveryId, targetId, resourceId, and reason unknownPool|ownerMismatch|alreadyFull|invalidRequest."
+    }
+  ],
+  "events": {
+    "emits": [
+      "combat.resourceChanged",
+      "combat.resourceRestoreRejected"
+    ],
+    "listensTo": [
+      "inventory.recoveryRequested",
+      "world.restCompleted"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "resources",
+    "recovery",
+    "consumables",
+    "rest",
+    "replay-safe",
+    "rpg-family"
+  ],
+  "provenance": "RPG Consumables, Rest & Recovery extraction pass searched Unit Roster, Vital Stats, Energy Per Turn, Action Point Economy, Team Resources, Prepared Spellbook, Potion Belt, and Rest Camp. Each owns a different resource or transaction; none owns generic per-unit mana/focus-style pools that consumables and completed rest can restore without duplicating health, card energy, action points, survival meters, team RTS stock, or prepared casts."
+}
