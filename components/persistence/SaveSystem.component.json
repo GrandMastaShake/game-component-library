@@ -2,8 +2,8 @@
   "id": "persistence.save_system",
   "name": "Save System",
   "category": "persistence",
-  "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed build, specialization, mastery, quest, dialogue, elite-assignment, encounter, telegraph, boss, arena-hazard, status-stack, cleanse, control-removal, world-flag, inventory, and journal changes.",
-  "version": "0.2.5",
+  "description": "Serializes a player's game state into a saveable snapshot on an interval or on declared state-change triggers, including completed build, specialization, mastery, quest, dialogue, elite-assignment, encounter, telegraph, boss, arena-hazard, status-stack, cleanse, control-removal, consumable-use, cooldown, rest, health and named-resource recovery, world-flag, inventory, and journal changes.",
+  "version": "0.2.6",
   "platform": [
     "roblox",
     "godot",
@@ -92,7 +92,20 @@
       "combat.effectApplied",
       "combat.effectRefreshed",
       "combat.effectStacked",
-      "combat.effectRemoved"
+      "combat.effectRemoved",
+      "inventory.potionUsed",
+      "inventory.useRejected",
+      "inventory.consumableCooldownStarted",
+      "inventory.consumableCooldownCompleted",
+      "world.restStarted",
+      "world.restRejected",
+      "world.restCompleted",
+      "world.restInterrupted",
+      "combat.healthRestored",
+      "combat.healthRestoreRejected",
+      "combat.resourceChanged",
+      "combat.resourceRestoreRejected",
+      "combat.spellSlotsRestored"
     ]
   },
   "sinkFor": [
@@ -100,7 +113,10 @@
   ],
   "dependencies": [],
   "tags": [
+    "consumables",
     "persistence",
+    "recovery",
+    "rest",
     "save",
     "state",
     "status-effects"
