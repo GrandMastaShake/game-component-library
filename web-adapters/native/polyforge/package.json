@@ -1,7 +1,7 @@
 {
   "name": "@game-component-library/polyforge",
-  "version": "0.3.0",
-  "description": "Native WebGL low-poly generation, topology analysis, and component editing brick.",
+  "version": "0.4.0",
+  "description": "Native WebGL low-poly generation, canonical asset documents, deterministic LOD baking, and GLB readback.",
   "type": "module",
   "private": true,
   "engines": {
