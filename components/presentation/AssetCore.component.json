@@ -1,0 +1,36 @@
+{
+  "id": "presentation.asset_core",
+  "name": "POLYFORGE Asset Core",
+  "category": "presentation",
+  "description": "Canonical editable .forge.json assets with stable vertex, edge, face, corner, and operation IDs. Replays ID-based moves, edge splits, polygon extrusion, and face deletion without treating array positions as identity. Stores generator provenance, per-vertex positions/colors/skin-weight slots, per-face materials, named UV-set declarations, sockets, budgets, and a deterministic checksum. Three.js geometry is a derived product, not the source of truth.",
+  "version": "0.1.0",
+  "platform": ["web", "agnostic"],
+  "implementations": [
+    {"target": "webgl", "status": "running", "module": "web-adapters/native/polyforge/asset-core.js", "note": "Library-native canonical document, stable-ID edit replay, validation, checksums, and deterministic serialization covered by Node tests."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "assetId", "type": "string", "required": true, "description": "Dotted lowercase identity such as prop.wayfinder."},
+    {"name": "generationResult", "type": "object", "required": true, "description": "POLYFORGE generation result used to initialize the editable polygon document."},
+    {"name": "assetOperations", "type": "array", "required": false, "default": [], "description": "Stable-ID move, split, deleteFace, and extrudeFace operations."},
+    {"name": "budgetLevels", "type": "array", "required": false, "description": "Ordered lodN records with hero/gameplay/far/proxy bands and maximum triangle counts."},
+    {"name": "sockets", "type": "array", "required": false, "default": []}
+  ],
+  "outputs": [
+    {"name": "forgeDocument", "type": "object", "description": "Validated canonical .forge.json content."},
+    {"name": "checksum", "type": "string"},
+    {"name": "topologyStats", "type": "object"}
+  ],
+  "events": {
+    "emits": ["presentation.assetDocumentChanged"],
+    "listensTo": ["presentation.meshGenerated"]
+  },
+  "eventIntents": {"presentation.assetDocumentChanged": ["asset-source", "bake"]},
+  "sinkFor": [],
+  "dependencies": ["presentation.low_poly_generator"],
+  "tags": ["mesh", "asset-core", "stable-ids", "serialization", "editing", "provenance", "webgl"],
+  "provenance": "Library-native editable source foundation derived from the existing POLYFORGE brick; stable identities and canonical serialization are new, with no third-party asset content.",
+  "implementationPath": "web-adapters/native/polyforge/asset-core.js"
+}

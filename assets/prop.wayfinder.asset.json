@@ -1,0 +1,55 @@
+{
+  "description": "Deterministic POLYFORGE bake of prop.wayfinder with 50 editable-source triangles.",
+  "format": "gltf-binary",
+  "forwardAxis": "+z",
+  "id": "prop.wayfinder",
+  "levels": [
+    {
+      "bytes": 3340,
+      "distanceBand": "hero",
+      "file": "assets/prop.wayfinder.lod0.glb",
+      "level": "lod0",
+      "triangles": 50
+    },
+    {
+      "bytes": 3056,
+      "distanceBand": "gameplay",
+      "file": "assets/prop.wayfinder.lod1.glb",
+      "level": "lod1",
+      "triangles": 40
+    },
+    {
+      "bytes": 2816,
+      "distanceBand": "far",
+      "file": "assets/prop.wayfinder.lod2.glb",
+      "level": "lod2",
+      "triangles": 32
+    },
+    {
+      "bytes": 2612,
+      "distanceBand": "proxy",
+      "file": "assets/prop.wayfinder.lod3.glb",
+      "level": "lod3",
+      "triangles": 24
+    }
+  ],
+  "name": "Wayfinder Beacon",
+  "provenance": "Original procedural geometry generated and measured by the library-native POLYFORGE asset pipeline; no third-party mesh, texture, or commercial game content is included.",
+  "sockets": [
+    {
+      "name": "attachment",
+      "position": [
+        0,
+        3.9,
+        0
+      ]
+    }
+  ],
+  "source": {
+    "kind": "generated",
+    "repository": "GrandMastaShake/game-component-library",
+    "script": "web-adapters/native/polyforge/asset-baker.js",
+    "tool": "POLYFORGE Asset Baker 0.4.0"
+  },
+  "units": "metres"
+}

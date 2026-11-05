@@ -1,0 +1,33 @@
+{
+  "id": "presentation.asset_baker",
+  "name": "POLYFORGE Asset Baker",
+  "category": "presentation",
+  "description": "Enforces triangle budgets with deterministic topology-guarded edge collapse, bakes ordered LODs to self-contained glTF binaries, and derives runtime descriptors from exported-file readback. Rejects impossible budgets, folded or duplicate faces, non-manifold collapses, corrupt GLBs, and descriptor drift rather than silently shipping over-budget output. Offline baking only; presentation.lod_system remains the runtime selector.",
+  "version": "0.1.0",
+  "platform": ["web", "agnostic"],
+  "implementations": [
+    {"target": "webgl", "status": "running", "module": "web-adapters/native/polyforge/asset-baker.js", "note": "Deterministic LOD reduction, GLB encoding, byte/triangle/socket readback, strict budget failures, and independent Python rebake validation."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "forgeDocument", "type": "object", "required": true},
+    {"name": "strictBudgets", "type": "boolean", "required": false, "default": true, "description": "Fail when topology guards cannot reach a declared ceiling."}
+  ],
+  "outputs": [
+    {"name": "assetDescriptor", "type": "object", "description": "Runtime asset contract with measured GLB triangles and bytes."},
+    {"name": "lodFiles", "type": "array", "description": "Self-contained glTF 2.0 binary payloads per declared level."},
+    {"name": "readbackStats", "type": "object"}
+  ],
+  "events": {
+    "emits": ["presentation.assetBaked"],
+    "listensTo": ["presentation.assetDocumentChanged"]
+  },
+  "eventIntents": {"presentation.assetBaked": ["runtime-asset", "lod-selection"]},
+  "sinkFor": [],
+  "dependencies": ["presentation.asset_core"],
+  "tags": ["mesh", "asset-baking", "performance", "triangle-budget", "lod-generation", "gltf-binary", "readback", "webgl"],
+  "provenance": "Library-native offline baking foundation built for original POLYFORGE geometry; deterministic reduction, GLB encoding, and independent readback are new implementation work.",
+  "implementationPath": "web-adapters/native/polyforge/asset-baker.js"
+}

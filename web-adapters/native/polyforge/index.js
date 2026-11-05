@@ -2,8 +2,12 @@ import { DEFAULTS, PRESETS, analyzeTopology, generateGeometry } from './mesh.js'
 import { PROMPT_OBJECTS, interpretPrompt, isPromptObject, resolvePrompt } from './prompt-mesh.js'
 import { applyMeshEdits, readMeshEdits } from './mesh-edit.js'
 import { buildQuadDominant } from './quad-mesh.js'
+import { decimateMeshData, geometryToMeshData, meshDataToGeometry } from './mesh-data.js'
+import { applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, checksumAssetDocument, createAssetDocument, defaultBudgets, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument } from './asset-core.js'
+import { bakeAsset, encodeGLB, inspectGLB } from './asset-baker.js'
 
 export { DEFAULTS, PRESETS, PROMPT_OBJECTS, analyzeTopology, applyMeshEdits, buildQuadDominant, interpretPrompt, readMeshEdits, resolvePrompt }
+export { applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, bakeAsset, checksumAssetDocument, createAssetDocument, decimateMeshData, defaultBudgets, encodeGLB, inspectGLB, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument }
 
 export function normalizeSettings(input = {}) {
   const settings = { ...DEFAULTS, ...input }
@@ -23,8 +27,20 @@ export function generate(input = {}) {
   const settings = normalizeSettings(input)
   const base = generateGeometry(settings)
   const operations = operationsFrom(input.meshEdits)
-  const geometry = operations.length ? applyMeshEdits(base, operations) : base
+  let geometry = operations.length ? applyMeshEdits(base, operations) : base
   if (geometry !== base) base.dispose()
+
+  let budget = null
+  if (input.targetFaceCount !== undefined) {
+    const reduced = decimateMeshData(geometryToMeshData(geometry), input.targetFaceCount)
+    if (!reduced.stats.withinBudget) {
+      geometry.dispose()
+      throw new Error(`targetFaceCount ${input.targetFaceCount} is unreachable without violating topology guards (remaining ${reduced.stats.triangles})`)
+    }
+    geometry.dispose()
+    geometry = meshDataToGeometry(reduced)
+    budget = { ...reduced.stats }
+  }
 
   const quadMesh = buildQuadDominant(geometry)
   const topology = analyzeTopology(geometry)
@@ -35,6 +51,7 @@ export function generate(input = {}) {
     quadRatio: quadMesh.stats.quadRatio,
     faceReduction: quadMesh.stats.faceReduction,
     faceReductionRatio: quadMesh.stats.faceReductionRatio,
+    ...(budget ? { budget } : {}),
   }
   return { geometry, settings, operations, faces: quadMesh.faces, stats }
 }
@@ -62,6 +79,17 @@ export function toMeshData(result) {
   }
 }
 
+/** Generate, canonicalize, budget, export, and read back an original asset. */
+export function bakeGeneratedAsset({ id, name, input = {}, budgets, sockets, materials, strict = true }) {
+  const result = generate(input)
+  try {
+    const document = createAssetDocument({ id, name, result, budgets, sockets, materials })
+    return bakeAsset(document, { strict })
+  } finally {
+    result.geometry.dispose()
+  }
+}
+
 /** Stateful convenience wrapper; all generation and edits remain deterministic. */
 export class LowPolyGenerator {
   constructor(defaults = {}) {
@@ -83,5 +111,18 @@ export class LowPolyGenerator {
 
   edit(geometry, operations) {
     return applyMeshEdits(geometry, operationsFrom(operations))
+  }
+
+  createAsset({ id, name, budgets, sockets, materials, ...overrides } = {}) {
+    const result = this.generate(overrides)
+    try {
+      return createAssetDocument({ id, name, result, budgets, sockets, materials })
+    } finally {
+      result.geometry.dispose()
+    }
+  }
+
+  bakeAsset({ id, name, budgets, sockets, materials, strict = true, ...overrides } = {}) {
+    return bakeGeneratedAsset({ id, name, input: { ...this.defaults, ...overrides }, budgets, sockets, materials, strict })
   }
 }

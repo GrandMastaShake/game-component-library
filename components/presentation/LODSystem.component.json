@@ -2,8 +2,8 @@
   "id": "presentation.lod_system",
   "name": "LOD System",
   "category": "presentation",
-  "description": "Swaps mesh detail level based on camera distance to reduce rendering cost for distant objects.",
-  "version": "0.1.0",
+  "description": "Swaps mesh detail level based on camera distance to reduce rendering cost for distant objects. Accepts measured LODs from presentation.asset_baker; offline simplification and export remain outside this runtime selector.",
+  "version": "0.1.1",
   "platform": [
     "roblox",
     "godot",
@@ -57,7 +57,8 @@
       "presentation.lodChanged"
     ],
     "listensTo": [
-      "presentation.meshGenerated"
+      "presentation.meshGenerated",
+      "presentation.assetBaked"
     ]
   },
   "dependencies": [
