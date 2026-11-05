@@ -1,0 +1,246 @@
+{
+  "checksum": "fnv1a32:bda492b7",
+  "format": "polyforge.geometry",
+  "id": "graph.wayfinder_relay",
+  "links": [
+    {
+      "from": {
+        "node": "n000000",
+        "socket": "asset"
+      },
+      "id": "l000000",
+      "to": {
+        "node": "n000001",
+        "socket": "asset"
+      }
+    },
+    {
+      "from": {
+        "node": "n000001",
+        "socket": "asset"
+      },
+      "id": "l000001",
+      "to": {
+        "node": "n000002",
+        "socket": "asset"
+      }
+    },
+    {
+      "from": {
+        "node": "n000002",
+        "socket": "asset"
+      },
+      "id": "l000002",
+      "to": {
+        "node": "n000003",
+        "socket": "asset"
+      }
+    },
+    {
+      "from": {
+        "node": "n000003",
+        "socket": "asset"
+      },
+      "id": "l000003",
+      "to": {
+        "node": "n000004",
+        "socket": "asset"
+      }
+    },
+    {
+      "from": {
+        "node": "n000004",
+        "socket": "asset"
+      },
+      "id": "l000004",
+      "to": {
+        "node": "n000005",
+        "socket": "asset"
+      }
+    },
+    {
+      "from": {
+        "node": "n000005",
+        "socket": "asset"
+      },
+      "id": "l000005",
+      "to": {
+        "node": "n000006",
+        "socket": "asset"
+      }
+    },
+    {
+      "from": {
+        "node": "n000006",
+        "socket": "asset"
+      },
+      "id": "l000006",
+      "to": {
+        "node": "n000007",
+        "socket": "asset"
+      }
+    }
+  ],
+  "name": "Wayfinder Relay Geometry",
+  "nextIds": {
+    "link": 7,
+    "node": 8
+  },
+  "nodes": [
+    {
+      "id": "n000000",
+      "parameters": {
+        "id": "prop.wayfinder_relay",
+        "name": "Wayfinder Relay",
+        "settings": {
+          "color": "#7DD3FC",
+          "primitive": "crystal",
+          "seed": 20261106
+        },
+        "sockets": [
+          {
+            "name": "attachment",
+            "position": [
+              0,
+              3.9,
+              0
+            ]
+          }
+        ]
+      },
+      "position": {
+        "x": 0,
+        "y": 120
+      },
+      "type": "source.generate"
+    },
+    {
+      "id": "n000001",
+      "parameters": {
+        "distance": 0.18,
+        "faceId": "f000000"
+      },
+      "position": {
+        "x": 180,
+        "y": 0
+      },
+      "type": "edit.extrudeFace"
+    },
+    {
+      "id": "n000002",
+      "parameters": {
+        "edgeId": "e000000"
+      },
+      "position": {
+        "x": 360,
+        "y": 0
+      },
+      "type": "edit.split"
+    },
+    {
+      "id": "n000003",
+      "parameters": {
+        "delta": [
+          0.03,
+          -0.02,
+          0.04
+        ],
+        "vertexIds": [
+          "v000039"
+        ]
+      },
+      "position": {
+        "x": 540,
+        "y": 0
+      },
+      "type": "edit.move"
+    },
+    {
+      "id": "n000004",
+      "parameters": {
+        "includeSockets": true,
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "scale": [
+          0.95,
+          1.15,
+          0.95
+        ],
+        "translation": [
+          0,
+          0.1,
+          0
+        ]
+      },
+      "position": {
+        "x": 720,
+        "y": 0
+      },
+      "type": "modify.transform"
+    },
+    {
+      "id": "n000005",
+      "parameters": {
+        "levels": [
+          {
+            "distanceBand": "hero",
+            "level": "lod0",
+            "maxTriangles": 64
+          },
+          {
+            "distanceBand": "gameplay",
+            "level": "lod1",
+            "maxTriangles": 48
+          },
+          {
+            "distanceBand": "far",
+            "level": "lod2",
+            "maxTriangles": 32
+          },
+          {
+            "distanceBand": "proxy",
+            "level": "lod3",
+            "maxTriangles": 24
+          }
+        ]
+      },
+      "position": {
+        "x": 900,
+        "y": 0
+      },
+      "type": "configure.budgets"
+    },
+    {
+      "id": "n000006",
+      "parameters": {},
+      "position": {
+        "x": 1080,
+        "y": 0
+      },
+      "type": "measure.asset"
+    },
+    {
+      "id": "n000007",
+      "parameters": {},
+      "position": {
+        "x": 1260,
+        "y": 0
+      },
+      "type": "output.asset"
+    }
+  ],
+  "outputs": {
+    "asset": {
+      "node": "n000007",
+      "socket": "asset"
+    },
+    "stats": {
+      "node": "n000006",
+      "socket": "stats"
+    }
+  },
+  "version": "1.0.0"
+}
