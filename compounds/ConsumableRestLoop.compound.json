@@ -1,0 +1,873 @@
+{
+  "id": "compound.consumable_rest_loop",
+  "name": "Consumables, Rest & Recovery Loop",
+  "version": "0.1.0",
+  "description": "A replay-safe RPG recovery loop: Potion Belt accepts or rejects a use before touching the shared inventory stack, starts generated shared cooldowns, and routes health, generic resource, status, and cleanse requests to their sole owners. Rest Camp owns safe-zone/combat eligibility, one pending rest, persisted risk, interruption, and completion. Only completed rest recovers health, named resources, and prepared casts; ambushes use the existing encounter spawner. Stable use, rest, recovery, application, and cleanse ids plus timer generations make reloads and stale completions inert. Original Glimmerfen content is host-replaceable.",
+  "targetPlatform": "agnostic",
+  "components": [
+    {
+      "id": "inventory.potion_belt",
+      "role": "sole owner of consumable-use legality, accepted item consumption, shared cooldowns, and stable use identity",
+      "config": {
+        "beltSlots": 4,
+        "autoRefillFromBag": true,
+        "definitions": [
+          {
+            "id": "redleaf_draught",
+            "description": "A bitter leaf draught that restores a small amount of health.",
+            "targetMode": "unit",
+            "usePolicy": "always",
+            "cooldownGroupId": "draught",
+            "cooldownSeconds": 4,
+            "consume": true,
+            "recovery": [
+              {
+                "resourceId": "health",
+                "mode": "flat",
+                "amount": 5
+              }
+            ],
+            "statusApplications": [],
+            "cleanseRequests": []
+          },
+          {
+            "id": "focus_phial",
+            "description": "A clear phial that restores three focus to the drinker.",
+            "targetMode": "self",
+            "usePolicy": "always",
+            "cooldownGroupId": "draught",
+            "cooldownSeconds": 4,
+            "consume": true,
+            "recovery": [
+              {
+                "resourceId": "focus",
+                "mode": "flat",
+                "amount": 3
+              }
+            ],
+            "statusApplications": [],
+            "cleanseRequests": []
+          },
+          {
+            "id": "clearwater_phial",
+            "description": "A clean rinse that asks Status Effects for the authored control cleanse.",
+            "targetMode": "unit",
+            "usePolicy": "always",
+            "cooldownGroupId": "remedy",
+            "cooldownSeconds": 6,
+            "consume": true,
+            "recovery": [],
+            "statusApplications": [],
+            "cleanseRequests": [
+              {
+                "ruleId": "purge_control"
+              }
+            ]
+          },
+          {
+            "id": "lantern_tonic",
+            "description": "A warm tonic that restores one focus and applies the original battle_focus effect.",
+            "targetMode": "self",
+            "usePolicy": "always",
+            "cooldownGroupId": "tonic",
+            "cooldownSeconds": 8,
+            "consume": true,
+            "recovery": [
+              {
+                "resourceId": "focus",
+                "mode": "flat",
+                "amount": 1
+              }
+            ],
+            "statusApplications": [
+              {
+                "effectId": "battle_focus"
+              }
+            ],
+            "cleanseRequests": []
+          },
+          {
+            "id": "wayfarer_salve",
+            "description": "An out-of-combat salve that restores up to half the target’s maximum health.",
+            "targetMode": "unit",
+            "usePolicy": "outOfCombat",
+            "cooldownGroupId": "remedy",
+            "cooldownSeconds": 6,
+            "consume": true,
+            "recovery": [
+              {
+                "resourceId": "health",
+                "mode": "percentMax",
+                "amount": 0.5
+              }
+            ],
+            "statusApplications": [],
+            "cleanseRequests": []
+          },
+          {
+            "id": "snaring_vial",
+            "description": "A thrown bog resin that applies the original bound_steps effect through Status Effects.",
+            "targetMode": "unit",
+            "usePolicy": "always",
+            "cooldownGroupId": "tonic",
+            "cooldownSeconds": 8,
+            "consume": true,
+            "recovery": [],
+            "statusApplications": [
+              {
+                "effectId": "bound_steps"
+              }
+            ],
+            "cleanseRequests": []
+          }
+        ],
+        "initialState": {}
+      }
+    },
+    {
+      "id": "inventory.core_inventory",
+      "role": "sole low-level item quantity and removal owner"
+    },
+    {
+      "id": "inventory.slotted_bag",
+      "role": "stacked bag window and slot limits over the same inventory store",
+      "config": {
+        "slotCount": 20,
+        "maxStackSize": 99,
+        "initialItems": [
+          {
+            "itemId": "redleaf_draught",
+            "quantity": 2
+          },
+          {
+            "itemId": "focus_phial",
+            "quantity": 2
+          },
+          {
+            "itemId": "clearwater_phial",
+            "quantity": 1
+          },
+          {
+            "itemId": "lantern_tonic",
+            "quantity": 1
+          },
+          {
+            "itemId": "wayfarer_salve",
+            "quantity": 1
+          },
+          {
+            "itemId": "snaring_vial",
+            "quantity": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "utility.timer_system",
+      "role": "sole countdown and tick owner for consumable cooldowns, rest, and status"
+    },
+    {
+      "id": "world.rest_camp",
+      "role": "sole rest eligibility, pending transaction, risk roll, interruption, and completion owner",
+      "config": {
+        "profiles": [
+          {
+            "id": "field_break",
+            "description": "A short exposed pause with partial health and full focus recovery.",
+            "durationSeconds": 4,
+            "requiresSafeZone": false,
+            "allowInCombat": false,
+            "ambushChance": 0.2,
+            "recovery": [
+              {
+                "resourceId": "health",
+                "mode": "flat",
+                "amount": 2
+              },
+              {
+                "resourceId": "focus",
+                "mode": "full"
+              }
+            ]
+          },
+          {
+            "id": "watchfire_rest",
+            "description": "A safe-zone camp with full health, focus, and resolve recovery and a small ambush risk.",
+            "durationSeconds": 8,
+            "requiresSafeZone": true,
+            "allowInCombat": false,
+            "ambushChance": 0.05,
+            "recovery": [
+              {
+                "resourceId": "health",
+                "mode": "full"
+              },
+              {
+                "resourceId": "focus",
+                "mode": "full"
+              },
+              {
+                "resourceId": "resolve",
+                "mode": "full"
+              }
+            ]
+          },
+          {
+            "id": "trail_pause",
+            "description": "A brief combat-tolerant pause that restores one focus but no health.",
+            "durationSeconds": 2,
+            "requiresSafeZone": false,
+            "allowInCombat": true,
+            "ambushChance": 0,
+            "recovery": [
+              {
+                "resourceId": "focus",
+                "mode": "flat",
+                "amount": 1
+              }
+            ]
+          }
+        ],
+        "restoresPerRestAbilities": true,
+        "initialState": {}
+      }
+    },
+    {
+      "id": "social.party_system",
+      "role": "party membership source; does not recover resources"
+    },
+    {
+      "id": "combat.resource_pools",
+      "role": "sole generic per-owner named-resource balance and recovery owner",
+      "config": {
+        "definitions": [
+          {
+            "id": "focus",
+            "ownerId": "scout",
+            "initial": 2,
+            "maximum": 8
+          },
+          {
+            "id": "focus",
+            "ownerId": "warden",
+            "initial": 4,
+            "maximum": 8
+          },
+          {
+            "id": "resolve",
+            "ownerId": "scout",
+            "initial": 1,
+            "maximum": 3
+          }
+        ],
+        "initialState": {}
+      }
+    },
+    {
+      "id": "combat.unit_roster",
+      "role": "sole living-unit and health owner; applies only health recovery",
+      "config": {
+        "units": [
+          {
+            "id": "scout",
+            "team": "player",
+            "x": 0,
+            "y": 0,
+            "health": 12
+          },
+          {
+            "id": "warden",
+            "team": "player",
+            "x": 1,
+            "y": 0,
+            "health": 10
+          },
+          {
+            "id": "bog_target",
+            "team": "enemy",
+            "x": 2,
+            "y": 0,
+            "health": 9
+          }
+        ],
+        "initialHealth": {
+          "scout": 7,
+          "warden": 10,
+          "bog_target": 9
+        },
+        "initialRecoveryState": {}
+      }
+    },
+    {
+      "id": "combat.status_effects",
+      "role": "sole status stacking, immunity, cleanse, control, and status cleanup owner",
+      "config": {
+        "definitions": [
+          {
+            "id": "mire_slick",
+            "description": "A brief bog slick that reduces movement without removing control.",
+            "durationSeconds": 6,
+            "stackPolicy": "refresh",
+            "durationPolicy": "reset",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "slow"
+            ],
+            "dispellable": true,
+            "cleansePriority": 20,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [],
+              "moveMultiplier": 0.65
+            }
+          },
+          {
+            "id": "bound_steps",
+            "description": "Tethered footing that prevents movement and interrupts attack windups.",
+            "durationSeconds": 3.5,
+            "stackPolicy": "refresh",
+            "durationPolicy": "max",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "root"
+            ],
+            "dispellable": true,
+            "cleansePriority": 60,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [
+                "move"
+              ],
+              "moveMultiplier": 0
+            }
+          },
+          {
+            "id": "hushed",
+            "description": "A muffling ward that prevents active ability use.",
+            "durationSeconds": 4,
+            "stackPolicy": "refresh",
+            "durationPolicy": "reset",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "silence",
+              "mind"
+            ],
+            "dispellable": true,
+            "cleansePriority": 50,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [
+                "cast"
+              ],
+              "moveMultiplier": 1
+            }
+          },
+          {
+            "id": "staggered",
+            "description": "A short full stagger that prevents movement, abilities, and basic attacks.",
+            "durationSeconds": 1.75,
+            "stackPolicy": "refresh",
+            "durationPolicy": "max",
+            "maxStacks": 1,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "stun"
+            ],
+            "dispellable": true,
+            "cleansePriority": 90,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [
+                "move",
+                "cast",
+                "attack"
+              ],
+              "moveMultiplier": 0
+            }
+          },
+          {
+            "id": "frayed_guard",
+            "description": "Stacking defensive pressure; each stack removes one armor.",
+            "durationSeconds": 5,
+            "stackPolicy": "stack",
+            "durationPolicy": "extend",
+            "maxStacks": 3,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "hex"
+            ],
+            "dispellable": true,
+            "cleansePriority": 30,
+            "removeOnDefeat": true,
+            "modifiers": [
+              {
+                "stat": "armor",
+                "operation": "add",
+                "value": -1,
+                "perStack": true
+              }
+            ]
+          },
+          {
+            "id": "ember_mark",
+            "description": "Independent ember sigils from separate applications.",
+            "durationSeconds": 2.5,
+            "stackPolicy": "independent",
+            "durationPolicy": "reset",
+            "maxStacks": 1,
+            "grouping": "targetEffectSource",
+            "tags": [
+              "harmful",
+              "mark"
+            ],
+            "dispellable": true,
+            "cleansePriority": 10,
+            "removeOnDefeat": true,
+            "modifiers": []
+          },
+          {
+            "id": "clinging_ash",
+            "description": "Up to two ash layers multiply remaining movement speed.",
+            "durationSeconds": 4,
+            "stackPolicy": "stack",
+            "durationPolicy": "reset",
+            "maxStacks": 2,
+            "grouping": "targetEffect",
+            "tags": [
+              "harmful",
+              "control",
+              "slow"
+            ],
+            "dispellable": true,
+            "cleansePriority": 15,
+            "removeOnDefeat": true,
+            "modifiers": [],
+            "control": {
+              "restrictions": [],
+              "moveMultiplier": 0.8
+            }
+          },
+          {
+            "id": "battle_focus",
+            "description": "A beneficial two-stack focus that adds attack power.",
+            "durationSeconds": 5,
+            "stackPolicy": "stack",
+            "durationPolicy": "max",
+            "maxStacks": 2,
+            "grouping": "targetEffectSource",
+            "tags": [
+              "beneficial",
+              "buff"
+            ],
+            "dispellable": false,
+            "cleansePriority": 0,
+            "removeOnDefeat": true,
+            "modifiers": [
+              {
+                "stat": "attack",
+                "operation": "add",
+                "value": 1,
+                "perStack": true
+              }
+            ]
+          }
+        ],
+        "immunities": [
+          {
+            "id": "construct_mind_seal",
+            "targetIds": [
+              "glass_construct"
+            ],
+            "effectIds": [],
+            "tags": [
+              "mind"
+            ]
+          },
+          {
+            "id": "custodian_stun_brace",
+            "targetIds": [
+              "archive_custodian"
+            ],
+            "effectIds": [
+              "staggered"
+            ],
+            "tags": []
+          }
+        ],
+        "cleanseRules": [
+          {
+            "id": "purge_control",
+            "effectIds": [],
+            "tags": [
+              "control"
+            ],
+            "maxEffects": 1,
+            "order": "highestPriority"
+          },
+          {
+            "id": "restore_guard",
+            "effectIds": [
+              "mire_slick",
+              "frayed_guard"
+            ],
+            "tags": [],
+            "maxEffects": 2,
+            "order": "lowestPriority"
+          },
+          {
+            "id": "sweep_harmful",
+            "effectIds": [],
+            "tags": [
+              "harmful"
+            ],
+            "maxEffects": 9,
+            "order": "oldest"
+          }
+        ],
+        "unknownEffectPolicy": "reject",
+        "initialState": {}
+      }
+    },
+    {
+      "id": "combat.prepared_spellbook",
+      "role": "sole preparation and per-rest prepared-cast recovery owner",
+      "config": {
+        "recoverOnRest": true,
+        "initialProcessedRestIds": []
+      }
+    },
+    {
+      "id": "combat.hotbar_abilities",
+      "role": "existing cast owner and source of ordinary hits that can interrupt rest"
+    },
+    {
+      "id": "combat.damage_resolver",
+      "role": "existing final-damage and completed-defeat owner"
+    },
+    {
+      "id": "world.dynamic_encounter_spawner",
+      "role": "existing encounter birth owner for requested rest ambushes"
+    },
+    {
+      "id": "world.mob_patrol",
+      "role": "existing spawned-mob behavior owner"
+    },
+    {
+      "id": "combat.enemy_tier_scaling",
+      "role": "existing spawned-enemy tier and stat-scaling owner"
+    },
+    {
+      "id": "movement.character_body",
+      "role": "mob body dependency"
+    },
+    {
+      "id": "movement.physics_core",
+      "role": "body physics dependency"
+    },
+    {
+      "id": "progression.xp_leveling",
+      "role": "level source for enemy scaling"
+    },
+    {
+      "id": "persistence.save_system",
+      "role": "snapshot trigger owner for use, cooldown, rest, recovery, status, and prepared-cast changes"
+    }
+  ],
+  "connections": [
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.recoveryRequested",
+      "to": "combat.unit_roster",
+      "note": "Health operations use the sole health owner."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.recoveryRequested",
+      "to": "combat.resource_pools",
+      "note": "Non-health operations resolve per-owner generic pools."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.effectApplicationRequested",
+      "to": "combat.status_effects",
+      "note": "Consumable status enters the single status pipeline."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.cleanseRequested",
+      "to": "combat.status_effects",
+      "note": "Cleanse uses authored Status Effects rules."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.potionUsed",
+      "to": "persistence.save_system",
+      "note": "Persist accepted or rejected use and cooldown state."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.useRejected",
+      "to": "persistence.save_system",
+      "note": "Persist accepted or rejected use and cooldown state."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.consumableCooldownStarted",
+      "to": "persistence.save_system",
+      "note": "Persist accepted or rejected use and cooldown state."
+    },
+    {
+      "from": "inventory.potion_belt",
+      "event": "inventory.consumableCooldownCompleted",
+      "to": "persistence.save_system",
+      "note": "Persist accepted or rejected use and cooldown state."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restCompleted",
+      "to": "combat.unit_roster",
+      "note": "Only completed rest reaches this recovery owner."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restCompleted",
+      "to": "combat.resource_pools",
+      "note": "Only completed rest reaches this recovery owner."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restCompleted",
+      "to": "combat.prepared_spellbook",
+      "note": "Only completed rest reaches this recovery owner."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restAmbushRequested",
+      "to": "world.dynamic_encounter_spawner",
+      "note": "Ambush birth uses the existing spawner and tables."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restStarted",
+      "to": "persistence.save_system",
+      "note": "Persist pending and decided rest transactions."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restRejected",
+      "to": "persistence.save_system",
+      "note": "Persist pending and decided rest transactions."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restCompleted",
+      "to": "persistence.save_system",
+      "note": "Persist pending and decided rest transactions."
+    },
+    {
+      "from": "world.rest_camp",
+      "event": "world.restInterrupted",
+      "to": "persistence.save_system",
+      "note": "Persist pending and decided rest transactions."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.healthRestored",
+      "to": "persistence.save_system",
+      "note": "Persist health and direct recovery ledgers."
+    },
+    {
+      "from": "combat.unit_roster",
+      "event": "combat.healthRestoreRejected",
+      "to": "persistence.save_system",
+      "note": "Persist health and direct recovery ledgers."
+    },
+    {
+      "from": "combat.resource_pools",
+      "event": "combat.resourceChanged",
+      "to": "persistence.save_system",
+      "note": "Persist pools and direct recovery ledgers."
+    },
+    {
+      "from": "combat.resource_pools",
+      "event": "combat.resourceRestoreRejected",
+      "to": "persistence.save_system",
+      "note": "Persist pools and direct recovery ledgers."
+    },
+    {
+      "from": "combat.prepared_spellbook",
+      "event": "combat.spellSlotsRestored",
+      "to": "persistence.save_system",
+      "note": "Persist prepared-cast recovery."
+    },
+    {
+      "from": "combat.prepared_spellbook",
+      "event": "combat.spellCastAuthorized",
+      "to": "combat.hotbar_abilities",
+      "note": "Preparation authorizes but never executes a cast."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.abilityCast",
+      "to": "combat.prepared_spellbook",
+      "note": "Only a successful cast spends a prepared cast."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.damage_resolver",
+      "note": "Ordinary hits retain damage, roster, status, and rest-interruption paths."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.unit_roster",
+      "note": "Ordinary hits retain damage, roster, status, and rest-interruption paths."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "combat.status_effects",
+      "note": "Ordinary hits retain damage, roster, status, and rest-interruption paths."
+    },
+    {
+      "from": "combat.hotbar_abilities",
+      "event": "combat.hit",
+      "to": "world.rest_camp",
+      "note": "Ordinary hits retain damage, roster, status, and rest-interruption paths."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.unit_roster",
+      "note": "Defeat retains roster, status, and rest cleanup."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "combat.status_effects",
+      "note": "Defeat retains roster, status, and rest cleanup."
+    },
+    {
+      "from": "combat.damage_resolver",
+      "event": "combat.entityDefeated",
+      "to": "world.rest_camp",
+      "note": "Defeat retains roster, status, and rest cleanup."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.controlRestrictionsChanged",
+      "to": "combat.hotbar_abilities",
+      "note": "Optional statusGate cast behavior remains with Hotbar."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectApplied",
+      "to": "persistence.save_system",
+      "note": "Persist status state and ledgers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectRefreshed",
+      "to": "persistence.save_system",
+      "note": "Persist status state and ledgers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectStacked",
+      "to": "persistence.save_system",
+      "note": "Persist status state and ledgers."
+    },
+    {
+      "from": "combat.status_effects",
+      "event": "combat.effectRemoved",
+      "to": "persistence.save_system",
+      "note": "Persist status state and ledgers."
+    },
+    {
+      "from": "inventory.core_inventory",
+      "event": "inventory.itemAdded",
+      "to": "persistence.save_system",
+      "note": "Storage changes remain save-visible."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "inventory.potion_belt",
+      "note": "Timer completion checks stable identity and generation."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "world.rest_camp",
+      "note": "Timer completion checks stable identity and generation."
+    },
+    {
+      "from": "utility.timer_system",
+      "event": "utility.timerCompleted",
+      "to": "combat.status_effects",
+      "note": "Timer completion checks stable identity and generation."
+    },
+    {
+      "from": "world.mob_patrol",
+      "event": "world.hazardEntered",
+      "to": "combat.damage_resolver",
+      "note": "Existing mob hazard damage path remains unchanged."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "combat.enemy_tier_scaling",
+      "note": "Level changes feed existing enemy scaling."
+    },
+    {
+      "from": "progression.xp_leveling",
+      "event": "progression.leveledUp",
+      "to": "persistence.save_system",
+      "note": "Level state remains persistent."
+    }
+  ],
+  "criticalComponents": [
+    "inventory.potion_belt",
+    "world.rest_camp",
+    "combat.resource_pools",
+    "combat.unit_roster",
+    "combat.status_effects"
+  ],
+  "acceptanceCriteria": [
+    "An accepted explicit use removes exactly one item when consume=true and emits its operations with stable child ids derived from useId.",
+    "Unknown, empty, invalid-target, in-combat, and cooldown rejections remove no item, start no cooldown, and emit no recovery, status, or cleanse request.",
+    "Accepted and rejected useIds are both remembered; exact replay is silent and cannot consume or recover twice.",
+    "A shared cooldown is scoped by source and group; timer generations prevent an old completion from clearing a newer cooldown.",
+    "Unit Roster caps health recovery and rejects direct unknown, defeated, or full targets without Potion Belt inventing a refund.",
+    "Resource Pools accepts flat, percentMax, and full recovery only for its own generic per-owner pools and never duplicates health, AP, card energy, survival stats, or prepared casts.",
+    "Status Effects alone applies stacked status and cleanse requests from consumables, with the same immunity and replay rules as host requests.",
+    "Rest rejection for unsafe, in-combat, malformed, or already-resting requests starts no timer and recovers nothing.",
+    "Rest completion emits one stable restId and recovers each eligible member through Unit Roster, Resource Pools, and Prepared Spellbook.",
+    "Manual interruption, resting-member damage or defeat, and ambush emit no completed-rest recovery.",
+    "A stale rest timer after interruption or replacement cannot complete a newer transaction.",
+    "Rest ambush requests use Dynamic Encounter Spawner; Rest Camp never creates enemies or applies damage.",
+    "Prepared Spellbook restores only prepared casts on completed rest and dedupes restId without replacing the preparation list.",
+    "Save restoration preserves quantities, cooldowns, rest state, pools, health, and all dedupe ledgers without replaying historical events.",
+    "Legacy id-less potion and rest inputs keep their prior behavior and do not claim a fabricated cross-save identity.",
+    "Removing Resource Pools leaves health, status, cleanse, prepared-cast, inventory, and rest transactions intact; only generic named-pool recovery is absent.",
+    "Removing Dynamic Encounter Spawner leaves rest risk and interruption outcomes intact; no ambush enemies are placed.",
+    "All Glimmerfen items, profiles, units, pools, amounts, and scenarios are original generic content with no commercial names or exact balance tables."
+  ]
+}
