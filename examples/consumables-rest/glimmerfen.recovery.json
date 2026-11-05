@@ -1,0 +1,929 @@
+{
+  "schemaVersion": 1,
+  "id": "recovery.glimmerfen_supply",
+  "description": "Original consumable and rest content for the Glimmerfen border: small recovery choices, shared quick-use cooldowns, and interruptible camps. No commercial items, spells, characters, tables, or balance data.",
+  "statusDocumentIds": [
+    "status.mirelight_control"
+  ],
+  "initialInventory": [
+    {
+      "itemId": "redleaf_draught",
+      "quantity": 2
+    },
+    {
+      "itemId": "focus_phial",
+      "quantity": 2
+    },
+    {
+      "itemId": "clearwater_phial",
+      "quantity": 1
+    },
+    {
+      "itemId": "lantern_tonic",
+      "quantity": 1
+    },
+    {
+      "itemId": "wayfarer_salve",
+      "quantity": 1
+    },
+    {
+      "itemId": "snaring_vial",
+      "quantity": 1
+    }
+  ],
+  "units": [
+    {
+      "id": "scout",
+      "health": 7,
+      "maxHealth": 12
+    },
+    {
+      "id": "warden",
+      "health": 10,
+      "maxHealth": 10
+    },
+    {
+      "id": "bog_target",
+      "health": 9,
+      "maxHealth": 9
+    }
+  ],
+  "resourcePools": [
+    {
+      "id": "focus",
+      "ownerId": "scout",
+      "initial": 2,
+      "maximum": 8
+    },
+    {
+      "id": "focus",
+      "ownerId": "warden",
+      "initial": 4,
+      "maximum": 8
+    },
+    {
+      "id": "resolve",
+      "ownerId": "scout",
+      "initial": 1,
+      "maximum": 3
+    }
+  ],
+  "consumables": [
+    {
+      "id": "redleaf_draught",
+      "description": "A bitter leaf draught that restores a small amount of health.",
+      "targetMode": "unit",
+      "usePolicy": "always",
+      "cooldownGroupId": "draught",
+      "cooldownSeconds": 4,
+      "consume": true,
+      "recovery": [
+        {
+          "resourceId": "health",
+          "mode": "flat",
+          "amount": 5
+        }
+      ],
+      "statusApplications": [],
+      "cleanseRequests": []
+    },
+    {
+      "id": "focus_phial",
+      "description": "A clear phial that restores three focus to the drinker.",
+      "targetMode": "self",
+      "usePolicy": "always",
+      "cooldownGroupId": "draught",
+      "cooldownSeconds": 4,
+      "consume": true,
+      "recovery": [
+        {
+          "resourceId": "focus",
+          "mode": "flat",
+          "amount": 3
+        }
+      ],
+      "statusApplications": [],
+      "cleanseRequests": []
+    },
+    {
+      "id": "clearwater_phial",
+      "description": "A clean rinse that asks Status Effects for the authored control cleanse.",
+      "targetMode": "unit",
+      "usePolicy": "always",
+      "cooldownGroupId": "remedy",
+      "cooldownSeconds": 6,
+      "consume": true,
+      "recovery": [],
+      "statusApplications": [],
+      "cleanseRequests": [
+        {
+          "ruleId": "purge_control"
+        }
+      ]
+    },
+    {
+      "id": "lantern_tonic",
+      "description": "A warm tonic that restores one focus and applies the original battle_focus effect.",
+      "targetMode": "self",
+      "usePolicy": "always",
+      "cooldownGroupId": "tonic",
+      "cooldownSeconds": 8,
+      "consume": true,
+      "recovery": [
+        {
+          "resourceId": "focus",
+          "mode": "flat",
+          "amount": 1
+        }
+      ],
+      "statusApplications": [
+        {
+          "effectId": "battle_focus"
+        }
+      ],
+      "cleanseRequests": []
+    },
+    {
+      "id": "wayfarer_salve",
+      "description": "An out-of-combat salve that restores up to half the target’s maximum health.",
+      "targetMode": "unit",
+      "usePolicy": "outOfCombat",
+      "cooldownGroupId": "remedy",
+      "cooldownSeconds": 6,
+      "consume": true,
+      "recovery": [
+        {
+          "resourceId": "health",
+          "mode": "percentMax",
+          "amount": 0.5
+        }
+      ],
+      "statusApplications": [],
+      "cleanseRequests": []
+    },
+    {
+      "id": "snaring_vial",
+      "description": "A thrown bog resin that applies the original bound_steps effect through Status Effects.",
+      "targetMode": "unit",
+      "usePolicy": "always",
+      "cooldownGroupId": "tonic",
+      "cooldownSeconds": 8,
+      "consume": true,
+      "recovery": [],
+      "statusApplications": [
+        {
+          "effectId": "bound_steps"
+        }
+      ],
+      "cleanseRequests": []
+    }
+  ],
+  "restProfiles": [
+    {
+      "id": "field_break",
+      "description": "A short exposed pause with partial health and full focus recovery.",
+      "durationSeconds": 4,
+      "requiresSafeZone": false,
+      "allowInCombat": false,
+      "ambushChance": 0.2,
+      "recovery": [
+        {
+          "resourceId": "health",
+          "mode": "flat",
+          "amount": 2
+        },
+        {
+          "resourceId": "focus",
+          "mode": "full"
+        }
+      ]
+    },
+    {
+      "id": "watchfire_rest",
+      "description": "A safe-zone camp with full health, focus, and resolve recovery and a small ambush risk.",
+      "durationSeconds": 8,
+      "requiresSafeZone": true,
+      "allowInCombat": false,
+      "ambushChance": 0.05,
+      "recovery": [
+        {
+          "resourceId": "health",
+          "mode": "full"
+        },
+        {
+          "resourceId": "focus",
+          "mode": "full"
+        },
+        {
+          "resourceId": "resolve",
+          "mode": "full"
+        }
+      ]
+    },
+    {
+      "id": "trail_pause",
+      "description": "A brief combat-tolerant pause that restores one focus but no health.",
+      "durationSeconds": 2,
+      "requiresSafeZone": false,
+      "allowInCombat": true,
+      "ambushChance": 0,
+      "recovery": [
+        {
+          "resourceId": "focus",
+          "mode": "flat",
+          "amount": 1
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "accepted_use_and_replay",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.redleaf.001",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "inventory": {
+              "redleaf_draught": 1
+            },
+            "health": {
+              "scout": 12
+            },
+            "processedUseIds": [
+              "use.redleaf.001"
+            ],
+            "eventNames": [
+              "inventory.potionUsed",
+              "inventory.consumableCooldownStarted",
+              "inventory.recoveryRequested",
+              "combat.healthRestored"
+            ]
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.redleaf.001",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "inventory": {
+              "redleaf_draught": 1
+            },
+            "health": {
+              "scout": 12
+            },
+            "eventNames": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "shared_cooldown_rejects_before_cost",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.redleaf.002",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "scout"
+        },
+        {
+          "op": "use",
+          "useId": "use.focus.002",
+          "itemId": "focus_phial",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "inventory": {
+              "focus_phial": 2
+            },
+            "health": {
+              "scout": 12
+            },
+            "resources": {
+              "scout": {
+                "focus": 2
+              }
+            },
+            "lastRejected": {
+              "owner": "consumable",
+              "useId": "use.focus.002",
+              "reason": "cooldown"
+            },
+            "eventNames": [
+              "inventory.useRejected"
+            ]
+          }
+        },
+        {
+          "op": "advance",
+          "seconds": 4,
+          "expect": {
+            "cooldowns": [],
+            "eventNames": [
+              "inventory.consumableCooldownCompleted"
+            ]
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.focus.003",
+          "itemId": "focus_phial",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "inventory": {
+              "focus_phial": 1
+            },
+            "resources": {
+              "scout": {
+                "focus": 5
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "stale_cooldown_completion_is_inert",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.redleaf.003",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "scout"
+        },
+        {
+          "op": "expireCooldown",
+          "sourceId": "scout",
+          "cooldownGroupId": "draught",
+          "generation": 1,
+          "expect": {
+            "cooldowns": [],
+            "eventNames": [
+              "inventory.consumableCooldownCompleted"
+            ]
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.redleaf.004",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "warden",
+          "expect": {
+            "cooldowns": [
+              {
+                "sourceId": "scout",
+                "groupId": "draught",
+                "remainingSeconds": 4,
+                "generation": 2
+              }
+            ]
+          }
+        },
+        {
+          "op": "expireCooldown",
+          "sourceId": "scout",
+          "cooldownGroupId": "draught",
+          "generation": 1,
+          "expect": {
+            "cooldowns": [
+              {
+                "sourceId": "scout",
+                "groupId": "draught",
+                "remainingSeconds": 4,
+                "generation": 2
+              }
+            ],
+            "eventNames": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "combat_policy_and_percent_cap",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.salve.001",
+          "itemId": "wayfarer_salve",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "inCombat": true,
+          "expect": {
+            "inventory": {
+              "wayfarer_salve": 1
+            },
+            "health": {
+              "scout": 7
+            },
+            "lastRejected": {
+              "owner": "consumable",
+              "useId": "use.salve.001",
+              "reason": "inCombat"
+            },
+            "eventNames": [
+              "inventory.useRejected"
+            ]
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.salve.002",
+          "itemId": "wayfarer_salve",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "inCombat": false,
+          "expect": {
+            "inventory": {
+              "wayfarer_salve": 0
+            },
+            "health": {
+              "scout": 12
+            },
+            "eventNames": [
+              "inventory.potionUsed",
+              "inventory.potionEmpty",
+              "inventory.consumableCooldownStarted",
+              "inventory.recoveryRequested",
+              "combat.healthRestored"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "multi_operation_use_has_stable_child_ids",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.lantern.001",
+          "itemId": "lantern_tonic",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "resources": {
+              "scout": {
+                "focus": 3
+              }
+            },
+            "statusApplications": [
+              "use.lantern.001.effect.0"
+            ],
+            "eventNames": [
+              "inventory.potionUsed",
+              "inventory.potionEmpty",
+              "inventory.consumableCooldownStarted",
+              "inventory.recoveryRequested",
+              "combat.resourceChanged",
+              "inventory.effectApplicationRequested",
+              "combat.effectApplied"
+            ]
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.lantern.001",
+          "itemId": "lantern_tonic",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "resources": {
+              "scout": {
+                "focus": 3
+              }
+            },
+            "statusApplications": [
+              "use.lantern.001.effect.0"
+            ],
+            "eventNames": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "status_and_cleanse_use_one_owner",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.snare.001",
+          "itemId": "snaring_vial",
+          "sourceId": "scout",
+          "targetId": "bog_target",
+          "expect": {
+            "statusApplications": [
+              "use.snare.001.effect.0"
+            ]
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.clear.001",
+          "itemId": "clearwater_phial",
+          "sourceId": "scout",
+          "targetId": "bog_target",
+          "expect": {
+            "statusApplications": [],
+            "eventNames": [
+              "inventory.potionUsed",
+              "inventory.potionEmpty",
+              "inventory.consumableCooldownStarted",
+              "inventory.cleanseRequested",
+              "combat.effectCleansed",
+              "combat.effectRemoved"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rest_eligibility_rejections_do_not_recover",
+      "steps": [
+        {
+          "op": "rest",
+          "restId": "rest.unsafe.001",
+          "profileId": "watchfire_rest",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": false,
+          "inCombat": false,
+          "ambushRoll": 0.9,
+          "expect": {
+            "health": {
+              "scout": 7
+            },
+            "resources": {
+              "scout": {
+                "focus": 2
+              }
+            },
+            "activeRest": null,
+            "lastRejected": {
+              "owner": "rest",
+              "restId": "rest.unsafe.001",
+              "reason": "unsafe"
+            },
+            "eventNames": [
+              "world.restRejected"
+            ]
+          }
+        },
+        {
+          "op": "rest",
+          "restId": "rest.combat.001",
+          "profileId": "watchfire_rest",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": true,
+          "inCombat": true,
+          "ambushRoll": 0.9,
+          "expect": {
+            "health": {
+              "scout": 7
+            },
+            "activeRest": null,
+            "lastRejected": {
+              "owner": "rest",
+              "restId": "rest.combat.001",
+              "reason": "inCombat"
+            },
+            "processedRestIds": [
+              "rest.combat.001",
+              "rest.unsafe.001"
+            ],
+            "eventNames": [
+              "world.restRejected"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "completed_rest_recovers_once",
+      "steps": [
+        {
+          "op": "rest",
+          "restId": "rest.watch.001",
+          "profileId": "watchfire_rest",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": true,
+          "inCombat": false,
+          "ambushRoll": 0.9,
+          "expect": {
+            "activeRest": {
+              "restId": "rest.watch.001",
+              "generation": 1,
+              "remainingSeconds": 8
+            },
+            "eventNames": [
+              "world.restStarted"
+            ]
+          }
+        },
+        {
+          "op": "advance",
+          "seconds": 8,
+          "expect": {
+            "health": {
+              "scout": 12
+            },
+            "resources": {
+              "scout": {
+                "focus": 8,
+                "resolve": 3
+              }
+            },
+            "activeRest": null,
+            "eventNames": [
+              "world.restCompleted",
+              "combat.healthRestored",
+              "combat.resourceChanged",
+              "combat.resourceChanged"
+            ]
+          }
+        },
+        {
+          "op": "expireRest",
+          "restId": "rest.watch.001",
+          "generation": 1,
+          "expect": {
+            "health": {
+              "scout": 12
+            },
+            "resources": {
+              "scout": {
+                "focus": 8,
+                "resolve": 3
+              }
+            },
+            "eventNames": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "damage_interrupts_and_stale_rest_timer_is_inert",
+      "steps": [
+        {
+          "op": "rest",
+          "restId": "rest.field.001",
+          "profileId": "field_break",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": false,
+          "inCombat": false,
+          "ambushRoll": 0.9
+        },
+        {
+          "op": "hit",
+          "targetId": "scout",
+          "expect": {
+            "health": {
+              "scout": 7
+            },
+            "resources": {
+              "scout": {
+                "focus": 2
+              }
+            },
+            "activeRest": null,
+            "eventNames": [
+              "world.restInterrupted"
+            ]
+          }
+        },
+        {
+          "op": "expireRest",
+          "restId": "rest.field.001",
+          "generation": 1,
+          "expect": {
+            "health": {
+              "scout": 7
+            },
+            "resources": {
+              "scout": {
+                "focus": 2
+              }
+            },
+            "eventNames": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ambush_interrupts_without_recovery",
+      "steps": [
+        {
+          "op": "rest",
+          "restId": "rest.field.002",
+          "profileId": "field_break",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": false,
+          "inCombat": false,
+          "ambushRoll": 0.1
+        },
+        {
+          "op": "advance",
+          "seconds": 4,
+          "expect": {
+            "health": {
+              "scout": 7
+            },
+            "resources": {
+              "scout": {
+                "focus": 2
+              }
+            },
+            "activeRest": null,
+            "eventNames": [
+              "world.restInterrupted",
+              "world.restAmbushRequested"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "new_rest_rejects_while_one_is_active",
+      "steps": [
+        {
+          "op": "rest",
+          "restId": "rest.trail.001",
+          "profileId": "trail_pause",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": false,
+          "inCombat": true,
+          "ambushRoll": 0.9
+        },
+        {
+          "op": "rest",
+          "restId": "rest.trail.002",
+          "profileId": "trail_pause",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": false,
+          "inCombat": true,
+          "ambushRoll": 0.9,
+          "expect": {
+            "activeRest": {
+              "restId": "rest.trail.001",
+              "generation": 1,
+              "remainingSeconds": 2
+            },
+            "resources": {
+              "scout": {
+                "focus": 2
+              }
+            },
+            "lastRejected": {
+              "owner": "rest",
+              "restId": "rest.trail.002",
+              "reason": "alreadyResting"
+            },
+            "eventNames": [
+              "world.restRejected"
+            ]
+          }
+        },
+        {
+          "op": "interruptRest",
+          "restId": "rest.trail.001",
+          "reason": "manual"
+        },
+        {
+          "op": "rest",
+          "restId": "rest.trail.003",
+          "profileId": "trail_pause",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": false,
+          "inCombat": true,
+          "ambushRoll": 0.9,
+          "expect": {
+            "activeRest": {
+              "restId": "rest.trail.003",
+              "generation": 2,
+              "remainingSeconds": 2
+            }
+          }
+        },
+        {
+          "op": "expireRest",
+          "restId": "rest.trail.001",
+          "generation": 1,
+          "expect": {
+            "activeRest": {
+              "restId": "rest.trail.003",
+              "generation": 2,
+              "remainingSeconds": 2
+            },
+            "eventNames": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "snapshot_restore_preserves_ledgers_and_pending_rest",
+      "steps": [
+        {
+          "op": "use",
+          "useId": "use.redleaf.005",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "scout"
+        },
+        {
+          "op": "rest",
+          "restId": "rest.watch.002",
+          "profileId": "watchfire_rest",
+          "memberIds": [
+            "scout"
+          ],
+          "safeZone": true,
+          "inCombat": false,
+          "ambushRoll": 0.9
+        },
+        {
+          "op": "snapshot"
+        },
+        {
+          "op": "advance",
+          "seconds": 8
+        },
+        {
+          "op": "restore",
+          "expect": {
+            "health": {
+              "scout": 12
+            },
+            "resources": {
+              "scout": {
+                "focus": 2,
+                "resolve": 1
+              }
+            },
+            "activeRest": {
+              "restId": "rest.watch.002",
+              "generation": 1,
+              "remainingSeconds": 8
+            },
+            "processedUseIds": [
+              "use.redleaf.005"
+            ],
+            "processedRestIds": [
+              "rest.watch.002"
+            ],
+            "eventNames": []
+          }
+        },
+        {
+          "op": "use",
+          "useId": "use.redleaf.005",
+          "itemId": "redleaf_draught",
+          "sourceId": "scout",
+          "targetId": "scout",
+          "expect": {
+            "inventory": {
+              "redleaf_draught": 1
+            },
+            "eventNames": []
+          }
+        },
+        {
+          "op": "advance",
+          "seconds": 8,
+          "expect": {
+            "health": {
+              "scout": 12
+            },
+            "resources": {
+              "scout": {
+                "focus": 8,
+                "resolve": 3
+              }
+            },
+            "activeRest": null
+          }
+        }
+      ]
+    }
+  ]
+}
