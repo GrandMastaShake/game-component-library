@@ -1,8 +1,8 @@
 {
   "id": "genre.exploration_collectathon",
   "name": "Exploration / Collectathon",
-  "description": "The wander-and-complete genre: a world dense with shinies, secrets, and traversal puzzles, where the scoreboard is a completion percentage. This pack layers completion accounting, secret discovery, guided hinting, grapple traversal, and photo mode over the existing platformer kit — the movement verbs stay generic so the same pack can dress a voxel island or an isometric diorama. The design stance: every collectible is found by looking, movement is the puzzle, and the hunt ends in a fanfare the player earned, not a waypoint the game surrendered. Original collectible props can now use canonical POLYFORGE sources, strict triangle budgets, measured LODs, and runtime distance selection.",
-  "version": "0.2.0",
+  "description": "The wander-and-complete genre: a world dense with shinies, secrets, and traversal puzzles, where the scoreboard is a completion percentage. This pack layers completion accounting, secret discovery, guided hinting, grapple traversal, and photo mode over the existing platformer kit — the movement verbs stay generic so the same pack can dress a voxel island or an isometric diorama. The design stance: every collectible is found by looking, movement is the puzzle, and the hunt ends in a fanfare the player earned, not a waypoint the game surrendered. Original collectible props can now use canonical POLYFORGE sources, non-destructive typed geometry graphs, strict triangle budgets, measured LODs, and runtime distance selection.",
+  "version": "0.2.1",
   "loop": "wander → spot shiny → reach it (movement puzzle) → completion %",
   "views": [
     "voxel",
@@ -30,7 +30,8 @@
     "movement.grapple_traversal",
     "presentation.photo_mode",
     "presentation.asset_core",
-    "presentation.asset_baker"
+    "presentation.asset_baker",
+    "presentation.geometry_graph"
   ],
   "signatureCompound": {
     "name": "Hundred Percent Run",
@@ -49,6 +50,7 @@
     "completion",
     "traversal",
     "procedural-assets",
+    "geometry-nodes",
     "performance-budgets"
   ]
 }

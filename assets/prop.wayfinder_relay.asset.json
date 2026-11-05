@@ -1,0 +1,55 @@
+{
+  "description": "Deterministic POLYFORGE bake of prop.wayfinder_relay with 56 editable-source triangles.",
+  "format": "gltf-binary",
+  "forwardAxis": "+z",
+  "id": "prop.wayfinder_relay",
+  "levels": [
+    {
+      "bytes": 3560,
+      "distanceBand": "hero",
+      "file": "assets/prop.wayfinder_relay.lod0.glb",
+      "level": "lod0",
+      "triangles": 56
+    },
+    {
+      "bytes": 3332,
+      "distanceBand": "gameplay",
+      "file": "assets/prop.wayfinder_relay.lod1.glb",
+      "level": "lod1",
+      "triangles": 48
+    },
+    {
+      "bytes": 2852,
+      "distanceBand": "far",
+      "file": "assets/prop.wayfinder_relay.lod2.glb",
+      "level": "lod2",
+      "triangles": 32
+    },
+    {
+      "bytes": 2612,
+      "distanceBand": "proxy",
+      "file": "assets/prop.wayfinder_relay.lod3.glb",
+      "level": "lod3",
+      "triangles": 24
+    }
+  ],
+  "name": "Wayfinder Relay",
+  "provenance": "Original procedural geometry generated and measured by the library-native POLYFORGE asset pipeline; no third-party mesh, texture, or commercial game content is included.",
+  "sockets": [
+    {
+      "name": "attachment",
+      "position": [
+        0,
+        4.584999999999999,
+        0
+      ]
+    }
+  ],
+  "source": {
+    "kind": "generated",
+    "repository": "GrandMastaShake/game-component-library",
+    "script": "web-adapters/native/polyforge/asset-baker.js",
+    "tool": "POLYFORGE Asset Baker 0.5.0"
+  },
+  "units": "metres"
+}

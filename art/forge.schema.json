@@ -117,9 +117,14 @@
         "required": ["id", "type"],
         "properties": {
           "id": {"type": "string", "pattern": "^op[0-9]{6}$"},
-          "type": {"type": "string", "enum": ["move", "split", "deleteFace", "extrudeFace"]},
+          "type": {"type": "string", "enum": ["move", "split", "deleteFace", "extrudeFace", "transform"]},
           "vertexIds": {"type": "array", "items": {"type": "string"}},
           "delta": {"$ref": "#/definitions/vector3"},
+          "translation": {"$ref": "#/definitions/vector3"},
+          "scale": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
+          "rotation": {"$ref": "#/definitions/vector3"},
+          "pivot": {"$ref": "#/definitions/vector3"},
+          "includeSockets": {"type": "boolean"},
           "edgeId": {"type": "string"},
           "faceId": {"type": "string"},
           "distance": {"type": "number"}
