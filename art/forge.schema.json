@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PolyforgeEditableAsset",
+  "description": "Canonical editable POLYFORGE source. Stable vertex, edge, face, corner, and operation identities are the editing API; array positions are not. Runtime meshes and GLBs are derived artifacts.",
+  "type": "object",
+  "required": ["format", "version", "id", "name", "units", "forwardAxis", "generator", "vertices", "edges", "faces", "materials", "uvSets", "sockets", "budgets", "operations", "nextIds", "checksum"],
+  "additionalProperties": false,
+  "properties": {
+    "format": {"type": "string", "const": "polyforge.forge"},
+    "version": {"type": "string", "const": "1.0.0"},
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"},
+    "name": {"type": "string", "minLength": 1},
+    "units": {"type": "string", "enum": ["metres"]},
+    "forwardAxis": {"type": "string", "enum": ["+x", "-x", "+z", "-z"]},
+    "generator": {
+      "type": "object",
+      "required": ["kind", "settings", "operations"],
+      "properties": {
+        "kind": {"type": "string", "const": "polyforge"},
+        "settings": {"type": "object"},
+        "operations": {"type": "array"}
+      }
+    },
+    "vertices": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "position", "color", "skinWeights"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^v[0-9]{6}$"},
+          "position": {"$ref": "#/definitions/vector3"},
+          "color": {"$ref": "#/definitions/vector3"},
+          "skinWeights": {"type": "array"}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "vertices"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^e[0-9]{6}$"},
+          "vertices": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string"}}
+        }
+      }
+    },
+    "faces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "materialId", "corners"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^f[0-9]{6}$"},
+          "materialId": {"type": "string"},
+          "corners": {"type": "array", "minItems": 3, "items": {"$ref": "#/definitions/corner"}}
+        }
+      }
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "baseColor", "metallic", "roughness"],
+        "properties": {
+          "id": {"type": "string"},
+          "baseColor": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+          "metallic": {"type": "number", "minimum": 0, "maximum": 1},
+          "roughness": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "uvSets": {"type": "array", "description": "Named UV-set declarations. Unwrapping and packing belong to the UV workspace pack."},
+    "sockets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "position"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "position": {"$ref": "#/definitions/vector3"}
+        }
+      }
+    },
+    "budgets": {
+      "type": "object",
+      "required": ["levels"],
+      "additionalProperties": false,
+      "properties": {
+        "levels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["level", "distanceBand", "maxTriangles"],
+            "additionalProperties": false,
+            "properties": {
+              "level": {"type": "string", "pattern": "^lod[0-9]$"},
+              "distanceBand": {"type": "string", "enum": ["hero", "gameplay", "far", "proxy"]},
+              "maxTriangles": {"type": "integer", "minimum": 1}
+            }
+          }
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^op[0-9]{6}$"},
+          "type": {"type": "string", "enum": ["move", "split", "deleteFace", "extrudeFace"]},
+          "vertexIds": {"type": "array", "items": {"type": "string"}},
+          "delta": {"$ref": "#/definitions/vector3"},
+          "edgeId": {"type": "string"},
+          "faceId": {"type": "string"},
+          "distance": {"type": "number"}
+        }
+      }
+    },
+    "nextIds": {
+      "type": "object",
+      "required": ["vertex", "edge", "face", "corner", "operation"],
+      "additionalProperties": false,
+      "properties": {
+        "vertex": {"type": "integer", "minimum": 0},
+        "edge": {"type": "integer", "minimum": 0},
+        "face": {"type": "integer", "minimum": 0},
+        "corner": {"type": "integer", "minimum": 0},
+        "operation": {"type": "integer", "minimum": 0}
+      }
+    },
+    "checksum": {"type": "string", "pattern": "^fnv1a32:[0-9a-f]{8}$"}
+  },
+  "definitions": {
+    "vector3": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+    "corner": {
+      "type": "object",
+      "required": ["id", "vertexId"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^c[0-9]{6}$"},
+        "vertexId": {"type": "string"},
+        "normal": {"$ref": "#/definitions/vector3"},
+        "uv": {"type": "object", "additionalProperties": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}}}
+      }
+    }
+  }
+}

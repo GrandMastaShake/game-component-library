@@ -1,9 +1,9 @@
 {
   "id": "genre.exploration_collectathon",
   "name": "Exploration / Collectathon",
-  "description": "The wander-and-complete genre: a world dense with shinies, secrets, and traversal puzzles, where the scoreboard is a completion percentage. This pack layers completion accounting, secret discovery, guided hinting, grapple traversal, and photo mode over the existing platformer kit \u2014 the movement verbs stay generic so the same pack can dress a voxel island or an isometric diorama. The design stance: every collectible is found by looking, movement is the puzzle, and the hunt ends in a fanfare the player earned, not a waypoint the game surrendered.",
-  "version": "0.1.0",
-  "loop": "wander \u2192 spot shiny \u2192 reach it (movement puzzle) \u2192 completion %",
+  "description": "The wander-and-complete genre: a world dense with shinies, secrets, and traversal puzzles, where the scoreboard is a completion percentage. This pack layers completion accounting, secret discovery, guided hinting, grapple traversal, and photo mode over the existing platformer kit — the movement verbs stay generic so the same pack can dress a voxel island or an isometric diorama. The design stance: every collectible is found by looking, movement is the puzzle, and the hunt ends in a fanfare the player earned, not a waypoint the game surrendered. Original collectible props can now use canonical POLYFORGE sources, strict triangle budgets, measured LODs, and runtime distance selection.",
+  "version": "0.2.0",
+  "loop": "wander → spot shiny → reach it (movement puzzle) → completion %",
   "views": [
     "voxel",
     "isometric"
@@ -19,14 +19,18 @@
     "progression.level_goal",
     "presentation.camera_follow",
     "presentation.audio_system",
-    "economy.collectible_scatter"
+    "economy.collectible_scatter",
+    "presentation.low_poly_generator",
+    "presentation.lod_system"
   ],
   "newComponents": [
     "progression.completion_tracker",
     "world.hidden_alcove",
     "ui.guided_hint_system",
     "movement.grapple_traversal",
-    "presentation.photo_mode"
+    "presentation.photo_mode",
+    "presentation.asset_core",
+    "presentation.asset_baker"
   ],
   "signatureCompound": {
     "name": "Hundred Percent Run",
@@ -43,6 +47,8 @@
     "collectathon",
     "exploration",
     "completion",
-    "traversal"
+    "traversal",
+    "procedural-assets",
+    "performance-budgets"
   ]
 }

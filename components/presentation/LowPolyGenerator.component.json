@@ -2,8 +2,8 @@
   "id": "presentation.low_poly_generator",
   "name": "Low-Poly Generator",
   "category": "presentation",
-  "description": "Generates deterministic low-poly meshes from parameters or natural-language prompts, inspects quad-dominant topology, and replays vertex, edge, and face edits. The native WebGL brick is UI-independent and requires no hosted AI provider.",
-  "version": "0.2.0",
+  "description": "Generates deterministic low-poly meshes from parameters or natural-language prompts, inspects quad-dominant topology, replays legacy numeric mesh edits, and enforces targetFaceCount as a measured triangle ceiling through topology-guarded reduction. The native WebGL brick is UI-independent and requires no hosted AI provider. Stable-ID editing and runtime baking are owned by presentation.asset_core and presentation.asset_baker.",
+  "version": "0.3.0",
   "platform": [
     "roblox",
     "godot",
@@ -22,7 +22,7 @@
       "target": "webgl",
       "status": "running",
       "module": "web-adapters/native/polyforge/index.js",
-      "note": "Library-native POLYFORGE brick with deterministic Node tests for all nine prompt families and component-edit operations."
+      "note": "Library-native POLYFORGE brick with deterministic Node tests for every primitive/prompt family, legacy edits, enforced triangle ceilings, canonical assets, LOD baking, and GLB readback."
     },
     {
       "target": "godot",
@@ -114,6 +114,11 @@
     {
       "name": "quadFaces",
       "type": "array"
+    },
+    {
+      "name": "performanceBudget",
+      "type": "object",
+      "description": "Present when targetFaceCount is supplied; reports original, measured, target, collapse count, and withinBudget."
     }
   ],
   "events": {
@@ -134,6 +139,6 @@
     "mesh-editing"
   ],
   "sourceModule": "roblox-modular-lib/src/LowPolyGenerator.lua",
-  "provenance": "Adapted from POLYFORGE v0.3 as the native WebGL implementation of this existing contract; not a voxel mesher, scene editor UI, or hosted AI service.",
+  "provenance": "Adapted from POLYFORGE v0.3 and extended with v0.4 measured budget enforcement; not a voxel mesher, scene editor UI, or hosted AI service.",
   "implementationPath": "web-adapters/native/polyforge/index.js"
 }
