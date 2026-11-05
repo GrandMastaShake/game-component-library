@@ -186,7 +186,7 @@ test('budget configuration is semantic graph data and strict baking measures eve
       { level: 'lod0', distanceBand: 'hero', maxTriangles: 56 },
       { level: 'lod1', distanceBand: 'gameplay', maxTriangles: 40 },
       { level: 'lod2', distanceBand: 'far', maxTriangles: 32 },
-      { level: 'lod3', distanceBand': 'proxy', maxTriangles: 24 },
+      { level: 'lod3', distanceBand: 'proxy', maxTriangles: 24 },
     ] } }],
     links: [...graph.links.filter((link) => link.to.node !== 'n000004'), { id: 'l000005', from: { node: 'n000003', socket: 'asset' }, to: { node: 'n000006', socket: 'asset' } }, { id: 'l000006', from: { node: 'n000006', socket: 'asset' }, to: { node: 'n000004', socket: 'asset' } }],
     outputs: graph.outputs,
