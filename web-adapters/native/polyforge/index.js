@@ -5,9 +5,11 @@ import { buildQuadDominant } from './quad-mesh.js'
 import { decimateMeshData, geometryToMeshData, meshDataToGeometry } from './mesh-data.js'
 import { applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, checksumAssetDocument, createAssetDocument, defaultBudgets, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument } from './asset-core.js'
 import { bakeAsset, encodeGLB, inspectGLB } from './asset-baker.js'
+import { GEOMETRY_GRAPH_FORMAT, GEOMETRY_GRAPH_VERSION, GEOMETRY_NODE_TYPES, GeometryGraphEvaluator, applyGeometryGraphOperations, bakeGeometryGraph, checksumGeometryGraph, createGeometryGraph, evaluateGeometryGraph, parseGeometryGraph, serializeGeometryGraph, validateGeometryGraph } from './geometry-graph.js'
 
 export { DEFAULTS, PRESETS, PROMPT_OBJECTS, analyzeTopology, applyMeshEdits, buildQuadDominant, interpretPrompt, readMeshEdits, resolvePrompt }
 export { applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, bakeAsset, checksumAssetDocument, createAssetDocument, decimateMeshData, defaultBudgets, encodeGLB, inspectGLB, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument }
+export { GEOMETRY_GRAPH_FORMAT, GEOMETRY_GRAPH_VERSION, GEOMETRY_NODE_TYPES, GeometryGraphEvaluator, applyGeometryGraphOperations, bakeGeometryGraph, checksumGeometryGraph, createGeometryGraph, evaluateGeometryGraph, parseGeometryGraph, serializeGeometryGraph, validateGeometryGraph }
 
 export function normalizeSettings(input = {}) {
   const settings = { ...DEFAULTS, ...input }
