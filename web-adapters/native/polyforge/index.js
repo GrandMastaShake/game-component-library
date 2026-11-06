@@ -4,10 +4,10 @@ import { applyMeshEdits, readMeshEdits } from './mesh-edit.js'
 import { buildQuadDominant } from './quad-mesh.js'
 import { decimateMeshData, geometryToMeshData, meshDataToGeometry } from './mesh-data.js'
 import { applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, checksumAssetDocument, createAssetDocument, defaultBudgets, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument } from './asset-core.js'
-import { bakeAsset, encodeGLB, inspectGLB } from './asset-baker.js'
+import { DEFAULT_FILE_ROOT, bakeAsset, encodeGLB, inspectGLB } from './asset-baker.js'
 
 export { DEFAULTS, PRESETS, PROMPT_OBJECTS, analyzeTopology, applyMeshEdits, buildQuadDominant, interpretPrompt, readMeshEdits, resolvePrompt }
-export { applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, bakeAsset, checksumAssetDocument, createAssetDocument, decimateMeshData, defaultBudgets, encodeGLB, inspectGLB, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument }
+export { DEFAULT_FILE_ROOT, applyAssetOperations, assetDocumentStats, assetDocumentToMeshData, bakeAsset, checksumAssetDocument, createAssetDocument, decimateMeshData, defaultBudgets, encodeGLB, inspectGLB, parseAssetDocument, serializeAssetDocument, stableStringify, validateAssetDocument }
 
 export function normalizeSettings(input = {}) {
   const settings = { ...DEFAULTS, ...input }
@@ -53,7 +53,9 @@ export function generate(input = {}) {
     faceReductionRatio: quadMesh.stats.faceReductionRatio,
     ...(budget ? { budget } : {}),
   }
-  return { geometry, settings, operations, faces: quadMesh.faces, stats }
+  // The contract's `performanceBudget` output: present only when a budget was
+  // asked for. Also kept at stats.budget, where 0.4.0 put it.
+  return { geometry, settings, operations, faces: quadMesh.faces, stats, ...(budget ? { performanceBudget: { ...budget } } : {}) }
 }
 
 /** Resolve a natural-language prompt locally, or through an optional async adapter. */
@@ -80,11 +82,11 @@ export function toMeshData(result) {
 }
 
 /** Generate, canonicalize, budget, export, and read back an original asset. */
-export function bakeGeneratedAsset({ id, name, input = {}, budgets, sockets, materials, strict = true }) {
+export function bakeGeneratedAsset({ id, name, input = {}, budgets, sockets, materials, strict = true, fileRoot }) {
   const result = generate(input)
   try {
     const document = createAssetDocument({ id, name, result, budgets, sockets, materials })
-    return bakeAsset(document, { strict })
+    return bakeAsset(document, { strict, ...(fileRoot !== undefined ? { fileRoot } : {}) })
   } finally {
     result.geometry.dispose()
   }
@@ -122,7 +124,7 @@ export class LowPolyGenerator {
     }
   }
 
-  bakeAsset({ id, name, budgets, sockets, materials, strict = true, ...overrides } = {}) {
-    return bakeGeneratedAsset({ id, name, input: { ...this.defaults, ...overrides }, budgets, sockets, materials, strict })
+  bakeAsset({ id, name, budgets, sockets, materials, strict = true, fileRoot, ...overrides } = {}) {
+    return bakeGeneratedAsset({ id, name, input: { ...this.defaults, ...overrides }, budgets, sockets, materials, strict, fileRoot })
   }
 }

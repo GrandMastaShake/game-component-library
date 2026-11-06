@@ -184,8 +184,24 @@ export function inspectGLB(input) {
   }
 }
 
+/**
+ * Where a consumer keeps the baked levels, relative to its own repository root.
+ * A descriptor is a claim about files in the CONSUMING repository (the library
+ * commits no GLBs), so `file` has to name the path that repository serves them
+ * from. Every other generated prop in assets/ already says public/assets/generated/.
+ */
+export const DEFAULT_FILE_ROOT = 'public/assets/generated'
+
+function checkFileRoot(fileRoot) {
+  if (typeof fileRoot !== 'string' || !/^[a-z0-9_.-]+(\/[a-z0-9_.-]+)*$/i.test(fileRoot) || fileRoot.split('/').includes('..')) {
+    throw new Error(`fileRoot must be a relative path with no '..' segments, got ${JSON.stringify(fileRoot)}`)
+  }
+  return fileRoot
+}
+
 /** Bake every declared budget and derive the runtime descriptor from GLB readback. */
-export function bakeAsset(document, { strict = true } = {}) {
+export function bakeAsset(document, { strict = true, fileRoot = DEFAULT_FILE_ROOT } = {}) {
+  const root = checkFileRoot(fileRoot)
   const sourceStats = validateAssetDocument(document)
   if (document.materials.length !== 1) throw new Error('Asset Baker 0.4 exports one material; multi-material baking belongs to the material pack')
   const source = assetDocumentToMeshData(document)
@@ -217,7 +233,7 @@ export function bakeAsset(document, { strict = true } = {}) {
     levels: levels.map((level) => ({
       level: level.level,
       distanceBand: level.distanceBand,
-      file: `assets/${document.id}.${level.level}.glb`,
+      file: `${root}/${document.id}.${level.level}.glb`,
       triangles: level.readback.triangles,
       bytes: level.readback.bytes,
     })),
