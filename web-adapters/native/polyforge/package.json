@@ -1,7 +1,7 @@
 {
   "name": "@game-component-library/polyforge",
-  "version": "0.4.0",
-  "description": "Native WebGL low-poly generation, canonical asset documents, deterministic LOD baking, and GLB readback.",
+  "version": "0.5.0",
+  "description": "Native WebGL low-poly generation, canonical assets, typed geometry graphs, deterministic LOD baking, and GLB readback.",
   "type": "module",
   "private": true,
   "engines": {

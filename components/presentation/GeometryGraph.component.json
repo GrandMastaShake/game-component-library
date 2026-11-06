@@ -1,0 +1,39 @@
+{
+  "id": "presentation.geometry_graph",
+  "name": "POLYFORGE Geometry Graph",
+  "category": "presentation",
+  "description": "Compiles canonical non-destructive geometry DAGs into .forge.json assets. Stable node/link identities, typed sockets, deterministic topological evaluation, cycle and duplicate-input rejection, content checksums, graph editing commands, per-run dependency pruning, and mutation-isolated evaluation caches make procedural assets reproducible. Nodes generate or accept canonical sources, apply stable-ID geometry edits and transforms, configure LOD budgets, measure topology, and expose typed outputs. Authoring only; Asset Baker remains responsible for simplification and GLB export.",
+  "version": "0.1.0",
+  "platform": ["web", "agnostic"],
+  "implementations": [
+    {"target": "webgl", "status": "running", "module": "web-adapters/native/polyforge/geometry-graph.js", "note": "Typed ten-node runtime, deterministic graph serialization/editing/evaluation, canonical source generation, transform and budget nodes, content-keyed caching, and direct Asset Baker integration covered by native and independent Python tests."},
+    {"target": "godot", "status": "unmapped", "module": null},
+    {"target": "roblox", "status": "unmapped", "module": null},
+    {"target": "unity", "status": "unmapped", "module": null}
+  ],
+  "inputs": [
+    {"name": "graphDocument", "type": "object", "required": true, "description": "Validated polyforge.geometry 1.0 document with stable node and link IDs."},
+    {"name": "sourceDocument", "type": "object", "required": false, "description": "External canonical .forge.json input for source.asset; embedded source.generate nodes need no external document."},
+    {"name": "graphOperations", "type": "array", "required": false, "default": [], "description": "Non-mutating add/remove node/link, parameter, and output editing commands."}
+  ],
+  "outputs": [
+    {"name": "forgeDocument", "type": "object", "description": "Fresh canonical asset evaluated from the graph's asset output."},
+    {"name": "evaluationTrace", "type": "array", "description": "Deterministic node order with per-output asset checksums and measurements."},
+    {"name": "topologyStats", "type": "object"},
+    {"name": "graphChecksum", "type": "string"}
+  ],
+  "events": {
+    "emits": ["presentation.geometryGraphChanged", "presentation.geometryGraphEvaluated", "presentation.assetDocumentChanged"],
+    "listensTo": ["presentation.geometryGraphChanged", "presentation.assetDocumentChanged"]
+  },
+  "eventIntents": {
+    "presentation.geometryGraphChanged": ["graph-edit", "cache-invalidation"],
+    "presentation.geometryGraphEvaluated": ["authoring-diagnostics", "cache-invalidation"],
+    "presentation.assetDocumentChanged": ["asset-source", "bake"]
+  },
+  "sinkFor": [],
+  "dependencies": ["presentation.low_poly_generator", "presentation.asset_core"],
+  "tags": ["mesh", "geometry-nodes", "dag", "non-destructive", "stable-ids", "typed-links", "deterministic", "cache", "webgl"],
+  "provenance": "Original library-native procedural authoring layer implemented for POLYFORGE; the DAG format, typed compiler, stable graph commands, caching, and original example contain no third-party code or commercial game content.",
+  "implementationPath": "web-adapters/native/polyforge/geometry-graph.js"
+}

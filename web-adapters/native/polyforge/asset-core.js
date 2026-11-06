@@ -251,6 +251,24 @@ function faceNormal(face, vertices) {
   return normal.map((value) => value / length)
 }
 
+function transformPoint(point, operation) {
+  const translation = operation.translation ?? [0, 0, 0]
+  const scale = operation.scale ?? [1, 1, 1]
+  const rotation = operation.rotation ?? [0, 0, 0]
+  const pivot = operation.pivot ?? [0, 0, 0]
+  finiteVector(translation, 3, 'Transform translation')
+  finiteVector(scale, 3, 'Transform scale')
+  finiteVector(rotation, 3, 'Transform rotation')
+  finiteVector(pivot, 3, 'Transform pivot')
+  if (scale.some((value) => value <= 0)) throw new Error('Transform scale components must be positive')
+  const [rx, ry, rz] = rotation.map((value) => value * Math.PI / 180)
+  let [x, y, z] = point.map((value, axis) => (value - pivot[axis]) * scale[axis])
+  ;[y, z] = [y * Math.cos(rx) - z * Math.sin(rx), y * Math.sin(rx) + z * Math.cos(rx)]
+  ;[x, z] = [x * Math.cos(ry) + z * Math.sin(ry), -x * Math.sin(ry) + z * Math.cos(ry)]
+  ;[x, y] = [x * Math.cos(rz) - y * Math.sin(rz), x * Math.sin(rz) + y * Math.cos(rz)]
+  return [x + pivot[0] + translation[0], y + pivot[1] + translation[1], z + pivot[2] + translation[2]]
+}
+
 /** Apply stable-ID edits without mutating the source document. */
 export function applyAssetOperations(source, operations) {
   validateAssetDocument(source)
@@ -289,6 +307,22 @@ export function applyAssetOperations(source, operations) {
         adjacent += 1
       }
       if (!adjacent) throw new Error(`Edge ${edge.id} has no adjacent face`)
+    } else if (operation.type === 'transform') {
+      const vertexIds = operation.vertexIds ?? document.vertices.map((vertex) => vertex.id)
+      if (!Array.isArray(vertexIds) || !vertexIds.length || new Set(vertexIds).size !== vertexIds.length) {
+        throw new Error('Transform needs unique vertexIds, or omit them to transform the whole asset')
+      }
+      const selected = new Set(vertexIds)
+      for (const id of selected) {
+        if (!vertices.has(id)) throw new Error(`Selected vertex no longer exists: ${id}`)
+      }
+      for (const vertex of document.vertices) {
+        if (selected.has(vertex.id)) vertex.position = transformPoint(vertex.position, operation)
+      }
+      if (operation.includeSockets) {
+        if (selected.size !== document.vertices.length) throw new Error('Socket transforms require the whole asset')
+        document.sockets.forEach((socket) => { socket.position = transformPoint(socket.position, operation) })
+      }
     } else if (operation.type === 'deleteFace') {
       const before = document.faces.length
       document.faces = document.faces.filter((face) => face.id !== operation.faceId)

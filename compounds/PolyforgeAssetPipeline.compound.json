@@ -1,23 +1,26 @@
 {
   "id": "compound.polyforge_asset_pipeline",
   "name": "POLYFORGE Asset Pipeline",
-  "version": "0.1.0",
-  "description": "Generate an original low-poly mesh, canonicalize it into a stable-ID editable asset, bake strict budgeted LODs with measured GLB readback, and hand those levels to the runtime distance selector.",
+  "version": "0.2.0",
+  "description": "Generate an original low-poly mesh, canonicalize it into a stable-ID editable asset, evaluate non-destructive typed geometry nodes, bake strict budgeted LODs with measured GLB readback, and hand those levels to the runtime distance selector.",
   "targetPlatform": "webgl",
   "components": [
     {"id": "presentation.low_poly_generator", "role": "deterministic original mesh source", "config": {"primitive": "crystal", "seed": 20261105, "targetFaceCount": 200}},
     {"id": "presentation.asset_core", "role": "canonical editable source and stable-ID operations", "config": {"assetId": "prop.wayfinder"}},
+    {"id": "presentation.geometry_graph", "role": "non-destructive typed geometry DAG and deterministic evaluation", "config": {"graphId": "graph.wayfinder_relay"}},
     {"id": "presentation.asset_baker", "role": "offline LOD generation, GLB export, and readback", "config": {"strictBudgets": true}},
     {"id": "presentation.lod_system", "role": "runtime distance-based level selection", "config": {"lodThresholds": [5, 20, 50]}}
   ],
   "connections": [
     {"from": "presentation.low_poly_generator", "event": "presentation.meshGenerated", "to": "presentation.asset_core", "note": "The generated mesh initializes the canonical editable document."},
-    {"from": "presentation.asset_core", "event": "presentation.assetDocumentChanged", "to": "presentation.asset_baker", "note": "Only validated source revisions are baked."},
+    {"from": "presentation.asset_core", "event": "presentation.assetDocumentChanged", "to": "presentation.geometry_graph", "note": "A source.asset node can consume the current canonical revision without embedding it."},
+    {"from": "presentation.geometry_graph", "event": "presentation.assetDocumentChanged", "to": "presentation.asset_baker", "note": "Only validated graph-evaluated source revisions are baked."},
     {"from": "presentation.asset_baker", "event": "presentation.assetBaked", "to": "presentation.lod_system", "note": "Runtime selection consumes measured levels, not authoring estimates."}
   ],
-  "criticalComponents": ["presentation.low_poly_generator", "presentation.asset_core", "presentation.asset_baker"],
+  "criticalComponents": ["presentation.low_poly_generator", "presentation.asset_core", "presentation.geometry_graph", "presentation.asset_baker"],
   "acceptanceCriteria": [
-    "Identical inputs produce identical canonical source and GLB bytes.",
+    "Identical graph and source inputs produce identical canonical source, evaluation traces, and GLB bytes.",
+    "Geometry graphs reject cycles, unknown sockets, incompatible types, and multiple inbound links before evaluation.",
     "Every generated family respects targetFaceCount or fails explicitly.",
     "Every descriptor triangle and byte count is independently read from exported GLB data.",
     "LOD triangle counts are non-increasing and never exceed their declared budgets.",

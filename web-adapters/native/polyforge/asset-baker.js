@@ -51,7 +51,7 @@ export function encodeGLB(document, mesh) {
   const normals = vertexNormals(mesh)
   const material = document.materials[0]
   const json = {
-    asset: { version: '2.0', generator: 'POLYFORGE Asset Baker 0.4.0' },
+    asset: { version: '2.0', generator: 'POLYFORGE Asset Baker 0.5.0' },
     scene: 0,
     scenes: [{ nodes: [0] }],
     nodes: [{ name: document.id, mesh: 0 }],
@@ -187,7 +187,7 @@ export function inspectGLB(input) {
 /** Bake every declared budget and derive the runtime descriptor from GLB readback. */
 export function bakeAsset(document, { strict = true } = {}) {
   const sourceStats = validateAssetDocument(document)
-  if (document.materials.length !== 1) throw new Error('Asset Baker 0.4 exports one material; multi-material baking belongs to the material pack')
+  if (document.materials.length !== 1) throw new Error('Asset Baker 0.5 exports one material; multi-material baking belongs to the material pack')
   const source = assetDocumentToMeshData(document)
   const levels = document.budgets.levels.map((budget) => {
     const reduced = decimateMeshData(source, budget.maxTriangles)
@@ -222,7 +222,7 @@ export function bakeAsset(document, { strict = true } = {}) {
       bytes: level.readback.bytes,
     })),
     source: {
-      tool: 'POLYFORGE Asset Baker 0.4.0',
+      tool: 'POLYFORGE Asset Baker 0.5.0',
       repository: 'GrandMastaShake/game-component-library',
       script: 'web-adapters/native/polyforge/asset-baker.js',
       kind: 'generated',

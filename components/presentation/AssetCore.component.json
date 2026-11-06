@@ -2,8 +2,8 @@
   "id": "presentation.asset_core",
   "name": "POLYFORGE Asset Core",
   "category": "presentation",
-  "description": "Canonical editable .forge.json assets with stable vertex, edge, face, corner, and operation IDs. Replays ID-based moves, edge splits, polygon extrusion, and face deletion without treating array positions as identity. Stores generator provenance, per-vertex positions/colors/skin-weight slots, per-face materials, named UV-set declarations, sockets, budgets, and a deterministic checksum. Three.js geometry is a derived product, not the source of truth.",
-  "version": "0.1.0",
+  "description": "Canonical editable .forge.json assets with stable vertex, edge, face, corner, and operation IDs. Replays ID-based moves, edge splits, polygon extrusion, whole-asset or selected-vertex transforms, and face deletion without treating array positions as identity. Stores generator provenance, per-vertex positions/colors/skin-weight slots, per-face materials, named UV-set declarations, sockets, budgets, and a deterministic checksum. Three.js geometry is a derived product, not the source of truth.",
+  "version": "0.1.1",
   "platform": ["web", "agnostic"],
   "implementations": [
     {"target": "webgl", "status": "running", "module": "web-adapters/native/polyforge/asset-core.js", "note": "Library-native canonical document, stable-ID edit replay, validation, checksums, and deterministic serialization covered by Node tests."},
@@ -14,7 +14,7 @@
   "inputs": [
     {"name": "assetId", "type": "string", "required": true, "description": "Dotted lowercase identity such as prop.wayfinder."},
     {"name": "generationResult", "type": "object", "required": true, "description": "POLYFORGE generation result used to initialize the editable polygon document."},
-    {"name": "assetOperations", "type": "array", "required": false, "default": [], "description": "Stable-ID move, split, deleteFace, and extrudeFace operations."},
+    {"name": "assetOperations", "type": "array", "required": false, "default": [], "description": "Stable-ID move, split, deleteFace, extrudeFace, and transform operations."},
     {"name": "budgetLevels", "type": "array", "required": false, "description": "Ordered lodN records with hero/gameplay/far/proxy bands and maximum triangle counts."},
     {"name": "sockets", "type": "array", "required": false, "default": []}
   ],
