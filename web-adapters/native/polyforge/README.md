@@ -27,7 +27,8 @@ const result = await generateFromPrompt('a tall broad rocket', {
   targetFaceCount: 200,
 })
 scene.add(new THREE.Mesh(result.geometry, material))
-console.log(result.stats.triangles, result.stats.budget.withinBudget)
+console.log(result.stats.triangles, result.performanceBudget.withinBudget)
+// performanceBudget is the contract's output (also at stats.budget); absent without targetFaceCount.
 ```
 
 Consumers own and must dispose returned geometries. Legacy `meshEdits` remains supported for compatibility; new editor state should use stable-ID asset operations.
@@ -79,6 +80,8 @@ console.log(baked.descriptor)
 ## Repository example
 
 `examples/polyforge-asset-core/wayfinder.forge.json` is original editable source. `assets/prop.wayfinder.asset.json` is its measured runtime descriptor. Binary GLBs are intentionally generated into a temporary/consuming repository rather than committed here.
+
+A descriptor is a claim about files in the consuming repository, so each level's `file` names the path that repository keeps it at, relative to its root: `public/assets/generated/<id>.<level>.glb` by default, the same folder every other generated prop's descriptor uses. Pass `bakeAsset(document, { fileRoot })` to choose another. The pipeline writes each GLB at its descriptor path under `--output-dir`, so baking with `--output-dir` set to the consumer's root puts the files exactly where the descriptor says.
 
 ```bash
 node tools/polyforge_asset_pipeline.mjs bake \

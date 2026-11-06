@@ -50,10 +50,13 @@ async function createExample(output) {
 async function bake(source, outputDirectory) {
   const document = parseAssetDocument(await readFile(source, 'utf8'))
   const baked = bakeAsset(document)
-  const assets = path.join(outputDirectory, 'assets')
-  await mkdir(assets, { recursive: true })
-  for (const level of baked.levels) {
-    await writeFile(path.join(outputDirectory, `assets/${document.id}.${level.level}.glb`), level.glb)
+  // Each level is written where its descriptor says the consumer keeps it, so
+  // --output-dir can be a consuming repository's root (or a temporary stand-in
+  // for one) and every `file` in the descriptor resolves against it.
+  for (const [index, level] of baked.levels.entries()) {
+    const target = path.join(outputDirectory, ...baked.descriptor.levels[index].file.split('/'))
+    await mkdir(path.dirname(target), { recursive: true })
+    await writeFile(target, level.glb)
   }
   const descriptorPath = path.join(outputDirectory, `${document.id}.asset.json`)
   await writeFile(descriptorPath, `${stableStringify(baked.descriptor, 2)}\n`)

@@ -7,28 +7,28 @@
     {
       "bytes": 3340,
       "distanceBand": "hero",
-      "file": "assets/prop.wayfinder.lod0.glb",
+      "file": "public/assets/generated/prop.wayfinder.lod0.glb",
       "level": "lod0",
       "triangles": 50
     },
     {
       "bytes": 3056,
       "distanceBand": "gameplay",
-      "file": "assets/prop.wayfinder.lod1.glb",
+      "file": "public/assets/generated/prop.wayfinder.lod1.glb",
       "level": "lod1",
       "triangles": 40
     },
     {
       "bytes": 2816,
       "distanceBand": "far",
-      "file": "assets/prop.wayfinder.lod2.glb",
+      "file": "public/assets/generated/prop.wayfinder.lod2.glb",
       "level": "lod2",
       "triangles": 32
     },
     {
       "bytes": 2612,
       "distanceBand": "proxy",
-      "file": "assets/prop.wayfinder.lod3.glb",
+      "file": "public/assets/generated/prop.wayfinder.lod3.glb",
       "level": "lod3",
       "triangles": 24
     }

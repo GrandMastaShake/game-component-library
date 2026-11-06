@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
+  DEFAULT_FILE_ROOT,
   PRESETS,
   PROMPT_OBJECTS,
   analyzeTopology,
@@ -179,4 +180,37 @@ test('bakes are byte-for-byte deterministic and corrupt GLBs fail readback', () 
   const corrupt = first.levels[0].glb.slice()
   corrupt[0] = 0
   assert.throws(() => inspectGLB(corrupt), /magic/)
+})
+
+test('generate publishes the performanceBudget output its contract declares, only when a budget was asked for', () => {
+  const budgeted = generate({ primitive: 'crystal', seed: 7, targetFaceCount: 40 })
+  assert.deepEqual(budgeted.performanceBudget, budgeted.stats.budget)
+  assert.equal(budgeted.performanceBudget.targetTriangles, 40)
+  assert.equal(budgeted.performanceBudget.withinBudget, true)
+  assert.equal(budgeted.performanceBudget.triangles, budgeted.stats.triangles)
+  for (const key of ['originalTriangles', 'triangles', 'targetTriangles', 'collapses', 'withinBudget']) {
+    assert.ok(key in budgeted.performanceBudget, key)
+  }
+  budgeted.geometry.dispose()
+  const free = generate({ primitive: 'crystal', seed: 7 })
+  assert.equal('performanceBudget' in free, false)
+  free.geometry.dispose()
+})
+
+test('descriptor files name where the consumer keeps them, and fileRoot moves them', () => {
+  const source = asset({ primitive: 'crystal', seed: 7 })
+  const baked = bakeAsset(source)
+  assert.equal(DEFAULT_FILE_ROOT, 'public/assets/generated')
+  for (const level of baked.descriptor.levels) {
+    assert.equal(level.file, `public/assets/generated/${source.id}.${level.level}.glb`)
+  }
+  const moved = bakeAsset(source, { fileRoot: 'static/models' })
+  assert.deepEqual(moved.descriptor.levels.map((level) => level.file), baked.descriptor.levels.map((level) => level.file.replace('public/assets/generated/', 'static/models/')))
+  // Only the path moves: the bytes are the same bake.
+  assert.deepEqual(moved.levels.map((level) => level.readback.bytes), baked.levels.map((level) => level.readback.bytes))
+  for (const bad of ['', '/abs/path', '../outside', 'a/../b', 'a\b', 'a//b', 5]) {
+    assert.throws(() => bakeAsset(source, { fileRoot: bad }), /fileRoot/, JSON.stringify(bad))
+  }
+  const viaWrapper = bakeGeneratedAsset({ id: 'prop.probe', input: { primitive: 'crystal' }, fileRoot: 'x' })
+  assert.ok(viaWrapper.descriptor.levels.every((level) => level.file.startsWith('x/prop.probe.')))
 })
