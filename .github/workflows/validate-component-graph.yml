@@ -1,9 +1,9 @@
 name: Validate Component Library
 on:
   push:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "examples/**/*.boss.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "examples/**/*.boss.json", "examples/**/*.forge.json", "assets/**", "tools/**", ".github/workflows/validate-component-graph.yml"]
   pull_request:
-    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "examples/**/*.boss.json", "tools/**", ".github/workflows/validate-component-graph.yml"]
+    paths: ["components/**/*.component.json", "compounds/**/*.compound.json", "genres/**/*.genre.json", "art/**", "roblox-adapters/**", "web-adapters/**", "platform-baseline.json", "component.schema.json", "compound.schema.json", "web-implementations.json", "examples/**/*.request.json", "examples/**/*.tree.json", "examples/**/*.quest.json", "examples/**/*.dialogue.json", "examples/**/*.elite.json", "examples/**/*.specialization.json", "examples/**/*.boss.json", "examples/**/*.forge.json", "assets/**", "tools/**", ".github/workflows/validate-component-graph.yml"]
 permissions: {contents: read}
 jobs:
   validate:
@@ -40,6 +40,12 @@ jobs:
       # socket names, and levels that actually get cheaper. The app's
       # check-assets is the half that opens the glTF.
       - run: python3 tools/validate_asset_contracts.py --report reports/assets.json
+      # The other half for a POLYFORGE asset: bake its editable source fresh, open
+      # every GLB level with an independent reader, and require the committed
+      # descriptor to equal that bake. Uses the brick's node_modules from the
+      # native test step above.
+      - name: Validate POLYFORGE assets (fresh bake equals the committed descriptor)
+        run: python3 tools/validate_polyforge_assets.py --report reports/polyforge-assets.json
       - name: Validate art topology (fails on findings not in the baseline)
         run: python3 tools/validate_topology.py --baseline art/topology-baseline.json --report reports/topology.json
       - name: Validate platform claims (fails on findings not in the baseline)
