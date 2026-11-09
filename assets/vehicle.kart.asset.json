@@ -43,7 +43,7 @@
       "distanceRange": "<5m",
       "file": "public/assets/vehicle.kart/lod0.glb",
       "triangles": 212,
-      "bytes": 14236
+      "bytes": 14252
     },
     {
       "level": "lod1",
@@ -51,30 +51,30 @@
       "distanceRange": "5-20m",
       "file": "public/assets/vehicle.kart/lod1.glb",
       "triangles": 106,
-      "bytes": 9248
+      "bytes": 9260
     },
     {
       "level": "lod2",
       "distanceBand": "far",
       "distanceRange": "20-50m",
       "file": "public/assets/vehicle.kart/lod2.glb",
-      "triangles": 46,
-      "bytes": 5496
+      "triangles": 50,
+      "bytes": 5980
     },
     {
       "level": "lod3",
       "distanceBand": "proxy",
       "distanceRange": ">50m",
       "file": "public/assets/vehicle.kart/lod3.glb",
-      "triangles": 19,
-      "bytes": 3312
+      "triangles": 15,
+      "bytes": 2788
     }
   ],
   "source": {
     "tool": "blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3",
     "repository": "game-architect-studio",
     "script": "tools/blender/build_kart.py",
-    "generatedOn": "2026-09-09"
+    "generatedOn": "2026-11-09"
   },
-  "provenance": "The first asset built through the Blender bridge, and the one the racing pack needs: the voxel runtime draws its karts as three.js boxes assembled in code, which is a placeholder nothing outside that one file can reuse. The library's art side is entirely creature-shaped — 47 shapes, 5 anchors and 32 parts, all ears, horns, paws and tails from the pet pipeline — so there was no vehicle anchor, no wheel socket and no way to express a car at all. Deliberately not an assembly-graph anchor yet: adding one moves the topology and assembly baselines, which is a separate reviewable change from establishing what an asset descriptor is."
+  "provenance": "The first asset built through the Blender bridge, and the one the racing pack needs: the voxel runtime draws its karts as three.js boxes assembled in code, which is a placeholder nothing outside that one file can reuse. The library's art side is entirely creature-shaped — 47 shapes, 5 anchors and 32 parts, all ears, horns, paws and tails from the pet pipeline — so there was no vehicle anchor, no wheel socket and no way to express a car at all. Deliberately not an assembly-graph anchor yet: adding one moves the topology and assembly baselines, which is a separate reviewable change from establishing what an asset descriptor is. Regenerated 2026-11-09 at full size: the build script scaled every box to half its declared dimension (a `size=1` cube already has a one-metre edge), so the kart in the file was half the kart KartMesh.ts draws; the lod2 and lod3 counts moved with the geometry the decimator was given."
 }
