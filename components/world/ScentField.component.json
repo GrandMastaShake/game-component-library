@@ -47,8 +47,8 @@
       "name": "halfLifeMinutes",
       "type": "number",
       "required": false,
-      "default": 90,
-      "description": "Minutes for a source's strength to halve in dry weather."
+      "default": 720,
+      "description": "Minutes for a source's strength to halve in dry weather. Twelve hours by default: a day-old trail reads faint on the ground, not gone."
     },
     {
       "name": "rainWashRate",
