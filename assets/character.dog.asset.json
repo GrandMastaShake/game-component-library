@@ -32,18 +32,18 @@
     }
   ],
   "animations": [
-    { "name": "idle", "seconds": 3.0, "loops": true, "description": "A breath, a slow wag, one ear flick, a glance left and back." },
-    { "name": "walk", "seconds": 1.0, "loops": true, "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, a quarter apart. Authored for about 1.2 m/s." },
-    { "name": "trot", "seconds": 0.6666666666666666, "loops": true, "description": "Diagonal pairs half a cycle apart. Authored for about 2.5 m/s." },
-    { "name": "run", "seconds": 0.5, "loops": true, "description": "Rotary gallop: the hind pair close together, then the fore pair, the back bunching and stretching under them. Authored for about 5 m/s." },
-    { "name": "drag", "seconds": 1.3333333333333333, "loops": true, "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. movement.carry_in_mouth's dragSpeedFactor is why it is slow." },
-    { "name": "sniff", "seconds": 1.6666666666666667, "loops": true, "description": "Nose down: the neck and head drop, the nose sweeps, the fore legs give a little. The mouth socket reaches 0.05 m off the ground." },
-    { "name": "sniff_air", "seconds": 2.0, "loops": true, "description": "Nose up, on the wind: the head lifts to 0.9 m and casts slowly." },
-    { "name": "dig", "seconds": 0.5, "loops": true, "description": "The fore paws alternate fast, the chest low, the rump up, the tail up. One cycle is one scrape of each paw; housing.den_and_cache counts the seconds." },
-    { "name": "sit", "seconds": 1.4583333333333333, "loops": false, "description": "Down onto the haunches over half a second, then held: hind legs folded, rump dropped, back sloping up to square shoulders." },
-    { "name": "lie", "seconds": 1.9583333333333333, "loops": false, "description": "The sphinx over a second, head up then lowered onto the paws. What housing.den_and_cache's rest looks like." },
-    { "name": "bark", "seconds": 0.4583333333333333, "loops": false, "description": "Head back, jaw open 34 degrees, chest up, a hop of the fore paws; then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees." },
-    { "name": "mark", "seconds": 1.4583333333333333, "loops": false, "description": "The right hind leg lifts out and up, holds, and comes down; the weight shifts left to carry it." }
+    { "name": "idle", "seconds": 3.0416666666666665, "loops": true, "description": "A breath, a slow wag, one ear flick, a glance left and back." },
+    { "name": "walk", "seconds": 1.0416666666666667, "loops": true, "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, a quarter apart. Authored for about 1.2 m/s." },
+    { "name": "trot", "seconds": 0.7083333333333334, "loops": true, "description": "Diagonal pairs half a cycle apart. Authored for about 2.5 m/s." },
+    { "name": "run", "seconds": 0.5416666666666666, "loops": true, "description": "Rotary gallop: the hind pair close together, then the fore pair, the back bunching and stretching under them. Authored for about 5 m/s." },
+    { "name": "drag", "seconds": 1.375, "loops": true, "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. movement.carry_in_mouth's dragSpeedFactor is why it is slow." },
+    { "name": "sniff", "seconds": 1.7083333333333333, "loops": true, "description": "Nose down: the neck and head drop, the nose sweeps, the fore legs give a little. The mouth socket reaches 0.05 m off the ground." },
+    { "name": "sniff_air", "seconds": 2.0416666666666665, "loops": true, "description": "Nose up, on the wind: the head lifts to 0.9 m and casts slowly." },
+    { "name": "dig", "seconds": 0.5416666666666666, "loops": true, "description": "The fore paws alternate fast, the chest low, the rump up, the tail up. One cycle is one scrape of each paw; housing.den_and_cache counts the seconds." },
+    { "name": "sit", "seconds": 1.5, "loops": false, "description": "Down onto the haunches over half a second, then held: hind legs folded, rump dropped, back sloping up to square shoulders." },
+    { "name": "lie", "seconds": 2, "loops": false, "description": "The sphinx over a second, head up then lowered onto the paws. What housing.den_and_cache's rest looks like." },
+    { "name": "bark", "seconds": 0.5, "loops": false, "description": "Head back, jaw open 34 degrees, chest up, a hop of the fore paws; then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees." },
+    { "name": "mark", "seconds": 1.5, "loops": false, "description": "The right hind leg lifts out and up, holds, and comes down; the weight shifts left to carry it." }
   ],
   "levels": [
     {
