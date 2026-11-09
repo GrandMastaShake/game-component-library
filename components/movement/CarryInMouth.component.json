@@ -2,7 +2,7 @@
   "id": "movement.carry_in_mouth",
   "name": "Carry in Mouth",
   "category": "movement",
-  "description": "One thing at a time, in the mouth. Things in the world have a mass; the carrier picks the nearest within reach, carries it along as it moves (follow(x, z)), and drops it on command, on a bark, or when another brick takes it. A thing heavier than the mouth can lift is dragged instead: it comes along slower and only on the ground. While something is held the mouth is busy, so biting, eating and drinking are not available, which the carrier reports rather than enforces. Carried distance and time are counted per thing and reported each metre, for bricks that care what has been carried how far: a body that gets stronger, or a thing that is becoming something.",
+  "description": "One thing at a time, in the mouth. Things in the world have a mass; the carrier picks the nearest within reach, carries it along as it moves (follow(x, z)), and drops it on command, on a bark, or when another brick takes it; a thing dug back out of a den comes up held. A thing heavier than the mouth can lift is dragged instead: it comes along slower and only on the ground. While something is held the mouth is busy, so biting, eating and drinking are not available, which the carrier reports rather than enforces. Carried distance and time are counted per thing and reported each metre, for bricks that care what has been carried how far: a body that gets stronger, or a thing that is becoming something.",
   "version": "0.1.0",
   "platform": [
     "agnostic"
@@ -124,7 +124,8 @@
       "input.pickUp",
       "input.drop",
       "input.bark",
-      "housing.cached"
+      "housing.cached",
+      "housing.retrieved"
     ]
   },
   "eventIntents": {
