@@ -1,0 +1,153 @@
+{
+  "id": "world.scent_field",
+  "name": "Scent Field",
+  "category": "world",
+  "description": "The smell of a place, as information with age and direction rather than a line to follow. Sources lay scent at a point with a kind and a strength; each fades on a half-life, faster in rain, and reads stronger at night. A reading at a position returns what is smellable there in one of two modes: nose-down (ground, short range, old trails) or nose-up (air, long range, carried on the wind, bearing bent by it). It never says what a scent means or whether the ground toward it is walkable; it answers what is on the air here, how old, which way. Marking lays the reader's own scent.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "sources",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Initial sources: {id, kind, x, z, strength, ageMinutes}. More arrive by input.mark and by other bricks calling lay()."
+    },
+    {
+      "name": "halfLifeMinutes",
+      "type": "number",
+      "required": false,
+      "default": 720,
+      "description": "Minutes for a source's strength to halve in dry weather. Twelve hours by default: a day-old trail reads faint on the ground, not gone."
+    },
+    {
+      "name": "rainWashRate",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Decay multiplier while the weather is rain or storm."
+    },
+    {
+      "name": "nightBoost",
+      "type": "number",
+      "required": false,
+      "default": 1.4,
+      "description": "Multiplier on readable strength between dusk and dawn."
+    },
+    {
+      "name": "groundRange",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Nose-down reach in world units: close, old, exact."
+    },
+    {
+      "name": "airRange",
+      "type": "number",
+      "required": false,
+      "default": 14,
+      "description": "Nose-up reach in world units downwind of a source; upwind reach is a fraction of it."
+    },
+    {
+      "name": "windSpeed",
+      "type": "number",
+      "required": false,
+      "default": 0.6,
+      "description": "Wind speed 0..1; moves air scent downwind and shortens upwind reach."
+    },
+    {
+      "name": "windDirection",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "Direction the wind blows toward, in radians, 0 along +x."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sources",
+      "type": "array",
+      "description": "Live sources with current strength and age."
+    },
+    {
+      "name": "wind",
+      "type": "object",
+      "description": "{speed, direction} as the field currently has them."
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "description": "The reader's nose mode: ground or air."
+    },
+    {
+      "name": "smellAt",
+      "type": "function",
+      "description": "(x, z, mode?) -> readings [{id, kind, strength, ageMinutes, bearing, distance}], strongest first; bearing from the reader to the source, bent downwind in air mode."
+    },
+    {
+      "name": "lay",
+      "type": "function",
+      "description": "(kind, x, z, strength?) -> id; lays a source and emits world.scentLaid."
+    }
+  ],
+  "events": {
+    "emits": [
+      "world.scentLaid",
+      "world.scentFaded",
+      "world.scentNoticed"
+    ],
+    "listensTo": [
+      "input.sniff",
+      "input.mark",
+      "world.weatherChanged",
+      "world.dawnStarted",
+      "world.duskStarted"
+    ]
+  },
+  "eventIntents": {
+    "world.scentNoticed": [
+      "notify"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "scent",
+    "senses",
+    "dog",
+    "survival",
+    "tracking",
+    "wind",
+    "weather"
+  ],
+  "provenance": "Added 2026-11-09 for the canine survival pack (the-things-that-wake). Catalogue search first: pets.scent_tracker is a companion ability that picks one undiscovered point of interest by tag and reports a bearing to it; presentation.scent_trail_renderer draws that bearing. Neither models smell as a field with age, wind and two reading modes, which is what a game played as the dog needs; this owns the field, and the tracker could read it later. Library-native."
+}

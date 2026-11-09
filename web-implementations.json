@@ -1,7 +1,7 @@
 {
   "note": "What the consuming web application implements, per target. The library cannot see that repository, so `implementations` entries for web targets are status `external` by definition — this file is the declaration that makes them reviewable rather than assumed. Before it existed, 39 of 71 descriptors named a canvas2d implementation while the app registered all 71: the undercount was invisible because nothing compared the two.",
   "source": "game-architect-studio — generator/bricks/*.ts (canvas2d), generator/voxel/*.ts and generator/iso/*.ts (webgl and isometric)",
-  "verifiedOn": "2026-11-04",
+  "verifiedOn": "2026-11-09",
   "howToRefresh": "In the app: grep the register() calls in generator/bricks/*.ts for the canvas2d list. Then: python3 tools/declare_implementations.py",
   "targets": {
     "canvas2d": [
@@ -36,6 +36,7 @@
       "economy.pity_system",
       "economy.shop",
       "economy.team_resources",
+      "housing.den_and_cache",
       "housing.home_system",
       "inventory.affix_loot_generator",
       "inventory.booster_pieces",
@@ -50,6 +51,7 @@
       "inventory.slotted_bag",
       "movement.ai_driver",
       "movement.basic_walk",
+      "movement.carry_in_mouth",
       "movement.character_body",
       "movement.dash_ability",
       "movement.grid_agent",
@@ -90,6 +92,7 @@
       "presentation.tile_cursor",
       "progression.ability_loadout",
       "progression.attribute_sheet",
+      "progression.body_dials",
       "progression.cascade_scoring",
       "progression.drift_scoring",
       "progression.level_goal",
@@ -148,6 +151,7 @@
       "world.noise_lib",
       "world.room_template",
       "world.run_seed_manager",
+      "world.scent_field",
       "world.swap_validator",
       "world.terrain_generator",
       "world.tile_grid",

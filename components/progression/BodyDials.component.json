@@ -1,0 +1,194 @@
+{
+  "id": "progression.body_dials",
+  "name": "Body Dials",
+  "category": "progression",
+  "description": "A body shaped by what it does, with a fixed budget. Five dials (muscle, wind, jaw, nose, coat) share one total: exertion of a kind pushes its dial up one notch when enough has accrued, and the notch is paid for out of the reserve dial first and then the dial's opposite, so the total never changes within a level. The price of a notch rises with how much the body has already been changed. Unused dials drift back toward rest, slowly, never all the way. No dial passes its ceiling or its floor. Nothing is displayed as a number here; the body is the display, and other bricks read the dials to decide what it can lift, how far it goes, how cold it gets.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "start",
+      "type": "object",
+      "required": false,
+      "default": {
+        "muscle": 6,
+        "wind": 6,
+        "jaw": 6,
+        "nose": 6,
+        "coat": 6
+      },
+      "description": "Starting notches per dial; their sum is the budget."
+    },
+    {
+      "name": "opposites",
+      "type": "object",
+      "required": false,
+      "default": {
+        "muscle": "wind",
+        "wind": "muscle",
+        "jaw": "nose",
+        "nose": "jaw"
+      },
+      "description": "Where a notch is paid from after the reserve."
+    },
+    {
+      "name": "reserve",
+      "type": "string",
+      "required": false,
+      "default": "coat",
+      "description": "The dial a gain draws from first, and that drift returns to."
+    },
+    {
+      "name": "ceiling",
+      "type": "number",
+      "required": false,
+      "default": 12,
+      "description": "No dial above this."
+    },
+    {
+      "name": "floor",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "No dial below this."
+    },
+    {
+      "name": "priceBase",
+      "type": "number",
+      "required": false,
+      "default": 20,
+      "description": "Exertion units for the first notch."
+    },
+    {
+      "name": "priceGrowth",
+      "type": "number",
+      "required": false,
+      "default": 0.25,
+      "description": "Price multiplier added per notch of total change so far: price = priceBase x (1 + priceGrowth x totalChange)."
+    },
+    {
+      "name": "driftPerDay",
+      "type": "number",
+      "required": false,
+      "default": 0.1,
+      "description": "Notches per game day a dial drifts back toward its start when unused."
+    },
+    {
+      "name": "creditPerCarriedMetre",
+      "type": "number",
+      "required": false,
+      "default": 1,
+      "description": "Muscle exertion per kilogram-metre carried; doubled when dragging."
+    },
+    {
+      "name": "creditPerTravelledMetre",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Wind exertion per metre travelled unloaded."
+    },
+    {
+      "name": "creditPerDigSecond",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Muscle exertion per second of digging."
+    },
+    {
+      "name": "creditPerSniff",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Nose exertion per sniff reading."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "dials",
+      "type": "object",
+      "description": "Current notches per dial."
+    },
+    {
+      "name": "budget",
+      "type": "number",
+      "description": "Sum of the dials, constant within a level."
+    },
+    {
+      "name": "totalChange",
+      "type": "number",
+      "description": "Notches moved so far, which sets the price."
+    },
+    {
+      "name": "exertion",
+      "type": "object",
+      "description": "Accrued exertion per dial toward its next notch."
+    },
+    {
+      "name": "priceFor",
+      "type": "function",
+      "description": "(dial) -> exertion units the next notch costs."
+    },
+    {
+      "name": "exert",
+      "type": "function",
+      "description": "(dial, amount) -> void; accrue exertion and move a notch when it is paid."
+    }
+  ],
+  "events": {
+    "emits": [
+      "progression.dialMoved"
+    ],
+    "listensTo": [
+      "movement.carried",
+      "input.travelled",
+      "housing.denDug",
+      "world.scentNoticed",
+      "world.dawnStarted"
+    ]
+  },
+  "eventIntents": {
+    "progression.dialMoved": [
+      "notify"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "progression",
+    "body",
+    "attributes",
+    "dog",
+    "survival",
+    "use-based"
+  ],
+  "provenance": "Added 2026-11-09 for the canine survival pack (the-things-that-wake). Catalogue search first: progression.xp_leveling is a single rising number with levels; progression.skills_tree is bought nodes; progression.career_track is a ladder. None is use-based attributes under a conserved budget where every gain is paid from another attribute and the price rises with change. Library-native."
+}
