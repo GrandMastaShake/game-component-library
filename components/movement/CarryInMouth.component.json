@@ -1,0 +1,145 @@
+{
+  "id": "movement.carry_in_mouth",
+  "name": "Carry in Mouth",
+  "category": "movement",
+  "description": "One thing at a time, in the mouth. Things in the world have a mass; the carrier picks the nearest within reach, carries it along as it moves (follow(x, z)), and drops it on command, on a bark, or when another brick takes it. A thing heavier than the mouth can lift is dragged instead: it comes along slower and only on the ground. While something is held the mouth is busy, so biting, eating and drinking are not available, which the carrier reports rather than enforces. Carried distance and time are counted per thing and reported each metre, for bricks that care what has been carried how far: a body that gets stronger, or a thing that is becoming something.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "things",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Things in the world: {id, kind, mass, x, z}. mass in kilograms."
+    },
+    {
+      "name": "reach",
+      "type": "number",
+      "required": false,
+      "default": 1.2,
+      "description": "How close a thing must be to be picked up, in world units."
+    },
+    {
+      "name": "maxCarryMass",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Heaviest thing the mouth lifts; heavier is dragged."
+    },
+    {
+      "name": "dragSpeedFactor",
+      "type": "number",
+      "required": false,
+      "default": 0.45,
+      "description": "Speed multiplier the carrier should apply while dragging."
+    },
+    {
+      "name": "dropOnBark",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "A bark opens the mouth."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "held",
+      "type": "string",
+      "description": "Id of the thing in the mouth, or empty."
+    },
+    {
+      "name": "dragging",
+      "type": "boolean",
+      "description": "Whether the held thing is too heavy to lift and is being dragged."
+    },
+    {
+      "name": "speedFactor",
+      "type": "number",
+      "description": "1 when free or carrying, dragSpeedFactor when dragging."
+    },
+    {
+      "name": "mouthFree",
+      "type": "boolean",
+      "description": "Whether the mouth can bite, eat or drink right now."
+    },
+    {
+      "name": "things",
+      "type": "array",
+      "description": "Every thing with its current position and whether it is held."
+    },
+    {
+      "name": "carried",
+      "type": "object",
+      "description": "Per thing id: {metres, seconds} carried so far."
+    },
+    {
+      "name": "follow",
+      "type": "function",
+      "description": "(x, z) -> void; the carrier moved here, so the held thing did too, and distance is counted."
+    },
+    {
+      "name": "nearest",
+      "type": "function",
+      "description": "(x, z) -> the thing within reach, or null."
+    }
+  ],
+  "events": {
+    "emits": [
+      "movement.pickedUp",
+      "movement.dropped",
+      "movement.carried"
+    ],
+    "listensTo": [
+      "input.pickUp",
+      "input.drop",
+      "input.bark",
+      "housing.cached"
+    ]
+  },
+  "eventIntents": {
+    "movement.carried": [
+      "progress"
+    ]
+  },
+  "dependencies": [],
+  "tags": [
+    "carry",
+    "mouth",
+    "dog",
+    "inventory",
+    "survival",
+    "drag"
+  ],
+  "provenance": "Added 2026-11-09 for the canine survival pack (the-things-that-wake). Catalogue search first: inventory.core_inventory and inventory.slotted_bag are capacity and slots for a creature with pockets; movement.ball_carrier is one ball passed between players in a sport. None has a single mouth slot with mass that decides carry or drag, a busy mouth, and distance counted per thing. Library-native."
+}

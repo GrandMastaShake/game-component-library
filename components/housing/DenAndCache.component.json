@@ -1,0 +1,136 @@
+{
+  "id": "housing.den_and_cache",
+  "name": "Den and Cache",
+  "category": "housing",
+  "description": "Where a dog sleeps and where it hides things. A den is dug at a spot and takes time; a dug den can be rested in, and rest is reported in seconds so other bricks can restore what rest restores. A den holds a small cache: the thing in the mouth can be buried there and dug up again by whoever knows it is there. Caching counts buried time per thing, for bricks that care how long something has been in the ground. This brick owns the holes; it does not own needs, warmth or what the ground does to a buried thing.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "digSeconds",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Seconds of digging to make a den."
+    },
+    {
+      "name": "maxDens",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Dens remembered; digging a fourth forgets the oldest empty one."
+    },
+    {
+      "name": "cacheCapacity",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Things one den can hold."
+    },
+    {
+      "name": "reach",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "How close the digger must be to a den to rest in it or use its cache."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "dens",
+      "type": "array",
+      "description": "{id, x, z, dugAt, things:[{id, buriedAt}]} for each den."
+    },
+    {
+      "name": "digging",
+      "type": "object",
+      "description": "{x, z, progress} while a den is being dug, else null."
+    },
+    {
+      "name": "resting",
+      "type": "boolean",
+      "description": "Whether the resident is resting in a den now."
+    },
+    {
+      "name": "restSeconds",
+      "type": "number",
+      "description": "Seconds of the current rest."
+    },
+    {
+      "name": "nearestDen",
+      "type": "function",
+      "description": "(x, z) -> the den within reach, or null."
+    },
+    {
+      "name": "buried",
+      "type": "object",
+      "description": "Per thing id: seconds buried so far across all dens."
+    }
+  ],
+  "events": {
+    "emits": [
+      "housing.denDug",
+      "housing.restStarted",
+      "housing.rested",
+      "housing.cached",
+      "housing.retrieved"
+    ],
+    "listensTo": [
+      "input.dig",
+      "input.rest",
+      "input.cache",
+      "input.retrieve"
+    ]
+  },
+  "eventIntents": {
+    "housing.rested": [
+      "progress"
+    ],
+    "housing.cached": [
+      "progress"
+    ]
+  },
+  "dependencies": [
+    "movement.carry_in_mouth"
+  ],
+  "tags": [
+    "den",
+    "cache",
+    "dig",
+    "rest",
+    "dog",
+    "survival",
+    "home"
+  ],
+  "provenance": "Added 2026-11-09 for the canine survival pack (the-things-that-wake). Catalogue search first: housing.home_system is a placed, owned home with furniture; world.rest_camp is a party rest with an ambush roll; housing.build_placement places structures. None is a hole dug by the resident that doubles as a hiding place with buried time counted. Depends on movement.carry_in_mouth because what gets buried is what is in the mouth. Library-native."
+}

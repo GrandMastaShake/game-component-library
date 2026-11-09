@@ -1,0 +1,50 @@
+{
+  "id": "genre.canine_survival",
+  "name": "Canine Survival",
+  "description": "Survival played as a dog, in a place the people have left. The nose is the main instrument: scent is information with age and direction, moved by wind and washed by rain. One thing is carried at a time, in the mouth, and a heavy thing is dragged; a den is dug and rested in and hides what the mouth brought. The body is shaped by what it does, under a budget, so every gain is paid for. The pack's own pieces are the field, the mouth, the den and the body; the land, the day and the weather are the survival pack's. What wakes when a thing has been carried long enough is the next pack.",
+  "version": "0.1.0",
+  "loop": "sniff → carry → dig in → rest → carry on",
+  "views": [
+    "voxel"
+  ],
+  "memberComponents": [
+    "world.terrain_generator",
+    "world.biome_system",
+    "world.day_night_cycle",
+    "world.weather_system",
+    "movement.physics_core",
+    "movement.character_body",
+    "movement.ground_sensor",
+    "movement.run_control",
+    "movement.jump_core",
+    "presentation.camera_follow",
+    "presentation.object_placer"
+  ],
+  "newComponents": [
+    "world.scent_field",
+    "movement.carry_in_mouth",
+    "housing.den_and_cache",
+    "progression.body_dials"
+  ],
+  "signatureCompound": {
+    "name": "The Leash and the Blanket",
+    "description": "A dog in a yard at dusk: the owner's scent a day old on the step, a leash by the gate that smells of her, a blanket on the line too heavy to lift. Carry the leash along the remembered route; drag the blanket under the stairs; dig in and rest through the first thunder. The compound proves the causal chain: scent leads to the thing, carrying costs the mouth and shapes the body, the den turns an expedition into a night survived.",
+    "memberIds": [
+      "world.scent_field",
+      "movement.carry_in_mouth",
+      "housing.den_and_cache",
+      "progression.body_dials",
+      "world.day_night_cycle",
+      "world.weather_system"
+    ]
+  },
+  "tags": [
+    "genre-pack",
+    "survival",
+    "dog",
+    "canine",
+    "animal",
+    "scent",
+    "the-things-that-wake"
+  ]
+}
