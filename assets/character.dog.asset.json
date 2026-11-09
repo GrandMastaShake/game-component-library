@@ -1,7 +1,7 @@
 {
   "id": "character.dog",
   "name": "Dog",
-  "description": "The body a player is, in the dog game: a rigged quadruped with leg chains, a jaw, two ears and a three-bone tail, and the clips a dog needs before any object speaks. Built to the proportions components/manifest/VoxelYard.tsx already draws in boxes, so the asset and the placeholder are the same dog at two levels of finish and swapping one for the other changes nothing about how it moves.",
+  "description": "The body a player is, in the dog game: a rigged quadruped with leg chains, a jaw, two ears and a three-bone tail, low-poly and flat-shaded with its coat as a palette in vertex colours, and the clips a dog needs before any object speaks. Built to the proportions components/manifest/VoxelYard.tsx already draws in boxes, so the asset and the placeholder are the same dog at two levels of finish and swapping one for the other changes nothing about how it moves.",
   "format": "gltf-binary",
   "units": "metres",
   "forwardAxis": "+x",
@@ -51,8 +51,8 @@
       "distanceBand": "hero",
       "distanceRange": "<5m",
       "file": "public/assets/character.dog/lod0.glb",
-      "triangles": 276,
-      "bytes": 322748
+      "triangles": 832,
+      "bytes": 387620
     }
   ],
   "source": {
@@ -61,5 +61,5 @@
     "script": "tools/blender/build_dog.py",
     "generatedOn": "2026-11-09"
   },
-  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. The library's only rigged bodies are bipeds (character.hero, character.dungeon_hero), and the Blender bridge's pet skeleton is a chibi: four floating feet with no legs above them, right for the pets it was built for and wrong for a dog whose whole game is movement. So this is the first quadruped with leg chains, and the first asset whose clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. Not vendored: a CC0 dog with this clip set does not exist, and the gaits are formulas a reviewer can read. 23 bones, rigid weights, boxes; the art comes after the movement is good."
+  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. The library's only rigged bodies are bipeds (character.hero, character.dungeon_hero), and the Blender bridge's pet skeleton is a chibi: four floating feet with no legs above them, right for the pets it was built for and wrong for a dog whose whole game is movement. So this is the first quadruped with leg chains, and the first asset whose clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. Not vendored: a CC0 dog with this clip set does not exist, and the gaits are formulas a reviewer can read. 23 bones with automatic weights on one lofted low-poly shell (rings of eight vertices bridged into quads, flat-shaded, a flat palette in COLOR_0 and no texture): the look of a course squirrel or a Kenney animal, which is the register the yard is drawn in. The first body was the placeholder's boxes rigged as they stood and the second a voxel-remeshed shell of them; both read wrong beside that reference, and Alexander said so."
 }
