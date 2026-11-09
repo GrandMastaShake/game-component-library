@@ -1,0 +1,65 @@
+{
+  "id": "character.dog",
+  "name": "Dog",
+  "description": "The body a player is, in the dog game: a rigged quadruped with leg chains, a jaw, two ears and a three-bone tail, and the clips a dog needs before any object speaks. Built to the proportions components/manifest/VoxelYard.tsx already draws in boxes, so the asset and the placeholder are the same dog at two levels of finish and swapping one for the other changes nothing about how it moves.",
+  "format": "gltf-binary",
+  "units": "metres",
+  "forwardAxis": "+x",
+  "sockets": [
+    {
+      "name": "mouth",
+      "position": [0.9, 0.0, 0.5],
+      "carries": "thing",
+      "description": "The tip of the jaw. The one thing movement.carry_in_mouth holds rides here, so it follows the jaw through a sniff, a bark and a drag. Parented to the jaw bone."
+    },
+    {
+      "name": "collar",
+      "position": [0.44, 0.0, 0.58],
+      "carries": "collar",
+      "description": "The neck, where a collar sits and a leash clips. Parented to the neck bone."
+    },
+    {
+      "name": "back",
+      "position": [0.0, 0.0, 0.65],
+      "carries": "pack",
+      "description": "Between the shoulders, where a blanket or a pack is carried. Parented to the spine bone."
+    },
+    {
+      "name": "head_top",
+      "position": [0.62, 0.0, 0.78],
+      "carries": "hat",
+      "description": "Crown of the head, between the ears. Parented to the head bone."
+    }
+  ],
+  "animations": [
+    { "name": "idle", "seconds": 3.0, "loops": true, "description": "A breath, a slow wag, one ear flick, a glance left and back." },
+    { "name": "walk", "seconds": 1.0, "loops": true, "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, a quarter apart. Authored for about 1.2 m/s." },
+    { "name": "trot", "seconds": 0.6666666666666666, "loops": true, "description": "Diagonal pairs half a cycle apart. Authored for about 2.5 m/s." },
+    { "name": "run", "seconds": 0.5, "loops": true, "description": "Rotary gallop: the hind pair close together, then the fore pair, the back bunching and stretching under them. Authored for about 5 m/s." },
+    { "name": "drag", "seconds": 1.3333333333333333, "loops": true, "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. movement.carry_in_mouth's dragSpeedFactor is why it is slow." },
+    { "name": "sniff", "seconds": 1.6666666666666667, "loops": true, "description": "Nose down: the neck and head drop, the nose sweeps, the fore legs give a little. The mouth socket reaches 0.05 m off the ground." },
+    { "name": "sniff_air", "seconds": 2.0, "loops": true, "description": "Nose up, on the wind: the head lifts to 0.9 m and casts slowly." },
+    { "name": "dig", "seconds": 0.5, "loops": true, "description": "The fore paws alternate fast, the chest low, the rump up, the tail up. One cycle is one scrape of each paw; housing.den_and_cache counts the seconds." },
+    { "name": "sit", "seconds": 1.4583333333333333, "loops": false, "description": "Down onto the haunches over half a second, then held: hind legs folded, rump dropped, back sloping up to square shoulders." },
+    { "name": "lie", "seconds": 1.9583333333333333, "loops": false, "description": "The sphinx over a second, head up then lowered onto the paws. What housing.den_and_cache's rest looks like." },
+    { "name": "bark", "seconds": 0.4583333333333333, "loops": false, "description": "Head back, jaw open 34 degrees, chest up, a hop of the fore paws; then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees." },
+    { "name": "mark", "seconds": 1.4583333333333333, "loops": false, "description": "The right hind leg lifts out and up, holds, and comes down; the weight shifts left to carry it." }
+  ],
+  "levels": [
+    {
+      "level": "lod0",
+      "distanceBand": "hero",
+      "distanceRange": "<5m",
+      "file": "public/assets/character.dog/lod0.glb",
+      "triangles": 276,
+      "bytes": 322748
+    }
+  ],
+  "source": {
+    "tool": "blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3",
+    "repository": "game-architect-studio",
+    "script": "tools/blender/build_dog.py",
+    "generatedOn": "2026-11-09"
+  },
+  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. The library's only rigged bodies are bipeds (character.hero, character.dungeon_hero), and the Blender bridge's pet skeleton is a chibi: four floating feet with no legs above them, right for the pets it was built for and wrong for a dog whose whole game is movement. So this is the first quadruped with leg chains, and the first asset whose clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. Not vendored: a CC0 dog with this clip set does not exist, and the gaits are formulas a reviewer can read. 23 bones, rigid weights, boxes; the art comes after the movement is good."
+}
