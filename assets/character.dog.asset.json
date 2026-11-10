@@ -1,7 +1,7 @@
 {
   "id": "character.dog",
   "name": "Dog",
-  "description": "The body a player is, in the dog game: Kimi's bare Bernese mountain dog, one faceted low-poly shell of 11,457 triangles generated with the Tripo API, on Kimi's canine rig (144 bones in Blender, of which the 38 deform bones are what this file carries: hips, two spine segments, chest, neck, head, nose, jaw, two eyes, two-bone ears, a four-bone tail, fore legs of scapula, upper, lower, paw and toe, hind legs of upper, lower, hock, paw and toe), with the twelve clips a dog needs before any object speaks. The dog wears nothing: its collar, harness and packs are separate meshes skinned to the same joints and ship as their own asset. The four gaits are keyed on the rig's IK paw controls with each paw planted on the ground, so a foot in a stance does not slide; the speed each gait was authored for comes out of that geometry and is stated per clip.",
+  "description": "The body a player is, in the dog game: a low-poly Bernese mountain dog of 1,500 flat-shaded triangles with its tricolour coat as a palette in vertex colours and no texture, skinned to Kimi's 38 canine joints (hips, two spine segments, chest, neck, head, nose, jaw, two eyes, two-bone ears, a four-bone tail, fore legs of scapula, upper, lower, paw and toe, hind legs of upper, lower, hock, paw and toe), with the twelve clips a dog needs before any object speaks. The dog wears nothing: its collar, harness and packs are separate meshes on the same joints and ship as their own asset. The clips are authored on a control rig built to an animator's checklist and sampled onto the joints: the four gaits plant each paw on the ground with two keys, so a foot in a stance does not slide, and the speed each gait was authored for comes out of that geometry and is stated per clip.",
   "format": "gltf-binary",
   "units": "metres",
   "forwardAxis": "+x",
@@ -41,7 +41,7 @@
       "position": [
         0.465,
         0.0,
-        0.9
+        0.893
       ],
       "carries": "hat",
       "description": "Crown of the head, between the ears, measured off the body's surface. Parented to the head's deform bone."
@@ -52,43 +52,43 @@
       "name": "idle",
       "seconds": 3.0416666666666665,
       "loops": true,
-      "description": "A breath, a slow wag down a four-bone tail, one ear flick, a glance left and back with the eyes riding the head."
+      "description": "One slow breath in the ribs, the weight easing from side to side, a glance left that the ears lead, a tail that wags from its root with each joint a little later."
     },
     {
       "name": "walk",
-      "seconds": 0.7916666666666666,
+      "seconds": 0.875,
       "loops": true,
-      "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, a quarter apart. Each paw planted for a 0.36 m stance: authored for 0.774 m/s."
+      "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, five frames apart. Each paw planted for 12 of 20 frames over a 0.38 m stance: authored for 0.76 m/s."
     },
     {
       "name": "trot",
       "seconds": 0.4583333333333333,
       "loops": true,
-      "description": "Diagonal pairs half a cycle apart, paws planted for a 0.40 m stance: authored for 1.92 m/s."
+      "description": "Diagonal pairs half a cycle apart, each paw planted for 5 of 10 frames over a 0.40 m stance: authored for 1.92 m/s."
     },
     {
       "name": "run",
       "seconds": 0.4583333333333333,
       "loops": true,
-      "description": "Rotary gallop: the hind pair close together, then the fore pair, the back rounding and flattening under them. Paws planted for a 0.50 m stance: authored for 3.0 m/s."
+      "description": "Rotary gallop: the hind pair a frame apart, then the fore pair a frame apart, the back rounding and flattening under them. Each paw planted for 4 of 10 frames over a 0.50 m stance: authored for 3.0 m/s."
     },
     {
       "name": "drag",
       "seconds": 1.0416666666666667,
       "loops": true,
-      "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. Paws planted for a 0.28 m stance: authored for 0.4 m/s. movement.carry_in_mouth's dragSpeedFactor is why it is slow."
+      "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. Each paw planted for 16 of 24 frames over a 0.28 m stance: authored for 0.42 m/s. movement.carry_in_mouth's dragSpeedFactor is why it is slow."
     },
     {
       "name": "sniff",
       "seconds": 1.7083333333333333,
       "loops": true,
-      "description": "Nose down: the body pitches forward over planted paws, the legs fold, the neck and head drop and the nose sweeps. The mouth socket comes down to about 0.07 m."
+      "description": "Nose down on a scent: the front folds over planted paws, the neck drops and the nose sweeps side to side with the head a beat behind. The mouth socket comes down to within a few centimetres of the ground."
     },
     {
       "name": "sniff_air",
       "seconds": 2.0416666666666665,
       "loops": true,
-      "description": "Nose up, on the wind: the head lifts, the mouth socket to about 0.89 m, and casts slowly."
+      "description": "Nose up, on the wind: the head lifts, the mouth socket to about 0.88 m, and casts slowly."
     },
     {
       "name": "dig",
@@ -100,25 +100,25 @@
       "name": "sit",
       "seconds": 1.5,
       "loops": false,
-      "description": "Down onto the haunches over half a second, then held: the rump to the ground, the hocks laid down, the fore legs straight under square shoulders."
+      "description": "A small rise, then down onto the haunches a little past the pose and back up into it, and held: the rump to the ground, the hocks laid down behind flat paws, the fore paws stepping back one after the other."
     },
     {
       "name": "lie",
       "seconds": 2,
       "loops": false,
-      "description": "The sphinx over a second: fore legs out in front on their elbows, hocks on the ground, the head up and then lowered. What housing.den_and_cache's rest looks like."
+      "description": "The sphinx: the front goes down first, the rear follows, fore legs out in front on their elbows, hocks on the ground, and the head comes down toward the paws and settles. What housing.den_and_cache's rest looks like."
     },
     {
       "name": "bark",
       "seconds": 0.5,
       "loops": false,
-      "description": "Head back, jaw open 32 degrees, chest up, a hop of the fore paws; then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees."
+      "description": "A dip, the head thrown up with the jaw open 32 degrees and the fore paws off the ground, past the pose, then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees."
     },
     {
       "name": "mark",
       "seconds": 1.5,
       "loops": false,
-      "description": "The right hind paw lifts out and up with its hock, holds, and comes down; the weight shifts left to carry it."
+      "description": "The weight goes left, the right hind paw lifts out and up, holds while the body sinks a little on three legs, and comes down."
     }
   ],
   "levels": [
@@ -127,16 +127,16 @@
       "distanceBand": "hero",
       "distanceRange": "<5m",
       "file": "public/assets/character.dog/lod0.glb",
-      "triangles": 11457,
-      "bytes": 2643292
+      "triangles": 1500,
+      "bytes": 926408
     }
   ],
   "source": {
-    "tool": "Tripo API (body, and the segmentation that split off the gear), Kimi's canine rig in Blender, and blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3 (clips, sockets, export)",
+    "tool": "Tripo API (the body this one is derived from, and the segmentation that split off the gear), Kimi's joints and weights, and blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3 (the low-poly body, the control rig, the clips, the export)",
     "repository": "game-architect-studio",
     "script": "tools/blender/build_dog.py",
     "generatedOn": "2026-11-09",
     "sourceFile": "Riverside Bernese Dog — Base Rig.blend, 35256608 bytes, sha256 cb33715c12010ab2e18e126af0155e93c11c9f08eec9ed03c1f9fc80bf042743, Kimi's master of 9 Nov 2026; not in either repository, named by hash in the script"
   },
-  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. Four bodies followed in the studio's build script on 9 Nov 2026: the boxes rigged as they stood, a voxel-remeshed shell of them, a lofted low-poly tube body, and Kimi's first Tripo generation of the concept painting, which wore its harness and saddlebag as part of the mesh and as paint in the coat. Alexander asked for the dog with nothing on it and the gear as separate pieces, since what the dog wears changes through the game. Kimi delivered that the same day: a bare body generated with the Tripo API, the original equipment isolated into three attachment meshes by Tripo's semantic segmentation, and a 144-bone animator rig with 38 deform bones (IK/FK limbs with poles, scapulae, rear hocks, toe and heel rolls, tail follow, two-bone ears, eye aim, jaw) with normalised weights of at most four influences. Rights to Tripo output rest with the generating account under Tripo's terms, to be confirmed against the plan tier before the game is published. The studio's script appends that master by sha256 and makes the asset from it: the body welded (Tripo writes every facet with its own vertices; her weights agree on every split), flat-shaded, the coat resampled to 1K and written as JPEG, the normal and roughness maps dropped. One patch is applied to the rig and recorded as such: nothing joined the last spine segment to the chest, so pitching the hips ten degrees opened a 7.6 cm step in the back; that segment now aims at and stretches to the chest, and the build checks the step is gone. The master carries an idle and a walk; its walk covers 0.15 m/s and a game needs gaits at known speeds, so the twelve clips here are keyed by the script on her controls and sampled onto the deform bones by the exporter. Her IK does not stretch, so each paw is pivoted heel-up about its toes by just enough to stay within reach of the shoulder or hip as the body stands on that frame, the body stands 12 mm below her rest pose because her forelegs rest 99.4% straight, and the build measures every leg joint in every clip and fails if one opens more than 5 mm. Clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. The rig lessons come from P2Design's course squirrel, used as a reference and never as an asset."
+  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. Five bodies followed in the studio's build script on 9 Nov 2026 before this one: the boxes rigged as they stood, a voxel-remeshed shell of them, a lofted tube body, Kimi's first Tripo generation of the concept painting (which wore its gear), and Kimi's bare Tripo body on her own 144-bone rig. Alexander then asked for a truly low-poly dog, faceted with a flat palette, on a rig done properly, and shared the transcripts of P2Design's animation course to learn it from. What is Kimi's and kept: her 38 deform joints by name and rest pose, her weights, and her three gear meshes on those joints (her master is appended by sha256). Rights to Tripo output rest with the generating account under Tripo's terms, to be confirmed against the plan tier before the game is published. What is derived: this body is her bare shell voxel-remeshed into one closed surface, decimated with left-right symmetry and extra budget on the head, flat-shaded, each face coloured from her coat snapped to a five-colour palette, her weights carried across by nearest surface point (four at most, normalised). What is built here from scratch: the control layer, to the checklist an animator works from in that course's squirrel rig. Every deform joint copies a twin with its exact rest matrix; torso, neck, head, limbs and tail are stretch segments between joint tweaks; hips and chest are two pivots at the centre of gravity that move, rotate and scale, with the joints between following half-way so the back bends as a curve; the head rides a socket that takes the chest's position always and its rotation only by a head_follow property; four IK paws on scale-cancelling sockets with poles and 5% stretch, a one-channel foot roll with a toe pivot and a heel pivot, a hock control, toe controls; an FK tail on a tail_follow socket; hide_legs and hide_tail masks; unkeyable channels locked and a keying set of exactly the rest. The build proves, before any clip is keyed, that at rest every joint sits on Kimi's rest pose and that each control moves the mesh the way its name says. The clips are authored the two ways the course teaches and sampled onto the joints by the exporter: gaits layered one channel at a time with a planted paw as two vector-handled keys and the other paws as the same curves shifted by their phase, overlap down the tail and ears as one curve copied joint to joint a frame or two later; poses keyed on every control at each main pose with an anticipation before and a settle after. The build measures every clip and fails if a toe goes under the ground, a limb stretches past 8%, or a planted toe leaves its line by 3 mm. Clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. The course and its squirrel are a reference and never an asset."
 }
