@@ -1,0 +1,200 @@
+{
+  "id": "pets.waking_thing",
+  "name": "Waking Thing",
+  "category": "pets",
+  "description": "A thing that is used until it wakes. Each waking thing gathers resonance from meaningful use: resonance += context x novelty x relationship. Context is how characteristic the use is for that thing (a leash is for being carried along a route; a blanket is for being rested on). Novelty is whether this use, in this place, in this mood has happened before: a repeat earns nothing, so the same fetch in the same yard wakes nothing however often it is done. Relationship raises a use that happened in a den, in a storm, on a scent that matters, or beside a thing that is already awake. Each thing draws a hidden threshold once, from the seed. It goes dormant, then resonant (it stirs, with a tell), then awake. Readiness and the reveal are separate: a thing that has crossed its threshold waits for a moment that can carry its first words, which is the carrier still, with the thing in the mouth or beside it, and never while moving. A story thing also has a window, a place where it must speak: there it wakes at the first still moment, and if it arrives short of its threshold it is made ready there, so an opening cannot stall. The component reports the state of each thing and says when one stirs, is ready and wakes, with its first words. None of the numbers is an output: a player is meant to understand a waking afterwards, not to watch a bar fill.",
+  "version": "0.1.0",
+  "platform": [
+    "agnostic"
+  ],
+  "implementations": [
+    {
+      "target": "canvas2d",
+      "status": "external",
+      "module": null,
+      "note": "Implemented in the consuming application; not verifiable from this repository."
+    },
+    {
+      "target": "webgl",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "roblox",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "unity",
+      "status": "unmapped",
+      "module": null
+    },
+    {
+      "target": "godot",
+      "status": "unmapped",
+      "module": null
+    }
+  ],
+  "inputs": [
+    {
+      "name": "wakers",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "The things that can wake: {id, kind, characteristic, story, window, thresholdMin, thresholdMax, tell, firstWords}. id is the carried thing's id. characteristic maps a use (pickedUp, carried, dragged, dropped, cached, rested) to its context weight, 0 to 1; a use not named earns nothing. story marks a thing the plot needs; window is {place, x, z, radius}, where a story thing must speak. thresholdMin and thresholdMax override the defaults for this thing. tell is what it does when it stirs; firstWords is what it says when it wakes."
+    },
+    {
+      "name": "thresholdMin",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Least resonance a thing may need to wake, in units of one fully characteristic, new, plain use."
+    },
+    {
+      "name": "thresholdMax",
+      "type": "number",
+      "required": false,
+      "default": 7,
+      "description": "Most resonance a thing may need to wake. Each thing's threshold is drawn once between the two, from the seed."
+    },
+    {
+      "name": "resonantShare",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Share of its threshold at which a thing stirs and becomes resonant."
+    },
+    {
+      "name": "placeSize",
+      "type": "number",
+      "required": false,
+      "default": 4,
+      "description": "Side of the square, in world units, that counts as one place for novelty."
+    },
+    {
+      "name": "repeatCredit",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "description": "What a use earns when the same use has already happened in the same place and mood, as a share of a new one. 0 is the rule; 1 turns novelty off."
+    },
+    {
+      "name": "denBonus",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Added to the relationship factor of a use that happens at a den."
+    },
+    {
+      "name": "stressBonus",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Added to the relationship factor of a use that happens in a storm."
+    },
+    {
+      "name": "scentBonus",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Added to the relationship factor of a use that happens on a scent that matters."
+    },
+    {
+      "name": "scentsThatMatter",
+      "type": "array",
+      "required": false,
+      "default": [
+        "owner"
+      ],
+      "description": "Kinds of scent that raise a use made on them."
+    },
+    {
+      "name": "companionBonus",
+      "type": "number",
+      "required": false,
+      "default": 0.5,
+      "description": "Added to the relationship factor of a use that happens beside another thing that is awake."
+    },
+    {
+      "name": "quietSeconds",
+      "type": "number",
+      "required": false,
+      "default": 1.5,
+      "description": "How long the carrier must have been still before a ready thing may speak."
+    },
+    {
+      "name": "presentReach",
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "How near the carrier must be to a thing it is not holding for that thing to speak, in world units."
+    },
+    {
+      "name": "voiceGapSeconds",
+      "type": "number",
+      "required": false,
+      "default": 8,
+      "description": "Least time between two things waking, so two first words never land together."
+    },
+    {
+      "name": "restSecondsToCount",
+      "type": "number",
+      "required": false,
+      "default": 3,
+      "description": "Shortest rest in a den that counts as a use for the things rested with: those in its cache and those lying beside it."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "things",
+      "type": "array",
+      "description": "Every waking thing: {id, kind, state, story}. state is dormant, resonant or awake. A ready thing still reads resonant."
+    },
+    {
+      "name": "stateOf",
+      "type": "function",
+      "description": "(id) -> dormant, resonant or awake; empty for a thing that cannot wake."
+    },
+    {
+      "name": "woken",
+      "type": "array",
+      "description": "The things that have woken, in order: {id, kind, words, place}."
+    }
+  ],
+  "events": {
+    "emits": [
+      "pets.thingStirred",
+      "pets.thingReady",
+      "pets.thingWoke"
+    ],
+    "listensTo": [
+      "movement.pickedUp",
+      "movement.carried",
+      "movement.dropped",
+      "housing.cached",
+      "housing.rested",
+      "input.travelled",
+      "world.weatherChanged",
+      "world.dawnStarted",
+      "world.duskStarted"
+    ]
+  },
+  "eventIntents": {
+    "pets.thingWoke": [
+      "progress"
+    ]
+  },
+  "dependencies": [
+    "movement.carry_in_mouth"
+  ],
+  "tags": [
+    "waking",
+    "sentient",
+    "object",
+    "companion",
+    "dog",
+    "survival",
+    "the-things-that-wake"
+  ],
+  "provenance": "Added 2026-11-11 for the canine survival pack (the-things-that-wake), from the rule its design settled: Kimi's accumulation (context x novelty x relationship, a hidden threshold drawn once, duplicates earn nothing) with Watson's and Gemini's reveal rule (readiness is separate from the first words; story things wake inside an authored window). Catalogue search first: pets.pet_bond is a visible trust score in tiers, with diminishing credit for a repeated action in a day; it has no hidden threshold, no place in its novelty, and nothing that waits for a moment before it shows. pets.evolution_tree changes a pet at stated conditions the player can read. social.relationship_graph holds scores between people. None lets a thing cross a line the player cannot see and then choose when to say so. Library-native."
+}

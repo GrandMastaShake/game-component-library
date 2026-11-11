@@ -1,9 +1,9 @@
 {
   "id": "genre.canine_survival",
   "name": "Canine Survival",
-  "description": "Survival played as a dog, in a place the people have left. The nose is the main instrument: scent is information with age and direction, moved by wind and washed by rain. One thing is carried at a time, in the mouth, and a heavy thing is dragged; a den is dug and rested in and hides what the mouth brought. The body is shaped by what it does, under a budget, so every gain is paid for. The pack's own pieces are the field, the mouth, the den and the body; the land, the day and the weather are the survival pack's. What wakes when a thing has been carried long enough is the next pack.",
-  "version": "0.1.0",
-  "loop": "sniff → carry → dig in → rest → carry on",
+  "description": "Survival played as a dog, in a place the people have left. The nose is the main instrument: scent is information with age and direction, moved by wind and washed by rain. One thing is carried at a time, in the mouth, and a heavy thing is dragged; a den is dug and rested in and hides what the mouth brought. The body is shaped by what it does, under a budget, so every gain is paid for. A thing that is carried and used in enough places wakes: it stirs first, and then, at a still moment, it speaks. The pack's own pieces are the field, the mouth, the den, the body and the waking thing; the land, the day and the weather are the survival pack's. What a woken thing goes on to say, and how a dog answers it, is the next pack.",
+  "version": "0.2.0",
+  "loop": "sniff → carry → dig in → rest → carry on, until what is carried wakes",
   "views": [
     "voxel"
   ],
@@ -24,7 +24,8 @@
     "world.scent_field",
     "movement.carry_in_mouth",
     "housing.den_and_cache",
-    "progression.body_dials"
+    "progression.body_dials",
+    "pets.waking_thing"
   ],
   "signatureCompound": {
     "name": "The Leash and the Blanket",
