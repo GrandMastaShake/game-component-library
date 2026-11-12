@@ -1,7 +1,7 @@
 {
   "id": "character.dog",
   "name": "Dog",
-  "description": "The body a player is, in the dog game: Kimi's Bernese mountain dog in harness and saddlebag, one faceted low-poly shell of 12,229 triangles generated with the Tripo API from the concept painting, rigged in game-architect-studio with 25 bones (spine, neck, head, jaw, two hanging ears, a three-bone tail, fore legs of scapula, upper arm, forearm and paw, hind legs of thigh, shin and paw) and carrying the clips a dog needs before any object speaks. The four gaits were authored on an IK control layer with each paw planted on the ground and baked onto the bones, so a foot in a stance does not slide; the speed each gait was authored for comes out of that geometry and is stated per clip.",
+  "description": "The body a player is, in the dog game: a low-poly Bernese mountain dog modelled by hand as one closed, mirrored shell (1,182 triangles once split): a body of quad rings and a head drawn vertex by vertex, with eye sockets (a brow, a lid that shuts, two rings of iris quads and an octagon pupil with a catch-light, which the look control moves), a nose pad, hanging ears and lips that part when the jaw drops; flat-shaded, with its tricolour coat as a palette in vertex colours and no texture, skinned one or two joints to a vertex to Kimi's 38 canine joints and two lid joints of the studio's own, connected as one skeleton (hips, two spine segments, chest, neck, head, nose, jaw, two eyes and their two upper lids, two-bone ears, a four-bone tail, fore legs of scapula, upper, lower, paw and toe, hind legs of upper, lower, hock, paw and toe), with the twelve clips a dog needs before any object speaks. The dog wears nothing: its collar, harness and packs are separate meshes on the same joints and ship as their own asset. The clips are authored on a control rig built to an animator's checklist and sampled onto the joints: the four gaits plant each paw on the ground with two keys, so a foot in a stance does not slide, and the speed each gait was authored for comes out of that geometry and is stated per clip.",
   "format": "gltf-binary",
   "units": "metres",
   "forwardAxis": "+x",
@@ -9,42 +9,42 @@
     {
       "name": "mouth",
       "position": [
-        0.62,
-        0.04,
-        0.7
+        0.637,
+        0.0,
+        0.718
       ],
       "carries": "thing",
-      "description": "Under the nose, at the tip of the jaw. The one thing movement.carry_in_mouth holds rides here, so it follows the jaw through a sniff, a bark and a drag. Parented to the jaw bone."
+      "description": "Under the nose, at the tip of the jaw. The one thing movement.carry_in_mouth holds rides here, so it follows the jaw through a sniff, a bark and a drag. Parented to the jaw's deform bone."
     },
     {
       "name": "collar",
       "position": [
-        0.36,
+        0.391,
         0.0,
-        0.62
+        0.603
       ],
       "carries": "collar",
-      "description": "The front of the neck, where the painted collar sits and a leash clips. Parented to the neck bone."
+      "description": "The throat, on the underside of the neck, where a collar's ring hangs and a leash clips. Parented to the neck's deform bone."
     },
     {
       "name": "back",
       "position": [
-        0.05,
+        0.12,
         0.0,
-        0.66
+        0.638
       ],
       "carries": "pack",
-      "description": "The top of the back at the saddlebag's handle, where a blanket or a pack is carried. Parented to the spine bone."
+      "description": "The top of the back behind the withers, measured off the body's surface, where a blanket or a pack is carried. Parented to the second spine segment's deform bone."
     },
     {
       "name": "head_top",
       "position": [
-        0.44,
-        0.02,
+        0.465,
+        0.0,
         0.9
       ],
       "carries": "hat",
-      "description": "Crown of the head, between the ears. Parented to the head bone."
+      "description": "Crown of the head, between the ears, measured off the body's surface. Parented to the head's deform bone."
     }
   ],
   "animations": [
@@ -52,73 +52,73 @@
       "name": "idle",
       "seconds": 3.0416666666666665,
       "loops": true,
-      "description": "A breath, a slow wag, one ear flick, a glance left and back."
+      "description": "One slow breath in the ribs, the weight easing from side to side, a glance left that the ears lead with a blink at each end of it, a tail that wags from its root with each joint a little later."
     },
     {
       "name": "walk",
-      "seconds": 0.7916666666666666,
+      "seconds": 0.875,
       "loops": true,
-      "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, a quarter apart. Each paw planted for a 0.36 m stance: authored for 0.774 m/s."
+      "description": "Four-beat lateral sequence: hind left, fore left, hind right, fore right, five frames apart. Each paw planted for 12 of 20 frames over a 0.38 m stance: authored for 0.76 m/s."
     },
     {
       "name": "trot",
       "seconds": 0.4583333333333333,
       "loops": true,
-      "description": "Diagonal pairs half a cycle apart, paws planted for a 0.40 m stance: authored for 1.92 m/s."
+      "description": "Diagonal pairs half a cycle apart, each paw planted for 5 of 10 frames over a 0.40 m stance: authored for 1.92 m/s."
     },
     {
       "name": "run",
       "seconds": 0.4583333333333333,
       "loops": true,
-      "description": "Rotary gallop: the hind pair close together, then the fore pair, the back bunching and stretching under them. Paws planted for a 0.50 m stance: authored for 3.0 m/s."
+      "description": "Rotary gallop: the hind pair a frame apart, then the fore pair a frame apart, the back rounding and flattening under them. Each paw planted for 4 of 10 frames over a 0.50 m stance: authored for 3.0 m/s."
     },
     {
       "name": "drag",
       "seconds": 1.0416666666666667,
       "loops": true,
-      "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. Paws planted for a 0.28 m stance: authored for 0.4 m/s. movement.carry_in_mouth's dragSpeedFactor is why it is slow."
+      "description": "A walk with the weight back and the head low: the mouth is on something heavier than the dog lifts. Each paw planted for 16 of 24 frames over a 0.28 m stance: authored for 0.42 m/s. movement.carry_in_mouth's dragSpeedFactor is why it is slow."
     },
     {
       "name": "sniff",
       "seconds": 1.7083333333333333,
       "loops": true,
-      "description": "Nose down: the chest pitches, the neck and head drop, the nose sweeps, the fore legs bend. The mouth socket comes down to about 0.2 m."
+      "description": "Nose down on a scent: the front folds over planted paws, the neck drops and the nose sweeps side to side with the head a beat behind. The mouth socket comes down to within a few centimetres of the ground."
     },
     {
       "name": "sniff_air",
       "seconds": 2.0416666666666665,
       "loops": true,
-      "description": "Nose up, on the wind: the head lifts, the mouth socket to 0.93 m, and casts slowly."
+      "description": "Nose up, on the wind: the head lifts, the mouth socket to about 0.88 m, and casts slowly."
     },
     {
       "name": "dig",
       "seconds": 0.5416666666666666,
       "loops": true,
-      "description": "The fore paws scrape alternately with the elbows bent, the chest low, the rump up, the head down watching the hole, the tail up. One cycle is one scrape of each paw; housing.den_and_cache counts the seconds."
+      "description": "The fore paws scrape alternately along the ground, the chest low, the rump up, the head down watching the hole, the tail up. One cycle is one scrape of each paw; housing.den_and_cache counts the seconds."
     },
     {
       "name": "sit",
       "seconds": 1.5,
       "loops": false,
-      "description": "Down onto the haunches over half a second, then held: hind legs folded, rump dropped, back sloping up to square shoulders."
+      "description": "A small rise, then down onto the haunches a little past the pose and back up into it, and held: the rump to the ground, the hocks laid down behind flat paws, the fore paws stepping back one after the other."
     },
     {
       "name": "lie",
       "seconds": 2,
       "loops": false,
-      "description": "The sphinx over a second: fore legs out in front, hind legs folded under, the chest down to the ground, head up then lowered toward the paws. What housing.den_and_cache's rest looks like."
+      "description": "The sphinx: the front goes down first, the rear follows, fore legs out in front on their elbows, hocks on the ground, and the head comes down toward the paws and settles. What housing.den_and_cache's rest looks like."
     },
     {
       "name": "bark",
       "seconds": 0.5,
       "loops": false,
-      "description": "Head back, jaw open 34 degrees, chest up, a hop of the fore paws; then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees."
+      "description": "A dip, the head thrown up with the jaw open 32 degrees and the fore paws off the ground, past the pose, then shut. The brick drops what the mouth holds on a bark, so the open jaw is also what the player sees."
     },
     {
       "name": "mark",
       "seconds": 1.5,
       "loops": false,
-      "description": "The right hind leg lifts out and up, holds, and comes down; the weight shifts left to carry it."
+      "description": "The weight goes left, the right hind paw lifts out and up, holds while the body sinks a little on three legs, and comes down."
     }
   ],
   "levels": [
@@ -127,16 +127,16 @@
       "distanceBand": "hero",
       "distanceRange": "<5m",
       "file": "public/assets/character.dog/lod0.glb",
-      "triangles": 12229,
-      "bytes": 2453096
+      "triangles": 1182,
+      "bytes": 667780
     }
   ],
   "source": {
-    "tool": "Tripo API (body) and blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3 (rig, clips, export)",
+    "tool": "blender-mcp-asset-pipeline 1.0.3 on Blender 4.4.3 (the body, modelled by the build script; the control rig; the clips; the export). Kimi's Tripo-generated Bernese is the form the body is measured against and the coat its colours are read from; her joint names are kept",
     "repository": "game-architect-studio",
     "script": "tools/blender/build_dog.py",
-    "generatedOn": "2026-11-09",
-    "sourceFile": "Riverside Bernese Dog.glb, 27458020 bytes, sha256 5b736b3e0ac7daedb9c91812218608c70568406b4f491ebd097f0980ccfb18dd, from Kimi's 'Kimi_Agent_Dog Survival Game Pitch.zip' (9 Nov 2026); not in either repository, named by hash in the script"
+    "generatedOn": "2026-11-10",
+    "sourceFile": "Riverside Bernese Dog — Base Rig.blend, 35256608 bytes, sha256 cb33715c12010ab2e18e126af0155e93c11c9f08eec9ed03c1f9fc80bf042743, Kimi's master of 9 Nov 2026; not in either repository, named by hash in the script"
   },
-  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. Three rigged bodies followed in the studio's build script: the boxes rigged as they stood, a voxel-remeshed shell of them, and a lofted low-poly tube body with a vertex-colour palette; each read wrong beside the concept painting of a faceted Bernese in harness and saddlebag, and Alexander said so. On 9 Nov 2026 Kimi generated that painting's dog with the Tripo API ('Riverside Bernese Dog', one shell of 12,229 triangles, 4K coat with normal and roughness maps, Y-up metres, no rig) and shipped it in the pitch zip; rights to Tripo output rest with the generating account under Tripo's terms, to be confirmed against the plan tier before the game is published. The studio's script takes that file by sha256 and makes the asset from it: welded (Tripo writes every facet with its own vertices, 16,922 of them with every edge a boundary, which no automatic weighting can cross), flat-shaded, the coat resampled to 1K and written as JPEG, the normal and roughness maps dropped as a flat-shaded low-poly body has no use for them, bones placed on measured centrelines of the shell, automatic weights with the 289 vertices of the loose harness and bag parts assigned to their nearest bone. The rig follows what P2Design's course squirrel teaches: deform bones the mesh follows, and a control layer of IK paw targets and poles that the gaits are keyed on and that is baked onto the bones and deleted before export, so the four gaits have planted feet (the stance length and time of each is what its authored speed is) while the poses stay forward-kinematic. Clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. Every pose axis is pinned and checked on the evaluated rig before export; an asset whose walk went backwards would otherwise pass every file-level check there is."
+  "provenance": "The yard (game-architect-studio #150) drew its dog as nine boxes turned as one, which is an honest grey-box and cannot sit, dig or put its nose down. Six bodies followed in the studio's build script on 9 Nov 2026 before this one: the boxes rigged as they stood, a voxel-remeshed shell of them, a lofted tube body, Kimi's first Tripo generation of the concept painting (which wore its gear), Kimi's bare Tripo body on her own 144-bone rig, and a 1,500-triangle decimation of that body. Alexander asked for a truly low-poly dog on a rig done properly, shared the transcripts of P2Design's animation course to learn it from, and then said what was still wrong: joints that did not look connected, and a decimated mesh with no topology to work with, where the course's squirrel has rings an animator can read. What is Kimi's and kept: the NAMES of her 38 deform joints, the rest positions of the trunk, head and tail joints, and her three gear meshes on those joints (her master is appended by sha256). Her bare body is in this asset only as a measurement: no vertex, face or weight of it is in the file. Rights to Tripo output rest with the generating account under Tripo's terms, to be confirmed against the plan tier before the game is published. What is modelled here from nothing: the body. It is built the way that squirrel is built, counted on the squirrel first (583 vertices, 534 quads and 94 triangles, one closed mirrored island, rings of eight round every limb, nine vertices in ten carrying one or two joints): one tube of twelve-vertex rings from the tip of the tail to the nape, four legs of eight-vertex rings each joined through one ring round the upper leg into an eight-sided hole left in the trunk. A ring's vertices are where rays from its centre leave her smoothed shell, averaged left with right and set down on the centre line (her head is turned and her tail swung aside), so this dog stands straight. The tail is drawn. The head is drawn too, in a later pass the same day: Alexander asked for one and said the dog kept coming out all quads or all triangles when it needs both. Every head vertex is placed by hand in a table in the build script and every face is listed by its corners: quads where the head bends or opens (round the neck, the muzzle and each eye, along the lips), triangles where a plane ends or a marking comes to a point (the blaze, the rust spot over each eye, over and under each lid, the corner of the mouth, the side of the nose, the tip of each ear). A second short pass (10 Nov) drew the eye sockets: the brow was behind the eye's plane and now stands over it, a lid edge turns in to an eye set 5 mm back, and the pupil rides the eye joint so the look control moves the gaze. A third (10 Nov) redrew each eye in rings of eight after Alexander asked for more quads round the iris and a rounder pupil: the lid edge, the eye's edge, an iris ring and an octagon pupil, so the iris is a dark rim of eight quads and eight amber quads inside it, domed 3 mm from edge to pupil, and the iris ring goes half way with the pupil when the eye turns. A fourth (10 Nov) closed what the eyes still lacked. A blink: the upper lid's edge rides a new joint for each eye (DEF-LID.L and DEF-LID.R, the studio's own, beside Kimi's 38) that slides its own length down onto the lower lid, so the skin from the brow to the lid edge comes down over the eye; the build casts rays down each eye's axis and fails if a shut lid does not stop every one in front of the open eye. One gaze: the eyes face 44 degrees to either side, so two aims at one target had turned them by different angles; now one aim between the eyes is copied by both, and the build fails if they turn by different angles. A catch-light: a pale quad inside each pupil under its top inner edge, the side a light ahead of the dog falls on. The idle clip blinks twice. The strip between the lips is dark and is all that opens when the jaw drops. The jaw, nose, ear and eye joints are set where the drawn head has them: her ear joints ran 10 cm below any ear. Each face of the body takes a palette colour from her coat at the place on her left side it was measured from, so the two sides match; a drawn face is the colour it was drawn. Weights are given by construction: a ring between joints is all one bone, a ring on a joint half one and half the next. What was corrected: her leg joints stood outside her own legs, 4 to 5 cm to the side of the fore legs and up to 10 cm ahead of the hind cannons and paws. The ten leg joints a side are set down the middle of the legs, mirrored, and the build fails if any bone of the trunk, tail or legs lies outside the body it moves. The joints are now one skeleton (hips, spine, chest, neck, head, with the limbs and tail parented off it) that takes location and rotation from the control rig and never scale, so a stretch arrives as a joint moved along its bone, which every runtime can play. What is built here from scratch: the control layer, to the checklist an animator works from in that course's squirrel rig. Every deform joint follows a twin with its exact rest pose; torso, neck, head, limbs and tail are stretch segments between joint tweaks; hips and chest are two pivots at the centre of gravity that move, rotate and scale, with the joints between following half-way so the back bends as a curve; the head rides a socket that takes the chest's position always and its rotation only by a head_follow property; four IK paws on scale-cancelling sockets with poles and 5% stretch, a one-channel foot roll with a toe pivot and a heel pivot, a hock control, toe controls; an FK tail on a tail_follow socket; hide_legs and hide_tail masks; unkeyable channels locked and a keying set of exactly the rest. The build proves, before any clip is keyed, that at rest every joint sits on its rest pose and that each control moves the mesh the way its name says. The clips are authored the two ways the course teaches and sampled onto the joints by the exporter: gaits layered one channel at a time with a planted paw as two vector-handled keys and the other paws as the same curves shifted by their phase, overlap down the tail and ears as one curve copied joint to joint a frame or two later; poses keyed on every control at each main pose with an anticipation before and a settle after. The build measures every clip and fails if a toe goes under the ground, a limb stretches past 8%, or a planted toe leaves its line by 3 mm. Clips are named for a pack's bricks: sniff and sniff_air for world.scent_field's two nose modes, drag for movement.carry_in_mouth's heavy things, dig and lie for housing.den_and_cache, bark and mark for the two inputs that lay or drop scent. The course and its squirrel are a reference and never an asset: the course's terms keep its files out of commercial work, and nothing of them is in this one."
 }
